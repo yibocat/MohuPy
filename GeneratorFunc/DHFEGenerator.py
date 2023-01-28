@@ -1,17 +1,18 @@
 from matplotlib import pyplot as plt
-from .generateMF import *
+
 from DHFElements import HQrungF
+from .generateMF import *
 
 
 class DHFEGenerator(object):
     """
-        对偶犹豫模糊元素生成器
+        对偶犹豫模糊元素生成器父类
+
+        ================================================================
         说明：
             这是一个对偶犹豫模糊元素生成器，利用对偶犹豫模糊隶属度函数生成器生成，有两种方式：
                 1. 使用内建的 8 种隶属函数
                 2. 自定义隶属函数，属性 customFunc 来区分使用哪种隶属函数
-        ===========================================================================
-
         属性：
             qrung: 表示创建哪种对偶犹豫模糊元素。若 qrung=1 表示对偶犹豫模糊元素；qrung=2 表示对偶犹豫毕达哥拉斯模糊元素；qrung=3 表示对偶犹豫费马模糊元素
             customFunc 表示自定义函数开关，用来选择哪种隶属函数。若为 False 则使用内建的 8 种隶属函数；若为 True 则使用自定义隶属函数
@@ -46,13 +47,14 @@ class DHFEGenerator(object):
     _variable_end = 1
     _linspace = 100
 
+    numMFC = 0
+    numNMFC = 0
+
     def __init__(self, q, customFunc=False):
         self.qrung = q
 
         self.MF_parameters = []
         self.NMF_parameters = []
-        self.numMFC = 0
-        self.numNMFC = 0
 
         self.customFunc = customFunc
         if self.customFunc:
@@ -163,7 +165,7 @@ class DHFEGenerator(object):
         mf.MF_Plot('Membership func')
         nmf.MF_Plot('Non-Membership func')
 
-    def generatorDHFE(self, x, y):
+    def generator(self, x, y):
         """
         生成 Q 阶序对犹豫模糊元素
             x:  隶属函数自变量取值
@@ -181,8 +183,8 @@ class DHFEGenerator(object):
             self.qrung) + '<=1 and >=0. Please reset the parameters'
         assert np.min(md) ** self.qrung + np.min(nmd) ** self.qrung >= 0, 'The MD^' + str(self.qrung) + '+NMD^' + str(
             self.qrung) + '<=1 and >=0. Please reset the parameters'
-        newDHFE.md = self.mf.calculate_MD(x)
-        newDHFE.nmd = self.nmf.calculate_MD(y)
+        newDHFE.md = md
+        newDHFE.nmd = nmd
 
         return newDHFE
 

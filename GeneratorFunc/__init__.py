@@ -1,3 +1,3 @@
 __all__ = ['DHFEGenerator']
 
-from .dhfeGenerator import DHFEGenerator
+from .DHFEGenerator import DHFEGenerator
