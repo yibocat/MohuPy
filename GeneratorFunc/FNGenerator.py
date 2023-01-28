@@ -72,15 +72,15 @@ class FNGenerator(object):
                     当是自定义函数时，function 类型，表示函数本身
             MFparas:表示参数
         """
-        if not self.customFunc:
+        if self.customFunc:
+            self.MFunc = MFunc
+            self.MF_parameter = MFparas
+            assert hasattr(self.MFunc, '__call__'), 'ERROR:The MFunc is not a function!'
+        else:
             assert MFunc == 'sigmf' or MFunc == 'trimf' or MFunc == 'zmf' or MFunc == 'smf' or MFunc == 'gaussmf' or MFunc == 'gauss2mf' or MFunc == 'gbellmf' or MFunc == 'trapmf', \
                 'ERROR! Wrong membership function!'
             self.MFunc = MFunc
             self.MF_parameter = MFparas
-        else:
-            self.MFunc = MFunc
-            self.MF_parameter = MFparas
-            assert hasattr(self.MFunc, '__call__'), 'ERROR:The MFunc is not a function!'
 
     def NMFgeneratorSettings(self, NMFunc, NMFparas):
         """
@@ -90,15 +90,15 @@ class FNGenerator(object):
                      当是自定义函数时，function 类型，表示函数本身
             NMFparas:表示参数
         """
-        if not self.customFunc:
+        if self.customFunc:
+            self.NMFunc = NMFunc
+            self.NMF_parameter = NMFparas
+            assert hasattr(self.NMFunc, '__call__'), 'ERROR:The NMFunc is not a function!'
+        else:
             assert NMFunc == 'sigmf' or NMFunc == 'trimf' or NMFunc == 'zmf' or NMFunc == 'smf' or NMFunc == 'gaussmf' or NMFunc == 'gauss2mf' or NMFunc == 'gbellmf' or NMFunc == 'trapmf', \
                 'ERROR! Wrong membership function!'
             self.NMFunc = NMFunc
             self.NMF_parameter = NMFparas
-        else:
-            self.NMFunc = NMFunc
-            self.NMF_parameter = NMFparas
-            assert hasattr(self.NMFunc, '__call__'), 'ERROR:The NMFunc is not a function!'
 
     def setVariable(self, start, end, linspace):
         """
