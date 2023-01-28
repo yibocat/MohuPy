@@ -35,9 +35,8 @@ class DhFuzzy(object):
     nmd = None
     qrung = None
 
-    def __init__(self, md, nmd):
-        self.md = md
-        self.nmd = nmd
+    def __init__(self):
+        pass
 
     def score(self):
         return ((self.md ** self.qrung).sum()) / len(self.md) - ((self.nmd ** self.qrung).sum()) / len(self.nmd)
@@ -108,40 +107,42 @@ class DhFuzzy(object):
         return newEle
 
 
-class HQrungF(DhFuzzy):
-    """
-    HQrungF is a class representing the Q-Rung hesitant fuzzy sets model. It is inherited from the DHFuzzy class.
-
-    Attributes
-    ----------
-        md : numpy.ndarray, shape = (n_numbers), indicates the number of membership degrees
-        nmd : numpy.ndarray, shape = (n_numbers), indicates the number of non-membership degrees
-        qrung : numpy.ndarray, shape = (n_numbers), indicates the Q rung of the elements
-
-    Function
-    ---------
-        __init__(self, md, nmd): Initializes a Q-Rung dual hesitant fuzzy element
-        __repr__(self): Returns a string representation of the Q-Rung dual hesitant fuzzy element
-    """
-    def __init__(self, qrung, md, nmd):
-        md = np.asarray(md)
-        nmd = np.asarray(nmd)
-        self.qrung = qrung
-        assert (md.size == 0 or nmd.size == 0) or (
-                max(md) <= 1 and max(nmd) <= 1 and min(md) >= 0 and min(nmd) >= 0) and (
-                       0 <= max(md) ** self.qrung + max(nmd) ** self.qrung <= 1), \
-            "ERROR:Construction failed! max(MD)^q+max(NMD)^q and min(MD)^q+min(NMD)^q must be in interval[0,1]!"
-        DhFuzzy.__init__(self, md, nmd)
-
-    def __repr__(self):
-        if len(self.md) > 50 or len(self.nmd) > 50:
-            return 'HQrungF(Q=%d)[%d,%d]:{' % (self.qrung, len(self.md), len(self.nmd)) + \
-                '\n md :' + str(np.round(self.md, 4)[:50]) + \
-                ',\n nmd:' + str(np.round(self.nmd, 4)[:50]) + ' }\n'
-        else:
-            return 'HQrungF(Q=%d)[%d,%d]:{' % (self.qrung, len(self.md), len(self.nmd)) + \
-                '\n md :' + str(np.round(self.md, 4)) + \
-                ',\n nmd:' + str(np.round(self.nmd, 4)) + ' }\n'
+# class HQrungF(DhFuzzy):
+#     """
+#     HQrungF is a class representing the Q-Rung hesitant fuzzy sets model. It is inherited from the DHFuzzy class.
+#
+#     Attributes
+#     ----------
+#         md : numpy.ndarray, shape = (n_numbers), indicates the number of membership degrees
+#         nmd : numpy.ndarray, shape = (n_numbers), indicates the number of non-membership degrees
+#         qrung : numpy.ndarray, shape = (n_numbers), indicates the Q rung of the elements
+#
+#     Function
+#     ---------
+#         __init__(self, md, nmd): Initializes a Q-Rung dual hesitant fuzzy element
+#         __repr__(self): Returns a string representation of the Q-Rung dual hesitant fuzzy element
+#     """
+#     def __init__(self, qrung, md, nmd):
+#         super().__init__()
+#         md = np.asarray(md)
+#         nmd = np.asarray(nmd)
+#         self.qrung = qrung
+#         assert (md.size == 0 or nmd.size == 0) or (
+#                 max(md) <= 1 and max(nmd) <= 1 and min(md) >= 0 and min(nmd) >= 0) and (
+#                        0 <= max(md) ** self.qrung + max(nmd) ** self.qrung <= 1), \
+#             "ERROR:Construction failed! max(MD)^q+max(NMD)^q and min(MD)^q+min(NMD)^q must be in interval[0,1]!"
+#         self.md = md
+#         self.nmd = nmd
+#
+#     def __repr__(self):
+#         if len(self.md) > 50 or len(self.nmd) > 50:
+#             return 'HQrungF(Q=%d)[%d,%d]:{' % (self.qrung, len(self.md), len(self.nmd)) + \
+#                 '\n md :' + str(np.round(self.md, 4)[:50]) + \
+#                 ',\n nmd:' + str(np.round(self.nmd, 4)[:50]) + ' }\n'
+#         else:
+#             return 'HQrungF(Q=%d)[%d,%d]:{' % (self.qrung, len(self.md), len(self.nmd)) + \
+#                 '\n md :' + str(np.round(self.md, 4)) + \
+#                 ',\n nmd:' + str(np.round(self.nmd, 4)) + ' }\n'
 
 
 # class HIntuiF(_DhFuzzy):

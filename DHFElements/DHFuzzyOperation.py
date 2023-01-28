@@ -1,9 +1,15 @@
-from .DHFuzzy import HQrungF
+from .HQrungF import HQrungF
 from .archimedean import *
 import numpy as np
 
 
 def Intersection(dh1: HQrungF, dh2: HQrungF):
+    """
+        Intersection of two DHFEs
+        :param dh1: DHFE 1
+        :param dh2: DHFE 2
+        :return: DHFE
+    """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE !'
     q = dh1.qrung
     newDHFE = HQrungF(q, [], [])
@@ -22,6 +28,12 @@ def Intersection(dh1: HQrungF, dh2: HQrungF):
 
 
 def Union(dh1: HQrungF, dh2: HQrungF):
+    """
+        Union of two DHFEs
+        :param dh1: DHFE 1
+        :param dh2: DHFE 2
+        :return: DHFE
+    """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
     newDHFE = HQrungF(q, [], [])
@@ -40,6 +52,12 @@ def Union(dh1: HQrungF, dh2: HQrungF):
 
 
 def algebraicMultiplication(dh1: HQrungF, dh2: HQrungF):
+    """
+        Algebraic multiplication of two DHFEs
+        :param dh1: DHFE 1
+        :param dh2: DHFE 2
+        :return: DHFE
+    """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
     newDHFE = HQrungF(q, [], [])
@@ -56,6 +74,12 @@ def algebraicMultiplication(dh1: HQrungF, dh2: HQrungF):
 
 
 def algebraicPlus(dh1: HQrungF, dh2: HQrungF):
+    """
+        Algebraic addition of two DHFEs
+        :param dh1: DHFE 1
+        :param dh2: DHFE 2
+        :return: DHFE
+    """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
     newDHFE = HQrungF(q, [], [])
@@ -72,6 +96,12 @@ def algebraicPlus(dh1: HQrungF, dh2: HQrungF):
 
 
 def einsteinMultiplication(dh1: HQrungF, dh2: HQrungF):
+    """
+        Einstein multiplication of two DHFEs
+        :param dh1: DHFE 1
+        :param dh2: DHFE 2
+        :return: DHFE
+    """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
     newDHFE = HQrungF(q, [], [])
@@ -88,6 +118,12 @@ def einsteinMultiplication(dh1: HQrungF, dh2: HQrungF):
 
 
 def einsteinPlus(dh1: HQrungF, dh2: HQrungF):
+    """
+        Einstein addition of two DHFEs
+        :param dh1: DHFE 1
+        :param dh2: DHFE 2
+        :return: DHFE
+    """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
     newDHFE = HQrungF(q, [], [])
