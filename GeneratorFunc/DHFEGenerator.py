@@ -6,9 +6,10 @@ from .generateMF import *
 
 class DHFEGenerator(object):
     """
-        对偶犹豫模糊元素生成器父类
+        对偶犹豫模糊元素生成器
 
         ================================================================
+
         说明：
             这是一个对偶犹豫模糊元素生成器，利用对偶犹豫模糊隶属度函数生成器生成，有两种方式：
                 1. 使用内建的 8 种隶属函数
@@ -27,18 +28,17 @@ class DHFEGenerator(object):
             mf 表示生成的隶属函数集合，MemshipFC 类型或 CustomMemshipFC 类型
             nmf 表示生成的非隶属函数集合，MemshipFC 类型或 CustomMemshipFC 类型
         方法：
-            MFgeneratorSet(self,MFunc,MFnum,MFparas) 表示隶属函数设置
-            NMFgeneratorSet(self,NMFunc,NMFnum,NMFparas) 表示非隶属函数设置
-            set_Variable: 设置自变量范围和间隔
-            generator_function: 生成隶属度和非隶属度函数
+            MFgeneratorSetting(self,MFunc,MFnum,MFparas) 表示隶属函数设置
+            NMFgeneratorSetting(self,NMFunc,NMFnum,NMFparas) 表示非隶属函数设置
+            setVariable: 设置自变量范围和间隔
+            generatorFunc: 生成隶属度和非隶属度函数
             MF_NMF_Plot: 画出隶属度和非隶属度的曲线图
-            generator_DHFE: 生成 DHFE
-        步骤：
+            generator: 生成 DHFE
+        步骤（注意：步骤不可打乱）：
             1. 先初始化，创建一个对偶犹豫模糊元素生成器
             2. 设置隶属度函数和非隶属度函数，使用 MFgeneratorSet 和 NMFgeneratorSet 方法
             3. 设置自变量范围和间隔
             4. 生成 DHFE
-            注意：步骤不可打乱
     """
     qrung = 0
     customFunc = False  # 自定义函数开关，False 表示使用内建函数，True 表示使用自定义函数，默认为 False
@@ -158,7 +158,7 @@ class DHFEGenerator(object):
         """
             画图，分别画出隶属度和非隶属度的曲线图
         """
-        # x = np.linspace(self._variable_start, self._variable_end, self._linspace)
+        # np.linspace(self._variable_start, self._variable_end, self._linspace)
         mf = self.mf
         nmf = self.nmf
 
@@ -412,7 +412,9 @@ class _memshipFunc(object):
 class _customMemFunc(object):
     """
         自建隶属函数生成器
-        ========================================================================================
+
+        ----------------------------------------------------------------
+
         说明：
             MemshipFC 隶属函数生成器包含了 8 种基本的隶属函数，而该生成器可以创建自定义隶属函数和非隶属函数
             注意：自建函数时，使用如下方法
@@ -421,7 +423,6 @@ class _customMemFunc(object):
             |       return p[0]*x + p[1]    |
             ---------------------------------
             参数以 list 类型传入，表示为参数列表，然后在函数中使用列表元素的形式表示参数
-        ========================================================================================
         属性:
             ArbFunc: 表示自定义隶属函数方法，类型为‘function’
             parameter: 表示函数的参数列表
