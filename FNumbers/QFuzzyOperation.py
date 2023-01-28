@@ -50,26 +50,25 @@ def algebraicPlus(fn1: QrungFN, fn2: QrungFN):
     return newFN
 
 
-def einsteinMultiply(fn1:QrungFN, fn2:QrungFN):
+def einsteinMultiply(fn1: QrungFN, fn2: QrungFN):
     """
         Einstein multiplication of two FNs
     """
     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
     q = fn1.qrung
     newFN = QrungFN(q, 0, 0)
-    newFN.md = einstein_T(fn1.md ** q, fn2.md**q)**(1/q)
-    newFN.nmd = einstein_S(fn1.nmd ** q, fn2.nmd**q)**(1/q)
+    newFN.md = einstein_T(fn1.md ** q, fn2.md ** q) ** (1 / q)
+    newFN.nmd = einstein_S(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q)
     return newFN
 
 
-def einsteinPlus(fn1:QrungFN, fn2:QrungFN):
+def einsteinPlus(fn1: QrungFN, fn2: QrungFN):
     """
         Einstein addition of two FNs
     """
     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
     q = fn1.qrung
     newFN = QrungFN(q, 0, 0)
-    newFN.md = einstein_S(fn1.md ** q, fn2.md ** q)**(1/q)
-    newFN.nmd = einstein_T(fn1.nmd ** q, fn2.nmd ** q)**(1/q)
+    newFN.md = einstein_S(fn1.md ** q, fn2.md ** q) ** (1 / q)
+    newFN.nmd = einstein_T(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q)
     return newFN
-

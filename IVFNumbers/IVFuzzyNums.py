@@ -40,47 +40,18 @@ class IVFuzzynum(object):
         newIVFN.nmdu = in_algebraic_s(l * algebraic_s(self.nmdu ** self.qrung)) ** (1 / self.qrung)
         return newIVFN
 
-    def algebraicTimes(self,l):
+    def algebraicTimes(self, l):
         newIVFN = copy.copy(self)
-        newIVFN.mdl = in_algebraic_s(l*algebraic_s(self.mdl ** self.qrung))**(1/self.qrung)
-        newIVFN.mdu = in_algebraic_s(l*algebraic_s(self.mdu ** self.qrung))**(1/self.qrung)
-        newIVFN.nmdl = in_algebraic_tau(l*algebraic_tau(self.nmdl**self.qrung))**(1/self.qrung)
-        newIVFN.nmdu = in_algebraic_tau(l*algebraic_tau(self.nmdu**self.qrung))**(1/self.qrung)
+        newIVFN.mdl = in_algebraic_s(l * algebraic_s(self.mdl ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.mdu = in_algebraic_s(l * algebraic_s(self.mdu ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmdl = in_algebraic_tau(l * algebraic_tau(self.nmdl ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmdu = in_algebraic_tau(l * algebraic_tau(self.nmdu ** self.qrung)) ** (1 / self.qrung)
         return newIVFN
 
-    def einsteinPower(self,l):
+    def einsteinPower(self, l):
         newIVFN = copy.copy(self)
-        newIVFN.mdl = in_einstein_tau(l*einstein_tau(self.mdl**self.qrung)) ** (1 / self.qrung)
-        newIVFN.mdu = in_einstein_tau(l*einstein_tau(self.mdu**self.qrung)) ** (1 / self.qrung)
-        newIVFN.nmdl = in_einstein_s(l*einstein_s(self.nmdl**self.qrung))**(1/self.qrung)
-        newIVFN.nmdu = in_einstein_s(l*einstein_s(self.nmdu**self.qrung))**(1/self.qrung)
+        newIVFN.mdl = in_einstein_tau(l * einstein_tau(self.mdl ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.mdu = in_einstein_tau(l * einstein_tau(self.mdu ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmdl = in_einstein_s(l * einstein_s(self.nmdl ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmdu = in_einstein_s(l * einstein_s(self.nmdu ** self.qrung)) ** (1 / self.qrung)
         return newIVFN
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
