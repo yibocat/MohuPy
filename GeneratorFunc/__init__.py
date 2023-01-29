@@ -1,5 +1,7 @@
 __all__ = ['DHFEGenerator',
-           'FNGenerator']
+           'FNGenerator',
+           'IVFNGenerator']
 
 from .DHFEGenerator import DHFEGenerator
 from .FNGenerator import FNGenerator
+from .IVFNGenerator import IVFNGenerator
