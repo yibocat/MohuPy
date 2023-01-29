@@ -4,23 +4,23 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
 
-__all__ = ['HQrungF', 'Intersection', 'Union',
-           'algebraicMultiplication', 'algebraicPlus',
-           'einsteinMultiplication', 'einsteinPlus',
-           'QrungFN', 'Intersection', 'Union',
-           'algebraicMultiply', 'algebraicPlus',
-           'einsteinMultiply', 'einsteinPlus',
-           'QrungIVFN',
-           'algebraicMultiply', 'algebraicPlus',
-           'einsteinMultiply', 'einsteinPlus'
+__all__ = ['qrunghfe', 'intersection', 'unions',
+           'algebraicmultiplication', 'algebraicplus',
+           'einsteinmultiplication', 'einsteinplus',
+           'qrungfn', 'intersection', 'unions',
+           'algebraicmultiplication', 'algebraicplus',
+           'einsteinmultiplication', 'einsteinplus',
+           'qrungivfn',
+           'algebraicmultiplication', 'algebraicplus',
+           'einsteinmultiplication', 'einsteinplus'
            ]
 
-from DHFElements import (HQrungF, Intersection, Union,
-                         algebraicMultiplication, algebraicPlus,
-                         einsteinMultiplication, einsteinPlus)
-from FNumbers import (QrungFN, Intersection, Union,
-                      algebraicMultiply, algebraicPlus,
-                      einsteinMultiply, einsteinPlus)
-from IVFNumbers import (QrungIVFN,
-                        algebraicMultiply, algebraicPlus,
-                        einsteinMultiply, einsteinPlus)
+from .DHFElements import (qrunghfe, intersection, unions,
+                          algebraicmultiplication, algebraicplus,
+                          einsteinmultiplication, einsteinplus)
+from .FNumbers import (qrungfn, intersection, unions,
+                       algebraicmultiplication, algebraicplus,
+                       einsteinmultiplication, einsteinplus)
+from .IVFNumbers import (qrungivfn,
+                         algebraicmultiplication, algebraicplus,
+                         einsteinmultiplication, einsteinplus)

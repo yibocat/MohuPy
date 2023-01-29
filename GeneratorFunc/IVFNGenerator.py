@@ -1,5 +1,5 @@
 from matplotlib import pyplot as plt
-from IVFNumbers import QrungIVFN
+from IVFNumbers import qrungivfn
 from .generateMF import *
 
 
@@ -112,7 +112,7 @@ class IVFNGenerator(object):
         assert self._variable_start <= y <= self._variable_end, 'The independent variable y is not in the range of %d and %d' % (
             self._variable_start, self._variable_end)
 
-        newIVFN = QrungIVFN(self.qrung,0,0,0,0)
+        newIVFN = qrungivfn(self.qrung, 0, 0, 0, 0)
         MD = self.mf.calculate_MD(x)
         NMD = self.nmf.calculate_MD(y)
 

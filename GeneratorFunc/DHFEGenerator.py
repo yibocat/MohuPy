@@ -1,6 +1,6 @@
 from matplotlib import pyplot as plt
 
-from DHFElements import HQrungF
+from DHFElements import qrunghfe
 from .generateMF import *
 
 
@@ -176,7 +176,7 @@ class DHFEGenerator(object):
         assert self._variable_start <= y <= self._variable_end, 'The independent variable y is not in the range of %d and %d' % (
             self._variable_start, self._variable_end)
 
-        newDHFE = HQrungF(self.qrung, [], [])
+        newDHFE = qrunghfe(self.qrung, [], [])
         md = self.mf.calculate_MD(x)
         nmd = self.nmf.calculate_MD(y)
         assert np.max(md) ** self.qrung + np.max(nmd) ** self.qrung <= 1, 'The MD^' + str(self.qrung) + '+NMD^' + str(

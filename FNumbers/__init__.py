@@ -1,13 +1,13 @@
-__all__ = ['QrungFN',
+__all__ = ['qrungfn',
            'QFuzzyOperation',
-           'Intersection',
-           'Union',
-           'algebraicMultiply',
-           'algebraicPlus',
-           'einsteinMultiply',
-           'einsteinPlus']
+           'intersection',
+           'unions',
+           'algebraicmultiplication',
+           'algebraicplus',
+           'einsteinmultiplication',
+           'einsteinplus']
 
-from .QrungFN import QrungFN
-from .QFuzzyOperation import (Intersection, Union,
-                              algebraicMultiply, algebraicPlus,
-                              einsteinMultiply, einsteinPlus)
+from .qrungfn import qrungfn
+from .QFuzzyOperation import (intersection, unions,
+                              algebraicmultiplication, algebraicplus,
+                              einsteinmultiplication, einsteinplus)

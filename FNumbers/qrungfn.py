@@ -3,7 +3,7 @@ import numpy as np
 from .FuzzyNums import Fuzzynum
 
 
-class QrungFN(Fuzzynum):
+class qrungfn(Fuzzynum):
 
     def __init__(self, qrung, md, nmd):
         super().__init__()
@@ -17,6 +17,6 @@ class QrungFN(Fuzzynum):
         self.nmd = nmd
 
     def __repr__(self):
-        return 'QrungFN(Q=%d):(' % self.qrung + '\n' + '    md: ' + str(np.around(self.md, 4)) + '\n' + '    nmd:' + str(
+        return 'QRungFN(Q=%d):(' % self.qrung + '\n' + '    md: ' + str(np.around(self.md, 4)) + '\n' + '    nmd:' + str(
             np.around(self.nmd, 4)) + ')'
 

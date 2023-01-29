@@ -1,18 +1,18 @@
-from .HQrungF import HQrungF
+from .qrunghfe import qrunghfe
 from .archimedean import *
 import numpy as np
 
 
-def Intersection(dh1: HQrungF, dh2: HQrungF):
+def intersection(dh1: qrunghfe, dh2: qrunghfe):
     """
-        Intersection of two DHFEs
+        intersection of two DHFEs
         :param dh1: DHFE 1
         :param dh2: DHFE 2
         :return: DHFE
     """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE !'
     q = dh1.qrung
-    newDHFE = HQrungF(q, [], [])
+    newDHFE = qrunghfe(q, [], [])
     md_min = min(max(dh1.md), max(dh2.md))
     nmd_max = max(min(dh1.nmd), min(dh2.nmd))
 
@@ -27,16 +27,16 @@ def Intersection(dh1: HQrungF, dh2: HQrungF):
     return newDHFE
 
 
-def Union(dh1: HQrungF, dh2: HQrungF):
+def unions(dh1: qrunghfe, dh2: qrunghfe):
     """
-        Union of two DHFEs
+        unions of two DHFEs
         :param dh1: DHFE 1
         :param dh2: DHFE 2
         :return: DHFE
     """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
-    newDHFE = HQrungF(q, [], [])
+    newDHFE = qrunghfe(q, [], [])
     md_max = max(min(dh1.md), min(dh2.md))
     nmd_min = min(max(dh1.nmd), max(dh2.nmd))
 
@@ -51,7 +51,7 @@ def Union(dh1: HQrungF, dh2: HQrungF):
     return newDHFE
 
 
-def algebraicMultiplication(dh1: HQrungF, dh2: HQrungF):
+def algebraicmultiplication(dh1: qrunghfe, dh2: qrunghfe):
     """
         Algebraic multiplication of two DHFEs
         :param dh1: DHFE 1
@@ -60,7 +60,7 @@ def algebraicMultiplication(dh1: HQrungF, dh2: HQrungF):
     """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
-    newDHFE = HQrungF(q, [], [])
+    newDHFE = qrunghfe(q, [], [])
 
     mds = np.array(np.meshgrid(dh1.md, dh2.md)).T.reshape(-1, 2)
     nmds = np.array(np.meshgrid(dh1.nmd, dh2.nmd)).T.reshape(-1, 2)
@@ -73,7 +73,7 @@ def algebraicMultiplication(dh1: HQrungF, dh2: HQrungF):
     return newDHFE
 
 
-def algebraicPlus(dh1: HQrungF, dh2: HQrungF):
+def algebraicplus(dh1: qrunghfe, dh2: qrunghfe):
     """
         Algebraic addition of two DHFEs
         :param dh1: DHFE 1
@@ -82,7 +82,7 @@ def algebraicPlus(dh1: HQrungF, dh2: HQrungF):
     """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
-    newDHFE = HQrungF(q, [], [])
+    newDHFE = qrunghfe(q, [], [])
 
     mds = np.array(np.meshgrid(dh1.md, dh2.md)).T.reshape(-1, 2)
     nmds = np.array(np.meshgrid(dh1.nmd, dh2.nmd)).T.reshape(-1, 2)
@@ -95,7 +95,7 @@ def algebraicPlus(dh1: HQrungF, dh2: HQrungF):
     return newDHFE
 
 
-def einsteinMultiplication(dh1: HQrungF, dh2: HQrungF):
+def einsteinmultiplication(dh1: qrunghfe, dh2: qrunghfe):
     """
         Einstein multiplication of two DHFEs
         :param dh1: DHFE 1
@@ -104,7 +104,7 @@ def einsteinMultiplication(dh1: HQrungF, dh2: HQrungF):
     """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
-    newDHFE = HQrungF(q, [], [])
+    newDHFE = qrunghfe(q, [], [])
 
     mds = np.array(np.meshgrid(dh1.md, dh2.md)).T.reshape(-1, 2)
     nmds = np.array(np.meshgrid(dh1.nmd, dh2.nmd)).T.reshape(-1, 2)
@@ -117,7 +117,7 @@ def einsteinMultiplication(dh1: HQrungF, dh2: HQrungF):
     return newDHFE
 
 
-def einsteinPlus(dh1: HQrungF, dh2: HQrungF):
+def einsteinplus(dh1: qrunghfe, dh2: qrunghfe):
     """
         Einstein addition of two DHFEs
         :param dh1: DHFE 1
@@ -126,7 +126,7 @@ def einsteinPlus(dh1: HQrungF, dh2: HQrungF):
     """
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE!'
     q = dh1.qrung
-    newDHFE = HQrungF(q, [], [])
+    newDHFE = qrunghfe(q, [], [])
 
     mds = np.array(np.meshgrid(dh1.md, dh2.md)).T.reshape(-1, 2)
     nmds = np.array(np.meshgrid(dh1.nmd, dh2.nmd)).T.reshape(-1, 2)

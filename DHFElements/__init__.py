@@ -1,9 +1,9 @@
-__all__ = ['HQrungF',
-           'Intersection', 'Union',
-           'algebraicMultiplication', 'algebraicPlus',
-           'einsteinMultiplication', 'einsteinPlus']
+__all__ = ['qrunghfe',
+           'intersection', 'unions',
+           'algebraicmultiplication', 'algebraicplus',
+           'einsteinmultiplication', 'einsteinplus']
 
-from .HQrungF import HQrungF
-from .DHFuzzyOperation import (Intersection, Union,
-                               algebraicMultiplication, algebraicPlus,
-                               einsteinMultiplication, einsteinPlus)
+from .qrunghfe import qrunghfe
+from .DHFuzzyOperation import (intersection, unions,
+                               algebraicmultiplication, algebraicplus,
+                               einsteinmultiplication, einsteinplus)

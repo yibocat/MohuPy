@@ -2,9 +2,9 @@ import numpy as np
 from .DHFuzzy import DhFuzzy
 
 
-class HQrungF(DhFuzzy):
+class qrunghfe(DhFuzzy):
     """
-    HQrungF is a class representing the Q-Rung hesitant fuzzy sets model. It is inherited from the DHFuzzy class.
+    qrunghfe is a class representing the Q-Rung hesitant fuzzy sets model. It is inherited from the DHFuzzy class.
 
     Attributes
     ----------
@@ -32,11 +32,11 @@ class HQrungF(DhFuzzy):
 
     def __repr__(self):
         if len(self.md) > 50 or len(self.nmd) > 50:
-            return 'HQrungF(Q=%d)[%d,%d]:{' % (self.qrung, len(self.md), len(self.nmd)) + \
+            return 'QRungHFE(Q=%d)[%d,%d]:{' % (self.qrung, len(self.md), len(self.nmd)) + \
                 '\n md :' + str(np.round(self.md, 4)[:50]) + \
                 ',\n nmd:' + str(np.round(self.nmd, 4)[:50]) + ' }\n'
         else:
-            return 'HQrungF(Q=%d)[%d,%d]:{' % (self.qrung, len(self.md), len(self.nmd)) + \
+            return 'QRungHFE(Q=%d)[%d,%d]:{' % (self.qrung, len(self.md), len(self.nmd)) + \
                 '\n md :' + str(np.round(self.md, 4)) + \
                 ',\n nmd:' + str(np.round(self.nmd, 4)) + ' }\n'
 

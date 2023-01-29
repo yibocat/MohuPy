@@ -3,7 +3,7 @@ import numpy as np
 from .IVFuzzyNums import IVFuzzynum
 
 
-class QrungIVFN(IVFuzzynum):
+class qrungivfn(IVFuzzynum):
     def __init__(self, qrung, mdl, mdu, nmdl, nmdu):
         super().__init__()
         mdl = np.asarray(mdl)
@@ -25,6 +25,6 @@ class QrungIVFN(IVFuzzynum):
         self.qrung = qrung
 
     def __repr__(self):
-        return 'QrungIVFN(Q=%d):' % self.qrung + \
+        return 'QRungIVFN(Q=%d):' % self.qrung + \
             '(\n MD: [' + str(np.around(self.mdl, 4)) + ',' + str(np.around(self.mdu, 4)) + ']\n NMD:[' + str(
                 np.around(self.nmdl, 4)) + ',' + str(np.around(self.nmdu, 4)) + '])'

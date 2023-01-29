@@ -1,5 +1,5 @@
 from matplotlib import pyplot as plt
-from FNumbers import QrungFN
+from FNumbers import qrungfn
 from .generateMF import *
 
 
@@ -159,7 +159,7 @@ class FNGenerator(object):
         assert self._variable_start <= y <= self._variable_end, 'The independent variable y is not in the range of %d and %d' % (
             self._variable_start, self._variable_end)
 
-        newFN = QrungFN(self.qrung, 0, 0)
+        newFN = qrungfn(self.qrung, 0, 0)
         md = self.mf.calculate_MD(x)
         nmd = self.nmf.calculate_MD(y)
         assert np.max(md) ** self.qrung + np.max(nmd) ** self.qrung <= 1, 'The MD^' + str(self.qrung) + '+NMD^' + str(
