@@ -33,12 +33,35 @@ class qrungivfn(IVFuzzynum):
         """
             Check if the Q-rung interval-valued fuzzy number is legal.
         """
-        assert self.mdl <= self.mdu and self.nmdl <= self.nmdu, \
-            'ERROR: Illegal Q-rung interval-valued fuzzy number! ' \
-            'The upper limit of membership degree is greater than the lower limit.'
-        assert 0 <= self.mdl <= 1 and 0 <= self.mdu <= 1 and 0 <= self.nmdl <= 1 and 0 <= self.nmdu <= 1, \
-            'ERROR: Illegal Q-rung interval-valued fuzzy number! ' \
-            'The membership degree and non-membership degree must be in the interval[0,1]'
-        assert 0 <= self.mdl ** self.qrung + self.nmdl ** self.qrung <= 1 and 0 <= self.mdu ** self.qrung + self.nmdu ** self.qrung <= 1, \
-            'ERROR: Illegal Q-rung interval-valued fuzzy number! ' \
-            'The sum of membership degree and non-membership degree must be in the interval[0,1]'
+        if not (self.mdl <= self.mdu and self.nmdl <= self.nmdu):
+            # print('ERROR: Illegal Q-rung interval-valued fuzzy number! ' +
+            #       'The upper limit of membership degree is greater than the lower limit.')
+            return False
+        elif not (0 <= self.mdl <= 1 and 0 <= self.mdu <= 1 and 0 <= self.nmdl <= 1 and 0 <= self.nmdu <= 1):
+            # print('ERROR: Illegal Q-rung interval-valued fuzzy number! ' +
+            #       'The membership degree and non-membership degree must be in the interval[0,1]')
+            return False
+        elif not (0 <= self.mdl ** self.qrung + self.nmdl ** self.qrung <= 1 and 0 <= self.mdu ** self.qrung + self.nmdu ** self.qrung <= 1):
+            # print('ERROR: Illegal Q-rung interval-valued fuzzy number!'+
+            #       'The sum of membership degree and non-membership degree must be in the interval[0,1]')
+            return False
+        else:
+            return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

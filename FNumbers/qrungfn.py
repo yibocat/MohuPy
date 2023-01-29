@@ -25,6 +25,10 @@ class qrungfn(Fuzzynum):
         """
             Checks if the Q-Rung fuzzy number is legal.
         """
-        assert ((self.md.size == 0 or self.md.size == 1) and
-                (self.nmd.size == 0 or self.nmd.size == 1) and 0 <= self.md <= 1 and 0 <= self.nmd <= 1) \
-               and 0 <= self.md ** self.qrung + self.nmd ** self.qrung <= 1, 'ERROR: Illegal Q-rung fuzzy number!'
+        if ((self.md.size == 0 or self.md.size == 1) and
+            (self.nmd.size == 0 or self.nmd.size == 1) and 0 <= self.md <= 1 and 0 <= self.nmd <= 1) \
+                and 0 <= self.md ** self.qrung + self.nmd ** self.qrung <= 1:
+            return True
+        else:
+            # print('ERROR: Illegal Q-rung fuzzy number!')
+            return False

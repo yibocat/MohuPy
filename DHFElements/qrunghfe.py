@@ -44,10 +44,13 @@ class qrunghfe(DhFuzzy):
         """
             Checks if the Q-Rung hesitant fuzzy element is legal.
         """
-        assert (self.md.size == 0 or self.nmd.size == 0) or (
-                max(self.md) <= 1 and max(self.nmd) <= 1 and min(self.md) >= 0 and min(self.nmd) >= 0) and (
-                       0 <= max(self.md) ** self.qrung + max(self.nmd) ** self.qrung <= 1), \
-            "ERROR: Illegal Q-rung hesitant fuzzy element!"
+        if (self.md.size == 0 or self.nmd.size == 0) or \
+                (max(self.md) <= 1 and max(self.nmd) <= 1 and min(self.md) >= 0 and min(self.nmd) >= 0) \
+                and (0 <= max(self.md) ** self.qrung + max(self.nmd) ** self.qrung <= 1):
+            return True
+        else:
+            # print('ERROR: Illegal Q-rung hesitant fuzzy element!')
+            return False
 
 # class HIntuiF(_DhFuzzy):
 #     qrung = 1
