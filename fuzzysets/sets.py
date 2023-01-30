@@ -4,12 +4,12 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
 import numpy as np
-from FNumbers import qrungfn
-from IVFNumbers import qrungivfn
-from DHFElements import qrunghfe
-from Lib.random import randomFN
-from Lib.random import randomQHF
-from Lib.random import randomIVFN
+from fuzzyelement.FNumbers import qrungfn
+from fuzzyelement.IVFNumbers import qrungivfn
+from fuzzyelement.DHFElements import qrunghfe
+from library.random import randomFN
+from library.random import randomQHF
+from library.random import randomIVFN
 
 
 class fuzzyset(object):

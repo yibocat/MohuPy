@@ -1,5 +1,5 @@
 from matplotlib import pyplot as plt
-from FNumbers import qrungfn
+from fuzzyelement.FNumbers import qrungfn
 from .generateMF import *
 
 

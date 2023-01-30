@@ -8,8 +8,8 @@
 import copy
 
 import numpy as np
-from DHFElements import qrunghfe
-from FNumbers import qrungfn
+from fuzzyelement.DHFElements import qrunghfe
+from fuzzyelement.FNumbers import qrungfn
 
 
 def normalization(d1: qrunghfe, d2: qrunghfe, t=1) -> (qrunghfe, qrunghfe):

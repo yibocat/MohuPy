@@ -1,5 +1,5 @@
 from matplotlib import pyplot as plt
-from IVFNumbers import qrungivfn
+from fuzzyelement.IVFNumbers import qrungivfn
 from .generateMF import *
 
 

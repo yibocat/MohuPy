@@ -9,9 +9,9 @@ import re
 
 from scipy import stats
 
-import DHFElements as dh
-import FNumbers as fn
-import IVFNumbers as ifn
+import fuzzyelement.DHFElements as dh
+import fuzzyelement.FNumbers as fn
+import fuzzyelement.IVFNumbers as ifn
 
 import matplotlib.pyplot as plt
 import pandas as pd

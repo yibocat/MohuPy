@@ -4,7 +4,7 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
 
-from DHFElements import qrunghfe
+from fuzzyelement.DHFElements import qrunghfe
 
 
 # def dhfwa(sets, weight):

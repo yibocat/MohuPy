@@ -4,9 +4,9 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
 import numpy as np
-from FNumbers import qrungfn
-from DHFElements import qrunghfe
-from IVFNumbers import qrungivfn
+from fuzzyelement.FNumbers import qrungfn
+from fuzzyelement.DHFElements import qrunghfe
+from fuzzyelement.IVFNumbers import qrungivfn
 
 
 def randomFN(q):

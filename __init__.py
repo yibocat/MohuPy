@@ -15,12 +15,12 @@ __all__ = ['qrunghfe', 'intersection', 'unions',
            'einsteinmultiplication', 'einsteinplus'
            ]
 
-from .DHFElements import (qrunghfe, intersection, unions,
-                          algebraicmultiplication, algebraicplus,
-                          einsteinmultiplication, einsteinplus)
-from .FNumbers import (qrungfn, intersection, unions,
-                       algebraicmultiplication, algebraicplus,
-                       einsteinmultiplication, einsteinplus)
-from .IVFNumbers import (qrungivfn,
-                         algebraicmultiplication, algebraicplus,
-                         einsteinmultiplication, einsteinplus)
+from fuzzyelement.DHFElements import (qrunghfe, intersection, unions,
+                                      algebraicmultiplication, algebraicplus,
+                                      einsteinmultiplication, einsteinplus)
+from fuzzyelement.FNumbers import (qrungfn, intersection, unions,
+                                   algebraicmultiplication, algebraicplus,
+                                   einsteinmultiplication, einsteinplus)
+from fuzzyelement.IVFNumbers import (qrungivfn,
+                                     algebraicmultiplication, algebraicplus,
+                                     einsteinmultiplication, einsteinplus)
