@@ -15,7 +15,8 @@ class DHFEGenerator(object):
                 1. 使用内建的 8 种隶属函数
                 2. 自定义隶属函数，属性 customFunc 来区分使用哪种隶属函数
         属性：
-            qrung: 表示创建哪种对偶犹豫模糊元素。若 qrung=1 表示对偶犹豫模糊元素；qrung=2 表示对偶犹豫毕达哥拉斯模糊元素；qrung=3 表示对偶犹豫费马模糊元素
+            qrung: 表示创建哪种对偶犹豫模糊元素。若 qrung=1 表示对偶犹豫模糊元素；qrung=2 表示对偶犹豫毕达哥拉斯模糊元素；qrung=3 表
+                示对偶犹豫费马模糊元素
             customFunc 表示自定义函数开关，用来选择哪种隶属函数。若为 False 则使用内建的 8 种隶属函数；若为 True 则使用自定义隶属函数
             _variable_start,_variable_end,_linspace 为三个私有属性，表示自变量范围和自变量间隔
             MF_parameter 表示隶属度参数列表
@@ -85,15 +86,18 @@ class DHFEGenerator(object):
             self.numMFC = MFnum
             self.MF_parameters = MFparas
             assert len(
-                self.MF_parameters) == self.numMFC, 'The number of MFCs has not been set or does not match the number of parameters.'
+                self.MF_parameters) == self.numMFC, \
+                'The number of MFCs has not been set or does not match the number of parameters.'
         else:
-            assert MFunc == 'sigmf' or MFunc == 'trimf' or MFunc == 'zmf' or MFunc == 'smf' or MFunc == 'gaussmf' or MFunc == 'gauss2mf' or MFunc == 'gbellmf' or MFunc == 'trapmf', \
-                'ERROR! Wrong membership function!'
+            assert MFunc == 'sigmf' or MFunc == 'trimf' or MFunc == 'zmf' or\
+                   MFunc == 'smf' or MFunc == 'gaussmf' or MFunc == 'gauss2mf' or\
+                   MFunc == 'gbellmf' or MFunc == 'trapmf', 'ERROR! Wrong membership function!'
             self.MFunc = MFunc
             self.numMFC = MFnum
             self.MF_parameters = MFparas
             assert len(
-                self.MF_parameters) == self.numMFC, 'The number of MFCs has not been set or does not match the number of parameters.'
+                self.MF_parameters) == self.numMFC, \
+                'The number of MFCs has not been set or does not match the number of parameters.'
 
     def NMFgeneratorSettings(self, NMFunc, NMFnum, NMFparas):
         """
@@ -109,15 +113,18 @@ class DHFEGenerator(object):
             self.numNMFC = NMFnum
             self.NMF_parameters = NMFparas
             assert len(
-                self.NMF_parameters) == self.numNMFC, 'The number of MFCs has not been set or does not match the number of parameters.'
+                self.NMF_parameters) == self.numNMFC, \
+                'The number of MFCs has not been set or does not match the number of parameters.'
         else:
-            assert NMFunc == 'sigmf' or NMFunc == 'trimf' or NMFunc == 'zmf' or NMFunc == 'smf' or NMFunc == 'gaussmf' or NMFunc == 'gauss2mf' or NMFunc == 'gbellmf' or NMFunc == 'trapmf', \
-                'ERROR! Wrong non-membership function!'
+            assert NMFunc == 'sigmf' or NMFunc == 'trimf' or NMFunc == 'zmf' or\
+                   NMFunc == 'smf' or NMFunc == 'gaussmf' or NMFunc == 'gauss2mf' or\
+                   NMFunc == 'gbellmf' or NMFunc == 'trapmf', 'ERROR! Wrong non-membership function!'
             self.NMFunc = NMFunc
             self.numNMFC = NMFnum
             self.NMF_parameters = NMFparas
             assert len(
-                self.NMF_parameters) == self.numNMFC, 'The number of NMFCs has not been set or does not match the number of parameters.'
+                self.NMF_parameters) == self.numNMFC, \
+                'The number of NMFCs has not been set or does not match the number of parameters.'
 
     def setVariable(self, start, end, linspace):
         """
@@ -138,14 +145,16 @@ class DHFEGenerator(object):
             首先设置参数，然后设置环境
         """
         if self.customFunc:
-            assert hasattr(self.MFunc, '__call__') and hasattr(self.NMFunc,
-                                                               '__call__'), 'ERROR:The MFunc and NMFunc are not function type!'
+            assert hasattr(self.MFunc, '__call__') and hasattr(self.NMFunc, '__call__'),\
+                'ERROR:The MFunc and NMFunc are not function type!'
             self.mf = _customMemFunc(self.MFunc, self.MF_parameters, self.numMFC)
             self.nmf = _customMemFunc(self.NMFunc, self.NMF_parameters, self.numNMFC)
         else:
             assert self.MFunc != '' and self.NMFunc != '' and \
                    self.MF_parameters != [] and self.NMF_parameters != [] \
-                   and self.numMFC != 0 and self.numNMFC != 0, 'Membership function or parameter or number of function has not been set! Please set the membership and non-membership function first.'
+                   and self.numMFC != 0 and self.numNMFC != 0, 'Membership function or parameter or number of ' \
+                                                               'function has not been set! Please set the membership ' \
+                                                               'and non-membership function first.'
             self.mf = _memshipFunc(self.MFunc, self.MF_parameters, self.numMFC)
             self.nmf = _memshipFunc(self.NMFunc, self.NMF_parameters, self.numNMFC)
 
