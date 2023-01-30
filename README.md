@@ -7,3 +7,4 @@ generator and element generator that can generate the fuzzy numbers, interval-va
 fuzzy numbers and hesitant fuzzy elements. The membership degrees function generator 
 of the toolkit already has eight built-in membership degree function. Moreover, users 
 can use custom membership functions to construct membership function generators.
+
