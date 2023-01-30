@@ -180,30 +180,3 @@ def dh_fn_mean(dhf: qrunghfe):
     newfn.md = dhf.md.mean()
     newfn.nmd = dhf.nmd.mean()
     return newfn
-
-
-# ----------------------------------------------------------------
-# Generate a randomQHF Q-rung hesitant fuzzy element
-def randomQHF(q, n=5):
-    """
-        Generate a randomQHF Q-rung hesitant fuzzy element
-        Parameters
-        ----------
-            q : int
-                The Q-rung number
-            n : int
-                n represents the maximum randomQHF number of generated numbers, the default is 5.
-
-        Returns
-        -------
-            DHFElements
-    """
-    md = np.random.rand(np.random.randint(1, n))
-    nmd = np.random.rand(np.random.randint(1, n))
-    newHFE = qrunghfe(q, [], [])
-    newHFE.md = md
-    newHFE.nmd = nmd
-    if newHFE.isLegal():
-        return newHFE
-    else:
-        return randomQHF(q, n)

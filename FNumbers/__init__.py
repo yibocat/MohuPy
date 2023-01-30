@@ -1,5 +1,4 @@
 __all__ = ['qrungfn',
-           'QFuzzyOperation',
            'intersection',
            'unions',
            'algebraicmultiplication',

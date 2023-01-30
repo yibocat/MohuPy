@@ -116,8 +116,10 @@ class IVFNGenerator(object):
         MD = self.mf.calculate_MD(x)
         NMD = self.nmf.calculate_MD(y)
 
-        assert np.max(MD)**self.qrung+np.max(NMD)**self.qrung<=1,'The MD^'+str(self.qrung)+'+NMD^'+str(self.qrung)+'<=1 and >=0. Please reset the parameters'
-        assert np.min(MD)**self.qrung+np.min(NMD)**self.qrung>=0,'The MD^'+str(self.qrung)+'+NMD^'+str(self.qrung)+'<=1 and >=0. Please reset the parameters'
+        assert np.max(MD) ** self.qrung + np.max(NMD) ** self.qrung <= 1, 'The MD^' + str(self.qrung) + '+NMD^' + str(
+            self.qrung) + '<=1 and >=0. Please reset the parameters'
+        assert np.min(MD) ** self.qrung + np.min(NMD) ** self.qrung >= 0, 'The MD^' + str(self.qrung) + '+NMD^' + str(
+            self.qrung) + '<=1 and >=0. Please reset the parameters'
 
         newIVFN.mdl = MD[0]
         newIVFN.mdu = MD[1]

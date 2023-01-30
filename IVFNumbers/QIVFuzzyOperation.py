@@ -1,4 +1,4 @@
-from .QrungIVFNs import qrungivfn
+from .qrungivfn import qrungivfn
 from .archimedean import *
 
 

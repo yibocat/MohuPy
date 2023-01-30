@@ -4,6 +4,6 @@ __all__ = ['qrungivfn',
            'einsteinmultiplication',
            'einsteinplus']
 
-from .QrungIVFNs import qrungivfn
+from .qrungivfn import qrungivfn
 from .QIVFuzzyOperation import (algebraicmultiplication, algebraicplus,
                                 einsteinmultiplication, einsteinplus)
