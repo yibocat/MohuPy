@@ -96,7 +96,14 @@ def random_split(data, l):
 def qrunghfe_convert(s, q):
     """
         Convert input data to Q-rung hesitant fuzzy element.
-        Note: When the input data is 0, it should be set to 0.
+        Note: When the input data is '0', it should be set to '0.'.
+
+        Q-rung Hesitant Fuzzy convert function accepts three forms
+        of input data:
+        {{x,x,x,x},{x,x,x,x}};
+        {[x,x,x,x],[x,x,x,x]};
+        [[x,x,x,x],[x,x,x,x]].
+
         Parameters
         ----------
             s : str
@@ -128,6 +135,10 @@ def qrungfn_convert(s, q):
     """
         Convert input data to fuzzy number.
         Note: When the input data is 0, it should be set to 0.
+
+        Q-rung fuzzy convert function accepts the form:
+        [x,x]
+
         Parameters
         ----------
             s : str
@@ -152,6 +163,10 @@ def qrungivfn_convert(s, q):
     """
         Convert input data to interval-valued fuzzy number.
         Note: When the input data is 0, it should be set to 0.
+
+        Q-rung Interval-valued fuzzy convert function accepts the form:
+        [[x,x],[x,x]]
+
         Parameters
         ----------
         s : str
