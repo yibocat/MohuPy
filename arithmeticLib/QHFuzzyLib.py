@@ -9,6 +9,7 @@ import copy
 
 import numpy as np
 from DHFElements import qrunghfe
+from FNumbers import qrungfn
 
 
 def normalization(d1: qrunghfe, d2: qrunghfe, t=1) -> (qrunghfe, qrunghfe):
@@ -125,3 +126,84 @@ def generalized_distance(d1: qrunghfe, d2: qrunghfe, l=1, t=1):
     distance = 0.5 * (mds + nmds + pi) ** (1 / l)
 
     return distance
+
+
+# ----------------------------------------------------------------
+# Convert Qrung Hesitant Fuzzy element to Q-rung fuzzy number,
+# according to the method of membership degree maximum, minimum and mean.
+def dh_fn_max(dhf: qrunghfe):
+    """
+        Convert Q-rung hesitant fuzzy element to Q-rung fuzzy number by max value
+        Parameters
+        ----------
+            dhf : DHFElements
+
+        Returns
+        -------
+            newfn : FNumbers
+    """
+    newfn = qrungfn(dhf.qrung, 0, 0)
+    newfn.md = dhf.md.max()
+    newfn.nmd = dhf.nmd.max()
+    return newfn
+
+
+def dh_fn_min(dhf: qrunghfe):
+    """
+        Convert Q-rung hesitant fuzzy element to Q-rung fuzzy number by min value
+        Parameters
+        ----------
+            dhf : DHFElements
+
+        Returns
+        -------
+            newfn : FNumbers
+    """
+    newfn = qrungfn(dhf.qrung, 0, 0)
+    newfn.md = dhf.md.min()
+    newfn.nmd = dhf.nmd.min()
+    return newfn
+
+
+def dh_fn_mean(dhf: qrunghfe):
+    """
+        Convert Q-rung hesitant fuzzy element to Q-rung fuzzy number by mean value.
+        Parameters
+        ----------
+            dhf : DHFElements
+
+        Returns
+        -------
+            newfn : FNumbers
+    """
+    newfn = qrungfn(dhf.qrung, 0, 0)
+    newfn.md = dhf.md.mean()
+    newfn.nmd = dhf.nmd.mean()
+    return newfn
+
+
+# ----------------------------------------------------------------
+# Generate a randomQHF Q-rung hesitant fuzzy element
+def randomQHF(q, n=5):
+    """
+        Generate a randomQHF Q-rung hesitant fuzzy element
+        Parameters
+        ----------
+            q : int
+                The Q-rung number
+            n : int
+                n represents the maximum randomQHF number of generated numbers, the default is 5.
+
+        Returns
+        -------
+            DHFElements
+    """
+    md = np.random.rand(np.random.randint(1, n))
+    nmd = np.random.rand(np.random.randint(1, n))
+    newHFE = qrunghfe(q, [], [])
+    newHFE.md = md
+    newHFE.nmd = nmd
+    if newHFE.isLegal():
+        return newHFE
+    else:
+        return randomQHF(q, n)
