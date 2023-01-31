@@ -3,34 +3,35 @@ import copy
 
 
 class DhFuzzy(object):
+    # noinspection PyUnresolvedReferences
     """
-    DhFuzzy is a class to represent the dual hesitant fuzzy sets model.
+        DhFuzzy is a class to represent the dual hesitant fuzzy sets model.
 
-    Attributes
-    ----------
-        md : numpy.ndarray, shape = (n_numbers), indicates the number of membership degrees
-        nmd : numpy.ndarray, shape = (n_numbers), indicates the number of non-membership degrees
-        qrung : numpy.ndarray, shape = (n_numbers), indicates the Q rung of the elements
+        Attributes
+        ----------
+            md : numpy.ndarray, shape = (n_numbers), indicates the number of membership degrees
+            nmd : numpy.ndarray, shape = (n_numbers), indicates the number of non-membership degrees
+            qrung : numpy.ndarray, shape = (n_numbers), indicates the Q rung of the elements
 
-    Function
-    ----------
-        __init__(self, md, nmd): Initializes a dual hesitant fuzzy element
+        Function
+        ----------
+            __init__(self, md, nmd): Initializes a dual hesitant fuzzy element
 
-        isEmpty(self) : bool, judging that a dual hesitant fuzzy element is empty
-        isEmpty_half(self) : bool, judging whether the membership degree or non-membership degree of
-            a dual hesitant fuzzy element is empty
+            isEmpty(self) : bool, judging that a dual hesitant fuzzy element is empty
+            isEmpty_half(self) : bool, judging whether the membership degree or non-membership degree of
+                a dual hesitant fuzzy element is empty
 
-        complement(self) : DhFuzzy, complement set of the dual hesitated fuzzy element
+            complement(self) : DhFuzzy, complement set of the dual hesitated fuzzy element
 
-        qSort(self, rev) : DhFuzzy, Sort the dual hesitated fuzzy element
-            rev: : bool, indicate whether the sort is in reverse
+            qSort(self, rev) : DhFuzzy, Sort the dual hesitated fuzzy element
+                rev: : bool, indicate whether the sort is in reverse
 
-        algebraicPower(self,l) : Algebraic power operation, l indicates the operation parameter
-        algebraicTimes(self,l) : Algebraic times operation, l indicates the operation parameter
-        einsteinPower(self,l) : Einstein power operation, l indicates the operation parameter
-        einsteinTimes(self,l) : Einstein times operation, l indicates the operation parameter
+            algebraicPower(self,l) : Algebraic power operation, l indicates the operation parameter
+            algebraicTimes(self,l) : Algebraic times operation, l indicates the operation parameter
+            einsteinPower(self,l) : Einstein power operation, l indicates the operation parameter
+            einsteinTimes(self,l) : Einstein times operation, l indicates the operation parameter
 
-    """
+        """
     md = None
     nmd = None
     qrung = None
@@ -38,6 +39,7 @@ class DhFuzzy(object):
     def __init__(self):
         pass
 
+    @property
     def score(self):
         return ((self.md ** self.qrung).sum()) / len(self.md) - ((self.nmd ** self.qrung).sum()) / len(self.nmd)
 

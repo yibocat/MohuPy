@@ -37,8 +37,8 @@ class IVFNGenerator(object):
     def MFgeneratorSetting(self, MFunc, low_MF_para, upp_MF_para):
         if not self.customFunc:
             assert MFunc == 'sigmf' or MFunc == 'trimf' or MFunc == 'zmf' or \
-                   MFunc == 'smf' or MFunc == 'gaussmf' or MFunc == 'gauss2mf' or MFunc == 'gbellmf' or MFunc == 'trapmf', \
-                'ERROR! Wrong membership function!'
+                   MFunc == 'smf' or MFunc == 'gaussmf' or MFunc == 'gauss2mf' or \
+                   MFunc == 'gbellmf' or MFunc == 'trapmf', 'ERROR! Wrong membership function!'
             self.MFunc = MFunc
             self.low_mfpara = low_MF_para
             self.upp_mfpara = upp_MF_para
@@ -51,8 +51,8 @@ class IVFNGenerator(object):
     def NMFgeneratorSetting(self, NMFunc, low_NMF_para, upp_NMF_para):
         if not self.customFunc:
             assert NMFunc == 'sigmf' or NMFunc == 'trimf' or NMFunc == 'zmf' or \
-                   NMFunc == 'smf' or NMFunc == 'gaussmf' or NMFunc == 'gauss2mf' or NMFunc == 'gbellmf' or NMFunc == 'trapmf', \
-                'ERROR! Wrong membership function!'
+                   NMFunc == 'smf' or NMFunc == 'gaussmf' or NMFunc == 'gauss2mf' or \
+                   NMFunc == 'gbellmf' or NMFunc == 'trapmf', 'ERROR! Wrong membership function!'
             self.NMFunc = NMFunc
             self.low_nmfpara = low_NMF_para
             self.upp_nmfpara = upp_NMF_para
@@ -82,9 +82,10 @@ class IVFNGenerator(object):
             其次设置环境
         """
         if not self.customFunc:
-            assert self.MFunc != '' and self.NMFunc != '' and self.low_mfpara != [] and self.upp_mfpara != [] \
-                   and self.low_nmfpara != [] and self.upp_nmfpara != [], \
-                'Membership function or parameter or number of function has not been set! Please set the membership and non-membership function first.'
+            assert self.MFunc != '' and self.NMFunc != '' and \
+                   self.low_mfpara != [] and self.upp_mfpara != [] and self.low_nmfpara != [] and \
+                   self.upp_nmfpara != [], 'Membership function or parameter or number of function ' \
+                                           'has not been set! Please set the membership and non-membership function first.'
             self.mf = _memshipFunc(self.MFunc, self.low_mfpara, self.upp_mfpara)
             self.nmf = _memshipFunc(self.NMFunc, self.low_nmfpara, self.upp_nmfpara)
         else:
@@ -99,7 +100,7 @@ class IVFNGenerator(object):
         print(self.__repr__())
 
     def MF_NMF_Plot(self):
-        x = np.linspace(self._variable_start, self._variable_end, self._linspace)
+        # x = np.linspace(self._variable_start, self._variable_end, self._linspace)
         mf = self.mf
         nmf = self.nmf
 
@@ -418,7 +419,7 @@ class _customMemFunc(object):
             该函数的作用是将隶属函数沿 y 轴方向向下平移最小值个单位，保证隶属函数的值 <= 1
             可以理解为该函数的系数
         """
-        min_mf_low, min_mf_upp = [], []
+        # min_mf_low, min_mf_upp = [], []
         x = np.linspace(self._variable_start, self._variable_end, self._linspace)
         min_mf_low = min(self.ArbFunc(x, *self.low_para))
         min_mf_upp = min(self.ArbFunc(x, *self.upp_para))

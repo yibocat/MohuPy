@@ -3,20 +3,21 @@ from .DHFuzzy import DhFuzzy
 
 
 class qrunghfe(DhFuzzy):
+    # noinspection PyUnresolvedReferences
     """
-    qrunghfe is a class representing the Q-Rung hesitant fuzzy sets model. It is inherited from the DHFuzzy class.
+        qrunghfe is a class representing the Q-Rung hesitant fuzzy sets model. It is inherited from the DHFuzzy class.
 
-    Attributes
-    ----------
-        md : numpy.ndarray, shape = (n_numbers), indicates the number of membership degrees
-        nmd : numpy.ndarray, shape = (n_numbers), indicates the number of non-membership degrees
-        qrung : numpy.ndarray, shape = (n_numbers), indicates the Q rung of the elements
+        Attributes
+        ----------
+            md : numpy.ndarray, shape = (n_numbers), indicates the number of membership degrees
+            nmd : numpy.ndarray, shape = (n_numbers), indicates the number of non-membership degrees
+            qrung : numpy.ndarray, shape = (n_numbers), indicates the Q rung of the elements
 
-    Function
-    ---------
-        __init__(self, md, nmd): Initializes a Q-Rung dual hesitant fuzzy element
-        __repr__(self): Returns a string representation of the Q-Rung dual hesitant fuzzy element
-    """
+        Function
+        ---------
+            __init__(self, md, nmd): Initializes a Q-Rung dual hesitant fuzzy element
+            __repr__(self): Returns a string representation of the Q-Rung dual hesitant fuzzy element
+        """
 
     def __init__(self, qrung, md, nmd):
         super().__init__()

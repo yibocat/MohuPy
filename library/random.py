@@ -61,8 +61,8 @@ def randomQHF(q, n=5):
         Returns:
             DHFElements
     """
-    md = np.random.rand(np.random.randint(1,n))
-    nmd = np.random.rand(np.random.randint(1,n))
+    md = np.random.rand(np.random.randint(1, n))
+    nmd = np.random.rand(np.random.randint(1, n))
     newHFE = qrunghfe(q, [], [])
     newHFE.md = md
     newHFE.nmd = nmd

@@ -13,39 +13,40 @@ from library.random import randomIVFN
 
 
 class fuzzyset(object):
+    # noinspection PyUnresolvedReferences
     """
-        Fuzzy set class. General operations on fuzzy sets, including
-        adding fuzzy elements, deleting fuzzy elements, random fuzzy
-        sets, etc.
-        First, a dictionary of fuzzy element types is given. According
-        to different types of fuzzy elements, different fuzzy sets are
-        constructed, including Q-rung fuzzy sets, Q-rung interval
-        valued fuzzy sets and Q-rung dual hesitant fuzzy sets.
-        To initialize a fuzzy set, two parameters need to be passed in,
-        namely Q-rung and fuzzy element type. It should be noted that:
-        the type of fuzzy element must be included in the dictionary.
+            Fuzzy set class. General operations on fuzzy sets, including
+            adding fuzzy elements, deleting fuzzy elements, random fuzzy
+            sets, etc.
+            First, a dictionary of fuzzy element types is given. According
+            to different types of fuzzy elements, different fuzzy sets are
+            constructed, including Q-rung fuzzy sets, Q-rung interval
+            valued fuzzy sets and Q-rung dual hesitant fuzzy sets.
+            To initialize a fuzzy set, two parameters need to be passed in,
+            namely Q-rung and fuzzy element type. It should be noted that:
+            the type of fuzzy element must be included in the dictionary.
 
-        After initialization, the fuzzy set object can be used to
-        add fuzzy elements, delete fuzzy elements, random fuzzy sets,
-        etc.
+            After initialization, the fuzzy set object can be used to
+            add fuzzy elements, delete fuzzy elements, random fuzzy sets,
+            etc.
 
-        Attributes:
-            qrung: the Q-rung of the element
-            type: the type of the fuzzy element
-            __elements_num: the number of elements in the fuzzy set
-            collection: the collection of elements in the fuzzy set
-            __dict: Dictionary of Fuzzy Set Kinds
-            list: the list of elements in the fuzzy set
+            Attributes:
+                qrung: the Q-rung of the element
+                type: the type of the fuzzy element
+                __elements_num: the number of elements in the fuzzy set
+                collection: the collection of elements in the fuzzy set
+                __dict: Dictionary of Fuzzy Set Kinds
+                list: the list of elements in the fuzzy set
 
-        Methods:
-            append: add a fuzzy element to the fuzzy set
-            delete: delete a fuzzy element from the fuzzy set
-            deleteI: delete a fuzzy element from the fuzzy set by index
-            random: generate a random fuzzy set
-            __repr__: print the fuzzy set information
-            isEmpty: whether the fuzzy set is empty
-            check_dict: check the dictionary of elements kinds
-    """
+            Methods:
+                append: add a fuzzy element to the fuzzy set
+                delete: delete a fuzzy element from the fuzzy set
+                deleteI: delete a fuzzy element from the fuzzy set by index
+                random: generate a random fuzzy set
+                __repr__: print the fuzzy set information
+                isEmpty: whether the fuzzy set is empty
+                check_dict: check the dictionary of elements kinds
+        """
     qrung = None
     collection = None
     type = None
