@@ -58,7 +58,7 @@ class DhFuzzy(object):
             return False
 
     def complement(self):
-        newEle = copy.copy(self)
+        newEle = copy.deepcopy(self)
         if self.md.size == 0 and self.nmd.size != 0:
             newEle.md = np.array([])
             newEle.nmd = 1 - self.nmd
@@ -71,7 +71,7 @@ class DhFuzzy(object):
         return newEle
 
     def qSort(self, rev=True):
-        newEle = copy.copy(self)
+        newEle = copy.deepcopy(self)
         if rev:
             newEle.md = np.sort(self.md)
             newEle.nmd = np.sort(self.nmd)
@@ -81,19 +81,19 @@ class DhFuzzy(object):
         return newEle
 
     def algebraicPower(self, l):
-        newEle = copy.copy(self)
+        newEle = copy.deepcopy(self)
         newEle.md = self.md ** l
         newEle.nmd = (1 - (1 - self.nmd ** self.qrung) ** l) ** (1 / self.qrung)
         return newEle
 
     def algebraicTimes(self, l):
-        newEle = copy.copy(self)
+        newEle = copy.deepcopy(self)
         newEle.md = (1 - (1 - self.md ** self.qrung) ** l) ** (1 / self.qrung)
         newEle.nmd = self.nmd ** l
         return newEle
 
     def einsteinPower(self, l):
-        newEle = copy.copy(self)
+        newEle = copy.deepcopy(self)
         newEle.md = ((2 * (self.md ** self.qrung) ** l) / (
                 (2 - self.md ** self.qrung) ** l + (self.md ** self.qrung) ** l)) ** (1 / self.qrung)
         newEle.nmd = (((1 + self.nmd ** self.qrung) ** l - (1 - self.nmd ** self.qrung) ** l) /
@@ -101,7 +101,7 @@ class DhFuzzy(object):
         return newEle
 
     def einsteinTimes(self, l):
-        newEle = copy.copy(self)
+        newEle = copy.deepcopy(self)
         newEle.md = (((1 + self.md ** self.qrung) ** l - (1 - self.md ** self.qrung) ** l) /
                      ((1 + self.md ** self.qrung) ** l + (1 - self.md ** self.qrung) ** l)) ** (1 / self.qrung)
         newEle.nmd = ((2 * (self.nmd ** self.qrung) ** l) / (

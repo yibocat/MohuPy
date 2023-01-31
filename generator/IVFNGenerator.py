@@ -113,7 +113,7 @@ class IVFNGenerator(object):
         assert self._variable_start <= y <= self._variable_end, 'The independent variable y is not in the range of %d and %d' % (
             self._variable_start, self._variable_end)
 
-        newIVFN = qrungivfn(self.qrung, 0, 0, 0, 0)
+        newIVFN = qrungivfn(self.qrung, [0., 0.], [0., 0.])
         MD = self.mf.calculate_MD(x)
         NMD = self.nmf.calculate_MD(y)
 
@@ -122,10 +122,10 @@ class IVFNGenerator(object):
         assert np.min(MD) ** self.qrung + np.min(NMD) ** self.qrung >= 0, 'The MD^' + str(self.qrung) + '+NMD^' + str(
             self.qrung) + '<=1 and >=0. Please reset the parameters'
 
-        newIVFN.mdl = MD[0]
-        newIVFN.mdu = MD[1]
-        newIVFN.nmdl = NMD[0]
-        newIVFN.nmdu = NMD[1]
+        newIVFN.md[0] = MD[0]
+        newIVFN.md[1] = MD[1]
+        newIVFN.nmd[0] = NMD[0]
+        newIVFN.nmd[1] = NMD[1]
 
         return newIVFN
 

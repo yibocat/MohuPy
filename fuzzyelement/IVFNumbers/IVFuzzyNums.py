@@ -4,28 +4,26 @@ from .archimedean import *
 
 class IVFuzzynum(object):
     qrung = None
-    mdl = None
-    mdu = None
-    nmdl = None
-    nmdu = None
+    md = None
+    nmd = None
 
     def __init__(self):
         pass
 
     @property
     def score(self):
-        md = self.mdl ** self.qrung + self.mdu ** self.qrung
-        nmd = self.nmdl ** self.qrung + self.nmdu ** self.qrung
+        md = self.md[0] ** self.qrung + self.md[1] ** self.qrung
+        nmd = self.nmd[0] ** self.qrung + self.nmd[1] ** self.qrung
         return (md - nmd) / 2
 
     def isEmpty(self):
-        if not (self.mdl and self.mdu and self.nmdl and self.nmdu):
+        if not (self.md[0] and self.md[1] and self.nmd[0] and self.nmd[1]):
             return True
         else:
             return False
 
     def isEmpty_half(self):
-        if not (self.mdl or self.mdu or self.nmdl or self.nmdu):
+        if not (self.md[0] or self.md[1] or self.nmd[0] or self.nmd[1]):
             return True
         else:
             return False
@@ -34,32 +32,33 @@ class IVFuzzynum(object):
         pass
 
     def algebraicPower(self, l):
-        newIVFN = copy.copy(self)
-        newIVFN.mdl = in_algebraic_tau(l * algebraic_tau(self.mdl ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.mdu = in_algebraic_tau(l * algebraic_tau(self.mdu ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.nmdl = in_algebraic_s(l * algebraic_s(self.nmdl ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.nmdu = in_algebraic_s(l * algebraic_s(self.nmdu ** self.qrung)) ** (1 / self.qrung)
+        newIVFN = copy.deepcopy(self)
+        newIVFN.md[0] = in_algebraic_tau(l * algebraic_tau(self.md[0] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.md[1] = in_algebraic_tau(l * algebraic_tau(self.md[1] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmd[0] = in_algebraic_s(l * algebraic_s(self.nmd[0] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmd[1] = in_algebraic_s(l * algebraic_s(self.nmd[1] ** self.qrung)) ** (1 / self.qrung)
         return newIVFN
 
     def algebraicTimes(self, l):
-        newIVFN = copy.copy(self)
-        newIVFN.mdl = in_algebraic_s(l * algebraic_s(self.mdl ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.mdu = in_algebraic_s(l * algebraic_s(self.mdu ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.nmdl = in_algebraic_tau(l * algebraic_tau(self.nmdl ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.nmdu = in_algebraic_tau(l * algebraic_tau(self.nmdu ** self.qrung)) ** (1 / self.qrung)
+        newIVFN = copy.deepcopy(self)
+        newIVFN.md[0] = in_algebraic_s(l * algebraic_s(self.md[0] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.md[1] = in_algebraic_s(l * algebraic_s(self.md[1] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmd[0] = in_algebraic_tau(l * algebraic_tau(self.nmd[0] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmd[1] = in_algebraic_tau(l * algebraic_tau(self.nmd[1] ** self.qrung)) ** (1 / self.qrung)
         return newIVFN
 
     def einsteinPower(self, l):
-        newIVFN = copy.copy(self)
-        newIVFN.mdl = in_einstein_tau(l * einstein_tau(self.mdl ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.mdu = in_einstein_tau(l * einstein_tau(self.mdu ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.nmdl = in_einstein_s(l * einstein_s(self.nmdl ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.nmdu = in_einstein_s(l * einstein_s(self.nmdu ** self.qrung)) ** (1 / self.qrung)
+        newIVFN = copy.deepcopy(self)
+        newIVFN.md[0] = in_einstein_tau(l * einstein_tau(self.md[0] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.md[1] = in_einstein_tau(l * einstein_tau(self.md[1] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmd[0] = in_einstein_s(l * einstein_s(self.nmd[0] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmd[1] = in_einstein_s(l * einstein_s(self.nmd[1] ** self.qrung)) ** (1 / self.qrung)
         return newIVFN
 
     def einsteinTimes(self, l):
-        newIVFN = copy.copy(self)
-        newIVFN.mdl = in_einstein_s(l * einstein_s(self.mdl ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.mdu = in_einstein_s(l * einstein_s(self.mdu ** self.qrung)) ** (1 / self.qrung)
-        newIVFN.nmdl = in_einstein_tau(l * einstein_tau(self.nmdl ** self.qrung)) ** (1/self.qrung)
-        newIVFN.nmdu = in_einstein_tau(l * einstein_tau(self.nmdu ** self.qrung)) ** (1/self.qrung)
+        newIVFN = copy.deepcopy(self)
+        newIVFN.md[0] = in_einstein_s(l * einstein_s(self.md[0] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.md[1] = in_einstein_s(l * einstein_s(self.md[1] ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmd[0] = in_einstein_tau(l * einstein_tau(self.nmd[0] ** self.qrung)) ** (1/self.qrung)
+        newIVFN.nmd[1] = in_einstein_tau(l * einstein_tau(self.nmd[1] ** self.qrung)) ** (1/self.qrung)
+        return newIVFN

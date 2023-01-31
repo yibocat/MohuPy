@@ -3,7 +3,11 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
+import copy
+
 import numpy as np
+import pandas as pd
+
 from fuzzyelement.FNumbers import qrungfn
 from fuzzyelement.IVFNumbers import qrungivfn
 from fuzzyelement.DHFElements import qrunghfe
@@ -11,9 +15,10 @@ from library.random import randomFN
 from library.random import randomQHF
 from library.random import randomIVFN
 
+from config.__dict import __dict as dic
+
 
 class fuzzyset(object):
-    # noinspection PyUnresolvedReferences
     """
             Fuzzy set class. General operations on fuzzy sets, including
             adding fuzzy elements, deleting fuzzy elements, random fuzzy
@@ -48,23 +53,28 @@ class fuzzyset(object):
                 check_dict: check the dictionary of elements kinds
         """
     qrung = None
-    collection = None
+    collection = np.array([])
     type = None
     __elements_num = 0
-    __dict = {'qrunghfe': qrunghfe, 'qrungfn': qrungfn, 'qrungivfn': qrungivfn}
+    __dict = dic
+    __shape = None
 
-    def __init__(self, q, t):
+    def __init__(self, qrung, t):
         assert t in self.__dict, 'ERROR: created type does not exist!'
         self.collection = np.array([])
-        self.qrung = q
+        self.qrung = qrung
         self.type = self.__dict[t]
+        self.__elements_num = 0
+        self.__shape = None
 
     def __repr__(self):
-        return  'Collection information\n'\
-                '----------------------------------------\n'\
-                'number of elements:        %s\n' % self.__elements_num + \
+        return \
+                'Collection information\n' \
+                '----------------------------------------\n' \
+                'type of the set:           %s\n' % self.type.__name__ + \
                 'Q-rung:                    %s\n' % self.qrung + \
-                'type of the set:           %s\n' % self.type.__name__
+                'shape of the set:          ' + str(self.__shape) + '\n' + \
+                'number of elements:        %s\n' % self.__elements_num
 
     @property
     def dict(self):
@@ -78,24 +88,29 @@ class fuzzyset(object):
     def list(self):
         return self.collection.tolist()
 
+    @property
+    def shape(self):
+        self.__shape = self.collection.shape
+        return self.__shape
+
+    @property
+    def isEmpty(self):
+        return self.__elements_num == 0
+
     def append(self, x):
         assert x.qrung == self.qrung, 'ERROR: Q-rung for adding elements differs from set.'
         assert x.__class__ == self.type, 'ERROR: Cannot add different types of fuzzy elements!'
-        self.collection = np.append(self.collection, x)
+        self.collection = np.append(x, self.collection)
         self.__elements_num += 1
-        return self
 
-    def delete(self, x):
+    def remove(self, x):
         assert x in self.collection, 'ERROR: element is not in the set.'
         self.collection = np.delete(self.collection, np.where(self.collection == x))
         self.__elements_num -= 1
 
-    def deleteI(self, i):
+    def pop(self, i):
         self.collection = np.delete(self.collection, i)
         self.__elements_num -= 1
-
-    def isEmpty(self):
-        return self.__elements_num == 0
 
     def random(self, n, m=5):
         self.__elements_num = 0
@@ -109,14 +124,43 @@ class fuzzyset(object):
             if self.type == qrunghfe:
                 self.append(randomQHF(self.qrung, m))
 
-    def check_dict(self):
-        for x in self.__dict:
-            print(x, self.__dict[x])
+    def randint(self, *n, num=5):
+        self.__elements_num = 0
+        self.__shape = n
+        self.__elements_num = np.prod(n)
+        self.random(self.__elements_num, num)
+        self.reshape(self.__shape)
+
+    def getScore(self):
+        shape = self.__shape
+        self.reshape(self.__elements_num)
+        slist = np.asarray([self.collection[i].score for i in range(len(self.collection))])
+        self.reshape(shape)
+        return slist.reshape(shape)
+
+    def reshape(self, *x):
+        self.collection = self.collection.reshape(*x)
+        self.__elements_num = self.collection.size
+        self.__shape = self.collection.shape
+        return self
+
+    def display_matrix(self):
+        assert len(self.__shape) <= 2, 'The dimension of the shape must be less than or ' \
+                                       'equal to 2. If you still want to display, please ' \
+                                       'use the \'reshape()\' function to convert.'
+        matrix = []
+        print(self.__shape)
+        for i in range(self.__shape[0]):
+            a = []
+            for j in range(self.__shape[1]):
+                a.append(
+                    [np.round(self.collection[i, j].md, 4),
+                     np.round(self.collection[i, j].nmd, 4)])
+            matrix.append(a)
+        return pd.DataFrame(matrix)
 
     def save(self):
         pass
 
     def load(self):
         pass
-
-

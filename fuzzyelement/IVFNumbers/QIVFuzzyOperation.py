@@ -15,11 +15,11 @@ def algebraicmultiplication(ivfn1: qrungivfn, ivfn2: qrungivfn):
     """
     assert ivfn1.qrung == ivfn2.qrung, 'ERROR: The two QrungIVFNs are not the same qrungivfn!'
     q = ivfn1.qrung
-    newIVFN = qrungivfn(q, 0, 0, 0, 0)
-    newIVFN.mdl = algebraic_T(ivfn1.mdl ** q, ivfn2.mdl ** q) ** (1 / q)
-    newIVFN.mdu = algebraic_T(ivfn1.mdu ** q, ivfn2.mdu ** q) ** (1 / q)
-    newIVFN.nmdl = algebraic_S(ivfn1.nmdl ** q, ivfn2.nmdl ** q) ** (1 / q)
-    newIVFN.nmdu = algebraic_S(ivfn1.nmdu ** q, ivfn2.nmdu ** q) ** (1 / q)
+    newIVFN = qrungivfn(q, [0., 0.], [0., 0.])
+    newIVFN.md[0] = algebraic_T(ivfn1.md[0] ** q, ivfn2.md[0] ** q) ** (1 / q)
+    newIVFN.md[1] = algebraic_T(ivfn1.md[1] ** q, ivfn2.md[1] ** q) ** (1 / q)
+    newIVFN.nmd[0] = algebraic_S(ivfn1.nmd[0] ** q, ivfn2.nmd[0] ** q) ** (1 / q)
+    newIVFN.nmd[1] = algebraic_S(ivfn1.nmd[1] ** q, ivfn2.nmd[1] ** q) ** (1 / q)
     return newIVFN
 
 
@@ -36,11 +36,11 @@ def algebraicplus(ivfn1: qrungivfn, ivfn2: qrungivfn):
     """
     assert ivfn1.qrung == ivfn2.qrung, 'ERROR: The two QrungIVFNs are not the same qrungivfn!'
     q = ivfn1.qrung
-    newIVFN = qrungivfn(q, 0, 0, 0, 0)
-    newIVFN.mdl = algebraic_S(ivfn1.mdl ** q, ivfn2.mdl ** q) ** (1 / q)
-    newIVFN.mdu = algebraic_S(ivfn1.mdu ** q, ivfn2.mdu ** q) ** (1 / q)
-    newIVFN.nmdl = algebraic_T(ivfn1.nmdl ** q, ivfn2.nmdl ** q) ** (1 / q)
-    newIVFN.nmdu = algebraic_T(ivfn1.nmdu ** q, ivfn2.nmdu ** q) ** (1 / q)
+    newIVFN = qrungivfn(q, [0., 0.], [0., 0.])
+    newIVFN.md[0] = algebraic_S(ivfn1.md[0] ** q, ivfn2.md[0] ** q) ** (1 / q)
+    newIVFN.md[1] = algebraic_S(ivfn1.md[1] ** q, ivfn2.md[1] ** q) ** (1 / q)
+    newIVFN.nmd[0] = algebraic_T(ivfn1.nmd[0] ** q, ivfn2.nmd[0] ** q) ** (1 / q)
+    newIVFN.nmd[1] = algebraic_T(ivfn1.nmd[1] ** q, ivfn2.nmd[1] ** q) ** (1 / q)
     return newIVFN
 
 
@@ -57,11 +57,11 @@ def einsteinmultiplication(ivfn1: qrungivfn, ivfn2: qrungivfn):
     """
     assert ivfn1.qrung == ivfn2.qrung, 'ERROR: The two QrungIVFNs are not the same qrungivfn!'
     q = ivfn1.qrung
-    newIVFN = qrungivfn(q, 0, 0, 0, 0)
-    newIVFN.mdl = einstein_T(ivfn1.mdl ** q, ivfn2.mdl ** q) ** (1 / q)
-    newIVFN.mdu = einstein_T(ivfn1.mdu ** q, ivfn2.mdu ** q) ** (1 / q)
-    newIVFN.nmdl = einstein_S(ivfn1.nmdl ** q, ivfn2.nmdl ** q) ** (1 / q)
-    newIVFN.nmdu = einstein_S(ivfn1.nmdu ** q, ivfn2.nmdu ** q) ** (1 / q)
+    newIVFN = qrungivfn(q, [0., 0.], [0., 0.])
+    newIVFN.md[0] = einstein_T(ivfn1.md[0] ** q, ivfn2.md[0] ** q) ** (1 / q)
+    newIVFN.md[1] = einstein_T(ivfn1.md[1] ** q, ivfn2.md[1] ** q) ** (1 / q)
+    newIVFN.nmd[0] = einstein_S(ivfn1.nmd[0] ** q, ivfn2.nmd[0] ** q) ** (1 / q)
+    newIVFN.nmd[1] = einstein_S(ivfn1.nmd[1] ** q, ivfn2.nmd[1] ** q) ** (1 / q)
     return newIVFN
 
 
@@ -78,9 +78,9 @@ def einsteinplus(ivfn1: qrungivfn, ivfn2: qrungivfn):
     """
     assert ivfn1.qrung == ivfn2.qrung, 'ERROR: The two QrungIVFNs are not the same qrungivfn!'
     q = ivfn1.qrung
-    newIVFN = qrungivfn(q, 0, 0, 0, 0)
-    newIVFN.mdl = einstein_S(ivfn1.mdl ** q, ivfn2.mdl ** q) ** (1 / q)
-    newIVFN.mdu = einstein_S(ivfn1.mdu ** q, ivfn2.mdu ** q) ** (1 / q)
-    newIVFN.nmdl = einstein_T(ivfn1.nmdl ** q, ivfn2.nmdl ** q) ** (1 / q)
-    newIVFN.nmdu = einstein_T(ivfn1.nmdu ** q, ivfn2.nmdu ** q) ** (1 / q)
+    newIVFN = qrungivfn(q, [0., 0.], [0., 0.])
+    newIVFN.md[0] = einstein_S(ivfn1.md[0] ** q, ivfn2.md[0] ** q) ** (1 / q)
+    newIVFN.md[1] = einstein_S(ivfn1.md[1] ** q, ivfn2.md[1] ** q) ** (1 / q)
+    newIVFN.nmd[0] = einstein_T(ivfn1.nmd[0] ** q, ivfn2.nmd[0] ** q) ** (1 / q)
+    newIVFN.nmd[1] = einstein_T(ivfn1.nmd[1] ** q, ivfn2.nmd[1] ** q) ** (1 / q)
     return newIVFN

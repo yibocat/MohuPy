@@ -20,7 +20,7 @@ def randomFN(q):
     """
     md = np.random.rand(1)[0]
     nmd = np.random.rand(1)[0]
-    newFN = qrungfn(q, 0, 0)
+    newFN = qrungfn(q, 0., 0.)
     newFN.md = md
     newFN.nmd = nmd
     if newFN.isLegal():
@@ -41,9 +41,9 @@ def randomIVFN(q):
     """
     mdl, mdu = np.random.rand(1)[0], np.random.rand(1)[0]
     nmdl, nmdu = np.random.rand(1)[0], np.random.rand(1)[0]
-    newIVFN = qrungivfn(q, 0, 0, 0, 0)
-    newIVFN.mdl, newIVFN.mdu = mdl, mdu
-    newIVFN.nmdl, newIVFN.nmdu = nmdl, nmdu
+    newIVFN = qrungivfn(q, [0., 0.], [0., 0.])
+    newIVFN.md[0], newIVFN.md[1] = mdl, mdu
+    newIVFN.nmd[0], newIVFN.nmd[1] = nmdl, nmdu
     if newIVFN.isLegal():
         return newIVFN
     else:

@@ -93,7 +93,7 @@ def random_split(data, l):
     return data_1, data_2
 
 
-def qrunghfe_convert(s, q):
+def qrunghfe_convert(s, q: float):
     """
         Convert input data to Q-rung hesitant fuzzy element.
         Note: When the input data is '0', it should be set to '0.'.
@@ -150,7 +150,7 @@ def qrungfn_convert(s, q):
         -------
             fnf : FNumbers
     """
-    fnf = fn.qrungfn(q, 0, 0)
+    fnf = fn.qrungfn(q, 0., 0.)
     x = re.findall(r'\d.?\d*|},\{|],\[', s)
     assert len(x) == 2, 'Invalid data'
     fnf.md = np.asarray(float(x[0]))
@@ -178,16 +178,16 @@ def qrungivfn_convert(s, q):
         -------
         ivf : IVFNumbers
     """
-    ivf = ifn.qrungivfn(q, 0, 0, 0, 0)
+    ivf = ifn.qrungivfn(q, [0., 0.], [0., 0.])
     x = re.findall(r'\d.?\d*|],\[', s)  # 正则表达式判断所有的数字和 '],[' 字符串，列表形式
     assert '],[' in x and x[2] == '],[', \
         'Invalid data! Format error, possibly missing \'],[\' ' + \
         'or wrong interval-valued.'  # 断言是否存在 '],[' 字符串且 '],[' 位置是否为 2
     x.remove('],[')  # 删除字符列表中的 '],[' 字符串
     assert len(x) == 4, 'Invalid data! Data format mismatch.'  # 断言字符列表中的数字是否为 4 个
-    ivf.mdl = np.asarray(float(x[0]))
-    ivf.mdu = np.asarray(float(x[1]))
-    ivf.nmdl = np.asarray(float(x[2]))
-    ivf.nmdu = np.asarray(float(x[3]))
+    ivf.md[0] = np.asarray(float(x[0]))
+    ivf.md[1] = np.asarray(float(x[1]))
+    ivf.nmd[0] = np.asarray(float(x[2]))
+    ivf.nmd[1] = np.asarray(float(x[3]))
     assert ivf.isLegal(), 'Invalid data! Illegal Q-rung interval-valued fuzzy number.'
     return ivf

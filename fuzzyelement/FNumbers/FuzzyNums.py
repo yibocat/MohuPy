@@ -29,19 +29,19 @@ class Fuzzynum(object):
         pass
 
     def algebraicPower(self, l):
-        newFN = copy.copy(self)
+        newFN = copy.deepcopy(self)
         newFN.md = self.md ** l
         newFN.nmd = (1 - (1 - self.nmd ** self.qrung) ** l) ** (1 / self.qrung)
         return newFN
 
     def algebraicTimes(self, l):
-        newFN = copy.copy(self)
+        newFN = copy.deepcopy(self)
         newFN.md = (1 - (1 - self.md ** self.qrung) ** l) ** (1 / self.qrung)
         newFN.nmd = self.nmd ** l
         return newFN
 
     def einsteinPower(self, l):
-        newFn = copy.copy(self)
+        newFn = copy.deepcopy(self)
         newFn.md = ((2 * (self.md ** self.qrung) ** l) / (
                     (2 - self.md ** self.qrung) ** l + (self.md ** self.qrung) ** l)) ** (1 / self.qrung)
         newFn.nmd = (((1 + self.nmd ** self.qrung) ** l - (1 - self.nmd ** self.qrung) ** l) / (
@@ -49,7 +49,7 @@ class Fuzzynum(object):
         return newFn
 
     def einsteinTimes(self, l):
-        newFn = copy.copy(self)
+        newFn = copy.deepcopy(self)
         newFn.md = (((1 + self.md ** self.qrung) ** l - (1 - self.md ** self.qrung) ** l) / (
                     (1 + self.md ** self.qrung) ** l + (1 - self.md ** self.qrung) ** l)) ** (1 / self.qrung)
         newFn.nmd = ((2 * (self.nmd ** self.qrung) ** l) / (
