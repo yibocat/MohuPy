@@ -25,6 +25,11 @@ class qrungivfn(IVFuzzynum):
             '(\n MD: [' + str(np.around(self.md[0], 4)) + ',' + str(np.around(self.md[1], 4)) + ']\n NMD:[' + str(
                 np.around(self.nmd[0], 4)) + ',' + str(np.around(self.nmd[1], 4)) + '])'
 
+    @property
+    def parent(self):
+        for base in self.__class__.__bases__:
+            return base.__name__
+
     def isLegal(self):
         """
             Check if the Q-rung interval-valued fuzzy number is legal.

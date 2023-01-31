@@ -14,15 +14,10 @@ __all__ = ['plot_stats',
            'generalized_distance',
            'dh_fn_max',
            'dh_fn_min',
-           'dh_fn_mean',
-           'randomFN',
-           'randomQHF',
-           'randomIVFN']
+           'dh_fn_mean']
 
 from .toolkit import (plot_stats, ks_test_norm, random_split,
                       qrungfn_convert, qrungivfn_convert, qrunghfe_convert)
 
 from .QHFuzzyLib import (normalization, generalized_distance,
                          dh_fn_max, dh_fn_min, dh_fn_mean, )
-
-from .random import (randomFN, randomQHF, randomIVFN)

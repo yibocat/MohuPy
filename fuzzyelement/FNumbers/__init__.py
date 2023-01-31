@@ -4,9 +4,12 @@ __all__ = ['qrungfn',
            'algebraicmultiplication',
            'algebraicplus',
            'einsteinmultiplication',
-           'einsteinplus']
+           'einsteinplus',
+           'randomFN',
+           'str_to_fn']
 
 from .qrungfn import qrungfn
 from .QFuzzyOperation import (intersection, unions,
                               algebraicmultiplication, algebraicplus,
                               einsteinmultiplication, einsteinplus)
+from .toolkit import randomFN, str_to_fn

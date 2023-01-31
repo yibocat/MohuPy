@@ -41,6 +41,11 @@ class qrunghfe(DhFuzzy):
                 '\n md :' + str(np.round(self.md, 4)) + \
                 ',\n nmd:' + str(np.round(self.nmd, 4)) + ' }\n'
 
+    @property
+    def parent(self):
+        for base in self.__class__.__bases__:
+            return base.__name__
+
     def isLegal(self):
         """
             Checks if the Q-Rung hesitant fuzzy element is legal.
@@ -52,6 +57,7 @@ class qrunghfe(DhFuzzy):
         else:
             # print('ERROR: Illegal Q-rung hesitant fuzzy element!')
             return False
+
 
 # class HIntuiF(_DhFuzzy):
 #     qrung = 1

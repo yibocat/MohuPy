@@ -21,6 +21,11 @@ class qrungfn(Fuzzynum):
             np.around(self.md, 4)) + '\n' + '    nmd:' + str(
             np.around(self.nmd, 4)) + ')'
 
+    @property
+    def parent(self):
+        for base in self.__class__.__bases__:
+            return base.__name__
+
     def isLegal(self):
         """
             Checks if the Q-Rung fuzzy number is legal.
