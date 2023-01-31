@@ -9,6 +9,7 @@ class Fuzzynum(object):
     def __init__(self):
         pass
 
+    @property
     def score(self):
         return self.md ** self.qrung - self.nmd ** self.qrung
 

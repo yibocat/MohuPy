@@ -8,3 +8,8 @@ fuzzy numbers and hesitant fuzzy elements. The membership degrees function gener
 of the toolkit already has eight built-in membership degree function. Moreover, users 
 can use custom membership functions to construct membership function generators.
 
+Four python packages are required:
+1. numpy
+2. scipy
+3. matplotlib
+4. pandas

@@ -12,6 +12,7 @@ class IVFuzzynum(object):
     def __init__(self):
         pass
 
+    @property
     def score(self):
         md = self.mdl ** self.qrung + self.mdu ** self.qrung
         nmd = self.nmdl ** self.qrung + self.nmdu ** self.qrung
@@ -55,3 +56,10 @@ class IVFuzzynum(object):
         newIVFN.nmdl = in_einstein_s(l * einstein_s(self.nmdl ** self.qrung)) ** (1 / self.qrung)
         newIVFN.nmdu = in_einstein_s(l * einstein_s(self.nmdu ** self.qrung)) ** (1 / self.qrung)
         return newIVFN
+
+    def einsteinTimes(self, l):
+        newIVFN = copy.copy(self)
+        newIVFN.mdl = in_einstein_s(l * einstein_s(self.mdl ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.mdu = in_einstein_s(l * einstein_s(self.mdu ** self.qrung)) ** (1 / self.qrung)
+        newIVFN.nmdl = in_einstein_tau(l * einstein_tau(self.nmdl ** self.qrung)) ** (1/self.qrung)
+        newIVFN.nmdu = in_einstein_tau(l * einstein_tau(self.nmdu ** self.qrung)) ** (1/self.qrung)
