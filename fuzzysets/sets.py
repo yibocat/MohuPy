@@ -70,10 +70,10 @@ class fuzzyset(object):
         return \
                 'Collection information\n' \
                 '----------------------------------------\n' \
-                'type of the set:           %s\n' % self.__dict['type'].__name__ + \
+                'fuzzy set type:            %s\n' % self.__dict['type'].__name__ + \
                 'Q-rung:                    %s\n' % self.qrung + \
-                'shape of the set:          ' + str(self.__shape) + '\n' + \
-                'number of elements:        %s\n' % self.__elements_num
+                'the set shape:             ' + str(self.__shape) + '\n' + \
+                'elements number:           %s\n' % self.__elements_num
 
     @property
     def dict(self):
