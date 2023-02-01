@@ -4,7 +4,6 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
-import copy
 
 import numpy as np
 import pandas as pd
@@ -33,13 +32,13 @@ class fuzzyset(object):
             __elements_num: the number of elements in the fuzzy set
             __dict: Dictionary of Fuzzy Set Kinds
             __shape: Shape of fuzzy data set
-            isEmpty: whether the set is empty
 
             list: the list of elements in the fuzzy set
 
         Methods:
             __repr__: print the fuzzy set information
 
+            isEmpty: whether the set is empty
             append: add a fuzzy element to the fuzzy set
             remove: delete a fuzzy element from the fuzzy set
             pop: delete a fuzzy element from the fuzzy set by index
