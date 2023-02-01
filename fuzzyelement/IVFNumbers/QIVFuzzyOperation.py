@@ -9,6 +9,28 @@ from .qrungivfn import qrungivfn
 from .archimedean import *
 
 
+def intersection(ivfn1: qrungivfn, ivfn2: qrungivfn):
+    assert ivfn1.qrung == ivfn2.qrung, 'ERROR: The two QrungIVFNs are not the same qrungivfn!'
+    q = ivfn1.qrung
+    newIVFN = qrungivfn(q, [0., 0.], [0., 0.])
+    newIVFN.md[0] = min(ivfn1.md[0], ivfn2.md[0])
+    newIVFN.md[1] = min(ivfn1.md[1], ivfn2.md[1])
+    newIVFN.nmd[0] = max(ivfn1.nmd[0], ivfn2.nmd[0])
+    newIVFN.nmd[1] = max(ivfn1.nmd[1], ivfn2.nmd[1])
+    return newIVFN
+
+
+def unions(ivfn1: qrungivfn, ivfn2: qrungivfn):
+    assert ivfn1.qrung == ivfn2.qrung, 'ERROR: The two QrungIVFNs are not the same qrungivfn!'
+    q = ivfn1.qrung
+    newIVFN = qrungivfn(q, [0., 0.], [0., 0.])
+    newIVFN.md[0] = max(ivfn1.md[0], ivfn2.md[0])
+    newIVFN.md[1] = max(ivfn1.md[1], ivfn2.md[1])
+    newIVFN.nmd[0] = min(ivfn1.nmd[0], ivfn2.nmd[0])
+    newIVFN.nmd[1] = min(ivfn1.nmd[1], ivfn2.nmd[1])
+    return newIVFN
+
+
 def algebraicmultiplication(ivfn1: qrungivfn, ivfn2: qrungivfn):
     """
         Multiplies two QrungIVFNs by the algebraic T and S functions.

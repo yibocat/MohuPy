@@ -33,7 +33,10 @@ class Fuzzynum(object):
             return False
 
     def complement(self):
-        pass
+        newFN = copy.deepcopy(self)
+        newFN.md = self.nmd
+        newFN.nmd = self.md
+        return newFN
 
     def algebraicPower(self, l):
         newFN = copy.deepcopy(self)

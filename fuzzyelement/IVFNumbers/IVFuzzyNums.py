@@ -36,7 +36,10 @@ class IVFuzzynum(object):
             return False
 
     def complement(self):
-        pass
+        newIVFN = copy.deepcopy(self)
+        newIVFN.md = self.nmd
+        newIVFN.nmd = self.md
+        return newIVFN
 
     def algebraicPower(self, l):
         newIVFN = copy.deepcopy(self)
