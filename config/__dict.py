@@ -1,5 +1,6 @@
 #  Copyright (c) yibocat 2023 All Rights Reserved
-#  Date: 2023/1/31 上午10:56
+#  Python: 3.10.9
+#  Date: 2023/2/1 下午5:37
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
