@@ -8,7 +8,7 @@
 import numpy as np
 import pandas as pd
 
-from config.__dict import __dict as dic
+from config import load_dict
 
 
 class fuzzyset(object):
@@ -28,9 +28,8 @@ class fuzzyset(object):
         Attributes:
             qrung: the Q-rung of the element
             collection: the collection of elements in the fuzzy set
-            type: the type of the fuzzy element
             __elements_num: the number of elements in the fuzzy set
-            __dict: Dictionary of Fuzzy Set Kinds
+            __dict: dictionary of current fuzzy set types
             __shape: Shape of fuzzy data set
 
             list: the list of elements in the fuzzy set
@@ -54,16 +53,16 @@ class fuzzyset(object):
     """
     qrung = None
     collection = np.array([])
-    type = None
     __elements_num = 0
-    __dict = dic
+    __dict = None
     __shape = None
 
     def __init__(self, qrung, t):
-        assert t in self.__dict, 'ERROR: created type does not exist!'
+        dictionary = load_dict(False)
+        assert t in dictionary, 'ERROR: created type does not exist!'
         self.collection = np.array([])
         self.qrung = qrung
-        self.type = self.__dict[t]['type']
+        self.__dict = dictionary[t]
         self.__elements_num = 0
         self.__shape = None
 
@@ -71,7 +70,7 @@ class fuzzyset(object):
         return \
                 'Collection information\n' \
                 '----------------------------------------\n' \
-                'type of the set:           %s\n' % self.type.__name__ + \
+                'type of the set:           %s\n' % self.__dict['type'].__name__ + \
                 'Q-rung:                    %s\n' % self.qrung + \
                 'shape of the set:          ' + str(self.__shape) + '\n' + \
                 'number of elements:        %s\n' % self.__elements_num
@@ -111,7 +110,7 @@ class fuzzyset(object):
 
         """
         assert x.qrung == self.qrung, 'ERROR: Q-rung for adding elements differs from set.'
-        assert x.__class__ == self.type, 'ERROR: Cannot add different types of fuzzy elements!'
+        assert x.__class__ == self.__dict['type'], 'ERROR: Cannot add different types of fuzzy elements!'
         self.collection = np.append(x, self.collection)
         self.__elements_num += 1
 
@@ -165,14 +164,14 @@ class fuzzyset(object):
         self.collection = np.array([])
         father = None
 
-        for base in self.type.__bases__:
+        for base in self.__dict['type'].__bases__:
             father = base.__name__
         if father == 'DhFuzzy':
             args = [self.qrung, m]
         else:
             args = [self.qrung]
         for i in range(n):
-            self.append(dic[self.type.__name__]['random'](*args))
+            self.append(self.__dict['random'](*args))
 
         self.__shape = self.collection.shape
         return self
@@ -354,13 +353,13 @@ class fuzzyset(object):
         m = np.array(m)
 
         try:
-            dic[self.type.__name__]['convert_str'](m[0, 0], self.qrung)
+            self.__dict['convert_str'](m[0, 0], self.qrung)
         except Exception as e:
             print(e, 'The fuzzy data format does not match the created fuzzy set element format')
 
         for i in range(len(m)):
             for j in range(len(m[i])):
-                m[i][j] = dic[self.type.__name__]['convert_str'](m[i, j], self.qrung)
+                m[i][j] = self.__dict['convert_str'](m[i, j], self.qrung)
 
         matrix = np.asarray(m)
         self.__shape = matrix.shape
