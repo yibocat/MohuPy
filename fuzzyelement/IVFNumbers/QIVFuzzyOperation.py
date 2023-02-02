@@ -31,7 +31,7 @@ def unions(ivfn1: qrungivfn, ivfn2: qrungivfn):
     return newIVFN
 
 
-def algebraicmultiplication(ivfn1: qrungivfn, ivfn2: qrungivfn):
+def algeb_multipy(ivfn1: qrungivfn, ivfn2: qrungivfn):
     """
         Multiplies two QrungIVFNs by the algebraic T and S functions.
 
@@ -52,7 +52,7 @@ def algebraicmultiplication(ivfn1: qrungivfn, ivfn2: qrungivfn):
     return newIVFN
 
 
-def algebraicplus(ivfn1: qrungivfn, ivfn2: qrungivfn):
+def algeb_plus(ivfn1: qrungivfn, ivfn2: qrungivfn):
     """
         Adds two QrungIVFNs by the algebraic T and S functions.
 
@@ -73,7 +73,7 @@ def algebraicplus(ivfn1: qrungivfn, ivfn2: qrungivfn):
     return newIVFN
 
 
-def einsteinmultiplication(ivfn1: qrungivfn, ivfn2: qrungivfn):
+def eins_multipy(ivfn1: qrungivfn, ivfn2: qrungivfn):
     """
         Multiplies two QrungIVFNs by the einstein T and S functions.
 
@@ -94,7 +94,7 @@ def einsteinmultiplication(ivfn1: qrungivfn, ivfn2: qrungivfn):
     return newIVFN
 
 
-def einsteinplus(ivfn1: qrungivfn, ivfn2: qrungivfn):
+def eins_plus(ivfn1: qrungivfn, ivfn2: qrungivfn):
     """
         Adds two QrungIVFNs by the einstein T and S functions.
 

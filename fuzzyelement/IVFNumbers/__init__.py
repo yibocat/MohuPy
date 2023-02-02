@@ -8,14 +8,14 @@
 __all__ = ['qrungivfn',
            'intersection',
            'unions',
-           'algebraicmultiplication',
-           'algebraicplus',
-           'einsteinmultiplication',
-           'einsteinplus']
+           'algeb_multipy',
+           'algeb_plus',
+           'eins_multipy',
+           'eins_plus']
 
 from .qrungivfn import qrungivfn
-from .QIVFuzzyOperation import (algebraicmultiplication, algebraicplus,
-                                einsteinmultiplication, einsteinplus,
+from .QIVFuzzyOperation import (algeb_multipy, algeb_plus,
+                                eins_multipy, eins_plus,
                                 intersection, unions)
 
 from .toolkit import (randomIVFN, str_to_ivfn, pos, neg, zero)

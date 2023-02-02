@@ -4,6 +4,7 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
+import copy
 
 import numpy as np
 import pandas as pd
@@ -165,7 +166,7 @@ class fuzzyset(object):
         """
         assert x.qrung == self.qrung, 'ERROR: Q-rung for adding elements differs from set.'
         assert x.__class__ == self.__dict['type'], 'ERROR: Cannot add different types of fuzzy elements!'
-        self.set = np.append(x, self.set)
+        self.set = np.append(self.set, x)
         self.__elements_num += 1
 
     def remove(self, x):
@@ -210,7 +211,7 @@ class fuzzyset(object):
         self.reshape(shape)
         return slist.reshape(shape)
 
-    def random(self, n, m=5):
+    def random(self, n, num=5):
         """
             Randomly generate a one-dimensional fuzzy set.
 
@@ -226,7 +227,7 @@ class fuzzyset(object):
 
             Parameters:
                 n: the number of elements in the fuzzy set
-                m: the number of the element of the membership and non-membership degree
+                num: the number of the element of the membership and non-membership degree
                     set of the dual hesitant fuzzy set. The default value is set to 5
 
             Returns:
@@ -239,7 +240,7 @@ class fuzzyset(object):
         for base in self.__dict['type'].__bases__:
             father = base.__name__
         if father == 'DhFuzzy':
-            args = [self.qrung, m]
+            args = [self.qrung, num]
         else:
             args = [self.qrung]
         for i in range(n):
@@ -453,8 +454,14 @@ class fuzzyset(object):
             print((x, y))
         return self.set[x, y]
 
-    def sum(self):
-        pass
+    def sum(self, norm='algeb_plus'):
+        newf = copy.deepcopy(self)
+        newf = newf.ravel()
+        newE = self.__dict['neg'](self.qrung)
+        for e in newf.set:
+            newE = self.__dict[norm](newE, e)
+        del newf
+        return newE
 
     def savez(self, path):
         """

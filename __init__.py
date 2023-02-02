@@ -6,22 +6,22 @@
 #  Software: FuzzyKit
 
 __all__ = ['qrunghfe', 'intersection', 'unions',
-           'algebraicmultiplication', 'algebraicplus',
-           'einsteinmultiplication', 'einsteinplus',
+           'algeb_multipy', 'algeb_plus',
+           'eins_multipy', 'eins_plus',
            'qrungfn', 'intersection', 'unions',
-           'algebraicmultiplication', 'algebraicplus',
-           'einsteinmultiplication', 'einsteinplus',
+           'algeb_multipy', 'algeb_plus',
+           'eins_multipy', 'eins_plus',
            'qrungivfn',
-           'algebraicmultiplication', 'algebraicplus',
-           'einsteinmultiplication', 'einsteinplus'
+           'algeb_multipy', 'algeb_plus',
+           'eins_multipy', 'eins_plus'
            ]
 
 from fuzzyelement.DHFElements import (qrunghfe, intersection, unions,
-                                      algebraicmultiplication, algebraicplus,
-                                      einsteinmultiplication, einsteinplus)
+                                      algeb_multipy, algeb_plus,
+                                      eins_multipy, eins_plus)
 from fuzzyelement.FNumbers import (qrungfn, intersection, unions,
-                                   algebraicmultiplication, algebraicplus,
-                                   einsteinmultiplication, einsteinplus)
+                                   algeb_multipy, algeb_plus,
+                                   eins_multipy, eins_plus)
 from fuzzyelement.IVFNumbers import (qrungivfn,
-                                     algebraicmultiplication, algebraicplus,
-                                     einsteinmultiplication, einsteinplus)
+                                     algeb_multipy, algeb_plus,
+                                     eins_multipy, eins_plus)

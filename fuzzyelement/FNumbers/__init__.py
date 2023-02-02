@@ -8,15 +8,15 @@
 __all__ = ['qrungfn',
            'intersection',
            'unions',
-           'algebraicmultiplication',
-           'algebraicplus',
-           'einsteinmultiplication',
-           'einsteinplus']
+           'algeb_multipy',
+           'algeb_plus',
+           'eins_multipy',
+           'eins_plus']
 
 from .qrungfn import qrungfn
 from .QFuzzyOperation import (intersection, unions,
-                              algebraicmultiplication, algebraicplus,
-                              einsteinmultiplication, einsteinplus)
+                              algeb_multipy, algeb_plus,
+                              eins_multipy, eins_plus)
 
 from .toolkit import (randomFN, str_to_fn, pos, neg, zero)
 
