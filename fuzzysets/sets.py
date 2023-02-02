@@ -383,11 +383,75 @@ class fuzzyset(object):
         self.__shape = self.set.shape
         return self
 
-    def max(self):
-        pass
+    def max(self, show=True):
+        """
+            Returns the maximum element of the fuzzy set.
 
-    def min(self):
-        pass
+            Parameters:
+                show: whether to print the maximum element. Defaults to true
+            Returns:
+                the maximum element of the fuzzy set
+        """
+        score_mat = self.score
+        x, y = divmod(np.argmax(score_mat), score_mat.shape[1])
+        if show:
+            print((x, y))
+        return self.set[x, y]
+
+    def fmax(self, func, *args, show=True):
+        """
+            Compute the fuzzy elements using a custom function and then find the
+            maximum value in the matrix. Here func can be seen as a substitute
+            for the scoring function.
+
+            Parameters:
+                func: custom function
+                *args: arguments for the custom function
+                show: whether to print the maximum element. Defaults to true
+
+            Returns:
+                the maximum element of the fuzzy set
+        """
+        f_mat = self.elementFunc(func, *args)
+        x, y = divmod(np.argmax(f_mat), f_mat.shape[1])
+        if show:
+            print((x, y))
+        return self.set[x, y]
+
+    def min(self, show=True):
+        """
+            Returns the minimum element of the fuzzy set.
+
+            Parameters:
+                 show: whether to print the minimum element. Defaults to true
+            Returns:
+                the minimum element of the fuzzy set
+        """
+        score_mat = self.score
+        x, y = divmod(np.argmin(score_mat), score_mat.shape[1])
+        if show:
+            print((x, y))
+        return self.set[x, y]
+
+    def fmin(self, func, *args, show=True):
+        """
+            Compute the fuzzy elements using a custom function and then find the
+            minimum value in the matrix. Here func can be seen as a substitute
+            for the scoring function.
+
+            Parameters:
+                func: custom function
+                *args: arguments for the custom function
+                show: whether to print the maximum element. Defaults to true
+
+            Returns:
+                the minimum element of the fuzzy set
+        """
+        f_mat = self.elementFunc(func, *args)
+        x, y = divmod(np.argmin(f_mat), f_mat.shape[1])
+        if show:
+            print((x, y))
+        return self.set[x, y]
 
     def sum(self):
         pass
