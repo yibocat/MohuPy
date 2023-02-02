@@ -304,22 +304,64 @@ class fuzzyset(object):
         self.__shape = self.set.shape
         return self
 
-    def ones(self, *n):
-        assert self.__elements_num == 0, 'The fuzzy set is not empty. ' \
-                                         'This set already has data, please clear the data first.'
+    def poss(self, *n):
+        """
+             Generates a high-dimensional fuzzy set with a positive ideal solution.
+             This means that the degrees of membership are all 1 and the degrees of
+             non-membership are all 0.
+
+             Parameters:
+                 n: the shape parameters of the set. It can be 2-dimensional,
+                    3-dimensional or even multidimensional.
+                     For example, *n = [3,3,5] is a 3*3*5 3-dimensional fuzzy set.
+        """
+        assert self.__elements_num == 0, 'The fuzzy set is not empty. This set ' \
+                                         'already has data, please clear the data first.'
         self.__elements_num = 0
         self.set = np.array([])
         shape = n
         for i in range(np.prod(n)):
-            self.append(self.__dict['one'](self.qrung))
+            self.append(self.__dict['pos'](self.qrung))
+        self.reshape(shape)
+        self.__shape = shape
+        self.__elements_num = self.set.size
+        return self
+
+    def negs(self, *n):
+        """
+            Generates a high-dimensional fuzzy set with a negative ideal solution.
+             This means that the degrees of membership are all 0 and the degrees of
+             non-membership are all 1.
+
+             Parameters:
+                 n: the shape parameters of the set. It can be 2-dimensional,
+                    3-dimensional or even multidimensional.
+                     For example, *n = [3,3,5] is a 3*3*5 3-dimensional fuzzy set.
+        """
+        assert self.__elements_num == 0, 'The fuzzy set is not empty. This set ' \
+                                         'already has data, please clear the data first.'
+        self.__elements_num = 0
+        self.set = np.array([])
+        shape = n
+        for i in range(np.prod(n)):
+            self.append(self.__dict['neg'](self.qrung))
         self.reshape(shape)
         self.__shape = shape
         self.__elements_num = self.set.size
         return self
 
     def zeros(self, *n):
-        assert self.__elements_num == 0, 'The fuzzy set is not empty. ' \
-                                         'This set already has data, please clear the data first.'
+        """
+            Generate a high-dimensional fuzzy set whose membership degree and
+            non-membership degree are both 0.
+
+            Parameters:
+                 n: the shape parameters of the set. It can be 2-dimensional,
+                    3-dimensional or even multidimensional.
+                     For example, *n = [3,3,5] is a 3*3*5 3-dimensional fuzzy set.
+        """
+        assert self.__elements_num == 0, 'The fuzzy set is not empty. This set ' \
+                                         'already has data, please clear the data first.'
         self.__elements_num = 0
         self.set = np.array([])
         shape = n
@@ -330,21 +372,16 @@ class fuzzyset(object):
         self.__elements_num = self.set.size
         return self
 
-    def minusone(self, *n):
-        assert self.__elements_num == 0, 'The fuzzy set is not empty. ' \
-                                         'This set already has data, please clear the data first.'
+    def clear(self):
+        """
+            Clears the fuzzy set.
+            This method is not recommended to be used. Make sure the data is saved
+            before using this method.
+        """
         self.__elements_num = 0
         self.set = np.array([])
-        shape = n
-        for i in range(np.prod(n)):
-            self.append(self.__dict['minusone'](self.qrung))
-        self.reshape(shape)
-        self.__shape = shape
-        self.__elements_num = self.set.size
+        self.__shape = self.set.shape
         return self
-
-    def clear(self):
-        pass
 
     def max(self):
         pass

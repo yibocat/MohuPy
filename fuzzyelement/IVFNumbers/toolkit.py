@@ -67,13 +67,14 @@ def str_to_ivfn(s, q):
     return ivf
 
 
-def one(q):
+def pos(q):
     return qrungivfn(q, [1., 1.], [0., 0.])
+
+
+def neg(q):
+    return qrungivfn(q, [0., 0.], [1., 1.])
 
 
 def zero(q):
     return qrungivfn(q, [0., 0.], [0., 0.])
 
-
-def minusone(q):
-    return qrungivfn(q, [0., 0.], [1., 1.])

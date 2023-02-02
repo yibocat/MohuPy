@@ -18,6 +18,6 @@ from .QIVFuzzyOperation import (algebraicmultiplication, algebraicplus,
                                 einsteinmultiplication, einsteinplus,
                                 intersection, unions)
 
-from .toolkit import (randomIVFN, str_to_ivfn, one, zero, minusone)
+from .toolkit import (randomIVFN, str_to_ivfn, pos, neg, zero)
 
-__all__ += ['randomIVFN', 'str_to_ivfn', 'one', 'zero', 'minusone']
+__all__ += ['randomIVFN', 'str_to_ivfn', 'pos', 'neg', 'zero']

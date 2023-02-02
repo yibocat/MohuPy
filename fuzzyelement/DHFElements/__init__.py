@@ -18,6 +18,6 @@ from .DHFuzzyOperation import (intersection, unions,
                                algebraicmultiplication, algebraicplus,
                                einsteinmultiplication, einsteinplus)
 
-from .toolkit import (randomQHF, str_to_hfe, one, zero, minusone)
+from .toolkit import (randomQHF, str_to_hfe, pos, neg, zero)
 
-__all__ += ['randomQHF', 'str_to_hfe', 'one', 'zero', 'minusone']
+__all__ += ['randomQHF', 'str_to_hfe', 'pos', 'neg', 'zero']

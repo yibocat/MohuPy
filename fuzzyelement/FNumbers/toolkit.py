@@ -60,13 +60,14 @@ def str_to_fn(s, q):
     return fnf
 
 
-def one(q):
+def pos(q):
     return qrungfn(q, 1., 0.)
+
+
+def neg(q):
+    return qrungfn(q, 0., 1.)
 
 
 def zero(q):
     return qrungfn(q, 0., 0.)
 
-
-def minusone(q):
-    return qrungfn(q, 0., 1.)

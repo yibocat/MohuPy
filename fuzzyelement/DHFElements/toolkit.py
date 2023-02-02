@@ -70,13 +70,15 @@ def str_to_hfe(s, q: float):
     return dhf
 
 
-def one(q):
+def pos(q):
     return qrunghfe(q, [1.], [0.])
+
+
+def neg(q):
+    return qrunghfe(q, [0.], [1.])
 
 
 def zero(q):
     return qrunghfe(q, [0.], [0.])
 
 
-def minusone(q):
-    return qrunghfe(q, [0.], [1.])

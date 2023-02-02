@@ -18,6 +18,6 @@ from .QFuzzyOperation import (intersection, unions,
                               algebraicmultiplication, algebraicplus,
                               einsteinmultiplication, einsteinplus)
 
-from .toolkit import (randomFN, str_to_fn, one, zero, minusone)
+from .toolkit import (randomFN, str_to_fn, pos, neg, zero)
 
-__all__ += ['randomFN', 'str_to_fn', 'one', 'zero', 'minusone']
+__all__ += ['randomFN', 'str_to_fn', 'pos', 'neg', 'zero']
