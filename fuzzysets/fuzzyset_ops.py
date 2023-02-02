@@ -1,12 +1,7 @@
 #  Copyright (c) yibocat 2023 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/2/1 下午5:37
+#  Date: 2023/2/2 上午11:59
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
 
-__all__ = []
-
-from .sets import fuzzyset
-
-__all__.extend('fuzzyset')

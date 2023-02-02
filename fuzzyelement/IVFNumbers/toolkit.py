@@ -65,3 +65,15 @@ def str_to_ivfn(s, q):
     ivf.nmd[1] = np.asarray(float(nmd[1]))
     assert ivf.isLegal(), 'Invalid data! Illegal Q-rung interval-valued fuzzy number.'
     return ivf
+
+
+def one(q):
+    return qrungivfn(q, [1., 1.], [0., 0.])
+
+
+def zero(q):
+    return qrungivfn(q, [0., 0.], [0., 0.])
+
+
+def minusone(q):
+    return qrungivfn(q, [0., 0.], [1., 1.])

@@ -68,3 +68,15 @@ def str_to_hfe(s, q: float):
 
     assert dhf.isLegal(), 'ERROR: The data format is correct, but the data is invalid.'
     return dhf
+
+
+def one(q):
+    return qrunghfe(q, [1.], [0.])
+
+
+def zero(q):
+    return qrunghfe(q, [0.], [0.])
+
+
+def minusone(q):
+    return qrunghfe(q, [0.], [1.])

@@ -58,3 +58,15 @@ def str_to_fn(s, q):
     fnf.nmd = np.asarray(float(x[1]))
     assert fnf.isLegal(), 'ERROR: The data format is correct, but the data is invalid.'
     return fnf
+
+
+def one(q):
+    return qrungfn(q, 1., 0.)
+
+
+def zero(q):
+    return qrungfn(q, 0., 0.)
+
+
+def minusone(q):
+    return qrungfn(q, 0., 1.)
