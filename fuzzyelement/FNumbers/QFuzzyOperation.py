@@ -33,7 +33,7 @@ def unions(fn1: qrungfn, fn2: qrungfn):
     return newFN
 
 
-def algeb_multipy(fn1: qrungfn, fn2: qrungfn):
+def algeb_multiply(fn1: qrungfn, fn2: qrungfn):
     """
         Algebraic multiplication of two FNs
     """
@@ -57,7 +57,7 @@ def algeb_plus(fn1: qrungfn, fn2: qrungfn):
     return newFN
 
 
-def eins_multipy(fn1: qrungfn, fn2: qrungfn):
+def eins_multiply(fn1: qrungfn, fn2: qrungfn):
     """
         Einstein multiplication of two FNs
     """

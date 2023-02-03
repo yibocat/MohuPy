@@ -58,7 +58,7 @@ def unions(dh1: qrunghfe, dh2: qrunghfe):
     return newDHFE
 
 
-def algeb_multipy(dh1: qrunghfe, dh2: qrunghfe):
+def algeb_multiply(dh1: qrunghfe, dh2: qrunghfe):
     """
         Algebraic multiplication of two DHFEs
         :param dh1: DHFE 1
@@ -102,7 +102,7 @@ def algeb_plus(dh1: qrunghfe, dh2: qrunghfe):
     return newDHFE
 
 
-def eins_multipy(dh1: qrunghfe, dh2: qrunghfe):
+def eins_multiply(dh1: qrunghfe, dh2: qrunghfe):
     """
         Einstein multiplication of two DHFEs
         :param dh1: DHFE 1

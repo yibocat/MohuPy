@@ -8,15 +8,15 @@
 __all__ = ['qrunghfe',
            'intersection',
            'unions',
-           'algeb_multipy',
+           'algeb_multiply',
            'algeb_plus',
-           'eins_multipy',
+           'eins_multiply',
            'eins_plus']
 
 from .qrunghfe import qrunghfe
 from .DHFuzzyOperation import (intersection, unions,
-                               algeb_multipy, algeb_plus,
-                               eins_multipy, eins_plus)
+                               algeb_multiply, algeb_plus,
+                               eins_multiply, eins_plus)
 
 from .toolkit import (randomQHF, str_to_hfe, pos, neg, zero)
 
