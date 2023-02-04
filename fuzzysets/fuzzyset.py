@@ -557,3 +557,6 @@ class fuzzyset(object):
         self.set = matrix
         print('Loaded!')
         return self
+
+    def sort(self):
+        pass

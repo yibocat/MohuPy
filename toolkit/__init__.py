@@ -5,3 +5,8 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
 
+__all__ = ['plot_stats',
+           'ks_test_norm',
+           'random_split']
+
+from .toolkit import (plot_stats, ks_test_norm, random_split,)

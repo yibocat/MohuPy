@@ -9,19 +9,23 @@ import numpy as np
 from fuzzysets import fuzzyset
 
 
-def asfuzzyset(x):
+def fuzzys(x, copy=True):
     """
-        Convert a fuzzy numpy array to a fuzzy set.
+        construct a fuzzy set
 
         Parameters
         ----------
             x:  numpy.ndarray
-                The fuzzy numpy array.
+                Can be a numpy.ndarray of any dimension
         Returns
         -------
             fuzzyset
                 A fuzzy set.
     """
+    if copy:
+        xt = np.copy(x)
+    else:
+        xt = x
     fl = np.asarray(x)
     shape = fl.shape
     y = fl.ravel()
@@ -31,6 +35,22 @@ def asfuzzyset(x):
         newf.append(fe)
     newf.reshape(*shape)
     return newf
+
+
+def asfuzzyset(x):
+    """
+        Convert a fuzzy numpy array to a fuzzy set.
+
+        Parameters
+        ----------
+            x:  numpy.ndarray or list
+                The fuzzy numpy array.
+        Returns
+        -------
+            fuzzyset
+                A fuzzy set.
+    """
+    return fuzzys(x, copy=False)
 
 
 def equal(x: fuzzyset, y: fuzzyset, info=False) -> bool:

@@ -1,16 +1,14 @@
 #  Copyright (c) yibocat 2023 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/2/1 下午5:37
+#  Date: 2023/2/4 下午8:27
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
-
-
 import copy
 
 import numpy as np
+
 from fuzzyelement.DHFElements import qrunghfe
-from fuzzyelement.FNumbers import qrungfn
 
 
 def normalization(d1: qrunghfe, d2: qrunghfe, t=1) -> (qrunghfe, qrunghfe):
@@ -83,7 +81,7 @@ def normalization(d1: qrunghfe, d2: qrunghfe, t=1) -> (qrunghfe, qrunghfe):
     return d1, d2
 
 
-def generalized_distance(d1: qrunghfe, d2: qrunghfe, l=1, t=1):
+def generalized_distance(d1: qrunghfe, d2: qrunghfe, l=1, t=1, indeterminacy=True):
     """
         The generalized distance function for two Q-rung hesitant fuzzy elements.
         The parameter 'l' is the generic distance function parameter. 'l=1' indicates
@@ -127,57 +125,3 @@ def generalized_distance(d1: qrunghfe, d2: qrunghfe, l=1, t=1):
     distance = 0.5 * (mds + nmds + pi) ** (1 / l)
 
     return distance
-
-
-# ----------------------------------------------------------------
-# Convert Qrung Hesitant Fuzzy element to Q-rung fuzzy number,
-# according to the method of membership degree maximum, minimum and mean.
-def dh_fn_max(dhf: qrunghfe):
-    """
-        Convert Q-rung hesitant fuzzy element to Q-rung fuzzy number by max value
-        Parameters
-        ----------
-            dhf : DHFElements
-
-        Returns
-        -------
-            newfn : FNumbers
-    """
-    newfn = qrungfn(dhf.qrung, 0, 0)
-    newfn.md = dhf.md.max()
-    newfn.nmd = dhf.nmd.max()
-    return newfn
-
-
-def dh_fn_min(dhf: qrunghfe):
-    """
-        Convert Q-rung hesitant fuzzy element to Q-rung fuzzy number by min value
-        Parameters
-        ----------
-            dhf : DHFElements
-
-        Returns
-        -------
-            newfn : FNumbers
-    """
-    newfn = qrungfn(dhf.qrung, 0, 0)
-    newfn.md = dhf.md.min()
-    newfn.nmd = dhf.nmd.min()
-    return newfn
-
-
-def dh_fn_mean(dhf: qrunghfe):
-    """
-        Convert Q-rung hesitant fuzzy element to Q-rung fuzzy number by mean value.
-        Parameters
-        ----------
-            dhf : DHFElements
-
-        Returns
-        -------
-            newfn : FNumbers
-    """
-    newfn = qrungfn(dhf.qrung, 0, 0)
-    newfn.md = dhf.md.mean()
-    newfn.nmd = dhf.nmd.mean()
-    return newfn

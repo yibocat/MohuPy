@@ -82,7 +82,7 @@ def lambda_fuzzy_measure(fuzz_d, fuzz_measure, l):
         return (np.prod(1 + l * f) - 1) / l
 
 
-def choquet_integral(fuzz_density, measurable_func=None):
+def discrete_choquet_integral(fuzz_density, measurable_func=None):
     """
         The choquet integral based on lambda fuzzy measure function.
         For the existing set of fuzzy measures and a measurable function,

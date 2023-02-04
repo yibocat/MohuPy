@@ -24,8 +24,9 @@ __all__.extend(['dot',
                 'cartadd',
                 'cartprod'])
 
-from .fuzzysettools import (asfuzzyset, equal, similar)
+from .fuzzysettools import (fuzzys,asfuzzyset, equal, similar)
 
-__all__.extend(['asfuzzyset',
+__all__.extend(['fuzzys',
+                'asfuzzyset',
                 'equal',
                 'similar'])

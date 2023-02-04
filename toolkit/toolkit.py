@@ -10,10 +10,6 @@
 
 from scipy import stats
 
-# import fuzzyelement.DHFElements as dh
-# import fuzzyelement.FNumbers as fn
-# import fuzzyelement.IVFNumbers as ifn
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np

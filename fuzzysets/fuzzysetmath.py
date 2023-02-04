@@ -34,7 +34,7 @@ def dot(x, y, norm='algeb'):
                 Options are 'algeb' and 'eins' Norm
         Returns
         -------
-            numpy.ndarray
+            fuzzyset
                 A 2D list of fuzzy elements.
             fuzzyelement    if x and y are both 1D lists.
             fuzzyset        other
@@ -302,7 +302,3 @@ def similarity():
 
 def crossentropy():
     pass
-
-
-
-
