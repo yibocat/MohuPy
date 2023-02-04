@@ -7,13 +7,11 @@
 
 __all__ = []
 
-from .sets import fuzzyset
+from .fuzzyset import fuzzyset
+from .fuzzysetops import (dot, fuzz_add, fuzz_and,
+                          fuzz_multiply, fuzz_or,
+                          fuzz_func, cartadd)
 
 __all__.extend(['fuzzyset'])
-
-from .fuzzyset_ops import (dot, fuzz_add, fuzz_and,
-                           fuzz_multiply, fuzz_or,
-                           fuzz_func, cartadd)
-
 __all__.extend(['dot', 'fuzz_add', 'fuzz_and', 'fuzz_multiply',
                 'fuzz_or', 'fuzz_func', 'cartadd'])

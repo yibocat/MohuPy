@@ -5,12 +5,13 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
 
-from .sets import fuzzyset
+import numpy as np
+
+from .fuzzyset import fuzzyset
 from .__fuzzyset_ops import __dot11
 from .__fuzzyset_ops import __dot12
 from .__fuzzyset_ops import __dot21
 from .__fuzzyset_ops import __dot22
-import numpy as np
 from config.dictionary import load_dict
 
 
@@ -252,3 +253,56 @@ def cartadd(f1, f2, norm='algeb'):
     # print(type(a),type(b))
 
     return fuzz_add(a, b, norm)
+
+
+def cartprod(f1, f2, norm='algeb'):
+    """
+        Cartesian product of two fuzzy sets.
+
+        Parameters
+        ----------
+            f1:  numpy.ndarray
+                The first fuzzy set.
+            f2:  numpy.ndarray
+                The second fuzzy set.
+            norm: str
+                Arithmetic paradigm, defaults to algebraic operations.
+                Options are 'algeb' and 'eins' Norm
+        Returns
+        -------
+            numpy.ndarray
+                The result of the product.
+        Notes
+        -----
+    """
+    d = load_dict(False)
+    x, y = f1.ravel(), f2.ravel()
+
+    assert x[0].__class__.__name__ in d and y[0].__class__.__name__ in d, 'ERROR: fuzzy set type does not exist!'
+    assert x[0].__class__.__name__ == y[0].__class__.__name__, 'ERROR: the two fuzzy set are not the same set!'
+    assert x[0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
+
+    newset1 = fuzzyset(x[0].qrung, y[0].__class__.__name__)
+    newset2 = fuzzyset(x[0].qrung, y[0].__class__.__name__)
+    l1, l2 = len(x), len(y)
+
+    a = dot(np.atleast_2d(x).T, newset1.poss(1, l2).set, norm)
+    b = dot(newset2.poss(l1, 1).set, np.atleast_2d(y), norm)
+
+    return fuzz_multiply(a, b, norm)
+
+
+def distance():
+    pass
+
+
+def similarity():
+    pass
+
+
+def crossentropy():
+    pass
+
+
+
+
