@@ -8,10 +8,10 @@
 import numpy as np
 
 from .fuzzyset import fuzzyset
-from .__fuzzyset_ops import __dot11
-from .__fuzzyset_ops import __dot12
-from .__fuzzyset_ops import __dot21
-from .__fuzzyset_ops import __dot22
+from .__fuzzysetmath import __dot11
+from .__fuzzysetmath import __dot12
+from .__fuzzysetmath import __dot21
+from .__fuzzysetmath import __dot22
 from config.dictionary import load_dict
 
 

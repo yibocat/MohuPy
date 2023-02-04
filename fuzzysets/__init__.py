@@ -8,10 +8,24 @@
 __all__ = []
 
 from .fuzzyset import fuzzyset
-from .fuzzysetops import (dot, fuzz_add, fuzz_and,
-                          fuzz_multiply, fuzz_or,
-                          fuzz_func, cartadd)
 
 __all__.extend(['fuzzyset'])
-__all__.extend(['dot', 'fuzz_add', 'fuzz_and', 'fuzz_multiply',
-                'fuzz_or', 'fuzz_func', 'cartadd'])
+
+from .fuzzysetmath import (dot, fuzz_add, fuzz_and,
+                           fuzz_multiply, fuzz_or,
+                           fuzz_func, cartadd, cartprod)
+
+__all__.extend(['dot',
+                'fuzz_add',
+                'fuzz_and',
+                'fuzz_multiply',
+                'fuzz_or',
+                'fuzz_func',
+                'cartadd',
+                'cartprod'])
+
+from .fuzzysettools import (asfuzzyset, equal, similar)
+
+__all__.extend(['asfuzzyset',
+                'equal',
+                'similar'])
