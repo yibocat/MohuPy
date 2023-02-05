@@ -50,6 +50,14 @@ class DhFuzzy(object):
     def score(self):
         return ((self.md ** self.qrung).sum()) / len(self.md) - ((self.nmd ** self.qrung).sum()) / len(self.nmd)
 
+    @property
+    def accuracy(self):
+        return ((self.md ** self.qrung).sum()) / len(self.md) + ((self.nmd ** self.qrung).sum()) / len(self.nmd)
+
+    @property
+    def indeterminacy(self):
+        return (1 - self.accuracy) ** (1 / self.qrung)
+
     def isEmpty(self):
         ## 判断隶属度和非隶属度是否为空
         if self.md.size == 0 and self.nmd.size == 0:

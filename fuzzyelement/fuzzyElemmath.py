@@ -89,7 +89,18 @@ def generalized_distance(d1: qrunghfe, d2: qrunghfe, l=1, t=1, indeterminacy=Tru
         The parameter 't' is the risk factor of normalization process, which in
         the interval [0, 1]. 't=1' indicates optimistic normalization and 't=0' indicates
         pessimistic normalization.\n
-        ------------------------------------------------
+
+        Parameters
+            d1: Q-rung hesitant fuzzy element.
+            d2: Q-rung hesitant fuzzy element.
+            l: the generic distance function parameter.
+                l=1 indicates the Hamming distance
+                l=2 indicates the Euclidean distance
+            t: the parameter of the normalization function.
+                t=1 indicates optimistic normalization
+                t=0 indicates pessimistic normalization.
+            indeterminacy: Bool
+                Determine whether the distance formula contains indeterminacy.
 
         reference:
             A. R. Mishra, S.-M. Chen, and P. Rani, “Multiattribute decision-making
@@ -106,14 +117,11 @@ def generalized_distance(d1: qrunghfe, d2: qrunghfe, l=1, t=1, indeterminacy=Tru
     d1, d2 = normalization(d1, d2, t)
 
     # 不确定度
-    pi1 = (1 - (d1.md ** q).sum() / len(d1.md) -
-           (d1.nmd ** q).sum() / len(d1.nmd)) ** (1 / q)
-    pi2 = (1 - (d2.md ** q).sum() / len(d2.md) -
-           (d2.nmd ** q).sum() / len(d2.nmd)) ** (1 / q)
+    pi1 = d1.indeterminacy
+    pi2 = d2.indeterminacy
     pi = np.fabs(pi1 ** q - pi2 ** q) ** l
 
     mds, nmds = 0, 0
-
     for x in range(len(d1.md)):
         mds += np.fabs(d1.md[x] ** q - d2.md[x] ** q) ** l
     for y in range(len(d1.nmd)):
@@ -122,6 +130,9 @@ def generalized_distance(d1: qrunghfe, d2: qrunghfe, l=1, t=1, indeterminacy=Tru
     mds = mds / len(d1.md)
     nmds = nmds / len(d1.nmd)
 
-    distance = 0.5 * (mds + nmds + pi) ** (1 / l)
+    if indeterminacy:
+        distance = 0.5 * (mds + nmds + pi) ** (1 / l)
+    else:
+        distance = 0.5 * (mds + nmds) ** (1 / l)
 
     return distance

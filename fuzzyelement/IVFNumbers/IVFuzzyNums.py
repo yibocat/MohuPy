@@ -23,6 +23,16 @@ class IVFuzzynum(object):
         nmd = self.nmd[0] ** self.qrung + self.nmd[1] ** self.qrung
         return (md - nmd) / 2
 
+    @property
+    def accuracy(self):
+        md = self.md[0] ** self.qrung + self.md[1] ** self.qrung
+        nmd = self.nmd[0] ** self.qrung + self.nmd[1] ** self.qrung
+        return (md + nmd) / 2
+
+    @property
+    def indeterminacy(self):
+        return (1 - self.accuracy) ** (1 / self.qrung)
+
     def isEmpty(self):
         if not (self.md[0] and self.md[1] and self.nmd[0] and self.nmd[1]):
             return True

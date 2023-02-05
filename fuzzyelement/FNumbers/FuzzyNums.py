@@ -20,6 +20,14 @@ class Fuzzynum(object):
     def score(self):
         return self.md ** self.qrung - self.nmd ** self.qrung
 
+    @property
+    def accuracy(self):
+        return self.md ** self.qrung + self.nmd ** self.qrung
+
+    @property
+    def indeterminacy(self):
+        return (1 - self.accuracy) ** (1 / self.qrung)
+
     def isEmpty(self):
         if self.md is None and self.nmd is None:
             return True
