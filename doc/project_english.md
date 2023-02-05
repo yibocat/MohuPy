@@ -19,7 +19,7 @@ comparison, intersection and union)
 4. Custom fuzzy element program: need to write configuration tool code to construct 
 a custom configuration dictionary program;
 5. Change the underlying operation code of the fuzzy logic operation to be written 
-in C or C++ language. Preliminary consideration of Cpython;
+in C or C++ language. Preliminary consideration of Cython;
 6. Fuzzy Integral Related Content (Discrete Fuzzy Measures)
    1. Derivatives of Set Functions
    2. Shapley Value;
