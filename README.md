@@ -13,3 +13,6 @@ Four python packages are required:
 2. scipy
 3. matplotlib
 4. pandas
+
+## Contact
+email: yibocat@yeah.net
