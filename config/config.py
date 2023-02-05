@@ -11,6 +11,7 @@
 
 from dictionary import save_dict
 import fuzzyelement
+from fuzzyelement.__fuzzyElemmath import qhfeDistance, qfnDistance, qivfnDistance
 from fuzzyelement.IVFNumbers import (qrungivfn, randomIVFN, str_to_ivfn)
 from fuzzyelement.FNumbers import (qrungfn, randomFN, str_to_fn)
 from fuzzyelement.DHFElements import (qrunghfe, randomQHF, str_to_hfe)
@@ -31,6 +32,7 @@ d = {
         'pos': fuzzyelement.DHFElements.pos,
         'neg': fuzzyelement.DHFElements.neg,
         'zero': fuzzyelement.DHFElements.zero,
+        'distance': qhfeDistance,
     },
     'qrungfn': {
         'type': qrungfn,
@@ -46,6 +48,7 @@ d = {
         'pos': fuzzyelement.FNumbers.pos,
         'neg': fuzzyelement.FNumbers.neg,
         'zero': fuzzyelement.FNumbers.zero,
+        'distance': qfnDistance,
     },
     'qrungivfn': {
         'type': qrungivfn,
@@ -61,6 +64,7 @@ d = {
         'pos': fuzzyelement.IVFNumbers.pos,
         'neg': fuzzyelement.IVFNumbers.neg,
         'zero': fuzzyelement.IVFNumbers.zero,
+        'distance': qivfnDistance,
     }
 }
 

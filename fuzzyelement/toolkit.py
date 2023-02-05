@@ -4,8 +4,10 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzyKit
+
 from fuzzyelement.DHFElements import qrunghfe
 from fuzzyelement.FNumbers import qrungfn
+from fuzzyelement.IVFNumbers import qrungivfn
 
 
 # ----------------------------------------------------------------
@@ -60,3 +62,6 @@ def dh_fn_mean(dhf: qrunghfe):
     newfn.md = dhf.md.mean()
     newfn.nmd = dhf.nmd.mean()
     return newfn
+
+
+

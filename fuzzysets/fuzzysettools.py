@@ -123,3 +123,33 @@ def similar(x: fuzzyset, y: fuzzyset, info=False):
             print('Different shapes of fuzzy sets.')
         return False
     return True
+
+
+def similarity_matrix():
+    """
+        The similarity matrix of q-rung fuzzy set.
+        This function is only applicable to Q-rung intuitionistic fuzzy sets and
+        Q-rung interval-valued intuitionistic fuzzy sets.
+
+        reference:
+            Z. Xu, “A method based on distance measure for interval-valued
+            intuitionistic fuzzy group decision-making,” Inform Sciences,
+            vol. 180, no. 1, pp. 181–190, 2010, doi: 10.1016/j.ins.2009.09.005.
+    """
+    pass
+
+
+def composition_matrix():
+    """
+        Combination matrix of any two fuzzy set similarity matrices of the same shape.
+        This function is only applicable to Q-rung intuitionistic fuzzy sets and
+        Q-rung interval-valued intuitionistic fuzzy sets.
+
+        reference:
+            Z. Xu, “A method based on distance measure for interval-valued
+            intuitionistic fuzzy group decision-making,” Inform Sciences,
+            vol. 180, no. 1, pp. 181–190, 2010, doi: 10.1016/j.ins.2009.09.005.
+
+    """
+
+    pass

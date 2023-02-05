@@ -12,7 +12,7 @@ geometric operator for three fuzzy elements;
 
 ## Planning Function
 1. Indeterminacy of the three fuzzy elements;
-2. The distance formula, similarity formula and correlation formula (generalized 
+2. The similarity formula and correlation formula (generalized 
 distance and Hausdorff distance) of the three fuzzy elements;
 3. More functions of fuzzy sets (set sorting, set distance, similarity, correlation, 
 comparison, intersection and union)
@@ -32,22 +32,22 @@ in C or C++ language. Preliminary consideration of Cpython;
 
 ## Detailed description of the completed functions
 1. Q-rung intuitionistic fuzzy numbers
-   1. Score function, judgment empty, complement, algebraic power, algebraic 
-multiple, Einstein power, Einstein multiple;
+   1. Score function, judgment empty, complement,Indeterminacy, algebraic power, 
+algebraic multiple, Einstein power, Einstein multiple;
    2. Intersection operation, union operation, algebraic multiplication, 
 algebraic addition, Einstein multiplication, Einstein addition;
    3. random generation, character conversion, positive ideal, negative ideal, 
 0 value;
 2. Q-rung interval-valued intuitionistic fuzzy numbers
-   1. Score function, judgment empty, complement, algebraic power, algebraic 
-multiple, Einstein power, Einstein multiple;
+   1. Score function, judgment empty, complement,Indeterminacy, algebraic power, 
+algebraic multiple, Einstein power, Einstein multiple;
    2. Intersection operation, union operation, algebraic multiplication, 
 algebraic addition, Einstein multiplication, Einstein addition;
    3. random generation, character conversion, positive ideal, negative ideal, 
 0 value;
 3. Q-rung dual hesitant fuzzy elements
-   1. Score function, judgment empty, complement, algebraic power, algebraic 
-multiple, Einstein power, Einstein multiple;
+   1. Score function, judgment empty, complement,Indeterminacy, algebraic power, 
+algebraic multiple, Einstein power, Einstein multiple;
    2. Intersection operation, union operation, algebraic multiplication, 
 algebraic addition, Einstein multiplication, Einstein addition;
    3. random generation, character conversion, positive ideal, negative ideal, 
@@ -55,7 +55,7 @@ algebraic addition, Einstein multiplication, Einstein addition;
 4. Fuzzy element mathematical operation
    1. Dual hesitant fuzzy element normalization (continuous normalization of 
 parameter values)
-   2. Q-rung dual hesitant fuzzy element generalized distance formula (beta): 
+   2. Q-rung dual hesitant fuzzy element generalized distance formula: 
 This formula needs to be further improved into a distance formula corresponding 
 to all fuzzy elements;
 5. Membership function generator 
