@@ -52,9 +52,9 @@ def lambda_fuzzy_measure(fuzz_d, fuzz_measure, l):
 
         Parameters
         ----------
-            fuzz_d: numpy.ndarray
+            fuzz_d: numpy.ndarray or list
                 fuzzy density subset
-            fuzz_measure: numpy.ndarray
+            fuzz_measure: numpy.ndarray or list
                 fuzzy measure set
             l: float
                 lambda parameter, 5 digits of precision
@@ -100,7 +100,7 @@ def discrete_choquet_integral(fuzz_density, measurable_func=None):
 
         Parameters
         ----------
-            fuzz_density: numpy.ndarray
+            fuzz_density: numpy.ndarray or list
                 fuzzy density list
             measurable_func: function
                 measurable function
