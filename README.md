@@ -16,3 +16,8 @@ Four python packages are required:
 
 ## Contact
 email: yibocat@yeah.net
+
+## Functional description
+[Chinese](doc/project_chinese.md)
+
+[English](doc/project_english.md)
