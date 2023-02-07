@@ -57,6 +57,6 @@ def load_dict(info=True):
 
 def save_dict(dd):
     print('Saving configuration file...')
-    with open('dictionary.pkl', 'wb') as f:
+    with open(__dict_file, 'wb') as f:
         pickle.dump(dd, f)
     print('Saved successfully!')

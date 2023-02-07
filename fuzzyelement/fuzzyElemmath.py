@@ -8,9 +8,9 @@ import copy
 
 import numpy as np
 
-from fuzzyelement.DHFElements import qrunghfe
-from fuzzyelement.FNumbers import qrungfn
-from fuzzyelement.IVFNumbers import qrungivfn
+from .DHFElements import qrunghfe
+from .FNumbers import qrungfn
+from .IVFNumbers import qrungivfn
 
 from config import load_dict
 
