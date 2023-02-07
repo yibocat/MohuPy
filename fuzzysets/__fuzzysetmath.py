@@ -3,7 +3,7 @@
 #  Date: 2023/2/3 下午4:01
 #  Author: yibow
 #  Email: yibocat@yeah.net
-#  Software: FuzzyKit
+#  Software: FuzzPy
 from fuzzysets import fuzzyset
 import config as cfg
 

@@ -3,7 +3,7 @@
 #  Date: 2023/2/2 上午1:58
 #  Author: yibow
 #  Email: yibocat@yeah.net
-#  Software: FuzzyKit
+#  Software: FuzzPy
 
 """
     This file is a fuzzy set configuration information IO file, which stores

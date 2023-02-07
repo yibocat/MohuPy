@@ -3,7 +3,7 @@
 #  Date: 2023/2/1 下午5:37
 #  Author: yibow
 #  Email: yibocat@yeah.net
-#  Software: FuzzyKit
+#  Software: FuzzPy
 
 from .fuzzMeasure import (lambda_fuzzy_measure, lamda, discrete_choquet_integral)
 

@@ -3,7 +3,7 @@
 #  Date: 2023/2/4 下午8:27
 #  Author: yibow
 #  Email: yibocat@yeah.net
-#  Software: FuzzyKit
+#  Software: FuzzPy
 import copy
 
 import numpy as np

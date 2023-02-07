@@ -3,7 +3,7 @@
 #  Date: 2023/2/2 下午4:34
 #  Author: yibow
 #  Email: yibocat@yeah.net
-#  Software: FuzzyKit
+#  Software: FuzzPy
 
 """
     Manually update the fuzzy set configuration file

@@ -3,7 +3,7 @@
 #  Date: 2023/2/4 下午8:33
 #  Author: yibow
 #  Email: yibocat@yeah.net
-#  Software: FuzzyKit
+#  Software: FuzzPy
 
 from fuzzyelement.DHFElements import qrunghfe
 from fuzzyelement.FNumbers import qrungfn

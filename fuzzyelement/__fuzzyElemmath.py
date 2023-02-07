@@ -3,7 +3,7 @@
 #  Date: 2023/2/5 上午10:06
 #  Author: yibow
 #  Email: yibocat@yeah.net
-#  Software: FuzzyKit
+#  Software: FuzzPy
 
 import copy
 
