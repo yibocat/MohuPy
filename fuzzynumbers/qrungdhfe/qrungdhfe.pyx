@@ -13,7 +13,7 @@ cdef class qrungdhfe(Fuzzynum):
     cdef np.ndarray __md
     cdef np.ndarray __nmd
 
-    def __init__(self, qrung, md, nmd):
+    def __init__(self, int qrung, md, nmd):
         super().__init__()
 
         mds = np.asarray(md)
@@ -96,7 +96,7 @@ cdef class qrungdhfe(Fuzzynum):
         def __get__(self):
             mm = ((self.__md ** self.__qrung).sum()) / len(self.__md)
             nn = ((self.__nmd ** self.__qrung).sum()) / len(self.__nmd)
-            self.__indeterminacy =  (1 - mm - nn) ** (1 / self.__qrung)
+            self.__indeterminacy =  (1. - mm - nn) ** (1 / self.__qrung)
             return self.__indeterminacy
 
     cpdef set_md(self, value):
@@ -136,10 +136,10 @@ cdef class qrungdhfe(Fuzzynum):
         newEle = copy.deepcopy(self)
         if self.__md.size == 0 and self.__nmd.size != 0:
             newEle.md = np.array([])
-            newEle.nmd = 1 - self.__nmd
+            newEle.nmd = 1. - self.__nmd
         elif self.__md.size != 0 and self.__nmd.size == 0:
             newEle.nmd = np.array([])
-            newEle.md = 1 - self.__md
+            newEle.md = 1. - self.__md
         else:
             newEle.md = self.__nmd
             newEle.nmd = self.__md
@@ -158,27 +158,27 @@ cdef class qrungdhfe(Fuzzynum):
     cpdef algeb_power(self, double l):
         newEle = copy.deepcopy(self)
         newEle.md = self.__md ** l
-        newEle.nmd = (1 - (1 - self.__nmd ** self.__qrung) ** l) ** (1 / self.__qrung)
+        newEle.nmd = (1. - (1. - self.__nmd ** self.__qrung) ** l) ** (1 / self.__qrung)
         return newEle
 
     cpdef algeb_times(self, double l):
         newEle = copy.deepcopy(self)
-        newEle.md = (1 - (1 - self.__md ** self.__qrung) ** l) ** (1 / self.__qrung)
+        newEle.md = (1. - (1. - self.__md ** self.__qrung) ** l) ** (1 / self.__qrung)
         newEle.nmd = self.__nmd ** l
         return newEle
 
     cpdef eins_power(self, double l):
         newEle = copy.deepcopy(self)
         newEle.md = ((2 * (self.__md ** self.__qrung) ** l) / (
-                (2 - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1 / self.__qrung)
-        newEle.nmd = (((1 + self.__nmd ** self.__qrung) ** l - (1 - self.__nmd ** self.__qrung) ** l) /
-                      ((1 + self.__nmd ** self.__qrung) ** l + (1 - self.__nmd ** self.__qrung) ** l)) ** (1 / self.__qrung)
+                (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1 / self.__qrung)
+        newEle.nmd = (((1. + self.__nmd ** self.__qrung) ** l - (1. - self.__nmd ** self.__qrung) ** l) /
+                      ((1. + self.__nmd ** self.__qrung) ** l + (1. - self.__nmd ** self.__qrung) ** l)) ** (1 / self.__qrung)
         return newEle
 
     cpdef eins_times(self, double l):
         newEle = copy.deepcopy(self)
-        newEle.md = (((1 + self.__md ** self.__qrung) ** l - (1 - self.__md ** self.__qrung) ** l) /
-                     ((1 + self.__md ** self.__qrung) ** l + (1 - self.__md ** self.__qrung) ** l)) ** (1 / self.__qrung)
+        newEle.md = (((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) /
+                     ((1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1 / self.__qrung)
         newEle.nmd = ((2 * (self.__nmd ** self.__qrung) ** l) / (
-                (2 - self.__nmd ** self.__qrung) ** l + (self.__nmd ** self.__qrung) ** l)) ** (1 / self.__qrung)
+                (2. - self.__nmd ** self.__qrung) ** l + (self.__nmd ** self.__qrung) ** l)) ** (1 / self.__qrung)
         return newEle

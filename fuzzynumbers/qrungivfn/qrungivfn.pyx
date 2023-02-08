@@ -26,7 +26,8 @@ cdef class qrungivfn(Fuzzynum):
 
     def __init__(self, int qrung, list md, list nmd):
         super().__init__()
-
+        cdef np.ndarray mds
+        cdef np.ndarray nmds
         mds = np.asarray(md)
         nmds = np.asarray(nmd)
 
@@ -85,36 +86,36 @@ cdef class qrungivfn(Fuzzynum):
         def __get__(self):
             md = self.__md[0] ** self.__qrung + self.__md[1] ** self.__qrung
             nmd = self.__nmd[0] ** self.__qrung + self.__nmd[1] ** self.__qrung
-            self.__score = (md - nmd) / 2
+            self.__score = (md - nmd) / 2.
             return self.__score
 
     property accuracy:
         def __get__(self):
             md = self.__md[0] ** self.__qrung + self.__md[1] ** self.__qrung
             nmd = self.__nmd[0] ** self.__qrung + self.__nmd[1] ** self.__qrung
-            self.__accuracy = (md + nmd) / 2
+            self.__accuracy = (md + nmd) / 2.
             return self.__accuracy
 
     property indeterminacy:
         def __get__(self):
             md = self.__md[0] ** self.__qrung + self.__md[1] ** self.__qrung
             nmd = self.__nmd[0] ** self.__qrung + self.__nmd[1] ** self.__qrung
-            self.__indeterminacy =  (1 - (md + nmd) / 2) ** (1 / self.__qrung)
+            self.__indeterminacy =  (1. - (md + nmd) / 2.) ** (1. / self.__qrung)
             return self.__indeterminacy
 
-    cpdef isEmpty(self):
+    cpdef bint isEmpty(self):
         if not (self.__md[0] and self.__md[1] and self.__nmd[0] and self.__nmd[1]):
             return True
         else:
             return False
 
-    cpdef isEmpty_half(self):
+    cpdef bint isEmpty_half(self):
         if not (self.__md[0] or self.__md[1] or self.__nmd[0] or self.__nmd[1]):
             return True
         else:
             return False
 
-    cpdef isLegal(self):
+    cpdef bint isLegal(self):
         if not (self.__md.size == 2 and self.__nmd.size == 2):
             return False
         elif not (self.__md[0] <= self.__md[1] and self.__nmd[0] <= self.__nmd[1]):
