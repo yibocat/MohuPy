@@ -1,20 +1,17 @@
 import copy
-
 from ..Fuzzynum cimport Fuzzynum
 
 import numpy as np
 cimport numpy as np
 
 cdef class qrungdhfe(Fuzzynum):
-    cdef readonly:
-        int __qrung
-        str __parent
-        double __score
-        double __accuracy
-        double __indeterminacy
-    cdef:
-        np.ndarray __md
-        np.ndarray __nmd
+    cdef int __qrung
+    cdef str __parent
+    cdef double __score
+    cdef double __accuracy
+    cdef double __indeterminacy
+    cdef np.ndarray __md
+    cdef np.ndarray __nmd
 
     def __init__(self, qrung, md, nmd):
         super().__init__()
@@ -74,7 +71,6 @@ cdef class qrungdhfe(Fuzzynum):
             if not self.isLegal():
                 self.__nmd = onm
                 raise ValueError('ERROR: Invalid data.')
-            self.__nmd = onm
 
     property parent:
         def __get__(self):

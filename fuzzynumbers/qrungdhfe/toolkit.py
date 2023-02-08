@@ -17,11 +17,11 @@ def random(q, n):
             DHFElements
     """
     newf = qrungdhfe(q, [], [])
-    newf.set_md(np.random.rand(np.random.randint(1, n+1)))
-    newf.set_nmd(np.random.rand(np.random.randint(1, n+1)))
+    newf.set_md(np.random.rand(np.random.randint(1, n)))
+    newf.set_nmd(np.random.rand(np.random.randint(1, n)))
     while not newf.isLegal():
-        newf.set_md(np.random.rand(np.random.randint(1, n+1)))
-        newf.set_nmd(np.random.rand(np.random.randint(1, n+1)))
+        newf.set_md(np.random.rand(np.random.randint(1, n)))
+        newf.set_nmd(np.random.rand(np.random.randint(1, n)))
     return newf
 
 

@@ -1,5 +1,3 @@
-import numpy as np
-cimport numpy as np
 
 cpdef algebraic_tau(double x)
 cpdef in_algebraic_tau(double x)

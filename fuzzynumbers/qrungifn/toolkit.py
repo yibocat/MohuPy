@@ -14,11 +14,11 @@ def random(q: int):
             FNumbers
     """
     newf = qrungifn(q, 0., 0.)
-    newf.md = np.random.rand(1)[0]
-    newf.nmd = np.random.rand(1)[0]
+    newf.md = np.random.rand(1)
+    newf.nmd = np.random.rand(1)
     while not newf.isLegal():
-        newf.md = np.random.rand(1)[0]
-        newf.nmd = np.random.rand(1)[0]
+        newf.md = np.random.rand(1)
+        newf.nmd = np.random.rand(1)
     return newf
 
 

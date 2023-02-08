@@ -6,15 +6,14 @@ cimport numpy as np
 
 cdef class qrungifn(Fuzzynum):
 
-    cdef readonly:
+    cdef:
         int __qrung
         str __parent
         double __score
         double __accuracy
         double __indeterminacy
-    cdef:
-        double __md
-        double __nmd
+        np.ndarray __md
+        np.ndarray __nmd
 
     def __init__(self, int qrung, double md, double nmd):
         super().__init__()
