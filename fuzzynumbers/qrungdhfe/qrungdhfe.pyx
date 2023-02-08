@@ -109,19 +109,19 @@ cdef class qrungdhfe(Fuzzynum):
         assert 0 <= value.all() <= 1, 'ERROR: Invalid data.'
         self.__nmd = value
 
-    cpdef isEmpty(self):
+    cpdef bint isEmpty(self):
         if self.__md.size == 0 and self.__nmd.size == 0:
             return True
         else:
             return False
 
-    cpdef isEmpty_half(self):
+    cpdef bint isEmpty_half(self):
         if self.__md.size == 0 or self.__nmd.size == 0:
             return True
         else:
             return False
 
-    cpdef isLegal(self):
+    cpdef bint isLegal(self):
         a1 = self.__md.size == 0 and self.__nmd.size == 0
         a2 = self.__md.size == 0 and 0 <= self.__nmd.all() <= 1
         a3 = self.__nmd.size == 0 and 0 <= self.__md.all() <= 1

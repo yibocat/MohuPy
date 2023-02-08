@@ -103,6 +103,16 @@ cdef class qrungivfn(Fuzzynum):
             self.__indeterminacy =  (1. - (md + nmd) / 2.) ** (1. / self.__qrung)
             return self.__indeterminacy
 
+    cpdef set_md(self, value):
+        v = np.asarray(value)
+        assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
+        self.__md = v
+
+    cpdef set_nmd(self, value):
+        v = np.asarray(value)
+        assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
+        self.__nmd = v
+
     cpdef bint isEmpty(self):
         if not (self.__md[0] and self.__md[1] and self.__nmd[0] and self.__nmd[1]):
             return True

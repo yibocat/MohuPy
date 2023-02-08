@@ -46,10 +46,4 @@ ext = [
 ]
 
 setup(name='fuzzpy',
-      ext_modules=cythonize(ext,
-                            language_level=3,
-                            annotate=True))
-
-# setup(name='fuzzpy',
-#       ext_modules=cythonize(ext, language_level=3),
-#       zip_safe=False)
+      ext_modules=cythonize(ext, language_level=3, ))

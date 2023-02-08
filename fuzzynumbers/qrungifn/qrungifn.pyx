@@ -27,8 +27,8 @@ cdef class qrungifn(Fuzzynum):
                 and 0. <= mds.all() ** qrung + nmds.all() ** qrung <= 1., \
                 'ERROR: Both of MD and NMD and MD^q+NMD^q must have be in the interval 0-1 ' \
                 'and the number of MD or NMD must have be 1.'
-        self.__md = mds[0]
-        self.__nmd = nmds[0]
+        self.__md = mds
+        self.__nmd = nmds
 
     def __repr__(self):
         return 'QRungFN(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(
@@ -45,8 +45,9 @@ cdef class qrungifn(Fuzzynum):
 
         def __set__(self, double value):
             assert 0. <= value <= 1., 'ERROR: MD must be in the interval 0-1.'
+            v = np.asarray(value)
             m = self.__md
-            self.__md = value
+            self.__md = v
             if not self.isLegal():
                 self.__md = m
                 raise ValueError('ERROR: Invalid data.')
@@ -57,8 +58,9 @@ cdef class qrungifn(Fuzzynum):
 
         def __set__(self, double value):
             assert 0. <= value <= 1., 'ERROR: NMD must be in the interval 0-1.'
+            v = np.asarray(value)
             m = self.__nmd
-            self.__nmd = value
+            self.__nmd = v
             if not self.isLegal():
                 self.__nmd = m
                 raise ValueError('ERROR: Invalid data.')
@@ -83,6 +85,16 @@ cdef class qrungifn(Fuzzynum):
             acc = self.md ** self.__qrung + self.nmd ** self.__qrung
             self.__indeterminacy = (1. - acc) ** (1. / self.__qrung)
             return self.__indeterminacy
+
+    cpdef set_md(self, value):
+        v = np.asarray(value)
+        assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
+        self.__md = v
+
+    cpdef set_nmd(self, value):
+        v = np.asarray(value)
+        assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
+        self.__nmd = v
 
     cpdef bint isEmpty(self):
         if self.__md is None and self.__nmd is None:

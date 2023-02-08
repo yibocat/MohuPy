@@ -16,11 +16,11 @@ def random(q):
             IVFNumbers
     """
     newf = qrungivfn(q, [0., 0.], [0., 0.])
-    newf.md[0], newf.md[1] = np.random.rand(1)[0], np.random.rand(1)[0]
-    newf.nmd[0], newf.nmd[1] = np.random.rand(1)[0], np.random.rand(1)[0]
+    newf.set_md([np.random.rand(1)[0], np.random.rand(1)[0]])
+    newf.set_nmd([np.random.rand(1)[0], np.random.rand(1)[0]])
     while not newf.isLegal():
-        newf.md[0], newf.md[1] = np.random.rand(1)[0], np.random.rand(1)[0]
-        newf.nmd[0], newf.nmd[1] = np.random.rand(1)[0], np.random.rand(1)[0]
+        newf.set_md([np.random.rand(1)[0], np.random.rand(1)[0]])
+        newf.set_nmd([np.random.rand(1)[0], np.random.rand(1)[0]])
     return newf
 
 
