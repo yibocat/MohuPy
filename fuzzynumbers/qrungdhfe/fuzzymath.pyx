@@ -13,11 +13,11 @@ cpdef intersection(dh1: qrungdhfe, dh2: qrungdhfe):
 
     md1 = dh1.md[dh1.md <= md_min]
     md2 = dh2.md[dh2.md <= md_min]
-    newDHFE.md = np.unique(np.concatenate((md1, md2)))
+    newDHFE.set_md(np.unique(np.concatenate((md1, md2))))
 
     nmd1 = dh1.nmd[dh1.nmd >= nmd_max]
     nmd2 = dh2.nmd[dh2.nmd >= nmd_max]
-    newDHFE.nmd = np.unique(np.concatenate((nmd1, nmd2)))
+    newDHFE.set_nmd(np.unique(np.concatenate((nmd1, nmd2))))
 
     return newDHFE
 
@@ -37,11 +37,11 @@ cpdef unions(dh1: qrungdhfe, dh2: qrungdhfe):
 
     md1 = dh1.md[dh1.md >= md_max]
     md2 = dh2.md[dh2.md >= md_max]
-    newDHFE.md = np.unique(np.concatenate((md1, md2)))
+    newDHFE.set_md(np.unique(np.concatenate((md1, md2))))
 
     nmd1 = dh1.nmd[dh1.nmd <= nmd_min]
     nmd2 = dh2.nmd[dh2.nmd <= nmd_min]
-    newDHFE.nmd = np.unique(np.concatenate((nmd1, nmd2)))
+    newDHFE.set_nmd(np.unique(np.concatenate((nmd1, nmd2))))
 
     return newDHFE
 
@@ -61,9 +61,9 @@ cpdef algeb_multiply(dh1: qrungdhfe, dh2: qrungdhfe):
     nmds = np.array(np.meshgrid(dh1.nmd, dh2.nmd)).T.reshape(-1, 2)
 
     for i in range(len(mds)):
-        newDHFE.md = np.append(newDHFE.md, algebraic_T(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
+        newDHFE.set_md(np.append(newDHFE.md, algebraic_T(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q)))
     for i in range(len(nmds)):
-        newDHFE.nmd = np.append(newDHFE.nmd, algebraic_S(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
+        newDHFE.set_nmd(np.append(newDHFE.nmd, algebraic_S(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q)))
 
     return newDHFE
 
@@ -83,9 +83,9 @@ cpdef algeb_plus(dh1: qrungdhfe, dh2: qrungdhfe):
     nmds = np.array(np.meshgrid(dh1.nmd, dh2.nmd)).T.reshape(-1, 2)
 
     for i in range(len(mds)):
-        newDHFE.md = np.append(newDHFE.md, algebraic_S(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
+        newDHFE.set_md(np.append(newDHFE.md, algebraic_S(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q)))
     for i in range(len(nmds)):
-        newDHFE.nmd = np.append(newDHFE.nmd, algebraic_T(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
+        newDHFE.set_nmd(np.append(newDHFE.nmd, algebraic_T(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q)))
 
     return newDHFE
 
@@ -105,9 +105,9 @@ cpdef eins_multiply(dh1: qrungdhfe, dh2: qrungdhfe):
     nmds = np.array(np.meshgrid(dh1.nmd, dh2.nmd)).T.reshape(-1, 2)
 
     for i in range(len(mds)):
-        newDHFE.md = np.append(newDHFE.md, einstein_T(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
+        newDHFE.set_md(np.append(newDHFE.md, einstein_T(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q)))
     for i in range(len(nmds)):
-        newDHFE.nmd = np.append(newDHFE.nmd, einstein_S(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
+        newDHFE.set_nmd(np.append(newDHFE.nmd, einstein_S(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q)))
 
     return newDHFE
 
@@ -127,8 +127,8 @@ cpdef eins_plus(dh1: qrungdhfe, dh2: qrungdhfe):
     nmds = np.array(np.meshgrid(dh1.nmd, dh2.nmd)).T.reshape(-1, 2)
 
     for i in range(len(mds)):
-        newDHFE.md = np.append(newDHFE.md, einstein_S(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
+        newDHFE.set_md(np.append(newDHFE.md, einstein_S(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q)))
     for i in range(len(nmds)):
-        newDHFE.nmd = np.append(newDHFE.nmd, einstein_T(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
+        newDHFE.set_nmd(np.append(newDHFE.nmd, einstein_T(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q)))
 
     return newDHFE
