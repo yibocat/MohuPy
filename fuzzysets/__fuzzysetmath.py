@@ -4,8 +4,8 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzPy
-from fuzzpy_py.fuzzysets import fuzzyset
-from fuzzpy_py import config as cfg
+from fuzzysets import fuzzyset
+import config as cfg
 
 d = cfg.load_dict(False)
 

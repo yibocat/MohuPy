@@ -16,6 +16,3 @@ __all__ = ['qrunghfe', 'intersection', 'unions',
            'eins_multiply', 'eins_plus'
            ]
 
-from fuzzpy_py.fuzzyelement.IVFNumbers import (qrungivfn,
-                                               algeb_multiply, algeb_plus,
-                                               eins_multiply, eins_plus)

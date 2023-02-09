@@ -7,7 +7,7 @@
 
 from matplotlib import pyplot as plt
 
-from ..fuzzyelement.DHFElements import qrunghfe
+from fuzzyelement.DHFElements import qrunghfe
 from .generateMF import *
 
 

@@ -42,7 +42,7 @@
 
 import pickle
 
-__dict_file = '../fuzzpy_py/config/dictionary.pkl'
+__dict_file = '../config/dictionary.pkl'
 
 
 def load_dict(info=True):

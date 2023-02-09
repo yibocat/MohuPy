@@ -9,9 +9,9 @@ import copy
 
 import numpy as np
 
-from fuzzpy_py.fuzzyelement.DHFElements import qrunghfe
-from fuzzpy_py.fuzzyelement.FNumbers import qrungfn
-from fuzzpy_py.fuzzyelement.IVFNumbers import qrungivfn
+from fuzzyelement.DHFElements import qrunghfe
+from fuzzyelement.FNumbers import qrungfn
+from fuzzyelement.IVFNumbers import qrungivfn
 
 
 def normalization(d1: qrunghfe, d2: qrunghfe, t=1) -> (qrunghfe, qrunghfe):

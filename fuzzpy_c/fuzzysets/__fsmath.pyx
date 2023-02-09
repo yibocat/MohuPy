@@ -3,7 +3,7 @@ cimport numpy as np
 # from Cython.Includes.libc.string import strcat
 
 from .fuzzyset import fuzzyset
-import config as cfg
+import fuzzpy_c.config as cfg
 
 d = cfg.load_dict(False)
 

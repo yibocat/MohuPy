@@ -5,7 +5,7 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzPy
 
-from fuzzpy_py.config import load_dict
+from config import load_dict
 
 d = load_dict(False)
 

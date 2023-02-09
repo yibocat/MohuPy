@@ -12,7 +12,8 @@ from .__fuzzysetmath import __dot11
 from .__fuzzysetmath import __dot12
 from .__fuzzysetmath import __dot21
 from .__fuzzysetmath import __dot22
-from fuzzpy_py.config.dictionary import load_dict
+
+from config.dictionary import load_dict
 
 
 def dot(x, y, norm='algeb'):
