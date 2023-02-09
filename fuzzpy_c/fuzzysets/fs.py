@@ -1,12 +1,6 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
-#  Python: 3.10.9
-#  Date: 2023/2/4 下午4:39
-#  Author: yibow
-#  Email: yibocat@yeah.net
-#  Software: FuzzPy
 import numpy as np
 
-from fuzzpy_py.fuzzysets import fuzzyset
+from .fuzzyset import fuzzyset
 
 
 def fuzzys(x, copy=True):
@@ -15,8 +9,9 @@ def fuzzys(x, copy=True):
 
         Parameters
         ----------
-            x:  numpy.ndarray
+            x:  numpy.array or list
                 Can be a numpy.ndarray of any dimension
+            copy: bool
         Returns
         -------
             fuzzyset
@@ -83,7 +78,7 @@ def equal(x: fuzzyset, y: fuzzyset, info=False) -> bool:
         return False
     else:
         xr, yr = x.ravel(), y.ravel()
-        for i in range(x.len):
+        for i in range(x.size):
             if xr.set[i] != yr.set[i]:
                 if info:
                     print('There are unequal elements')
