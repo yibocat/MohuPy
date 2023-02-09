@@ -1,4 +1,4 @@
-# FuzzyKit(developing...)
+# FuzzPy(developing...)
 
 FuzzyKit is a fuzzy logic operation toolkit which includes the q-rung fuzzy sets,
 q-rung interval-valued fuzzy sets and q-rung hesitant fuzzy sets.
