@@ -6,7 +6,7 @@
 #  Software: FuzzPy
 import numpy as np
 
-from fuzzysets import fuzzyset
+from fuzzpy_py.fuzzysets import fuzzyset
 
 
 def fuzzys(x, copy=True):

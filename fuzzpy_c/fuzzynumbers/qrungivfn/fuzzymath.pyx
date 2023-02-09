@@ -1,5 +1,5 @@
 from .qrungivfn import qrungivfn
-from fuzzynumbers.archimedean import *
+from fuzzpy_c.fuzzynumbers.archimedean import *
 
 cpdef intersection(ivfn1: qrungivfn, ivfn2: qrungivfn):
     assert ivfn1.qrung == ivfn2.qrung, 'ERROR: The two QrungIVFNs are not the same qrungivfn!'

@@ -16,12 +16,6 @@ __all__ = ['qrunghfe', 'intersection', 'unions',
            'eins_multiply', 'eins_plus'
            ]
 
-from fuzzyelement.DHFElements import (qrunghfe, intersection, unions,
-                                      algeb_multiply, algeb_plus,
-                                      eins_multiply, eins_plus)
-from fuzzyelement.FNumbers import (qrungfn, intersection, unions,
-                                   algeb_multiply, algeb_plus,
-                                   eins_multiply, eins_plus)
-from fuzzyelement.IVFNumbers import (qrungivfn,
-                                     algeb_multiply, algeb_plus,
-                                     eins_multiply, eins_plus)
+from fuzzpy_py.fuzzyelement.IVFNumbers import (qrungivfn,
+                                               algeb_multiply, algeb_plus,
+                                               eins_multiply, eins_plus)

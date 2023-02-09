@@ -1,8 +1,5 @@
-import numpy as np
-cimport numpy as np
-
 from .qrungdhfe import qrungdhfe
-from fuzzynumbers.archimedean import *
+from fuzzpy_c.fuzzynumbers.archimedean import *
 
 cpdef intersection(dh1: qrungdhfe, dh2: qrungdhfe):
     assert dh1.qrung == dh2.qrung, 'ERROR! The two DHFEs are not the same DHFE !'

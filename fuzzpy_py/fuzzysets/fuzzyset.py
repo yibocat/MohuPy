@@ -9,7 +9,7 @@ import copy
 import numpy as np
 import pandas as pd
 
-from config import load_dict
+from fuzzpy_py.config import load_dict
 
 
 class fuzzyset(object):

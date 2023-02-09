@@ -42,7 +42,7 @@
 
 import pickle
 
-__dict_file = '../config/dictionary.pkl'
+__dict_file = '../fuzzpy_py/config/dictionary.pkl'
 
 
 def load_dict(info=True):
@@ -57,6 +57,6 @@ def load_dict(info=True):
 
 def save_dict(dd):
     print('Saving configuration file...')
-    with open(__dict_file, 'wb') as f:
+    with open('dictionary.pkl', 'wb') as f:
         pickle.dump(dd, f)
     print('Saved successfully!')

@@ -1,5 +1,5 @@
 from .qrungifn import qrungifn
-from fuzzynumbers.archimedean import *
+from fuzzpy_c.fuzzynumbers.archimedean import *
 
 cpdef intersection(fn1:qrungifn, fn2:qrungifn):
     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'

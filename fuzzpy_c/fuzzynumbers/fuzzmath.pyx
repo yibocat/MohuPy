@@ -1,5 +1,5 @@
 
-from config import load_dict
+from fuzzpy_py.config import load_dict
 d = load_dict(False)
 
 cpdef double generalized_distance(d1, d2, double l=1., double t=1., bint indeterminacy=True):

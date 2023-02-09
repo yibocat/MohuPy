@@ -1,6 +1,6 @@
 import copy
 
-from fuzzynumbers.archimedean cimport ( in_algebraic_tau,
+from FuzzPy_C.fuzzynumbers.archimedean cimport ( in_algebraic_tau,
                                         algebraic_tau,
                                         in_algebraic_s,
                                         algebraic_s,

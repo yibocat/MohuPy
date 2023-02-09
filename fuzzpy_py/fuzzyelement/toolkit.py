@@ -5,9 +5,9 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzPy
 
-from fuzzyelement.DHFElements import qrunghfe
-from fuzzyelement.FNumbers import qrungfn
-from fuzzyelement.IVFNumbers import qrungivfn
+from fuzzpy_py.fuzzyelement.DHFElements import qrunghfe
+from fuzzpy_py.fuzzyelement.FNumbers import qrungfn
+from fuzzpy_py.fuzzyelement.IVFNumbers import qrungivfn
 
 
 # ----------------------------------------------------------------

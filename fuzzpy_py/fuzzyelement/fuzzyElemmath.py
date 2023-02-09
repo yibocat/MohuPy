@@ -4,15 +4,8 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzPy
-import copy
 
-import numpy as np
-
-from .DHFElements import qrunghfe
-from .FNumbers import qrungfn
-from .IVFNumbers import qrungivfn
-
-from config import load_dict
+from fuzzpy_py.config import load_dict
 
 d = load_dict(False)
 

@@ -6,7 +6,7 @@
 #  Software: FuzzPy
 
 from matplotlib import pyplot as plt
-from fuzzyelement.IVFNumbers import qrungivfn
+from ..fuzzyelement.IVFNumbers import qrungivfn
 from .generateMF import *
 
 
