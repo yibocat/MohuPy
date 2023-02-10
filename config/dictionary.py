@@ -1,10 +1,3 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
-#  Python: 3.10.9
-#  Date: 2023/2/2 上午1:58
-#  Author: yibow
-#  Email: yibocat@yeah.net
-#  Software: FuzzPy
-
 """
     This file is a fuzzy set configuration information IO file, which stores
     the existing fuzzy set configuration information into the pkl file. The
@@ -57,6 +50,6 @@ def load_dict(info=True):
 
 def save_dict(dd):
     print('Saving configuration file...')
-    with open('dictionary.pkl', 'wb') as f:
+    with open(__dict_file, 'wb') as f:
         pickle.dump(dd, f)
     print('Saved successfully!')

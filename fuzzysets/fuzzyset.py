@@ -1,9 +1,3 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
-#  Python: 3.10.9
-#  Date: 2023/2/1 下午5:37
-#  Author: yibow
-#  Email: yibocat@yeah.net
-#  Software: FuzzPy
 import copy
 
 import numpy as np
@@ -27,9 +21,9 @@ class fuzzyset(object):
         delete fuzzy elements, random fuzzy sets, etc.
 
         Attributes:
-            qrung: the Q-rung of the element
-            set: the set of elements in the fuzzy set
-            __elements_num: the number of elements in the fuzzy set
+            __qrung: the Q-rung of the element
+            __set: the set of elements in the fuzzy set
+            __size: the number of elements in the fuzzy set
             __dict: dictionary of current fuzzy set types
             __shape: Shape of fuzzy data set
 
@@ -53,19 +47,19 @@ class fuzzyset(object):
             savecsv: Save the 2-dimension matrix of the fuzzy set to a CSV file
             loadcsv: Load the 2-dimension matrix of the fuzzy set from a CSV file
     """
-    qrung = None
-    set = np.array([])
-    __elements_num = 0
+    __qrung = None
+    __set = np.array([])
+    __size = 0
     __dict = None
     __shape = None
 
     def __init__(self, qrung, t):
         dictionary = load_dict(False)
-        assert t in dictionary, 'ERROR: fuzzy set type does not exist!'
-        self.set = np.array([])
-        self.qrung = qrung
+        assert t in dictionary, 'ERROR: fuzzy set type does not exist.'
+        self.__set = np.array([])
+        self.__qrung = qrung
         self.__dict = dictionary[t]
-        self.__elements_num = 0
+        self.__size = 0
         self.__shape = None
 
     def __repr__(self):
@@ -73,30 +67,37 @@ class fuzzyset(object):
                 'Collection information\n' \
                 '----------------------------------------\n' \
                 'fuzzy set type:            %s\n' % self.__dict['type'].__name__ + \
-                'Q-rung:                    %s\n' % self.qrung + \
+                'Q-rung:                    %s\n' % self.__qrung + \
                 'the set shape:             ' + str(self.__shape) + '\n' + \
-                'elements number:           %s\n' % self.__elements_num
+                'elements number:           %s\n' % self.__size
+
+    @property
+    def qrung(self):
+        return self.__qrung
+
+    @property
+    def set(self):
+        return self.__set
+
+    @property
+    def size(self):
+        return self.__size
 
     @property
     def dict(self):
         return self.__dict
 
     @property
-    def len(self):
-        return self.__elements_num
-
-    @property
-    def list(self):
-        return self.set.tolist()
-
-    @property
     def shape(self):
-        self.__shape = self.set.shape
         return self.__shape
 
     @property
-    def isEmpty(self):
-        return self.__elements_num == 0
+    def isempty(self):
+        return self.__size == 0
+
+    @property
+    def list(self):
+        return self.__set.tolist()
 
     @property
     def mat(self):
@@ -121,15 +122,15 @@ class fuzzyset(object):
         if len(self.__shape) == 1:
             for i in range(self.__shape[0]):
                 matrix.append(
-                    [[np.round(self.set[i].md, 4),
-                      np.round(self.set[i].nmd, 4)]])
+                    [[np.round(self.__set[i].md, 4),
+                      np.round(self.__set[i].nmd, 4)]])
         else:
             for i in range(self.__shape[0]):
                 a = []
                 for j in range(self.__shape[1]):
                     a.append(
-                        [np.round(self.set[i, j].md, 4),
-                         np.round(self.set[i, j].nmd, 4)])
+                        [np.round(self.__set[i, j].md, 4),
+                         np.round(self.__set[i, j].nmd, 4)])
                 matrix.append(a)
         return pd.DataFrame(matrix)
 
@@ -147,7 +148,7 @@ class fuzzyset(object):
         """
         shape = self.__shape
         self.ravel()
-        slist = np.asarray([self.set[i].score for i in range(len(self.set))])
+        slist = np.asarray([self.__set[i].score for i in range(len(self.__set))])
         self.reshape(shape)
         return slist.reshape(shape)
 
@@ -164,10 +165,10 @@ class fuzzyset(object):
                 x: the fuzzy element to be added
 
         """
-        assert x.qrung == self.qrung, 'ERROR: Q-rung for adding elements differs from set.'
+        assert x.qrung == self.__qrung, 'ERROR: Q-rung for adding elements differs from set.'
         assert x.__class__ == self.__dict['type'], 'ERROR: Cannot add different types of fuzzy elements!'
-        self.set = np.append(self.set, x)
-        self.__elements_num += 1
+        self.__set = np.append(self.__set, x)
+        self.__size += 1
 
     def remove(self, x):
         """
@@ -180,9 +181,9 @@ class fuzzyset(object):
             Parameters:
                 x: the element to be deleted
         """
-        assert x in self.set, 'ERROR: element is not in the set.'
-        self.set = np.delete(self.set, np.where(self.set == x))
-        self.__elements_num -= 1
+        assert x in self.__set, 'ERROR: element is not in the set.'
+        self.__set = np.delete(self.__set, np.where(self.__set == x))
+        self.__size -= 1
 
     def pop(self, i):
         """
@@ -190,10 +191,10 @@ class fuzzyset(object):
 
             Parameters
         """
-        self.set = np.delete(self.set, i)
-        self.__elements_num -= 1
+        self.__set = np.delete(self.__set, i)
+        self.__size -= 1
 
-    def elementFunc(self, func, *args):
+    def elementfunc(self, func, *args):
         """
             Apply a function to all elements of the fuzzy set.
 
@@ -207,7 +208,7 @@ class fuzzyset(object):
         """
         shape = self.__shape
         self.ravel()
-        slist = np.asarray([func(self.set[i], *args) for i in range(len(self.set))])
+        slist = np.asarray([func(self.__set[i], *args) for i in range(len(self.__set))])
         self.reshape(shape)
         return slist.reshape(shape)
 
@@ -233,20 +234,21 @@ class fuzzyset(object):
             Returns:
                 the fuzzy set
         """
-        self.__elements_num = 0
-        self.set = np.array([])
+        self.__size = 0
+        self.__set = np.array([])
         father = None
 
-        for base in self.__dict['type'].__bases__:
-            father = base.__name__
-        if father == 'DhFuzzy':
-            args = [self.qrung, num]
+        # for base in self.__dict['type'].__bases__:
+        #     father = base.__name__
+
+        if self.__dict['type'].__name__ == 'qrungdhfe':
+            args = [self.__qrung, num]
         else:
-            args = [self.qrung]
+            args = [self.__qrung]
         for i in range(n):
             self.append(self.__dict['random'](*args))
 
-        self.__shape = self.set.shape
+        self.__shape = self.__set.shape
         return self
 
     def rand(self, *n, num=5):
@@ -270,13 +272,13 @@ class fuzzyset(object):
 
         """
 
-        self.__elements_num = 0
-        # self.set = np.array([])
+        self.__size = 0
+        # self.__set = np.array([])
         shape = n
         self.random(np.prod(n), num)
         self.reshape(shape)
         self.__shape = shape
-        self.__elements_num = self.set.size
+        self.__size = self.__set.size
         return self
 
     def reshape(self, *x):
@@ -291,18 +293,18 @@ class fuzzyset(object):
             Returns:
                 the fuzzy set
         """
-        self.set = self.set.reshape(*x)
-        # self.__elements_num = self.set.size
-        self.__shape = self.set.shape
+        self.__set = self.__set.reshape(*x)
+        # self.__size = self.__set.size
+        self.__shape = self.__set.shape
         return self
 
     def ravel(self):
         """
             Reshapes the set to a 1-dimensional array.
         """
-        self.set = self.set.ravel()
-        # self.__elements_num = self.set.size
-        self.__shape = self.set.shape
+        self.__set = self.__set.ravel()
+        # self.__size = self.__set.size
+        self.__shape = self.__set.shape
         return self
 
     def poss(self, *n):
@@ -316,16 +318,16 @@ class fuzzyset(object):
                     3-dimensional or even multidimensional.
                      For example, *n = [3,3,5] is a 3*3*5 3-dimensional fuzzy set.
         """
-        assert self.__elements_num == 0, 'The fuzzy set is not empty. This set ' \
-                                         'already has data, please clear the data first.'
-        self.__elements_num = 0
-        self.set = np.array([])
+        assert self.__size == 0, 'The fuzzy set is not empty. This set ' \
+                                 'already has data, please clear the data first.'
+        self.__size = 0
+        self.__set = np.array([])
         shape = n
         for i in range(np.prod(n)):
-            self.append(self.__dict['pos'](self.qrung))
+            self.append(self.__dict['pos'](self.__qrung))
         self.reshape(shape)
         self.__shape = shape
-        self.__elements_num = self.set.size
+        self.__size = self.__set.size
         return self
 
     def negs(self, *n):
@@ -339,16 +341,16 @@ class fuzzyset(object):
                     3-dimensional or even multidimensional.
                      For example, *n = [3,3,5] is a 3*3*5 3-dimensional fuzzy set.
         """
-        assert self.__elements_num == 0, 'The fuzzy set is not empty. This set ' \
-                                         'already has data, please clear the data first.'
-        self.__elements_num = 0
-        self.set = np.array([])
+        assert self.__size == 0, 'The fuzzy set is not empty. This set ' \
+                                 'already has data, please clear the data first.'
+        self.__size = 0
+        self.__set = np.array([])
         shape = n
         for i in range(np.prod(n)):
-            self.append(self.__dict['neg'](self.qrung))
+            self.append(self.__dict['neg'](self.__qrung))
         self.reshape(shape)
         self.__shape = shape
-        self.__elements_num = self.set.size
+        self.__size = self.__set.size
         return self
 
     def zeros(self, *n):
@@ -361,16 +363,16 @@ class fuzzyset(object):
                     3-dimensional or even multidimensional.
                      For example, *n = [3,3,5] is a 3*3*5 3-dimensional fuzzy set.
         """
-        assert self.__elements_num == 0, 'The fuzzy set is not empty. This set ' \
-                                         'already has data, please clear the data first.'
-        self.__elements_num = 0
-        self.set = np.array([])
+        assert self.__size == 0, 'The fuzzy set is not empty. This set ' \
+                                 'already has data, please clear the data first.'
+        self.__size = 0
+        self.__set = np.array([])
         shape = n
         for i in range(np.prod(n)):
-            self.append(self.__dict['zero'](self.qrung))
+            self.append(self.__dict['zero'](self.__qrung))
         self.reshape(shape)
         self.__shape = shape
-        self.__elements_num = self.set.size
+        self.__size = self.__set.size
         return self
 
     def clear(self):
@@ -379,9 +381,9 @@ class fuzzyset(object):
             This method is not recommended to be used. Make sure the data is saved
             before using this method.
         """
-        self.__elements_num = 0
-        self.set = np.array([])
-        self.__shape = self.set.shape
+        self.__size = 0
+        self.__set = np.array([])
+        self.__shape = self.__set.shape
         return self
 
     def max(self, show=True):
@@ -397,7 +399,7 @@ class fuzzyset(object):
         x, y = divmod(np.argmax(score_mat), score_mat.shape[1])
         if show:
             print((x, y))
-        return self.set[x, y]
+        return self.__set[x, y]
 
     def fmax(self, func, *args, show=True):
         """
@@ -413,11 +415,11 @@ class fuzzyset(object):
             Returns:
                 the maximum element of the fuzzy set
         """
-        f_mat = self.elementFunc(func, *args)
+        f_mat = self.elementfunc(func, *args)
         x, y = divmod(np.argmax(f_mat), f_mat.shape[1])
         if show:
             print((x, y))
-        return self.set[x, y]
+        return self.__set[x, y]
 
     def min(self, show=True):
         """
@@ -432,7 +434,7 @@ class fuzzyset(object):
         x, y = divmod(np.argmin(score_mat), score_mat.shape[1])
         if show:
             print((x, y))
-        return self.set[x, y]
+        return self.__set[x, y]
 
     def fmin(self, func, *args, show=True):
         """
@@ -448,16 +450,16 @@ class fuzzyset(object):
             Returns:
                 the minimum element of the fuzzy set
         """
-        f_mat = self.elementFunc(func, *args)
+        f_mat = self.elementfunc(func, *args)
         x, y = divmod(np.argmin(f_mat), f_mat.shape[1])
         if show:
             print((x, y))
-        return self.set[x, y]
+        return self.__set[x, y]
 
     def sum(self, norm='algeb_plus'):
         newf = copy.deepcopy(self)
         newf = newf.ravel()
-        newE = self.__dict['neg'](self.qrung)
+        newE = self.__dict['neg'](self.__qrung)
         for e in newf.set:
             newE = self.__dict[norm](newE, e)
         del newf
@@ -480,8 +482,8 @@ class fuzzyset(object):
                     npz compressed file.
         """
         print("Saving...")
-        collection = self.set
-        qrung = self.qrung
+        collection = self.__set
+        qrung = self.__qrung
         shape = self.__shape
         np.savez_compressed(path, set=collection, qrung=qrung, shape=shape)
         print('Saved!')
@@ -502,14 +504,14 @@ class fuzzyset(object):
         file = path + '.npz'
 
         fuzzset = np.load(file, allow_pickle=True)
-        self.set = fuzzset['set']
-        self.qrung = fuzzset['qrung']
+        self.__set = fuzzset['set']
+        self.__qrung = fuzzset['qrung']
         self.__shape = fuzzset['shape']
-        self.__elements_num = self.set.size
+        self.__size = self.__set.size
         print('Loaded!')
         return self
 
-    def savecsv(self, path):
+    def savecsv(self, path, show=False):
         """
             Save the fuzzy set to a.csv file.
 
@@ -518,13 +520,24 @@ class fuzzyset(object):
 
             Parameters:
                 path: the path to save the fuzzy set
+                show: Print save information option
         """
-        print('Saving...')
-        mat = self.mat
-        mat.to_csv(path)
-        print('Saved!')
+        if show:
+            print('Saving...')
+        s = []
+        for i in range(self.__shape[0]):
+            u = []
+            for j in range(self.__shape[1]):
+                u.append(list(self.__set[i, j].convert()))
+            s.append(u)
+        s = pd.DataFrame(s)
+        s.to_csv(path)
+        if show:
+            print('Saved!')
+            print(s)
+        return s
 
-    def loadcsv(self, path):
+    def loadcsv(self, path, show=False):
         """
             Load the fuzzy set from a.csv file.
 
@@ -538,24 +551,27 @@ class fuzzyset(object):
             parameter
                 path: the path to load the fuzzy set.
         """
-        print('Loading...')
+        if show:
+            print('Loading...')
         m = pd.read_csv(path, index_col=0)
-        m = np.array(m)
-
+        m = np.asarray(m)
+        if show:
+            print(m)
         try:
-            self.__dict['convert_str'](m[0, 0], self.qrung)
+            self.__dict['convert_str'](m[0, 0], self.__qrung)
         except Exception as e:
             print(e, 'The fuzzy data format does not match the created fuzzy set element format')
 
         for i in range(len(m)):
             for j in range(len(m[i])):
-                m[i][j] = self.__dict['convert_str'](m[i, j], self.qrung)
+                m[i][j] = self.__dict['convert_str'](m[i, j], self.__qrung)
 
         matrix = np.asarray(m)
         self.__shape = matrix.shape
-        self.__elements_num = matrix.size
-        self.set = matrix
-        print('Loaded!')
+        self.__size = matrix.size
+        self.__set = matrix
+        if show:
+            print('Loaded!')
         return self
 
     def sort(self):

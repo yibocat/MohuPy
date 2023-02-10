@@ -1,70 +1,59 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
-#  Python: 3.10.9
-#  Date: 2023/2/2 下午4:34
-#  Author: yibow
-#  Email: yibocat@yeah.net
-#  Software: FuzzPy
-
-"""
-    Manually update the fuzzy set configuration file
-"""
 
 from dictionary import save_dict
-import fuzzyelement
-from fuzzyelement.__fuzzyElemmath import qhfeDistance, qfnDistance, qivfnDistance
-from fuzzyelement.IVFNumbers import (qrungivfn, randomIVFN, str_to_ivfn)
-from fuzzyelement.FNumbers import (qrungfn, randomFN, str_to_fn)
-from fuzzyelement.DHFElements import (qrunghfe, randomQHF, str_to_hfe)
-from generator import DHFEGenerator, FNGenerator, IVFNGenerator
+import fuzzynumbers.qrungdhfe
+import fuzzynumbers.qrungifn
+import fuzzynumbers.qrungivfn
+
+from fuzzynumbers.__fuzzmath import qdfe_d, qifn_d, qivfn_d
 
 d = {
-    'qrunghfe': {
-        'type': qrunghfe,
-        'random': randomQHF,
-        'generator': DHFEGenerator,
-        'convert_str': str_to_hfe,
-        'intersection': fuzzyelement.DHFElements.intersection,
-        'unions': fuzzyelement.DHFElements.unions,
-        'algeb_multiply': fuzzyelement.DHFElements.algeb_multiply,
-        'algeb_plus': fuzzyelement.DHFElements.algeb_plus,
-        'eins_multiply': fuzzyelement.DHFElements.eins_multiply,
-        'eins_plus': fuzzyelement.DHFElements.eins_plus,
-        'pos': fuzzyelement.DHFElements.pos,
-        'neg': fuzzyelement.DHFElements.neg,
-        'zero': fuzzyelement.DHFElements.zero,
-        'distance': qhfeDistance,
+    'qrungdhfe': {
+        'type': fuzzynumbers.qrungdhfe.qrungdhfe,
+        'random': fuzzynumbers.qrungdhfe.random,
+        'convert_str': fuzzynumbers.qrungdhfe.str_to_hfe,
+        'intersection': fuzzynumbers.qrungdhfe.intersection,
+        'unions': fuzzynumbers.qrungdhfe.unions,
+        'algeb_multiply': fuzzynumbers.qrungdhfe.algeb_multiply,
+        'algeb_plus': fuzzynumbers.qrungdhfe.algeb_plus,
+        'eins_multiply': fuzzynumbers.qrungdhfe.eins_multiply,
+        'eins_plus': fuzzynumbers.qrungdhfe.eins_plus,
+        'pos': fuzzynumbers.qrungdhfe.pos,
+        'neg': fuzzynumbers.qrungdhfe.neg,
+        'zero': fuzzynumbers.qrungdhfe.zero,
+        'distance': qdfe_d,
+        'generator': '',
     },
-    'qrungfn': {
-        'type': qrungfn,
-        'random': randomFN,
-        'generator': FNGenerator,
-        'convert_str': str_to_fn,
-        'intersection': fuzzyelement.FNumbers.intersection,
-        'unions': fuzzyelement.FNumbers.unions,
-        'algeb_multiply': fuzzyelement.FNumbers.algeb_multiply,
-        'algeb_plus': fuzzyelement.FNumbers.algeb_plus,
-        'eins_multiply': fuzzyelement.FNumbers.eins_multiply,
-        'eins_plus': fuzzyelement.FNumbers.eins_plus,
-        'pos': fuzzyelement.FNumbers.pos,
-        'neg': fuzzyelement.FNumbers.neg,
-        'zero': fuzzyelement.FNumbers.zero,
-        'distance': qfnDistance,
+    'qrungifn': {
+        'type': fuzzynumbers.qrungifn.qrungifn,
+        'random': fuzzynumbers.qrungifn.random,
+        'convert_str': fuzzynumbers.qrungifn.str_to_fn,
+        'intersection': fuzzynumbers.qrungifn.intersection,
+        'unions': fuzzynumbers.qrungifn.unions,
+        'algeb_multiply': fuzzynumbers.qrungifn.algeb_multiply,
+        'algeb_plus': fuzzynumbers.qrungifn.algeb_plus,
+        'eins_multiply': fuzzynumbers.qrungifn.eins_multiply,
+        'eins_plus': fuzzynumbers.qrungifn.eins_plus,
+        'pos': fuzzynumbers.qrungifn.pos,
+        'neg': fuzzynumbers.qrungifn.neg,
+        'zero': fuzzynumbers.qrungifn.zero,
+        'distance': qifn_d,
+        'generator': '',
     },
     'qrungivfn': {
-        'type': qrungivfn,
-        'random': randomIVFN,
-        'generator': IVFNGenerator,
-        'convert_str': str_to_ivfn,
-        'intersection': fuzzyelement.IVFNumbers.intersection,
-        'unions': fuzzyelement.IVFNumbers.unions,
-        'algeb_multiply': fuzzyelement.IVFNumbers.algeb_multiply,
-        'algeb_plus': fuzzyelement.IVFNumbers.algeb_plus,
-        'eins_multiply': fuzzyelement.IVFNumbers.eins_multiply,
-        'eins_plus': fuzzyelement.IVFNumbers.eins_plus,
-        'pos': fuzzyelement.IVFNumbers.pos,
-        'neg': fuzzyelement.IVFNumbers.neg,
-        'zero': fuzzyelement.IVFNumbers.zero,
-        'distance': qivfnDistance,
+        'type': fuzzynumbers.qrungivfn.qrungivfn,
+        'random': fuzzynumbers.qrungivfn.random,
+        'convert_str': fuzzynumbers.qrungivfn.str_to_ivfn,
+        'intersection': fuzzynumbers.qrungivfn.intersection,
+        'unions': fuzzynumbers.qrungivfn.unions,
+        'algeb_multiply': fuzzynumbers.qrungivfn.algeb_multiply,
+        'algeb_plus': fuzzynumbers.qrungivfn.algeb_plus,
+        'eins_multiply': fuzzynumbers.qrungivfn.eins_multiply,
+        'eins_plus': fuzzynumbers.qrungivfn.eins_plus,
+        'pos': fuzzynumbers.qrungivfn.pos,
+        'neg': fuzzynumbers.qrungivfn.neg,
+        'zero': fuzzynumbers.qrungivfn.zero,
+        'distance': qivfn_d,
+        'generator': '',
     }
 }
 
