@@ -35,13 +35,13 @@
 import pickle
 # from dictionary import save_dict
 
-from fuzzpy import fuzzynumbers
-import fuzzpy.fuzzynumbers.qrungdhfe
-import fuzzpy.fuzzynumbers.qrungifn
-import fuzzpy.fuzzynumbers.qrungivfn
+# from fuzzpy import fuzzynumbers
+import fuzzynumbers.qrungdhfe
+import fuzzynumbers.qrungifn
+import fuzzynumbers.qrungivfn
 
-from fuzzpy.fuzzynumbers.__fuzzmath import qdfe_d, qifn_d, qivfn_d
-from fuzzpy.generator import dhfegener, ifngener, ivfngener
+from fuzzynumbers.__fuzzmath import qdfe_d, qifn_d, qivfn_d
+from generator import dhfegener, ifngener, ivfngener
 
 d = {
     'qrungdhfe': {

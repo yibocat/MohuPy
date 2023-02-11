@@ -1,6 +1,6 @@
 import copy
 
-from fuzzpy.fuzzynumbers.archimedean cimport ( in_algebraic_tau,
+from ..archimedean cimport ( in_algebraic_tau,
                                         algebraic_tau,
                                         in_algebraic_s,
                                         algebraic_s,
@@ -33,11 +33,11 @@ cdef class qrungivfn(Fuzzynum):
 
         assert mds.size == 2 and nmds.size == 2, 'ERROR: The data format contains at least upper and lower bounds.'
         assert mds[0] <= mds[1] and nmds[0] <= nmds[1], \
-            'ERROR: The upper limit of membership degree is greater than the lower limit.'
+            'the upper limit of membership degree is less than the lower limit.'
         assert 0 <= mds[0] <= 1 and 0 <= mds[1] <= 1 and 0 <= nmds[0] <= 1 and 0 <= nmds[1] <= 1, \
-            'ERROR: The membership degree and non-membership degree must be in the interval 0-1.'
+            'the membership degree and non-membership degree must be in the interval 0-1.'
         assert 0 <= mds[0] ** qrung + nmds[0] ** qrung <= 1 and 0 <= mds[1] ** qrung + nmds[1] ** qrung <= 1, \
-            'ERROR: The sum of membership degree and non-membership degree must be in the interval 0-1.'
+            'the sum of membership degree and non-membership degree must be in the interval 0-1.'
 
         self.__md = mds
         self.__nmd = nmds

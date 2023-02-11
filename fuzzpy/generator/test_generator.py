@@ -5,7 +5,7 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzPy
 
-from fuzzpy.generator.generate import dhfegener
+from generator.generate import dhfegener
 
 fdict = ['sigmf', 'trimf', 'zmf', 'trapmf', 'smf', 'gaussmf', 'gauss2mf', 'gbellmf']
 params = [

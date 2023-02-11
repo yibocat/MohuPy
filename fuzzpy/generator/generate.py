@@ -6,9 +6,9 @@ from .function import (sigmf, trimf, zmf,
                        trapmf, smf, gaussmf,
                        gauss2mf, gbellmf)
 
-import fuzzpy.fuzzynumbers.qrungdhfe as hfe
-import fuzzpy.fuzzynumbers.qrungivfn as ivfn
-import fuzzpy.fuzzynumbers.qrungifn as ifn
+import fuzzynumbers.qrungdhfe as hfe
+import fuzzynumbers.qrungivfn as ivfn
+import fuzzynumbers.qrungifn as ifn
 
 
 fdict = {'sigmf': sigmf,
@@ -146,7 +146,7 @@ class fuzzgener(object):
                     Note: When changing this attribute, a warning will pop up to clear
                     the original membership function and parameters.
         """
-        from fuzzpy.config import load_dict
+        from config import load_dict
         d = load_dict('../dict.pkl', info=False).keys()
         assert qrung > 0, 'q-rung must be >= 1'
         assert fe in d, 'fuzzy element type does not exist.'
@@ -199,7 +199,7 @@ class fuzzgener(object):
 
     @fuzze.setter
     def fuzze(self, fuzze):
-        from fuzzpy.config import load_dict
+        from config import load_dict
         d = load_dict('../dict.pkl', info=False).keys()
         if self.__custom:
             assert callable(fuzze), 'Custom fuzzy element must be a function.'

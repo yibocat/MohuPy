@@ -1,6 +1,6 @@
 
-from fuzzpy.config import load_dict
-d = load_dict(False)
+from config import load_dict
+d = load_dict('../dict.pkl', info=False)
 
 cpdef double generalized_distance(d1, d2, double l=1., double t=1., bint indeterminacy=True):
     assert l > 0., 'ERROR: Generalized distance parameter error, parameter must be > 0.'

@@ -3,7 +3,7 @@ cimport numpy as np
 
 from .fuzzyset import fuzzyset
 from .__fsmath cimport __dot11, __dot12, __dot21,__dot22
-from fuzzpy.config import load_dict
+from config import load_dict
 
 cpdef dot(np.ndarray x, np.ndarray y, str norm='algeb'):
     """
@@ -201,15 +201,15 @@ def fuzz_func(func, f1: fuzzyset, f2: fuzzyset, *args):
     newf.reshape(f2.shape)
     return newf
 
-cpdef cartadd(np.ndarray f1, np.ndarray f2, str norm='algeb'):
+cpdef cartadd(np.ndarray x, np.ndarray y, str norm='algeb'):
     """
         Cartesian addition of two fuzzy sets.
 
         Parameters
         ----------
-            f1:  numpy.ndarray
+            x:  numpy.ndarray
                 The first fuzzy set.
-            f2:  numpy.ndarray
+            y:  numpy.ndarray
                 The second fuzzy set.
             norm: str
                 Arithmetic paradigm, defaults to algebraic operations.
@@ -223,7 +223,7 @@ cpdef cartadd(np.ndarray f1, np.ndarray f2, str norm='algeb'):
     """
     cdef dict d
     d = load_dict('../dict.pkl', info=False)
-    x, y = f1.ravel(), f2.ravel()
+    x, y = x.ravel(), y.ravel()
 
     assert x[0].__class__.__name__ in d and y[0].__class__.__name__ in d, 'ERROR: fuzzy set type does not exist!'
     assert x[0].__class__.__name__ == y[0].__class__.__name__, 'ERROR: the two fuzzy set are not the same set!'
@@ -241,15 +241,15 @@ cpdef cartadd(np.ndarray f1, np.ndarray f2, str norm='algeb'):
 
     return fuzz_add(a, b, norm)
 
-cpdef cartprod(np.ndarray f1, np.ndarray f2, str norm='algeb'):
+cpdef cartprod(np.ndarray x, np.ndarray y, str norm='algeb'):
     """
         Cartesian product of two fuzzy sets.
 
         Parameters
         ----------
-            f1:  numpy.ndarray
+            x:  numpy.ndarray
                 The first fuzzy set.
-            f2:  numpy.ndarray
+            y:  numpy.ndarray
                 The second fuzzy set.
             norm: str
                 Arithmetic paradigm, defaults to algebraic operations.
@@ -263,7 +263,7 @@ cpdef cartprod(np.ndarray f1, np.ndarray f2, str norm='algeb'):
     """
     cdef dict d
     d = load_dict('../dict.pkl', info=False)
-    x, y = f1.ravel(), f2.ravel()
+    x, y = x.ravel(), y.ravel()
 
     assert x[0].__class__.__name__ in d and y[0].__class__.__name__ in d, 'ERROR: fuzzy set type does not exist!'
     assert x[0].__class__.__name__ == y[0].__class__.__name__, 'ERROR: the two fuzzy set are not the same set!'

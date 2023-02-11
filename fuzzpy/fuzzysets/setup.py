@@ -7,13 +7,13 @@ import numpy
 include_dirs = [numpy.get_include()]
 
 ext = [
-    Extension("fuzzpy.fuzzysets.__fsmath",
-              ["fuzzpy/fuzzysets/__fsmath.pyx"],
+    Extension("fuzzysets.__fsmath",
+              ["fuzzysets/__fsmath.pyx"],
               include_dirs=include_dirs,
               define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
 
-    Extension("fuzzpy.fuzzysets.fsmath",
-              ["fuzzpy/fuzzysets/fsmath.pyx"],
+    Extension("fuzzysets.fsmath",
+              ["fuzzysets/fsmath.pyx"],
               include_dirs=include_dirs,
               define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
 ]

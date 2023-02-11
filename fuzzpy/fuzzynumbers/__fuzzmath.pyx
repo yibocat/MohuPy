@@ -113,8 +113,8 @@ cpdef double qdfe_d(d1: qrungdhfe, d2: qrungdhfe, double l, double t, bint indet
     assert d1.qrung == d2.qrung and not d1.isEmpty() and not d2.isEmpty(), \
         'ERROR! The two DHFEs are not the same DHFE or one of them is a empty DHFE!'
     cdef int q
-    cdef double d_1
-    cdef double d_2
+    d_1 = copy.deepcopy(d1)
+    d_2 = copy.deepcopy(d2)
 
     q = d1.qrung
     d_1, d_2 = normalization(d1, d2, t)

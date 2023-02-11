@@ -21,12 +21,12 @@ cdef class qrungifn(Fuzzynum):
         cdef np.ndarray nmds
         mds = np.asarray(md)
         nmds = np.asarray(nmd)
+
+        assert mds.size == 1 and nmds.size == 1, 'md and nmd must be a double number.'
+        assert 0. <= md <= 1. and 0. <= nmd <= 1., 'md and nmd must be between 0 and 1.'
+        assert 0. <= md ** qrung + nmd ** qrung <= 1., 'md ** qrung + nmd ** qrung must be between 0 and 1'
+
         self.__qrung = qrung
-        assert (( mds.size == 1 and nmds.size == 1)
-                and 0. <= mds.all() <= 1. and 0. <= nmds.all() <= 1.) \
-                and 0. <= mds.all() ** qrung + nmds.all() ** qrung <= 1., \
-                'ERROR: Both of MD and NMD and MD^q+NMD^q must have be in the interval 0-1 ' \
-                'and the number of MD or NMD must have be 1.'
         self.__md = mds
         self.__nmd = nmds
 
