@@ -1,5 +1,6 @@
+
 __all__ = []
 
-from .generator import dhfegener, ivfngener, ifngener
+from .generate import dhfegener, ivfngener, ifngener
 
-__all__.extend(["dhfegener", "ivfngener", "ifngener"])
+__all__.extend(['dhfegener', 'ifngener', 'ivfngener'])

@@ -4,15 +4,3 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: FuzzPy
-
-__all__ = ['qrunghfe', 'intersection', 'unions',
-           'algeb_multiply', 'algeb_plus',
-           'eins_multiply', 'eins_plus',
-           'qrungfn', 'intersection', 'unions',
-           'algeb_multiply', 'algeb_plus',
-           'eins_multiply', 'eins_plus',
-           'qrungivfn',
-           'algeb_multiply', 'algeb_plus',
-           'eins_multiply', 'eins_plus'
-           ]
-

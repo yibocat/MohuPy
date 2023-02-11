@@ -5,12 +5,12 @@ from .memfunc import memfunc
 from .function import (sigmf, trimf, zmf,
                        trapmf, smf, gaussmf,
                        gauss2mf, gbellmf)
-import config as cfg
+# from config.dictionary import load_dict
 import fuzzynumbers.qrungdhfe as hfe
 import fuzzynumbers.qrungivfn as ivfn
 import fuzzynumbers.qrungifn as ifn
 
-d = cfg.load_dict(False).keys()
+# d = load_dict(False).keys()
 
 fdict = {'sigmf': sigmf,
          'trimf': trimf,
@@ -22,7 +22,7 @@ fdict = {'sigmf': sigmf,
          'gbellmf': gbellmf}
 
 
-class generator(object):
+class fuzzgener(object):
     """
         This class is a fuzzy element generator base class, which contains
         the basic characteristics of the generator. First of all, various
@@ -147,6 +147,8 @@ class generator(object):
                     Note: When changing this attribute, a warning will pop up to clear
                     the original membership function and parameters.
         """
+        from config.dictionary import load_dict
+        d = load_dict(False).keys()
         assert qrung > 0, 'q-rung must be >= 1'
         assert fe in d, 'fuzzy element type does not exist.'
 
@@ -170,14 +172,15 @@ class generator(object):
         return info
 
     def __str__(self):
-        """
-            Print the fuzzy element generator information.
-            This function is often used for output printing.
-        """
-        info = 'Info:\n' + 'Q-rung: %d,\n' % self.__qrung + 'fuzzy element: %s\n' % self.__fuzze + \
-               '--------------------\n' + \
-               'Membership function:\n' + str(self.__mf) + '\n' + 'Non-Membership function:\n' + str(self.__nmf)
-        return info
+        # """
+        #     Print the fuzzy element generator information.
+        #     This function is often used for output printing.
+        # """
+        # info = 'Info:\n' + 'Q-rung: %d,\n' % self.__qrung + 'fuzzy element: %s\n' % self.__fuzze + \
+        #        '--------------------\n' + \
+        #        'Membership function:\n' + str(self.__mf) + '\n' + 'Non-Membership function:\n' + str(self.__nmf)
+        # return info
+        return 'Successfully generated!'
 
     # Through the decorator, the private properties of this class can be accessed and
     # modified by subclasses. In addition, some restrictions have been added when modifying.
@@ -280,6 +283,9 @@ class generator(object):
     def linspace(self, linspace):
         self.__linspace = linspace
 
+    def getinfo(self):
+        print(self.__repr__())
+
     def setvariable(self, start, end, linspace):
         """
             Set the variable range of the independent variable. This
@@ -312,13 +318,13 @@ class generator(object):
         nmf.plot('non-mem func', figsize)
 
 
-class dhfegener(generator):
+class dhfegener(fuzzgener):
     """
-        Q-rung dual hesitant fuzzy element generator. As a subclass of generator,
+        Q-rung dual hesitant fuzzy element fuzzgener. As a subclass of fuzzgener,
         this class inherits most of the properties of the parent class, and can
         access the private properties of the parent class through the decorator
         set by the parent class. By inputting qrung, type of fuzzy element,
-        membership function, parameters and user-defined settings, the generator
+        membership function, parameters and user-defined settings, the fuzzgener
         can finally calculate a Q-rung dual hesitant fuzzy element satisfying
         the condition.
 
@@ -346,7 +352,8 @@ class dhfegener(generator):
     __mfnum = -1
     __nmfnum = -1
 
-    def __init__(self, qrung, fe, func, params, custom=False):
+    def __init__(self, qrung, func, params, custom=False):
+        fe = 'qrungdhfe'
         super(dhfegener, self).__init__(qrung, fe, func, params, custom)
         self.__mfnum = len(params[0])
         self.__nmfnum = len(params[1])
@@ -384,13 +391,13 @@ class dhfegener(generator):
             raise ValueError('The fuzzy element is not valid.')
 
 
-class ivfngener(generator):
+class ivfngener(fuzzgener):
     """
-        Qrung interval intuitionistic fuzzy number generator. As a subclass of generator,
+        Qrung interval intuitionistic fuzzy number fuzzgener. As a subclass of fuzzgener,
         this class inherits most of the properties of the parent class, and can
         access the private properties of the parent class through the decorator
         set by the parent class. By inputting qrung, type of fuzzy element,
-        membership function, parameters and user-defined settings, the generator
+        membership function, parameters and user-defined settings, the fuzzgener
         can finally calculate a Q-rung interval intuitionistic fuzzy number
         satisfying the condition.
 
@@ -418,7 +425,8 @@ class ivfngener(generator):
     __mfnum = 2
     __nmfnum = 2
 
-    def __init__(self, qrung, fe, func, params, custom=False):
+    def __init__(self, qrung, func, params, custom=False):
+        fe = 'qrungivfn'
         super(ivfngener, self).__init__(qrung, fe, func, params, custom)
         assert self.__mfnum == len(params[0]), 'membership function parameter setting error. ' \
                                                'There can only be two set of parameters'
@@ -458,13 +466,13 @@ class ivfngener(generator):
             raise ValueError('The fuzzy element is not valid.')
 
 
-class ifngener(generator):
+class ifngener(fuzzgener):
     """
-        Qrung intuitionistic fuzzy number generator. As a subclass of generator,
+        Qrung intuitionistic fuzzy number fuzzgener. As a subclass of fuzzgener,
         this class inherits most of the properties of the parent class, and can
         access the private properties of the parent class through the decorator
         set by the parent class. By inputting qrung, type of fuzzy element,
-        membership function, parameters and user-defined settings, the generator
+        membership function, parameters and user-defined settings, the fuzzgener
         can finally calculate a Q-rung intuitionistic fuzzy number satisfying
         the condition.
 
@@ -492,7 +500,8 @@ class ifngener(generator):
     __mfnum = 1
     __nmfnum = 1
 
-    def __init__(self, qrung, fe, func, params, custom=False):
+    def __init__(self, qrung, func, params, custom=False):
+        fe = 'qrungifn'
         super(ifngener, self).__init__(qrung, fe, func, params, custom)
         assert self.__mfnum == len(params[0]), 'membership function parameter setting error. ' \
                                                'There can only be one set of parameters'

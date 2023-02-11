@@ -23,7 +23,7 @@ def lamda(sets):
 
         Parameters
         ----------
-            sets: numpy.ndarray
+            sets: ndarray or list
                 fuzzy density list: fuzzy measures for single elements
 
         Returns
@@ -52,9 +52,9 @@ def lambda_fuzzy_measure(fuzz_d, fuzz_measure, l):
 
         Parameters
         ----------
-            fuzz_d: numpy.ndarray or list
+            fuzz_d: ndarray or list
                 fuzzy density subset
-            fuzz_measure: numpy.ndarray or list
+            fuzz_measure: ndarray or list
                 fuzzy measure set
             l: float
                 lambda parameter, 5 digits of precision

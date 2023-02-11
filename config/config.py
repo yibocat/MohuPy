@@ -5,6 +5,7 @@ import fuzzynumbers.qrungifn
 import fuzzynumbers.qrungivfn
 
 from fuzzynumbers.__fuzzmath import qdfe_d, qifn_d, qivfn_d
+from generator import dhfegener, ifngener, ivfngener
 
 d = {
     'qrungdhfe': {
@@ -21,7 +22,7 @@ d = {
         'neg': fuzzynumbers.qrungdhfe.neg,
         'zero': fuzzynumbers.qrungdhfe.zero,
         'distance': qdfe_d,
-        'generator': '',
+        'fuzzgener': dhfegener,
     },
     'qrungifn': {
         'type': fuzzynumbers.qrungifn.qrungifn,
@@ -37,7 +38,7 @@ d = {
         'neg': fuzzynumbers.qrungifn.neg,
         'zero': fuzzynumbers.qrungifn.zero,
         'distance': qifn_d,
-        'generator': '',
+        'fuzzgener': ifngener,
     },
     'qrungivfn': {
         'type': fuzzynumbers.qrungivfn.qrungivfn,
@@ -53,7 +54,7 @@ d = {
         'neg': fuzzynumbers.qrungivfn.neg,
         'zero': fuzzynumbers.qrungivfn.zero,
         'distance': qivfn_d,
-        'generator': '',
+        'fuzzgener': ivfngener,
     }
 }
 
