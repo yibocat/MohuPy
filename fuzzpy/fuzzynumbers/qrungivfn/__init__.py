@@ -6,16 +6,15 @@ from .fuzzymath import (intersection, unions,
                         eins_multiply, eins_plus)
 from .toolkit import (random, str_to_ivfn, pos, neg, zero)
 
-__all__.extend(['qrungivfn',
-                'intersection',
-                'unions',
-                'algeb_multiply',
-                'algeb_plus',
-                'eins_multiply',
-                'eins_plus',
-                'random',
-                'str_to_ivfn',
-                'pos',
-                'neg',
-                'zero'])
-
+__all__ += ['qrungivfn',
+            'intersection',
+            'unions',
+            'algeb_multiply',
+            'algeb_plus',
+            'eins_multiply',
+            'eins_plus',
+            'random',
+            'str_to_ivfn',
+            'pos',
+            'neg',
+            'zero']

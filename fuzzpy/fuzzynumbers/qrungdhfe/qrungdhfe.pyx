@@ -34,12 +34,12 @@ cdef class qrungdhfe(Fuzzynum):
 
     def __repr__(self):
         if len(self.__md) > 50 or len(self.__nmd) > 50:
-            return 'QRungHFE(Q=%d)'%self.__qrung + \
+            return 'qrungdhfe(Q=%d)'%self.__qrung + \
                    '[%d,%d]:{' % (len(self.__md), len(self.__nmd)) + \
                 '\n md :' + str(np.round(self.__md, 4)[:50]) + \
                 ',\n nmd:' + str(np.round(self.__nmd, 4)[:50]) + ' }\n'
         else:
-            return 'QRungHFE(Q=%d)'%self.__qrung+ \
+            return 'qrungdhfe(Q=%d)'%self.__qrung+ \
                    '[%d,%d]:{' % (len(self.__md), len(self.__nmd)) + \
                 '\n md :' + str(np.round(self.__md, 4)) + \
                 ',\n nmd:' + str(np.round(self.__nmd, 4)) + ' }\n'

@@ -31,7 +31,7 @@ cdef class qrungifn(Fuzzynum):
         self.__nmd = nmds
 
     def __repr__(self):
-        return 'QRungFN(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(
+        return 'qrungifn(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(
             np.around(self.__md, 4)) + '\n' + '    nmd:' + str(
             np.around(self.__nmd, 4)) + ')'
 
