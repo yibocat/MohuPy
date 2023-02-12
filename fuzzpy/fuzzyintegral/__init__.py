@@ -5,7 +5,7 @@
 #  Email: yibocat@yeah.net
 #  Software: FuzzPy
 
-from .fuzzMeasure import (lambda_fuzzy_measure, lamda, discrete_choquet_integral)
+from .choquet import (lambda_fuzzy_measure, lamda, discrete_choquet_integral)
 
 __all__ = ['lamda',
            'discrete_choquet_integral',
