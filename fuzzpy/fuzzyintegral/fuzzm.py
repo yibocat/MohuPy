@@ -7,8 +7,9 @@ class fuzzm(object):
     __meas = None
     __lambda = 0.
 
-    def __init__(self, meas, fs, e=None, func=None, *args):
-        d = ['dirac', 'dual', 'add', 'symmetric', 'lambda']
+    def __init__(self, fs, meas='lambda', e=None, func=None, *args):
+        # d = ['dirac', 'dual', 'add', 'symmetric', 'lambda']
+        d = ['dirac', 'add', 'symmetric', 'lambda']
         assert meas in d, 'fuzzy measure does not exist.'
         self.__meas = meas
         self.__fs = np.asarray(fs)
@@ -52,9 +53,13 @@ class fuzzm(object):
         if self.__meas == 'lambda':
             return self.__lambda_fuzz_measure(sub)
 
+    @property
+    def len(self):
+        return self.__fs.size
+
     def getlambda(self):
         if self.__meas == 'lambda':
-            return self.__lambda
+            return np.float_(self.__lambda)
         else:
             return None
 
@@ -75,7 +80,7 @@ class fuzzm(object):
         """
         assert len(np.setdiff1d(self.e, self.__fs)) == 0, 'the element is not in the set'
         assert len(np.setdiff1d(sub, self.__fs)) == 0, 'the subset is not in the set'
-        return 1. if self.e in sub else 0.
+        return np.float_(1) if self.e in sub else np.float_(0)
 
     def __dual_fuzz_meas(self, sub):
         """
@@ -89,7 +94,7 @@ class fuzzm(object):
                 fuzzy measure: ndarray or float
         """
         assert len(np.setdiff1d(sub, self.__fs)) == 0, 'sub must be a subset of set.'
-        return 1 - np.setdiff1d(self.__fs, sub)
+        return np.float_(1 - np.setdiff1d(self.__fs, sub))
 
     def __add_fuzz_meas(self, sub):
         """
@@ -104,7 +109,7 @@ class fuzzm(object):
         """
         assert len(np.setdiff1d(sub, self.__fs)) == 0, 'sub must be a subset of set.'
         # assert np.sum(self.__fs) == 1, 'set must sum to 1.'
-        return np.sum(sub)
+        return np.float_(np.sum(sub))
 
     def __symmetric_fuzz_meas(self, sub):
         """
@@ -128,9 +133,9 @@ class fuzzm(object):
         assert len(np.setdiff1d(sub, self.__fs)) == 0, 'sub must be a subset of set.'
         ratio = np.array(sub).size / np.array(self.__fs).size
         if self.func is None:
-            return ratio
+            return np.float_(ratio)
         else:
-            return self.func(ratio, self.args)
+            return np.float_(self.func(ratio, self.args))
 
     def __lambda_fuzz_measure(self, sub):
         """
@@ -160,9 +165,34 @@ class fuzzm(object):
         f = np.asarray(sub)
         assert len(np.setdiff1d(f, self.__fs)) == 0, 'ERROR! The subset is not an element of the set.'
         if np.round(self.__lambda, 5) == 0:
-            return f.sum()
+            return np.float_(f.sum())
         else:
-            return (np.prod(1 + self.__lambda * f) - 1) / self.__lambda
+            return np.float_((np.prod(1 + self.__lambda * f) - 1) / self.__lambda)
+
+    def subsets(self):
+        ans = []
+        n = 1 << len(self.__fs)
+        for i in range(n):
+            res = np.array([])
+            num = i
+            idx = 0
+            while num:
+                if num & 1:
+                    res = np.append(res, self.__fs[idx])
+                num >>= 1
+                idx += 1
+            ans.append(res)
+        return np.asarray(ans, dtype=object)
+
+    def meas_table(self):
+        ss = self.subsets()
+        fmeas = np.array([])
+        for s in ss:
+            fmeas = np.append(fmeas, self.__call__(s))
+        t = np.stack((ss, fmeas), axis=1)
+        # t = dict(zip(ss, fmeas))
+
+        return t
 
 
 def lamda(sets):
