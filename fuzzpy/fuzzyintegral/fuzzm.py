@@ -1,11 +1,20 @@
 import numpy as np
 from scipy.optimize import fsolve
 
+from fuzzyintegral.math import lamda, subsets
+
 
 class fuzzm(object):
     __fs = None
     __meas = None
     __lambda = 0.
+    __dic = {
+            'dirac': 'Dirac measure',
+            'dual': 'dual fuzzy measure',
+            'add': 'additive fuzzy measure',
+            'symmetric': 'symmetric fuzzy measure',
+            'lambda': 'lambda fuzzy measure'
+        }
 
     def __init__(self, fs, meas='lambda', e=None, func=None, *args):
         # d = ['dirac', 'dual', 'add', 'symmetric', 'lambda']
@@ -30,15 +39,7 @@ class fuzzm(object):
             self.__lambda = fsolve(lamda(self.__fs), np.array(-1))
 
     def __repr__(self):
-        dic = {
-            'dirac': 'Dirac measure',
-            'dual': 'dual fuzzy measure',
-            'add': 'additive fuzzy measure',
-            'symmetric': 'symmetric fuzzy measure',
-            'lambda': 'lambda fuzzy measure'
-        }
-
-        return 'Fuzzy measure: %s.' % dic[self.__meas] + '\n' + \
+        return 'Fuzzy measure: %s.' % self.__dic[self.__meas] + '\n' + \
             'The set: ' + str(self.__fs)
 
     def __call__(self, sub):
@@ -170,6 +171,14 @@ class fuzzm(object):
             return np.float_((np.prod(1 + self.__lambda * f) - 1) / self.__lambda)
 
     def subsets(self):
+        """
+            Computes all subsets of a set
+
+            Returns
+            -------
+            subsets: list
+                all subsets of a collection
+        """
         ans = []
         n = 1 << len(self.__fs)
         for i in range(n):
@@ -185,42 +194,98 @@ class fuzzm(object):
         return np.asarray(ans, dtype=object)
 
     def meas_table(self):
+        """
+            Show all subsets and their fuzzy measure values
+            Returns
+            -------
+            t: ndarray
+                fuzzy measure table
+        """
         ss = self.subsets()
         fmeas = np.array([])
         for s in ss:
             fmeas = np.append(fmeas, self.__call__(s))
         t = np.stack((ss, fmeas), axis=1)
-        # t = dict(zip(ss, fmeas))
-
         return t
 
+    def mobius_table(self):
+        """
+            Fuzzy measure table of Möbius Representation
+            Returns
+            -------
+            t: ndarray
+                fuzzy measure table
+        """
+        ss = self.subsets()
+        fmeas = np.array([])
+        for s in ss:
+            fmeas = np.append(fmeas, self.mobius_transform(s))
+        t = np.stack((ss, fmeas), axis=1)
+        return t
 
-def lamda(sets):
-    """
-        The equation for computing the lambda fuzzy measure
-        parameter, which returns an anonymous function.
+    def mobius_transform(self, A):
+        """
+            Mobius transform of the fuzzy measure
 
-        The calculation of lambda needs to use optimize.fsolve
-        optimization calculation of the scipy library, because
-        the equation is a high-order nonlinear equation.
+            Parameters
+            ----------
+            A: ndarray or list
+                fuzzy measure set
+            f: fuzzm
+                fuzzy measure function
 
-        The initial value of lambda optimization calculation
-        is usually 1, as shown in the example below.
+            Returns
+            -------
+            A: ndarray or list
+                mobius transform of a fuzzy measure set
+        """
+        # meas = self.__init__()
+        trans = np.array([])
+        for B in subsets(A):
+            ceof = (-1) ** np.setdiff1d(A, B).size
+            trans = np.append(trans, ceof * self(B))
+        return np.sum(trans)
 
-        Parameters
-        ----------
-            sets: ndarray or list
-                fuzzy density list: fuzzy measures for single elements
+    def zeta_transform(self, A):
+        """
+            The Möbius transformation is invertible, and one recovers
+            μ by using its inverse, called Zeta transform.
 
-        Returns
-        -------
-            function: anonymous function
-                Equation of lambda fuzzy measure parameter
+            Note: the zeta_transform is equal to the fuzzy measure value.
+            In other words, zeta_transform(A) equals self.__call__(A),
+            where A is a subset of the fuzzy measure set.
 
-        Examples
-        --------
-            In [1]: x = np.array([0.4,0.25,0.37,0.2])
-            In [2]: scipy.optimize.fsolve(lamda(x), np.array(-1))
-            Out[2]: array(-0.4403)
-    """
-    return lambda lam: np.prod(1 + lam * sets) - lam - 1
+            Examples:
+            --------
+                In [1]: s = np.array([0.4,0.25,0.37,0.2])
+                In [2]: x = fuzzm(s)
+                In [3]: x.zeta_transform([0.4,0.25])==x([0.4,0.25])
+                Out[3]: True
+
+            Parameters
+            ----------
+            A: list or ndarray
+                subset of the set
+
+            Returns
+            -------
+            zeta: numpy.float_
+                Zeta transform of Möbius Representation
+        """
+        mm = np.array([])
+        for t in subsets(A):
+            mm = np.append(mm, self.mobius_transform(t))
+        return np.sum(mm)
+
+    def vector(self):
+        """
+            Returns the vector representation of the fuzzy measure
+            Returns
+            -------
+            v: numpy.float_
+                vector representation of the fuzzy measure
+        """
+        t = np.array([])
+        for x in self.subsets():
+            t = np.append(t, self.__call__(x))
+        return t

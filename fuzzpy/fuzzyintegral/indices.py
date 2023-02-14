@@ -1,5 +1,6 @@
 import numpy as np
 
+from .math import subsets
 from .fuzzm import fuzzm
 
 
@@ -68,7 +69,7 @@ def shapley_value(ss, m='lambda'):
     shapley = np.array([])
     for x in ss:
         ts = np.array([])
-        for sub in __subsets(np.setdiff1d(ss, x)):
+        for sub in subsets(np.setdiff1d(ss, x)):
             coef = np.math.factorial(n - sub.size - 1) * \
                    np.math.factorial(sub.size) / np.math.factorial(n)
             ts = np.append(ts, coef * derivative(x, sub, lam))
@@ -104,7 +105,7 @@ def banzhaf_value(ss, m='lambda'):
     banzhaf = np.array([])
     for x in ss:
         ts = np.array([])
-        for sub in __subsets(np.setdiff1d(ss, x)):
+        for sub in subsets(np.setdiff1d(ss, x)):
             ts = np.append(ts, derivative(x, sub, lam))
         banzhaf = np.append(banzhaf, coef * np.sum(ts))
     return banzhaf
@@ -139,37 +140,9 @@ def shannon_entropy(ss, m='lambda'):
     shannon = np.array([])
     for x in ss:
         ts = np.array([])
-        for sub in __subsets(np.setdiff1d(ss, x)):
+        for sub in subsets(np.setdiff1d(ss, x)):
             coef = np.math.factorial(n - sub.size - 1) * \
                    np.math.factorial(sub.size) / np.math.factorial(n)
             ts = np.append(ts, coef * h(derivative(x, sub, lam)))
         shannon = np.append(shannon, np.sum(ts))
     return np.sum(shannon)
-
-
-def __subsets(su):
-    """
-    Generate all subsets of a set.
-    Parameters
-    ----------
-    su: list or ndarray
-        set of the set
-
-    Returns
-    -------
-    subsets: ndarray
-        all subsets of a set
-    """
-    ans = []
-    m = 1 << len(su)
-    for i in range(m):
-        res = np.array([])
-        num = i
-        idx = 0
-        while num:
-            if num & 1:
-                res = np.append(res, su[idx])
-            num >>= 1
-            idx += 1
-        ans.append(res)
-    return np.asarray(ans, dtype=object)
