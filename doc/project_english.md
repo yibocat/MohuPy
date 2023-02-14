@@ -5,30 +5,30 @@ and special functions;
 3. Q-rung dual hesitant fuzzy elements: definition, operation and special functions;
 4. Fuzzy Sets: Definitions, operations and special Features;
 5. Membership function generator;
-6. Fuzzy integrals: only discrete Choquet integrals (numeric or single valued);
+6. Simple fuzzy measure, fuzzy integral and fuzzy measure representation;
 7. Configuration Tool: Fuzzy element dictionary configuration;
 8. Aggregation operator: general weighted average operator and general weighted 
 geometric operator for three fuzzy elements;
 
 ## Planning Function
-1. Indeterminacy of the three fuzzy elements;
-2. The similarity formula and correlation formula (generalized 
+1. [x] Indeterminacy of the three fuzzy elements;
+2. [ ] The similarity formula and correlation formula (generalized 
 distance and Hausdorff distance) of the three fuzzy elements;
-3. More functions of fuzzy sets (set sorting, set distance, similarity, correlation, 
+3. [ ] More functions of fuzzy sets (set sorting, set distance, similarity, correlation, 
 comparison, intersection and union)
-4. Custom fuzzy element program: need to write configuration tool code to construct 
+4. [ ] Custom fuzzy element program: need to write configuration tool code to construct 
 a custom configuration dictionary program;
-5. Change the underlying operation code of the fuzzy logic operation to be written 
+5. [x] Change the underlying operation code of the fuzzy logic operation to be written 
 in C or C++ language. Preliminary consideration of Cython;
-6. Fuzzy Integral Related Content (Discrete Fuzzy Measures)
-   1. Derivatives of Set Functions
-   2. Shapley Value;
-   3. Banzhaf Value;
-   4. Entropy;
-   5. Cardinality Index;
-   6. Representation of fuzzy measures;
-   7. Sugeno Integral;
-   8. Use fuzzy numbers to represent numerical values in fuzzy integrals;
+6. [x] Fuzzy Integral Related Content (Discrete Fuzzy Measures)
+   1. [x] Derivatives of Set Functions
+   2. [x] Shapley Value;
+   3. [x] Banzhaf Value;
+   4. [x] Entropy;
+   5. [ ] Cardinality Index;
+   6. [x] Representation of fuzzy measures;
+   7. [x] Sugeno Integral;
+   8. [ ] Use fuzzy numbers to represent numerical values in fuzzy integrals;
 
 ## Detailed description of the completed functions
 1. Q-rung intuitionistic fuzzy numbers
@@ -83,10 +83,13 @@ union, set element intersection;
    1. Fuzzy set functions `fuzzys` (similar to `numpy.array`);
    2. Transformation set function `asfuzzyset` (similar to `numpy.asarray`);
    3. Strict equality judgment, (weak equality) similar judgment;
-9. Fuzzy Integral
-   1. lambda-fuzzy measure;
-   2. lambda anonymous function;
-   3. Discrete Choquet integral;
+9. Fuzzy measure and fuzzy integral
+   1. Dirac measure(Boolean measure), additive Measures, Symmetric Fuzzy Measures,  
+lambda fuzzy measure
+   2. Derivatives of set functions, Shapley value, Banzhaf value, Entropy Index
+   3. Möbius Representations or Möbius transformation, Zeta transformation, 
+Vector representation
+   4. Discrete Choquet integral, Discrete Sugeno integral, The Shilkret Integral.
 10. Fuzzy Element Configuration Dictionary
     1. Configure dictionary;
     2. Configure dictionary save function, configure dictionary load function;
