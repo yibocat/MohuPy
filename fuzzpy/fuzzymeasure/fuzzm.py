@@ -1,13 +1,17 @@
 import numpy as np
 from scipy.optimize import fsolve
 
-from fuzzyintegral.math import lamda, subsets
+from fuzzymeasure.math import lamda, subsets
 
 
 class fuzzm(object):
     __fs = None
     __meas = None
     __lambda = 0.
+    __mobius = None
+    __vector = np.array([])
+    __table = None
+
     __dic = {
             'dirac': 'Dirac measure',
             'dual': 'dual fuzzy measure',
@@ -59,10 +63,8 @@ class fuzzm(object):
         return self.__fs.size
 
     def getlambda(self):
-        if self.__meas == 'lambda':
-            return np.float_(self.__lambda)
-        else:
-            return None
+        assert self.__meas == 'lambda', 'the fuzzy measure must be lambda fuzzy measure.'
+        return np.float_(self.__lambda)
 
     def __Dirac_measure(self, sub):
         """
@@ -198,30 +200,30 @@ class fuzzm(object):
             Show all subsets and their fuzzy measure values
             Returns
             -------
-            t: ndarray
+            self.__table: ndarray
                 fuzzy measure table
         """
         ss = self.subsets()
         fmeas = np.array([])
         for s in ss:
             fmeas = np.append(fmeas, self.__call__(s))
-        t = np.stack((ss, fmeas), axis=1)
-        return t
+        self.__table = np.stack((ss, fmeas), axis=1)
+        return self.__table
 
     def mobius_table(self):
         """
             Fuzzy measure table of Möbius Representation
             Returns
             -------
-            t: ndarray
-                fuzzy measure table
+            self.__mobius: ndarray
+                fuzzy measure table of Möbius Representation
         """
         ss = self.subsets()
         fmeas = np.array([])
         for s in ss:
             fmeas = np.append(fmeas, self.mobius_transform(s))
-        t = np.stack((ss, fmeas), axis=1)
-        return t
+        self.__mobius = np.stack((ss, fmeas), axis=1)
+        return self.__mobius
 
     def mobius_transform(self, A):
         """
@@ -231,8 +233,6 @@ class fuzzm(object):
             ----------
             A: ndarray or list
                 fuzzy measure set
-            f: fuzzm
-                fuzzy measure function
 
             Returns
             -------
@@ -285,7 +285,6 @@ class fuzzm(object):
             v: numpy.float_
                 vector representation of the fuzzy measure
         """
-        t = np.array([])
         for x in self.subsets():
-            t = np.append(t, self.__call__(x))
-        return t
+            self.__vector = np.append(self.__vector, self.__call__(x))
+        return self.__vector
