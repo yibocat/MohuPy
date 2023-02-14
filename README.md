@@ -1,23 +1,37 @@
 # FuzzPy(developing...)
 
-FuzzyKit is a fuzzy logic operation toolkit which includes the q-rung fuzzy sets,
-q-rung interval-valued fuzzy sets and q-rung hesitant fuzzy sets.
-The toolkit also includes the membership and non-membership degrees function
-generator and element generator that can generate the fuzzy numbers, interval-valued 
-fuzzy numbers and hesitant fuzzy elements. The membership degrees function generator 
-of the toolkit already has eight built-in membership degree function. Moreover, users 
-can use custom membership functions to construct membership function generators.
+FuzzPy is a fuzzy logic and fuzzy mathematics toolkit which includes the q-rung intuitionistic 
 
-Four python packages are required:
+fuzzy sets, q-rung interval-valued intuitionistic fuzzy sets and q-rung dual hesitant fuzzy sets.
+
+
+The tool mainly includes: the basic definition of fuzzy elements (fuzzy numbers) and some 
+
+operation rules, the definition of fuzzy sets and some operation rules, generation of membership 
+
+functions, generation of fuzzy elements, simple fuzzy measure including measure expression 
+
+and fuzzy integral, etc., and finally A general aggregation operator of three kinds fuzzy elements.
+
+
+
+## Document
+
+coming soon...
+
+## Requirements
+
 1. numpy
 2. scipy
 3. matplotlib
 4. pandas
 
 ## Contact
+
 email: yibocat@yeah.net
 
 ## Functional description
+
 [Chinese](doc/project_chinese.md)
 
 [English](doc/project_english.md)
