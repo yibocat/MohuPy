@@ -1,9 +1,9 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
+#  Copyright (C) yibocat 2023 all Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/2/1 下午5:37
+#  Date: 2023/2/17 下午4:43
 #  Author: yibow
-#  Email: yibocat@yeah.net
-#  Software: FuzzPy
+#  E-mail: yibocat@yeah.net
+#  Software: fuzzpy
 
 
 # import re
