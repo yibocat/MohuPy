@@ -6,7 +6,7 @@ from .fsmath import (dot, fuzz_add, fuzz_multiply,
                      cartadd, cartprod)
 
 from .fs import (fuzzys, asfuzzyset, equal,
-                 similar)
+                 similar, rand_set)
 
 __all__ += ['fuzzyset',
             'dot',
@@ -20,4 +20,5 @@ __all__ += ['fuzzyset',
             'asfuzzyset',
             'equal',
             'similar',
-            'fuzzys']
+            'fuzzys',
+            'rand_set']

@@ -10,6 +10,7 @@ import fuzzynumbers.qrungdhfe as hfe
 import fuzzynumbers.qrungivfn as ivfn
 import fuzzynumbers.qrungifn as ifn
 
+import fuzzynumbers as fns
 
 fdict = {'sigmf': sigmf,
          'trimf': trimf,
@@ -146,8 +147,7 @@ class fuzzgener(object):
                     Note: When changing this attribute, a warning will pop up to clear
                     the original membership function and parameters.
         """
-        from config import load_dict
-        d = load_dict('../dict.pkl', info=False).keys()
+        d = fns.get_dict.keys()
         assert qrung > 0, 'q-rung must be >= 1'
         assert fe in d, 'fuzzy element type does not exist.'
 
@@ -199,8 +199,7 @@ class fuzzgener(object):
 
     @fuzze.setter
     def fuzze(self, fuzze):
-        from config import load_dict
-        d = load_dict('../dict.pkl', info=False).keys()
+        d = fns.get_dict.keys()
         if self.__custom:
             assert callable(fuzze), 'Custom fuzzy element must be a function.'
         else:
@@ -381,7 +380,7 @@ class dhfegener(fuzzgener):
             'The independent variable y is not in the range of %d and %d' % (
                 self.variable_start, self.variable_end)
 
-        dhfe = hfe.zero(self.qrung)
+        dhfe = fns.zero('qrungdhfe', self.qrung)
         md = self.mf(x)
         nmd = self.nmf(y)
         dhfe.set_md(md)
@@ -456,7 +455,7 @@ class ivfngener(fuzzgener):
             'The independent variable y is not in the range of %d and %d' % (
                 self.variable_start, self.variable_end)
 
-        ivf = ivfn.zero(self.qrung)
+        ivf = fns.zero('qrungivfn', self.qrung)
         md = np.sort(self.mf(x))
         nmd = np.sort(self.nmf(y))
         ivf.set_md(md)
@@ -531,7 +530,7 @@ class ifngener(fuzzgener):
             'The independent variable y is not in the range of %d and %d' % (
                 self.variable_start, self.variable_end)
 
-        fn = ifn.zero(self.qrung)
+        fn = fns.zero('qrungifn', self.qrung)
         md = np.sort(self.mf(x))
         nmd = np.sort(self.nmf(y))
         fn.set_md(md)

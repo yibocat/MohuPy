@@ -3,7 +3,8 @@ cimport numpy as np
 
 from .fuzzyset import fuzzyset
 from .__fsmath cimport __dot11, __dot12, __dot21,__dot22
-from config import load_dict
+# from config import load_dict
+import fuzzynumbers as fns
 
 cpdef dot(np.ndarray x, np.ndarray y, str norm='algeb'):
     """
@@ -222,7 +223,7 @@ cpdef cartadd(np.ndarray x, np.ndarray y, str norm='algeb'):
         -----
     """
     cdef dict d
-    d = load_dict('../dict.pkl', info=False)
+    d = fns.get_dict
     x, y = x.ravel(), y.ravel()
 
     assert x[0].__class__.__name__ in d and y[0].__class__.__name__ in d, 'ERROR: fuzzy set type does not exist!'
@@ -262,7 +263,7 @@ cpdef cartprod(np.ndarray x, np.ndarray y, str norm='algeb'):
         -----
     """
     cdef dict d
-    d = load_dict('../dict.pkl', info=False)
+    d = fns.get_dict
     x, y = x.ravel(), y.ravel()
 
     assert x[0].__class__.__name__ in d and y[0].__class__.__name__ in d, 'ERROR: fuzzy set type does not exist!'

@@ -1,6 +1,7 @@
 import numpy as np
 
 from .fuzzyset import fuzzyset
+import fuzzynumbers as fns
 
 
 def fuzzys(x, copy=True):
@@ -148,3 +149,60 @@ def composition_matrix():
     """
 
     pass
+
+
+def rand_set(qrung, t, *n, num=5):
+    """
+        Generate a random fuzzy set.
+
+        Parameters
+        ----------
+            qrung:  int
+                The q-rung of the fuzzy set.
+            t:  str
+                The type of the fuzzy set.
+            n:  int list
+                The size of the fuzzy set.
+            num:  int
+                The number of membership and non-membership degree
+                in dual hesitant fuzzy element.
+        Returns
+        -------
+            fuzzyset
+                A random fuzzy set.
+    """
+    assert qrung > 0, 'q-rung must be greater than 0.'
+    d = fns.get_dict
+    assert t in d, 'The type of the fuzzy set does not exist.'
+
+    r = fuzzyset(qrung, t)
+    return r.rand(*n, num=num)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

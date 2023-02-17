@@ -2,10 +2,10 @@ import fuzzynumbers.config
 import fuzzynumbers.fuzz_global as glb
 
 __all__ = []
-
 get_dict = glb.global_dict()
 get_variable = glb.global_get
-__all__ += ['get_dict', 'get_variable']
+set_variable = glb.global_set
+__all__ += ['get_dict', 'get_variable', 'set_variable']
 
 qrungdhfe = glb.global_get('qrungdhfe')['type']
 qrungifn = glb.global_get('qrungifn')['type']

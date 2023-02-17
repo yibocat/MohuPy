@@ -3,7 +3,7 @@ import copy
 import numpy as np
 import pandas as pd
 
-from config import load_dict
+import fuzzynumbers as fns
 
 
 class fuzzyset(object):
@@ -54,7 +54,7 @@ class fuzzyset(object):
     __shape = None
 
     def __init__(self, qrung, t):
-        dictionary = load_dict('../dict.pkl', info=False)
+        dictionary = fns.get_dict
         assert t in dictionary, 'ERROR: fuzzy set type does not exist.'
         self.__set = np.array([])
         self.__qrung = qrung
@@ -63,6 +63,15 @@ class fuzzyset(object):
         self.__shape = None
 
     def __repr__(self):
+        return \
+                'Collection information\n' \
+                '----------------------------------------\n' \
+                'fuzzy set type:            %s\n' % self.__dict['type'].__name__ + \
+                'Q-rung:                    %s\n' % self.__qrung + \
+                'the set shape:             ' + str(self.__shape) + '\n' + \
+                'elements number:           %s\n' % self.__size
+
+    def __str__(self):
         return \
                 'Collection information\n' \
                 '----------------------------------------\n' \
@@ -236,7 +245,6 @@ class fuzzyset(object):
         """
         self.__size = 0
         self.__set = np.array([])
-        father = None
 
         # for base in self.__dict['type'].__bases__:
         #     father = base.__name__

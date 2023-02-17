@@ -2,9 +2,8 @@ import numpy as np
 cimport numpy as np
 
 from .fuzzyset import fuzzyset
-from config import load_dict
-
-d = load_dict('../dict.pkl', info=False)
+import fuzzynumbers as fns
+d = fns.get_dict
 
 cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):
     assert x[0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
