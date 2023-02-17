@@ -26,6 +26,6 @@ email: yibocat@yeah.net
 
 ## Functional description
 
-[Chinese](doc/project_chinese.md)
+[Chinese](docs/project_chinese.md)
 
-[English](doc/project_english.md)
+[English](docs/project_english.md)
