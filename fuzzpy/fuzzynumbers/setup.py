@@ -35,8 +35,8 @@ ext = [
               ["fuzzynumbers/__fuzzmath.pyx"],
               include_dirs=include_dirs,
               define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
-    Extension('fuzzynumbers.fuzzmath',
-              ['fuzzynumbers/fuzzmath.pyx']),
+    # Extension('fuzzynumbers.fuzzmath',
+    #           ['fuzzynumbers/fuzzmath.pyx']),
 
     Extension("fuzzynumbers.Fuzzynum",
               ["fuzzynumbers/Fuzzynum.pyx"]),
