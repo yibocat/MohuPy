@@ -1,12 +1,12 @@
 #  Copyright (c) yibocat 2023 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/2/20 下午10:06
+#  Date: 2023/2/21 上午4:11
 #  Author: yibow
 #  Email: yibocat@yeah.net
-#  Software: FuzzPy
+#  Software: Mohusets
 
 from setuptools import Extension, setup, find_packages
-
+from mohusets.configuration import *
 import numpy
 
 include_dirs = [numpy.get_include()]
@@ -14,51 +14,51 @@ include_dirs = [numpy.get_include()]
 USE_CYTHON = ...  # command line option, try-import, ...
 
 ext = '.pyx' if USE_CYTHON else '.c'
-ext1 = Extension("fuzzpy.fuzzysets.__fsmath",
-                 ["fuzzpy/fuzzysets/__fsmath.pyx"],
+ext1 = Extension("mohusets.fuzzysets.__fsmath",
+                 ["./mohusets/fuzzysets/__fsmath" + ext],
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 
-ext2 = Extension("fuzzpy.fuzzysets.fsmath",
-                 ["fuzzpy/fuzzysets/fsmath.pyx"],
+ext2 = Extension("mohusets.fuzzysets.fsmath",
+                 ["./mohusets/fuzzysets/fsmath" + ext],
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 
-ext3 = Extension("fuzzpy.fuzzynumbers.qrungifn.qrungifn",
-                 ["fuzzpy/fuzzynumbers/qrungifn/qrungifn.pyx"],
+ext3 = Extension("mohusets.fuzzynumbers.qrungifn.qrungifn",
+                 ["./mohusets/fuzzynumbers/qrungifn/qrungifn" + ext],
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
-ext4 = Extension("fuzzpy.fuzzynumbers.qrungifn.fuzzymath",
-                 ["fuzzpy/fuzzynumbers/qrungifn/fuzzymath.pyx"])
+ext4 = Extension("mohusets.fuzzynumbers.qrungifn.fuzzymath",
+                 ["./mohusets/fuzzynumbers/qrungifn/fuzzymath" + ext])
 
-ext5 = Extension("fuzzpy.fuzzynumbers.qrungivfn.qrungivfn",
-                 ["fuzzpy/fuzzynumbers/qrungivfn/qrungivfn.pyx"],
-                 include_dirs=include_dirs,
-                 define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
-
-ext6 = Extension("fuzzpy.fuzzynumbers.qrungivfn.fuzzymath",
-                 ["fuzzpy/fuzzynumbers/qrungivfn/fuzzymath.pyx"])
-
-ext7 = Extension("fuzzpy.fuzzynumbers.qrungdhfe.qrungdhfe",
-                 ["fuzzpy/fuzzynumbers/qrungdhfe/qrungdhfe.pyx"],
+ext5 = Extension("mohusets.fuzzynumbers.qrungivfn.qrungivfn",
+                 ["./mohusets/fuzzynumbers/qrungivfn/qrungivfn" + ext],
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 
-ext8 = Extension("fuzzpy.fuzzynumbers.qrungdhfe.fuzzymath",
-                 ["fuzzpy/fuzzynumbers/qrungdhfe/fuzzymath.pyx"],
+ext6 = Extension("mohusets.fuzzynumbers.qrungivfn.fuzzymath",
+                 ["./mohusets/fuzzynumbers/qrungivfn/fuzzymath" + ext])
+
+ext7 = Extension("mohusets.fuzzynumbers.qrungdhfe.qrungdhfe",
+                 ["./mohusets/fuzzynumbers/qrungdhfe/qrungdhfe" + ext],
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 
-ext9 = Extension("fuzzpy.fuzzynumbers.__fuzzmath",
-                 ["fuzzpy/fuzzynumbers/__fuzzmath.pyx"],
+ext8 = Extension("mohusets.fuzzynumbers.qrungdhfe.fuzzymath",
+                 ["./mohusets/fuzzynumbers/qrungdhfe/fuzzymath" + ext],
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 
-ext10 = Extension("fuzzpy.fuzzynumbers.Fuzzynum",
-                  ["fuzzpy/fuzzynumbers/Fuzzynum.pyx"])
+ext9 = Extension("mohusets.fuzzynumbers.__fuzzmath",
+                 ["./mohusets/fuzzynumbers/__fuzzmath" + ext],
+                 include_dirs=include_dirs,
+                 define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 
-ext11 = Extension("fuzzpy.fuzzynumbers.archimedean",
-                  ["fuzzpy/fuzzynumbers/archimedean.pyx"],
+ext10 = Extension("mohusets.fuzzynumbers.Fuzzynum",
+                  ["./mohusets/fuzzynumbers/Fuzzynum" + ext])
+
+ext11 = Extension("mohusets.fuzzynumbers.archimedean",
+                  ["./mohusets/fuzzynumbers/archimedean" + ext],
                   include_dirs=include_dirs,
                   define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 
@@ -69,10 +69,29 @@ if USE_CYTHON:
 
     extensions = cythonize(extensions, language_level=3)
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
-    name="sci-fuzzpy",
-    version="0.0.1",
+    name=about['name'],
     ext_modules=cythonize(extensions, language_level=3),
-    packages=find_packages(),
     zip_safe=False,
+    packages=find_packages(),
+    description=about['description'],
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    version=about['version'],
+    author=about['author'],
+    author_email=about['email'],
+    url=about['url'],
+    license=about['license'],
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "License :: OSI Approved :: MIT License",
+    ],
+    install_requires=install_requires,
 )

@@ -1,6 +1,6 @@
-# FuzzPy(developing...)
+# Mohusets(developing...)
 
-FuzzPy is a fuzzy logic and fuzzy mathematics toolkit which includes the q-rung intuitionistic 
+Mohusets is a fuzzy logic and fuzzy mathematics toolkit which includes the q-rung intuitionistic 
 fuzzy sets, q-rung interval-valued intuitionistic fuzzy sets and q-rung dual hesitant fuzzy sets.
 The tool mainly includes: the basic definition of fuzzy elements (fuzzy numbers) and some 
 operation rules, the definition of fuzzy sets and some operation rules, generation of membership 
