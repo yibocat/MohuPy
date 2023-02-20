@@ -5,8 +5,8 @@
 #  E-mail: yibocat@yeah.net
 #  Software: fuzzpy
 
+from .toolkit import (plot_stats, ks_test_norm, random_split,)
+
 __all__ = ['plot_stats',
            'ks_test_norm',
            'random_split']
-
-from .toolkit import (plot_stats, ks_test_norm, random_split,)

@@ -13,11 +13,11 @@ from .function import (sigmf, trimf, zmf,
                        trapmf, smf, gaussmf,
                        gauss2mf, gbellmf)
 
-import fuzzynumbers.qrungdhfe as hfe
-import fuzzynumbers.qrungivfn as ivfn
-import fuzzynumbers.qrungifn as ifn
+# import fuzzpy.fuzzynumbers.qrungdhfe as hfe
+# import fuzzpy.fuzzynumbers.qrungivfn as ivfn
+# import fuzzpy.fuzzynumbers.qrungifn as ifn
 
-import fuzzynumbers as fns
+import fuzzpy.fuzzynumbers as fns
 
 fdict = {'sigmf': sigmf,
          'trimf': trimf,

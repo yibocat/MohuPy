@@ -5,19 +5,19 @@
 #  E-mail: yibocat@yeah.net
 #  Software: fuzzpy
 
-import fuzzynumbers.fuzz_global as glb
+import fuzzpy.fuzzynumbers.fuzz_global as glb
 
 glb._init()
 
-import fuzzynumbers.qrungdhfe as hfe
-import fuzzynumbers.qrungifn as ifn
-import fuzzynumbers.qrungivfn as ivfn
+import fuzzpy.fuzzynumbers.qrungdhfe as hfe
+import fuzzpy.fuzzynumbers.qrungifn as ifn
+import fuzzpy.fuzzynumbers.qrungivfn as ivfn
 
 dict_dhfe = {'type': hfe.qrungdhfe}
 dict_ifn = {'type': ifn.qrungifn}
 dict_ivfn = {'type': ivfn.qrungivfn}
 
-from fuzzynumbers.__fuzzmath import qdfe_d, qifn_d, qivfn_d
+from fuzzpy.fuzzynumbers.__fuzzmath import qdfe_d, qifn_d, qivfn_d
 
 dict_dhfe['random'] = hfe.random
 dict_ifn['random'] = ifn.random

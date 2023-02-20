@@ -5,8 +5,8 @@
 #  E-mail: yibocat@yeah.net
 #  Software: fuzzpy
 
-import fuzzynumbers.config
-import fuzzynumbers.fuzz_global as glb
+import fuzzpy.fuzzynumbers.config
+import fuzzpy.fuzzynumbers.fuzz_global as glb
 
 __all__ = []
 get_dict = glb.global_dict()

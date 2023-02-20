@@ -8,7 +8,7 @@
 import numpy as np
 
 from .fuzzyset import fuzzyset
-import fuzzynumbers as fns
+import fuzzpy.fuzzynumbers as fns
 
 
 def fuzzys(x, copy=True):

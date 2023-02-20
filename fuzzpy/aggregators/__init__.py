@@ -5,3 +5,8 @@
 #  E-mail: yibocat@yeah.net
 #  Software: fuzzpy
 
+__all__ = []
+
+from .aggregatfunc import weighted_ave, weighted_geom
+
+__all__ += ['weighted_ave', 'weighted_geom']

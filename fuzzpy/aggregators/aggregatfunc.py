@@ -7,7 +7,7 @@
 
 import numpy as np
 
-from fuzzysets.fuzzyset import fuzzyset
+from fuzzpy.fuzzysets.fuzzyset import fuzzyset
 
 
 def weighted_ave(f: fuzzyset, weights, mode='algeb'):

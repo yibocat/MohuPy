@@ -6,7 +6,7 @@
 #  Software: fuzzpy
 
 import numpy as np
-from fuzzymeasure.fuzzm import fuzzm
+from .fuzzm import fuzzm
 
 
 def discrete_choquet_integral(sett, measurable_func=None):

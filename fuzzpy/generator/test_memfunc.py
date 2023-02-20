@@ -4,7 +4,7 @@
 #  Author: yibow
 #  E-mail: yibocat@yeah.net
 #  Software: fuzzpy
-from generator.memfunc import memfunc
+from fuzzpy.generator.memfunc import memfunc
 
 fdict = ['sigmf', 'trimf', 'zmf', 'trapmf', 'smf', 'gaussmf', 'gauss2mf', 'gbellmf']
 params = [

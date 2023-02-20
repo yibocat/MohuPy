@@ -11,7 +11,7 @@ cimport numpy as np
 from .fuzzyset import fuzzyset
 from .__fsmath cimport __dot11, __dot12, __dot21,__dot22
 # from config import load_dict
-import fuzzynumbers as fns
+import fuzzpy.fuzzynumbers as fns
 
 cpdef dot(np.ndarray x, np.ndarray y, str norm='algeb'):
     """

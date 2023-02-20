@@ -9,7 +9,7 @@ import numpy as np
 cimport numpy as np
 
 from .fuzzyset import fuzzyset
-import fuzzynumbers as fns
+import fuzzpy.fuzzynumbers as fns
 d = fns.get_dict
 
 cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):

@@ -8,7 +8,7 @@
 import numpy as np
 from scipy.optimize import fsolve
 
-from fuzzymeasure.math import lamda, subsets
+from .math import lamda, subsets
 
 
 class fuzzm(object):
