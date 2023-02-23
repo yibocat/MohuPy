@@ -107,7 +107,10 @@ cdef class qrungivfn(Fuzzynum):
         def __get__(self):
             md = self.__md[0] ** self.__qrung + self.__md[1] ** self.__qrung
             nmd = self.__nmd[0] ** self.__qrung + self.__nmd[1] ** self.__qrung
-            self.__indeterminacy =  (1. - (md + nmd) / 2.) ** (1. / self.__qrung)
+            if md + nmd == 1.:
+                self.__indeterminacy = 0.
+            else:
+                self.__indeterminacy =  (1. - (md + nmd) / 2.) ** (1. / self.__qrung)
             return self.__indeterminacy
 
     cpdef set_md(self, value):
@@ -155,8 +158,8 @@ cdef class qrungivfn(Fuzzynum):
 
     cpdef comp(self):
         newIVFN = copy.deepcopy(self)
-        newIVFN.md = self.__nmd
-        newIVFN.nmd = self.__md
+        newIVFN.set_md(self.__nmd)
+        newIVFN.set_nmd(self.__md)
         return newIVFN
 
     cpdef algeb_power(self, double l):

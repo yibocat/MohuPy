@@ -186,7 +186,35 @@ def rand_set(qrung, t, *n, num=5):
     return r.rand(*n, num=num)
 
 
+def dh_fn_sets(f: fuzzyset, norm='max'):
+    """
+        Transform a dual hesitant fuzzy set into a fuzzy set
 
+        Parameters
+        ----------
+            f:  fuzzyset
+                The dual hesitant fuzzy set.
+            norm:  str
+                The norm of the dual hesitant function.
+        Returns
+        -------
+            fuzzyset
+                The fuzzy set.
+    """
+    assert f.dict['type'].__name__ == 'qrungdhfe', \
+        'The fuzzy set is not dual hesitant fuzzy set.'
+    dm_ffn = []
+    for i in range(f.shape[0]):
+        dm_a = []
+        for j in range(f.shape[1]):
+            if norm == 'max':
+                dm_a.append(fns.dh_fn_max(f.set[i,j]))
+            elif norm == 'min':
+                dm_a.append(fns.dh_fn_min(f.set[i,j]))
+            else:
+                dm_a.append(fns.dh_fn_mean(f.set[i,j]))
+        dm_ffn.append(dm_a)
+    return asfuzzyset(dm_ffn)
 
 
 

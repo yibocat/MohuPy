@@ -66,6 +66,7 @@ cdef class qrungdhfe(Fuzzynum):
             if not self.isLegal():
                 self.__md = om
                 raise ValueError('ERROR: Invalid data.')
+            assert 0 <= value.all() <= 1, 'ERROR: Invalid data.'
 
     property nmd:
         def __get__(self):
@@ -78,6 +79,7 @@ cdef class qrungdhfe(Fuzzynum):
             if not self.isLegal():
                 self.__nmd = onm
                 raise ValueError('ERROR: Invalid data.')
+            assert 0 <= value.all() <= 1, 'ERROR: Invalid data.'
 
     property parent:
         def __get__(self):
@@ -103,7 +105,10 @@ cdef class qrungdhfe(Fuzzynum):
         def __get__(self):
             mm = ((self.__md ** self.__qrung).sum()) / len(self.__md)
             nn = ((self.__nmd ** self.__qrung).sum()) / len(self.__nmd)
-            self.__indeterminacy =  (1. - mm - nn) ** (1 / self.__qrung)
+            if mm + nn == 1.:
+                self.__indeterminacy = 0.
+            else:
+                self.__indeterminacy =  (1. - mm - nn) ** (1 / self.__qrung)
             return self.__indeterminacy
 
     cpdef set_md(self, value):
@@ -158,14 +163,14 @@ cdef class qrungdhfe(Fuzzynum):
     cpdef comp(self):
         newEle = copy.deepcopy(self)
         if self.__md.size == 0 and self.__nmd.size != 0:
-            newEle.md = np.array([])
-            newEle.nmd = 1. - self.__nmd
+            newEle.set_md(np.array([]))
+            newEle.set_nmd(1. - self.__nmd)
         elif self.__md.size != 0 and self.__nmd.size == 0:
-            newEle.nmd = np.array([])
-            newEle.md = 1. - self.__md
+            newEle.set_nmd(np.array([]))
+            newEle.set_md(1. - self.__md)
         else:
-            newEle.md = self.__nmd
-            newEle.nmd = self.__md
+            newEle.set_md(self.__nmd)
+            newEle.set_nmd(self.__md)
         return newEle
 
     cpdef qsort(self, rev=True):

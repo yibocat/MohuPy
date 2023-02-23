@@ -5,7 +5,7 @@
     "distutils": {
         "name": "mohusets.fuzzynumbers.qrungifn.fuzzymath",
         "sources": [
-            "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx"
+            "./mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx"
         ]
     },
     "module_name": "mohusets.fuzzynumbers.qrungifn.fuzzymath"
@@ -4826,7 +4826,7 @@ if (!__Pyx_RefNanny) {
   #endif
 
   /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":8
- * #  Software: mohusets
+ * #  Software: Mohusets
  * 
  * from .qrungifn import qrungifn             # <<<<<<<<<<<<<<
  * from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
@@ -4955,9 +4955,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":1
- * #  Copyright (C) yibocat 2023 all Rights Reserved             # <<<<<<<<<<<<<<
+ * #  Copyright (c) yibocat 2023 All Rights Reserved             # <<<<<<<<<<<<<<
  * #  Python: 3.10.9
- * #  Date: 2023/2/17 4:43
+ * #  Date: 2023/2/21 4:11
  */
   __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);

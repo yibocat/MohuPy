@@ -579,7 +579,11 @@ class fuzzyset(object):
 
         for i in range(len(m)):
             for j in range(len(m[i])):
-                m[i][j] = self.__dict['convert_str'](m[i, j], self.__qrung)
+                try:
+                    m[i][j] = self.__dict['convert_str'](m[i, j], self.__qrung)
+                except Exception as e:
+                    print(e, 'error element:(%d,%d)' % (i+1, j+1))
+                    return None
 
         matrix = np.asarray(m)
         self.__shape = matrix.shape
@@ -587,7 +591,6 @@ class fuzzyset(object):
         self.__set = matrix
         if show:
             print('Loaded!')
-        return self
 
     def sort(self):
         pass

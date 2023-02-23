@@ -6,11 +6,13 @@
 #  Software: Mohusets
 
 import numpy as np
+import copy
 
 from mohusets.fuzzysets.fuzzyset import fuzzyset
+import mohusets.fuzzynumbers as fns
 
 
-def weighted_ave(f: fuzzyset, weights, mode='algeb'):
+def weighted_ave(f: fuzzyset, weights=None, mode='algeb'):
     """
         weighted average operator of fuzzyset
 
@@ -27,9 +29,10 @@ def weighted_ave(f: fuzzyset, weights, mode='algeb'):
             Aggregated fuzzy elements
     """
     w = np.asarray(weights)
-    fs = f.ravel()
+    assert f.set.ndim == 1, 'weighted average operator only support 1-dimensional fuzzy set'
+    fs = copy.deepcopy(f)
     dlist = []
-    if weights == 0:
+    if weights is None:
         for i in range(fs.size):
             dlist.append(fs.set[i])
     else:
@@ -48,7 +51,7 @@ def weighted_ave(f: fuzzyset, weights, mode='algeb'):
     return ag
 
 
-def weighted_geom(f: fuzzyset, weights, mode='algeb'):
+def weighted_geom(f: fuzzyset, weights=None, mode='algeb'):
     """
         weighted geometric operator of fuzzyset
 
@@ -65,9 +68,10 @@ def weighted_geom(f: fuzzyset, weights, mode='algeb'):
             Aggregated fuzzy elements
     """
     w = np.asarray(weights)
-    fs = f.ravel()
+    assert f.set.ndim == 1, 'weighted average operator only support 1-dimensional fuzzy set'
+    fs = copy.deepcopy(f)
     dlist = []
-    if weights == 0:
+    if weights is None:
         for i in range(fs.size):
             dlist.append(fs.set[i])
     else:
@@ -82,5 +86,53 @@ def weighted_geom(f: fuzzyset, weights, mode='algeb'):
     ag = fuzzyset(f.qrung, f.dict['type'].__name__).poss(f.size).set[0]
     for e in dlist:
         ag = f.dict[mode + '_multiply'](e, ag)
+    assert ag.isLegal(), 'The aggregation element is not legal.'
+    return ag
+
+
+def sub_weighted_ave(f, weights=None, mode='algeb'):
+    dictionary = fns.get_dict[f[0].__class__.__name__]
+    fv = copy.deepcopy(f)
+    dlist = []
+    if weights is None:
+        for i in range(len(fv)):
+            dlist.append(fv[i])
+    else:
+        w = np.asarray(weights)
+        assert 0. <= w.all() <= 1. and w.sum() == 1., 'weights must be between 0 and' \
+                                                      '1 and the sum of weights must equal to 1.'
+        for i in range(len(fv)):
+            if mode == 'algeb':
+                dlist.append(fv[i].algeb_times(w[i]))
+            elif mode == 'eins':
+                dlist.append(fv[i].eins_times(w[i]))
+
+    ag = fns.neg(fv[0].__class__.__name__, fv[0].qrung)
+    for e in dlist:
+        ag = dictionary[mode + '_plus'](e, ag)
+    assert ag.isLegal(), 'The aggregation element is not legal.'
+    return ag
+
+
+def sub_weighted_geom(f, weights=None, mode='algeb'):
+    dictionary = fns.get_dict[f[0].__class__.__name__]
+    fv = copy.deepcopy(f)
+    dlist = []
+    if weights is None:
+        for i in range(len(fv)):
+            dlist.append(fv[i])
+    else:
+        w = np.asarray(weights)
+        assert 0. <= w.all() <= 1. and w.sum() == 1., 'weights must be between 0 and' \
+                                                      '1 and the sum of weights must equal to 1.'
+        for i in range(len(fv)):
+            if mode == 'algeb':
+                dlist.append(fv[i].algeb_power(w[i]))
+            elif mode == 'eins':
+                dlist.append(fv[i].eins_power(w[i]))
+
+    ag = fns.pos(fv[0].__class__.__name__, fv[0].qrung)
+    for e in dlist:
+        ag = dictionary[mode + '_multiply'](e, ag)
     assert ag.isLegal(), 'The aggregation element is not legal.'
     return ag

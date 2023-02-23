@@ -19,17 +19,16 @@ cdef class qrungifn(Fuzzynum):
         double __score
         double __accuracy
         double __indeterminacy
-        np.ndarray __md
-        np.ndarray __nmd
+        float __md
+        float __nmd
 
-    def __init__(self, int qrung, double md, double nmd):
+    def __init__(self, int qrung, float md, float nmd):
         super().__init__()
-        cdef np.ndarray mds
-        cdef np.ndarray nmds
-        mds = np.asarray(md)
-        nmds = np.asarray(nmd)
+        cdef float mds
+        cdef float nmds
+        mds = np.float_(md)
+        nmds = np.float_(nmd)
 
-        assert mds.size == 1 and nmds.size == 1, 'md and nmd must be a double number.'
         assert 0. <= md <= 1. and 0. <= nmd <= 1., 'md and nmd must be between 0 and 1.'
         assert 0. <= md ** qrung + nmd ** qrung <= 1., 'md ** qrung + nmd ** qrung must be between 0 and 1'
 
@@ -50,9 +49,9 @@ cdef class qrungifn(Fuzzynum):
         def __get__(self):
             return self.__md
 
-        def __set__(self, double value):
+        def __set__(self, float value):
             assert 0. <= value <= 1., 'ERROR: MD must be in the interval 0-1.'
-            v = np.asarray(value)
+            v = np.float_(value)
             m = self.__md
             self.__md = v
             if not self.isLegal():
@@ -63,9 +62,9 @@ cdef class qrungifn(Fuzzynum):
         def __get__(self):
             return self.__nmd
 
-        def __set__(self, double value):
+        def __set__(self, float value):
             assert 0. <= value <= 1., 'ERROR: NMD must be in the interval 0-1.'
-            v = np.asarray(value)
+            v = np.float_(value)
             m = self.__nmd
             self.__nmd = v
             if not self.isLegal():
@@ -90,16 +89,19 @@ cdef class qrungifn(Fuzzynum):
     property indeterminacy:
         def __get__(self):
             acc = self.md ** self.__qrung + self.nmd ** self.__qrung
-            self.__indeterminacy = (1. - acc) ** (1. / self.__qrung)
+            if acc == 1.:
+                self.__indeterminacy = 0.
+            else:
+                self.__indeterminacy = (1. - acc) ** (1. / self.__qrung)
             return self.__indeterminacy
 
     cpdef set_md(self, value):
-        v = np.asarray(value)
+        v = np.float_(value)
         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
         self.__md = v
 
     cpdef set_nmd(self, value):
-        v = np.asarray(value)
+        v = np.float_(value)
         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
         self.__nmd = v
 
@@ -116,51 +118,49 @@ cdef class qrungifn(Fuzzynum):
             return False
 
     cpdef bint isLegal(self):
-        mds = np.asarray(self.__md)
-        nmds = np.asarray(self.__nmd)
-        if (mds.size == 1 and nmds.size == 1) and 0 <= mds <= 1 and 0 <= nmds <= 1 \
-                and 0 <= mds ** self.__qrung + nmds ** self.__qrung <= 1:
+        mds = self.__md
+        nmds = self.__nmd
+        if 0. <= mds <= 1. and 0. <= nmds <= 1. \
+                and 0. <= mds ** self.__qrung + nmds ** self.__qrung <= 1.:
             return True
         else:
             return False
 
     cpdef convert(self):
-        cdef list m
-        cdef list n
-        m = np.round(self.__md ,4).tolist()
-        n = np.round(self.__nmd,4).tolist()
+        m = np.round(self.__md ,4)
+        n = np.round(self.__nmd,4)
         return m,n
 
     cpdef comp(self):
         newFN = copy.deepcopy(self)
-        newFN.md = self.__nmd
-        newFN.nmd = self.__md
+        newFN.set_md(self.__nmd)
+        newFN.set_nmd(self.__md)
         return newFN
 
-    cpdef algeb_power(self, double l):
+    cpdef algeb_power(self, float l):
         newFN = copy.deepcopy(self)
-        newFN.set_md(self.__md[0] ** l)
-        newFN.set_nmd((1. - (1. - self.__nmd[0] ** self.__qrung) ** l) ** (1. / self.__qrung))
+        newFN.set_md(self.__md ** l)
+        newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** l) ** (1. / self.__qrung))
         return newFN
 
-    cpdef algeb_times(self, double l):
+    cpdef algeb_times(self, float l):
         newFN = copy.deepcopy(self)
-        newFN.set_md((1. - (1. - self.__md[0] ** self.__qrung) ** l) ** (1. / self.__qrung))
-        newFN.set_nmd(self.__nmd[0] ** l)
+        newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** l) ** (1. / self.__qrung))
+        newFN.set_nmd(self.__nmd ** l)
         return newFN
 
-    cpdef eins_power(self, double l):
+    cpdef eins_power(self, float l):
         newFN = copy.deepcopy(self)
-        newFN.set_md(((2. * (self.__md[0] ** self.__qrung) ** l) / (
-                    (2. - self.__md[0] ** self.__qrung) ** l + (self.__md[0] ** self.__qrung) ** l)) ** (1. / self.__qrung))
-        newFN.set_nmd((((1. + self.__nmd[0] ** self.__qrung) ** l - (1. - self.__nmd[0] ** self.__qrung) ** l) / (
-                    (1. + self.__nmd[0] ** self.__qrung) ** l + (1. - self.__nmd[0] ** self.__qrung) ** l)) ** (1. / self.__qrung))
+        newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (
+                    (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
+        newFN.set_nmd((((1. + self.__nmd ** self.__qrung) ** l - (1. - self.__nmd ** self.__qrung) ** l) / (
+                    (1. + self.__nmd ** self.__qrung) ** l + (1. - self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))
         return newFN
 
-    cpdef eins_times(self, double l):
+    cpdef eins_times(self, float l):
         newFN = copy.deepcopy(self)
-        newFN.set_md((((1. + self.__md[0] ** self.__qrung) ** l - (1. - self.__md[0] ** self.__qrung) ** l) / (
-                    (1. + self.__md[0] ** self.__qrung) ** l + (1. - self.__md[0] ** self.__qrung) ** l)) ** (1. / self.__qrung))
-        newFN.set_nmd(((2. * (self.__nmd[0] ** self.__qrung) ** l) / (
-                    (2. - self.__nmd[0] ** self.__qrung) ** l + (self.__nmd[0] ** self.__qrung) ** l)) ** (1. / self.__qrung))
+        newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (
+                    (1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
+        newFN.set_nmd(((2. * (self.__nmd ** self.__qrung) ** l) / (
+                    (2. - self.__nmd ** self.__qrung) ** l + (self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))
         return newFN

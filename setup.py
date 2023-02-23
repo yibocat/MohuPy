@@ -11,9 +11,29 @@ import numpy
 
 include_dirs = [numpy.get_include()]
 
-USE_CYTHON = ...  # command line option, try-import, ...
+import os.path
 
+
+def no_cythonize(extensions, **_ignore):
+    for extension in extensions:
+        sources = []
+        for sfile in extension.sources:
+            path, ext = os.path.splitext(sfile)
+            if ext in ('.pyx', '.py'):
+                if extension.language == 'c++':
+                    ext = '.cpp'
+                else:
+                    ext = '.c'
+                sfile = path + ext
+            sources.append(sfile)
+        extension.sources[:] = sources
+    return extensions
+
+
+USE_CYTHON = True  # command line option, try-import, ...
 ext = '.pyx' if USE_CYTHON else '.c'
+# ext = '.pyx'
+
 ext1 = Extension("mohusets.fuzzysets.__fsmath",
                  ["./mohusets/fuzzysets/__fsmath" + ext],
                  include_dirs=include_dirs,
@@ -69,12 +89,16 @@ if USE_CYTHON:
 
     extensions = cythonize(extensions, language_level=3)
 
+else:
+    extensions = no_cythonize(extensions, language_level=3)
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
     name=about['name'],
-    ext_modules=cythonize(extensions, language_level=3),
+    # ext_modules=no_cythonize(extensions, language_level=3),
+    ext_modules=extensions,
     zip_safe=False,
     packages=find_packages(),
     description=about['description'],

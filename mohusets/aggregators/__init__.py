@@ -7,6 +7,8 @@
 
 __all__ = []
 
-from .aggregatfunc import weighted_ave, weighted_geom
+from .aggregatfunc import (weighted_ave, weighted_geom,
+                           sub_weighted_ave, sub_weighted_geom)
 
-__all__ += ['weighted_ave', 'weighted_geom']
+__all__ += ['weighted_ave', 'weighted_geom',
+            'sub_weighted_ave', 'sub_weighted_geom']
