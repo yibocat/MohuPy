@@ -50,7 +50,7 @@ def generalized_distance(d1, d2, l=1., t=1., indeterminacy=True):
         return glb.global_get(typ)['distance'](d2, d1, l, indeterminacy)
 
 
-def random(fn, q, n=5):
+def random(q, fn, n=5):
     """
         Generate a random element from a fuzzy element.
 

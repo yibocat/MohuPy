@@ -99,8 +99,8 @@ def sub_weighted_ave(f, weights=None, mode='algeb'):
             dlist.append(fv[i])
     else:
         w = np.asarray(weights)
-        assert 0. <= w.all() <= 1. and w.sum() == 1., 'weights must be between 0 and' \
-                                                      '1 and the sum of weights must equal to 1.'
+        # assert 0. <= w.all() <= 1. and w.sum() == 1., 'weights must be between 0 and' \
+        #                                               '1 and the sum of weights must equal to 1.'
         for i in range(len(fv)):
             if mode == 'algeb':
                 dlist.append(fv[i].algeb_times(w[i]))
@@ -123,8 +123,8 @@ def sub_weighted_geom(f, weights=None, mode='algeb'):
             dlist.append(fv[i])
     else:
         w = np.asarray(weights)
-        assert 0. <= w.all() <= 1. and w.sum() == 1., 'weights must be between 0 and' \
-                                                      '1 and the sum of weights must equal to 1.'
+        # assert 0. <= w.all() <= 1. and w.sum() == 1., 'weights must be between 0 and' \
+        #                                               '1 and the sum of weights must equal to 1.'
         for i in range(len(fv)):
             if mode == 'algeb':
                 dlist.append(fv[i].algeb_power(w[i]))

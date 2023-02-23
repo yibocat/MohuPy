@@ -6,6 +6,7 @@
 #  Software: Mohusets
 
 import numpy as np
+import pandas as pd
 
 from .fuzzyset import fuzzyset
 import mohusets.fuzzynumbers as fns
@@ -80,16 +81,20 @@ def equal(x: fuzzyset, y: fuzzyset, info=False) -> bool:
         if info:
             print('Different types of fuzzy sets.')
         return False
-    elif x.shape != y.shape:
+    elif (np.asarray(x.shape) != np.asarray(y.shape)).all():
         if info:
             print('Different shapes of fuzzy sets.')
         return False
     else:
         xr, yr = x.ravel(), y.ravel()
         for i in range(x.size):
-            if xr.set[i] != yr.set[i]:
+            if (xr.set[i].md != yr.set[i].md).all():
                 if info:
-                    print('There are unequal elements')
+                    print('There are unequal elements.')
+                return False
+            if (xr.set[i].nmd != yr.set[i].nmd).all():
+                if info:
+                    print('There are unequal elements.')
                 return False
     return True
 
@@ -121,7 +126,7 @@ def similar(x: fuzzyset, y: fuzzyset, info=False):
         if info:
             print('Different types of fuzzy sets.')
         return False
-    elif x.shape != y.shape:
+    elif (np.asarray(x.shape) != np.asarray(y.shape)).all():
         if info:
             print('Different shapes of fuzzy sets.')
         return False
@@ -208,26 +213,29 @@ def dh_fn_sets(f: fuzzyset, norm='max'):
         dm_a = []
         for j in range(f.shape[1]):
             if norm == 'max':
-                dm_a.append(fns.dh_fn_max(f.set[i,j]))
+                dm_a.append(fns.dh_fn_max(f.set[i, j]))
             elif norm == 'min':
-                dm_a.append(fns.dh_fn_min(f.set[i,j]))
+                dm_a.append(fns.dh_fn_min(f.set[i, j]))
             else:
-                dm_a.append(fns.dh_fn_mean(f.set[i,j]))
+                dm_a.append(fns.dh_fn_mean(f.set[i, j]))
         dm_ffn.append(dm_a)
     return asfuzzyset(dm_ffn)
 
 
+def savez(fs: fuzzyset, path: str):
+    try:
+        fs.savez(path)
+    except Exception as e:
+        print(e, 'Save failed.')
 
 
-
-
-
-
-
-
-
-
-
+def loadz(path: str):
+    newfs = fuzzyset()
+    try:
+        newfs.loadz(path)
+    except Exception as e:
+        print(e, 'Load failed.')
+    return newfs
 
 
 

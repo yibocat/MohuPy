@@ -59,21 +59,26 @@ class fuzzyset(object):
     __size = 0
     __dict = None
     __shape = None
+    __type = None
 
-    def __init__(self, qrung, t):
+    def __init__(self, qrung=None, ftype=None):
         dictionary = fns.get_dict
-        assert t in dictionary, 'ERROR: fuzzy set type does not exist.'
-        self.__set = np.array([])
-        self.__qrung = qrung
-        self.__dict = dictionary[t]
-        self.__size = 0
-        self.__shape = None
+        if qrung is not None and ftype is not None:
+            assert ftype in dictionary, 'ERROR: fuzzy set type does not exist.'
+            self.__type = ftype
+            self.__set = np.array([])
+            self.__qrung = qrung
+            self.__dict = dictionary[ftype]
+            self.__size = 0
+            self.__shape = None
+        else:
+            pass
 
     def __repr__(self):
         return \
                 'Collection information\n' \
                 '----------------------------------------\n' \
-                'fuzzy set type:            %s\n' % self.__dict['type'].__name__ + \
+                'fuzzy set type:            %s\n' % self.__type + \
                 'Q-rung:                    %s\n' % self.__qrung + \
                 'the set shape:             ' + str(self.__shape) + '\n' + \
                 'elements number:           %s\n' % self.__size
@@ -82,10 +87,14 @@ class fuzzyset(object):
         return \
                 'Collection information\n' \
                 '----------------------------------------\n' \
-                'fuzzy set type:            %s\n' % self.__dict['type'].__name__ + \
+                'fuzzy set type:            %s\n' % self.__type + \
                 'Q-rung:                    %s\n' % self.__qrung + \
                 'the set shape:             ' + str(self.__shape) + '\n' + \
                 'elements number:           %s\n' % self.__size
+
+    @property
+    def ftype(self):
+        return self.__type
 
     @property
     def qrung(self):
@@ -185,6 +194,7 @@ class fuzzyset(object):
         assert x.__class__ == self.__dict['type'], 'ERROR: Cannot add different types of fuzzy elements!'
         self.__set = np.append(self.__set, x)
         self.__size += 1
+        self.__shape = self.__set.shape
 
     def remove(self, x):
         """
@@ -200,6 +210,7 @@ class fuzzyset(object):
         assert x in self.__set, 'ERROR: element is not in the set.'
         self.__set = np.delete(self.__set, np.where(self.__set == x))
         self.__size -= 1
+        self.__shape = self.__set.shape
 
     def pop(self, i):
         """
@@ -209,6 +220,7 @@ class fuzzyset(object):
         """
         self.__set = np.delete(self.__set, i)
         self.__size -= 1
+        self.__shape = self.__set.shape
 
     def elementfunc(self, func, *args):
         """
@@ -256,7 +268,7 @@ class fuzzyset(object):
         # for base in self.__dict['type'].__bases__:
         #     father = base.__name__
 
-        if self.__dict['type'].__name__ == 'qrungdhfe':
+        if self.__type == 'qrungdhfe':
             args = [self.__qrung, num]
         else:
             args = [self.__qrung]
@@ -411,10 +423,10 @@ class fuzzyset(object):
                 the maximum element of the fuzzy set
         """
         score_mat = self.score
-        x, y = divmod(np.argmax(score_mat), score_mat.shape[1])
+        index = np.unravel_index(np.argmax(score_mat), score_mat.shape)
         if show:
-            print((x, y))
-        return self.__set[x, y]
+            print(index)
+        return self.__set[index]
 
     def fmax(self, func, *args, show=True):
         """
@@ -431,10 +443,10 @@ class fuzzyset(object):
                 the maximum element of the fuzzy set
         """
         f_mat = self.elementfunc(func, *args)
-        x, y = divmod(np.argmax(f_mat), f_mat.shape[1])
+        index = np.unravel_index(np.argmax(f_mat), f_mat.shape)
         if show:
-            print((x, y))
-        return self.__set[x, y]
+            print(index)
+        return self.__set[index]
 
     def min(self, show=True):
         """
@@ -446,10 +458,10 @@ class fuzzyset(object):
                 the minimum element of the fuzzy set
         """
         score_mat = self.score
-        x, y = divmod(np.argmin(score_mat), score_mat.shape[1])
+        index = np.unravel_index(np.argmin(score_mat), score_mat.shape)
         if show:
-            print((x, y))
-        return self.__set[x, y]
+            print(index)
+        return self.__set[index]
 
     def fmin(self, func, *args, show=True):
         """
@@ -466,10 +478,10 @@ class fuzzyset(object):
                 the minimum element of the fuzzy set
         """
         f_mat = self.elementfunc(func, *args)
-        x, y = divmod(np.argmin(f_mat), f_mat.shape[1])
+        index = np.unravel_index(np.argmin(f_mat), f_mat.shape)
         if show:
-            print((x, y))
-        return self.__set[x, y]
+            print(index)
+        return self.__set[index]
 
     def sum(self, norm='algeb_plus'):
         newf = copy.deepcopy(self)
@@ -498,9 +510,11 @@ class fuzzyset(object):
         """
         print("Saving...")
         collection = self.__set
+        ftype = self.__type
         qrung = self.__qrung
         shape = self.__shape
-        np.savez_compressed(path, set=collection, qrung=qrung, shape=shape)
+        dicts = self.__dict
+        np.savez_compressed(path+'.npz', set=collection, ftype=ftype, qrung=qrung, shape=shape, dict=dicts)
         print('Saved!')
 
     def loadz(self, path):
@@ -519,9 +533,11 @@ class fuzzyset(object):
         file = path + '.npz'
 
         fuzzset = np.load(file, allow_pickle=True)
-        self.__set = fuzzset['set']
         self.__qrung = fuzzset['qrung']
+        self.__set = fuzzset['set']
         self.__shape = fuzzset['shape']
+        self.__type = fuzzset['ftype']
+        self.__dict = fuzzset['dict'].tolist()
         self.__size = self.__set.size
         print('Loaded!')
         return self

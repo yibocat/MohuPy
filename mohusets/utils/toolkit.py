@@ -88,3 +88,44 @@ def random_split(data, l):
     data_2 = data[index_2]
 
     return data_1, data_2
+
+
+def show_decision_mat(Data, round=4):
+    """
+        Show the decision matrix of a fuzzy set.
+
+        Parameters
+        ----------
+            Data:  pandas.DataFrame
+                The fuzzy set.
+            round: int
+                The number of decimal places.
+        Returns
+        -------
+            pandas.DataFrame
+        Notes
+        -----
+            This method is similar to fuzzyset.mat and can display a decision
+            matrix. But the difference is that this method displays a fuzzy
+            set of ndarray type, and is also applicable to fuzzyset.set.
+        Examples
+        --------
+        In [1]: import mohusets.fuzzyset as fs
+        In [2]: fs.show_decision_mat(Data)          # Data is a ndarray type fuzzy set.
+        In [2]: fs.show_decision_mat(t.set)         # t is a fuzzyset type fuzzy set, and t.set is a ndarray type fuzzy set.
+    """
+    attributes = []
+    matrix = []
+    suppliers = []
+
+    for i in range(len(Data)):
+        suppliers.append('A' + str(i + 1))
+    for j in range(len(Data[0])):
+        attributes.append('C' + str(j + 1))
+
+    for i in range(len(Data)):
+        alt = []
+        for j in range(len(Data[i])):
+            alt.append([np.round(Data[i, j].md, round), np.round(Data[i, j].nmd,4)])
+        matrix.append(alt)
+    return pd.DataFrame(matrix, index=suppliers, columns=attributes)

@@ -13,7 +13,8 @@ from .fsmath import (dot, fuzz_add, fuzz_multiply,
                      cartadd, cartprod)
 
 from .fs import (fuzzys, asfuzzyset, equal,
-                 similar, rand_set, dh_fn_sets)
+                 similar, rand_set, dh_fn_sets,
+                 savez, loadz)
 
 __all__ += ['fuzzyset',
             'dot',
@@ -29,4 +30,6 @@ __all__ += ['fuzzyset',
             'similar',
             'fuzzys',
             'rand_set',
-            'dh_fn_sets']
+            'dh_fn_sets',
+            'savez',
+            'loadz']
