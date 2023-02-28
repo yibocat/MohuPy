@@ -6,7 +6,7 @@
 #  Software: Mohusets
 
 import mohusets.fuzzynumbers.config
-import mohusets.fuzzynumbers.fuzz_global as glb
+from . import fuzz_global as glb
 
 
 def generalized_distance(d1, d2, l=1., t=1., indeterminacy=True):

@@ -9,7 +9,7 @@ import re
 
 import numpy as np
 
-from .qrungivfn import qrungivfn
+from .fuzzy_element import qrungivfn
 
 
 def random(q):

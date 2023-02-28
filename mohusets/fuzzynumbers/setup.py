@@ -29,12 +29,12 @@
 #     Extension("fuzzynumbers.qrungivfn.fuzzymath",
 #               ["fuzzynumbers/qrungivfn/fuzzymath.pyx"]),
 #
-#     Extension("fuzzynumbers.qrungdhfe.qrungdhfe",
-#               ["fuzzynumbers/qrungdhfe/qrungdhfe.pyx"],
+#     Extension("fuzzynumbers.qdhfe.qdhfe",
+#               ["fuzzynumbers/qdhfe/qdhfe.pyx"],
 #               include_dirs=include_dirs,
 #               define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
-#     Extension("fuzzynumbers.qrungdhfe.fuzzymath",
-#               ["fuzzynumbers/qrungdhfe/fuzzymath.pyx"],
+#     Extension("fuzzynumbers.qdhfe.fuzzymath",
+#               ["fuzzynumbers/qdhfe/fuzzymath.pyx"],
 #               include_dirs=include_dirs,
 #               define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")]),
 #

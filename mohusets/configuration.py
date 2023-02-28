@@ -6,7 +6,7 @@
 #  Software: Mohusets
 
 __NAME = "mohusets"
-__VERSION = "0.0.2"
+__VERSION = "0.0.3"
 __AUTHOR = "yibow"
 __LICENSE = "MIT"
 __EMAIL = "yibocat@yeah.net"

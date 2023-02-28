@@ -3,12 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "name": "mohusets.fuzzynumbers.qrungifn.fuzzymath",
+        "name": "mohusets.fuzzynumbers.qifn.fuzzymath",
         "sources": [
-            "./mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx"
+            "./mohusets/fuzzynumbers/qifn/fuzzymath.pyx"
         ]
     },
-    "module_name": "mohusets.fuzzynumbers.qrungifn.fuzzymath"
+    "module_name": "mohusets.fuzzynumbers.qifn.fuzzymath"
 }
 END: Cython Metadata */
 
@@ -1036,8 +1036,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__mohusets__fuzzynumbers__qrungifn__fuzzymath
-#define __PYX_HAVE_API__mohusets__fuzzynumbers__qrungifn__fuzzymath
+#define __PYX_HAVE__mohusets__fuzzynumbers__qifn__fuzzymath
+#define __PYX_HAVE_API__mohusets__fuzzynumbers__qifn__fuzzymath
 /* Early includes */
 #ifdef _OPENMP
 #include <omp.h>
@@ -1260,7 +1260,7 @@ static const char *__pyx_filename;
 /* #### Code section: filename_table ### */
 
 static const char *__pyx_f[] = {
-  "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx",
+  "mohusets/fuzzynumbers/qifn/fuzzymath.pyx",
 };
 /* #### Code section: utility_code_proto_before_types ### */
 /* #### Code section: numeric_typedefs ### */
@@ -1793,22 +1793,22 @@ static double (*__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_S)(doub
 static double (*__pyx_f_8mohusets_12fuzzynumbers_11archimedean_einstein_T)(double, double, int __pyx_skip_dispatch); /*proto*/
 static double (*__pyx_f_8mohusets_12fuzzynumbers_11archimedean_einstein_S)(double, double, int __pyx_skip_dispatch); /*proto*/
 
-/* Module declarations from "mohusets.fuzzynumbers.qrungifn.fuzzymath" */
+/* Module declarations from "mohusets.fuzzynumbers.qifn.fuzzymath" */
 #if !CYTHON_USE_MODULE_STATE
 #endif
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersection(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_multiply(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plus(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_multiply(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_intersection(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_unions(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_algeb_multiply(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_algeb_plus(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_eins_multiply(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_eins_plus(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 /* #### Code section: typeinfo ### */
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "mohusets.fuzzynumbers.qrungifn.fuzzymath"
-extern int __pyx_module_is_main_mohusets__fuzzynumbers__qrungifn__fuzzymath;
-int __pyx_module_is_main_mohusets__fuzzynumbers__qrungifn__fuzzymath = 0;
+#define __Pyx_MODULE_NAME "mohusets.fuzzynumbers.qifn.fuzzymath"
+extern int __pyx_module_is_main_mohusets__fuzzynumbers__qifn__fuzzymath;
+int __pyx_module_is_main_mohusets__fuzzynumbers__qifn__fuzzymath = 0;
 
-/* Implementation of "mohusets.fuzzynumbers.qrungifn.fuzzymath" */
+/* Implementation of "mohusets.fuzzynumbers.qifn.fuzzymath" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_AssertionError;
 /* #### Code section: string_decls ### */
@@ -1832,13 +1832,14 @@ static const char __pyx_k_algeb_plus[] = "algeb_plus";
 static const char __pyx_k_intersection[] = "intersection";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_eins_multiply[] = "eins_multiply";
+static const char __pyx_k_fuzzy_element[] = "fuzzy_element";
 static const char __pyx_k_AssertionError[] = "AssertionError";
 static const char __pyx_k_algeb_multiply[] = "algeb_multiply";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_ERROR_the_two_FNs_are_not_the_sa[] = "ERROR:the two FNs are not the same FN";
-static const char __pyx_k_mohusets_fuzzynumbers_qrungifn_f[] = "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx";
-static const char __pyx_k_mohusets_fuzzynumbers_qrungifn_f_2[] = "mohusets.fuzzynumbers.qrungifn.fuzzymath";
+static const char __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy[] = "mohusets/fuzzynumbers/qifn/fuzzymath.pyx";
+static const char __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy_2[] = "mohusets.fuzzynumbers.qifn.fuzzymath";
 #if !CYTHON_USE_MODULE_STATE
 static PyObject *__pyx_kp_u_;
 static PyObject *__pyx_n_s_AssertionError;
@@ -1852,13 +1853,14 @@ static PyObject *__pyx_n_s_eins_multiply;
 static PyObject *__pyx_n_s_eins_plus;
 static PyObject *__pyx_n_s_fn1;
 static PyObject *__pyx_n_s_fn2;
+static PyObject *__pyx_n_s_fuzzy_element;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_intersection;
 static PyObject *__pyx_n_s_is_coroutine;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_md;
-static PyObject *__pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f;
-static PyObject *__pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2;
+static PyObject *__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy;
+static PyObject *__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_nmd;
 static PyObject *__pyx_n_s_qrung;
@@ -1869,12 +1871,12 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_unions;
 #endif
 /* #### Code section: decls ### */
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersection(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_2unions(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_4algeb_multiply(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_6algeb_plus(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_8eins_multiply(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_10eins_plus(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_intersection(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_2unions(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_4algeb_multiply(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_6algeb_plus(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_8eins_multiply(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_10eins_plus(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2); /* proto */
 #if !CYTHON_USE_MODULE_STATE
 static PyObject *__pyx_float_0_;
 static PyObject *__pyx_int_1;
@@ -1916,13 +1918,14 @@ typedef struct {
   PyObject *__pyx_n_s_eins_plus;
   PyObject *__pyx_n_s_fn1;
   PyObject *__pyx_n_s_fn2;
+  PyObject *__pyx_n_s_fuzzy_element;
   PyObject *__pyx_n_s_import;
   PyObject *__pyx_n_s_intersection;
   PyObject *__pyx_n_s_is_coroutine;
   PyObject *__pyx_n_s_main;
   PyObject *__pyx_n_s_md;
-  PyObject *__pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f;
-  PyObject *__pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2;
+  PyObject *__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy;
+  PyObject *__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2;
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_n_s_nmd;
   PyObject *__pyx_n_s_qrung;
@@ -1985,13 +1988,14 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_eins_plus);
   Py_CLEAR(clear_module_state->__pyx_n_s_fn1);
   Py_CLEAR(clear_module_state->__pyx_n_s_fn2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_fuzzy_element);
   Py_CLEAR(clear_module_state->__pyx_n_s_import);
   Py_CLEAR(clear_module_state->__pyx_n_s_intersection);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
   Py_CLEAR(clear_module_state->__pyx_n_s_md);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f);
-  Py_CLEAR(clear_module_state->__pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy);
+  Py_CLEAR(clear_module_state->__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_nmd);
   Py_CLEAR(clear_module_state->__pyx_n_s_qrung);
@@ -2041,13 +2045,14 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_eins_plus);
   Py_VISIT(traverse_module_state->__pyx_n_s_fn1);
   Py_VISIT(traverse_module_state->__pyx_n_s_fn2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_fuzzy_element);
   Py_VISIT(traverse_module_state->__pyx_n_s_import);
   Py_VISIT(traverse_module_state->__pyx_n_s_intersection);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
   Py_VISIT(traverse_module_state->__pyx_n_s_md);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f);
-  Py_VISIT(traverse_module_state->__pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy);
+  Py_VISIT(traverse_module_state->__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_nmd);
   Py_VISIT(traverse_module_state->__pyx_n_s_qrung);
@@ -2094,13 +2099,14 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_eins_plus __pyx_mstate_global->__pyx_n_s_eins_plus
 #define __pyx_n_s_fn1 __pyx_mstate_global->__pyx_n_s_fn1
 #define __pyx_n_s_fn2 __pyx_mstate_global->__pyx_n_s_fn2
+#define __pyx_n_s_fuzzy_element __pyx_mstate_global->__pyx_n_s_fuzzy_element
 #define __pyx_n_s_import __pyx_mstate_global->__pyx_n_s_import
 #define __pyx_n_s_intersection __pyx_mstate_global->__pyx_n_s_intersection
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
 #define __pyx_n_s_md __pyx_mstate_global->__pyx_n_s_md
-#define __pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f __pyx_mstate_global->__pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f
-#define __pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2 __pyx_mstate_global->__pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2
+#define __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy __pyx_mstate_global->__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy
+#define __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2 __pyx_mstate_global->__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_n_s_nmd __pyx_mstate_global->__pyx_n_s_nmd
 #define __pyx_n_s_qrung __pyx_mstate_global->__pyx_n_s_qrung
@@ -2121,7 +2127,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #endif
 /* #### Code section: module_code ### */
 
-/* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":11
+/* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":11
  * from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
  * 
  * cpdef intersection(fn1:qrungifn, fn2:qrungifn):             # <<<<<<<<<<<<<<
@@ -2129,14 +2135,14 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
  *     q = fn1.qrung
  */
 
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_1intersection(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_1intersection(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersection(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_intersection(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_q = NULL;
   PyObject *__pyx_v_newFN = NULL;
   PyObject *__pyx_r = NULL;
@@ -2154,7 +2160,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersect
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersection", 0);
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":12
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":12
  * 
  * cpdef intersection(fn1:qrungifn, fn2:qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'             # <<<<<<<<<<<<<<
@@ -2181,7 +2187,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersect
   if ((1)); else __PYX_ERR(0, 12, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":13
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":13
  * cpdef intersection(fn1:qrungifn, fn2:qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung             # <<<<<<<<<<<<<<
@@ -2193,7 +2199,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersect
   __pyx_v_q = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":14
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":14
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
@@ -2225,7 +2231,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersect
   __pyx_v_newFN = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":15
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":15
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(min(fn1.md, fn2.md))             # <<<<<<<<<<<<<<
@@ -2273,7 +2279,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersect
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":16
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":16
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(min(fn1.md, fn2.md))
  *     newFN.set_nmd(max(fn1.nmd, fn2.nmd))             # <<<<<<<<<<<<<<
@@ -2321,7 +2327,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersect
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":17
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":17
  *     newFN.set_md(min(fn1.md, fn2.md))
  *     newFN.set_nmd(max(fn1.nmd, fn2.nmd))
  *     return newFN             # <<<<<<<<<<<<<<
@@ -2333,7 +2339,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersect
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":11
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":11
  * from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
  * 
  * cpdef intersection(fn1:qrungifn, fn2:qrungifn):             # <<<<<<<<<<<<<<
@@ -2349,7 +2355,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersect
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.intersection", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.intersection", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_q);
@@ -2360,15 +2366,15 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersect
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_1intersection(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_1intersection(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_1intersection = {"intersection", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_1intersection, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_1intersection(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_1intersection = {"intersection", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_1intersection, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_1intersection(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -2435,18 +2441,18 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("intersection", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 11, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.intersection", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.intersection", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersection(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
+  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_intersection(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersection(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_intersection(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2455,7 +2461,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersection", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersection(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_intersection(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2464,7 +2470,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersec
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.intersection", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.intersection", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2472,7 +2478,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersec
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":20
+/* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":20
  * 
  * 
  * cpdef unions(fn1:qrungifn, fn2:qrungifn):             # <<<<<<<<<<<<<<
@@ -2480,14 +2486,14 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_intersec
  *     q = fn1.qrung
  */
 
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_3unions(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_3unions(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_unions(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_q = NULL;
   PyObject *__pyx_v_newFN = NULL;
   PyObject *__pyx_r = NULL;
@@ -2505,7 +2511,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(Py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("unions", 0);
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":21
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":21
  * 
  * cpdef unions(fn1:qrungifn, fn2:qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'             # <<<<<<<<<<<<<<
@@ -2532,7 +2538,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(Py
   if ((1)); else __PYX_ERR(0, 21, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":22
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":22
  * cpdef unions(fn1:qrungifn, fn2:qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung             # <<<<<<<<<<<<<<
@@ -2544,7 +2550,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(Py
   __pyx_v_q = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":23
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":23
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
@@ -2576,7 +2582,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(Py
   __pyx_v_newFN = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":24
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":24
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(max(fn1.md, fn2.md))             # <<<<<<<<<<<<<<
@@ -2624,7 +2630,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(Py
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":25
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":25
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(max(fn1.md, fn2.md))
  *     newFN.set_nmd(min(fn1.nmd, fn2.nmd))             # <<<<<<<<<<<<<<
@@ -2672,7 +2678,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(Py
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":26
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":26
  *     newFN.set_md(max(fn1.md, fn2.md))
  *     newFN.set_nmd(min(fn1.nmd, fn2.nmd))
  *     return newFN             # <<<<<<<<<<<<<<
@@ -2684,7 +2690,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(Py
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":20
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":20
  * 
  * 
  * cpdef unions(fn1:qrungifn, fn2:qrungifn):             # <<<<<<<<<<<<<<
@@ -2700,7 +2706,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(Py
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.unions", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.unions", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_q);
@@ -2711,15 +2717,15 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(Py
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_3unions(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_3unions(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_3unions = {"unions", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_3unions, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_3unions(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_3unions = {"unions", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_3unions, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_3unions(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -2786,18 +2792,18 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("unions", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 20, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.unions", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.unions", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_2unions(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
+  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_2unions(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_2unions(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_2unions(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2806,7 +2812,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_2unions(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("unions", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_unions(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_unions(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2815,7 +2821,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_2unions(
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.unions", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.unions", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -2823,7 +2829,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_2unions(
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":29
+/* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":29
  * 
  * 
  * cpdef algeb_multiply(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -2831,14 +2837,14 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_2unions(
  *     q = fn1.qrung
  */
 
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_5algeb_multiply(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_5algeb_multiply(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_multiply(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_algeb_multiply(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_q = NULL;
   PyObject *__pyx_v_newFN = NULL;
   PyObject *__pyx_r = NULL;
@@ -2857,7 +2863,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_mul
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("algeb_multiply", 0);
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":30
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":30
  * 
  * cpdef algeb_multiply(fn1: qrungifn, fn2: qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'             # <<<<<<<<<<<<<<
@@ -2884,7 +2890,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_mul
   if ((1)); else __PYX_ERR(0, 30, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":31
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":31
  * cpdef algeb_multiply(fn1: qrungifn, fn2: qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung             # <<<<<<<<<<<<<<
@@ -2896,7 +2902,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_mul
   __pyx_v_q = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":32
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":32
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
@@ -2928,7 +2934,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_mul
   __pyx_v_newFN = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":33
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":33
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(algebraic_T(fn1.md ** q, fn2.md ** q) ** (1 / q))             # <<<<<<<<<<<<<<
@@ -2982,7 +2988,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_mul
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":34
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":34
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(algebraic_T(fn1.md ** q, fn2.md ** q) ** (1 / q))
  *     newFN.set_nmd(algebraic_S(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q))             # <<<<<<<<<<<<<<
@@ -3036,7 +3042,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_mul
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":35
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":35
  *     newFN.set_md(algebraic_T(fn1.md ** q, fn2.md ** q) ** (1 / q))
  *     newFN.set_nmd(algebraic_S(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q))
  *     return newFN             # <<<<<<<<<<<<<<
@@ -3048,7 +3054,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_mul
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":29
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":29
  * 
  * 
  * cpdef algeb_multiply(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -3063,7 +3069,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_mul
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.algeb_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.algeb_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_q);
@@ -3074,15 +3080,15 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_mul
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_5algeb_multiply(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_5algeb_multiply(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_5algeb_multiply = {"algeb_multiply", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_5algeb_multiply, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_5algeb_multiply(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_5algeb_multiply = {"algeb_multiply", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_5algeb_multiply, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_5algeb_multiply(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3149,18 +3155,18 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("algeb_multiply", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 29, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.algeb_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.algeb_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_4algeb_multiply(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
+  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_4algeb_multiply(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_4algeb_multiply(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_4algeb_multiply(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3169,7 +3175,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_4algeb_m
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("algeb_multiply", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_multiply(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_algeb_multiply(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3178,7 +3184,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_4algeb_m
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.algeb_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.algeb_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3186,7 +3192,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_4algeb_m
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":38
+/* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":38
  * 
  * 
  * cpdef algeb_plus(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -3194,14 +3200,14 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_4algeb_m
  *     q = fn1.qrung
  */
 
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_7algeb_plus(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_7algeb_plus(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plus(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_algeb_plus(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_q = NULL;
   PyObject *__pyx_v_newFN = NULL;
   PyObject *__pyx_r = NULL;
@@ -3220,7 +3226,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plu
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("algeb_plus", 0);
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":39
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":39
  * 
  * cpdef algeb_plus(fn1: qrungifn, fn2: qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'             # <<<<<<<<<<<<<<
@@ -3247,7 +3253,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plu
   if ((1)); else __PYX_ERR(0, 39, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":40
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":40
  * cpdef algeb_plus(fn1: qrungifn, fn2: qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung             # <<<<<<<<<<<<<<
@@ -3259,7 +3265,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plu
   __pyx_v_q = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":41
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":41
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
@@ -3291,7 +3297,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plu
   __pyx_v_newFN = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":42
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":42
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(algebraic_S(fn1.md ** q, fn2.md ** q) ** (1 / q))             # <<<<<<<<<<<<<<
@@ -3345,7 +3351,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plu
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":43
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":43
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(algebraic_S(fn1.md ** q, fn2.md ** q) ** (1 / q))
  *     newFN.set_nmd(algebraic_T(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q))             # <<<<<<<<<<<<<<
@@ -3399,7 +3405,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plu
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":44
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":44
  *     newFN.set_md(algebraic_S(fn1.md ** q, fn2.md ** q) ** (1 / q))
  *     newFN.set_nmd(algebraic_T(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q))
  *     return newFN             # <<<<<<<<<<<<<<
@@ -3411,7 +3417,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plu
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":38
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":38
  * 
  * 
  * cpdef algeb_plus(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -3426,7 +3432,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plu
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.algeb_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.algeb_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_q);
@@ -3437,15 +3443,15 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plu
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_7algeb_plus(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_7algeb_plus(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_7algeb_plus = {"algeb_plus", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_7algeb_plus, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_7algeb_plus(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_7algeb_plus = {"algeb_plus", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_7algeb_plus, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_7algeb_plus(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3512,18 +3518,18 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("algeb_plus", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 38, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.algeb_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.algeb_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_6algeb_plus(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
+  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_6algeb_plus(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_6algeb_plus(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_6algeb_plus(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3532,7 +3538,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_6algeb_p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("algeb_plus", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_algeb_plus(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_algeb_plus(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3541,7 +3547,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_6algeb_p
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.algeb_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.algeb_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3549,7 +3555,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_6algeb_p
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":47
+/* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":47
  * 
  * 
  * cpdef eins_multiply(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -3557,14 +3563,14 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_6algeb_p
  *     q = fn1.qrung
  */
 
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_9eins_multiply(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_9eins_multiply(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_multiply(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_eins_multiply(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_q = NULL;
   PyObject *__pyx_v_newFN = NULL;
   PyObject *__pyx_r = NULL;
@@ -3583,7 +3589,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_mult
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eins_multiply", 0);
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":48
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":48
  * 
  * cpdef eins_multiply(fn1: qrungifn, fn2: qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'             # <<<<<<<<<<<<<<
@@ -3610,7 +3616,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_mult
   if ((1)); else __PYX_ERR(0, 48, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":49
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":49
  * cpdef eins_multiply(fn1: qrungifn, fn2: qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung             # <<<<<<<<<<<<<<
@@ -3622,7 +3628,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_mult
   __pyx_v_q = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":50
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":50
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
@@ -3654,7 +3660,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_mult
   __pyx_v_newFN = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":51
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":51
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(einstein_T(fn1.md ** q, fn2.md ** q) ** (1 / q))             # <<<<<<<<<<<<<<
@@ -3708,7 +3714,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_mult
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":52
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":52
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(einstein_T(fn1.md ** q, fn2.md ** q) ** (1 / q))
  *     newFN.set_nmd(einstein_S(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q))             # <<<<<<<<<<<<<<
@@ -3762,7 +3768,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_mult
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":53
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":53
  *     newFN.set_md(einstein_T(fn1.md ** q, fn2.md ** q) ** (1 / q))
  *     newFN.set_nmd(einstein_S(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q))
  *     return newFN             # <<<<<<<<<<<<<<
@@ -3774,7 +3780,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_mult
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":47
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":47
  * 
  * 
  * cpdef eins_multiply(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -3789,7 +3795,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_mult
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.eins_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.eins_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_q);
@@ -3800,15 +3806,15 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_mult
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_9eins_multiply(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_9eins_multiply(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_9eins_multiply = {"eins_multiply", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_9eins_multiply, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_9eins_multiply(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_9eins_multiply = {"eins_multiply", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_9eins_multiply, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_9eins_multiply(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3875,18 +3881,18 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("eins_multiply", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 47, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.eins_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.eins_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_8eins_multiply(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
+  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_8eins_multiply(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_8eins_multiply(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_8eins_multiply(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3895,7 +3901,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_8eins_mu
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eins_multiply", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_multiply(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_eins_multiply(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3904,7 +3910,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_8eins_mu
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.eins_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.eins_multiply", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -3912,7 +3918,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_8eins_mu
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":56
+/* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":56
  * 
  * 
  * cpdef eins_plus(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -3920,14 +3926,14 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_8eins_mu
  *     q = fn1.qrung
  */
 
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_11eins_plus(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_11eins_plus(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_eins_plus(PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_q = NULL;
   PyObject *__pyx_v_newFN = NULL;
   PyObject *__pyx_r = NULL;
@@ -3946,7 +3952,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eins_plus", 0);
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":57
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":57
  * 
  * cpdef eins_plus(fn1: qrungifn, fn2: qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'             # <<<<<<<<<<<<<<
@@ -3973,7 +3979,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus
   if ((1)); else __PYX_ERR(0, 57, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":58
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":58
  * cpdef eins_plus(fn1: qrungifn, fn2: qrungifn):
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung             # <<<<<<<<<<<<<<
@@ -3985,7 +3991,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus
   __pyx_v_q = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":59
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":59
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
@@ -4017,7 +4023,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus
   __pyx_v_newFN = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":60
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":60
  *     q = fn1.qrung
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(einstein_S(fn1.md ** q, fn2.md ** q) ** (1 / q))             # <<<<<<<<<<<<<<
@@ -4071,7 +4077,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":61
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":61
  *     newFN = qrungifn(q, 0., 0.)
  *     newFN.set_md(einstein_S(fn1.md ** q, fn2.md ** q) ** (1 / q))
  *     newFN.set_nmd(einstein_T(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q))             # <<<<<<<<<<<<<<
@@ -4124,7 +4130,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":62
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":62
  *     newFN.set_md(einstein_S(fn1.md ** q, fn2.md ** q) ** (1 / q))
  *     newFN.set_nmd(einstein_T(fn1.nmd ** q, fn2.nmd ** q) ** (1 / q))
  *     return newFN             # <<<<<<<<<<<<<<
@@ -4134,7 +4140,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":56
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":56
  * 
  * 
  * cpdef eins_plus(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -4149,7 +4155,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_9);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.eins_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.eins_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_q);
@@ -4160,15 +4166,15 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_11eins_plus(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_11eins_plus(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_11eins_plus = {"eins_plus", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_11eins_plus, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_11eins_plus(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_11eins_plus = {"eins_plus", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_11eins_plus, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_11eins_plus(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4235,18 +4241,18 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L5_argtuple_error:;
   __Pyx_RaiseArgtupleInvalid("eins_plus", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 56, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.eins_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.eins_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_10eins_plus(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
+  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_10eins_plus(__pyx_self, __pyx_v_fn1, __pyx_v_fn2);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_10eins_plus(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_10eins_plus(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_fn1, PyObject *__pyx_v_fn2) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4255,7 +4261,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_10eins_p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eins_plus", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_eins_plus(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_eins_plus(__pyx_v_fn1, __pyx_v_fn2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4264,7 +4270,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_10eins_p
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("mohusets.fuzzynumbers.qrungifn.fuzzymath.eins_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzymath.eins_plus", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4300,13 +4306,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, __pyx_k_eins_plus, sizeof(__pyx_k_eins_plus), 0, 0, 1, 1},
   {0, __pyx_k_fn1, sizeof(__pyx_k_fn1), 0, 0, 1, 1},
   {0, __pyx_k_fn2, sizeof(__pyx_k_fn2), 0, 0, 1, 1},
+  {0, __pyx_k_fuzzy_element, sizeof(__pyx_k_fuzzy_element), 0, 0, 1, 1},
   {0, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {0, __pyx_k_intersection, sizeof(__pyx_k_intersection), 0, 0, 1, 1},
   {0, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
   {0, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {0, __pyx_k_md, sizeof(__pyx_k_md), 0, 0, 1, 1},
-  {0, __pyx_k_mohusets_fuzzynumbers_qrungifn_f, sizeof(__pyx_k_mohusets_fuzzynumbers_qrungifn_f), 0, 0, 1, 0},
-  {0, __pyx_k_mohusets_fuzzynumbers_qrungifn_f_2, sizeof(__pyx_k_mohusets_fuzzynumbers_qrungifn_f_2), 0, 0, 1, 1},
+  {0, __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy, sizeof(__pyx_k_mohusets_fuzzynumbers_qifn_fuzzy), 0, 0, 1, 0},
+  {0, __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy_2, sizeof(__pyx_k_mohusets_fuzzynumbers_qifn_fuzzy_2), 0, 0, 1, 1},
   {0, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {0, __pyx_k_nmd, sizeof(__pyx_k_nmd), 0, 0, 1, 1},
   {0, __pyx_k_qrung, sizeof(__pyx_k_qrung), 0, 0, 1, 1},
@@ -4328,13 +4335,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_eins_plus, __pyx_k_eins_plus, sizeof(__pyx_k_eins_plus), 0, 0, 1, 1},
   {&__pyx_n_s_fn1, __pyx_k_fn1, sizeof(__pyx_k_fn1), 0, 0, 1, 1},
   {&__pyx_n_s_fn2, __pyx_k_fn2, sizeof(__pyx_k_fn2), 0, 0, 1, 1},
+  {&__pyx_n_s_fuzzy_element, __pyx_k_fuzzy_element, sizeof(__pyx_k_fuzzy_element), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_intersection, __pyx_k_intersection, sizeof(__pyx_k_intersection), 0, 0, 1, 1},
   {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_md, __pyx_k_md, sizeof(__pyx_k_md), 0, 0, 1, 1},
-  {&__pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f, __pyx_k_mohusets_fuzzynumbers_qrungifn_f, sizeof(__pyx_k_mohusets_fuzzynumbers_qrungifn_f), 0, 0, 1, 0},
-  {&__pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2, __pyx_k_mohusets_fuzzynumbers_qrungifn_f_2, sizeof(__pyx_k_mohusets_fuzzynumbers_qrungifn_f_2), 0, 0, 1, 1},
+  {&__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy, sizeof(__pyx_k_mohusets_fuzzynumbers_qifn_fuzzy), 0, 0, 1, 0},
+  {&__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy_2, sizeof(__pyx_k_mohusets_fuzzynumbers_qifn_fuzzy_2), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_nmd, __pyx_k_nmd, sizeof(__pyx_k_nmd), 0, 0, 1, 1},
   {&__pyx_n_s_qrung, __pyx_k_qrung, sizeof(__pyx_k_qrung), 0, 0, 1, 1},
@@ -4359,7 +4367,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":11
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":11
  * from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
  * 
  * cpdef intersection(fn1:qrungifn, fn2:qrungifn):             # <<<<<<<<<<<<<<
@@ -4369,52 +4377,52 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__2 = PyTuple_Pack(2, __pyx_n_s_fn1, __pyx_n_s_fn2); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
-  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f, __pyx_n_s_intersection, 11, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_intersection, 11, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 11, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":20
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":20
  * 
  * 
  * cpdef unions(fn1:qrungifn, fn2:qrungifn):             # <<<<<<<<<<<<<<
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  */
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f, __pyx_n_s_unions, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_unions, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 20, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":29
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":29
  * 
  * 
  * cpdef algeb_multiply(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  */
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f, __pyx_n_s_algeb_multiply, 29, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_algeb_multiply, 29, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 29, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":38
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":38
  * 
  * 
  * cpdef algeb_plus(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  */
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f, __pyx_n_s_algeb_plus, 38, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_algeb_plus, 38, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 38, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":47
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":47
  * 
  * 
  * cpdef eins_multiply(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  */
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f, __pyx_n_s_eins_multiply, 47, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_eins_multiply, 47, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 47, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":56
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":56
  * 
  * 
  * cpdef eins_plus(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
  *     assert fn1.qrung == fn2.qrung, 'ERROR:the two FNs are not the same FN'
  *     q = fn1.qrung
  */
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f, __pyx_n_s_eins_plus, 56, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_eins_plus, 56, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4437,21 +4445,22 @@ static CYTHON_SMALL_CODE int __Pyx_InitConstants(void) {
   if (__Pyx_InitString(__pyx_string_tab[9], &__pyx_n_s_eins_plus) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[10], &__pyx_n_s_fn1) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[11], &__pyx_n_s_fn2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[12], &__pyx_n_s_import) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[13], &__pyx_n_s_intersection) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[14], &__pyx_n_s_is_coroutine) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[15], &__pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[16], &__pyx_n_s_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[17], &__pyx_kp_s_mohusets_fuzzynumbers_qrungifn_f) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[18], &__pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[19], &__pyx_n_s_name) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[20], &__pyx_n_s_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[21], &__pyx_n_s_qrung) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[22], &__pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[23], &__pyx_n_s_set_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[24], &__pyx_n_s_set_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[25], &__pyx_n_s_test) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[26], &__pyx_n_s_unions) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[12], &__pyx_n_s_fuzzy_element) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[13], &__pyx_n_s_import) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[14], &__pyx_n_s_intersection) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[15], &__pyx_n_s_is_coroutine) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[16], &__pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[17], &__pyx_n_s_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[18], &__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[19], &__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[20], &__pyx_n_s_name) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[21], &__pyx_n_s_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[22], &__pyx_n_s_qrung) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[23], &__pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[24], &__pyx_n_s_set_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[25], &__pyx_n_s_set_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[26], &__pyx_n_s_test) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[27], &__pyx_n_s_unions) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   #endif
   #if !CYTHON_USE_MODULE_STATE
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
@@ -4797,14 +4806,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_mohusets__fuzzynumbers__qrungifn__fuzzymath) {
+  if (__pyx_module_is_main_mohusets__fuzzynumbers__qifn__fuzzymath) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "mohusets.fuzzynumbers.qrungifn.fuzzymath")) {
-      if (unlikely((PyDict_SetItemString(modules, "mohusets.fuzzynumbers.qrungifn.fuzzymath", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "mohusets.fuzzynumbers.qifn.fuzzymath")) {
+      if (unlikely((PyDict_SetItemString(modules, "mohusets.fuzzynumbers.qifn.fuzzymath", __pyx_m) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -4825,10 +4834,10 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":8
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":8
  * #  Software: Mohusets
  * 
- * from .qrungifn import qrungifn             # <<<<<<<<<<<<<<
+ * from .fuzzy_element import qrungifn             # <<<<<<<<<<<<<<
  * from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
  * 
  */
@@ -4837,7 +4846,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_INCREF(__pyx_n_s_qrungifn);
   __Pyx_GIVEREF(__pyx_n_s_qrungifn);
   PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_qrungifn);
-  __pyx_t_3 = __Pyx_Import(__pyx_n_s_qrungifn, __pyx_t_2, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_Import(__pyx_n_s_fuzzy_element, __pyx_t_2, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_qrungifn); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
@@ -4846,7 +4855,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":11
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":11
  * from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
  * 
  * cpdef intersection(fn1:qrungifn, fn2:qrungifn):             # <<<<<<<<<<<<<<
@@ -4857,14 +4866,14 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_fn1, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_fn2, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_1intersection, 0, __pyx_n_s_intersection, NULL, __pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_1intersection, 0, __pyx_n_s_intersection, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_intersection, __pyx_t_2) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":20
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":20
  * 
  * 
  * cpdef unions(fn1:qrungifn, fn2:qrungifn):             # <<<<<<<<<<<<<<
@@ -4875,14 +4884,14 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_fn1, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_fn2, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_3unions, 0, __pyx_n_s_unions, NULL, __pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_3unions, 0, __pyx_n_s_unions, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_unions, __pyx_t_3) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":29
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":29
  * 
  * 
  * cpdef algeb_multiply(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -4893,14 +4902,14 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_fn1, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_fn2, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_5algeb_multiply, 0, __pyx_n_s_algeb_multiply, NULL, __pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_5algeb_multiply, 0, __pyx_n_s_algeb_multiply, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_algeb_multiply, __pyx_t_2) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":38
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":38
  * 
  * 
  * cpdef algeb_plus(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -4911,14 +4920,14 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_fn1, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_fn2, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_7algeb_plus, 0, __pyx_n_s_algeb_plus, NULL, __pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_7algeb_plus, 0, __pyx_n_s_algeb_plus, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_algeb_plus, __pyx_t_3) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":47
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":47
  * 
  * 
  * cpdef eins_multiply(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -4929,14 +4938,14 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_fn1, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_fn2, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_9eins_multiply, 0, __pyx_n_s_eins_multiply, NULL, __pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_9eins_multiply, 0, __pyx_n_s_eins_multiply, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_eins_multiply, __pyx_t_2) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":56
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":56
  * 
  * 
  * cpdef eins_plus(fn1: qrungifn, fn2: qrungifn):             # <<<<<<<<<<<<<<
@@ -4947,14 +4956,14 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_fn1, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_fn2, __pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_8qrungifn_9fuzzymath_11eins_plus, 0, __pyx_n_s_eins_plus, NULL, __pyx_n_s_mohusets_fuzzynumbers_qrungifn_f_2, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_9fuzzymath_11eins_plus, 0, __pyx_n_s_eins_plus, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_eins_plus, __pyx_t_3) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qrungifn/fuzzymath.pyx":1
+  /* "mohusets/fuzzynumbers/qifn/fuzzymath.pyx":1
  * #  Copyright (c) yibocat 2023 All Rights Reserved             # <<<<<<<<<<<<<<
  * #  Python: 3.10.9
  * #  Date: 2023/2/21 4:11
@@ -4972,13 +4981,13 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_3);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init mohusets.fuzzynumbers.qrungifn.fuzzymath", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init mohusets.fuzzynumbers.qifn.fuzzymath", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init mohusets.fuzzynumbers.qrungifn.fuzzymath");
+    PyErr_SetString(PyExc_ImportError, "init mohusets.fuzzynumbers.qifn.fuzzymath");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

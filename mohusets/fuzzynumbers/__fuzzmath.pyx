@@ -10,10 +10,14 @@ import copy
 import numpy as np
 cimport numpy as np
 
-from .qrungdhfe.qrungdhfe import qrungdhfe
-from .qrungivfn.qrungivfn import qrungivfn
-from .qrungifn.qrungifn import qrungifn
 
+from .qdhfe import config as config1
+from .qifn import config as config2
+from .qivfn import config as config3
+
+qrungdhfe = config1.global_get('type')
+qrungifn = config2.global_get('type')
+qrungivfn = config3.global_get('type')
 
 
 cpdef double _adj(np.ndarray d, double tm):

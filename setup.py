@@ -30,7 +30,7 @@ def no_cythonize(extensions, **_ignore):
     return extensions
 
 
-USE_CYTHON = True  # command line option, try-import, ...
+USE_CYTHON = False  # command line option, try-import, ...
 ext = '.pyx' if USE_CYTHON else '.c'
 # ext = '.pyx'
 
@@ -44,28 +44,28 @@ ext2 = Extension("mohusets.fuzzysets.fsmath",
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 
-ext3 = Extension("mohusets.fuzzynumbers.qrungifn.qrungifn",
-                 ["./mohusets/fuzzynumbers/qrungifn/qrungifn" + ext],
+ext3 = Extension("mohusets.fuzzynumbers.qifn.fuzzy_element",
+                 ["./mohusets/fuzzynumbers/qifn/fuzzy_element" + ext],
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
-ext4 = Extension("mohusets.fuzzynumbers.qrungifn.fuzzymath",
-                 ["./mohusets/fuzzynumbers/qrungifn/fuzzymath" + ext])
+ext4 = Extension("mohusets.fuzzynumbers.qifn.fuzzymath",
+                 ["./mohusets/fuzzynumbers/qifn/fuzzymath" + ext])
 
-ext5 = Extension("mohusets.fuzzynumbers.qrungivfn.qrungivfn",
-                 ["./mohusets/fuzzynumbers/qrungivfn/qrungivfn" + ext],
-                 include_dirs=include_dirs,
-                 define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
-
-ext6 = Extension("mohusets.fuzzynumbers.qrungivfn.fuzzymath",
-                 ["./mohusets/fuzzynumbers/qrungivfn/fuzzymath" + ext])
-
-ext7 = Extension("mohusets.fuzzynumbers.qrungdhfe.qrungdhfe",
-                 ["./mohusets/fuzzynumbers/qrungdhfe/qrungdhfe" + ext],
+ext5 = Extension("mohusets.fuzzynumbers.qivfn.fuzzy_element",
+                 ["./mohusets/fuzzynumbers/qivfn/fuzzy_element" + ext],
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 
-ext8 = Extension("mohusets.fuzzynumbers.qrungdhfe.fuzzymath",
-                 ["./mohusets/fuzzynumbers/qrungdhfe/fuzzymath" + ext],
+ext6 = Extension("mohusets.fuzzynumbers.qivfn.fuzzymath",
+                 ["./mohusets/fuzzynumbers/qivfn/fuzzymath" + ext])
+
+ext7 = Extension("mohusets.fuzzynumbers.qdhfe.fuzzy_element",
+                 ["./mohusets/fuzzynumbers/qdhfe/fuzzy_element" + ext],
+                 include_dirs=include_dirs,
+                 define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
+
+ext8 = Extension("mohusets.fuzzynumbers.qdhfe.fuzzymath",
+                 ["./mohusets/fuzzynumbers/qdhfe/fuzzymath" + ext],
                  include_dirs=include_dirs,
                  define_macros=[("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")])
 

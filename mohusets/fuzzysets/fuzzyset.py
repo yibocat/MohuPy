@@ -10,7 +10,7 @@ import copy
 import numpy as np
 import pandas as pd
 
-import mohusets.fuzzynumbers as fns
+from ..fuzzynumbers import glb
 
 
 class fuzzyset(object):
@@ -62,7 +62,7 @@ class fuzzyset(object):
     __type = None
 
     def __init__(self, qrung=None, ftype=None):
-        dictionary = fns.get_dict
+        dictionary = glb.global_dict()
         if qrung is not None and ftype is not None:
             assert ftype in dictionary, 'ERROR: fuzzy set type does not exist.'
             self.__type = ftype
@@ -199,7 +199,8 @@ class fuzzyset(object):
             self.__shape = self.__set.shape
         else:
             self.__type = x.__class__.__name__
-            self.__dict = fns.get_dict[self.__type]
+            self.__dict = glb.global_get(self.__type)
+            # self.__dict = fns.get_dict[self.__type]
             self.__set = np.append(self.__set, x)
             self.__qrung = x.qrung
             self.__shape = self.__set.shape
@@ -600,10 +601,10 @@ class fuzzyset(object):
         m = np.asarray(m)
         if show:
             print(m)
-        try:
-            self.__dict['convert_str'](m[0, 0], self.__qrung)
-        except Exception as e:
-            print(e, 'The fuzzy data format does not match the created fuzzy set element format')
+        # try:
+        self.__dict['convert_str'](m[0, 0], self.__qrung)
+        # except Exception as e:
+        #     print(e, 'The fuzzy data format does not match the created fuzzy set element format')
 
         for i in range(len(m)):
             for j in range(len(m[i])):

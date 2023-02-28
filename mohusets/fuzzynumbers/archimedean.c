@@ -21,7 +21,7 @@
         ],
         "name": "mohusets.fuzzynumbers.archimedean",
         "sources": [
-            "mohusets/fuzzynumbers/archimedean.pyx"
+            "./mohusets/fuzzynumbers/archimedean.pyx"
         ]
     },
     "module_name": "mohusets.fuzzynumbers.archimedean"
@@ -6774,7 +6774,7 @@ if (!__Pyx_RefNanny) {
   #endif
 
   /* "mohusets/fuzzynumbers/archimedean.pyx":8
- * #  Software: mohusets
+ * #  Software: Mohusets
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
@@ -6930,9 +6930,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "mohusets/fuzzynumbers/archimedean.pyx":1
- * #  Copyright (C) yibocat 2023 all Rights Reserved             # <<<<<<<<<<<<<<
+ * #  Copyright (c) yibocat 2023 All Rights Reserved             # <<<<<<<<<<<<<<
  * #  Python: 3.10.9
- * #  Date: 2023/2/17 4:43
+ * #  Date: 2023/2/21 4:11
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);

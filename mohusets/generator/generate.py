@@ -8,16 +8,19 @@
 import numpy as np
 import warnings
 
+
 from .memfunc import memfunc
 from .function import (sigmf, trimf, zmf,
                        trapmf, smf, gaussmf,
                        gauss2mf, gbellmf)
 
-# import mohusets.fuzzynumbers.qrungdhfe as hfe
+# import mohusets.fuzzynumbers.qdhfe as hfe
 # import mohusets.fuzzynumbers.qrungivfn as ivfn
 # import mohusets.fuzzynumbers.qrungifn as ifn
 
-import mohusets.fuzzynumbers as fns
+# import mohusets.fuzzynumbers as fns
+from ..fuzzynumbers import glb, zero
+
 
 fdict = {'sigmf': sigmf,
          'trimf': trimf,
@@ -154,7 +157,7 @@ class fuzzgener(object):
                     Note: When changing this attribute, a warning will pop up to clear
                     the original membership function and parameters.
         """
-        d = fns.get_dict.keys()
+        d = glb.global_dict().keys()
         assert qrung > 0, 'q-rung must be >= 1'
         assert fe in d, 'fuzzy element type does not exist.'
 
@@ -206,7 +209,7 @@ class fuzzgener(object):
 
     @fuzze.setter
     def fuzze(self, fuzze):
-        d = fns.get_dict.keys()
+        d = glb.global_dict().keys()
         if self.__custom:
             assert callable(fuzze), 'Custom fuzzy element must be a function.'
         else:
@@ -387,7 +390,7 @@ class dhfegener(fuzzgener):
             'The independent variable y is not in the range of %d and %d' % (
                 self.variable_start, self.variable_end)
 
-        dhfe = fns.zero('qrungdhfe', self.qrung)
+        dhfe = zero('qrungdhfe', self.qrung)
         md = self.mf(x)
         nmd = self.nmf(y)
         dhfe.set_md(md)
@@ -462,7 +465,7 @@ class ivfngener(fuzzgener):
             'The independent variable y is not in the range of %d and %d' % (
                 self.variable_start, self.variable_end)
 
-        ivf = fns.zero('qrungivfn', self.qrung)
+        ivf = zero('qrungivfn', self.qrung)
         md = np.sort(self.mf(x))
         nmd = np.sort(self.nmf(y))
         ivf.set_md(md)
@@ -537,7 +540,7 @@ class ifngener(fuzzgener):
             'The independent variable y is not in the range of %d and %d' % (
                 self.variable_start, self.variable_end)
 
-        fn = fns.zero('qrungifn', self.qrung)
+        fn = zero('qrungifn', self.qrung)
         md = np.sort(self.mf(x))
         nmd = np.sort(self.nmf(y))
         fn.set_md(md)

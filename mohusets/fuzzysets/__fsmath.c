@@ -21,7 +21,7 @@
         ],
         "name": "mohusets.fuzzysets.__fsmath",
         "sources": [
-            "mohusets/fuzzysets/__fsmath.pyx"
+            "./mohusets/fuzzysets/__fsmath.pyx"
         ]
     },
     "module_name": "mohusets.fuzzysets.__fsmath"
@@ -2050,6 +2050,9 @@ static PyObject *__Pyx_ImportDottedModule(PyObject *name, PyObject *parts_tuple)
 /* ImportFrom.proto */
 static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
 
+/* PyObjectCallNoArg.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
+
 /* IncludeStructmemberH.proto */
 #include <structmember.h>
 
@@ -2448,8 +2451,8 @@ static const char __pyx_k_y[] = "y";
 static const char __pyx_k__5[] = "*";
 static const char __pyx_k__6[] = ".";
 static const char __pyx_k_np[] = "np";
-static const char __pyx_k__17[] = "?";
-static const char __pyx_k_fns[] = "fns";
+static const char __pyx_k__16[] = "?";
+static const char __pyx_k_glb[] = "glb";
 static const char __pyx_k_set[] = "set";
 static const char __pyx_k_sum[] = "sum";
 static const char __pyx_k_main[] = "__main__";
@@ -2472,10 +2475,9 @@ static const char __pyx_k_append[] = "append";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_fuzzyset[] = "fuzzyset";
-static const char __pyx_k_get_dict[] = "get_dict";
-static const char __pyx_k_mohusets[] = "mohusets";
 static const char __pyx_k_multiply[] = "_multiply";
 static const char __pyx_k_ImportError[] = "ImportError";
+static const char __pyx_k_global_dict[] = "global_dict";
 static const char __pyx_k_fuzzynumbers[] = "fuzzynumbers";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
@@ -2483,7 +2485,6 @@ static const char __pyx_k_class_getitem[] = "__class_getitem__";
 static const char __pyx_k_AssertionError[] = "AssertionError";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_mohusets_fuzzynumbers[] = "mohusets.fuzzynumbers";
 static const char __pyx_k_mohusets_fuzzysets___fsmath[] = "mohusets.fuzzysets.__fsmath";
 static const char __pyx_k_ERROR_The_number_of_elements_in[] = "ERROR: The number of elements in the two fuzzy sets must be the same.";
 static const char __pyx_k_ERROR_the_two_fuzzy_set_are_not[] = "ERROR: the two fuzzy set are not the same set!";
@@ -2509,7 +2510,7 @@ static PyObject *__pyx_kp_u_KetError_The_norm_is_not_defined;
 static PyObject *__pyx_kp_u_Shape_of_two_set_are_not_aligned;
 static PyObject *__pyx_kp_u_The_first_set_must_be_1_dimensio;
 static PyObject *__pyx_kp_u_The_first_set_must_be_2_dimensio;
-static PyObject *__pyx_n_s__17;
+static PyObject *__pyx_n_s__16;
 static PyObject *__pyx_n_s__5;
 static PyObject *__pyx_kp_u__6;
 static PyObject *__pyx_n_u_algeb;
@@ -2524,17 +2525,15 @@ static PyObject *__pyx_n_s_dot11;
 static PyObject *__pyx_n_s_dot12;
 static PyObject *__pyx_n_s_dot21;
 static PyObject *__pyx_n_s_dot22;
-static PyObject *__pyx_n_s_fns;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_fuzzynumbers;
 static PyObject *__pyx_n_s_fuzzyset;
-static PyObject *__pyx_n_s_get_dict;
+static PyObject *__pyx_n_s_glb;
+static PyObject *__pyx_n_s_global_dict;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_initializing;
 static PyObject *__pyx_n_s_is_coroutine;
 static PyObject *__pyx_n_s_main;
-static PyObject *__pyx_n_s_mohusets;
-static PyObject *__pyx_n_s_mohusets_fuzzynumbers;
 static PyObject *__pyx_n_s_mohusets_fuzzysets___fsmath;
 static PyObject *__pyx_kp_s_mohusets_fuzzysets___fsmath_pyx;
 static PyObject *__pyx_n_u_multiply;
@@ -2568,15 +2567,14 @@ static PyObject *__pyx_slice__2;
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
 static PyObject *__pyx_tuple__7;
-static PyObject *__pyx_tuple__8;
-static PyObject *__pyx_tuple__10;
-static PyObject *__pyx_tuple__12;
-static PyObject *__pyx_tuple__14;
-static PyObject *__pyx_tuple__16;
-static PyObject *__pyx_codeobj__9;
-static PyObject *__pyx_codeobj__11;
-static PyObject *__pyx_codeobj__13;
-static PyObject *__pyx_codeobj__15;
+static PyObject *__pyx_tuple__9;
+static PyObject *__pyx_tuple__11;
+static PyObject *__pyx_tuple__13;
+static PyObject *__pyx_tuple__15;
+static PyObject *__pyx_codeobj__8;
+static PyObject *__pyx_codeobj__10;
+static PyObject *__pyx_codeobj__12;
+static PyObject *__pyx_codeobj__14;
 #endif
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -2621,7 +2619,7 @@ typedef struct {
   PyObject *__pyx_kp_u_Shape_of_two_set_are_not_aligned;
   PyObject *__pyx_kp_u_The_first_set_must_be_1_dimensio;
   PyObject *__pyx_kp_u_The_first_set_must_be_2_dimensio;
-  PyObject *__pyx_n_s__17;
+  PyObject *__pyx_n_s__16;
   PyObject *__pyx_n_s__5;
   PyObject *__pyx_kp_u__6;
   PyObject *__pyx_n_u_algeb;
@@ -2636,17 +2634,15 @@ typedef struct {
   PyObject *__pyx_n_s_dot12;
   PyObject *__pyx_n_s_dot21;
   PyObject *__pyx_n_s_dot22;
-  PyObject *__pyx_n_s_fns;
   PyObject *__pyx_n_s_format;
   PyObject *__pyx_n_s_fuzzynumbers;
   PyObject *__pyx_n_s_fuzzyset;
-  PyObject *__pyx_n_s_get_dict;
+  PyObject *__pyx_n_s_glb;
+  PyObject *__pyx_n_s_global_dict;
   PyObject *__pyx_n_s_import;
   PyObject *__pyx_n_s_initializing;
   PyObject *__pyx_n_s_is_coroutine;
   PyObject *__pyx_n_s_main;
-  PyObject *__pyx_n_s_mohusets;
-  PyObject *__pyx_n_s_mohusets_fuzzynumbers;
   PyObject *__pyx_n_s_mohusets_fuzzysets___fsmath;
   PyObject *__pyx_kp_s_mohusets_fuzzysets___fsmath_pyx;
   PyObject *__pyx_n_u_multiply;
@@ -2671,15 +2667,14 @@ typedef struct {
   PyObject *__pyx_tuple__3;
   PyObject *__pyx_tuple__4;
   PyObject *__pyx_tuple__7;
-  PyObject *__pyx_tuple__8;
-  PyObject *__pyx_tuple__10;
-  PyObject *__pyx_tuple__12;
-  PyObject *__pyx_tuple__14;
-  PyObject *__pyx_tuple__16;
-  PyObject *__pyx_codeobj__9;
-  PyObject *__pyx_codeobj__11;
-  PyObject *__pyx_codeobj__13;
-  PyObject *__pyx_codeobj__15;
+  PyObject *__pyx_tuple__9;
+  PyObject *__pyx_tuple__11;
+  PyObject *__pyx_tuple__13;
+  PyObject *__pyx_tuple__15;
+  PyObject *__pyx_codeobj__8;
+  PyObject *__pyx_codeobj__10;
+  PyObject *__pyx_codeobj__12;
+  PyObject *__pyx_codeobj__14;
 } __pyx_mstate;
 
 #ifdef __cplusplus
@@ -2740,7 +2735,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Shape_of_two_set_are_not_aligned);
   Py_CLEAR(clear_module_state->__pyx_kp_u_The_first_set_must_be_1_dimensio);
   Py_CLEAR(clear_module_state->__pyx_kp_u_The_first_set_must_be_2_dimensio);
-  Py_CLEAR(clear_module_state->__pyx_n_s__17);
+  Py_CLEAR(clear_module_state->__pyx_n_s__16);
   Py_CLEAR(clear_module_state->__pyx_n_s__5);
   Py_CLEAR(clear_module_state->__pyx_kp_u__6);
   Py_CLEAR(clear_module_state->__pyx_n_u_algeb);
@@ -2755,17 +2750,15 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_dot12);
   Py_CLEAR(clear_module_state->__pyx_n_s_dot21);
   Py_CLEAR(clear_module_state->__pyx_n_s_dot22);
-  Py_CLEAR(clear_module_state->__pyx_n_s_fns);
   Py_CLEAR(clear_module_state->__pyx_n_s_format);
   Py_CLEAR(clear_module_state->__pyx_n_s_fuzzynumbers);
   Py_CLEAR(clear_module_state->__pyx_n_s_fuzzyset);
-  Py_CLEAR(clear_module_state->__pyx_n_s_get_dict);
+  Py_CLEAR(clear_module_state->__pyx_n_s_glb);
+  Py_CLEAR(clear_module_state->__pyx_n_s_global_dict);
   Py_CLEAR(clear_module_state->__pyx_n_s_import);
   Py_CLEAR(clear_module_state->__pyx_n_s_initializing);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
-  Py_CLEAR(clear_module_state->__pyx_n_s_mohusets);
-  Py_CLEAR(clear_module_state->__pyx_n_s_mohusets_fuzzynumbers);
   Py_CLEAR(clear_module_state->__pyx_n_s_mohusets_fuzzysets___fsmath);
   Py_CLEAR(clear_module_state->__pyx_kp_s_mohusets_fuzzysets___fsmath_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_u_multiply);
@@ -2790,15 +2783,14 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_tuple__3);
   Py_CLEAR(clear_module_state->__pyx_tuple__4);
   Py_CLEAR(clear_module_state->__pyx_tuple__7);
-  Py_CLEAR(clear_module_state->__pyx_tuple__8);
-  Py_CLEAR(clear_module_state->__pyx_tuple__10);
-  Py_CLEAR(clear_module_state->__pyx_tuple__12);
-  Py_CLEAR(clear_module_state->__pyx_tuple__14);
-  Py_CLEAR(clear_module_state->__pyx_tuple__16);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__9);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__11);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__13);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__15);
+  Py_CLEAR(clear_module_state->__pyx_tuple__9);
+  Py_CLEAR(clear_module_state->__pyx_tuple__11);
+  Py_CLEAR(clear_module_state->__pyx_tuple__13);
+  Py_CLEAR(clear_module_state->__pyx_tuple__15);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__8);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__10);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__12);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__14);
   return 0;
 }
 #endif
@@ -2846,7 +2838,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Shape_of_two_set_are_not_aligned);
   Py_VISIT(traverse_module_state->__pyx_kp_u_The_first_set_must_be_1_dimensio);
   Py_VISIT(traverse_module_state->__pyx_kp_u_The_first_set_must_be_2_dimensio);
-  Py_VISIT(traverse_module_state->__pyx_n_s__17);
+  Py_VISIT(traverse_module_state->__pyx_n_s__16);
   Py_VISIT(traverse_module_state->__pyx_n_s__5);
   Py_VISIT(traverse_module_state->__pyx_kp_u__6);
   Py_VISIT(traverse_module_state->__pyx_n_u_algeb);
@@ -2861,17 +2853,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_dot12);
   Py_VISIT(traverse_module_state->__pyx_n_s_dot21);
   Py_VISIT(traverse_module_state->__pyx_n_s_dot22);
-  Py_VISIT(traverse_module_state->__pyx_n_s_fns);
   Py_VISIT(traverse_module_state->__pyx_n_s_format);
   Py_VISIT(traverse_module_state->__pyx_n_s_fuzzynumbers);
   Py_VISIT(traverse_module_state->__pyx_n_s_fuzzyset);
-  Py_VISIT(traverse_module_state->__pyx_n_s_get_dict);
+  Py_VISIT(traverse_module_state->__pyx_n_s_glb);
+  Py_VISIT(traverse_module_state->__pyx_n_s_global_dict);
   Py_VISIT(traverse_module_state->__pyx_n_s_import);
   Py_VISIT(traverse_module_state->__pyx_n_s_initializing);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
-  Py_VISIT(traverse_module_state->__pyx_n_s_mohusets);
-  Py_VISIT(traverse_module_state->__pyx_n_s_mohusets_fuzzynumbers);
   Py_VISIT(traverse_module_state->__pyx_n_s_mohusets_fuzzysets___fsmath);
   Py_VISIT(traverse_module_state->__pyx_kp_s_mohusets_fuzzysets___fsmath_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_u_multiply);
@@ -2896,15 +2886,14 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_tuple__3);
   Py_VISIT(traverse_module_state->__pyx_tuple__4);
   Py_VISIT(traverse_module_state->__pyx_tuple__7);
-  Py_VISIT(traverse_module_state->__pyx_tuple__8);
-  Py_VISIT(traverse_module_state->__pyx_tuple__10);
-  Py_VISIT(traverse_module_state->__pyx_tuple__12);
-  Py_VISIT(traverse_module_state->__pyx_tuple__14);
-  Py_VISIT(traverse_module_state->__pyx_tuple__16);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__9);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__11);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__13);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__15);
+  Py_VISIT(traverse_module_state->__pyx_tuple__9);
+  Py_VISIT(traverse_module_state->__pyx_tuple__11);
+  Py_VISIT(traverse_module_state->__pyx_tuple__13);
+  Py_VISIT(traverse_module_state->__pyx_tuple__15);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__8);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__10);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__12);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__14);
   return 0;
 }
 #endif
@@ -2949,7 +2938,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Shape_of_two_set_are_not_aligned __pyx_mstate_global->__pyx_kp_u_Shape_of_two_set_are_not_aligned
 #define __pyx_kp_u_The_first_set_must_be_1_dimensio __pyx_mstate_global->__pyx_kp_u_The_first_set_must_be_1_dimensio
 #define __pyx_kp_u_The_first_set_must_be_2_dimensio __pyx_mstate_global->__pyx_kp_u_The_first_set_must_be_2_dimensio
-#define __pyx_n_s__17 __pyx_mstate_global->__pyx_n_s__17
+#define __pyx_n_s__16 __pyx_mstate_global->__pyx_n_s__16
 #define __pyx_n_s__5 __pyx_mstate_global->__pyx_n_s__5
 #define __pyx_kp_u__6 __pyx_mstate_global->__pyx_kp_u__6
 #define __pyx_n_u_algeb __pyx_mstate_global->__pyx_n_u_algeb
@@ -2964,17 +2953,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_dot12 __pyx_mstate_global->__pyx_n_s_dot12
 #define __pyx_n_s_dot21 __pyx_mstate_global->__pyx_n_s_dot21
 #define __pyx_n_s_dot22 __pyx_mstate_global->__pyx_n_s_dot22
-#define __pyx_n_s_fns __pyx_mstate_global->__pyx_n_s_fns
 #define __pyx_n_s_format __pyx_mstate_global->__pyx_n_s_format
 #define __pyx_n_s_fuzzynumbers __pyx_mstate_global->__pyx_n_s_fuzzynumbers
 #define __pyx_n_s_fuzzyset __pyx_mstate_global->__pyx_n_s_fuzzyset
-#define __pyx_n_s_get_dict __pyx_mstate_global->__pyx_n_s_get_dict
+#define __pyx_n_s_glb __pyx_mstate_global->__pyx_n_s_glb
+#define __pyx_n_s_global_dict __pyx_mstate_global->__pyx_n_s_global_dict
 #define __pyx_n_s_import __pyx_mstate_global->__pyx_n_s_import
 #define __pyx_n_s_initializing __pyx_mstate_global->__pyx_n_s_initializing
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
-#define __pyx_n_s_mohusets __pyx_mstate_global->__pyx_n_s_mohusets
-#define __pyx_n_s_mohusets_fuzzynumbers __pyx_mstate_global->__pyx_n_s_mohusets_fuzzynumbers
 #define __pyx_n_s_mohusets_fuzzysets___fsmath __pyx_mstate_global->__pyx_n_s_mohusets_fuzzysets___fsmath
 #define __pyx_kp_s_mohusets_fuzzysets___fsmath_pyx __pyx_mstate_global->__pyx_kp_s_mohusets_fuzzysets___fsmath_pyx
 #define __pyx_n_u_multiply __pyx_mstate_global->__pyx_n_u_multiply
@@ -2999,20 +2986,19 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_tuple__3 __pyx_mstate_global->__pyx_tuple__3
 #define __pyx_tuple__4 __pyx_mstate_global->__pyx_tuple__4
 #define __pyx_tuple__7 __pyx_mstate_global->__pyx_tuple__7
-#define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
-#define __pyx_tuple__10 __pyx_mstate_global->__pyx_tuple__10
-#define __pyx_tuple__12 __pyx_mstate_global->__pyx_tuple__12
-#define __pyx_tuple__14 __pyx_mstate_global->__pyx_tuple__14
-#define __pyx_tuple__16 __pyx_mstate_global->__pyx_tuple__16
-#define __pyx_codeobj__9 __pyx_mstate_global->__pyx_codeobj__9
-#define __pyx_codeobj__11 __pyx_mstate_global->__pyx_codeobj__11
-#define __pyx_codeobj__13 __pyx_mstate_global->__pyx_codeobj__13
-#define __pyx_codeobj__15 __pyx_mstate_global->__pyx_codeobj__15
+#define __pyx_tuple__9 __pyx_mstate_global->__pyx_tuple__9
+#define __pyx_tuple__11 __pyx_mstate_global->__pyx_tuple__11
+#define __pyx_tuple__13 __pyx_mstate_global->__pyx_tuple__13
+#define __pyx_tuple__15 __pyx_mstate_global->__pyx_tuple__15
+#define __pyx_codeobj__8 __pyx_mstate_global->__pyx_codeobj__8
+#define __pyx_codeobj__10 __pyx_mstate_global->__pyx_codeobj__10
+#define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
+#define __pyx_codeobj__14 __pyx_mstate_global->__pyx_codeobj__14
 #endif
 /* #### Code section: module_code ### */
 
-/* "mohusets/fuzzysets/__fsmath.pyx":15
- * d = fns.get_dict
+/* "mohusets/fuzzysets/__fsmath.pyx":16
+ * d = glb.global_dict()
  * 
  * cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     assert x[0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
@@ -3058,7 +3044,7 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
     }
   }
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":16
+  /* "mohusets/fuzzysets/__fsmath.pyx":17
  * 
  * cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):
  *     assert x[0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'             # <<<<<<<<<<<<<<
@@ -3067,56 +3053,23 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 16, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 16, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_4)) {
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_fuzzy_set_are_not, 0, 0);
-      __PYX_ERR(0, 16, __pyx_L1_error)
-    }
-  }
-  #else
-  if ((1)); else __PYX_ERR(0, 16, __pyx_L1_error)
-  #endif
-
-  /* "mohusets/fuzzysets/__fsmath.pyx":17
- * cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):
- *     assert x[0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
- *     assert x[0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'             # <<<<<<<<<<<<<<
- *     assert x.ndim == 1 and x.ndim == 1, 'Both fuzzy sets must be 1-dimensional fuzzy sets.'
- *     assert x.size == y.size, 'ERROR: The number of elements in the two fuzzy sets must be the same.'
- */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(!Py_OptimizeFlag)) {
     __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 17, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (unlikely(!__pyx_t_4)) {
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_qrung_of_two_fuzzy_set, 0, 0);
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_fuzzy_set_are_not, 0, 0);
       __PYX_ERR(0, 17, __pyx_L1_error)
     }
   }
@@ -3125,6 +3078,39 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
   #endif
 
   /* "mohusets/fuzzysets/__fsmath.pyx":18
+ * cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):
+ *     assert x[0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
+ *     assert x[0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'             # <<<<<<<<<<<<<<
+ *     assert x.ndim == 1 and x.ndim == 1, 'Both fuzzy sets must be 1-dimensional fuzzy sets.'
+ *     assert x.size == y.size, 'ERROR: The number of elements in the two fuzzy sets must be the same.'
+ */
+  #ifndef CYTHON_WITHOUT_ASSERTIONS
+  if (unlikely(!Py_OptimizeFlag)) {
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 18, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 18, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (unlikely(!__pyx_t_4)) {
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_qrung_of_two_fuzzy_set, 0, 0);
+      __PYX_ERR(0, 18, __pyx_L1_error)
+    }
+  }
+  #else
+  if ((1)); else __PYX_ERR(0, 18, __pyx_L1_error)
+  #endif
+
+  /* "mohusets/fuzzysets/__fsmath.pyx":19
  *     assert x[0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  *     assert x.ndim == 1 and x.ndim == 1, 'Both fuzzy sets must be 1-dimensional fuzzy sets.'             # <<<<<<<<<<<<<<
@@ -3144,14 +3130,14 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
     __pyx_L3_bool_binop_done:;
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_Both_fuzzy_sets_must_be_1_dimens, 0, 0);
-      __PYX_ERR(0, 18, __pyx_L1_error)
+      __PYX_ERR(0, 19, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 18, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 19, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":19
+  /* "mohusets/fuzzysets/__fsmath.pyx":20
  *     assert x[0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  *     assert x.ndim == 1 and x.ndim == 1, 'Both fuzzy sets must be 1-dimensional fuzzy sets.'
  *     assert x.size == y.size, 'ERROR: The number of elements in the two fuzzy sets must be the same.'             # <<<<<<<<<<<<<<
@@ -3163,26 +3149,26 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
     __pyx_t_4 = (__pyx_f_5numpy_7ndarray_4size_size(__pyx_v_x) == __pyx_f_5numpy_7ndarray_4size_size(__pyx_v_y));
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_The_number_of_elements_in, 0, 0);
-      __PYX_ERR(0, 19, __pyx_L1_error)
+      __PYX_ERR(0, 20, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 19, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 20, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":22
+  /* "mohusets/fuzzysets/__fsmath.pyx":23
  *     cdef int num
  * 
  *     nor = norm + '_multiply'             # <<<<<<<<<<<<<<
  *     assert nor in d[x[0].__class__.__name__], 'KetError: The norm {} is not defined.'.format(nor)
  * 
  */
-  __pyx_t_1 = __Pyx_PyUnicode_ConcatSafe(__pyx_v_norm, __pyx_n_u_multiply); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyUnicode_ConcatSafe(__pyx_v_norm, __pyx_n_u_multiply); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_nor = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":23
+  /* "mohusets/fuzzysets/__fsmath.pyx":24
  * 
  *     nor = norm + '_multiply'
  *     assert nor in d[x[0].__class__.__name__], 'KetError: The norm {} is not defined.'.format(nor)             # <<<<<<<<<<<<<<
@@ -3191,24 +3177,24 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_d); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_d); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 23, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 24, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 23, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 24, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_v_nor, __pyx_t_3, Py_EQ)); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 23, __pyx_L1_error)
+    __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_v_nor, __pyx_t_3, Py_EQ)); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 24, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (unlikely(!__pyx_t_4)) {
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_KetError_The_norm_is_not_defined, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_kp_u_KetError_The_norm_is_not_defined, __pyx_n_s_format); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_1 = NULL;
       __pyx_t_6 = 0;
@@ -3226,69 +3212,69 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
         PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_v_nor};
         __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 23, __pyx_L1_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 24, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
-      __pyx_t_2 = PyTuple_Pack(1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
+      __pyx_t_2 = PyTuple_Pack(1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_t_2, 0, 0);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __PYX_ERR(0, 23, __pyx_L1_error)
+      __PYX_ERR(0, 24, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 23, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 24, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":25
+  /* "mohusets/fuzzysets/__fsmath.pyx":26
  *     assert nor in d[x[0].__class__.__name__], 'KetError: The norm {} is not defined.'.format(nor)
  * 
  *     multipy = d[x[0].__class__.__name__][nor]             # <<<<<<<<<<<<<<
  *     newfuzz = fuzzyset(x[0].qrung, y[0].__class__.__name__)
  *     num = 0
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_d); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_d); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_v_nor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_v_nor); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_multipy = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":26
+  /* "mohusets/fuzzysets/__fsmath.pyx":27
  * 
  *     multipy = d[x[0].__class__.__name__][nor]
  *     newfuzz = fuzzyset(x[0].qrung, y[0].__class__.__name__)             # <<<<<<<<<<<<<<
  *     num = 0
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_fuzzyset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_fuzzyset); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_qrung); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_qrung); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_class); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_class); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __pyx_t_8 = NULL;
@@ -3309,14 +3295,14 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
     __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
   __pyx_v_newfuzz = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":27
+  /* "mohusets/fuzzysets/__fsmath.pyx":28
  *     multipy = d[x[0].__class__.__name__][nor]
  *     newfuzz = fuzzyset(x[0].qrung, y[0].__class__.__name__)
  *     num = 0             # <<<<<<<<<<<<<<
@@ -3325,28 +3311,28 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
  */
   __pyx_v_num = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":29
+  /* "mohusets/fuzzysets/__fsmath.pyx":30
  *     num = 0
  * 
  *     for i in range(len(x)):             # <<<<<<<<<<<<<<
  *         newfuzz.append(multipy(x[i], y[i]))
  *         num += 1
  */
-  __pyx_t_9 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_9 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_9 == ((Py_ssize_t)-1))) __PYX_ERR(0, 30, __pyx_L1_error)
   __pyx_t_10 = __pyx_t_9;
   for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
     __pyx_v_i = __pyx_t_11;
 
-    /* "mohusets/fuzzysets/__fsmath.pyx":30
+    /* "mohusets/fuzzysets/__fsmath.pyx":31
  * 
  *     for i in range(len(x)):
  *         newfuzz.append(multipy(x[i], y[i]))             # <<<<<<<<<<<<<<
  *         num += 1
  *     f = newfuzz.sum()
  */
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_multipy);
     __pyx_t_7 = __pyx_v_multipy; __pyx_t_8 = NULL;
@@ -3367,14 +3353,14 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
-    __pyx_t_12 = __Pyx_PyObject_Append(__pyx_v_newfuzz, __pyx_t_3); if (unlikely(__pyx_t_12 == ((int)-1))) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_Append(__pyx_v_newfuzz, __pyx_t_3); if (unlikely(__pyx_t_12 == ((int)-1))) __PYX_ERR(0, 31, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "mohusets/fuzzysets/__fsmath.pyx":31
+    /* "mohusets/fuzzysets/__fsmath.pyx":32
  *     for i in range(len(x)):
  *         newfuzz.append(multipy(x[i], y[i]))
  *         num += 1             # <<<<<<<<<<<<<<
@@ -3384,46 +3370,14 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
     __pyx_v_num = (__pyx_v_num + 1);
   }
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":32
+  /* "mohusets/fuzzysets/__fsmath.pyx":33
  *         newfuzz.append(multipy(x[i], y[i]))
  *         num += 1
  *     f = newfuzz.sum()             # <<<<<<<<<<<<<<
  *     newfuzz.clear()
  *     newfuzz.append(f)
  */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_newfuzz, __pyx_n_s_sum); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 32, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = NULL;
-  __pyx_t_6 = 0;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_7);
-    if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
-      __Pyx_INCREF(__pyx_t_2);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_7, function);
-      __pyx_t_6 = 1;
-    }
-  }
-  {
-    PyObject *__pyx_callargs[1] = {__pyx_t_2, };
-    __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
-    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 32, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  }
-  __pyx_v_f = __pyx_t_3;
-  __pyx_t_3 = 0;
-
-  /* "mohusets/fuzzysets/__fsmath.pyx":33
- *         num += 1
- *     f = newfuzz.sum()
- *     newfuzz.clear()             # <<<<<<<<<<<<<<
- *     newfuzz.append(f)
- *     return newfuzz
- */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_newfuzz, __pyx_n_s_clear); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_newfuzz, __pyx_n_s_sum); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_2 = NULL;
   __pyx_t_6 = 0;
@@ -3445,18 +3399,50 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_f = __pyx_t_3;
+  __pyx_t_3 = 0;
 
   /* "mohusets/fuzzysets/__fsmath.pyx":34
+ *         num += 1
+ *     f = newfuzz.sum()
+ *     newfuzz.clear()             # <<<<<<<<<<<<<<
+ *     newfuzz.append(f)
+ *     return newfuzz
+ */
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_newfuzz, __pyx_n_s_clear); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_2 = NULL;
+  __pyx_t_6 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_7))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_7);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_7);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_7, function);
+      __pyx_t_6 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[1] = {__pyx_t_2, };
+    __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_7, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "mohusets/fuzzysets/__fsmath.pyx":35
  *     f = newfuzz.sum()
  *     newfuzz.clear()
  *     newfuzz.append(f)             # <<<<<<<<<<<<<<
  *     return newfuzz
  * 
  */
-  __pyx_t_12 = __Pyx_PyObject_Append(__pyx_v_newfuzz, __pyx_v_f); if (unlikely(__pyx_t_12 == ((int)-1))) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyObject_Append(__pyx_v_newfuzz, __pyx_v_f); if (unlikely(__pyx_t_12 == ((int)-1))) __PYX_ERR(0, 35, __pyx_L1_error)
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":35
+  /* "mohusets/fuzzysets/__fsmath.pyx":36
  *     newfuzz.clear()
  *     newfuzz.append(f)
  *     return newfuzz             # <<<<<<<<<<<<<<
@@ -3468,8 +3454,8 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(PyArrayObject *_
   __pyx_r = __pyx_v_newfuzz;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":15
- * d = fns.get_dict
+  /* "mohusets/fuzzysets/__fsmath.pyx":16
+ * d = glb.global_dict()
  * 
  * cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     assert x[0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
@@ -3548,26 +3534,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_x)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_y)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__dot11", 0, 2, 3, 1); __PYX_ERR(0, 15, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__dot11", 0, 2, 3, 1); __PYX_ERR(0, 16, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_norm);
           if (value) { values[2] = value; kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 15, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__dot11") < 0)) __PYX_ERR(0, 15, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__dot11") < 0)) __PYX_ERR(0, 16, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -3585,15 +3571,15 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__dot11", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 15, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__dot11", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 16, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzysets.__fsmath.__dot11", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(0, 15, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y), __pyx_ptype_5numpy_ndarray, 1, "y", 0))) __PYX_ERR(0, 15, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_norm), (&PyUnicode_Type), 1, "norm", 1))) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y), __pyx_ptype_5numpy_ndarray, 1, "y", 0))) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_norm), (&PyUnicode_Type), 1, "norm", 1))) __PYX_ERR(0, 16, __pyx_L1_error)
   __pyx_r = __pyx_pf_8mohusets_9fuzzysets_8__fsmath___dot11(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_norm);
 
   /* function exit code */
@@ -3617,7 +3603,7 @@ static PyObject *__pyx_pf_8mohusets_9fuzzysets_8__fsmath___dot11(CYTHON_UNUSED P
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.norm = __pyx_v_norm;
-  __pyx_t_1 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3634,7 +3620,7 @@ static PyObject *__pyx_pf_8mohusets_9fuzzysets_8__fsmath___dot11(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "mohusets/fuzzysets/__fsmath.pyx":37
+/* "mohusets/fuzzysets/__fsmath.pyx":38
  *     return newfuzz
  * 
  * cpdef __dot21(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
@@ -3678,7 +3664,7 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(PyArrayObject *_
     }
   }
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":38
+  /* "mohusets/fuzzysets/__fsmath.pyx":39
  * 
  * cpdef __dot21(np.ndarray x, np.ndarray y, str norm='algeb'):
  *     assert x[0, 0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'             # <<<<<<<<<<<<<<
@@ -3687,56 +3673,23 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(PyArrayObject *_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 38, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 38, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_4)) {
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_fuzzy_set_are_not, 0, 0);
-      __PYX_ERR(0, 38, __pyx_L1_error)
-    }
-  }
-  #else
-  if ((1)); else __PYX_ERR(0, 38, __pyx_L1_error)
-  #endif
-
-  /* "mohusets/fuzzysets/__fsmath.pyx":39
- * cpdef __dot21(np.ndarray x, np.ndarray y, str norm='algeb'):
- *     assert x[0, 0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
- *     assert x[0, 0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'             # <<<<<<<<<<<<<<
- *     assert x.ndim == 2 and y.ndim == 1, \
- *         'The first set must be 2-dimensional and the second set must be 1-dimensional'
- */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(!Py_OptimizeFlag)) {
     __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 39, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (unlikely(!__pyx_t_4)) {
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_qrung_of_two_fuzzy_set, 0, 0);
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_fuzzy_set_are_not, 0, 0);
       __PYX_ERR(0, 39, __pyx_L1_error)
     }
   }
@@ -3745,6 +3698,39 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(PyArrayObject *_
   #endif
 
   /* "mohusets/fuzzysets/__fsmath.pyx":40
+ * cpdef __dot21(np.ndarray x, np.ndarray y, str norm='algeb'):
+ *     assert x[0, 0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
+ *     assert x[0, 0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'             # <<<<<<<<<<<<<<
+ *     assert x.ndim == 2 and y.ndim == 1, \
+ *         'The first set must be 2-dimensional and the second set must be 1-dimensional'
+ */
+  #ifndef CYTHON_WITHOUT_ASSERTIONS
+  if (unlikely(!Py_OptimizeFlag)) {
+    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 40, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (unlikely(!__pyx_t_4)) {
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_qrung_of_two_fuzzy_set, 0, 0);
+      __PYX_ERR(0, 40, __pyx_L1_error)
+    }
+  }
+  #else
+  if ((1)); else __PYX_ERR(0, 40, __pyx_L1_error)
+  #endif
+
+  /* "mohusets/fuzzysets/__fsmath.pyx":41
  *     assert x[0, 0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0, 0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  *     assert x.ndim == 2 and y.ndim == 1, \             # <<<<<<<<<<<<<<
@@ -3764,14 +3750,14 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(PyArrayObject *_
     __pyx_L3_bool_binop_done:;
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_The_first_set_must_be_2_dimensio, 0, 0);
-      __PYX_ERR(0, 40, __pyx_L1_error)
+      __PYX_ERR(0, 41, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 40, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 41, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":42
+  /* "mohusets/fuzzysets/__fsmath.pyx":43
  *     assert x.ndim == 2 and y.ndim == 1, \
  *         'The first set must be 2-dimensional and the second set must be 1-dimensional'
  *     assert len(x[0]) == len(y), 'Shape of two set are not aligned.'             # <<<<<<<<<<<<<<
@@ -3780,41 +3766,41 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(PyArrayObject *_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_6 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_6 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 43, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_y)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 42, __pyx_L1_error)
+    __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_y)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 43, __pyx_L1_error)
     __pyx_t_4 = (__pyx_t_6 == __pyx_t_7);
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_Shape_of_two_set_are_not_aligned, 0, 0);
-      __PYX_ERR(0, 42, __pyx_L1_error)
+      __PYX_ERR(0, 43, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 42, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 43, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":44
+  /* "mohusets/fuzzysets/__fsmath.pyx":45
  *     assert len(x[0]) == len(y), 'Shape of two set are not aligned.'
  * 
  *     newf = fuzzyset(x[0, 0].qrung, y[0].__class__.__name__)             # <<<<<<<<<<<<<<
  * 
  *     for i in range(len(x)):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_fuzzyset); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_fuzzyset); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_qrung); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_qrung); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_class); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_class); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __pyx_t_9 = NULL;
@@ -3835,35 +3821,35 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(PyArrayObject *_
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_newf = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":46
+  /* "mohusets/fuzzysets/__fsmath.pyx":47
  *     newf = fuzzyset(x[0, 0].qrung, y[0].__class__.__name__)
  * 
  *     for i in range(len(x)):             # <<<<<<<<<<<<<<
  *         newf.append(__dot11(x[i, :], y, norm).set[0])
  *     return newf
  */
-  __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 47, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_6; __pyx_t_11+=1) {
     __pyx_v_i = __pyx_t_11;
 
-    /* "mohusets/fuzzysets/__fsmath.pyx":47
+    /* "mohusets/fuzzysets/__fsmath.pyx":48
  * 
  *     for i in range(len(x)):
  *         newf.append(__dot11(x[i, :], y, norm).set[0])             # <<<<<<<<<<<<<<
  *     return newf
  * 
  */
-    __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -3871,26 +3857,26 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(PyArrayObject *_
     __Pyx_GIVEREF(__pyx_slice__2);
     PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_slice__2);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 47, __pyx_L1_error)
+    if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 48, __pyx_L1_error)
     __pyx_t_12.__pyx_n = 1;
     __pyx_t_12.norm = __pyx_v_norm;
-    __pyx_t_2 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(((PyArrayObject *)__pyx_t_1), __pyx_v_y, 0, &__pyx_t_12); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(((PyArrayObject *)__pyx_t_1), __pyx_v_y, 0, &__pyx_t_12); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_13 = __Pyx_PyObject_Append(__pyx_v_newf, __pyx_t_2); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 47, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_Append(__pyx_v_newf, __pyx_t_2); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":48
+  /* "mohusets/fuzzysets/__fsmath.pyx":49
  *     for i in range(len(x)):
  *         newf.append(__dot11(x[i, :], y, norm).set[0])
  *     return newf             # <<<<<<<<<<<<<<
@@ -3902,7 +3888,7 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(PyArrayObject *_
   __pyx_r = __pyx_v_newf;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":37
+  /* "mohusets/fuzzysets/__fsmath.pyx":38
  *     return newfuzz
  * 
  * cpdef __dot21(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
@@ -3979,26 +3965,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_x)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_y)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__dot21", 0, 2, 3, 1); __PYX_ERR(0, 37, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__dot21", 0, 2, 3, 1); __PYX_ERR(0, 38, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_norm);
           if (value) { values[2] = value; kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__dot21") < 0)) __PYX_ERR(0, 37, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__dot21") < 0)) __PYX_ERR(0, 38, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -4016,15 +4002,15 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__dot21", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 37, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__dot21", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 38, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzysets.__fsmath.__dot21", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(0, 37, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y), __pyx_ptype_5numpy_ndarray, 1, "y", 0))) __PYX_ERR(0, 37, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_norm), (&PyUnicode_Type), 1, "norm", 1))) __PYX_ERR(0, 37, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y), __pyx_ptype_5numpy_ndarray, 1, "y", 0))) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_norm), (&PyUnicode_Type), 1, "norm", 1))) __PYX_ERR(0, 38, __pyx_L1_error)
   __pyx_r = __pyx_pf_8mohusets_9fuzzysets_8__fsmath_2__dot21(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_norm);
 
   /* function exit code */
@@ -4048,7 +4034,7 @@ static PyObject *__pyx_pf_8mohusets_9fuzzysets_8__fsmath_2__dot21(CYTHON_UNUSED 
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.norm = __pyx_v_norm;
-  __pyx_t_1 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot21(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4065,7 +4051,7 @@ static PyObject *__pyx_pf_8mohusets_9fuzzysets_8__fsmath_2__dot21(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "mohusets/fuzzysets/__fsmath.pyx":50
+/* "mohusets/fuzzysets/__fsmath.pyx":51
  *     return newf
  * 
  * cpdef __dot12(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
@@ -4109,7 +4095,7 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(PyArrayObject *_
     }
   }
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":51
+  /* "mohusets/fuzzysets/__fsmath.pyx":52
  * 
  * cpdef __dot12(np.ndarray x, np.ndarray y, str norm='algeb'):
  *     assert x[0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'             # <<<<<<<<<<<<<<
@@ -4118,56 +4104,23 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(PyArrayObject *_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_4)) {
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_fuzzy_set_are_not, 0, 0);
-      __PYX_ERR(0, 51, __pyx_L1_error)
-    }
-  }
-  #else
-  if ((1)); else __PYX_ERR(0, 51, __pyx_L1_error)
-  #endif
-
-  /* "mohusets/fuzzysets/__fsmath.pyx":52
- * cpdef __dot12(np.ndarray x, np.ndarray y, str norm='algeb'):
- *     assert x[0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'
- *     assert x[0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'             # <<<<<<<<<<<<<<
- *     assert x.ndim == 1 and y.ndim == 2, 'The first set must be 1-dimensional and the second set must be 2-dimensional'
- *     assert len(x) == len(y), 'Shape of two set are not aligned.'
- */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(!Py_OptimizeFlag)) {
     __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 52, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (unlikely(!__pyx_t_4)) {
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_qrung_of_two_fuzzy_set, 0, 0);
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_fuzzy_set_are_not, 0, 0);
       __PYX_ERR(0, 52, __pyx_L1_error)
     }
   }
@@ -4176,6 +4129,39 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(PyArrayObject *_
   #endif
 
   /* "mohusets/fuzzysets/__fsmath.pyx":53
+ * cpdef __dot12(np.ndarray x, np.ndarray y, str norm='algeb'):
+ *     assert x[0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'
+ *     assert x[0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'             # <<<<<<<<<<<<<<
+ *     assert x.ndim == 1 and y.ndim == 2, 'The first set must be 1-dimensional and the second set must be 2-dimensional'
+ *     assert len(x) == len(y), 'Shape of two set are not aligned.'
+ */
+  #ifndef CYTHON_WITHOUT_ASSERTIONS
+  if (unlikely(!Py_OptimizeFlag)) {
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 53, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 53, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (unlikely(!__pyx_t_4)) {
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_qrung_of_two_fuzzy_set, 0, 0);
+      __PYX_ERR(0, 53, __pyx_L1_error)
+    }
+  }
+  #else
+  if ((1)); else __PYX_ERR(0, 53, __pyx_L1_error)
+  #endif
+
+  /* "mohusets/fuzzysets/__fsmath.pyx":54
  *     assert x[0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  *     assert x.ndim == 1 and y.ndim == 2, 'The first set must be 1-dimensional and the second set must be 2-dimensional'             # <<<<<<<<<<<<<<
@@ -4195,14 +4181,14 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(PyArrayObject *_
     __pyx_L3_bool_binop_done:;
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_The_first_set_must_be_1_dimensio, 0, 0);
-      __PYX_ERR(0, 53, __pyx_L1_error)
+      __PYX_ERR(0, 54, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 53, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 54, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":54
+  /* "mohusets/fuzzysets/__fsmath.pyx":55
  *     assert x[0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  *     assert x.ndim == 1 and y.ndim == 2, 'The first set must be 1-dimensional and the second set must be 2-dimensional'
  *     assert len(x) == len(y), 'Shape of two set are not aligned.'             # <<<<<<<<<<<<<<
@@ -4211,38 +4197,38 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(PyArrayObject *_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_6 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 54, __pyx_L1_error)
-    __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_y)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 54, __pyx_L1_error)
+    __pyx_t_6 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_y)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 55, __pyx_L1_error)
     __pyx_t_4 = (__pyx_t_6 == __pyx_t_7);
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_Shape_of_two_set_are_not_aligned, 0, 0);
-      __PYX_ERR(0, 54, __pyx_L1_error)
+      __PYX_ERR(0, 55, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 54, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 55, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":56
+  /* "mohusets/fuzzysets/__fsmath.pyx":57
  *     assert len(x) == len(y), 'Shape of two set are not aligned.'
  * 
  *     newf = fuzzyset(x[0].qrung, y[0, 0].__class__.__name__)             # <<<<<<<<<<<<<<
  * 
  *     for i in range(len(y[0])):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_fuzzyset); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_fuzzyset); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_qrung); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_qrung); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_class); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_class); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __pyx_t_9 = NULL;
@@ -4263,38 +4249,38 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(PyArrayObject *_
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_newf = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":58
+  /* "mohusets/fuzzysets/__fsmath.pyx":59
  *     newf = fuzzyset(x[0].qrung, y[0, 0].__class__.__name__)
  * 
  *     for i in range(len(y[0])):             # <<<<<<<<<<<<<<
  *         newf.append(__dot11(x, y[:, i], norm).set[0])
  *     return newf
  */
-  __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_7 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_7 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_6 = __pyx_t_7;
   for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_6; __pyx_t_11+=1) {
     __pyx_v_i = __pyx_t_11;
 
-    /* "mohusets/fuzzysets/__fsmath.pyx":59
+    /* "mohusets/fuzzysets/__fsmath.pyx":60
  * 
  *     for i in range(len(y[0])):
  *         newf.append(__dot11(x, y[:, i], norm).set[0])             # <<<<<<<<<<<<<<
  *     return newf
  * 
  */
-    __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_slice__2);
     __Pyx_GIVEREF(__pyx_slice__2);
@@ -4302,26 +4288,26 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(PyArrayObject *_
     __Pyx_GIVEREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 59, __pyx_L1_error)
+    if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 60, __pyx_L1_error)
     __pyx_t_12.__pyx_n = 1;
     __pyx_t_12.norm = __pyx_v_norm;
-    __pyx_t_2 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(__pyx_v_x, ((PyArrayObject *)__pyx_t_1), 0, &__pyx_t_12); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_2 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(__pyx_v_x, ((PyArrayObject *)__pyx_t_1), 0, &__pyx_t_12); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_set); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_13 = __Pyx_PyObject_Append(__pyx_v_newf, __pyx_t_2); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_13 = __Pyx_PyObject_Append(__pyx_v_newf, __pyx_t_2); if (unlikely(__pyx_t_13 == ((int)-1))) __PYX_ERR(0, 60, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":60
+  /* "mohusets/fuzzysets/__fsmath.pyx":61
  *     for i in range(len(y[0])):
  *         newf.append(__dot11(x, y[:, i], norm).set[0])
  *     return newf             # <<<<<<<<<<<<<<
@@ -4333,7 +4319,7 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(PyArrayObject *_
   __pyx_r = __pyx_v_newf;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":50
+  /* "mohusets/fuzzysets/__fsmath.pyx":51
  *     return newf
  * 
  * cpdef __dot12(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
@@ -4410,26 +4396,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_x)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_y)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__dot12", 0, 2, 3, 1); __PYX_ERR(0, 50, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__dot12", 0, 2, 3, 1); __PYX_ERR(0, 51, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_norm);
           if (value) { values[2] = value; kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__dot12") < 0)) __PYX_ERR(0, 50, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__dot12") < 0)) __PYX_ERR(0, 51, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -4447,15 +4433,15 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__dot12", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 50, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__dot12", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 51, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzysets.__fsmath.__dot12", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(0, 50, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y), __pyx_ptype_5numpy_ndarray, 1, "y", 0))) __PYX_ERR(0, 50, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_norm), (&PyUnicode_Type), 1, "norm", 1))) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y), __pyx_ptype_5numpy_ndarray, 1, "y", 0))) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_norm), (&PyUnicode_Type), 1, "norm", 1))) __PYX_ERR(0, 51, __pyx_L1_error)
   __pyx_r = __pyx_pf_8mohusets_9fuzzysets_8__fsmath_4__dot12(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_norm);
 
   /* function exit code */
@@ -4479,7 +4465,7 @@ static PyObject *__pyx_pf_8mohusets_9fuzzysets_8__fsmath_4__dot12(CYTHON_UNUSED 
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.norm = __pyx_v_norm;
-  __pyx_t_1 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot12(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4496,7 +4482,7 @@ static PyObject *__pyx_pf_8mohusets_9fuzzysets_8__fsmath_4__dot12(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "mohusets/fuzzysets/__fsmath.pyx":62
+/* "mohusets/fuzzysets/__fsmath.pyx":63
  *     return newf
  * 
  * cpdef __dot22(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
@@ -4543,7 +4529,7 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
     }
   }
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":66
+  /* "mohusets/fuzzysets/__fsmath.pyx":67
  *         Dot product of two fuzzy sets
  *     """
  *     assert x[0, 0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'             # <<<<<<<<<<<<<<
@@ -4552,56 +4538,23 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 66, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_4)) {
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_fuzzy_set_are_not, 0, 0);
-      __PYX_ERR(0, 66, __pyx_L1_error)
-    }
-  }
-  #else
-  if ((1)); else __PYX_ERR(0, 66, __pyx_L1_error)
-  #endif
-
-  /* "mohusets/fuzzysets/__fsmath.pyx":67
- *     """
- *     assert x[0, 0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'
- *     assert x[0, 0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'             # <<<<<<<<<<<<<<
- *     assert x.ndim == 2 and y.ndim == 2, 'Fuzzy sets must be 2-dimensional.'
- *     assert len(x[0]) == len(y), 'Shape of two set are not aligned.'
- */
-  #ifndef CYTHON_WITHOUT_ASSERTIONS
-  if (unlikely(!Py_OptimizeFlag)) {
     __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_class); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (unlikely(!__pyx_t_4)) {
-      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_qrung_of_two_fuzzy_set, 0, 0);
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_fuzzy_set_are_not, 0, 0);
       __PYX_ERR(0, 67, __pyx_L1_error)
     }
   }
@@ -4610,6 +4563,39 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
   #endif
 
   /* "mohusets/fuzzysets/__fsmath.pyx":68
+ *     """
+ *     assert x[0, 0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'
+ *     assert x[0, 0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'             # <<<<<<<<<<<<<<
+ *     assert x.ndim == 2 and y.ndim == 2, 'Fuzzy sets must be 2-dimensional.'
+ *     assert len(x[0]) == len(y), 'Shape of two set are not aligned.'
+ */
+  #ifndef CYTHON_WITHOUT_ASSERTIONS
+  if (unlikely(!Py_OptimizeFlag)) {
+    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_3, __pyx_t_2, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 68, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (unlikely(!__pyx_t_4)) {
+      __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_qrung_of_two_fuzzy_set, 0, 0);
+      __PYX_ERR(0, 68, __pyx_L1_error)
+    }
+  }
+  #else
+  if ((1)); else __PYX_ERR(0, 68, __pyx_L1_error)
+  #endif
+
+  /* "mohusets/fuzzysets/__fsmath.pyx":69
  *     assert x[0, 0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0, 0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  *     assert x.ndim == 2 and y.ndim == 2, 'Fuzzy sets must be 2-dimensional.'             # <<<<<<<<<<<<<<
@@ -4629,14 +4615,14 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
     __pyx_L3_bool_binop_done:;
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_Fuzzy_sets_must_be_2_dimensional, 0, 0);
-      __PYX_ERR(0, 68, __pyx_L1_error)
+      __PYX_ERR(0, 69, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 68, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 69, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":69
+  /* "mohusets/fuzzysets/__fsmath.pyx":70
  *     assert x[0, 0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  *     assert x.ndim == 2 and y.ndim == 2, 'Fuzzy sets must be 2-dimensional.'
  *     assert len(x[0]) == len(y), 'Shape of two set are not aligned.'             # <<<<<<<<<<<<<<
@@ -4645,41 +4631,41 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_x), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_6 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_6 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_y)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_y)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 70, __pyx_L1_error)
     __pyx_t_4 = (__pyx_t_6 == __pyx_t_7);
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_Shape_of_two_set_are_not_aligned, 0, 0);
-      __PYX_ERR(0, 69, __pyx_L1_error)
+      __PYX_ERR(0, 70, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 69, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 70, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":71
+  /* "mohusets/fuzzysets/__fsmath.pyx":72
  *     assert len(x[0]) == len(y), 'Shape of two set are not aligned.'
  * 
  *     newf = fuzzyset(x[0, 0].qrung, y[0, 0].__class__.__name__)             # <<<<<<<<<<<<<<
  *     newf.zeros(len(x), len(y[0]))
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_fuzzyset); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_fuzzyset); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_tuple_); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_qrung); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_qrung); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_tuple_); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_class); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_class); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __pyx_t_9 = NULL;
@@ -4700,30 +4686,30 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_newf = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":72
+  /* "mohusets/fuzzysets/__fsmath.pyx":73
  * 
  *     newf = fuzzyset(x[0, 0].qrung, y[0, 0].__class__.__name__)
  *     newf.zeros(len(x), len(y[0]))             # <<<<<<<<<<<<<<
  * 
  *     for i in range(len(x)):
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_newf, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_newf, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 72, __pyx_L1_error)
-  __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_8 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_7 = PyObject_Length(__pyx_t_8); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_7 = PyObject_Length(__pyx_t_8); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_8 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __pyx_t_9 = NULL;
   __pyx_t_10 = 0;
@@ -4743,49 +4729,49 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
     __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":74
+  /* "mohusets/fuzzysets/__fsmath.pyx":75
  *     newf.zeros(len(x), len(y[0]))
  * 
  *     for i in range(len(x)):             # <<<<<<<<<<<<<<
  *         for j in range(len(y[0])):
  *             newf.set[i, j] = __dot11(x[i, :], y[:, j], norm=norm).set[0]
  */
-  __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_7 = PyObject_Length(((PyObject *)__pyx_v_x)); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 75, __pyx_L1_error)
   __pyx_t_6 = __pyx_t_7;
   for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_6; __pyx_t_11+=1) {
     __pyx_v_i = __pyx_t_11;
 
-    /* "mohusets/fuzzysets/__fsmath.pyx":75
+    /* "mohusets/fuzzysets/__fsmath.pyx":76
  * 
  *     for i in range(len(x)):
  *         for j in range(len(y[0])):             # <<<<<<<<<<<<<<
  *             newf.set[i, j] = __dot11(x[i, :], y[:, j], norm=norm).set[0]
  *     return newf
  */
-    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(((PyObject *)__pyx_v_y), 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_12 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 75, __pyx_L1_error)
+    __pyx_t_12 = PyObject_Length(__pyx_t_1); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_13 = __pyx_t_12;
     for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
       __pyx_v_j = __pyx_t_14;
 
-      /* "mohusets/fuzzysets/__fsmath.pyx":76
+      /* "mohusets/fuzzysets/__fsmath.pyx":77
  *     for i in range(len(x)):
  *         for j in range(len(y[0])):
  *             newf.set[i, j] = __dot11(x[i, :], y[:, j], norm=norm).set[0]             # <<<<<<<<<<<<<<
  *     return newf
  * 
  */
-      __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_GIVEREF(__pyx_t_1);
       PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -4793,13 +4779,13 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
       __Pyx_GIVEREF(__pyx_slice__2);
       PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_slice__2);
       __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_x), __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 76, __pyx_L1_error)
-      __pyx_t_2 = PyInt_FromSsize_t(__pyx_v_j); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+      if (!(likely(((__pyx_t_1) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 77, __pyx_L1_error)
+      __pyx_t_2 = PyInt_FromSsize_t(__pyx_v_j); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_INCREF(__pyx_slice__2);
       __Pyx_GIVEREF(__pyx_slice__2);
@@ -4807,29 +4793,29 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
       __Pyx_GIVEREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_t_2);
       __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetItem(((PyObject *)__pyx_v_y), __pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 76, __pyx_L1_error)
+      if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 77, __pyx_L1_error)
       __pyx_t_15.__pyx_n = 1;
       __pyx_t_15.norm = __pyx_v_norm;
-      __pyx_t_8 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(((PyArrayObject *)__pyx_t_1), ((PyArrayObject *)__pyx_t_2), 0, &__pyx_t_15); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_8 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot11(((PyArrayObject *)__pyx_t_1), ((PyArrayObject *)__pyx_t_2), 0, &__pyx_t_15); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_newf, __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_newf, __pyx_n_s_set); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_i); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_3 = PyInt_FromSsize_t(__pyx_v_j); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_3 = PyInt_FromSsize_t(__pyx_v_j); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 76, __pyx_L1_error)
+      __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_GIVEREF(__pyx_t_1);
       PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_1);
@@ -4837,14 +4823,14 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
       PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_t_3);
       __pyx_t_1 = 0;
       __pyx_t_3 = 0;
-      if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_t_9, __pyx_t_8) < 0))) __PYX_ERR(0, 76, __pyx_L1_error)
+      if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_t_9, __pyx_t_8) < 0))) __PYX_ERR(0, 77, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
   }
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":77
+  /* "mohusets/fuzzysets/__fsmath.pyx":78
  *         for j in range(len(y[0])):
  *             newf.set[i, j] = __dot11(x[i, :], y[:, j], norm=norm).set[0]
  *     return newf             # <<<<<<<<<<<<<<
@@ -4856,7 +4842,7 @@ static PyObject *__pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(PyArrayObject *_
   __pyx_r = __pyx_v_newf;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":62
+  /* "mohusets/fuzzysets/__fsmath.pyx":63
  *     return newf
  * 
  * cpdef __dot22(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
@@ -4934,26 +4920,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_x)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_y)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__dot22", 0, 2, 3, 1); __PYX_ERR(0, 62, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__dot22", 0, 2, 3, 1); __PYX_ERR(0, 63, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_norm);
           if (value) { values[2] = value; kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__dot22") < 0)) __PYX_ERR(0, 62, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__dot22") < 0)) __PYX_ERR(0, 63, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -4971,15 +4957,15 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__dot22", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 62, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__dot22", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 63, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzysets.__fsmath.__dot22", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(0, 62, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y), __pyx_ptype_5numpy_ndarray, 1, "y", 0))) __PYX_ERR(0, 62, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_norm), (&PyUnicode_Type), 1, "norm", 1))) __PYX_ERR(0, 62, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(0, 63, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_y), __pyx_ptype_5numpy_ndarray, 1, "y", 0))) __PYX_ERR(0, 63, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_norm), (&PyUnicode_Type), 1, "norm", 1))) __PYX_ERR(0, 63, __pyx_L1_error)
   __pyx_r = __pyx_pf_8mohusets_9fuzzysets_8__fsmath_6__dot22(__pyx_self, __pyx_v_x, __pyx_v_y, __pyx_v_norm);
 
   /* function exit code */
@@ -5003,7 +4989,7 @@ static PyObject *__pyx_pf_8mohusets_9fuzzysets_8__fsmath_6__dot22(CYTHON_UNUSED 
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.norm = __pyx_v_norm;
-  __pyx_t_1 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_9fuzzysets_8__fsmath___dot22(__pyx_v_x, __pyx_v_y, 0, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6310,7 +6296,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, __pyx_k_Shape_of_two_set_are_not_aligned, sizeof(__pyx_k_Shape_of_two_set_are_not_aligned), 0, 1, 0, 0},
   {0, __pyx_k_The_first_set_must_be_1_dimensio, sizeof(__pyx_k_The_first_set_must_be_1_dimensio), 0, 1, 0, 0},
   {0, __pyx_k_The_first_set_must_be_2_dimensio, sizeof(__pyx_k_The_first_set_must_be_2_dimensio), 0, 1, 0, 0},
-  {0, __pyx_k__17, sizeof(__pyx_k__17), 0, 0, 1, 1},
+  {0, __pyx_k__16, sizeof(__pyx_k__16), 0, 0, 1, 1},
   {0, __pyx_k__5, sizeof(__pyx_k__5), 0, 0, 1, 1},
   {0, __pyx_k__6, sizeof(__pyx_k__6), 0, 1, 0, 0},
   {0, __pyx_k_algeb, sizeof(__pyx_k_algeb), 0, 1, 0, 1},
@@ -6325,17 +6311,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, __pyx_k_dot12, sizeof(__pyx_k_dot12), 0, 0, 1, 1},
   {0, __pyx_k_dot21, sizeof(__pyx_k_dot21), 0, 0, 1, 1},
   {0, __pyx_k_dot22, sizeof(__pyx_k_dot22), 0, 0, 1, 1},
-  {0, __pyx_k_fns, sizeof(__pyx_k_fns), 0, 0, 1, 1},
   {0, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {0, __pyx_k_fuzzynumbers, sizeof(__pyx_k_fuzzynumbers), 0, 0, 1, 1},
   {0, __pyx_k_fuzzyset, sizeof(__pyx_k_fuzzyset), 0, 0, 1, 1},
-  {0, __pyx_k_get_dict, sizeof(__pyx_k_get_dict), 0, 0, 1, 1},
+  {0, __pyx_k_glb, sizeof(__pyx_k_glb), 0, 0, 1, 1},
+  {0, __pyx_k_global_dict, sizeof(__pyx_k_global_dict), 0, 0, 1, 1},
   {0, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {0, __pyx_k_initializing, sizeof(__pyx_k_initializing), 0, 0, 1, 1},
   {0, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
   {0, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
-  {0, __pyx_k_mohusets, sizeof(__pyx_k_mohusets), 0, 0, 1, 1},
-  {0, __pyx_k_mohusets_fuzzynumbers, sizeof(__pyx_k_mohusets_fuzzynumbers), 0, 0, 1, 1},
   {0, __pyx_k_mohusets_fuzzysets___fsmath, sizeof(__pyx_k_mohusets_fuzzysets___fsmath), 0, 0, 1, 1},
   {0, __pyx_k_mohusets_fuzzysets___fsmath_pyx, sizeof(__pyx_k_mohusets_fuzzysets___fsmath_pyx), 0, 0, 1, 0},
   {0, __pyx_k_multiply, sizeof(__pyx_k_multiply), 0, 1, 0, 1},
@@ -6366,7 +6350,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_Shape_of_two_set_are_not_aligned, __pyx_k_Shape_of_two_set_are_not_aligned, sizeof(__pyx_k_Shape_of_two_set_are_not_aligned), 0, 1, 0, 0},
   {&__pyx_kp_u_The_first_set_must_be_1_dimensio, __pyx_k_The_first_set_must_be_1_dimensio, sizeof(__pyx_k_The_first_set_must_be_1_dimensio), 0, 1, 0, 0},
   {&__pyx_kp_u_The_first_set_must_be_2_dimensio, __pyx_k_The_first_set_must_be_2_dimensio, sizeof(__pyx_k_The_first_set_must_be_2_dimensio), 0, 1, 0, 0},
-  {&__pyx_n_s__17, __pyx_k__17, sizeof(__pyx_k__17), 0, 0, 1, 1},
+  {&__pyx_n_s__16, __pyx_k__16, sizeof(__pyx_k__16), 0, 0, 1, 1},
   {&__pyx_n_s__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 0, 1, 1},
   {&__pyx_kp_u__6, __pyx_k__6, sizeof(__pyx_k__6), 0, 1, 0, 0},
   {&__pyx_n_u_algeb, __pyx_k_algeb, sizeof(__pyx_k_algeb), 0, 1, 0, 1},
@@ -6381,17 +6365,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_dot12, __pyx_k_dot12, sizeof(__pyx_k_dot12), 0, 0, 1, 1},
   {&__pyx_n_s_dot21, __pyx_k_dot21, sizeof(__pyx_k_dot21), 0, 0, 1, 1},
   {&__pyx_n_s_dot22, __pyx_k_dot22, sizeof(__pyx_k_dot22), 0, 0, 1, 1},
-  {&__pyx_n_s_fns, __pyx_k_fns, sizeof(__pyx_k_fns), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_fuzzynumbers, __pyx_k_fuzzynumbers, sizeof(__pyx_k_fuzzynumbers), 0, 0, 1, 1},
   {&__pyx_n_s_fuzzyset, __pyx_k_fuzzyset, sizeof(__pyx_k_fuzzyset), 0, 0, 1, 1},
-  {&__pyx_n_s_get_dict, __pyx_k_get_dict, sizeof(__pyx_k_get_dict), 0, 0, 1, 1},
+  {&__pyx_n_s_glb, __pyx_k_glb, sizeof(__pyx_k_glb), 0, 0, 1, 1},
+  {&__pyx_n_s_global_dict, __pyx_k_global_dict, sizeof(__pyx_k_global_dict), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_initializing, __pyx_k_initializing, sizeof(__pyx_k_initializing), 0, 0, 1, 1},
   {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
-  {&__pyx_n_s_mohusets, __pyx_k_mohusets, sizeof(__pyx_k_mohusets), 0, 0, 1, 1},
-  {&__pyx_n_s_mohusets_fuzzynumbers, __pyx_k_mohusets_fuzzynumbers, sizeof(__pyx_k_mohusets_fuzzynumbers), 0, 0, 1, 1},
   {&__pyx_n_s_mohusets_fuzzysets___fsmath, __pyx_k_mohusets_fuzzysets___fsmath, sizeof(__pyx_k_mohusets_fuzzysets___fsmath), 0, 0, 1, 1},
   {&__pyx_kp_s_mohusets_fuzzysets___fsmath_pyx, __pyx_k_mohusets_fuzzysets___fsmath_pyx, sizeof(__pyx_k_mohusets_fuzzysets___fsmath_pyx), 0, 0, 1, 0},
   {&__pyx_n_u_multiply, __pyx_k_multiply, sizeof(__pyx_k_multiply), 0, 1, 0, 1},
@@ -6415,8 +6397,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_AssertionError = __Pyx_GetBuiltinName(__pyx_n_s_AssertionError); if (!__pyx_builtin_AssertionError) __PYX_ERR(0, 16, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_builtin_AssertionError = __Pyx_GetBuiltinName(__pyx_n_s_AssertionError); if (!__pyx_builtin_AssertionError) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 30, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 986, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -6428,25 +6410,25 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":38
+  /* "mohusets/fuzzysets/__fsmath.pyx":39
  * 
  * cpdef __dot21(np.ndarray x, np.ndarray y, str norm='algeb'):
  *     assert x[0, 0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'             # <<<<<<<<<<<<<<
  *     assert x[0, 0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  *     assert x.ndim == 2 and y.ndim == 1, \
  */
-  __pyx_tuple_ = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(2, __pyx_int_0, __pyx_int_0); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":47
+  /* "mohusets/fuzzysets/__fsmath.pyx":48
  * 
  *     for i in range(len(x)):
  *         newf.append(__dot11(x[i, :], y, norm).set[0])             # <<<<<<<<<<<<<<
  *     return newf
  * 
  */
-  __pyx_slice__2 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_slice__2 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__2);
   __Pyx_GIVEREF(__pyx_slice__2);
 
@@ -6472,67 +6454,56 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":12
- * 
- * from .fuzzyset import fuzzyset
- * import mohusets.fuzzynumbers as fns             # <<<<<<<<<<<<<<
- * d = fns.get_dict
- * 
- */
-  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_mohusets, __pyx_n_s_fuzzynumbers); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
-
-  /* "mohusets/fuzzysets/__fsmath.pyx":15
- * d = fns.get_dict
+  /* "mohusets/fuzzysets/__fsmath.pyx":16
+ * d = glb.global_dict()
  * 
  * cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     assert x[0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  */
-  __pyx_tuple__8 = PyTuple_Pack(3, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_norm); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
-  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzysets___fsmath_pyx, __pyx_n_s_dot11, 15, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_n_u_algeb); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_tuple__7 = PyTuple_Pack(3, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_norm); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzysets___fsmath_pyx, __pyx_n_s_dot11, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_u_algeb); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":37
+  /* "mohusets/fuzzysets/__fsmath.pyx":38
  *     return newfuzz
  * 
  * cpdef __dot21(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     assert x[0, 0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0, 0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  */
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzysets___fsmath_pyx, __pyx_n_s_dot21, 37, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 37, __pyx_L1_error)
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_u_algeb); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 37, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzysets___fsmath_pyx, __pyx_n_s_dot21, 38, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_n_u_algeb); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":50
+  /* "mohusets/fuzzysets/__fsmath.pyx":51
  *     return newf
  * 
  * cpdef __dot12(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     assert x[0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  */
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzysets___fsmath_pyx, __pyx_n_s_dot12, 50, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_n_u_algeb); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__14);
-  __Pyx_GIVEREF(__pyx_tuple__14);
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzysets___fsmath_pyx, __pyx_n_s_dot12, 51, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_n_u_algeb); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":62
+  /* "mohusets/fuzzysets/__fsmath.pyx":63
  *     return newf
  * 
  * cpdef __dot22(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     """
  *         Dot product of two fuzzy sets
  */
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzysets___fsmath_pyx, __pyx_n_s_dot22, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 62, __pyx_L1_error)
-  __pyx_tuple__16 = PyTuple_Pack(1, __pyx_n_u_algeb); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 62, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__16);
-  __Pyx_GIVEREF(__pyx_tuple__16);
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzysets___fsmath_pyx, __pyx_n_s_dot22, 63, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_n_u_algeb); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 63, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -6554,7 +6525,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitConstants(void) {
   if (__Pyx_InitString(__pyx_string_tab[8], &__pyx_kp_u_Shape_of_two_set_are_not_aligned) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[9], &__pyx_kp_u_The_first_set_must_be_1_dimensio) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[10], &__pyx_kp_u_The_first_set_must_be_2_dimensio) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[11], &__pyx_n_s__17) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[11], &__pyx_n_s__16) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[12], &__pyx_n_s__5) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[13], &__pyx_kp_u__6) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[14], &__pyx_n_u_algeb) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
@@ -6569,35 +6540,33 @@ static CYTHON_SMALL_CODE int __Pyx_InitConstants(void) {
   if (__Pyx_InitString(__pyx_string_tab[23], &__pyx_n_s_dot12) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[24], &__pyx_n_s_dot21) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[25], &__pyx_n_s_dot22) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[26], &__pyx_n_s_fns) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[27], &__pyx_n_s_format) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[28], &__pyx_n_s_fuzzynumbers) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[29], &__pyx_n_s_fuzzyset) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[30], &__pyx_n_s_get_dict) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[26], &__pyx_n_s_format) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[27], &__pyx_n_s_fuzzynumbers) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[28], &__pyx_n_s_fuzzyset) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[29], &__pyx_n_s_glb) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[30], &__pyx_n_s_global_dict) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[31], &__pyx_n_s_import) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[32], &__pyx_n_s_initializing) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[33], &__pyx_n_s_is_coroutine) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[34], &__pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[35], &__pyx_n_s_mohusets) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[36], &__pyx_n_s_mohusets_fuzzynumbers) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[37], &__pyx_n_s_mohusets_fuzzysets___fsmath) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[38], &__pyx_kp_s_mohusets_fuzzysets___fsmath_pyx) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[39], &__pyx_n_u_multiply) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[40], &__pyx_n_s_name) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[41], &__pyx_n_s_norm) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[42], &__pyx_n_s_np) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[43], &__pyx_n_s_numpy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[44], &__pyx_kp_u_numpy_core_multiarray_failed_to) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[45], &__pyx_kp_u_numpy_core_umath_failed_to_impor) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[46], &__pyx_n_s_qrung) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[47], &__pyx_n_s_range) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[48], &__pyx_n_s_set) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[49], &__pyx_n_s_spec) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[50], &__pyx_n_s_sum) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[51], &__pyx_n_s_test) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[52], &__pyx_n_s_x) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[53], &__pyx_n_s_y) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[54], &__pyx_n_s_zeros) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[35], &__pyx_n_s_mohusets_fuzzysets___fsmath) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[36], &__pyx_kp_s_mohusets_fuzzysets___fsmath_pyx) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[37], &__pyx_n_u_multiply) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[38], &__pyx_n_s_name) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[39], &__pyx_n_s_norm) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[40], &__pyx_n_s_np) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[41], &__pyx_n_s_numpy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[42], &__pyx_kp_u_numpy_core_multiarray_failed_to) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[43], &__pyx_kp_u_numpy_core_umath_failed_to_impor) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[44], &__pyx_n_s_qrung) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[45], &__pyx_n_s_range) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[46], &__pyx_n_s_set) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[47], &__pyx_n_s_spec) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[48], &__pyx_n_s_sum) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[49], &__pyx_n_s_test) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[50], &__pyx_n_s_x) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[51], &__pyx_n_s_y) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[52], &__pyx_n_s_zeros) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   #endif
   #if !CYTHON_USE_MODULE_STATE
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
@@ -7056,7 +7025,7 @@ if (!__Pyx_RefNanny) {
   #endif
 
   /* "mohusets/fuzzysets/__fsmath.pyx":8
- * #  Software: mohusets
+ * #  Software: Mohusets
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
@@ -7071,8 +7040,8 @@ if (!__Pyx_RefNanny) {
  * cimport numpy as np
  * 
  * from .fuzzyset import fuzzyset             # <<<<<<<<<<<<<<
- * import mohusets.fuzzynumbers as fns
- * d = fns.get_dict
+ * # import mohusets.fuzzynumbers as fns
+ * from ..fuzzynumbers import glb
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -7088,89 +7057,101 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":12
- * 
- * from .fuzzyset import fuzzyset
- * import mohusets.fuzzynumbers as fns             # <<<<<<<<<<<<<<
- * d = fns.get_dict
- * 
- */
-  __pyx_t_3 = __Pyx_ImportDottedModule(__pyx_n_s_mohusets_fuzzynumbers, __pyx_tuple__7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_fns, __pyx_t_3) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
   /* "mohusets/fuzzysets/__fsmath.pyx":13
  * from .fuzzyset import fuzzyset
- * import mohusets.fuzzynumbers as fns
- * d = fns.get_dict             # <<<<<<<<<<<<<<
+ * # import mohusets.fuzzynumbers as fns
+ * from ..fuzzynumbers import glb             # <<<<<<<<<<<<<<
+ * d = glb.global_dict()
+ * 
+ */
+  __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_INCREF(__pyx_n_s_glb);
+  __Pyx_GIVEREF(__pyx_n_s_glb);
+  PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_glb);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_fuzzynumbers, __pyx_t_3, 2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_glb); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_glb, __pyx_t_3) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "mohusets/fuzzysets/__fsmath.pyx":14
+ * # import mohusets.fuzzynumbers as fns
+ * from ..fuzzynumbers import glb
+ * d = glb.global_dict()             # <<<<<<<<<<<<<<
  * 
  * cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_fns); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_glb); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_global_dict); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_get_dict); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_d, __pyx_t_2) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_d, __pyx_t_2) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":15
- * d = fns.get_dict
+  /* "mohusets/fuzzysets/__fsmath.pyx":16
+ * d = glb.global_dict()
  * 
  * cpdef __dot11(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     assert x[0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_9fuzzysets_8__fsmath_1__dot11, 0, __pyx_n_s_dot11, NULL, __pyx_n_s_mohusets_fuzzysets___fsmath, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_9fuzzysets_8__fsmath_1__dot11, 0, __pyx_n_s_dot11, NULL, __pyx_n_s_mohusets_fuzzysets___fsmath, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__10);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dot11, __pyx_t_2) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__9);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dot11, __pyx_t_2) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":37
+  /* "mohusets/fuzzysets/__fsmath.pyx":38
  *     return newfuzz
  * 
  * cpdef __dot21(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     assert x[0, 0].__class__ == y[0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0, 0].qrung == y[0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_9fuzzysets_8__fsmath_3__dot21, 0, __pyx_n_s_dot21, NULL, __pyx_n_s_mohusets_fuzzysets___fsmath, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_9fuzzysets_8__fsmath_3__dot21, 0, __pyx_n_s_dot21, NULL, __pyx_n_s_mohusets_fuzzysets___fsmath, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__12);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dot21, __pyx_t_2) < 0) __PYX_ERR(0, 37, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__11);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dot21, __pyx_t_2) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":50
+  /* "mohusets/fuzzysets/__fsmath.pyx":51
  *     return newf
  * 
  * cpdef __dot12(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     assert x[0].__class__ == y[0, 0].__class__, 'ERROR: the two fuzzy set are not the same set!'
  *     assert x[0].qrung == y[0, 0].qrung, 'ERROR: the qrung of two fuzzy sets are not equal!'
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_9fuzzysets_8__fsmath_5__dot12, 0, __pyx_n_s_dot12, NULL, __pyx_n_s_mohusets_fuzzysets___fsmath, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_9fuzzysets_8__fsmath_5__dot12, 0, __pyx_n_s_dot12, NULL, __pyx_n_s_mohusets_fuzzysets___fsmath, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__14);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dot12, __pyx_t_2) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__13);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dot12, __pyx_t_2) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzysets/__fsmath.pyx":62
+  /* "mohusets/fuzzysets/__fsmath.pyx":63
  *     return newf
  * 
  * cpdef __dot22(np.ndarray x, np.ndarray y, str norm='algeb'):             # <<<<<<<<<<<<<<
  *     """
  *         Dot product of two fuzzy sets
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_9fuzzysets_8__fsmath_7__dot22, 0, __pyx_n_s_dot22, NULL, __pyx_n_s_mohusets_fuzzysets___fsmath, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_9fuzzysets_8__fsmath_7__dot22, 0, __pyx_n_s_dot22, NULL, __pyx_n_s_mohusets_fuzzysets___fsmath, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__16);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dot22, __pyx_t_2) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_tuple__15);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dot22, __pyx_t_2) < 0) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "mohusets/fuzzysets/__fsmath.pyx":1
- * #  Copyright (C) yibocat 2023 all Rights Reserved             # <<<<<<<<<<<<<<
+ * #  Copyright (c) yibocat 2023 All Rights Reserved             # <<<<<<<<<<<<<<
  * #  Python: 3.10.9
- * #  Date: 2023/2/17 4:43
+ * #  Date: 2023/2/21 4:11
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -9006,6 +8987,12 @@ static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
     return value;
 }
 
+/* PyObjectCallNoArg */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
+    PyObject *arg = NULL;
+    return __Pyx_PyObject_FastCall(func, (&arg)+1, 0 | __Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET);
+}
+
 /* FixUpExtensionType */
 #if CYTHON_USE_TYPE_SPECS
 static int __Pyx_fix_up_extension_type_from_spec(PyType_Spec *spec, PyTypeObject *type) {
@@ -10718,7 +10705,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
                                                __pyx_n_s_name);
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
-        Py_XSETREF(name, __Pyx_NewRef(__pyx_n_s__17));
+        Py_XSETREF(name, __Pyx_NewRef(__pyx_n_s__16));
     }
     return name;
 }

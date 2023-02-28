@@ -5,7 +5,7 @@
 #  Email: yibocat@yeah.net
 #  Software: Mohusets
 
-from .qrungivfn import qrungivfn
+from .fuzzy_element import qrungivfn
 from ..archimedean cimport einstein_T, einstein_S, algebraic_T, algebraic_S
 
 cpdef intersection(ivfn1: qrungivfn, ivfn2: qrungivfn):

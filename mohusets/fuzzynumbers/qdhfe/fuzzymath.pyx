@@ -7,7 +7,7 @@
 
 import numpy as np
 
-from .qrungdhfe import qrungdhfe
+from .fuzzy_element import qrungdhfe
 from ..archimedean cimport algebraic_T, algebraic_S, einstein_S, einstein_T
 
 cpdef intersection(dh1: qrungdhfe, dh2: qrungdhfe):

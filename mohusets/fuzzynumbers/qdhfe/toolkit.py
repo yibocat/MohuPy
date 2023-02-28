@@ -8,8 +8,7 @@
 import re
 
 import numpy as np
-
-from .qrungdhfe import qrungdhfe
+from .fuzzy_element import qrungdhfe
 
 
 def random(q, n):

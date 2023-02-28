@@ -5,7 +5,7 @@
     "distutils": {
         "name": "mohusets.fuzzynumbers.Fuzzynum",
         "sources": [
-            "mohusets/fuzzynumbers/Fuzzynum.pyx"
+            "./mohusets/fuzzynumbers/Fuzzynum.pyx"
         ]
     },
     "module_name": "mohusets.fuzzynumbers.Fuzzynum"
@@ -1272,7 +1272,7 @@ static const char *__pyx_f[] = {
 struct __pyx_obj_8mohusets_12fuzzynumbers_8Fuzzynum_Fuzzynum;
 
 /* "mohusets/fuzzynumbers/Fuzzynum.pxd":8
- * #  Software: mohusets
+ * #  Software: Mohusets
  * 
  * cdef class Fuzzynum:             # <<<<<<<<<<<<<<
  *     pass
@@ -3798,9 +3798,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "mohusets/fuzzynumbers/Fuzzynum.pyx":1
- * #  Copyright (C) yibocat 2023 all Rights Reserved             # <<<<<<<<<<<<<<
+ * #  Copyright (c) yibocat 2023 All Rights Reserved             # <<<<<<<<<<<<<<
  * #  Python: 3.10.9
- * #  Date: 2023/2/17 4:43
+ * #  Date: 2023/2/21 4:11
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);

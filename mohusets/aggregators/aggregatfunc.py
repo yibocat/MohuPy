@@ -8,8 +8,9 @@
 import numpy as np
 import copy
 
-from mohusets.fuzzysets.fuzzyset import fuzzyset
-import mohusets.fuzzynumbers as fns
+from ..fuzzysets import fuzzyset
+
+from ..fuzzynumbers import glb, neg, pos
 
 
 def weighted_ave(f: fuzzyset, weights=None, mode='algeb'):
@@ -91,7 +92,8 @@ def weighted_geom(f: fuzzyset, weights=None, mode='algeb'):
 
 
 def sub_weighted_ave(f, weights=None, mode='algeb'):
-    dictionary = fns.get_dict[f[0].__class__.__name__]
+    dictionary = glb.global_get(f[0].__class__.__name__)
+    # dictionary = fns.get_dict[f[0].__class__.__name__]
     fv = copy.deepcopy(f)
     dlist = []
     if weights is None:
@@ -107,7 +109,7 @@ def sub_weighted_ave(f, weights=None, mode='algeb'):
             elif mode == 'eins':
                 dlist.append(fv[i].eins_times(w[i]))
 
-    ag = fns.neg(fv[0].__class__.__name__, fv[0].qrung)
+    ag = neg(fv[0].__class__.__name__, fv[0].qrung)
     for e in dlist:
         ag = dictionary[mode + '_plus'](e, ag)
     assert ag.isLegal(), 'The aggregation element is not legal.'
@@ -115,7 +117,7 @@ def sub_weighted_ave(f, weights=None, mode='algeb'):
 
 
 def sub_weighted_geom(f, weights=None, mode='algeb'):
-    dictionary = fns.get_dict[f[0].__class__.__name__]
+    dictionary = glb.global_get(f[0].__class__.__name__)
     fv = copy.deepcopy(f)
     dlist = []
     if weights is None:
@@ -131,7 +133,7 @@ def sub_weighted_geom(f, weights=None, mode='algeb'):
             elif mode == 'eins':
                 dlist.append(fv[i].eins_power(w[i]))
 
-    ag = fns.pos(fv[0].__class__.__name__, fv[0].qrung)
+    ag = pos(fv[0].__class__.__name__, fv[0].qrung)
     for e in dlist:
         ag = dictionary[mode + '_multiply'](e, ag)
     assert ag.isLegal(), 'The aggregation element is not legal.'

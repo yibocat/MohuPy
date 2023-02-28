@@ -5,8 +5,8 @@
 #  Email: yibocat@yeah.net
 #  Software: Mohusets
 
-from .qrungdhfe import qrungdhfe
-from .qrungifn import qrungifn
+from .qdhfe.fuzzy_element import qrungdhfe
+from .qifn.fuzzy_element import qrungifn
 
 
 def dh_fn_max(dhf: qrungdhfe):

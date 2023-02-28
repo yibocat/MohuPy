@@ -5,7 +5,7 @@
 #  Email: yibocat@yeah.net
 #  Software: Mohusets
 
-from .toolkit import (plot_stats, ks_test_norm, random_split,show_decision_mat)
+from .toolkit import (plot_stats, ks_test_norm, random_split, show_decision_mat)
 
 __all__ = ['plot_stats',
            'ks_test_norm',

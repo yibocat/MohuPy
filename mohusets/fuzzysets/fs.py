@@ -9,7 +9,8 @@ import numpy as np
 import pandas as pd
 
 from .fuzzyset import fuzzyset
-import mohusets.fuzzynumbers as fns
+# import mohusets.fuzzynumbers as fns
+from ..fuzzynumbers import glb,dh_fn_max,dh_fn_min,dh_fn_mean
 
 
 def fuzzys(x, copy=True):
@@ -184,7 +185,7 @@ def rand_set(qrung, t, *n, num=5):
                 A random fuzzy set.
     """
     assert qrung > 0, 'q-rung must be greater than 0.'
-    d = fns.get_dict
+    d = glb.global_dict()
     assert t in d, 'The type of the fuzzy set does not exist.'
 
     r = fuzzyset(qrung, t)
@@ -213,11 +214,11 @@ def dh_fn_sets(f: fuzzyset, norm='max'):
         dm_a = []
         for j in range(f.shape[1]):
             if norm == 'max':
-                dm_a.append(fns.dh_fn_max(f.set[i, j]))
+                dm_a.append(dh_fn_max(f.set[i, j]))
             elif norm == 'min':
-                dm_a.append(fns.dh_fn_min(f.set[i, j]))
+                dm_a.append(dh_fn_min(f.set[i, j]))
             else:
-                dm_a.append(fns.dh_fn_mean(f.set[i, j]))
+                dm_a.append(dh_fn_mean(f.set[i, j]))
         dm_ffn.append(dm_a)
     return asfuzzyset(dm_ffn)
 

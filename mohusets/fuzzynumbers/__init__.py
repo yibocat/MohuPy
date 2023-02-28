@@ -5,8 +5,10 @@
 #  Email: yibocat@yeah.net
 #  Software: Mohusets
 
-import mohusets.fuzzynumbers.config
-import mohusets.fuzzynumbers.fuzz_global as glb
+# import mohusets.fuzzynumbers.config
+# import mohusets.fuzzynumbers.fuzz_global as glb
+from . import config
+from . import fuzz_global as glb
 
 __all__ = []
 get_dict = glb.global_dict()
@@ -20,9 +22,9 @@ qrungivfn = glb.global_get('qrungivfn')['type']
 
 __all__ += ['qrungdhfe', 'qrungifn', 'qrungivfn']
 
-from .qrungdhfe.toolkit import str_to_hfe
-from .qrungifn.toolkit import str_to_fn
-from .qrungivfn.toolkit import str_to_ivfn
+from .qdhfe.toolkit import str_to_hfe
+from .qifn.toolkit import str_to_fn
+from .qivfn.toolkit import str_to_ivfn
 
 __all__ += ['str_to_hfe', 'str_to_fn', 'str_to_ivfn']
 
