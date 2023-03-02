@@ -60,6 +60,7 @@ class fuzzyset(object):
     __dict = None
     __shape = None
     __type = None
+    __ndim = None
 
     def __init__(self, qrung=None, ftype=None):
         dictionary = glb.global_dict()
@@ -71,6 +72,7 @@ class fuzzyset(object):
             self.__dict = dictionary[ftype]
             self.__size = 0
             self.__shape = None
+            self.__ndim = None
         else:
             pass
 
@@ -123,6 +125,11 @@ class fuzzyset(object):
     @property
     def list(self):
         return self.__set.tolist()
+
+    @property
+    def ndim(self):
+        self.__ndim = len(self.__shape)
+        return self.__ndim
 
     @property
     def mat(self):

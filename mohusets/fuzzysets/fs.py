@@ -9,8 +9,7 @@ import numpy as np
 import pandas as pd
 
 from .fuzzyset import fuzzyset
-# import mohusets.fuzzynumbers as fns
-from ..fuzzynumbers import glb,dh_fn_max,dh_fn_min,dh_fn_mean
+from ..fuzzynumbers import glb, dh_fn_max, dh_fn_min, dh_fn_mean
 
 
 def fuzzys(x, copy=True):
@@ -239,14 +238,35 @@ def loadz(path: str):
     return newfs
 
 
+def sort(t: fuzzyset, func=None, reverse=False, *param):
+    """
+        Sort a fuzzy set.
 
+        Parameters
+        ----------
+            t:  fuzzyset
+                The fuzzy set.
+            func:  function
+                The function used to sort the fuzzy set.
+                if func is None, the score function will be used.
+            reverse:  bool
+                Whether to reverse the sort.
+            param:  list
+                The parameters of the function.
+        Returns
+        -------
+            fuzzyset
+                The sorted fuzzy set.
 
-
-
-
-
-
-
-
-
-
+    """
+    assert len(t.shape) == 1, 'the fuzzyset must be a 1-d array.'
+    if func is None:
+        so = t.score
+    else:
+        so = t.elementfunc(func, *param)
+    if reverse is True:
+        index = np.argsort(-so)
+    else:
+        index = np.argsort(so)
+    A = np.asarray(t.set[index])
+    return asfuzzyset(A)
