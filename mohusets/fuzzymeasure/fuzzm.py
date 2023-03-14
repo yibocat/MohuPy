@@ -5,6 +5,7 @@
 #  Email: yibocat@yeah.net
 #  Software: Mohusets
 
+import re
 import numpy as np
 from scipy.optimize import fsolve
 
@@ -68,6 +69,10 @@ class fuzzm(object):
     @property
     def len(self):
         return self.__fs.size
+
+    @property
+    def set(self):
+        return self.__fs
 
     def getlambda(self):
         assert self.__meas == 'lambda', 'the fuzzy measure must be lambda fuzzy measure.'
@@ -295,3 +300,77 @@ class fuzzm(object):
         for x in self.subsets():
             self.__vector = np.append(self.__vector, self.__call__(x))
         return self.__vector
+
+    def subdicts(self, chara='C', reserve=4):
+        """
+            Returns the dictionary representation of the fuzzy measure power set
+            Parameters
+            ----------
+                chara: str
+                    character representation of the fuzzy measure
+                reserve: int
+                    Keep 'reserve' digits after the decimal point
+
+            Returns
+            -------
+                d: dict
+                    dictionary representation of the fuzzy measure
+        """
+        def _subsets(nums):
+            ans = []
+            n = 1 << len(nums)
+            for i in range(n):
+                res = []
+                num = i
+                idx = 0
+                while num:
+                    if num & 1:
+                        res.append(nums[idx])
+                    num >>= 1
+                    idx += 1
+                ans.append(str(res))
+            return ans
+
+        def _conversion(sttr):
+            tss = re.findall(r'\w\d', sttr)
+            sp = tss[0]
+            for i in tss[1:]:
+                sp += ','+i
+            return sp
+
+        n = self.__fs.size
+        attributes = []
+        for i in range(n):
+            attributes.append(chara+str(i+1))
+
+        subset_attributes = _subsets(attributes)
+        fuzzy_measure = np.round(self.vector(), reserve).tolist()
+
+        sub_att = ['{}']
+        for t in subset_attributes[1:]:
+            sub_att.append(_conversion(t))
+
+        subbs = dict(zip(sub_att, fuzzy_measure))
+        return subbs
+
+    def dicts(self, chara='C'):
+        """
+            Returns the dictionary representation of the fuzzy measure
+            Parameters
+            ----------
+                chara: str
+                    character representation of the fuzzy measure
+
+            Returns
+            -------
+                d: dict
+                    dictionary representation of the fuzzy measure
+        """
+        n = self.__fs.size
+        attributes = []
+        for i in range(n):
+            attributes.append(chara+str(i+1))
+
+        fuzzdd = dict(zip(attributes, self.__fs))
+
+        return fuzzdd

@@ -45,7 +45,7 @@ def derivative(x, sub, f):
     return f(np.union1d(sub, x)) - f(np.setdiff1d(sub, x))
 
 
-def shapley_value(ss, m='lambda'):
+def shapley_value(ss, sets, m='lambda'):
     """
         Shapley value of a set. The Shapley value is interpreted as a kind
         of average value of the contribution of each criterion alone in all
@@ -60,8 +60,9 @@ def shapley_value(ss, m='lambda'):
         Parameters
         ----------
         ss: list or ndarray
-            set of the set
-
+            the subset of the set
+        sets: list or ndarray
+            the set of fuzzy measure
         m: str
             fuzzy measure function, default is 'lambda'
 
@@ -71,7 +72,7 @@ def shapley_value(ss, m='lambda'):
             Shapley value vector
     """
 
-    lam = fuzzm(ss, meas=m)
+    lam = fuzzm(sets, meas=m)
     n = lam.len
     shapley = np.array([])
     for x in ss:
@@ -84,7 +85,7 @@ def shapley_value(ss, m='lambda'):
     return shapley
 
 
-def banzhaf_value(ss, m='lambda'):
+def banzhaf_value(ss, sets, m='lambda'):
     """
         An alternative to the Shapley value is the Banzhaf value. It measures the
         same concept as the Shapley value, but weights the terms [μ(A ∪{i}) − μ(A)]
@@ -98,6 +99,8 @@ def banzhaf_value(ss, m='lambda'):
         ----------
         ss: list or ndarray
             set of the set
+        sets: list or ndarray
+            the set of fuzzy measure
         m: str
             fuzzy measure function, default is 'lambda'
 
@@ -106,8 +109,8 @@ def banzhaf_value(ss, m='lambda'):
         banzhaf value: ndarray
             Banzhaf value vector
     """
-    lam = fuzzm(ss, meas=m)
-    n = len(ss)
+    lam = fuzzm(sets, meas=m)
+    n = lam.len
     coef = 1/(2**n - 1)
     banzhaf = np.array([])
     for x in ss:
@@ -118,13 +121,15 @@ def banzhaf_value(ss, m='lambda'):
     return banzhaf
 
 
-def shannon_entropy(ss, m='lambda'):
+def shannon_entropy(ss, sets, m='lambda'):
     """
     Shannon entropy of a fuzzy measure.
     Parameters
     ----------
     ss: list or ndarray
         set of the set
+    sets: list or ndarray
+        the set of fuzzy measure
     m: str
         fuzzy measure function, default is 'lambda'
 
@@ -142,7 +147,7 @@ def shannon_entropy(ss, m='lambda'):
     """
     def h(t):
         return -t*np.log(t)
-    lam = fuzzm(ss, meas=m)
+    lam = fuzzm(sets, meas=m)
     n = lam.len
     shannon = np.array([])
     for x in ss:
