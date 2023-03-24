@@ -11,6 +11,11 @@ from scipy.optimize import fsolve
 
 from .math import lamda, subsets
 
+import networkx
+
+from . import hassenetworkx as hwx
+from matplotlib import pyplot as plt
+
 
 class fuzzm(object):
     __fs = None
@@ -374,3 +379,54 @@ class fuzzm(object):
         fuzzdd = dict(zip(attributes, self.__fs))
 
         return fuzzdd
+
+    def hasse_diagram(self, node_char='C', node_size=85000, save_path=None, figsize=(18, 12), fontsize=9, transparency=0.55):
+        def _search_subset(pattern, st):
+            """
+                判断子集，在画 hasse 图时的边有用
+            """
+            if re.search(pattern, st) is not None or pattern == '{}':
+                return True
+            else:
+                return False
+        t = self                                    # 创建一个模糊测度对象
+        dd = t.subdicts(chara=node_char)            # 得到模糊测度字典
+
+        keys = []                                   # 模糊测度字典的键列表
+        for i in dd.keys():
+            keys.append(i)
+
+        values = np.array([])                       # 模糊测度字典的值列表
+        for j in dd.values():
+            values = np.append(values, j)
+
+        def value(v):
+            return (v/np.sum(values))*node_size
+
+        subset_relationships = [(s1+'\n'+str(dd[s1]), s2+'\n'+str(dd[s2]))
+                                for s1 in dd.keys() for s2 in dd.keys()
+                                if ((s1 != s2) and _search_subset(s1, s2))]   # 得到所有子集间的关系，即 hasse 的边
+
+        Graph = networkx.DiGraph()
+        Graph.add_nodes_from([s+'\n'+str(dd[s]) for s in dd])
+        Graph.add_edges_from(subset_relationships)
+        hwx.transitivity_elimination(Graph)
+        # Plotting with automated / default layering
+        plt.figure(figsize=figsize)
+        networkx.draw_networkx(Graph,
+                               node_size=[value(dd[node]) for node in keys],
+                               pos=hwx.layout(Graph),
+                               alpha=transparency,
+                               font_size=fontsize,
+                               font_family='Times New Roman',
+                               font_weight='bold',
+                               font_color='black')
+
+        plt.axis('off')
+        if save_path is not None:
+            try:
+                plt.savefig(save_path, bbox_inches='tight')
+                print('Saved successfully!')
+            except IOError:
+                print('Save failed:')
+        plt.show()
