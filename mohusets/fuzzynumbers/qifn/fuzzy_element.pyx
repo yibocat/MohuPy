@@ -7,6 +7,7 @@
 
 import copy
 from ..Fuzzynum cimport Fuzzynum
+from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
 
 import numpy as np
 cimport numpy as np
@@ -136,6 +137,81 @@ cdef class qrungifn(Fuzzynum):
         newFN.set_md(self.__nmd)
         newFN.set_nmd(self.__md)
         return newFN
+
+    def __add__(self, other):
+        assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
+        assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
+        q = self.qrung
+        newFN = qrungifn(q, 0., 0.)
+        newFN.set_md(algebraic_S(self.md ** q, other.md ** q) ** (1 / q))
+        newFN.set_nmd(algebraic_T(self.nmd ** q, other.nmd ** q) ** (1 / q))
+        return newFN
+
+    def __pow__(self, power, modulo):
+        q = self.qrung
+        newFN = qrungifn(q, 0., 0.)
+        newFN.set_md(self.__md ** power)
+        newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** power) ** (1. / self.__qrung))
+        return newFN
+
+    def __mul__(self, other):
+        q = self.qrung
+        newFN = qrungifn(q, 0., 0.)
+        if other.__class__.__name__ == self.__class__.__name__:
+            assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
+            newFN.set_md(algebraic_T(self.md ** q, other.md ** q) ** (1 / q))
+            newFN.set_nmd(algebraic_S(self.nmd ** q, other.nmd ** q) ** (1 / q))
+        else:
+            newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))
+            newFN.set_nmd(self.__nmd ** other)
+        return newFN
+
+    def __rmul__(self, other):
+        q = self.qrung
+        newFN = qrungifn(q, 0., 0.)
+        if other.__class__.__name__ == self.__class__.__name__:
+            assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
+            newFN.set_md(algebraic_T(self.md ** q, other.md ** q) ** (1 / q))
+            newFN.set_nmd(algebraic_S(self.nmd ** q, other.nmd ** q) ** (1 / q))
+        else:
+            newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))
+            newFN.set_nmd(self.__nmd ** other)
+        return newFN
+
+    def __sub__(self, other:qrungifn):
+        """
+             Subtraction of Q-Rung orthopair fuzzy numbers
+        """
+        q = self.qrung
+        newFN = qrungifn(q, 0., 0.)
+        if other.nmd == 0 or other.md == 1:
+            newFN.set_md(0)
+            newFN.set_nmd(1)
+        elif 0<=self.nmd**q/other.nmd**q<=(1-self.md**q)/(1-other.md**q)<=1:
+            newFN.set_md(((self.md ** q - other.md ** q)/(1 - other.md**q))**(1/q))
+            newFN.set_nmd(self.nmd/other.nmd)
+        else:
+            newFN.set_md(0)
+            newFN.set_nmd(1)
+        return newFN
+
+    def __truediv__(self, other):
+        """
+             Division of Q-Rung orthopair fuzzy numbers
+        """
+        q = self.qrung
+        newFN = qrungifn(q, 0., 0.)
+        if other.md == 0 or other.nmd == 1:
+            newFN.set_md(1)
+            newFN.set_nmd(0)
+        elif 0<=self.md/other.md<=(1-self.nmd**q)/(1-other.nmd**q)<=1:
+            newFN.set_md(self.md/other.md)
+            newFN.set_nmd(((self.nmd ** q - other.nmd ** q)/(1 - other.nmd**q))**(1/q))
+        else:
+            newFN.set_md(1)
+            newFN.set_nmd(0)
+        return newFN
+
 
     cpdef algeb_power(self, float l):
         newFN = copy.deepcopy(self)

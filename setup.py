@@ -13,6 +13,9 @@ include_dirs = [numpy.get_include()]
 
 import os.path
 
+# Noting: Release versions need to set USE_CYTHON=False
+USE_CYTHON = True  # command line option, try-import, ...
+ext = '.pyx' if USE_CYTHON else '.c'
 
 def no_cythonize(extensions, **_ignore):
     for extension in extensions:
@@ -28,11 +31,6 @@ def no_cythonize(extensions, **_ignore):
             sources.append(sfile)
         extension.sources[:] = sources
     return extensions
-
-
-USE_CYTHON = False  # command line option, try-import, ...
-ext = '.pyx' if USE_CYTHON else '.c'
-# ext = '.pyx'
 
 ext1 = Extension("mohusets.fuzzysets.__fsmath",
                  ["./mohusets/fuzzysets/__fsmath" + ext],
