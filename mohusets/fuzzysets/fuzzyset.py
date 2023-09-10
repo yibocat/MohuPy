@@ -258,7 +258,13 @@ class fuzzyset(object):
         self.ravel()
         slist = np.asarray([func(self.__set[i], *args) for i in range(len(self.__set))])
         self.reshape(shape)
-        return slist.reshape(shape)
+
+        newf = fuzzyset(self.__qrung, self.__type)
+        for fe in slist:
+            newf.append(fe)
+        newf.reshape(shape)
+        return newf
+
 
     def random(self, n, num=5):
         """
