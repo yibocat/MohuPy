@@ -94,6 +94,9 @@ class fuzzyset(object):
                 'the set shape:             ' + str(self.__shape) + '\n' + \
                 'elements number:           %s\n' % self.__size
 
+    def __getitem__(self, item):
+        return self.__set[item]
+
     @property
     def ftype(self):
         return self.__type
