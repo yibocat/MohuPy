@@ -6,6 +6,9 @@
 #  Software: Mohusets
 
 import copy
+
+from matplotlib import pyplot as plt
+
 from ..Fuzzynum cimport Fuzzynum
 from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
 
@@ -240,3 +243,60 @@ cdef class qrungifn(Fuzzynum):
         newFN.set_nmd(((2. * (self.__nmd ** self.__qrung) ** l) / (
                     (2. - self.__nmd ** self.__qrung) ** l + (self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))
         return newFN
+
+    def plot(self, region='None'):
+        """
+            Plots the fuzzynumber distribution for a given fuzzynumber.
+
+            Parameters
+            ----------
+            region : str
+                The region of operations.
+
+            Returns
+            -------
+        """
+        md = self.__md
+        nmd = self.__nmd
+        q = self.__qrung
+
+        x = np.linspace(0, 1, 1000)
+
+        plt.gca().spines['top'].set_linewidth(False)
+        plt.gca().spines['bottom'].set_linewidth(True)
+        plt.gca().spines['left'].set_linewidth(True)
+        plt.gca().spines['right'].set_linewidth(False)
+        plt.axis([0,1.1,0,1.1])
+        plt.axhline(y=0)
+        plt.axvline(x=0)
+        plt.scatter(md, nmd, color='red', marker='o')
+
+        y = (1 - x**q)**(1/q)
+
+        n = (nmd**q/(1-md**q)*(1-x**q))**(1/q)
+        m = (md**q/(1-nmd**q)*(1-x**q))**(1/q)
+
+        if region == 'addition':
+            # Q-ROFN f addition region
+            plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+        elif region =='subtraction':
+            # Q-ROFN f subtraction region
+            plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+        elif region =='multiplication':
+            # Q-ROFN f multiplication region
+            plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)
+        elif region == 'division':
+            # Q-ROFN f division region
+            plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+        elif region == 'all':
+            plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+            plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+            plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)
+            plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+        else:
+            pass
+
+        plt.plot(x,y)
+        # plt.plot(x,n,linestyle='--')
+        # plt.plot(m,x,linestyle='--')
+        plt.show()

@@ -1583,7 +1583,7 @@ struct __pyx_obj_8mohusets_12fuzzynumbers_8Fuzzynum_Fuzzynum {
 };
 
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":15
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":18
  * cimport numpy as np
  * 
  * cdef class qrungifn(Fuzzynum):             # <<<<<<<<<<<<<<
@@ -1977,6 +1977,17 @@ static PyObject* __Pyx_PyInt_SubtractCObj(PyObject *op1, PyObject *op2, long int
 #else
 #define __Pyx_PyInt_SubtractCObj(op1, op2, intval, inplace, zerodivision_check)\
     (inplace ? PyNumber_InPlaceSubtract(op1, op2) : PyNumber_Subtract(op1, op2))
+#endif
+
+/* DictGetItem.proto */
+#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
+static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key);
+#define __Pyx_PyObject_Dict_GetItem(obj, name)\
+    (likely(PyDict_CheckExact(obj)) ?\
+     __Pyx_PyDict_GetItem(obj, name) : PyObject_GetItem(obj, name))
+#else
+#define __Pyx_PyDict_GetItem(d, key) PyObject_GetItem(d, key)
+#define __Pyx_PyObject_Dict_GetItem(obj, name)  PyObject_GetItem(obj, name)
 #endif
 
 /* GetAttr3.proto */
@@ -2541,51 +2552,82 @@ static PyObject *__pyx_builtin_ImportError;
 /* #### Code section: string_decls ### */
 static const char __pyx_k_[] = "\n";
 static const char __pyx_k_l[] = "l";
+static const char __pyx_k_m[] = "m";
+static const char __pyx_k_n[] = "n";
+static const char __pyx_k_o[] = "o";
+static const char __pyx_k_q[] = "q";
+static const char __pyx_k_x[] = "x";
+static const char __pyx_k_y[] = "y";
 static const char __pyx_k__2[] = ")";
-static const char __pyx_k__5[] = ".";
-static const char __pyx_k__8[] = "*";
+static const char __pyx_k__6[] = ".";
+static const char __pyx_k__9[] = "*";
 static const char __pyx_k_gc[] = "gc";
 static const char __pyx_k_md[] = "md";
 static const char __pyx_k_np[] = "np";
-static const char __pyx_k__29[] = "?";
+static const char __pyx_k__33[] = "?";
 static const char __pyx_k_all[] = "all";
+static const char __pyx_k_gca[] = "gca";
 static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_nmd[] = "nmd";
+static const char __pyx_k_plt[] = "plt";
+static const char __pyx_k_red[] = "red";
+static const char __pyx_k_top[] = "top";
+static const char __pyx_k_None[] = "None";
+static const char __pyx_k_axis[] = "axis";
+static const char __pyx_k_blue[] = "blue";
 static const char __pyx_k_comp[] = "comp";
 static const char __pyx_k_copy[] = "copy";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_init[] = "__init__";
+static const char __pyx_k_left[] = "left";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_md_2[] = "    md: ";
 static const char __pyx_k_name[] = "__name__";
+static const char __pyx_k_plot[] = "plot";
 static const char __pyx_k_self[] = "self";
+static const char __pyx_k_show[] = "show";
 static const char __pyx_k_spec[] = "__spec__";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_alpha[] = "alpha";
 static const char __pyx_k_bases[] = "__bases__";
 static const char __pyx_k_class[] = "__class__";
+static const char __pyx_k_color[] = "color";
 static const char __pyx_k_float[] = "float_";
 static const char __pyx_k_nmd_2[] = "    nmd:";
 static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_qrung[] = "qrung";
+static const char __pyx_k_right[] = "right";
 static const char __pyx_k_round[] = "round";
 static const char __pyx_k_state[] = "state";
 static const char __pyx_k_super[] = "super";
 static const char __pyx_k_value[] = "value";
+static const char __pyx_k_where[] = "where";
 static const char __pyx_k_around[] = "around";
+static const char __pyx_k_bottom[] = "bottom";
 static const char __pyx_k_dict_2[] = "_dict";
 static const char __pyx_k_enable[] = "enable";
 static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_marker[] = "marker";
 static const char __pyx_k_pickle[] = "pickle";
+static const char __pyx_k_pyplot[] = "pyplot";
 static const char __pyx_k_reduce[] = "__reduce__";
+static const char __pyx_k_region[] = "region";
 static const char __pyx_k_set_md[] = "set_md";
+static const char __pyx_k_spines[] = "spines";
 static const char __pyx_k_update[] = "update";
+static const char __pyx_k_axhline[] = "axhline";
+static const char __pyx_k_axvline[] = "axvline";
 static const char __pyx_k_convert[] = "convert";
 static const char __pyx_k_disable[] = "disable";
 static const char __pyx_k_isEmpty[] = "isEmpty";
 static const char __pyx_k_isLegal[] = "isLegal";
+static const char __pyx_k_scatter[] = "scatter";
 static const char __pyx_k_set_nmd[] = "set_nmd";
+static const char __pyx_k_addition[] = "addition";
 static const char __pyx_k_deepcopy[] = "deepcopy";
+static const char __pyx_k_division[] = "division";
 static const char __pyx_k_getstate[] = "__getstate__";
+static const char __pyx_k_linspace[] = "linspace";
 static const char __pyx_k_pyx_type[] = "__pyx_type";
 static const char __pyx_k_qrungifn[] = "qrungifn";
 static const char __pyx_k_setstate[] = "__setstate__";
@@ -2595,12 +2637,15 @@ static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_eins_power[] = "eins_power";
 static const char __pyx_k_eins_times[] = "eins_times";
+static const char __pyx_k_matplotlib[] = "matplotlib";
 static const char __pyx_k_pyx_result[] = "__pyx_result";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_ImportError[] = "ImportError";
 static const char __pyx_k_PickleError[] = "PickleError";
 static const char __pyx_k_algeb_power[] = "algeb_power";
 static const char __pyx_k_algeb_times[] = "algeb_times";
+static const char __pyx_k_subtraction[] = "subtraction";
+static const char __pyx_k_fill_between[] = "fill_between";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_isEmpty_half[] = "isEmpty_half";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
@@ -2608,9 +2653,13 @@ static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_qrungifn_Q_d[] = "qrungifn(Q=%d):(";
 static const char __pyx_k_stringsource[] = "<stringsource>";
 static const char __pyx_k_use_setstate[] = "use_setstate";
+static const char __pyx_k_fill_betweenx[] = "fill_betweenx";
 static const char __pyx_k_qrungifn_comp[] = "qrungifn.comp";
+static const char __pyx_k_qrungifn_plot[] = "qrungifn.plot";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
+static const char __pyx_k_set_linewidth[] = "set_linewidth";
 static const char __pyx_k_AssertionError[] = "AssertionError";
+static const char __pyx_k_multiplication[] = "multiplication";
 static const char __pyx_k_pyx_PickleError[] = "__pyx_PickleError";
 static const char __pyx_k_qrungifn_set_md[] = "qrungifn.set_md";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
@@ -2652,20 +2701,30 @@ static PyObject *__pyx_kp_u_ERROR_the_two_fuzzy_elements_are;
 static PyObject *__pyx_kp_u_ERROR_the_two_ifns_are_not_the_i;
 static PyObject *__pyx_n_s_ImportError;
 static PyObject *__pyx_kp_s_Incompatible_checksums_0x_x_vs_0;
+static PyObject *__pyx_n_u_None;
 static PyObject *__pyx_n_s_PickleError;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_kp_u__2;
-static PyObject *__pyx_n_s__29;
-static PyObject *__pyx_kp_u__5;
-static PyObject *__pyx_n_s__8;
+static PyObject *__pyx_n_s__33;
+static PyObject *__pyx_kp_u__6;
+static PyObject *__pyx_n_s__9;
+static PyObject *__pyx_n_u_addition;
 static PyObject *__pyx_n_s_algeb_power;
 static PyObject *__pyx_n_s_algeb_times;
 static PyObject *__pyx_n_s_all;
+static PyObject *__pyx_n_u_all;
+static PyObject *__pyx_n_s_alpha;
 static PyObject *__pyx_n_s_around;
 static PyObject *__pyx_n_s_asyncio_coroutines;
+static PyObject *__pyx_n_s_axhline;
+static PyObject *__pyx_n_s_axis;
+static PyObject *__pyx_n_s_axvline;
 static PyObject *__pyx_n_s_bases;
+static PyObject *__pyx_n_u_blue;
+static PyObject *__pyx_n_u_bottom;
 static PyObject *__pyx_n_s_class;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_color;
 static PyObject *__pyx_n_s_comp;
 static PyObject *__pyx_n_s_convert;
 static PyObject *__pyx_n_s_copy;
@@ -2673,11 +2732,15 @@ static PyObject *__pyx_n_s_deepcopy;
 static PyObject *__pyx_n_s_dict;
 static PyObject *__pyx_n_s_dict_2;
 static PyObject *__pyx_kp_u_disable;
+static PyObject *__pyx_n_u_division;
 static PyObject *__pyx_n_s_eins_power;
 static PyObject *__pyx_n_s_eins_times;
 static PyObject *__pyx_kp_u_enable;
+static PyObject *__pyx_n_s_fill_between;
+static PyObject *__pyx_n_s_fill_betweenx;
 static PyObject *__pyx_n_s_float;
 static PyObject *__pyx_kp_u_gc;
+static PyObject *__pyx_n_s_gca;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_init;
@@ -2688,13 +2751,20 @@ static PyObject *__pyx_n_s_isLegal;
 static PyObject *__pyx_n_s_is_coroutine;
 static PyObject *__pyx_kp_u_isenabled;
 static PyObject *__pyx_n_s_l;
+static PyObject *__pyx_n_u_left;
+static PyObject *__pyx_n_s_linspace;
+static PyObject *__pyx_n_s_m;
 static PyObject *__pyx_n_s_main;
+static PyObject *__pyx_n_s_marker;
+static PyObject *__pyx_n_s_matplotlib;
 static PyObject *__pyx_n_s_md;
 static PyObject *__pyx_kp_u_md_2;
 static PyObject *__pyx_kp_u_md_and_nmd_must_be_between_0_and;
 static PyObject *__pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe;
 static PyObject *__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy;
 static PyObject *__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2;
+static PyObject *__pyx_n_u_multiplication;
+static PyObject *__pyx_n_s_n;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_new;
 static PyObject *__pyx_n_s_nmd;
@@ -2703,7 +2773,11 @@ static PyObject *__pyx_n_s_np;
 static PyObject *__pyx_n_s_numpy;
 static PyObject *__pyx_kp_u_numpy_core_multiarray_failed_to;
 static PyObject *__pyx_kp_u_numpy_core_umath_failed_to_impor;
+static PyObject *__pyx_n_u_o;
 static PyObject *__pyx_n_s_pickle;
+static PyObject *__pyx_n_s_plot;
+static PyObject *__pyx_n_s_plt;
+static PyObject *__pyx_n_s_pyplot;
 static PyObject *__pyx_n_s_pyx_PickleError;
 static PyObject *__pyx_n_s_pyx_checksum;
 static PyObject *__pyx_n_s_pyx_result;
@@ -2711,6 +2785,7 @@ static PyObject *__pyx_n_s_pyx_state;
 static PyObject *__pyx_n_s_pyx_type;
 static PyObject *__pyx_n_s_pyx_unpickle_qrungifn;
 static PyObject *__pyx_n_s_pyx_vtable;
+static PyObject *__pyx_n_s_q;
 static PyObject *__pyx_n_s_qrung;
 static PyObject *__pyx_n_s_qrungifn;
 static PyObject *__pyx_kp_u_qrungifn_Q_d;
@@ -2725,25 +2800,38 @@ static PyObject *__pyx_n_s_qrungifn_eins_times;
 static PyObject *__pyx_n_s_qrungifn_isEmpty;
 static PyObject *__pyx_n_s_qrungifn_isEmpty_half;
 static PyObject *__pyx_n_s_qrungifn_isLegal;
+static PyObject *__pyx_n_s_qrungifn_plot;
 static PyObject *__pyx_n_s_qrungifn_set_md;
 static PyObject *__pyx_n_s_qrungifn_set_nmd;
+static PyObject *__pyx_n_u_red;
 static PyObject *__pyx_n_s_reduce;
 static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
+static PyObject *__pyx_n_s_region;
+static PyObject *__pyx_n_u_right;
 static PyObject *__pyx_n_s_round;
+static PyObject *__pyx_n_s_scatter;
 static PyObject *__pyx_n_s_self;
+static PyObject *__pyx_n_s_set_linewidth;
 static PyObject *__pyx_n_s_set_md;
 static PyObject *__pyx_n_s_set_nmd;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
+static PyObject *__pyx_n_s_show;
 static PyObject *__pyx_n_s_spec;
+static PyObject *__pyx_n_s_spines;
 static PyObject *__pyx_n_s_state;
 static PyObject *__pyx_kp_s_stringsource;
+static PyObject *__pyx_n_u_subtraction;
 static PyObject *__pyx_n_s_super;
 static PyObject *__pyx_n_s_test;
+static PyObject *__pyx_n_u_top;
 static PyObject *__pyx_n_s_update;
 static PyObject *__pyx_n_s_use_setstate;
 static PyObject *__pyx_n_s_value;
+static PyObject *__pyx_n_s_where;
+static PyObject *__pyx_n_s_x;
+static PyObject *__pyx_n_s_y;
 #endif
 /* #### Code section: decls ### */
 static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___init__(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, int __pyx_v_qrung, float __pyx_v_md, float __pyx_v_nmd); /* proto */
@@ -2774,16 +2862,20 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
 static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_32algeb_times(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, float __pyx_v_l); /* proto */
 static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_34eins_power(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, float __pyx_v_l); /* proto */
 static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_36eins_times(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, float __pyx_v_l); /* proto */
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_38__reduce_cython__(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_40__setstate_cython__(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_38plot(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, PyObject *__pyx_v_region); /* proto */
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_40__reduce_cython__(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_42__setstate_cython__(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element___pyx_unpickle_qrungifn(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 #if !CYTHON_USE_MODULE_STATE
 static PyObject *__pyx_float_0_;
 static PyObject *__pyx_float_1_;
+static PyObject *__pyx_float_0_1;
+static PyObject *__pyx_float_1_1;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_4;
+static PyObject *__pyx_int_1000;
 static PyObject *__pyx_int_179661131;
 static PyObject *__pyx_int_190112119;
 static PyObject *__pyx_int_241299837;
@@ -2791,28 +2883,32 @@ static PyObject *__pyx_int_241299837;
 #if !CYTHON_USE_MODULE_STATE
 static PyObject *__pyx_tuple__3;
 static PyObject *__pyx_tuple__4;
-static PyObject *__pyx_tuple__6;
+static PyObject *__pyx_tuple__5;
 static PyObject *__pyx_tuple__7;
-static PyObject *__pyx_tuple__9;
-static PyObject *__pyx_tuple__12;
-static PyObject *__pyx_tuple__18;
-static PyObject *__pyx_tuple__23;
-static PyObject *__pyx_tuple__25;
+static PyObject *__pyx_tuple__8;
+static PyObject *__pyx_tuple__10;
+static PyObject *__pyx_tuple__13;
+static PyObject *__pyx_tuple__19;
+static PyObject *__pyx_tuple__24;
+static PyObject *__pyx_tuple__26;
 static PyObject *__pyx_tuple__27;
-static PyObject *__pyx_codeobj__10;
+static PyObject *__pyx_tuple__29;
+static PyObject *__pyx_tuple__31;
 static PyObject *__pyx_codeobj__11;
-static PyObject *__pyx_codeobj__13;
+static PyObject *__pyx_codeobj__12;
 static PyObject *__pyx_codeobj__14;
 static PyObject *__pyx_codeobj__15;
 static PyObject *__pyx_codeobj__16;
 static PyObject *__pyx_codeobj__17;
-static PyObject *__pyx_codeobj__19;
+static PyObject *__pyx_codeobj__18;
 static PyObject *__pyx_codeobj__20;
 static PyObject *__pyx_codeobj__21;
 static PyObject *__pyx_codeobj__22;
-static PyObject *__pyx_codeobj__24;
-static PyObject *__pyx_codeobj__26;
+static PyObject *__pyx_codeobj__23;
+static PyObject *__pyx_codeobj__25;
 static PyObject *__pyx_codeobj__28;
+static PyObject *__pyx_codeobj__30;
+static PyObject *__pyx_codeobj__32;
 #endif
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
@@ -2859,20 +2955,30 @@ typedef struct {
   PyObject *__pyx_kp_u_ERROR_the_two_ifns_are_not_the_i;
   PyObject *__pyx_n_s_ImportError;
   PyObject *__pyx_kp_s_Incompatible_checksums_0x_x_vs_0;
+  PyObject *__pyx_n_u_None;
   PyObject *__pyx_n_s_PickleError;
   PyObject *__pyx_n_s_ValueError;
   PyObject *__pyx_kp_u__2;
-  PyObject *__pyx_n_s__29;
-  PyObject *__pyx_kp_u__5;
-  PyObject *__pyx_n_s__8;
+  PyObject *__pyx_n_s__33;
+  PyObject *__pyx_kp_u__6;
+  PyObject *__pyx_n_s__9;
+  PyObject *__pyx_n_u_addition;
   PyObject *__pyx_n_s_algeb_power;
   PyObject *__pyx_n_s_algeb_times;
   PyObject *__pyx_n_s_all;
+  PyObject *__pyx_n_u_all;
+  PyObject *__pyx_n_s_alpha;
   PyObject *__pyx_n_s_around;
   PyObject *__pyx_n_s_asyncio_coroutines;
+  PyObject *__pyx_n_s_axhline;
+  PyObject *__pyx_n_s_axis;
+  PyObject *__pyx_n_s_axvline;
   PyObject *__pyx_n_s_bases;
+  PyObject *__pyx_n_u_blue;
+  PyObject *__pyx_n_u_bottom;
   PyObject *__pyx_n_s_class;
   PyObject *__pyx_n_s_cline_in_traceback;
+  PyObject *__pyx_n_s_color;
   PyObject *__pyx_n_s_comp;
   PyObject *__pyx_n_s_convert;
   PyObject *__pyx_n_s_copy;
@@ -2880,11 +2986,15 @@ typedef struct {
   PyObject *__pyx_n_s_dict;
   PyObject *__pyx_n_s_dict_2;
   PyObject *__pyx_kp_u_disable;
+  PyObject *__pyx_n_u_division;
   PyObject *__pyx_n_s_eins_power;
   PyObject *__pyx_n_s_eins_times;
   PyObject *__pyx_kp_u_enable;
+  PyObject *__pyx_n_s_fill_between;
+  PyObject *__pyx_n_s_fill_betweenx;
   PyObject *__pyx_n_s_float;
   PyObject *__pyx_kp_u_gc;
+  PyObject *__pyx_n_s_gca;
   PyObject *__pyx_n_s_getstate;
   PyObject *__pyx_n_s_import;
   PyObject *__pyx_n_s_init;
@@ -2895,13 +3005,20 @@ typedef struct {
   PyObject *__pyx_n_s_is_coroutine;
   PyObject *__pyx_kp_u_isenabled;
   PyObject *__pyx_n_s_l;
+  PyObject *__pyx_n_u_left;
+  PyObject *__pyx_n_s_linspace;
+  PyObject *__pyx_n_s_m;
   PyObject *__pyx_n_s_main;
+  PyObject *__pyx_n_s_marker;
+  PyObject *__pyx_n_s_matplotlib;
   PyObject *__pyx_n_s_md;
   PyObject *__pyx_kp_u_md_2;
   PyObject *__pyx_kp_u_md_and_nmd_must_be_between_0_and;
   PyObject *__pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe;
   PyObject *__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy;
   PyObject *__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2;
+  PyObject *__pyx_n_u_multiplication;
+  PyObject *__pyx_n_s_n;
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_n_s_new;
   PyObject *__pyx_n_s_nmd;
@@ -2910,7 +3027,11 @@ typedef struct {
   PyObject *__pyx_n_s_numpy;
   PyObject *__pyx_kp_u_numpy_core_multiarray_failed_to;
   PyObject *__pyx_kp_u_numpy_core_umath_failed_to_impor;
+  PyObject *__pyx_n_u_o;
   PyObject *__pyx_n_s_pickle;
+  PyObject *__pyx_n_s_plot;
+  PyObject *__pyx_n_s_plt;
+  PyObject *__pyx_n_s_pyplot;
   PyObject *__pyx_n_s_pyx_PickleError;
   PyObject *__pyx_n_s_pyx_checksum;
   PyObject *__pyx_n_s_pyx_result;
@@ -2918,6 +3039,7 @@ typedef struct {
   PyObject *__pyx_n_s_pyx_type;
   PyObject *__pyx_n_s_pyx_unpickle_qrungifn;
   PyObject *__pyx_n_s_pyx_vtable;
+  PyObject *__pyx_n_s_q;
   PyObject *__pyx_n_s_qrung;
   PyObject *__pyx_n_s_qrungifn;
   PyObject *__pyx_kp_u_qrungifn_Q_d;
@@ -2932,57 +3054,77 @@ typedef struct {
   PyObject *__pyx_n_s_qrungifn_isEmpty;
   PyObject *__pyx_n_s_qrungifn_isEmpty_half;
   PyObject *__pyx_n_s_qrungifn_isLegal;
+  PyObject *__pyx_n_s_qrungifn_plot;
   PyObject *__pyx_n_s_qrungifn_set_md;
   PyObject *__pyx_n_s_qrungifn_set_nmd;
+  PyObject *__pyx_n_u_red;
   PyObject *__pyx_n_s_reduce;
   PyObject *__pyx_n_s_reduce_cython;
   PyObject *__pyx_n_s_reduce_ex;
+  PyObject *__pyx_n_s_region;
+  PyObject *__pyx_n_u_right;
   PyObject *__pyx_n_s_round;
+  PyObject *__pyx_n_s_scatter;
   PyObject *__pyx_n_s_self;
+  PyObject *__pyx_n_s_set_linewidth;
   PyObject *__pyx_n_s_set_md;
   PyObject *__pyx_n_s_set_nmd;
   PyObject *__pyx_n_s_setstate;
   PyObject *__pyx_n_s_setstate_cython;
+  PyObject *__pyx_n_s_show;
   PyObject *__pyx_n_s_spec;
+  PyObject *__pyx_n_s_spines;
   PyObject *__pyx_n_s_state;
   PyObject *__pyx_kp_s_stringsource;
+  PyObject *__pyx_n_u_subtraction;
   PyObject *__pyx_n_s_super;
   PyObject *__pyx_n_s_test;
+  PyObject *__pyx_n_u_top;
   PyObject *__pyx_n_s_update;
   PyObject *__pyx_n_s_use_setstate;
   PyObject *__pyx_n_s_value;
+  PyObject *__pyx_n_s_where;
+  PyObject *__pyx_n_s_x;
+  PyObject *__pyx_n_s_y;
   PyObject *__pyx_float_0_;
   PyObject *__pyx_float_1_;
+  PyObject *__pyx_float_0_1;
+  PyObject *__pyx_float_1_1;
   PyObject *__pyx_int_0;
   PyObject *__pyx_int_1;
   PyObject *__pyx_int_4;
+  PyObject *__pyx_int_1000;
   PyObject *__pyx_int_179661131;
   PyObject *__pyx_int_190112119;
   PyObject *__pyx_int_241299837;
   PyObject *__pyx_tuple__3;
   PyObject *__pyx_tuple__4;
-  PyObject *__pyx_tuple__6;
+  PyObject *__pyx_tuple__5;
   PyObject *__pyx_tuple__7;
-  PyObject *__pyx_tuple__9;
-  PyObject *__pyx_tuple__12;
-  PyObject *__pyx_tuple__18;
-  PyObject *__pyx_tuple__23;
-  PyObject *__pyx_tuple__25;
+  PyObject *__pyx_tuple__8;
+  PyObject *__pyx_tuple__10;
+  PyObject *__pyx_tuple__13;
+  PyObject *__pyx_tuple__19;
+  PyObject *__pyx_tuple__24;
+  PyObject *__pyx_tuple__26;
   PyObject *__pyx_tuple__27;
-  PyObject *__pyx_codeobj__10;
+  PyObject *__pyx_tuple__29;
+  PyObject *__pyx_tuple__31;
   PyObject *__pyx_codeobj__11;
-  PyObject *__pyx_codeobj__13;
+  PyObject *__pyx_codeobj__12;
   PyObject *__pyx_codeobj__14;
   PyObject *__pyx_codeobj__15;
   PyObject *__pyx_codeobj__16;
   PyObject *__pyx_codeobj__17;
-  PyObject *__pyx_codeobj__19;
+  PyObject *__pyx_codeobj__18;
   PyObject *__pyx_codeobj__20;
   PyObject *__pyx_codeobj__21;
   PyObject *__pyx_codeobj__22;
-  PyObject *__pyx_codeobj__24;
-  PyObject *__pyx_codeobj__26;
+  PyObject *__pyx_codeobj__23;
+  PyObject *__pyx_codeobj__25;
   PyObject *__pyx_codeobj__28;
+  PyObject *__pyx_codeobj__30;
+  PyObject *__pyx_codeobj__32;
 } __pyx_mstate;
 
 #ifdef __cplusplus
@@ -3045,20 +3187,30 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_ERROR_the_two_ifns_are_not_the_i);
   Py_CLEAR(clear_module_state->__pyx_n_s_ImportError);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Incompatible_checksums_0x_x_vs_0);
+  Py_CLEAR(clear_module_state->__pyx_n_u_None);
   Py_CLEAR(clear_module_state->__pyx_n_s_PickleError);
   Py_CLEAR(clear_module_state->__pyx_n_s_ValueError);
   Py_CLEAR(clear_module_state->__pyx_kp_u__2);
-  Py_CLEAR(clear_module_state->__pyx_n_s__29);
-  Py_CLEAR(clear_module_state->__pyx_kp_u__5);
-  Py_CLEAR(clear_module_state->__pyx_n_s__8);
+  Py_CLEAR(clear_module_state->__pyx_n_s__33);
+  Py_CLEAR(clear_module_state->__pyx_kp_u__6);
+  Py_CLEAR(clear_module_state->__pyx_n_s__9);
+  Py_CLEAR(clear_module_state->__pyx_n_u_addition);
   Py_CLEAR(clear_module_state->__pyx_n_s_algeb_power);
   Py_CLEAR(clear_module_state->__pyx_n_s_algeb_times);
   Py_CLEAR(clear_module_state->__pyx_n_s_all);
+  Py_CLEAR(clear_module_state->__pyx_n_u_all);
+  Py_CLEAR(clear_module_state->__pyx_n_s_alpha);
   Py_CLEAR(clear_module_state->__pyx_n_s_around);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
+  Py_CLEAR(clear_module_state->__pyx_n_s_axhline);
+  Py_CLEAR(clear_module_state->__pyx_n_s_axis);
+  Py_CLEAR(clear_module_state->__pyx_n_s_axvline);
   Py_CLEAR(clear_module_state->__pyx_n_s_bases);
+  Py_CLEAR(clear_module_state->__pyx_n_u_blue);
+  Py_CLEAR(clear_module_state->__pyx_n_u_bottom);
   Py_CLEAR(clear_module_state->__pyx_n_s_class);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
+  Py_CLEAR(clear_module_state->__pyx_n_s_color);
   Py_CLEAR(clear_module_state->__pyx_n_s_comp);
   Py_CLEAR(clear_module_state->__pyx_n_s_convert);
   Py_CLEAR(clear_module_state->__pyx_n_s_copy);
@@ -3066,11 +3218,15 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_dict);
   Py_CLEAR(clear_module_state->__pyx_n_s_dict_2);
   Py_CLEAR(clear_module_state->__pyx_kp_u_disable);
+  Py_CLEAR(clear_module_state->__pyx_n_u_division);
   Py_CLEAR(clear_module_state->__pyx_n_s_eins_power);
   Py_CLEAR(clear_module_state->__pyx_n_s_eins_times);
   Py_CLEAR(clear_module_state->__pyx_kp_u_enable);
+  Py_CLEAR(clear_module_state->__pyx_n_s_fill_between);
+  Py_CLEAR(clear_module_state->__pyx_n_s_fill_betweenx);
   Py_CLEAR(clear_module_state->__pyx_n_s_float);
   Py_CLEAR(clear_module_state->__pyx_kp_u_gc);
+  Py_CLEAR(clear_module_state->__pyx_n_s_gca);
   Py_CLEAR(clear_module_state->__pyx_n_s_getstate);
   Py_CLEAR(clear_module_state->__pyx_n_s_import);
   Py_CLEAR(clear_module_state->__pyx_n_s_init);
@@ -3081,13 +3237,20 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
   Py_CLEAR(clear_module_state->__pyx_kp_u_isenabled);
   Py_CLEAR(clear_module_state->__pyx_n_s_l);
+  Py_CLEAR(clear_module_state->__pyx_n_u_left);
+  Py_CLEAR(clear_module_state->__pyx_n_s_linspace);
+  Py_CLEAR(clear_module_state->__pyx_n_s_m);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
+  Py_CLEAR(clear_module_state->__pyx_n_s_marker);
+  Py_CLEAR(clear_module_state->__pyx_n_s_matplotlib);
   Py_CLEAR(clear_module_state->__pyx_n_s_md);
   Py_CLEAR(clear_module_state->__pyx_kp_u_md_2);
   Py_CLEAR(clear_module_state->__pyx_kp_u_md_and_nmd_must_be_between_0_and);
   Py_CLEAR(clear_module_state->__pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe);
   Py_CLEAR(clear_module_state->__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy);
   Py_CLEAR(clear_module_state->__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2);
+  Py_CLEAR(clear_module_state->__pyx_n_u_multiplication);
+  Py_CLEAR(clear_module_state->__pyx_n_s_n);
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_new);
   Py_CLEAR(clear_module_state->__pyx_n_s_nmd);
@@ -3096,7 +3259,11 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_numpy);
   Py_CLEAR(clear_module_state->__pyx_kp_u_numpy_core_multiarray_failed_to);
   Py_CLEAR(clear_module_state->__pyx_kp_u_numpy_core_umath_failed_to_impor);
+  Py_CLEAR(clear_module_state->__pyx_n_u_o);
   Py_CLEAR(clear_module_state->__pyx_n_s_pickle);
+  Py_CLEAR(clear_module_state->__pyx_n_s_plot);
+  Py_CLEAR(clear_module_state->__pyx_n_s_plt);
+  Py_CLEAR(clear_module_state->__pyx_n_s_pyplot);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_PickleError);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_checksum);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_result);
@@ -3104,6 +3271,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_type);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_unpickle_qrungifn);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_vtable);
+  Py_CLEAR(clear_module_state->__pyx_n_s_q);
   Py_CLEAR(clear_module_state->__pyx_n_s_qrung);
   Py_CLEAR(clear_module_state->__pyx_n_s_qrungifn);
   Py_CLEAR(clear_module_state->__pyx_kp_u_qrungifn_Q_d);
@@ -3118,57 +3286,77 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_qrungifn_isEmpty);
   Py_CLEAR(clear_module_state->__pyx_n_s_qrungifn_isEmpty_half);
   Py_CLEAR(clear_module_state->__pyx_n_s_qrungifn_isLegal);
+  Py_CLEAR(clear_module_state->__pyx_n_s_qrungifn_plot);
   Py_CLEAR(clear_module_state->__pyx_n_s_qrungifn_set_md);
   Py_CLEAR(clear_module_state->__pyx_n_s_qrungifn_set_nmd);
+  Py_CLEAR(clear_module_state->__pyx_n_u_red);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce_cython);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce_ex);
+  Py_CLEAR(clear_module_state->__pyx_n_s_region);
+  Py_CLEAR(clear_module_state->__pyx_n_u_right);
   Py_CLEAR(clear_module_state->__pyx_n_s_round);
+  Py_CLEAR(clear_module_state->__pyx_n_s_scatter);
   Py_CLEAR(clear_module_state->__pyx_n_s_self);
+  Py_CLEAR(clear_module_state->__pyx_n_s_set_linewidth);
   Py_CLEAR(clear_module_state->__pyx_n_s_set_md);
   Py_CLEAR(clear_module_state->__pyx_n_s_set_nmd);
   Py_CLEAR(clear_module_state->__pyx_n_s_setstate);
   Py_CLEAR(clear_module_state->__pyx_n_s_setstate_cython);
+  Py_CLEAR(clear_module_state->__pyx_n_s_show);
   Py_CLEAR(clear_module_state->__pyx_n_s_spec);
+  Py_CLEAR(clear_module_state->__pyx_n_s_spines);
   Py_CLEAR(clear_module_state->__pyx_n_s_state);
   Py_CLEAR(clear_module_state->__pyx_kp_s_stringsource);
+  Py_CLEAR(clear_module_state->__pyx_n_u_subtraction);
   Py_CLEAR(clear_module_state->__pyx_n_s_super);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
+  Py_CLEAR(clear_module_state->__pyx_n_u_top);
   Py_CLEAR(clear_module_state->__pyx_n_s_update);
   Py_CLEAR(clear_module_state->__pyx_n_s_use_setstate);
   Py_CLEAR(clear_module_state->__pyx_n_s_value);
+  Py_CLEAR(clear_module_state->__pyx_n_s_where);
+  Py_CLEAR(clear_module_state->__pyx_n_s_x);
+  Py_CLEAR(clear_module_state->__pyx_n_s_y);
   Py_CLEAR(clear_module_state->__pyx_float_0_);
   Py_CLEAR(clear_module_state->__pyx_float_1_);
+  Py_CLEAR(clear_module_state->__pyx_float_0_1);
+  Py_CLEAR(clear_module_state->__pyx_float_1_1);
   Py_CLEAR(clear_module_state->__pyx_int_0);
   Py_CLEAR(clear_module_state->__pyx_int_1);
   Py_CLEAR(clear_module_state->__pyx_int_4);
+  Py_CLEAR(clear_module_state->__pyx_int_1000);
   Py_CLEAR(clear_module_state->__pyx_int_179661131);
   Py_CLEAR(clear_module_state->__pyx_int_190112119);
   Py_CLEAR(clear_module_state->__pyx_int_241299837);
   Py_CLEAR(clear_module_state->__pyx_tuple__3);
   Py_CLEAR(clear_module_state->__pyx_tuple__4);
-  Py_CLEAR(clear_module_state->__pyx_tuple__6);
+  Py_CLEAR(clear_module_state->__pyx_tuple__5);
   Py_CLEAR(clear_module_state->__pyx_tuple__7);
-  Py_CLEAR(clear_module_state->__pyx_tuple__9);
-  Py_CLEAR(clear_module_state->__pyx_tuple__12);
-  Py_CLEAR(clear_module_state->__pyx_tuple__18);
-  Py_CLEAR(clear_module_state->__pyx_tuple__23);
-  Py_CLEAR(clear_module_state->__pyx_tuple__25);
+  Py_CLEAR(clear_module_state->__pyx_tuple__8);
+  Py_CLEAR(clear_module_state->__pyx_tuple__10);
+  Py_CLEAR(clear_module_state->__pyx_tuple__13);
+  Py_CLEAR(clear_module_state->__pyx_tuple__19);
+  Py_CLEAR(clear_module_state->__pyx_tuple__24);
+  Py_CLEAR(clear_module_state->__pyx_tuple__26);
   Py_CLEAR(clear_module_state->__pyx_tuple__27);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__10);
+  Py_CLEAR(clear_module_state->__pyx_tuple__29);
+  Py_CLEAR(clear_module_state->__pyx_tuple__31);
   Py_CLEAR(clear_module_state->__pyx_codeobj__11);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__13);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__12);
   Py_CLEAR(clear_module_state->__pyx_codeobj__14);
   Py_CLEAR(clear_module_state->__pyx_codeobj__15);
   Py_CLEAR(clear_module_state->__pyx_codeobj__16);
   Py_CLEAR(clear_module_state->__pyx_codeobj__17);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__19);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__18);
   Py_CLEAR(clear_module_state->__pyx_codeobj__20);
   Py_CLEAR(clear_module_state->__pyx_codeobj__21);
   Py_CLEAR(clear_module_state->__pyx_codeobj__22);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__24);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__26);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__23);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__25);
   Py_CLEAR(clear_module_state->__pyx_codeobj__28);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__30);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__32);
   return 0;
 }
 #endif
@@ -3218,20 +3406,30 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_ERROR_the_two_ifns_are_not_the_i);
   Py_VISIT(traverse_module_state->__pyx_n_s_ImportError);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Incompatible_checksums_0x_x_vs_0);
+  Py_VISIT(traverse_module_state->__pyx_n_u_None);
   Py_VISIT(traverse_module_state->__pyx_n_s_PickleError);
   Py_VISIT(traverse_module_state->__pyx_n_s_ValueError);
   Py_VISIT(traverse_module_state->__pyx_kp_u__2);
-  Py_VISIT(traverse_module_state->__pyx_n_s__29);
-  Py_VISIT(traverse_module_state->__pyx_kp_u__5);
-  Py_VISIT(traverse_module_state->__pyx_n_s__8);
+  Py_VISIT(traverse_module_state->__pyx_n_s__33);
+  Py_VISIT(traverse_module_state->__pyx_kp_u__6);
+  Py_VISIT(traverse_module_state->__pyx_n_s__9);
+  Py_VISIT(traverse_module_state->__pyx_n_u_addition);
   Py_VISIT(traverse_module_state->__pyx_n_s_algeb_power);
   Py_VISIT(traverse_module_state->__pyx_n_s_algeb_times);
   Py_VISIT(traverse_module_state->__pyx_n_s_all);
+  Py_VISIT(traverse_module_state->__pyx_n_u_all);
+  Py_VISIT(traverse_module_state->__pyx_n_s_alpha);
   Py_VISIT(traverse_module_state->__pyx_n_s_around);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
+  Py_VISIT(traverse_module_state->__pyx_n_s_axhline);
+  Py_VISIT(traverse_module_state->__pyx_n_s_axis);
+  Py_VISIT(traverse_module_state->__pyx_n_s_axvline);
   Py_VISIT(traverse_module_state->__pyx_n_s_bases);
+  Py_VISIT(traverse_module_state->__pyx_n_u_blue);
+  Py_VISIT(traverse_module_state->__pyx_n_u_bottom);
   Py_VISIT(traverse_module_state->__pyx_n_s_class);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
+  Py_VISIT(traverse_module_state->__pyx_n_s_color);
   Py_VISIT(traverse_module_state->__pyx_n_s_comp);
   Py_VISIT(traverse_module_state->__pyx_n_s_convert);
   Py_VISIT(traverse_module_state->__pyx_n_s_copy);
@@ -3239,11 +3437,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_dict);
   Py_VISIT(traverse_module_state->__pyx_n_s_dict_2);
   Py_VISIT(traverse_module_state->__pyx_kp_u_disable);
+  Py_VISIT(traverse_module_state->__pyx_n_u_division);
   Py_VISIT(traverse_module_state->__pyx_n_s_eins_power);
   Py_VISIT(traverse_module_state->__pyx_n_s_eins_times);
   Py_VISIT(traverse_module_state->__pyx_kp_u_enable);
+  Py_VISIT(traverse_module_state->__pyx_n_s_fill_between);
+  Py_VISIT(traverse_module_state->__pyx_n_s_fill_betweenx);
   Py_VISIT(traverse_module_state->__pyx_n_s_float);
   Py_VISIT(traverse_module_state->__pyx_kp_u_gc);
+  Py_VISIT(traverse_module_state->__pyx_n_s_gca);
   Py_VISIT(traverse_module_state->__pyx_n_s_getstate);
   Py_VISIT(traverse_module_state->__pyx_n_s_import);
   Py_VISIT(traverse_module_state->__pyx_n_s_init);
@@ -3254,13 +3456,20 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
   Py_VISIT(traverse_module_state->__pyx_kp_u_isenabled);
   Py_VISIT(traverse_module_state->__pyx_n_s_l);
+  Py_VISIT(traverse_module_state->__pyx_n_u_left);
+  Py_VISIT(traverse_module_state->__pyx_n_s_linspace);
+  Py_VISIT(traverse_module_state->__pyx_n_s_m);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
+  Py_VISIT(traverse_module_state->__pyx_n_s_marker);
+  Py_VISIT(traverse_module_state->__pyx_n_s_matplotlib);
   Py_VISIT(traverse_module_state->__pyx_n_s_md);
   Py_VISIT(traverse_module_state->__pyx_kp_u_md_2);
   Py_VISIT(traverse_module_state->__pyx_kp_u_md_and_nmd_must_be_between_0_and);
   Py_VISIT(traverse_module_state->__pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe);
   Py_VISIT(traverse_module_state->__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy);
   Py_VISIT(traverse_module_state->__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2);
+  Py_VISIT(traverse_module_state->__pyx_n_u_multiplication);
+  Py_VISIT(traverse_module_state->__pyx_n_s_n);
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_new);
   Py_VISIT(traverse_module_state->__pyx_n_s_nmd);
@@ -3269,7 +3478,11 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_numpy);
   Py_VISIT(traverse_module_state->__pyx_kp_u_numpy_core_multiarray_failed_to);
   Py_VISIT(traverse_module_state->__pyx_kp_u_numpy_core_umath_failed_to_impor);
+  Py_VISIT(traverse_module_state->__pyx_n_u_o);
   Py_VISIT(traverse_module_state->__pyx_n_s_pickle);
+  Py_VISIT(traverse_module_state->__pyx_n_s_plot);
+  Py_VISIT(traverse_module_state->__pyx_n_s_plt);
+  Py_VISIT(traverse_module_state->__pyx_n_s_pyplot);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_PickleError);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_checksum);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_result);
@@ -3277,6 +3490,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_type);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_unpickle_qrungifn);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_vtable);
+  Py_VISIT(traverse_module_state->__pyx_n_s_q);
   Py_VISIT(traverse_module_state->__pyx_n_s_qrung);
   Py_VISIT(traverse_module_state->__pyx_n_s_qrungifn);
   Py_VISIT(traverse_module_state->__pyx_kp_u_qrungifn_Q_d);
@@ -3291,57 +3505,77 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_qrungifn_isEmpty);
   Py_VISIT(traverse_module_state->__pyx_n_s_qrungifn_isEmpty_half);
   Py_VISIT(traverse_module_state->__pyx_n_s_qrungifn_isLegal);
+  Py_VISIT(traverse_module_state->__pyx_n_s_qrungifn_plot);
   Py_VISIT(traverse_module_state->__pyx_n_s_qrungifn_set_md);
   Py_VISIT(traverse_module_state->__pyx_n_s_qrungifn_set_nmd);
+  Py_VISIT(traverse_module_state->__pyx_n_u_red);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce_cython);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce_ex);
+  Py_VISIT(traverse_module_state->__pyx_n_s_region);
+  Py_VISIT(traverse_module_state->__pyx_n_u_right);
   Py_VISIT(traverse_module_state->__pyx_n_s_round);
+  Py_VISIT(traverse_module_state->__pyx_n_s_scatter);
   Py_VISIT(traverse_module_state->__pyx_n_s_self);
+  Py_VISIT(traverse_module_state->__pyx_n_s_set_linewidth);
   Py_VISIT(traverse_module_state->__pyx_n_s_set_md);
   Py_VISIT(traverse_module_state->__pyx_n_s_set_nmd);
   Py_VISIT(traverse_module_state->__pyx_n_s_setstate);
   Py_VISIT(traverse_module_state->__pyx_n_s_setstate_cython);
+  Py_VISIT(traverse_module_state->__pyx_n_s_show);
   Py_VISIT(traverse_module_state->__pyx_n_s_spec);
+  Py_VISIT(traverse_module_state->__pyx_n_s_spines);
   Py_VISIT(traverse_module_state->__pyx_n_s_state);
   Py_VISIT(traverse_module_state->__pyx_kp_s_stringsource);
+  Py_VISIT(traverse_module_state->__pyx_n_u_subtraction);
   Py_VISIT(traverse_module_state->__pyx_n_s_super);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
+  Py_VISIT(traverse_module_state->__pyx_n_u_top);
   Py_VISIT(traverse_module_state->__pyx_n_s_update);
   Py_VISIT(traverse_module_state->__pyx_n_s_use_setstate);
   Py_VISIT(traverse_module_state->__pyx_n_s_value);
+  Py_VISIT(traverse_module_state->__pyx_n_s_where);
+  Py_VISIT(traverse_module_state->__pyx_n_s_x);
+  Py_VISIT(traverse_module_state->__pyx_n_s_y);
   Py_VISIT(traverse_module_state->__pyx_float_0_);
   Py_VISIT(traverse_module_state->__pyx_float_1_);
+  Py_VISIT(traverse_module_state->__pyx_float_0_1);
+  Py_VISIT(traverse_module_state->__pyx_float_1_1);
   Py_VISIT(traverse_module_state->__pyx_int_0);
   Py_VISIT(traverse_module_state->__pyx_int_1);
   Py_VISIT(traverse_module_state->__pyx_int_4);
+  Py_VISIT(traverse_module_state->__pyx_int_1000);
   Py_VISIT(traverse_module_state->__pyx_int_179661131);
   Py_VISIT(traverse_module_state->__pyx_int_190112119);
   Py_VISIT(traverse_module_state->__pyx_int_241299837);
   Py_VISIT(traverse_module_state->__pyx_tuple__3);
   Py_VISIT(traverse_module_state->__pyx_tuple__4);
-  Py_VISIT(traverse_module_state->__pyx_tuple__6);
+  Py_VISIT(traverse_module_state->__pyx_tuple__5);
   Py_VISIT(traverse_module_state->__pyx_tuple__7);
-  Py_VISIT(traverse_module_state->__pyx_tuple__9);
-  Py_VISIT(traverse_module_state->__pyx_tuple__12);
-  Py_VISIT(traverse_module_state->__pyx_tuple__18);
-  Py_VISIT(traverse_module_state->__pyx_tuple__23);
-  Py_VISIT(traverse_module_state->__pyx_tuple__25);
+  Py_VISIT(traverse_module_state->__pyx_tuple__8);
+  Py_VISIT(traverse_module_state->__pyx_tuple__10);
+  Py_VISIT(traverse_module_state->__pyx_tuple__13);
+  Py_VISIT(traverse_module_state->__pyx_tuple__19);
+  Py_VISIT(traverse_module_state->__pyx_tuple__24);
+  Py_VISIT(traverse_module_state->__pyx_tuple__26);
   Py_VISIT(traverse_module_state->__pyx_tuple__27);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__10);
+  Py_VISIT(traverse_module_state->__pyx_tuple__29);
+  Py_VISIT(traverse_module_state->__pyx_tuple__31);
   Py_VISIT(traverse_module_state->__pyx_codeobj__11);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__13);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__12);
   Py_VISIT(traverse_module_state->__pyx_codeobj__14);
   Py_VISIT(traverse_module_state->__pyx_codeobj__15);
   Py_VISIT(traverse_module_state->__pyx_codeobj__16);
   Py_VISIT(traverse_module_state->__pyx_codeobj__17);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__19);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__18);
   Py_VISIT(traverse_module_state->__pyx_codeobj__20);
   Py_VISIT(traverse_module_state->__pyx_codeobj__21);
   Py_VISIT(traverse_module_state->__pyx_codeobj__22);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__24);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__26);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__23);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__25);
   Py_VISIT(traverse_module_state->__pyx_codeobj__28);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__30);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__32);
   return 0;
 }
 #endif
@@ -3388,20 +3622,30 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_ERROR_the_two_ifns_are_not_the_i __pyx_mstate_global->__pyx_kp_u_ERROR_the_two_ifns_are_not_the_i
 #define __pyx_n_s_ImportError __pyx_mstate_global->__pyx_n_s_ImportError
 #define __pyx_kp_s_Incompatible_checksums_0x_x_vs_0 __pyx_mstate_global->__pyx_kp_s_Incompatible_checksums_0x_x_vs_0
+#define __pyx_n_u_None __pyx_mstate_global->__pyx_n_u_None
 #define __pyx_n_s_PickleError __pyx_mstate_global->__pyx_n_s_PickleError
 #define __pyx_n_s_ValueError __pyx_mstate_global->__pyx_n_s_ValueError
 #define __pyx_kp_u__2 __pyx_mstate_global->__pyx_kp_u__2
-#define __pyx_n_s__29 __pyx_mstate_global->__pyx_n_s__29
-#define __pyx_kp_u__5 __pyx_mstate_global->__pyx_kp_u__5
-#define __pyx_n_s__8 __pyx_mstate_global->__pyx_n_s__8
+#define __pyx_n_s__33 __pyx_mstate_global->__pyx_n_s__33
+#define __pyx_kp_u__6 __pyx_mstate_global->__pyx_kp_u__6
+#define __pyx_n_s__9 __pyx_mstate_global->__pyx_n_s__9
+#define __pyx_n_u_addition __pyx_mstate_global->__pyx_n_u_addition
 #define __pyx_n_s_algeb_power __pyx_mstate_global->__pyx_n_s_algeb_power
 #define __pyx_n_s_algeb_times __pyx_mstate_global->__pyx_n_s_algeb_times
 #define __pyx_n_s_all __pyx_mstate_global->__pyx_n_s_all
+#define __pyx_n_u_all __pyx_mstate_global->__pyx_n_u_all
+#define __pyx_n_s_alpha __pyx_mstate_global->__pyx_n_s_alpha
 #define __pyx_n_s_around __pyx_mstate_global->__pyx_n_s_around
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
+#define __pyx_n_s_axhline __pyx_mstate_global->__pyx_n_s_axhline
+#define __pyx_n_s_axis __pyx_mstate_global->__pyx_n_s_axis
+#define __pyx_n_s_axvline __pyx_mstate_global->__pyx_n_s_axvline
 #define __pyx_n_s_bases __pyx_mstate_global->__pyx_n_s_bases
+#define __pyx_n_u_blue __pyx_mstate_global->__pyx_n_u_blue
+#define __pyx_n_u_bottom __pyx_mstate_global->__pyx_n_u_bottom
 #define __pyx_n_s_class __pyx_mstate_global->__pyx_n_s_class
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
+#define __pyx_n_s_color __pyx_mstate_global->__pyx_n_s_color
 #define __pyx_n_s_comp __pyx_mstate_global->__pyx_n_s_comp
 #define __pyx_n_s_convert __pyx_mstate_global->__pyx_n_s_convert
 #define __pyx_n_s_copy __pyx_mstate_global->__pyx_n_s_copy
@@ -3409,11 +3653,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_dict __pyx_mstate_global->__pyx_n_s_dict
 #define __pyx_n_s_dict_2 __pyx_mstate_global->__pyx_n_s_dict_2
 #define __pyx_kp_u_disable __pyx_mstate_global->__pyx_kp_u_disable
+#define __pyx_n_u_division __pyx_mstate_global->__pyx_n_u_division
 #define __pyx_n_s_eins_power __pyx_mstate_global->__pyx_n_s_eins_power
 #define __pyx_n_s_eins_times __pyx_mstate_global->__pyx_n_s_eins_times
 #define __pyx_kp_u_enable __pyx_mstate_global->__pyx_kp_u_enable
+#define __pyx_n_s_fill_between __pyx_mstate_global->__pyx_n_s_fill_between
+#define __pyx_n_s_fill_betweenx __pyx_mstate_global->__pyx_n_s_fill_betweenx
 #define __pyx_n_s_float __pyx_mstate_global->__pyx_n_s_float
 #define __pyx_kp_u_gc __pyx_mstate_global->__pyx_kp_u_gc
+#define __pyx_n_s_gca __pyx_mstate_global->__pyx_n_s_gca
 #define __pyx_n_s_getstate __pyx_mstate_global->__pyx_n_s_getstate
 #define __pyx_n_s_import __pyx_mstate_global->__pyx_n_s_import
 #define __pyx_n_s_init __pyx_mstate_global->__pyx_n_s_init
@@ -3424,13 +3672,20 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
 #define __pyx_kp_u_isenabled __pyx_mstate_global->__pyx_kp_u_isenabled
 #define __pyx_n_s_l __pyx_mstate_global->__pyx_n_s_l
+#define __pyx_n_u_left __pyx_mstate_global->__pyx_n_u_left
+#define __pyx_n_s_linspace __pyx_mstate_global->__pyx_n_s_linspace
+#define __pyx_n_s_m __pyx_mstate_global->__pyx_n_s_m
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
+#define __pyx_n_s_marker __pyx_mstate_global->__pyx_n_s_marker
+#define __pyx_n_s_matplotlib __pyx_mstate_global->__pyx_n_s_matplotlib
 #define __pyx_n_s_md __pyx_mstate_global->__pyx_n_s_md
 #define __pyx_kp_u_md_2 __pyx_mstate_global->__pyx_kp_u_md_2
 #define __pyx_kp_u_md_and_nmd_must_be_between_0_and __pyx_mstate_global->__pyx_kp_u_md_and_nmd_must_be_between_0_and
 #define __pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe __pyx_mstate_global->__pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe
 #define __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy __pyx_mstate_global->__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy
 #define __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2 __pyx_mstate_global->__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2
+#define __pyx_n_u_multiplication __pyx_mstate_global->__pyx_n_u_multiplication
+#define __pyx_n_s_n __pyx_mstate_global->__pyx_n_s_n
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_n_s_new __pyx_mstate_global->__pyx_n_s_new
 #define __pyx_n_s_nmd __pyx_mstate_global->__pyx_n_s_nmd
@@ -3439,7 +3694,11 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_numpy __pyx_mstate_global->__pyx_n_s_numpy
 #define __pyx_kp_u_numpy_core_multiarray_failed_to __pyx_mstate_global->__pyx_kp_u_numpy_core_multiarray_failed_to
 #define __pyx_kp_u_numpy_core_umath_failed_to_impor __pyx_mstate_global->__pyx_kp_u_numpy_core_umath_failed_to_impor
+#define __pyx_n_u_o __pyx_mstate_global->__pyx_n_u_o
 #define __pyx_n_s_pickle __pyx_mstate_global->__pyx_n_s_pickle
+#define __pyx_n_s_plot __pyx_mstate_global->__pyx_n_s_plot
+#define __pyx_n_s_plt __pyx_mstate_global->__pyx_n_s_plt
+#define __pyx_n_s_pyplot __pyx_mstate_global->__pyx_n_s_pyplot
 #define __pyx_n_s_pyx_PickleError __pyx_mstate_global->__pyx_n_s_pyx_PickleError
 #define __pyx_n_s_pyx_checksum __pyx_mstate_global->__pyx_n_s_pyx_checksum
 #define __pyx_n_s_pyx_result __pyx_mstate_global->__pyx_n_s_pyx_result
@@ -3447,6 +3706,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_pyx_type __pyx_mstate_global->__pyx_n_s_pyx_type
 #define __pyx_n_s_pyx_unpickle_qrungifn __pyx_mstate_global->__pyx_n_s_pyx_unpickle_qrungifn
 #define __pyx_n_s_pyx_vtable __pyx_mstate_global->__pyx_n_s_pyx_vtable
+#define __pyx_n_s_q __pyx_mstate_global->__pyx_n_s_q
 #define __pyx_n_s_qrung __pyx_mstate_global->__pyx_n_s_qrung
 #define __pyx_n_s_qrungifn __pyx_mstate_global->__pyx_n_s_qrungifn
 #define __pyx_kp_u_qrungifn_Q_d __pyx_mstate_global->__pyx_kp_u_qrungifn_Q_d
@@ -3461,61 +3721,81 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_qrungifn_isEmpty __pyx_mstate_global->__pyx_n_s_qrungifn_isEmpty
 #define __pyx_n_s_qrungifn_isEmpty_half __pyx_mstate_global->__pyx_n_s_qrungifn_isEmpty_half
 #define __pyx_n_s_qrungifn_isLegal __pyx_mstate_global->__pyx_n_s_qrungifn_isLegal
+#define __pyx_n_s_qrungifn_plot __pyx_mstate_global->__pyx_n_s_qrungifn_plot
 #define __pyx_n_s_qrungifn_set_md __pyx_mstate_global->__pyx_n_s_qrungifn_set_md
 #define __pyx_n_s_qrungifn_set_nmd __pyx_mstate_global->__pyx_n_s_qrungifn_set_nmd
+#define __pyx_n_u_red __pyx_mstate_global->__pyx_n_u_red
 #define __pyx_n_s_reduce __pyx_mstate_global->__pyx_n_s_reduce
 #define __pyx_n_s_reduce_cython __pyx_mstate_global->__pyx_n_s_reduce_cython
 #define __pyx_n_s_reduce_ex __pyx_mstate_global->__pyx_n_s_reduce_ex
+#define __pyx_n_s_region __pyx_mstate_global->__pyx_n_s_region
+#define __pyx_n_u_right __pyx_mstate_global->__pyx_n_u_right
 #define __pyx_n_s_round __pyx_mstate_global->__pyx_n_s_round
+#define __pyx_n_s_scatter __pyx_mstate_global->__pyx_n_s_scatter
 #define __pyx_n_s_self __pyx_mstate_global->__pyx_n_s_self
+#define __pyx_n_s_set_linewidth __pyx_mstate_global->__pyx_n_s_set_linewidth
 #define __pyx_n_s_set_md __pyx_mstate_global->__pyx_n_s_set_md
 #define __pyx_n_s_set_nmd __pyx_mstate_global->__pyx_n_s_set_nmd
 #define __pyx_n_s_setstate __pyx_mstate_global->__pyx_n_s_setstate
 #define __pyx_n_s_setstate_cython __pyx_mstate_global->__pyx_n_s_setstate_cython
+#define __pyx_n_s_show __pyx_mstate_global->__pyx_n_s_show
 #define __pyx_n_s_spec __pyx_mstate_global->__pyx_n_s_spec
+#define __pyx_n_s_spines __pyx_mstate_global->__pyx_n_s_spines
 #define __pyx_n_s_state __pyx_mstate_global->__pyx_n_s_state
 #define __pyx_kp_s_stringsource __pyx_mstate_global->__pyx_kp_s_stringsource
+#define __pyx_n_u_subtraction __pyx_mstate_global->__pyx_n_u_subtraction
 #define __pyx_n_s_super __pyx_mstate_global->__pyx_n_s_super
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
+#define __pyx_n_u_top __pyx_mstate_global->__pyx_n_u_top
 #define __pyx_n_s_update __pyx_mstate_global->__pyx_n_s_update
 #define __pyx_n_s_use_setstate __pyx_mstate_global->__pyx_n_s_use_setstate
 #define __pyx_n_s_value __pyx_mstate_global->__pyx_n_s_value
+#define __pyx_n_s_where __pyx_mstate_global->__pyx_n_s_where
+#define __pyx_n_s_x __pyx_mstate_global->__pyx_n_s_x
+#define __pyx_n_s_y __pyx_mstate_global->__pyx_n_s_y
 #define __pyx_float_0_ __pyx_mstate_global->__pyx_float_0_
 #define __pyx_float_1_ __pyx_mstate_global->__pyx_float_1_
+#define __pyx_float_0_1 __pyx_mstate_global->__pyx_float_0_1
+#define __pyx_float_1_1 __pyx_mstate_global->__pyx_float_1_1
 #define __pyx_int_0 __pyx_mstate_global->__pyx_int_0
 #define __pyx_int_1 __pyx_mstate_global->__pyx_int_1
 #define __pyx_int_4 __pyx_mstate_global->__pyx_int_4
+#define __pyx_int_1000 __pyx_mstate_global->__pyx_int_1000
 #define __pyx_int_179661131 __pyx_mstate_global->__pyx_int_179661131
 #define __pyx_int_190112119 __pyx_mstate_global->__pyx_int_190112119
 #define __pyx_int_241299837 __pyx_mstate_global->__pyx_int_241299837
 #define __pyx_tuple__3 __pyx_mstate_global->__pyx_tuple__3
 #define __pyx_tuple__4 __pyx_mstate_global->__pyx_tuple__4
-#define __pyx_tuple__6 __pyx_mstate_global->__pyx_tuple__6
+#define __pyx_tuple__5 __pyx_mstate_global->__pyx_tuple__5
 #define __pyx_tuple__7 __pyx_mstate_global->__pyx_tuple__7
-#define __pyx_tuple__9 __pyx_mstate_global->__pyx_tuple__9
-#define __pyx_tuple__12 __pyx_mstate_global->__pyx_tuple__12
-#define __pyx_tuple__18 __pyx_mstate_global->__pyx_tuple__18
-#define __pyx_tuple__23 __pyx_mstate_global->__pyx_tuple__23
-#define __pyx_tuple__25 __pyx_mstate_global->__pyx_tuple__25
+#define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
+#define __pyx_tuple__10 __pyx_mstate_global->__pyx_tuple__10
+#define __pyx_tuple__13 __pyx_mstate_global->__pyx_tuple__13
+#define __pyx_tuple__19 __pyx_mstate_global->__pyx_tuple__19
+#define __pyx_tuple__24 __pyx_mstate_global->__pyx_tuple__24
+#define __pyx_tuple__26 __pyx_mstate_global->__pyx_tuple__26
 #define __pyx_tuple__27 __pyx_mstate_global->__pyx_tuple__27
-#define __pyx_codeobj__10 __pyx_mstate_global->__pyx_codeobj__10
+#define __pyx_tuple__29 __pyx_mstate_global->__pyx_tuple__29
+#define __pyx_tuple__31 __pyx_mstate_global->__pyx_tuple__31
 #define __pyx_codeobj__11 __pyx_mstate_global->__pyx_codeobj__11
-#define __pyx_codeobj__13 __pyx_mstate_global->__pyx_codeobj__13
+#define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
 #define __pyx_codeobj__14 __pyx_mstate_global->__pyx_codeobj__14
 #define __pyx_codeobj__15 __pyx_mstate_global->__pyx_codeobj__15
 #define __pyx_codeobj__16 __pyx_mstate_global->__pyx_codeobj__16
 #define __pyx_codeobj__17 __pyx_mstate_global->__pyx_codeobj__17
-#define __pyx_codeobj__19 __pyx_mstate_global->__pyx_codeobj__19
+#define __pyx_codeobj__18 __pyx_mstate_global->__pyx_codeobj__18
 #define __pyx_codeobj__20 __pyx_mstate_global->__pyx_codeobj__20
 #define __pyx_codeobj__21 __pyx_mstate_global->__pyx_codeobj__21
 #define __pyx_codeobj__22 __pyx_mstate_global->__pyx_codeobj__22
-#define __pyx_codeobj__24 __pyx_mstate_global->__pyx_codeobj__24
-#define __pyx_codeobj__26 __pyx_mstate_global->__pyx_codeobj__26
+#define __pyx_codeobj__23 __pyx_mstate_global->__pyx_codeobj__23
+#define __pyx_codeobj__25 __pyx_mstate_global->__pyx_codeobj__25
 #define __pyx_codeobj__28 __pyx_mstate_global->__pyx_codeobj__28
+#define __pyx_codeobj__30 __pyx_mstate_global->__pyx_codeobj__30
+#define __pyx_codeobj__32 __pyx_mstate_global->__pyx_codeobj__32
 #endif
 /* #### Code section: module_code ### */
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":26
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":29
  *         float __nmd
  * 
  *     def __init__(self, int qrung, float md, float nmd):             # <<<<<<<<<<<<<<
@@ -3560,26 +3840,26 @@ static int __pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_1__
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_qrung)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (likely((values[1] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_md)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 26, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 29, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_GetKwValue_VARARGS(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_nmd)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 26, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 29, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 26, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "__init__") < 0)) __PYX_ERR(0, 29, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -3588,13 +3868,13 @@ static int __pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_1__
       values[1] = __Pyx_Arg_VARARGS(__pyx_args, 1);
       values[2] = __Pyx_Arg_VARARGS(__pyx_args, 2);
     }
-    __pyx_v_qrung = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_qrung == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
-    __pyx_v_md = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_md == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
-    __pyx_v_nmd = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_nmd == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
+    __pyx_v_qrung = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_qrung == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L3_error)
+    __pyx_v_md = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_md == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L3_error)
+    __pyx_v_nmd = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_nmd == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 26, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 29, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzy_element.qrungifn.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3625,14 +3905,14 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":27
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":30
  * 
  *     def __init__(self, int qrung, float md, float nmd):
  *         super().__init__()             # <<<<<<<<<<<<<<
  *         cdef float mds
  *         cdef float nmds
  */
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
   __Pyx_GIVEREF((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
@@ -3640,10 +3920,10 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
   __Pyx_INCREF((PyObject *)__pyx_v_self);
   __Pyx_GIVEREF((PyObject *)__pyx_v_self);
   PyTuple_SET_ITEM(__pyx_t_2, 1, ((PyObject *)__pyx_v_self));
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_super, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_init); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -3662,25 +3942,25 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
     PyObject *__pyx_callargs[1] = {__pyx_t_3, };
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":30
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":33
  *         cdef float mds
  *         cdef float nmds
  *         mds = np.float_(md)             # <<<<<<<<<<<<<<
  *         nmds = np.float_(nmd)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   __pyx_t_4 = 0;
@@ -3699,27 +3979,27 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  __pyx_t_6 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_6 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_6 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_mds = __pyx_t_6;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":31
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":34
  *         cdef float nmds
  *         mds = np.float_(md)
  *         nmds = np.float_(nmd)             # <<<<<<<<<<<<<<
  * 
  *         assert 0. <= md <= 1. and 0. <= nmd <= 1., 'md and nmd must be between 0 and 1.'
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_4 = 0;
@@ -3738,15 +4018,15 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_6 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_6 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsFloat(__pyx_t_1); if (unlikely((__pyx_t_6 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_nmds = __pyx_t_6;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":33
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":36
  *         nmds = np.float_(nmd)
  * 
  *         assert 0. <= md <= 1. and 0. <= nmd <= 1., 'md and nmd must be between 0 and 1.'             # <<<<<<<<<<<<<<
@@ -3772,14 +4052,14 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
     __pyx_L3_bool_binop_done:;
     if (unlikely(!__pyx_t_7)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_md_and_nmd_must_be_between_0_and, 0, 0);
-      __PYX_ERR(0, 33, __pyx_L1_error)
+      __PYX_ERR(0, 36, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 33, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 36, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":34
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":37
  * 
  *         assert 0. <= md <= 1. and 0. <= nmd <= 1., 'md and nmd must be between 0 and 1.'
  *         assert 0. <= md ** qrung + nmd ** qrung <= 1., 'md ** qrung + nmd ** qrung must be between 0 and 1'             # <<<<<<<<<<<<<<
@@ -3795,14 +4075,14 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
     }
     if (unlikely(!__pyx_t_7)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe, 0, 0);
-      __PYX_ERR(0, 34, __pyx_L1_error)
+      __PYX_ERR(0, 37, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 34, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 37, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":36
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":39
  *         assert 0. <= md ** qrung + nmd ** qrung <= 1., 'md ** qrung + nmd ** qrung must be between 0 and 1'
  * 
  *         self.__qrung = qrung             # <<<<<<<<<<<<<<
@@ -3811,7 +4091,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
  */
   __pyx_v_self->_qrungifn__qrung = __pyx_v_qrung;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":37
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":40
  * 
  *         self.__qrung = qrung
  *         self.__md = mds             # <<<<<<<<<<<<<<
@@ -3820,7 +4100,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
  */
   __pyx_v_self->_qrungifn__md = __pyx_v_mds;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":38
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":41
  *         self.__qrung = qrung
  *         self.__md = mds
  *         self.__nmd = nmds             # <<<<<<<<<<<<<<
@@ -3829,7 +4109,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
  */
   __pyx_v_self->_qrungifn__nmd = __pyx_v_nmds;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":26
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":29
  *         float __nmd
  * 
  *     def __init__(self, int qrung, float md, float nmd):             # <<<<<<<<<<<<<<
@@ -3852,7 +4132,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn___i
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":40
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":43
  *         self.__nmd = nmds
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -3888,7 +4168,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":41
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":44
  * 
  *     def __repr__(self):
  *         return 'qrungifn(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(             # <<<<<<<<<<<<<<
@@ -3896,31 +4176,31 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *             np.around(self.__nmd, 4)) + ')'
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_qrungifn_Q_d, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_qrungifn_Q_d, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_2, __pyx_kp_u_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_2, __pyx_kp_u_); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_1, __pyx_kp_u_md_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_1, __pyx_kp_u_md_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":42
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":45
  *     def __repr__(self):
  *         return 'qrungifn(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(
  *             np.around(self.__md, 4)) + '\n' + '    nmd:' + str(             # <<<<<<<<<<<<<<
  *             np.around(self.__nmd, 4)) + ')'
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_around); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_around); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -3939,53 +4219,53 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 2+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":41
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":44
  * 
  *     def __repr__(self):
  *         return 'qrungifn(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(             # <<<<<<<<<<<<<<
  *             np.around(self.__md, 4)) + '\n' + '    nmd:' + str(
  *             np.around(self.__nmd, 4)) + ')'
  */
-  __pyx_t_4 = __Pyx_PyObject_Str(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Str(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":42
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":45
  *     def __repr__(self):
  *         return 'qrungifn(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(
  *             np.around(self.__md, 4)) + '\n' + '    nmd:' + str(             # <<<<<<<<<<<<<<
  *             np.around(self.__nmd, 4)) + ')'
  * 
  */
-  __pyx_t_4 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_1, __pyx_kp_u_); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_1, __pyx_kp_u_); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_4, __pyx_kp_u_nmd_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_4, __pyx_kp_u_nmd_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":43
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":46
  *         return 'qrungifn(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(
  *             np.around(self.__md, 4)) + '\n' + '    nmd:' + str(
  *             np.around(self.__nmd, 4)) + ')'             # <<<<<<<<<<<<<<
  * 
  *     property qrung:
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_around); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_around); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -4004,41 +4284,41 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_6, 2+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":42
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":45
  *     def __repr__(self):
  *         return 'qrungifn(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(
  *             np.around(self.__md, 4)) + '\n' + '    nmd:' + str(             # <<<<<<<<<<<<<<
  *             np.around(self.__nmd, 4)) + ')'
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_Str(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Str(__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = PyNumber_Add(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Add(__pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":43
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":46
  *         return 'qrungifn(Q=%d):(' % self.__qrung + '\n' + '    md: ' + str(
  *             np.around(self.__md, 4)) + '\n' + '    nmd:' + str(
  *             np.around(self.__nmd, 4)) + ')'             # <<<<<<<<<<<<<<
  * 
  *     property qrung:
  */
-  __pyx_t_3 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_4, __pyx_kp_u__2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyUnicode_ConcatInPlace(__pyx_t_4, __pyx_kp_u__2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":40
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":43
  *         self.__nmd = nmds
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -4061,7 +4341,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":46
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":49
  * 
  *     property qrung:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4092,7 +4372,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":47
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":50
  *     property qrung:
  *         def __get__(self):
  *             return self.__qrung             # <<<<<<<<<<<<<<
@@ -4100,13 +4380,13 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *     property md:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":46
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":49
  * 
  *     property qrung:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4125,7 +4405,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":50
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":53
  * 
  *     property md:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4156,7 +4436,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":51
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":54
  *     property md:
  *         def __get__(self):
  *             return self.__md             # <<<<<<<<<<<<<<
@@ -4164,13 +4444,13 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *         def __set__(self, float value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":50
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":53
  * 
  *     property md:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4189,7 +4469,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":53
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":56
  *             return self.__md
  * 
  *         def __set__(self, float value):             # <<<<<<<<<<<<<<
@@ -4209,7 +4489,7 @@ static int __pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_2md
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __pyx_PyFloat_AsFloat(__pyx_arg_value); if (unlikely((__pyx_v_value == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 53, __pyx_L3_error)
+    __pyx_v_value = __pyx_PyFloat_AsFloat(__pyx_arg_value); if (unlikely((__pyx_v_value == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 56, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4241,7 +4521,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_2md
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":54
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":57
  * 
  *         def __set__(self, float value):
  *             assert 0. <= value <= 1., 'ERROR: MD must be in the interval 0-1.'             # <<<<<<<<<<<<<<
@@ -4256,26 +4536,26 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_2md
     }
     if (unlikely(!__pyx_t_1)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_MD_must_be_in_the_interval, 0, 0);
-      __PYX_ERR(0, 54, __pyx_L1_error)
+      __PYX_ERR(0, 57, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 54, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 57, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":55
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":58
  *         def __set__(self, float value):
  *             assert 0. <= value <= 1., 'ERROR: MD must be in the interval 0-1.'
  *             v = np.float_(value)             # <<<<<<<<<<<<<<
  *             m = self.__md
  *             self.__md = v
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -4294,36 +4574,36 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_2md
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_v_v = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":56
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":59
  *             assert 0. <= value <= 1., 'ERROR: MD must be in the interval 0-1.'
  *             v = np.float_(value)
  *             m = self.__md             # <<<<<<<<<<<<<<
  *             self.__md = v
  *             if not self.isLegal():
  */
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_m = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":57
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":60
  *             v = np.float_(value)
  *             m = self.__md
  *             self.__md = v             # <<<<<<<<<<<<<<
  *             if not self.isLegal():
  *                 self.__md = m
  */
-  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_v); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_v); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L1_error)
   __pyx_v_self->_qrungifn__md = __pyx_t_7;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":58
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":61
  *             m = self.__md
  *             self.__md = v
  *             if not self.isLegal():             # <<<<<<<<<<<<<<
@@ -4333,30 +4613,30 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_2md
   __pyx_t_1 = (!((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_self->__pyx_vtab)->isLegal(__pyx_v_self, 0));
   if (unlikely(__pyx_t_1)) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":59
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":62
  *             self.__md = v
  *             if not self.isLegal():
  *                 self.__md = m             # <<<<<<<<<<<<<<
  *                 raise ValueError('ERROR: Invalid data.')
  * 
  */
-    __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_m); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 59, __pyx_L1_error)
+    __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_m); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L1_error)
     __pyx_v_self->_qrungifn__md = __pyx_t_7;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":60
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":63
  *             if not self.isLegal():
  *                 self.__md = m
  *                 raise ValueError('ERROR: Invalid data.')             # <<<<<<<<<<<<<<
  * 
  *     property nmd:
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 63, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 60, __pyx_L1_error)
+    __PYX_ERR(0, 63, __pyx_L1_error)
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":58
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":61
  *             m = self.__md
  *             self.__md = v
  *             if not self.isLegal():             # <<<<<<<<<<<<<<
@@ -4365,7 +4645,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_2md
  */
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":53
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":56
  *             return self.__md
  * 
  *         def __set__(self, float value):             # <<<<<<<<<<<<<<
@@ -4390,7 +4670,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_2md
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":63
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":66
  * 
  *     property nmd:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4421,7 +4701,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":64
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":67
  *     property nmd:
  *         def __get__(self):
  *             return self.__nmd             # <<<<<<<<<<<<<<
@@ -4429,13 +4709,13 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *         def __set__(self, float value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":63
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":66
  * 
  *     property nmd:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4454,7 +4734,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":66
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":69
  *             return self.__nmd
  * 
  *         def __set__(self, float value):             # <<<<<<<<<<<<<<
@@ -4474,7 +4754,7 @@ static int __pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_3nm
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__set__ (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __pyx_PyFloat_AsFloat(__pyx_arg_value); if (unlikely((__pyx_v_value == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 66, __pyx_L3_error)
+    __pyx_v_value = __pyx_PyFloat_AsFloat(__pyx_arg_value); if (unlikely((__pyx_v_value == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 69, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4506,7 +4786,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_3nm
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__set__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":67
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":70
  * 
  *         def __set__(self, float value):
  *             assert 0. <= value <= 1., 'ERROR: NMD must be in the interval 0-1.'             # <<<<<<<<<<<<<<
@@ -4521,26 +4801,26 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_3nm
     }
     if (unlikely(!__pyx_t_1)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_NMD_must_be_in_the_interva, 0, 0);
-      __PYX_ERR(0, 67, __pyx_L1_error)
+      __PYX_ERR(0, 70, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 67, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 70, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":68
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":71
  *         def __set__(self, float value):
  *             assert 0. <= value <= 1., 'ERROR: NMD must be in the interval 0-1.'
  *             v = np.float_(value)             # <<<<<<<<<<<<<<
  *             m = self.__nmd
  *             self.__nmd = v
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_6 = 0;
@@ -4559,36 +4839,36 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_3nm
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_v_v = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":69
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":72
  *             assert 0. <= value <= 1., 'ERROR: NMD must be in the interval 0-1.'
  *             v = np.float_(value)
  *             m = self.__nmd             # <<<<<<<<<<<<<<
  *             self.__nmd = v
  *             if not self.isLegal():
  */
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_m = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":70
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":73
  *             v = np.float_(value)
  *             m = self.__nmd
  *             self.__nmd = v             # <<<<<<<<<<<<<<
  *             if not self.isLegal():
  *                 self.__nmd = m
  */
-  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_v); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_v); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 73, __pyx_L1_error)
   __pyx_v_self->_qrungifn__nmd = __pyx_t_7;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":71
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":74
  *             m = self.__nmd
  *             self.__nmd = v
  *             if not self.isLegal():             # <<<<<<<<<<<<<<
@@ -4598,30 +4878,30 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_3nm
   __pyx_t_1 = (!((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_self->__pyx_vtab)->isLegal(__pyx_v_self, 0));
   if (unlikely(__pyx_t_1)) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":72
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":75
  *             self.__nmd = v
  *             if not self.isLegal():
  *                 self.__nmd = m             # <<<<<<<<<<<<<<
  *                 raise ValueError('ERROR: Invalid data.')
  * 
  */
-    __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_m); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L1_error)
+    __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_m); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L1_error)
     __pyx_v_self->_qrungifn__nmd = __pyx_t_7;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":73
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":76
  *             if not self.isLegal():
  *                 self.__nmd = m
  *                 raise ValueError('ERROR: Invalid data.')             # <<<<<<<<<<<<<<
  * 
  *     property parent:
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 73, __pyx_L1_error)
+    __PYX_ERR(0, 76, __pyx_L1_error)
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":71
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":74
  *             m = self.__nmd
  *             self.__nmd = v
  *             if not self.isLegal():             # <<<<<<<<<<<<<<
@@ -4630,7 +4910,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_3nm
  */
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":66
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":69
  *             return self.__nmd
  * 
  *         def __set__(self, float value):             # <<<<<<<<<<<<<<
@@ -4655,7 +4935,7 @@ static int __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_3nm
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":76
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":79
  * 
  *     property parent:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4690,25 +4970,25 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":77
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":80
  *     property parent:
  *         def __get__(self):
  *             for base in self.__class__.__bases__:             # <<<<<<<<<<<<<<
  *                 self.__parent = base.__name__
  *                 return self.__parent
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bases); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_bases); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (likely(PyList_CheckExact(__pyx_t_2)) || PyTuple_CheckExact(__pyx_t_2)) {
     __pyx_t_1 = __pyx_t_2; __Pyx_INCREF(__pyx_t_1); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 77, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 80, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   for (;;) {
@@ -4716,17 +4996,17 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_2); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 77, __pyx_L1_error)
+        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_2); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 80, __pyx_L1_error)
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_2); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 77, __pyx_L1_error)
+        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_3); __Pyx_INCREF(__pyx_t_2); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 80, __pyx_L1_error)
         #else
-        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
+        __pyx_t_2 = PySequence_ITEM(__pyx_t_1, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       }
@@ -4736,7 +5016,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 77, __pyx_L1_error)
+          else __PYX_ERR(0, 80, __pyx_L1_error)
         }
         break;
       }
@@ -4745,23 +5025,23 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     __pyx_v_base = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":78
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":81
  *         def __get__(self):
  *             for base in self.__class__.__bases__:
  *                 self.__parent = base.__name__             # <<<<<<<<<<<<<<
  *                 return self.__parent
  *     property score:
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_base, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_base, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 81, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    if (!(likely(PyUnicode_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_2))) __PYX_ERR(0, 78, __pyx_L1_error)
+    if (!(likely(PyUnicode_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None) || __Pyx_RaiseUnexpectedTypeError("unicode", __pyx_t_2))) __PYX_ERR(0, 81, __pyx_L1_error)
     __Pyx_GIVEREF(__pyx_t_2);
     __Pyx_GOTREF(__pyx_v_self->_qrungifn__parent);
     __Pyx_DECREF(__pyx_v_self->_qrungifn__parent);
     __pyx_v_self->_qrungifn__parent = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":79
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":82
  *             for base in self.__class__.__bases__:
  *                 self.__parent = base.__name__
  *                 return self.__parent             # <<<<<<<<<<<<<<
@@ -4774,7 +5054,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":77
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":80
  *     property parent:
  *         def __get__(self):
  *             for base in self.__class__.__bases__:             # <<<<<<<<<<<<<<
@@ -4784,7 +5064,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":76
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":79
  * 
  *     property parent:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4807,7 +5087,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":81
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":84
  *                 return self.__parent
  *     property score:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4842,38 +5122,38 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":82
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":85
  *     property score:
  *         def __get__(self):
  *             self.__score = self.md ** self.__qrung - self.nmd ** self.__qrung             # <<<<<<<<<<<<<<
  *             return self.__score
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Subtract(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Subtract(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self->_qrungifn__score = __pyx_t_5;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":83
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":86
  *         def __get__(self):
  *             self.__score = self.md ** self.__qrung - self.nmd ** self.__qrung
  *             return self.__score             # <<<<<<<<<<<<<<
@@ -4881,13 +5161,13 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *     property accuracy:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__score); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":81
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":84
  *                 return self.__parent
  *     property score:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4909,7 +5189,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":86
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":89
  * 
  *     property accuracy:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -4944,38 +5224,38 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":87
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":90
  *     property accuracy:
  *         def __get__(self):
  *             self.__accuracy = self.md ** self.__qrung + self.nmd ** self.__qrung             # <<<<<<<<<<<<<<
  *             return self.__accuracy
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self->_qrungifn__accuracy = __pyx_t_5;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":88
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":91
  *         def __get__(self):
  *             self.__accuracy = self.md ** self.__qrung + self.nmd ** self.__qrung
  *             return self.__accuracy             # <<<<<<<<<<<<<<
@@ -4983,13 +5263,13 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *     property indeterminacy:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__accuracy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__accuracy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":86
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":89
  * 
  *     property accuracy:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -5011,7 +5291,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":91
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":94
  * 
  *     property indeterminacy:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -5048,50 +5328,50 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":92
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":95
  *     property indeterminacy:
  *         def __get__(self):
  *             acc = self.md ** self.__qrung + self.nmd ** self.__qrung             # <<<<<<<<<<<<<<
  *             if acc == 1.:
  *                 self.__indeterminacy = 0.
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_4 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_acc = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":93
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":96
  *         def __get__(self):
  *             acc = self.md ** self.__qrung + self.nmd ** self.__qrung
  *             if acc == 1.:             # <<<<<<<<<<<<<<
  *                 self.__indeterminacy = 0.
  *             else:
  */
-  __pyx_t_1 = __Pyx_PyFloat_EqObjC(__pyx_v_acc, __pyx_float_1_, 1., 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyFloat_EqObjC(__pyx_v_acc, __pyx_float_1_, 1., 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 96, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_5) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":94
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":97
  *             acc = self.md ** self.__qrung + self.nmd ** self.__qrung
  *             if acc == 1.:
  *                 self.__indeterminacy = 0.             # <<<<<<<<<<<<<<
@@ -5100,7 +5380,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  */
     __pyx_v_self->_qrungifn__indeterminacy = 0.;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":93
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":96
  *         def __get__(self):
  *             acc = self.md ** self.__qrung + self.nmd ** self.__qrung
  *             if acc == 1.:             # <<<<<<<<<<<<<<
@@ -5110,7 +5390,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     goto __pyx_L3;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":96
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":99
  *                 self.__indeterminacy = 0.
  *             else:
  *                 self.__indeterminacy = (1. - acc) ** (1. / self.__qrung)             # <<<<<<<<<<<<<<
@@ -5118,25 +5398,25 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  * 
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_PyFloat_SubtractCObj(__pyx_float_1_, __pyx_v_acc, 1., 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFloat_SubtractCObj(__pyx_float_1_, __pyx_v_acc, 1., 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 96, __pyx_L1_error)
+      __PYX_ERR(0, 99, __pyx_L1_error)
     }
-    __pyx_t_4 = PyFloat_FromDouble((1. / ((double)__pyx_v_self->_qrungifn__qrung))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_4 = PyFloat_FromDouble((1. / ((double)__pyx_v_self->_qrungifn__qrung))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 99, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_t_4, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_t_4, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 96, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_self->_qrungifn__indeterminacy = __pyx_t_6;
   }
   __pyx_L3:;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":97
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":100
  *             else:
  *                 self.__indeterminacy = (1. - acc) ** (1. / self.__qrung)
  *             return self.__indeterminacy             # <<<<<<<<<<<<<<
@@ -5144,13 +5424,13 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *     cpdef set_md(self, value):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__indeterminacy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__indeterminacy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":91
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":94
  * 
  *     property indeterminacy:
  *         def __get__(self):             # <<<<<<<<<<<<<<
@@ -5173,7 +5453,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":99
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":102
  *             return self.__indeterminacy
  * 
  *     cpdef set_md(self, value):             # <<<<<<<<<<<<<<
@@ -5212,7 +5492,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_set_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_set_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -5238,7 +5518,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
           PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_value};
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
@@ -5260,16 +5540,16 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":100
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":103
  * 
  *     cpdef set_md(self, value):
  *         v = np.float_(value)             # <<<<<<<<<<<<<<
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
  *         self.__md = v
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5288,14 +5568,14 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_v_value};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_v = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":101
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":104
  *     cpdef set_md(self, value):
  *         v = np.float_(value)
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'             # <<<<<<<<<<<<<<
@@ -5304,7 +5584,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_n_s_all); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_n_s_all); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_2 = NULL;
     __pyx_t_5 = 0;
@@ -5322,38 +5602,38 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
       PyObject *__pyx_callargs[1] = {__pyx_t_2, };
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 101, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
-    __pyx_t_3 = PyObject_RichCompare(__pyx_int_0, __pyx_t_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_int_0, __pyx_t_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
     if (__Pyx_PyObject_IsTrue(__pyx_t_3)) {
       __Pyx_DECREF(__pyx_t_3);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_int_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 101, __pyx_L1_error)
+      __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_int_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 104, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (unlikely(!__pyx_t_6)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_Invalid_data, 0, 0);
-      __PYX_ERR(0, 101, __pyx_L1_error)
+      __PYX_ERR(0, 104, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 101, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 104, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":102
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":105
  *         v = np.float_(value)
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
  *         self.__md = v             # <<<<<<<<<<<<<<
  * 
  *     cpdef set_nmd(self, value):
  */
-  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_v); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_v); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L1_error)
   __pyx_v_self->_qrungifn__md = __pyx_t_7;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":99
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":102
  *             return self.__indeterminacy
  * 
  *     cpdef set_md(self, value):             # <<<<<<<<<<<<<<
@@ -5424,12 +5704,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_value)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_md") < 0)) __PYX_ERR(0, 99, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_md") < 0)) __PYX_ERR(0, 102, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -5440,7 +5720,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_md", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 99, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_md", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 102, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzy_element.qrungifn.set_md", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5462,7 +5742,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_md", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_set_md(__pyx_v_self, __pyx_v_value, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_set_md(__pyx_v_self, __pyx_v_value, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5479,7 +5759,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":104
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":107
  *         self.__md = v
  * 
  *     cpdef set_nmd(self, value):             # <<<<<<<<<<<<<<
@@ -5518,7 +5798,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -5544,7 +5824,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
           PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_value};
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
@@ -5566,16 +5846,16 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":105
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":108
  * 
  *     cpdef set_nmd(self, value):
  *         v = np.float_(value)             # <<<<<<<<<<<<<<
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
  *         self.__nmd = v
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5594,14 +5874,14 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_v_value};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_v = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":106
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":109
  *     cpdef set_nmd(self, value):
  *         v = np.float_(value)
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'             # <<<<<<<<<<<<<<
@@ -5610,7 +5890,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_n_s_all); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_v, __pyx_n_s_all); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_2 = NULL;
     __pyx_t_5 = 0;
@@ -5628,38 +5908,38 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
       PyObject *__pyx_callargs[1] = {__pyx_t_2, };
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
-    __pyx_t_3 = PyObject_RichCompare(__pyx_int_0, __pyx_t_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_int_0, __pyx_t_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
     if (__Pyx_PyObject_IsTrue(__pyx_t_3)) {
       __Pyx_DECREF(__pyx_t_3);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_int_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 106, __pyx_L1_error)
+      __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_int_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 106, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (unlikely(!__pyx_t_6)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_Invalid_data, 0, 0);
-      __PYX_ERR(0, 106, __pyx_L1_error)
+      __PYX_ERR(0, 109, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 106, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 109, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":107
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":110
  *         v = np.float_(value)
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
  *         self.__nmd = v             # <<<<<<<<<<<<<<
  * 
  *     cpdef bint isEmpty(self):
  */
-  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_v); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L1_error)
+  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_v); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L1_error)
   __pyx_v_self->_qrungifn__nmd = __pyx_t_7;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":104
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":107
  *         self.__md = v
  * 
  *     cpdef set_nmd(self, value):             # <<<<<<<<<<<<<<
@@ -5730,12 +6010,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_value)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_nmd") < 0)) __PYX_ERR(0, 104, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_nmd") < 0)) __PYX_ERR(0, 107, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -5746,7 +6026,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_nmd", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 104, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_nmd", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 107, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzy_element.qrungifn.set_nmd", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5768,7 +6048,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_nmd", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_set_nmd(__pyx_v_self, __pyx_v_value, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_set_nmd(__pyx_v_self, __pyx_v_value, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5785,7 +6065,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":109
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":112
  *         self.__nmd = v
  * 
  *     cpdef bint isEmpty(self):             # <<<<<<<<<<<<<<
@@ -5823,7 +6103,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_isEmpty); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_isEmpty); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -5848,11 +6128,11 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
           PyObject *__pyx_callargs[1] = {__pyx_t_4, };
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
-        __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_r = __pyx_t_6;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5871,14 +6151,14 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":110
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":113
  * 
  *     cpdef bint isEmpty(self):
  *         if self.__md is None and self.__nmd is None:             # <<<<<<<<<<<<<<
  *             return True
  *         else:
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = (__pyx_t_1 == Py_None);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5887,7 +6167,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = (__pyx_t_1 == Py_None);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5895,7 +6175,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_6) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":111
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":114
  *     cpdef bint isEmpty(self):
  *         if self.__md is None and self.__nmd is None:
  *             return True             # <<<<<<<<<<<<<<
@@ -5905,7 +6185,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     __pyx_r = 1;
     goto __pyx_L0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":110
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":113
  * 
  *     cpdef bint isEmpty(self):
  *         if self.__md is None and self.__nmd is None:             # <<<<<<<<<<<<<<
@@ -5914,7 +6194,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
  */
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":113
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":116
  *             return True
  *         else:
  *             return False             # <<<<<<<<<<<<<<
@@ -5926,7 +6206,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     goto __pyx_L0;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":109
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":112
  *         self.__nmd = v
  * 
  *     cpdef bint isEmpty(self):             # <<<<<<<<<<<<<<
@@ -5989,7 +6269,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("isEmpty", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEmpty(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEmpty(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6006,7 +6286,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":115
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":118
  *             return False
  * 
  *     cpdef bint isEmpty_half(self):             # <<<<<<<<<<<<<<
@@ -6044,7 +6324,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_isEmpty_half); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_isEmpty_half); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -6069,11 +6349,11 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
           PyObject *__pyx_callargs[1] = {__pyx_t_4, };
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 115, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 118, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
-        __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 118, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_r = __pyx_t_6;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6092,14 +6372,14 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":116
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":119
  * 
  *     cpdef bint isEmpty_half(self):
  *         if self.__md is None or self.__nmd is None:             # <<<<<<<<<<<<<<
  *             return True
  *         else:
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = (__pyx_t_1 == Py_None);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6108,7 +6388,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     __pyx_t_6 = __pyx_t_7;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 116, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = (__pyx_t_1 == Py_None);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6116,7 +6396,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_6) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":117
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":120
  *     cpdef bint isEmpty_half(self):
  *         if self.__md is None or self.__nmd is None:
  *             return True             # <<<<<<<<<<<<<<
@@ -6126,7 +6406,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     __pyx_r = 1;
     goto __pyx_L0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":116
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":119
  * 
  *     cpdef bint isEmpty_half(self):
  *         if self.__md is None or self.__nmd is None:             # <<<<<<<<<<<<<<
@@ -6135,7 +6415,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
  */
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":119
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":122
  *             return True
  *         else:
  *             return False             # <<<<<<<<<<<<<<
@@ -6147,7 +6427,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEm
     goto __pyx_L0;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":115
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":118
  *             return False
  * 
  *     cpdef bint isEmpty_half(self):             # <<<<<<<<<<<<<<
@@ -6210,7 +6490,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("isEmpty_half", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEmpty_half(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isEmpty_half(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 118, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6227,7 +6507,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":121
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":124
  *             return False
  * 
  *     cpdef bint isLegal(self):             # <<<<<<<<<<<<<<
@@ -6267,7 +6547,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLe
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_isLegal); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_isLegal); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -6292,11 +6572,11 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLe
           PyObject *__pyx_callargs[1] = {__pyx_t_4, };
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
-        __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 121, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 124, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_r = __pyx_t_6;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -6315,43 +6595,43 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLe
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":122
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":125
  * 
  *     cpdef bint isLegal(self):
  *         mds = self.__md             # <<<<<<<<<<<<<<
  *         nmds = self.__nmd
  *         if 0. <= mds <= 1. and 0. <= nmds <= 1. \
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_mds = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":123
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":126
  *     cpdef bint isLegal(self):
  *         mds = self.__md
  *         nmds = self.__nmd             # <<<<<<<<<<<<<<
  *         if 0. <= mds <= 1. and 0. <= nmds <= 1. \
  *                 and 0. <= mds ** self.__qrung + nmds ** self.__qrung <= 1.:
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_nmds = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":124
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":127
  *         mds = self.__md
  *         nmds = self.__nmd
  *         if 0. <= mds <= 1. and 0. <= nmds <= 1. \             # <<<<<<<<<<<<<<
  *                 and 0. <= mds ** self.__qrung + nmds ** self.__qrung <= 1.:
  *             return True
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_float_0_, __pyx_v_mds, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_float_0_, __pyx_v_mds, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
   if (__Pyx_PyObject_IsTrue(__pyx_t_1)) {
     __Pyx_DECREF(__pyx_t_1);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_mds, __pyx_float_1_, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_mds, __pyx_float_1_, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
   }
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_7) {
   } else {
@@ -6359,27 +6639,27 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLe
     goto __pyx_L4_bool_binop_done;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":125
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":128
  *         nmds = self.__nmd
  *         if 0. <= mds <= 1. and 0. <= nmds <= 1. \
  *                 and 0. <= mds ** self.__qrung + nmds ** self.__qrung <= 1.:             # <<<<<<<<<<<<<<
  *             return True
  *         else:
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_float_0_, __pyx_v_nmds, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_float_0_, __pyx_v_nmds, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
   if (__Pyx_PyObject_IsTrue(__pyx_t_1)) {
     __Pyx_DECREF(__pyx_t_1);
-    __pyx_t_1 = PyObject_RichCompare(__pyx_v_nmds, __pyx_float_1_, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_nmds, __pyx_float_1_, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":124
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":127
  *         mds = self.__md
  *         nmds = self.__nmd
  *         if 0. <= mds <= 1. and 0. <= nmds <= 1. \             # <<<<<<<<<<<<<<
  *                 and 0. <= mds ** self.__qrung + nmds ** self.__qrung <= 1.:
  *             return True
  */
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 124, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_7) {
   } else {
@@ -6387,39 +6667,39 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLe
     goto __pyx_L4_bool_binop_done;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":125
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":128
  *         nmds = self.__nmd
  *         if 0. <= mds <= 1. and 0. <= nmds <= 1. \
  *                 and 0. <= mds ** self.__qrung + nmds ** self.__qrung <= 1.:             # <<<<<<<<<<<<<<
  *             return True
  *         else:
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Power(__pyx_v_mds, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Power(__pyx_v_mds, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyNumber_Power(__pyx_v_nmds, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Power(__pyx_v_nmds, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyObject_RichCompare(__pyx_float_0_, __pyx_t_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_3 = PyObject_RichCompare(__pyx_float_0_, __pyx_t_1, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
   if (__Pyx_PyObject_IsTrue(__pyx_t_3)) {
     __Pyx_DECREF(__pyx_t_3);
-    __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_float_1_, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_t_1, __pyx_float_1_, Py_LE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 128, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_7 < 0))) __PYX_ERR(0, 128, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_6 = __pyx_t_7;
   __pyx_L4_bool_binop_done:;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":124
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":127
  *         mds = self.__md
  *         nmds = self.__nmd
  *         if 0. <= mds <= 1. and 0. <= nmds <= 1. \             # <<<<<<<<<<<<<<
@@ -6428,7 +6708,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLe
  */
   if (__pyx_t_6) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":126
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":129
  *         if 0. <= mds <= 1. and 0. <= nmds <= 1. \
  *                 and 0. <= mds ** self.__qrung + nmds ** self.__qrung <= 1.:
  *             return True             # <<<<<<<<<<<<<<
@@ -6438,7 +6718,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLe
     __pyx_r = 1;
     goto __pyx_L0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":124
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":127
  *         mds = self.__md
  *         nmds = self.__nmd
  *         if 0. <= mds <= 1. and 0. <= nmds <= 1. \             # <<<<<<<<<<<<<<
@@ -6447,7 +6727,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLe
  */
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":128
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":131
  *             return True
  *         else:
  *             return False             # <<<<<<<<<<<<<<
@@ -6459,7 +6739,7 @@ static int __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLe
     goto __pyx_L0;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":121
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":124
  *             return False
  * 
  *     cpdef bint isLegal(self):             # <<<<<<<<<<<<<<
@@ -6524,7 +6804,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("isLegal", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLegal(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_isLegal(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 124, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6541,7 +6821,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":130
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":133
  *             return False
  * 
  *     cpdef convert(self):             # <<<<<<<<<<<<<<
@@ -6579,7 +6859,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_convert); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_convert); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -6605,7 +6885,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
           PyObject *__pyx_callargs[1] = {__pyx_t_4, };
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
@@ -6627,19 +6907,19 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":131
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":134
  * 
  *     cpdef convert(self):
  *         m = np.round(self.__md ,4)             # <<<<<<<<<<<<<<
  *         n = np.round(self.__nmd,4)
  *         return m,n
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_round); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_round); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -6658,26 +6938,26 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 2+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 134, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_m = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":132
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":135
  *     cpdef convert(self):
  *         m = np.round(self.__md ,4)
  *         n = np.round(self.__nmd,4)             # <<<<<<<<<<<<<<
  *         return m,n
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_round); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_round); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -6696,14 +6976,14 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_5, 2+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_n = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":133
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":136
  *         m = np.round(self.__md ,4)
  *         n = np.round(self.__nmd,4)
  *         return m,n             # <<<<<<<<<<<<<<
@@ -6711,7 +6991,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  *     cpdef comp(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_m);
   __Pyx_GIVEREF(__pyx_v_m);
@@ -6723,7 +7003,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":130
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":133
  *             return False
  * 
  *     cpdef convert(self):             # <<<<<<<<<<<<<<
@@ -6789,7 +7069,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("convert", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_convert(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_convert(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6806,7 +7086,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":135
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":138
  *         return m,n
  * 
  *     cpdef comp(self):             # <<<<<<<<<<<<<<
@@ -6843,7 +7123,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_comp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_comp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -6869,7 +7149,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
           PyObject *__pyx_callargs[1] = {__pyx_t_4, };
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
@@ -6891,16 +7171,16 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":136
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":139
  * 
  *     cpdef comp(self):
  *         newFN = copy.deepcopy(self)             # <<<<<<<<<<<<<<
  *         newFN.set_md(self.__nmd)
  *         newFN.set_nmd(self.__md)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -6919,23 +7199,23 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     PyObject *__pyx_callargs[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 136, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_newFN = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":137
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":140
  *     cpdef comp(self):
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(self.__nmd)             # <<<<<<<<<<<<<<
  *         newFN.set_nmd(self.__md)
  *         return newFN
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -6954,22 +7234,22 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":138
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":141
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(self.__nmd)
  *         newFN.set_nmd(self.__md)             # <<<<<<<<<<<<<<
  *         return newFN
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -6988,13 +7268,13 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":139
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":142
  *         newFN.set_md(self.__nmd)
  *         newFN.set_nmd(self.__md)
  *         return newFN             # <<<<<<<<<<<<<<
@@ -7006,7 +7286,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":135
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":138
  *         return m,n
  * 
  *     cpdef comp(self):             # <<<<<<<<<<<<<<
@@ -7071,7 +7351,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("comp", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_comp(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_comp(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7088,7 +7368,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":141
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":144
  *         return newFN
  * 
  *     def __add__(self, other):             # <<<<<<<<<<<<<<
@@ -7126,7 +7406,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__add__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":142
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":145
  * 
  *     def __add__(self, other):
  *         assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'             # <<<<<<<<<<<<<<
@@ -7135,31 +7415,31 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 145, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_fuzzy_elements_are, 0, 0);
-      __PYX_ERR(0, 142, __pyx_L1_error)
+      __PYX_ERR(0, 145, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 142, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 145, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":143
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":146
  *     def __add__(self, other):
  *         assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
  *         assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'             # <<<<<<<<<<<<<<
@@ -7168,44 +7448,44 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  */
   #ifndef CYTHON_WITHOUT_ASSERTIONS
   if (unlikely(!Py_OptimizeFlag)) {
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_qrung); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 143, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 146, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (unlikely(!__pyx_t_4)) {
       __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_FNs_are_not_the_sa, 0, 0);
-      __PYX_ERR(0, 143, __pyx_L1_error)
+      __PYX_ERR(0, 146, __pyx_L1_error)
     }
   }
   #else
-  if ((1)); else __PYX_ERR(0, 143, __pyx_L1_error)
+  if ((1)); else __PYX_ERR(0, 146, __pyx_L1_error)
   #endif
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":144
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":147
  *         assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
  *         assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
  *         q = self.qrung             # <<<<<<<<<<<<<<
  *         newFN = qrungifn(q, 0., 0.)
  *         newFN.set_md(algebraic_S(self.md ** q, other.md ** q) ** (1 / q))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_q = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":145
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":148
  *         assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
  *         newFN.set_md(algebraic_S(self.md ** q, other.md ** q) ** (1 / q))
  *         newFN.set_nmd(algebraic_T(self.nmd ** q, other.nmd ** q) ** (1 / q))
  */
-  __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_q);
   __Pyx_GIVEREF(__pyx_v_q);
@@ -7216,81 +7496,81 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __Pyx_INCREF(__pyx_float_0_);
   __Pyx_GIVEREF(__pyx_float_0_);
   PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_float_0_);
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_newFN = ((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":146
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":149
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         newFN.set_md(algebraic_S(self.md ** q, other.md ** q) ** (1 / q))             # <<<<<<<<<<<<<<
  *         newFN.set_nmd(algebraic_T(self.nmd ** q, other.nmd ** q) ** (1 / q))
  *         return newFN
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_S(__pyx_t_5, __pyx_t_6, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_S(__pyx_t_5, __pyx_t_6, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyNumber_Power(__pyx_t_3, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Power(__pyx_t_3, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":147
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":150
  *         newFN = qrungifn(q, 0., 0.)
  *         newFN.set_md(algebraic_S(self.md ** q, other.md ** q) ** (1 / q))
  *         newFN.set_nmd(algebraic_T(self.nmd ** q, other.nmd ** q) ** (1 / q))             # <<<<<<<<<<<<<<
  *         return newFN
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_T(__pyx_t_6, __pyx_t_5, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_T(__pyx_t_6, __pyx_t_5, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_3, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_3, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":148
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":151
  *         newFN.set_md(algebraic_S(self.md ** q, other.md ** q) ** (1 / q))
  *         newFN.set_nmd(algebraic_T(self.nmd ** q, other.nmd ** q) ** (1 / q))
  *         return newFN             # <<<<<<<<<<<<<<
@@ -7302,7 +7582,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __pyx_r = ((PyObject *)__pyx_v_newFN);
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":141
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":144
  *         return newFN
  * 
  *     def __add__(self, other):             # <<<<<<<<<<<<<<
@@ -7325,7 +7605,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":150
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":153
  *         return newFN
  * 
  *     def __pow__(self, power, modulo):             # <<<<<<<<<<<<<<
@@ -7360,26 +7640,26 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__pow__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":151
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":154
  * 
  *     def __pow__(self, power, modulo):
  *         q = self.qrung             # <<<<<<<<<<<<<<
  *         newFN = qrungifn(q, 0., 0.)
  *         newFN.set_md(self.__md ** power)
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_q = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":152
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":155
  *     def __pow__(self, power, modulo):
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
  *         newFN.set_md(self.__md ** power)
  *         newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** power) ** (1. / self.__qrung))
  */
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_q);
   __Pyx_GIVEREF(__pyx_v_q);
@@ -7390,60 +7670,60 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __Pyx_INCREF(__pyx_float_0_);
   __Pyx_GIVEREF(__pyx_float_0_);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_float_0_);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_newFN = ((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":153
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":156
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         newFN.set_md(self.__md ** power)             # <<<<<<<<<<<<<<
  *         newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** power) ** (1. / self.__qrung))
  *         return newFN
  */
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_power, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_power, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":154
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":157
  *         newFN = qrungifn(q, 0., 0.)
  *         newFN.set_md(self.__md ** power)
  *         newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** power) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
  *         return newFN
  * 
  */
-  __pyx_t_2 = PyFloat_FromDouble((1. - powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((1. - powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_power, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_power, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyFloat_SubtractCObj(__pyx_float_1_, __pyx_t_1, 1., 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyFloat_SubtractCObj(__pyx_float_1_, __pyx_t_1, 1., 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 154, __pyx_L1_error)
+    __PYX_ERR(0, 157, __pyx_L1_error)
   }
-  __pyx_t_1 = PyFloat_FromDouble((1. / ((double)__pyx_v_self->_qrungifn__qrung))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((1. / ((double)__pyx_v_self->_qrungifn__qrung))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_3, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_3, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":155
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":158
  *         newFN.set_md(self.__md ** power)
  *         newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** power) ** (1. / self.__qrung))
  *         return newFN             # <<<<<<<<<<<<<<
@@ -7455,7 +7735,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __pyx_r = ((PyObject *)__pyx_v_newFN);
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":150
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":153
  *         return newFN
  * 
  *     def __pow__(self, power, modulo):             # <<<<<<<<<<<<<<
@@ -7478,7 +7758,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":157
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":160
  *         return newFN
  * 
  *     def __mul__(self, other):             # <<<<<<<<<<<<<<
@@ -7516,26 +7796,26 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__mul__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":158
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":161
  * 
  *     def __mul__(self, other):
  *         q = self.qrung             # <<<<<<<<<<<<<<
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.__class__.__name__ == self.__class__.__name__:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_q = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":159
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":162
  *     def __mul__(self, other):
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
  *         if other.__class__.__name__ == self.__class__.__name__:
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
  */
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_q);
   __Pyx_GIVEREF(__pyx_v_q);
@@ -7546,37 +7826,37 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __Pyx_INCREF(__pyx_float_0_);
   __Pyx_GIVEREF(__pyx_float_0_);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_float_0_);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_newFN = ((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":160
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":163
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.__class__.__name__ == self.__class__.__name__:             # <<<<<<<<<<<<<<
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
  *             newFN.set_md(algebraic_T(self.md ** q, other.md ** q) ** (1 / q))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":161
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":164
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.__class__.__name__ == self.__class__.__name__:
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'             # <<<<<<<<<<<<<<
@@ -7585,90 +7865,90 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  */
     #ifndef CYTHON_WITHOUT_ASSERTIONS
     if (unlikely(!Py_OptimizeFlag)) {
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_v_q, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L1_error)
+      __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_v_q, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 161, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 164, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       if (unlikely(!__pyx_t_4)) {
         __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_ifns_are_not_the_i, 0, 0);
-        __PYX_ERR(0, 161, __pyx_L1_error)
+        __PYX_ERR(0, 164, __pyx_L1_error)
       }
     }
     #else
-    if ((1)); else __PYX_ERR(0, 161, __pyx_L1_error)
+    if ((1)); else __PYX_ERR(0, 164, __pyx_L1_error)
     #endif
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":162
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":165
  *         if other.__class__.__name__ == self.__class__.__name__:
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
  *             newFN.set_md(algebraic_T(self.md ** q, other.md ** q) ** (1 / q))             # <<<<<<<<<<<<<<
  *             newFN.set_nmd(algebraic_S(self.nmd ** q, other.nmd ** q) ** (1 / q))
  *         else:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_T(__pyx_t_5, __pyx_t_6, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_T(__pyx_t_5, __pyx_t_6, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyNumber_Power(__pyx_t_3, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Power(__pyx_t_3, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L1_error)
+    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":163
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":166
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
  *             newFN.set_md(algebraic_T(self.md ** q, other.md ** q) ** (1 / q))
  *             newFN.set_nmd(algebraic_S(self.nmd ** q, other.nmd ** q) ** (1 / q))             # <<<<<<<<<<<<<<
  *         else:
  *             newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_S(__pyx_t_6, __pyx_t_5, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_S(__pyx_t_6, __pyx_t_5, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_3, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L1_error)
+    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_3, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":160
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":163
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.__class__.__name__ == self.__class__.__name__:             # <<<<<<<<<<<<<<
@@ -7678,7 +7958,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     goto __pyx_L3;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":165
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":168
  *             newFN.set_nmd(algebraic_S(self.nmd ** q, other.nmd ** q) ** (1 / q))
  *         else:
  *             newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
@@ -7686,49 +7966,49 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *         return newFN
  */
   /*else*/ {
-    __pyx_t_1 = PyFloat_FromDouble((1. - powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble((1. - powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_v_other, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_v_other, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyFloat_SubtractCObj(__pyx_float_1_, __pyx_t_3, 1., 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFloat_SubtractCObj(__pyx_float_1_, __pyx_t_3, 1., 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 165, __pyx_L1_error)
+      __PYX_ERR(0, 168, __pyx_L1_error)
     }
-    __pyx_t_3 = PyFloat_FromDouble((1. / ((double)__pyx_v_self->_qrungifn__qrung))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_3 = PyFloat_FromDouble((1. / ((double)__pyx_v_self->_qrungifn__qrung))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_t_3, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_t_3, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+    __pyx_t_3 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 168, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":166
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":169
  *         else:
  *             newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))
  *             newFN.set_nmd(self.__nmd ** other)             # <<<<<<<<<<<<<<
  *         return newFN
  * 
  */
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 169, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_other, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_other, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 169, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_3 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 169, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_L3:;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":167
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":170
  *             newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))
  *             newFN.set_nmd(self.__nmd ** other)
  *         return newFN             # <<<<<<<<<<<<<<
@@ -7740,7 +8020,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __pyx_r = ((PyObject *)__pyx_v_newFN);
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":157
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":160
  *         return newFN
  * 
  *     def __mul__(self, other):             # <<<<<<<<<<<<<<
@@ -7763,7 +8043,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":169
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":172
  *         return newFN
  * 
  *     def __rmul__(self, other):             # <<<<<<<<<<<<<<
@@ -7801,26 +8081,26 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__rmul__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":170
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":173
  * 
  *     def __rmul__(self, other):
  *         q = self.qrung             # <<<<<<<<<<<<<<
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.__class__.__name__ == self.__class__.__name__:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_q = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":171
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":174
  *     def __rmul__(self, other):
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
  *         if other.__class__.__name__ == self.__class__.__name__:
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
  */
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_q);
   __Pyx_GIVEREF(__pyx_v_q);
@@ -7831,37 +8111,37 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __Pyx_INCREF(__pyx_float_0_);
   __Pyx_GIVEREF(__pyx_float_0_);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_float_0_);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_newFN = ((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":172
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":175
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.__class__.__name__ == self.__class__.__name__:             # <<<<<<<<<<<<<<
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
  *             newFN.set_md(algebraic_T(self.md ** q, other.md ** q) ** (1 / q))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_name); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_class); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_name); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_3, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_4) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":173
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":176
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.__class__.__name__ == self.__class__.__name__:
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'             # <<<<<<<<<<<<<<
@@ -7870,90 +8150,90 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  */
     #ifndef CYTHON_WITHOUT_ASSERTIONS
     if (unlikely(!Py_OptimizeFlag)) {
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_qrung); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_v_q, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 173, __pyx_L1_error)
+      __pyx_t_3 = PyObject_RichCompare(__pyx_t_2, __pyx_v_q, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 173, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 176, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       if (unlikely(!__pyx_t_4)) {
         __Pyx_Raise(__pyx_builtin_AssertionError, __pyx_kp_u_ERROR_the_two_ifns_are_not_the_i, 0, 0);
-        __PYX_ERR(0, 173, __pyx_L1_error)
+        __PYX_ERR(0, 176, __pyx_L1_error)
       }
     }
     #else
-    if ((1)); else __PYX_ERR(0, 173, __pyx_L1_error)
+    if ((1)); else __PYX_ERR(0, 176, __pyx_L1_error)
     #endif
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":174
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":177
  *         if other.__class__.__name__ == self.__class__.__name__:
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
  *             newFN.set_md(algebraic_T(self.md ** q, other.md ** q) ** (1 / q))             # <<<<<<<<<<<<<<
  *             newFN.set_nmd(algebraic_S(self.nmd ** q, other.nmd ** q) ** (1 / q))
  *         else:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_T(__pyx_t_5, __pyx_t_6, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_T(__pyx_t_5, __pyx_t_6, 0)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyNumber_Power(__pyx_t_3, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Power(__pyx_t_3, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":175
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":178
  *             assert other.qrung == q, 'ERROR: the two ifns are not the ifn with the same q'
  *             newFN.set_md(algebraic_T(self.md ** q, other.md ** q) ** (1 / q))
  *             newFN.set_nmd(algebraic_S(self.nmd ** q, other.nmd ** q) ** (1 / q))             # <<<<<<<<<<<<<<
  *         else:
  *             newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_S(__pyx_t_6, __pyx_t_5, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_2 = PyFloat_FromDouble(__pyx_f_8mohusets_12fuzzynumbers_11archimedean_algebraic_S(__pyx_t_6, __pyx_t_5, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Power(__pyx_t_2, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_3, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_3, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":172
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":175
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.__class__.__name__ == self.__class__.__name__:             # <<<<<<<<<<<<<<
@@ -7963,7 +8243,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     goto __pyx_L3;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":177
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":180
  *             newFN.set_nmd(algebraic_S(self.nmd ** q, other.nmd ** q) ** (1 / q))
  *         else:
  *             newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
@@ -7971,49 +8251,49 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *         return newFN
  */
   /*else*/ {
-    __pyx_t_1 = PyFloat_FromDouble((1. - powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble((1. - powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_v_other, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_v_other, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyFloat_SubtractCObj(__pyx_float_1_, __pyx_t_3, 1., 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyFloat_SubtractCObj(__pyx_float_1_, __pyx_t_3, 1., 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 177, __pyx_L1_error)
+      __PYX_ERR(0, 180, __pyx_L1_error)
     }
-    __pyx_t_3 = PyFloat_FromDouble((1. / ((double)__pyx_v_self->_qrungifn__qrung))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_3 = PyFloat_FromDouble((1. / ((double)__pyx_v_self->_qrungifn__qrung))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_t_3, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_t_3, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+    __pyx_t_3 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":178
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":181
  *         else:
  *             newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))
  *             newFN.set_nmd(self.__nmd ** other)             # <<<<<<<<<<<<<<
  *         return newFN
  * 
  */
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_3 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 181, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_other, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_3, __pyx_v_other, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_3 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 181, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_L3:;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":179
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":182
  *             newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** other) ** (1. / self.__qrung))
  *             newFN.set_nmd(self.__nmd ** other)
  *         return newFN             # <<<<<<<<<<<<<<
@@ -8025,7 +8305,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __pyx_r = ((PyObject *)__pyx_v_newFN);
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":169
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":172
  *         return newFN
  * 
  *     def __rmul__(self, other):             # <<<<<<<<<<<<<<
@@ -8048,7 +8328,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":181
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":184
  *         return newFN
  * 
  *     def __sub__(self, other:qrungifn):             # <<<<<<<<<<<<<<
@@ -8070,7 +8350,7 @@ static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__sub__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn, 0, "other", 0))) __PYX_ERR(0, 181, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn, 0, "other", 0))) __PYX_ERR(0, 184, __pyx_L1_error)
   __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_26__sub__(((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_self), ((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_other));
 
   /* function exit code */
@@ -8099,26 +8379,26 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__sub__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":185
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":188
  *              Subtraction of Q-Rung orthopair fuzzy numbers
  *         """
  *         q = self.qrung             # <<<<<<<<<<<<<<
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.nmd == 0 or other.md == 1:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_q = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":186
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":189
  *         """
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
  *         if other.nmd == 0 or other.md == 1:
  *             newFN.set_md(0)
  */
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_q);
   __Pyx_GIVEREF(__pyx_v_q);
@@ -8129,65 +8409,65 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __Pyx_INCREF(__pyx_float_0_);
   __Pyx_GIVEREF(__pyx_float_0_);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_float_0_);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 186, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_newFN = ((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":187
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":190
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.nmd == 0 or other.md == 1:             # <<<<<<<<<<<<<<
  *             newFN.set_md(0)
  *             newFN.set_nmd(1)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_EqObjC(__pyx_t_2, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_EqObjC(__pyx_t_2, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (!__pyx_t_4) {
   } else {
     __pyx_t_3 = __pyx_t_4;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 187, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 190, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_3 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":188
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":191
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.nmd == 0 or other.md == 1:
  *             newFN.set_md(0)             # <<<<<<<<<<<<<<
  *             newFN.set_nmd(1)
  *         elif 0<=self.nmd**q/other.nmd**q<=(1-self.md**q)/(1-other.md**q)<=1:
  */
-    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_int_0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 188, __pyx_L1_error)
+    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_int_0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":189
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":192
  *         if other.nmd == 0 or other.md == 1:
  *             newFN.set_md(0)
  *             newFN.set_nmd(1)             # <<<<<<<<<<<<<<
  *         elif 0<=self.nmd**q/other.nmd**q<=(1-self.md**q)/(1-other.md**q)<=1:
  *             newFN.set_md(((self.md ** q - other.md ** q)/(1 - other.md**q))**(1/q))
  */
-    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_int_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 189, __pyx_L1_error)
+    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_int_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 192, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":187
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":190
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.nmd == 0 or other.md == 1:             # <<<<<<<<<<<<<<
@@ -8197,127 +8477,127 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     goto __pyx_L3;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":190
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":193
  *             newFN.set_md(0)
  *             newFN.set_nmd(1)
  *         elif 0<=self.nmd**q/other.nmd**q<=(1-self.md**q)/(1-other.md**q)<=1:             # <<<<<<<<<<<<<<
  *             newFN.set_md(((self.md ** q - other.md ** q)/(1 - other.md**q))**(1/q))
  *             newFN.set_nmd(self.nmd/other.nmd)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_1 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_5 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = PyObject_RichCompare(__pyx_int_0, __pyx_t_2, Py_LE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_5 = PyObject_RichCompare(__pyx_int_0, __pyx_t_2, Py_LE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 193, __pyx_L1_error)
   if (__Pyx_PyObject_IsTrue(__pyx_t_5)) {
     __Pyx_DECREF(__pyx_t_5);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_6 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_6 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 193, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_6, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_6, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_md); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_md); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 193, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = PyNumber_Power(__pyx_t_6, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Power(__pyx_t_6, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 193, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_7, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_7, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 193, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 193, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_5 = PyObject_RichCompare(__pyx_t_2, __pyx_t_7, Py_LE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 190, __pyx_L1_error)
+    __pyx_t_5 = PyObject_RichCompare(__pyx_t_2, __pyx_t_7, Py_LE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 193, __pyx_L1_error)
     if (__Pyx_PyObject_IsTrue(__pyx_t_5)) {
       __Pyx_DECREF(__pyx_t_5);
-      __pyx_t_5 = PyObject_RichCompare(__pyx_t_7, __pyx_int_1, Py_LE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 190, __pyx_L1_error)
+      __pyx_t_5 = PyObject_RichCompare(__pyx_t_7, __pyx_int_1, Py_LE); __Pyx_XGOTREF(__pyx_t_5); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 193, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 190, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   if (__pyx_t_3) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":191
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":194
  *             newFN.set_nmd(1)
  *         elif 0<=self.nmd**q/other.nmd**q<=(1-self.md**q)/(1-other.md**q)<=1:
  *             newFN.set_md(((self.md ** q - other.md ** q)/(1 - other.md**q))**(1/q))             # <<<<<<<<<<<<<<
  *             newFN.set_nmd(self.nmd/other.nmd)
  *         else:
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_md); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_5, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_5, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_md); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_md); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = PyNumber_Power(__pyx_t_5, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Power(__pyx_t_5, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Subtract(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Subtract(__pyx_t_2, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_md); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_md); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_2 = PyNumber_Power(__pyx_t_7, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_2 = PyNumber_Power(__pyx_t_7, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_2, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_2, 1, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_5, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_5 = PyNumber_Power(__pyx_t_2, __pyx_t_7, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Power(__pyx_t_2, __pyx_t_7, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_5, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 191, __pyx_L1_error)
+    __pyx_t_7 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_5, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 194, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":192
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":195
  *         elif 0<=self.nmd**q/other.nmd**q<=(1-self.md**q)/(1-other.md**q)<=1:
  *             newFN.set_md(((self.md ** q - other.md ** q)/(1 - other.md**q))**(1/q))
  *             newFN.set_nmd(self.nmd/other.nmd)             # <<<<<<<<<<<<<<
  *         else:
  *             newFN.set_md(0)
  */
-    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 192, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_nmd); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_nmd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 192, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_nmd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_7, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 192, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_7, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 192, __pyx_L1_error)
+    __pyx_t_5 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_2, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":190
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":193
  *             newFN.set_md(0)
  *             newFN.set_nmd(1)
  *         elif 0<=self.nmd**q/other.nmd**q<=(1-self.md**q)/(1-other.md**q)<=1:             # <<<<<<<<<<<<<<
@@ -8327,7 +8607,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     goto __pyx_L3;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":194
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":197
  *             newFN.set_nmd(self.nmd/other.nmd)
  *         else:
  *             newFN.set_md(0)             # <<<<<<<<<<<<<<
@@ -8335,24 +8615,24 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *         return newFN
  */
   /*else*/ {
-    __pyx_t_5 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_int_0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
+    __pyx_t_5 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_int_0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 197, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":195
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":198
  *         else:
  *             newFN.set_md(0)
  *             newFN.set_nmd(1)             # <<<<<<<<<<<<<<
  *         return newFN
  * 
  */
-    __pyx_t_5 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_int_1, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
+    __pyx_t_5 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_int_1, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 198, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __pyx_L3:;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":196
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":199
  *             newFN.set_md(0)
  *             newFN.set_nmd(1)
  *         return newFN             # <<<<<<<<<<<<<<
@@ -8364,7 +8644,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __pyx_r = ((PyObject *)__pyx_v_newFN);
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":181
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":184
  *         return newFN
  * 
  *     def __sub__(self, other:qrungifn):             # <<<<<<<<<<<<<<
@@ -8389,7 +8669,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":198
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":201
  *         return newFN
  * 
  *     def __truediv__(self, other):             # <<<<<<<<<<<<<<
@@ -8432,26 +8712,26 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__truediv__", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":202
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":205
  *              Division of Q-Rung orthopair fuzzy numbers
  *         """
  *         q = self.qrung             # <<<<<<<<<<<<<<
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.md == 0 or other.nmd == 1:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_q = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":203
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":206
  *         """
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)             # <<<<<<<<<<<<<<
  *         if other.md == 0 or other.nmd == 1:
  *             newFN.set_md(1)
  */
-  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_q);
   __Pyx_GIVEREF(__pyx_v_q);
@@ -8462,65 +8742,65 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __Pyx_INCREF(__pyx_float_0_);
   __Pyx_GIVEREF(__pyx_float_0_);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_float_0_);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_newFN = ((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":204
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":207
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.md == 0 or other.nmd == 1:             # <<<<<<<<<<<<<<
  *             newFN.set_md(1)
  *             newFN.set_nmd(0)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_EqObjC(__pyx_t_2, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_EqObjC(__pyx_t_2, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (!__pyx_t_4) {
   } else {
     __pyx_t_3 = __pyx_t_4;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_EqObjC(__pyx_t_1, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 204, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_4 < 0))) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_3 = __pyx_t_4;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_3) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":205
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":208
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.md == 0 or other.nmd == 1:
  *             newFN.set_md(1)             # <<<<<<<<<<<<<<
  *             newFN.set_nmd(0)
  *         elif 0<=self.md/other.md<=(1-self.nmd**q)/(1-other.nmd**q)<=1:
  */
-    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_int_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 205, __pyx_L1_error)
+    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_int_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 208, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":206
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":209
  *         if other.md == 0 or other.nmd == 1:
  *             newFN.set_md(1)
  *             newFN.set_nmd(0)             # <<<<<<<<<<<<<<
  *         elif 0<=self.md/other.md<=(1-self.nmd**q)/(1-other.nmd**q)<=1:
  *             newFN.set_md(self.md/other.md)
  */
-    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_int_0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 206, __pyx_L1_error)
+    __pyx_t_2 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_int_0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 209, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":204
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":207
  *         q = self.qrung
  *         newFN = qrungifn(q, 0., 0.)
  *         if other.md == 0 or other.nmd == 1:             # <<<<<<<<<<<<<<
@@ -8530,121 +8810,121 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     goto __pyx_L3;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":207
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":210
  *             newFN.set_md(1)
  *             newFN.set_nmd(0)
  *         elif 0<=self.md/other.md<=(1-self.nmd**q)/(1-other.nmd**q)<=1:             # <<<<<<<<<<<<<<
  *             newFN.set_md(self.md/other.md)
  *             newFN.set_nmd(((self.nmd ** q - other.nmd ** q)/(1 - other.nmd**q))**(1/q))
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_md); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyObject_RichCompare(__pyx_int_0, __pyx_t_5, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_int_0, __pyx_t_5, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
   if (__Pyx_PyObject_IsTrue(__pyx_t_1)) {
     __Pyx_DECREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nmd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_6 = PyNumber_Power(__pyx_t_2, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_6, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_6, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = PyNumber_Power(__pyx_t_6, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Power(__pyx_t_6, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_7, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_7, 1, 0, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_1 = PyObject_RichCompare(__pyx_t_5, __pyx_t_7, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_t_5, __pyx_t_7, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
     if (__Pyx_PyObject_IsTrue(__pyx_t_1)) {
       __Pyx_DECREF(__pyx_t_1);
-      __pyx_t_1 = PyObject_RichCompare(__pyx_t_7, __pyx_int_1, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
+      __pyx_t_1 = PyObject_RichCompare(__pyx_t_7, __pyx_int_1, Py_LE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   }
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_3) {
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":208
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":211
  *             newFN.set_nmd(0)
  *         elif 0<=self.md/other.md<=(1-self.nmd**q)/(1-other.nmd**q)<=1:
  *             newFN.set_md(self.md/other.md)             # <<<<<<<<<<<<<<
  *             newFN.set_nmd(((self.nmd ** q - other.nmd ** q)/(1 - other.nmd**q))**(1/q))
  *         else:
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 208, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 211, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 208, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_md); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 211, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 208, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 211, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_7, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 208, __pyx_L1_error)
+    __pyx_t_5 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_t_7, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 211, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":209
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":212
  *         elif 0<=self.md/other.md<=(1-self.nmd**q)/(1-other.nmd**q)<=1:
  *             newFN.set_md(self.md/other.md)
  *             newFN.set_nmd(((self.nmd ** q - other.nmd ** q)/(1 - other.nmd**q))**(1/q))             # <<<<<<<<<<<<<<
  *         else:
  *             newFN.set_md(1)
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nmd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nmd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = PyNumber_Power(__pyx_t_5, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Power(__pyx_t_5, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = PyNumber_Power(__pyx_t_5, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Power(__pyx_t_5, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = PyNumber_Subtract(__pyx_t_7, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Subtract(__pyx_t_7, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_other, __pyx_n_s_nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_7 = PyNumber_Power(__pyx_t_1, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_7, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_7, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyNumber_Divide(__pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = PyNumber_Power(__pyx_t_7, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_5 = PyNumber_Power(__pyx_t_7, __pyx_t_1, Py_None); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_5, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_t_5, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":207
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":210
  *             newFN.set_md(1)
  *             newFN.set_nmd(0)
  *         elif 0<=self.md/other.md<=(1-self.nmd**q)/(1-other.nmd**q)<=1:             # <<<<<<<<<<<<<<
@@ -8654,7 +8934,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
     goto __pyx_L3;
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":211
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":214
  *             newFN.set_nmd(((self.nmd ** q - other.nmd ** q)/(1 - other.nmd**q))**(1/q))
  *         else:
  *             newFN.set_md(1)             # <<<<<<<<<<<<<<
@@ -8662,24 +8942,24 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  *         return newFN
  */
   /*else*/ {
-    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_int_1, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 211, __pyx_L1_error)
+    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_md(__pyx_v_newFN, __pyx_int_1, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":212
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":215
  *         else:
  *             newFN.set_md(1)
  *             newFN.set_nmd(0)             # <<<<<<<<<<<<<<
  *         return newFN
  * 
  */
-    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_int_0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
+    __pyx_t_1 = ((struct __pyx_vtabstruct_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_newFN->__pyx_vtab)->set_nmd(__pyx_v_newFN, __pyx_int_0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
   __pyx_L3:;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":213
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":216
  *             newFN.set_md(1)
  *             newFN.set_nmd(0)
  *         return newFN             # <<<<<<<<<<<<<<
@@ -8691,7 +8971,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   __pyx_r = ((PyObject *)__pyx_v_newFN);
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":198
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":201
  *         return newFN
  * 
  *     def __truediv__(self, other):             # <<<<<<<<<<<<<<
@@ -8716,7 +8996,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":216
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":219
  * 
  * 
  *     cpdef algeb_power(self, float l):             # <<<<<<<<<<<<<<
@@ -8754,7 +9034,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_algeb_power); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_algeb_power); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -8763,7 +9043,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
       #endif
               || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_31algeb_power)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 216, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -8783,7 +9063,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         }
@@ -8805,16 +9085,16 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":217
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":220
  * 
  *     cpdef algeb_power(self, float l):
  *         newFN = copy.deepcopy(self)             # <<<<<<<<<<<<<<
  *         newFN.set_md(self.__md ** l)
  *         newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** l) ** (1. / self.__qrung))
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 217, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 217, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -8833,23 +9113,23 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     PyObject *__pyx_callargs[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_v_newFN = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":218
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":221
  *     cpdef algeb_power(self, float l):
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(self.__md ** l)             # <<<<<<<<<<<<<<
  *         newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** l) ** (1. / self.__qrung))
  *         return newFN
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyFloat_FromDouble(powf(__pyx_v_self->_qrungifn__md, __pyx_v_l)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 218, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(powf(__pyx_v_self->_qrungifn__md, __pyx_v_l)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_6 = 0;
@@ -8868,26 +9148,26 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":219
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":222
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(self.__md ** l)
  *         newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** l) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
  *         return newFN
  * 
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 222, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 219, __pyx_L1_error)
+    __PYX_ERR(0, 222, __pyx_L1_error)
   }
-  __pyx_t_2 = PyFloat_FromDouble(pow((1. - pow((1. - powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l))), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(pow((1. - pow((1. - powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l))), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_6 = 0;
@@ -8906,13 +9186,13 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":220
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":223
  *         newFN.set_md(self.__md ** l)
  *         newFN.set_nmd((1. - (1. - self.__nmd ** self.__qrung) ** l) ** (1. / self.__qrung))
  *         return newFN             # <<<<<<<<<<<<<<
@@ -8924,7 +9204,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":216
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":219
  * 
  * 
  *     cpdef algeb_power(self, float l):             # <<<<<<<<<<<<<<
@@ -8994,23 +9274,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_l)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 216, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 219, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "algeb_power") < 0)) __PYX_ERR(0, 216, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "algeb_power") < 0)) __PYX_ERR(0, 219, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_l = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_l == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 216, __pyx_L3_error)
+    __pyx_v_l = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_l == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 219, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("algeb_power", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 216, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("algeb_power", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 219, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzy_element.qrungifn.algeb_power", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -9032,7 +9312,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("algeb_power", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_algeb_power(__pyx_v_self, __pyx_v_l, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_algeb_power(__pyx_v_self, __pyx_v_l, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -9049,7 +9329,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":222
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":225
  *         return newFN
  * 
  *     cpdef algeb_times(self, float l):             # <<<<<<<<<<<<<<
@@ -9087,7 +9367,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_algeb_times); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_algeb_times); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -9096,7 +9376,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
       #endif
               || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_33algeb_times)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 222, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -9116,7 +9396,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 225, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         }
@@ -9138,16 +9418,16 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":223
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":226
  * 
  *     cpdef algeb_times(self, float l):
  *         newFN = copy.deepcopy(self)             # <<<<<<<<<<<<<<
  *         newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** l) ** (1. / self.__qrung))
  *         newFN.set_nmd(self.__nmd ** l)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 226, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 223, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 226, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -9166,27 +9446,27 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     PyObject *__pyx_callargs[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 223, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_v_newFN = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":224
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":227
  *     cpdef algeb_times(self, float l):
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** l) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
  *         newFN.set_nmd(self.__nmd ** l)
  *         return newFN
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 224, __pyx_L1_error)
+    __PYX_ERR(0, 227, __pyx_L1_error)
   }
-  __pyx_t_2 = PyFloat_FromDouble(pow((1. - pow((1. - powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l))), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 224, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(pow((1. - pow((1. - powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l))), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 227, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_6 = 0;
@@ -9205,22 +9485,22 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 227, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":225
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":228
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** l) ** (1. / self.__qrung))
  *         newFN.set_nmd(self.__nmd ** l)             # <<<<<<<<<<<<<<
  *         return newFN
  * 
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = PyFloat_FromDouble(powf(__pyx_v_self->_qrungifn__nmd, __pyx_v_l)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(powf(__pyx_v_self->_qrungifn__nmd, __pyx_v_l)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_6 = 0;
@@ -9239,13 +9519,13 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":226
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":229
  *         newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** l) ** (1. / self.__qrung))
  *         newFN.set_nmd(self.__nmd ** l)
  *         return newFN             # <<<<<<<<<<<<<<
@@ -9257,7 +9537,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":222
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":225
  *         return newFN
  * 
  *     cpdef algeb_times(self, float l):             # <<<<<<<<<<<<<<
@@ -9327,23 +9607,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_l)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 225, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "algeb_times") < 0)) __PYX_ERR(0, 222, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "algeb_times") < 0)) __PYX_ERR(0, 225, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_l = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_l == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 222, __pyx_L3_error)
+    __pyx_v_l = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_l == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 225, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("algeb_times", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 222, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("algeb_times", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 225, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzy_element.qrungifn.algeb_times", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -9365,7 +9645,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("algeb_times", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_algeb_times(__pyx_v_self, __pyx_v_l, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_algeb_times(__pyx_v_self, __pyx_v_l, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 225, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -9382,7 +9662,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":228
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":231
  *         return newFN
  * 
  *     cpdef eins_power(self, float l):             # <<<<<<<<<<<<<<
@@ -9422,7 +9702,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_eins_power); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_eins_power); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 231, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -9431,7 +9711,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
       #endif
               || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_35eins_power)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 228, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 231, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -9451,7 +9731,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         }
@@ -9473,16 +9753,16 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":229
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":232
  * 
  *     cpdef eins_power(self, float l):
  *         newFN = copy.deepcopy(self)             # <<<<<<<<<<<<<<
  *         newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (
  *                     (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 232, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 229, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 232, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -9501,25 +9781,25 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     PyObject *__pyx_callargs[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 229, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 232, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_v_newFN = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":230
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":233
  *     cpdef eins_power(self, float l):
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (             # <<<<<<<<<<<<<<
  *                     (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd((((1. + self.__nmd ** self.__qrung) ** l - (1. - self.__nmd ** self.__qrung) ** l) / (
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 230, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 233, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_7 = (2. * powf(powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung)), __pyx_v_l));
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":231
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":234
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (
  *                     (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
@@ -9528,7 +9808,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   __pyx_t_8 = (pow((2. - powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)) + powf(powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung)), __pyx_v_l));
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":230
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":233
  *     cpdef eins_power(self, float l):
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (             # <<<<<<<<<<<<<<
@@ -9537,10 +9817,10 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   if (unlikely(__pyx_t_8 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 230, __pyx_L1_error)
+    __PYX_ERR(0, 233, __pyx_L1_error)
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":231
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":234
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (
  *                     (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
@@ -9549,9 +9829,9 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 231, __pyx_L1_error)
+    __PYX_ERR(0, 234, __pyx_L1_error)
   }
-  __pyx_t_2 = PyFloat_FromDouble(pow((__pyx_t_7 / __pyx_t_8), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(pow((__pyx_t_7 / __pyx_t_8), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_6 = 0;
@@ -9570,24 +9850,24 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 230, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 233, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":232
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":235
  *         newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (
  *                     (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd((((1. + self.__nmd ** self.__qrung) ** l - (1. - self.__nmd ** self.__qrung) ** l) / (             # <<<<<<<<<<<<<<
  *                     (1. + self.__nmd ** self.__qrung) ** l + (1. - self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         return newFN
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_8 = (pow((1. + powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)) - pow((1. - powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)));
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":233
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":236
  *                     (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd((((1. + self.__nmd ** self.__qrung) ** l - (1. - self.__nmd ** self.__qrung) ** l) / (
  *                     (1. + self.__nmd ** self.__qrung) ** l + (1. - self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
@@ -9596,7 +9876,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   __pyx_t_7 = (pow((1. + powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)) + pow((1. - powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)));
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":232
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":235
  *         newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (
  *                     (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd((((1. + self.__nmd ** self.__qrung) ** l - (1. - self.__nmd ** self.__qrung) ** l) / (             # <<<<<<<<<<<<<<
@@ -9605,10 +9885,10 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   if (unlikely(__pyx_t_7 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 232, __pyx_L1_error)
+    __PYX_ERR(0, 235, __pyx_L1_error)
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":233
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":236
  *                     (2. - self.__md ** self.__qrung) ** l + (self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd((((1. + self.__nmd ** self.__qrung) ** l - (1. - self.__nmd ** self.__qrung) ** l) / (
  *                     (1. + self.__nmd ** self.__qrung) ** l + (1. - self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
@@ -9617,9 +9897,9 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 233, __pyx_L1_error)
+    __PYX_ERR(0, 236, __pyx_L1_error)
   }
-  __pyx_t_2 = PyFloat_FromDouble(pow((__pyx_t_8 / __pyx_t_7), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 233, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(pow((__pyx_t_8 / __pyx_t_7), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_6 = 0;
@@ -9638,13 +9918,13 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 232, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":234
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":237
  *         newFN.set_nmd((((1. + self.__nmd ** self.__qrung) ** l - (1. - self.__nmd ** self.__qrung) ** l) / (
  *                     (1. + self.__nmd ** self.__qrung) ** l + (1. - self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         return newFN             # <<<<<<<<<<<<<<
@@ -9656,7 +9936,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":228
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":231
  *         return newFN
  * 
  *     cpdef eins_power(self, float l):             # <<<<<<<<<<<<<<
@@ -9726,23 +10006,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_l)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 228, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 231, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "eins_power") < 0)) __PYX_ERR(0, 228, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "eins_power") < 0)) __PYX_ERR(0, 231, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_l = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_l == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 228, __pyx_L3_error)
+    __pyx_v_l = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_l == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 231, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("eins_power", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 228, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("eins_power", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 231, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzy_element.qrungifn.eins_power", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -9764,7 +10044,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eins_power", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_eins_power(__pyx_v_self, __pyx_v_l, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_eins_power(__pyx_v_self, __pyx_v_l, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 231, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -9781,7 +10061,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
-/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":236
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":239
  *         return newFN
  * 
  *     cpdef eins_times(self, float l):             # <<<<<<<<<<<<<<
@@ -9821,7 +10101,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     if (unlikely(!__Pyx_object_dict_version_matches(((PyObject *)__pyx_v_self), __pyx_tp_dict_version, __pyx_obj_dict_version))) {
       PY_UINT64_T __pyx_typedict_guard = __Pyx_get_tp_dict_version(((PyObject *)__pyx_v_self));
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_eins_times); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_eins_times); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 239, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       #ifdef __Pyx_CyFunction_USED
       if (!__Pyx_IsCyOrPyCFunction(__pyx_t_1)
@@ -9830,7 +10110,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
       #endif
               || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_37eins_times)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 236, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_l); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 239, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -9850,7 +10130,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
           __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 239, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         }
@@ -9872,16 +10152,16 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     #endif
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":237
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":240
  * 
  *     cpdef eins_times(self, float l):
  *         newFN = copy.deepcopy(self)             # <<<<<<<<<<<<<<
  *         newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (
  *                     (1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 237, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -9900,25 +10180,25 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     PyObject *__pyx_callargs[2] = {__pyx_t_2, ((PyObject *)__pyx_v_self)};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 237, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 240, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __pyx_v_newFN = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":238
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":241
  *     cpdef eins_times(self, float l):
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (             # <<<<<<<<<<<<<<
  *                     (1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd(((2. * (self.__nmd ** self.__qrung) ** l) / (
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 238, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_md); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 241, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_7 = (pow((1. + powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)) - pow((1. - powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)));
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":239
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":242
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (
  *                     (1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
@@ -9927,7 +10207,7 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   __pyx_t_8 = (pow((1. + powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)) + pow((1. - powf(__pyx_v_self->_qrungifn__md, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)));
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":238
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":241
  *     cpdef eins_times(self, float l):
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (             # <<<<<<<<<<<<<<
@@ -9936,10 +10216,10 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   if (unlikely(__pyx_t_8 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 238, __pyx_L1_error)
+    __PYX_ERR(0, 241, __pyx_L1_error)
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":239
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":242
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (
  *                     (1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
@@ -9948,9 +10228,9 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 239, __pyx_L1_error)
+    __PYX_ERR(0, 242, __pyx_L1_error)
   }
-  __pyx_t_2 = PyFloat_FromDouble(pow((__pyx_t_7 / __pyx_t_8), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(pow((__pyx_t_7 / __pyx_t_8), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_6 = 0;
@@ -9969,32 +10249,33 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 238, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 241, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":240
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":243
  *         newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (
  *                     (1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd(((2. * (self.__nmd ** self.__qrung) ** l) / (             # <<<<<<<<<<<<<<
  *                     (2. - self.__nmd ** self.__qrung) ** l + (self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         return newFN
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 240, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_newFN, __pyx_n_s_set_nmd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 243, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_8 = (2. * powf(powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung)), __pyx_v_l));
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":241
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":244
  *                     (1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd(((2. * (self.__nmd ** self.__qrung) ** l) / (
  *                     (2. - self.__nmd ** self.__qrung) ** l + (self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
  *         return newFN
+ * 
  */
   __pyx_t_7 = (pow((2. - powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung))), ((double)__pyx_v_l)) + powf(powf(__pyx_v_self->_qrungifn__nmd, ((float)__pyx_v_self->_qrungifn__qrung)), __pyx_v_l));
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":240
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":243
  *         newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (
  *                     (1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd(((2. * (self.__nmd ** self.__qrung) ** l) / (             # <<<<<<<<<<<<<<
@@ -10003,20 +10284,21 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
  */
   if (unlikely(__pyx_t_7 == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 240, __pyx_L1_error)
+    __PYX_ERR(0, 243, __pyx_L1_error)
   }
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":241
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":244
  *                     (1. + self.__md ** self.__qrung) ** l + (1. - self.__md ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         newFN.set_nmd(((2. * (self.__nmd ** self.__qrung) ** l) / (
  *                     (2. - self.__nmd ** self.__qrung) ** l + (self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))             # <<<<<<<<<<<<<<
  *         return newFN
+ * 
  */
   if (unlikely(__pyx_v_self->_qrungifn__qrung == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 241, __pyx_L1_error)
+    __PYX_ERR(0, 244, __pyx_L1_error)
   }
-  __pyx_t_2 = PyFloat_FromDouble(pow((__pyx_t_8 / __pyx_t_7), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(pow((__pyx_t_8 / __pyx_t_7), (1. / ((double)__pyx_v_self->_qrungifn__qrung)))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_6 = 0;
@@ -10035,23 +10317,25 @@ static PyObject *__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungif
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 240, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":242
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":245
  *         newFN.set_nmd(((2. * (self.__nmd ** self.__qrung) ** l) / (
  *                     (2. - self.__nmd ** self.__qrung) ** l + (self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))
  *         return newFN             # <<<<<<<<<<<<<<
+ * 
+ *     def plot(self, region='None'):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_newFN);
   __pyx_r = __pyx_v_newFN;
   goto __pyx_L0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":236
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":239
  *         return newFN
  * 
  *     cpdef eins_times(self, float l):             # <<<<<<<<<<<<<<
@@ -10121,23 +10405,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       switch (__pyx_nargs) {
         case  0:
         if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_l)) != 0)) kw_args--;
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 236, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 239, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "eins_times") < 0)) __PYX_ERR(0, 236, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "eins_times") < 0)) __PYX_ERR(0, 239, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_l = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_l == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 236, __pyx_L3_error)
+    __pyx_v_l = __pyx_PyFloat_AsFloat(values[0]); if (unlikely((__pyx_v_l == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 239, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("eins_times", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 236, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("eins_times", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 239, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzy_element.qrungifn.eins_times", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -10159,7 +10443,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("eins_times", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_eins_times(__pyx_v_self, __pyx_v_l, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_eins_times(__pyx_v_self, __pyx_v_l, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -10176,6 +10460,1130 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
   return __pyx_r;
 }
 
+/* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":247
+ *         return newFN
+ * 
+ *     def plot(self, region='None'):             # <<<<<<<<<<<<<<
+ *         """
+ *             Plots the fuzzynumber distribution for a given fuzzynumber.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39plot(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_38plot, "\n            Plots the fuzzynumber distribution for a given fuzzynumber.\n\n            Parameters\n            ----------\n            region : str\n                The region of operations.\n\n            Returns\n            -------\n        ");
+static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39plot = {"plot", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39plot, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_38plot};
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39plot(PyObject *__pyx_v_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyObject *__pyx_v_region = 0;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED const Py_ssize_t __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("plot (wrapper)", 0);
+  {
+    #if CYTHON_USE_MODULE_STATE
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_region,0};
+    #else
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_region,0};
+    #endif
+    PyObject* values[1] = {0};
+    values[0] = ((PyObject *)__pyx_n_u_None);
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_region);
+          if (value) { values[0] = value; kw_args--; }
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 247, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "plot") < 0)) __PYX_ERR(0, 247, __pyx_L3_error)
+      }
+    } else {
+      switch (__pyx_nargs) {
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_region = values[0];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("plot", 0, 0, 1, __pyx_nargs); __PYX_ERR(0, 247, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzy_element.qrungifn.plot", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_38plot(((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_self), __pyx_v_region);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_38plot(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, PyObject *__pyx_v_region) {
+  PyObject *__pyx_v_md = NULL;
+  PyObject *__pyx_v_nmd = NULL;
+  PyObject *__pyx_v_q = NULL;
+  PyObject *__pyx_v_x = NULL;
+  PyObject *__pyx_v_y = NULL;
+  PyObject *__pyx_v_n = NULL;
+  PyObject *__pyx_v_m = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_t_5;
+  int __pyx_t_6;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("plot", 0);
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":259
+ *             -------
+ *         """
+ *         md = self.__md             # <<<<<<<<<<<<<<
+ *         nmd = self.__nmd
+ *         q = self.__qrung
+ */
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__md); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 259, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_md = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":260
+ *         """
+ *         md = self.__md
+ *         nmd = self.__nmd             # <<<<<<<<<<<<<<
+ *         q = self.__qrung
+ * 
+ */
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->_qrungifn__nmd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_nmd = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":261
+ *         md = self.__md
+ *         nmd = self.__nmd
+ *         q = self.__qrung             # <<<<<<<<<<<<<<
+ * 
+ *         x = np.linspace(0, 1, 1000)
+ */
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->_qrungifn__qrung); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 261, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_q = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":263
+ *         q = self.__qrung
+ * 
+ *         x = np.linspace(0, 1, 1000)             # <<<<<<<<<<<<<<
+ * 
+ *         plt.gca().spines['top'].set_linewidth(False)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_linspace); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_x = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":265
+ *         x = np.linspace(0, 1, 1000)
+ * 
+ *         plt.gca().spines['top'].set_linewidth(False)             # <<<<<<<<<<<<<<
+ *         plt.gca().spines['bottom'].set_linewidth(True)
+ *         plt.gca().spines['left'].set_linewidth(True)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_plt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_gca); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[1] = {__pyx_t_3, };
+    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_spines); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_4, __pyx_n_u_top); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_set_linewidth); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_2, Py_False};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 265, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":266
+ * 
+ *         plt.gca().spines['top'].set_linewidth(False)
+ *         plt.gca().spines['bottom'].set_linewidth(True)             # <<<<<<<<<<<<<<
+ *         plt.gca().spines['left'].set_linewidth(True)
+ *         plt.gca().spines['right'].set_linewidth(False)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_plt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_gca); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[1] = {__pyx_t_2, };
+    __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 266, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  }
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_spines); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_t_3, __pyx_n_u_bottom); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_set_linewidth); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_4, Py_True};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 266, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":267
+ *         plt.gca().spines['top'].set_linewidth(False)
+ *         plt.gca().spines['bottom'].set_linewidth(True)
+ *         plt.gca().spines['left'].set_linewidth(True)             # <<<<<<<<<<<<<<
+ *         plt.gca().spines['right'].set_linewidth(False)
+ *         plt.axis([0,1.1,0,1.1])
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_plt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_gca); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[1] = {__pyx_t_4, };
+    __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  }
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_spines); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_left); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_set_linewidth); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_3, Py_True};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 267, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":268
+ *         plt.gca().spines['bottom'].set_linewidth(True)
+ *         plt.gca().spines['left'].set_linewidth(True)
+ *         plt.gca().spines['right'].set_linewidth(False)             # <<<<<<<<<<<<<<
+ *         plt.axis([0,1.1,0,1.1])
+ *         plt.axhline(y=0)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_plt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_gca); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[1] = {__pyx_t_3, };
+    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 268, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_spines); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_4, __pyx_n_u_right); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_set_linewidth); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 268, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_2, Py_False};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 268, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":269
+ *         plt.gca().spines['left'].set_linewidth(True)
+ *         plt.gca().spines['right'].set_linewidth(False)
+ *         plt.axis([0,1.1,0,1.1])             # <<<<<<<<<<<<<<
+ *         plt.axhline(y=0)
+ *         plt.axvline(x=0)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_plt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_axis); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = PyList_New(4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 269, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_INCREF(__pyx_int_0);
+  __Pyx_GIVEREF(__pyx_int_0);
+  PyList_SET_ITEM(__pyx_t_4, 0, __pyx_int_0);
+  __Pyx_INCREF(__pyx_float_1_1);
+  __Pyx_GIVEREF(__pyx_float_1_1);
+  PyList_SET_ITEM(__pyx_t_4, 1, __pyx_float_1_1);
+  __Pyx_INCREF(__pyx_int_0);
+  __Pyx_GIVEREF(__pyx_int_0);
+  PyList_SET_ITEM(__pyx_t_4, 2, __pyx_int_0);
+  __Pyx_INCREF(__pyx_float_1_1);
+  __Pyx_GIVEREF(__pyx_float_1_1);
+  PyList_SET_ITEM(__pyx_t_4, 3, __pyx_float_1_1);
+  __pyx_t_3 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_t_4};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 269, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":270
+ *         plt.gca().spines['right'].set_linewidth(False)
+ *         plt.axis([0,1.1,0,1.1])
+ *         plt.axhline(y=0)             # <<<<<<<<<<<<<<
+ *         plt.axvline(x=0)
+ *         plt.scatter(md, nmd, color='red', marker='o')
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_plt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_axhline); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_y, __pyx_int_0) < 0) __PYX_ERR(0, 270, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 270, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":271
+ *         plt.axis([0,1.1,0,1.1])
+ *         plt.axhline(y=0)
+ *         plt.axvline(x=0)             # <<<<<<<<<<<<<<
+ *         plt.scatter(md, nmd, color='red', marker='o')
+ * 
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_plt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_axvline); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_x, __pyx_int_0) < 0) __PYX_ERR(0, 271, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 271, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":272
+ *         plt.axhline(y=0)
+ *         plt.axvline(x=0)
+ *         plt.scatter(md, nmd, color='red', marker='o')             # <<<<<<<<<<<<<<
+ * 
+ *         y = (1 - x**q)**(1/q)
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_plt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_scatter); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_v_md);
+  __Pyx_GIVEREF(__pyx_v_md);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_md);
+  __Pyx_INCREF(__pyx_v_nmd);
+  __Pyx_GIVEREF(__pyx_v_nmd);
+  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_nmd);
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_color, __pyx_n_u_red) < 0) __PYX_ERR(0, 272, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_marker, __pyx_n_u_o) < 0) __PYX_ERR(0, 272, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 272, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":274
+ *         plt.scatter(md, nmd, color='red', marker='o')
+ * 
+ *         y = (1 - x**q)**(1/q)             # <<<<<<<<<<<<<<
+ * 
+ *         n = (nmd**q/(1-md**q)*(1-x**q))**(1/q)
+ */
+  __pyx_t_3 = PyNumber_Power(__pyx_v_x, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_3, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_t_3, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 274, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_y = __pyx_t_2;
+  __pyx_t_2 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":276
+ *         y = (1 - x**q)**(1/q)
+ * 
+ *         n = (nmd**q/(1-md**q)*(1-x**q))**(1/q)             # <<<<<<<<<<<<<<
+ *         m = (md**q/(1-nmd**q)*(1-x**q))**(1/q)
+ * 
+ */
+  __pyx_t_2 = PyNumber_Power(__pyx_v_nmd, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyNumber_Power(__pyx_v_md, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_3, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Power(__pyx_v_x, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_1, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Multiply(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyNumber_Power(__pyx_t_1, __pyx_t_2, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 276, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_n = __pyx_t_3;
+  __pyx_t_3 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":277
+ * 
+ *         n = (nmd**q/(1-md**q)*(1-x**q))**(1/q)
+ *         m = (md**q/(1-nmd**q)*(1-x**q))**(1/q)             # <<<<<<<<<<<<<<
+ * 
+ *         if region == 'addition':
+ */
+  __pyx_t_3 = PyNumber_Power(__pyx_v_md, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyNumber_Power(__pyx_v_nmd, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_2, 1, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyNumber_Divide(__pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Power(__pyx_v_x, __pyx_v_q, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyInt_SubtractCObj(__pyx_int_1, __pyx_t_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = PyNumber_Multiply(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_int_1, __pyx_v_q); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = PyNumber_Power(__pyx_t_1, __pyx_t_3, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 277, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_m = __pyx_t_2;
+  __pyx_t_2 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":279
+ *         m = (md**q/(1-nmd**q)*(1-x**q))**(1/q)
+ * 
+ *         if region == 'addition':             # <<<<<<<<<<<<<<
+ *             # Q-ROFN f addition region
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+ */
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_v_region, __pyx_n_u_addition, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 279, __pyx_L1_error)
+  if (__pyx_t_6) {
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":281
+ *         if region == 'addition':
+ *             # Q-ROFN f addition region
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)             # <<<<<<<<<<<<<<
+ *         elif region =='subtraction':
+ *             # Q-ROFN f subtraction region
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_plt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_fill_between); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx_v_x);
+    __Pyx_GIVEREF(__pyx_v_x);
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_x);
+    __Pyx_INCREF(__pyx_v_n);
+    __Pyx_GIVEREF(__pyx_v_n);
+    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_n);
+    __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_color, __pyx_n_u_blue) < 0) __PYX_ERR(0, 281, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_alpha, __pyx_float_0_1) < 0) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_4 = PyObject_RichCompare(__pyx_v_x, __pyx_v_md, Py_GT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 281, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_where, __pyx_t_4) < 0) __PYX_ERR(0, 281, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 281, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":279
+ *         m = (md**q/(1-nmd**q)*(1-x**q))**(1/q)
+ * 
+ *         if region == 'addition':             # <<<<<<<<<<<<<<
+ *             # Q-ROFN f addition region
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+ */
+    goto __pyx_L3;
+  }
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":282
+ *             # Q-ROFN f addition region
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+ *         elif region =='subtraction':             # <<<<<<<<<<<<<<
+ *             # Q-ROFN f subtraction region
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+ */
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_v_region, __pyx_n_u_subtraction, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 282, __pyx_L1_error)
+  if (__pyx_t_6) {
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":284
+ *         elif region =='subtraction':
+ *             # Q-ROFN f subtraction region
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)             # <<<<<<<<<<<<<<
+ *         elif region =='multiplication':
+ *             # Q-ROFN f multiplication region
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_plt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 284, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_fill_between); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 284, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_INCREF(__pyx_v_x);
+    __Pyx_GIVEREF(__pyx_v_x);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_x);
+    __Pyx_INCREF(__pyx_v_n);
+    __Pyx_GIVEREF(__pyx_v_n);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_n);
+    __Pyx_INCREF(__pyx_v_y);
+    __Pyx_GIVEREF(__pyx_v_y);
+    PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_v_y);
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 284, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_color, __pyx_n_u_red) < 0) __PYX_ERR(0, 284, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_alpha, __pyx_float_0_1) < 0) __PYX_ERR(0, 284, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_v_x, __pyx_v_md, Py_LT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 284, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_where, __pyx_t_3) < 0) __PYX_ERR(0, 284, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 284, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":282
+ *             # Q-ROFN f addition region
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+ *         elif region =='subtraction':             # <<<<<<<<<<<<<<
+ *             # Q-ROFN f subtraction region
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+ */
+    goto __pyx_L3;
+  }
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":285
+ *             # Q-ROFN f subtraction region
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+ *         elif region =='multiplication':             # <<<<<<<<<<<<<<
+ *             # Q-ROFN f multiplication region
+ *             plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)
+ */
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_v_region, __pyx_n_u_multiplication, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 285, __pyx_L1_error)
+  if (__pyx_t_6) {
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":287
+ *         elif region =='multiplication':
+ *             # Q-ROFN f multiplication region
+ *             plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)             # <<<<<<<<<<<<<<
+ *         elif region == 'division':
+ *             # Q-ROFN f division region
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_plt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_fill_betweenx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_INCREF(__pyx_v_x);
+    __Pyx_GIVEREF(__pyx_v_x);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_x);
+    __Pyx_INCREF(__pyx_v_m);
+    __Pyx_GIVEREF(__pyx_v_m);
+    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_m);
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_color, __pyx_n_u_blue) < 0) __PYX_ERR(0, 287, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_alpha, __pyx_float_0_1) < 0) __PYX_ERR(0, 287, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_x, __pyx_v_nmd, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_where, __pyx_t_1) < 0) __PYX_ERR(0, 287, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 287, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":285
+ *             # Q-ROFN f subtraction region
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+ *         elif region =='multiplication':             # <<<<<<<<<<<<<<
+ *             # Q-ROFN f multiplication region
+ *             plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)
+ */
+    goto __pyx_L3;
+  }
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":288
+ *             # Q-ROFN f multiplication region
+ *             plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)
+ *         elif region == 'division':             # <<<<<<<<<<<<<<
+ *             # Q-ROFN f division region
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+ */
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_v_region, __pyx_n_u_division, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 288, __pyx_L1_error)
+  if (__pyx_t_6) {
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":290
+ *         elif region == 'division':
+ *             # Q-ROFN f division region
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)             # <<<<<<<<<<<<<<
+ *         elif region == 'all':
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_plt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_fill_betweenx); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 290, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_v_x);
+    __Pyx_GIVEREF(__pyx_v_x);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_x);
+    __Pyx_INCREF(__pyx_v_m);
+    __Pyx_GIVEREF(__pyx_v_m);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_m);
+    __Pyx_INCREF(__pyx_v_y);
+    __Pyx_GIVEREF(__pyx_v_y);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_y);
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 290, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_color, __pyx_n_u_red) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_alpha, __pyx_float_0_1) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_x, __pyx_v_nmd, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_where, __pyx_t_2) < 0) __PYX_ERR(0, 290, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 290, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":288
+ *             # Q-ROFN f multiplication region
+ *             plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)
+ *         elif region == 'division':             # <<<<<<<<<<<<<<
+ *             # Q-ROFN f division region
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+ */
+    goto __pyx_L3;
+  }
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":291
+ *             # Q-ROFN f division region
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+ *         elif region == 'all':             # <<<<<<<<<<<<<<
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+ */
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_v_region, __pyx_n_u_all, Py_EQ)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 291, __pyx_L1_error)
+  if (__pyx_t_6) {
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":292
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+ *         elif region == 'all':
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)             # <<<<<<<<<<<<<<
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+ *             plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_plt); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_fill_between); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 292, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 292, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx_v_x);
+    __Pyx_GIVEREF(__pyx_v_x);
+    PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_x);
+    __Pyx_INCREF(__pyx_v_n);
+    __Pyx_GIVEREF(__pyx_v_n);
+    PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_n);
+    __pyx_t_1 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 292, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_color, __pyx_n_u_blue) < 0) __PYX_ERR(0, 292, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_alpha, __pyx_float_0_1) < 0) __PYX_ERR(0, 292, __pyx_L1_error)
+    __pyx_t_4 = PyObject_RichCompare(__pyx_v_x, __pyx_v_md, Py_GT); __Pyx_XGOTREF(__pyx_t_4); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 292, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_where, __pyx_t_4) < 0) __PYX_ERR(0, 292, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 292, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":293
+ *         elif region == 'all':
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)             # <<<<<<<<<<<<<<
+ *             plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_plt); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 293, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_fill_between); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_4 = PyTuple_New(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 293, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_INCREF(__pyx_v_x);
+    __Pyx_GIVEREF(__pyx_v_x);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_x);
+    __Pyx_INCREF(__pyx_v_n);
+    __Pyx_GIVEREF(__pyx_v_n);
+    PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_v_n);
+    __Pyx_INCREF(__pyx_v_y);
+    __Pyx_GIVEREF(__pyx_v_y);
+    PyTuple_SET_ITEM(__pyx_t_4, 2, __pyx_v_y);
+    __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 293, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_color, __pyx_n_u_red) < 0) __PYX_ERR(0, 293, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_alpha, __pyx_float_0_1) < 0) __PYX_ERR(0, 293, __pyx_L1_error)
+    __pyx_t_3 = PyObject_RichCompare(__pyx_v_x, __pyx_v_md, Py_LT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 293, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_where, __pyx_t_3) < 0) __PYX_ERR(0, 293, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 293, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":294
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+ *             plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)             # <<<<<<<<<<<<<<
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+ *         else:
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_plt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_fill_betweenx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_INCREF(__pyx_v_x);
+    __Pyx_GIVEREF(__pyx_v_x);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_x);
+    __Pyx_INCREF(__pyx_v_m);
+    __Pyx_GIVEREF(__pyx_v_m);
+    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_m);
+    __pyx_t_4 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_color, __pyx_n_u_blue) < 0) __PYX_ERR(0, 294, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_alpha, __pyx_float_0_1) < 0) __PYX_ERR(0, 294, __pyx_L1_error)
+    __pyx_t_1 = PyObject_RichCompare(__pyx_v_x, __pyx_v_nmd, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_where, __pyx_t_1) < 0) __PYX_ERR(0, 294, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":295
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+ *             plt.fill_betweenx(x, m, color='blue', alpha=0.1,where=x>nmd)
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)             # <<<<<<<<<<<<<<
+ *         else:
+ *             pass
+ */
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_plt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_fill_betweenx); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_INCREF(__pyx_v_x);
+    __Pyx_GIVEREF(__pyx_v_x);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_x);
+    __Pyx_INCREF(__pyx_v_m);
+    __Pyx_GIVEREF(__pyx_v_m);
+    PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_m);
+    __Pyx_INCREF(__pyx_v_y);
+    __Pyx_GIVEREF(__pyx_v_y);
+    PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_v_y);
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_color, __pyx_n_u_red) < 0) __PYX_ERR(0, 295, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_alpha, __pyx_float_0_1) < 0) __PYX_ERR(0, 295, __pyx_L1_error)
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_x, __pyx_v_nmd, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 295, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_where, __pyx_t_2) < 0) __PYX_ERR(0, 295, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 295, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":291
+ *             # Q-ROFN f division region
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+ *         elif region == 'all':             # <<<<<<<<<<<<<<
+ *             plt.fill_between(x,n,color='blue', alpha=0.1, where=x>md)
+ *             plt.fill_between(x,n,y,color='red', alpha=0.1, where=x<md)
+ */
+    goto __pyx_L3;
+  }
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":297
+ *             plt.fill_betweenx(x,m,y, color='red', alpha=0.1, where=x<nmd)
+ *         else:
+ *             pass             # <<<<<<<<<<<<<<
+ * 
+ *         plt.plot(x,y)
+ */
+  /*else*/ {
+  }
+  __pyx_L3:;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":299
+ *             pass
+ * 
+ *         plt.plot(x,y)             # <<<<<<<<<<<<<<
+ *         # plt.plot(x,n,linestyle='--')
+ *         # plt.plot(m,x,linestyle='--')
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_plt); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 299, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_plot); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 299, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_1, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[3] = {__pyx_t_3, __pyx_v_x, __pyx_v_y};
+    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_5, 2+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 299, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":302
+ *         # plt.plot(x,n,linestyle='--')
+ *         # plt.plot(m,x,linestyle='--')
+ *         plt.show()             # <<<<<<<<<<<<<<
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_plt); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_show); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_1)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_1);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_5 = 1;
+    }
+  }
+  {
+    PyObject *__pyx_callargs[1] = {__pyx_t_1, };
+    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 0+__pyx_t_5);
+    __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":247
+ *         return newFN
+ * 
+ *     def plot(self, region='None'):             # <<<<<<<<<<<<<<
+ *         """
+ *             Plots the fuzzynumber distribution for a given fuzzynumber.
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("mohusets.fuzzynumbers.qifn.fuzzy_element.qrungifn.plot", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_md);
+  __Pyx_XDECREF(__pyx_v_nmd);
+  __Pyx_XDECREF(__pyx_v_q);
+  __Pyx_XDECREF(__pyx_v_x);
+  __Pyx_XDECREF(__pyx_v_y);
+  __Pyx_XDECREF(__pyx_v_n);
+  __Pyx_XDECREF(__pyx_v_m);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     cdef tuple state
@@ -10183,15 +11591,15 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39__reduce_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39__reduce_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -10208,14 +11616,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("__reduce_cython__", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__reduce_cython__", 0))) return NULL;
-  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_38__reduce_cython__(((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_self));
+  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_40__reduce_cython__(((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_38__reduce_cython__(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self) {
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_40__reduce_cython__(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v__dict = 0;
   int __pyx_v_use_setstate;
@@ -10473,15 +11881,15 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungi
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__setstate_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_43__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__setstate_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_43__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_43__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_43__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -10540,14 +11948,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_40__setstate_cython__(((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_self), __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_42__setstate_cython__(((struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *)__pyx_v_self), __pyx_v___pyx_state);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_40__setstate_cython__(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_42__setstate_cython__(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -10715,7 +12123,7 @@ static PyObject *__pyx_pf_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element___pyx_u
  */
   __pyx_t_1 = __Pyx_PyInt_From_long(__pyx_v___pyx_checksum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__4, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_tuple__5, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
@@ -11833,7 +13241,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_array(void) {
  * 
  * cdef inline int import_umath() except -1:
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(2, 986, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(2, 986, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -11965,7 +13373,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_umath(void) {
  * 
  * cdef inline int import_ufunc() except -1:
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(2, 992, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(2, 992, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -12097,7 +13505,7 @@ static CYTHON_INLINE int __pyx_f_5numpy_import_ufunc(void) {
  * 
  * 
  */
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(2, 998, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_builtin_ImportError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_8)) __PYX_ERR(2, 998, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_Raise(__pyx_t_8, 0, 0, 0);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -12647,8 +14055,9 @@ static PyObject *__pyx_specialmethod___pyx_pw_8mohusets_12fuzzynumbers_4qifn_13f
 static PyMethodDef __pyx_methods_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn[] = {
   {"__repr__", (PyCFunction)__pyx_specialmethod___pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_3__repr__, METH_NOARGS|METH_COEXIST, 0},
   {"__rmul__", (PyCFunction)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_25__rmul__, METH_O|METH_COEXIST, 0},
-  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"plot", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39plot, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_38plot},
+  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_43__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
@@ -12853,20 +14262,30 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, __pyx_k_ERROR_the_two_ifns_are_not_the_i, sizeof(__pyx_k_ERROR_the_two_ifns_are_not_the_i), 0, 1, 0, 0},
   {0, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
   {0, __pyx_k_Incompatible_checksums_0x_x_vs_0, sizeof(__pyx_k_Incompatible_checksums_0x_x_vs_0), 0, 0, 1, 0},
+  {0, __pyx_k_None, sizeof(__pyx_k_None), 0, 1, 0, 1},
   {0, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
   {0, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {0, __pyx_k__2, sizeof(__pyx_k__2), 0, 1, 0, 0},
-  {0, __pyx_k__29, sizeof(__pyx_k__29), 0, 0, 1, 1},
-  {0, __pyx_k__5, sizeof(__pyx_k__5), 0, 1, 0, 0},
-  {0, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 1, 1},
+  {0, __pyx_k__33, sizeof(__pyx_k__33), 0, 0, 1, 1},
+  {0, __pyx_k__6, sizeof(__pyx_k__6), 0, 1, 0, 0},
+  {0, __pyx_k__9, sizeof(__pyx_k__9), 0, 0, 1, 1},
+  {0, __pyx_k_addition, sizeof(__pyx_k_addition), 0, 1, 0, 1},
   {0, __pyx_k_algeb_power, sizeof(__pyx_k_algeb_power), 0, 0, 1, 1},
   {0, __pyx_k_algeb_times, sizeof(__pyx_k_algeb_times), 0, 0, 1, 1},
   {0, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
+  {0, __pyx_k_all, sizeof(__pyx_k_all), 0, 1, 0, 1},
+  {0, __pyx_k_alpha, sizeof(__pyx_k_alpha), 0, 0, 1, 1},
   {0, __pyx_k_around, sizeof(__pyx_k_around), 0, 0, 1, 1},
   {0, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
+  {0, __pyx_k_axhline, sizeof(__pyx_k_axhline), 0, 0, 1, 1},
+  {0, __pyx_k_axis, sizeof(__pyx_k_axis), 0, 0, 1, 1},
+  {0, __pyx_k_axvline, sizeof(__pyx_k_axvline), 0, 0, 1, 1},
   {0, __pyx_k_bases, sizeof(__pyx_k_bases), 0, 0, 1, 1},
+  {0, __pyx_k_blue, sizeof(__pyx_k_blue), 0, 1, 0, 1},
+  {0, __pyx_k_bottom, sizeof(__pyx_k_bottom), 0, 1, 0, 1},
   {0, __pyx_k_class, sizeof(__pyx_k_class), 0, 0, 1, 1},
   {0, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {0, __pyx_k_color, sizeof(__pyx_k_color), 0, 0, 1, 1},
   {0, __pyx_k_comp, sizeof(__pyx_k_comp), 0, 0, 1, 1},
   {0, __pyx_k_convert, sizeof(__pyx_k_convert), 0, 0, 1, 1},
   {0, __pyx_k_copy, sizeof(__pyx_k_copy), 0, 0, 1, 1},
@@ -12874,11 +14293,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
   {0, __pyx_k_dict_2, sizeof(__pyx_k_dict_2), 0, 0, 1, 1},
   {0, __pyx_k_disable, sizeof(__pyx_k_disable), 0, 1, 0, 0},
+  {0, __pyx_k_division, sizeof(__pyx_k_division), 0, 1, 0, 1},
   {0, __pyx_k_eins_power, sizeof(__pyx_k_eins_power), 0, 0, 1, 1},
   {0, __pyx_k_eins_times, sizeof(__pyx_k_eins_times), 0, 0, 1, 1},
   {0, __pyx_k_enable, sizeof(__pyx_k_enable), 0, 1, 0, 0},
+  {0, __pyx_k_fill_between, sizeof(__pyx_k_fill_between), 0, 0, 1, 1},
+  {0, __pyx_k_fill_betweenx, sizeof(__pyx_k_fill_betweenx), 0, 0, 1, 1},
   {0, __pyx_k_float, sizeof(__pyx_k_float), 0, 0, 1, 1},
   {0, __pyx_k_gc, sizeof(__pyx_k_gc), 0, 1, 0, 0},
+  {0, __pyx_k_gca, sizeof(__pyx_k_gca), 0, 0, 1, 1},
   {0, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {0, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {0, __pyx_k_init, sizeof(__pyx_k_init), 0, 0, 1, 1},
@@ -12889,13 +14312,20 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
   {0, __pyx_k_isenabled, sizeof(__pyx_k_isenabled), 0, 1, 0, 0},
   {0, __pyx_k_l, sizeof(__pyx_k_l), 0, 0, 1, 1},
+  {0, __pyx_k_left, sizeof(__pyx_k_left), 0, 1, 0, 1},
+  {0, __pyx_k_linspace, sizeof(__pyx_k_linspace), 0, 0, 1, 1},
+  {0, __pyx_k_m, sizeof(__pyx_k_m), 0, 0, 1, 1},
   {0, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+  {0, __pyx_k_marker, sizeof(__pyx_k_marker), 0, 0, 1, 1},
+  {0, __pyx_k_matplotlib, sizeof(__pyx_k_matplotlib), 0, 0, 1, 1},
   {0, __pyx_k_md, sizeof(__pyx_k_md), 0, 0, 1, 1},
   {0, __pyx_k_md_2, sizeof(__pyx_k_md_2), 0, 1, 0, 0},
   {0, __pyx_k_md_and_nmd_must_be_between_0_and, sizeof(__pyx_k_md_and_nmd_must_be_between_0_and), 0, 1, 0, 0},
   {0, __pyx_k_md_qrung_nmd_qrung_must_be_betwe, sizeof(__pyx_k_md_qrung_nmd_qrung_must_be_betwe), 0, 1, 0, 0},
   {0, __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy, sizeof(__pyx_k_mohusets_fuzzynumbers_qifn_fuzzy), 0, 0, 1, 0},
   {0, __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy_2, sizeof(__pyx_k_mohusets_fuzzynumbers_qifn_fuzzy_2), 0, 0, 1, 1},
+  {0, __pyx_k_multiplication, sizeof(__pyx_k_multiplication), 0, 1, 0, 1},
+  {0, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
   {0, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {0, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
   {0, __pyx_k_nmd, sizeof(__pyx_k_nmd), 0, 0, 1, 1},
@@ -12904,7 +14334,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
   {0, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 1, 0, 0},
   {0, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 1, 0, 0},
+  {0, __pyx_k_o, sizeof(__pyx_k_o), 0, 1, 0, 1},
   {0, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
+  {0, __pyx_k_plot, sizeof(__pyx_k_plot), 0, 0, 1, 1},
+  {0, __pyx_k_plt, sizeof(__pyx_k_plt), 0, 0, 1, 1},
+  {0, __pyx_k_pyplot, sizeof(__pyx_k_pyplot), 0, 0, 1, 1},
   {0, __pyx_k_pyx_PickleError, sizeof(__pyx_k_pyx_PickleError), 0, 0, 1, 1},
   {0, __pyx_k_pyx_checksum, sizeof(__pyx_k_pyx_checksum), 0, 0, 1, 1},
   {0, __pyx_k_pyx_result, sizeof(__pyx_k_pyx_result), 0, 0, 1, 1},
@@ -12912,6 +14346,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, __pyx_k_pyx_type, sizeof(__pyx_k_pyx_type), 0, 0, 1, 1},
   {0, __pyx_k_pyx_unpickle_qrungifn, sizeof(__pyx_k_pyx_unpickle_qrungifn), 0, 0, 1, 1},
   {0, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
+  {0, __pyx_k_q, sizeof(__pyx_k_q), 0, 0, 1, 1},
   {0, __pyx_k_qrung, sizeof(__pyx_k_qrung), 0, 0, 1, 1},
   {0, __pyx_k_qrungifn, sizeof(__pyx_k_qrungifn), 0, 0, 1, 1},
   {0, __pyx_k_qrungifn_Q_d, sizeof(__pyx_k_qrungifn_Q_d), 0, 1, 0, 0},
@@ -12926,25 +14361,38 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, __pyx_k_qrungifn_isEmpty, sizeof(__pyx_k_qrungifn_isEmpty), 0, 0, 1, 1},
   {0, __pyx_k_qrungifn_isEmpty_half, sizeof(__pyx_k_qrungifn_isEmpty_half), 0, 0, 1, 1},
   {0, __pyx_k_qrungifn_isLegal, sizeof(__pyx_k_qrungifn_isLegal), 0, 0, 1, 1},
+  {0, __pyx_k_qrungifn_plot, sizeof(__pyx_k_qrungifn_plot), 0, 0, 1, 1},
   {0, __pyx_k_qrungifn_set_md, sizeof(__pyx_k_qrungifn_set_md), 0, 0, 1, 1},
   {0, __pyx_k_qrungifn_set_nmd, sizeof(__pyx_k_qrungifn_set_nmd), 0, 0, 1, 1},
+  {0, __pyx_k_red, sizeof(__pyx_k_red), 0, 1, 0, 1},
   {0, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
   {0, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {0, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
+  {0, __pyx_k_region, sizeof(__pyx_k_region), 0, 0, 1, 1},
+  {0, __pyx_k_right, sizeof(__pyx_k_right), 0, 1, 0, 1},
   {0, __pyx_k_round, sizeof(__pyx_k_round), 0, 0, 1, 1},
+  {0, __pyx_k_scatter, sizeof(__pyx_k_scatter), 0, 0, 1, 1},
   {0, __pyx_k_self, sizeof(__pyx_k_self), 0, 0, 1, 1},
+  {0, __pyx_k_set_linewidth, sizeof(__pyx_k_set_linewidth), 0, 0, 1, 1},
   {0, __pyx_k_set_md, sizeof(__pyx_k_set_md), 0, 0, 1, 1},
   {0, __pyx_k_set_nmd, sizeof(__pyx_k_set_nmd), 0, 0, 1, 1},
   {0, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {0, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
+  {0, __pyx_k_show, sizeof(__pyx_k_show), 0, 0, 1, 1},
   {0, __pyx_k_spec, sizeof(__pyx_k_spec), 0, 0, 1, 1},
+  {0, __pyx_k_spines, sizeof(__pyx_k_spines), 0, 0, 1, 1},
   {0, __pyx_k_state, sizeof(__pyx_k_state), 0, 0, 1, 1},
   {0, __pyx_k_stringsource, sizeof(__pyx_k_stringsource), 0, 0, 1, 0},
+  {0, __pyx_k_subtraction, sizeof(__pyx_k_subtraction), 0, 1, 0, 1},
   {0, __pyx_k_super, sizeof(__pyx_k_super), 0, 0, 1, 1},
   {0, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {0, __pyx_k_top, sizeof(__pyx_k_top), 0, 1, 0, 1},
   {0, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
   {0, __pyx_k_use_setstate, sizeof(__pyx_k_use_setstate), 0, 0, 1, 1},
   {0, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
+  {0, __pyx_k_where, sizeof(__pyx_k_where), 0, 0, 1, 1},
+  {0, __pyx_k_x, sizeof(__pyx_k_x), 0, 0, 1, 1},
+  {0, __pyx_k_y, sizeof(__pyx_k_y), 0, 0, 1, 1},
   #else
   {&__pyx_kp_u_, __pyx_k_, sizeof(__pyx_k_), 0, 1, 0, 0},
   {&__pyx_n_s_AssertionError, __pyx_k_AssertionError, sizeof(__pyx_k_AssertionError), 0, 0, 1, 1},
@@ -12956,20 +14404,30 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_ERROR_the_two_ifns_are_not_the_i, __pyx_k_ERROR_the_two_ifns_are_not_the_i, sizeof(__pyx_k_ERROR_the_two_ifns_are_not_the_i), 0, 1, 0, 0},
   {&__pyx_n_s_ImportError, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
   {&__pyx_kp_s_Incompatible_checksums_0x_x_vs_0, __pyx_k_Incompatible_checksums_0x_x_vs_0, sizeof(__pyx_k_Incompatible_checksums_0x_x_vs_0), 0, 0, 1, 0},
+  {&__pyx_n_u_None, __pyx_k_None, sizeof(__pyx_k_None), 0, 1, 0, 1},
   {&__pyx_n_s_PickleError, __pyx_k_PickleError, sizeof(__pyx_k_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_kp_u__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 1, 0, 0},
-  {&__pyx_n_s__29, __pyx_k__29, sizeof(__pyx_k__29), 0, 0, 1, 1},
-  {&__pyx_kp_u__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 1, 0, 0},
-  {&__pyx_n_s__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 1, 1},
+  {&__pyx_n_s__33, __pyx_k__33, sizeof(__pyx_k__33), 0, 0, 1, 1},
+  {&__pyx_kp_u__6, __pyx_k__6, sizeof(__pyx_k__6), 0, 1, 0, 0},
+  {&__pyx_n_s__9, __pyx_k__9, sizeof(__pyx_k__9), 0, 0, 1, 1},
+  {&__pyx_n_u_addition, __pyx_k_addition, sizeof(__pyx_k_addition), 0, 1, 0, 1},
   {&__pyx_n_s_algeb_power, __pyx_k_algeb_power, sizeof(__pyx_k_algeb_power), 0, 0, 1, 1},
   {&__pyx_n_s_algeb_times, __pyx_k_algeb_times, sizeof(__pyx_k_algeb_times), 0, 0, 1, 1},
   {&__pyx_n_s_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 0, 1, 1},
+  {&__pyx_n_u_all, __pyx_k_all, sizeof(__pyx_k_all), 0, 1, 0, 1},
+  {&__pyx_n_s_alpha, __pyx_k_alpha, sizeof(__pyx_k_alpha), 0, 0, 1, 1},
   {&__pyx_n_s_around, __pyx_k_around, sizeof(__pyx_k_around), 0, 0, 1, 1},
   {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
+  {&__pyx_n_s_axhline, __pyx_k_axhline, sizeof(__pyx_k_axhline), 0, 0, 1, 1},
+  {&__pyx_n_s_axis, __pyx_k_axis, sizeof(__pyx_k_axis), 0, 0, 1, 1},
+  {&__pyx_n_s_axvline, __pyx_k_axvline, sizeof(__pyx_k_axvline), 0, 0, 1, 1},
   {&__pyx_n_s_bases, __pyx_k_bases, sizeof(__pyx_k_bases), 0, 0, 1, 1},
+  {&__pyx_n_u_blue, __pyx_k_blue, sizeof(__pyx_k_blue), 0, 1, 0, 1},
+  {&__pyx_n_u_bottom, __pyx_k_bottom, sizeof(__pyx_k_bottom), 0, 1, 0, 1},
   {&__pyx_n_s_class, __pyx_k_class, sizeof(__pyx_k_class), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_color, __pyx_k_color, sizeof(__pyx_k_color), 0, 0, 1, 1},
   {&__pyx_n_s_comp, __pyx_k_comp, sizeof(__pyx_k_comp), 0, 0, 1, 1},
   {&__pyx_n_s_convert, __pyx_k_convert, sizeof(__pyx_k_convert), 0, 0, 1, 1},
   {&__pyx_n_s_copy, __pyx_k_copy, sizeof(__pyx_k_copy), 0, 0, 1, 1},
@@ -12977,11 +14435,15 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
   {&__pyx_n_s_dict_2, __pyx_k_dict_2, sizeof(__pyx_k_dict_2), 0, 0, 1, 1},
   {&__pyx_kp_u_disable, __pyx_k_disable, sizeof(__pyx_k_disable), 0, 1, 0, 0},
+  {&__pyx_n_u_division, __pyx_k_division, sizeof(__pyx_k_division), 0, 1, 0, 1},
   {&__pyx_n_s_eins_power, __pyx_k_eins_power, sizeof(__pyx_k_eins_power), 0, 0, 1, 1},
   {&__pyx_n_s_eins_times, __pyx_k_eins_times, sizeof(__pyx_k_eins_times), 0, 0, 1, 1},
   {&__pyx_kp_u_enable, __pyx_k_enable, sizeof(__pyx_k_enable), 0, 1, 0, 0},
+  {&__pyx_n_s_fill_between, __pyx_k_fill_between, sizeof(__pyx_k_fill_between), 0, 0, 1, 1},
+  {&__pyx_n_s_fill_betweenx, __pyx_k_fill_betweenx, sizeof(__pyx_k_fill_betweenx), 0, 0, 1, 1},
   {&__pyx_n_s_float, __pyx_k_float, sizeof(__pyx_k_float), 0, 0, 1, 1},
   {&__pyx_kp_u_gc, __pyx_k_gc, sizeof(__pyx_k_gc), 0, 1, 0, 0},
+  {&__pyx_n_s_gca, __pyx_k_gca, sizeof(__pyx_k_gca), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_init, __pyx_k_init, sizeof(__pyx_k_init), 0, 0, 1, 1},
@@ -12992,13 +14454,20 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
   {&__pyx_kp_u_isenabled, __pyx_k_isenabled, sizeof(__pyx_k_isenabled), 0, 1, 0, 0},
   {&__pyx_n_s_l, __pyx_k_l, sizeof(__pyx_k_l), 0, 0, 1, 1},
+  {&__pyx_n_u_left, __pyx_k_left, sizeof(__pyx_k_left), 0, 1, 0, 1},
+  {&__pyx_n_s_linspace, __pyx_k_linspace, sizeof(__pyx_k_linspace), 0, 0, 1, 1},
+  {&__pyx_n_s_m, __pyx_k_m, sizeof(__pyx_k_m), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
+  {&__pyx_n_s_marker, __pyx_k_marker, sizeof(__pyx_k_marker), 0, 0, 1, 1},
+  {&__pyx_n_s_matplotlib, __pyx_k_matplotlib, sizeof(__pyx_k_matplotlib), 0, 0, 1, 1},
   {&__pyx_n_s_md, __pyx_k_md, sizeof(__pyx_k_md), 0, 0, 1, 1},
   {&__pyx_kp_u_md_2, __pyx_k_md_2, sizeof(__pyx_k_md_2), 0, 1, 0, 0},
   {&__pyx_kp_u_md_and_nmd_must_be_between_0_and, __pyx_k_md_and_nmd_must_be_between_0_and, sizeof(__pyx_k_md_and_nmd_must_be_between_0_and), 0, 1, 0, 0},
   {&__pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe, __pyx_k_md_qrung_nmd_qrung_must_be_betwe, sizeof(__pyx_k_md_qrung_nmd_qrung_must_be_betwe), 0, 1, 0, 0},
   {&__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy, sizeof(__pyx_k_mohusets_fuzzynumbers_qifn_fuzzy), 0, 0, 1, 0},
   {&__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_k_mohusets_fuzzynumbers_qifn_fuzzy_2, sizeof(__pyx_k_mohusets_fuzzynumbers_qifn_fuzzy_2), 0, 0, 1, 1},
+  {&__pyx_n_u_multiplication, __pyx_k_multiplication, sizeof(__pyx_k_multiplication), 0, 1, 0, 1},
+  {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_new, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
   {&__pyx_n_s_nmd, __pyx_k_nmd, sizeof(__pyx_k_nmd), 0, 0, 1, 1},
@@ -13007,7 +14476,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
   {&__pyx_kp_u_numpy_core_multiarray_failed_to, __pyx_k_numpy_core_multiarray_failed_to, sizeof(__pyx_k_numpy_core_multiarray_failed_to), 0, 1, 0, 0},
   {&__pyx_kp_u_numpy_core_umath_failed_to_impor, __pyx_k_numpy_core_umath_failed_to_impor, sizeof(__pyx_k_numpy_core_umath_failed_to_impor), 0, 1, 0, 0},
+  {&__pyx_n_u_o, __pyx_k_o, sizeof(__pyx_k_o), 0, 1, 0, 1},
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
+  {&__pyx_n_s_plot, __pyx_k_plot, sizeof(__pyx_k_plot), 0, 0, 1, 1},
+  {&__pyx_n_s_plt, __pyx_k_plt, sizeof(__pyx_k_plt), 0, 0, 1, 1},
+  {&__pyx_n_s_pyplot, __pyx_k_pyplot, sizeof(__pyx_k_pyplot), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_PickleError, __pyx_k_pyx_PickleError, sizeof(__pyx_k_pyx_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_checksum, __pyx_k_pyx_checksum, sizeof(__pyx_k_pyx_checksum), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_result, __pyx_k_pyx_result, sizeof(__pyx_k_pyx_result), 0, 0, 1, 1},
@@ -13015,6 +14488,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_pyx_type, __pyx_k_pyx_type, sizeof(__pyx_k_pyx_type), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_unpickle_qrungifn, __pyx_k_pyx_unpickle_qrungifn, sizeof(__pyx_k_pyx_unpickle_qrungifn), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
+  {&__pyx_n_s_q, __pyx_k_q, sizeof(__pyx_k_q), 0, 0, 1, 1},
   {&__pyx_n_s_qrung, __pyx_k_qrung, sizeof(__pyx_k_qrung), 0, 0, 1, 1},
   {&__pyx_n_s_qrungifn, __pyx_k_qrungifn, sizeof(__pyx_k_qrungifn), 0, 0, 1, 1},
   {&__pyx_kp_u_qrungifn_Q_d, __pyx_k_qrungifn_Q_d, sizeof(__pyx_k_qrungifn_Q_d), 0, 1, 0, 0},
@@ -13029,33 +14503,46 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_qrungifn_isEmpty, __pyx_k_qrungifn_isEmpty, sizeof(__pyx_k_qrungifn_isEmpty), 0, 0, 1, 1},
   {&__pyx_n_s_qrungifn_isEmpty_half, __pyx_k_qrungifn_isEmpty_half, sizeof(__pyx_k_qrungifn_isEmpty_half), 0, 0, 1, 1},
   {&__pyx_n_s_qrungifn_isLegal, __pyx_k_qrungifn_isLegal, sizeof(__pyx_k_qrungifn_isLegal), 0, 0, 1, 1},
+  {&__pyx_n_s_qrungifn_plot, __pyx_k_qrungifn_plot, sizeof(__pyx_k_qrungifn_plot), 0, 0, 1, 1},
   {&__pyx_n_s_qrungifn_set_md, __pyx_k_qrungifn_set_md, sizeof(__pyx_k_qrungifn_set_md), 0, 0, 1, 1},
   {&__pyx_n_s_qrungifn_set_nmd, __pyx_k_qrungifn_set_nmd, sizeof(__pyx_k_qrungifn_set_nmd), 0, 0, 1, 1},
+  {&__pyx_n_u_red, __pyx_k_red, sizeof(__pyx_k_red), 0, 1, 0, 1},
   {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
+  {&__pyx_n_s_region, __pyx_k_region, sizeof(__pyx_k_region), 0, 0, 1, 1},
+  {&__pyx_n_u_right, __pyx_k_right, sizeof(__pyx_k_right), 0, 1, 0, 1},
   {&__pyx_n_s_round, __pyx_k_round, sizeof(__pyx_k_round), 0, 0, 1, 1},
+  {&__pyx_n_s_scatter, __pyx_k_scatter, sizeof(__pyx_k_scatter), 0, 0, 1, 1},
   {&__pyx_n_s_self, __pyx_k_self, sizeof(__pyx_k_self), 0, 0, 1, 1},
+  {&__pyx_n_s_set_linewidth, __pyx_k_set_linewidth, sizeof(__pyx_k_set_linewidth), 0, 0, 1, 1},
   {&__pyx_n_s_set_md, __pyx_k_set_md, sizeof(__pyx_k_set_md), 0, 0, 1, 1},
   {&__pyx_n_s_set_nmd, __pyx_k_set_nmd, sizeof(__pyx_k_set_nmd), 0, 0, 1, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
+  {&__pyx_n_s_show, __pyx_k_show, sizeof(__pyx_k_show), 0, 0, 1, 1},
   {&__pyx_n_s_spec, __pyx_k_spec, sizeof(__pyx_k_spec), 0, 0, 1, 1},
+  {&__pyx_n_s_spines, __pyx_k_spines, sizeof(__pyx_k_spines), 0, 0, 1, 1},
   {&__pyx_n_s_state, __pyx_k_state, sizeof(__pyx_k_state), 0, 0, 1, 1},
   {&__pyx_kp_s_stringsource, __pyx_k_stringsource, sizeof(__pyx_k_stringsource), 0, 0, 1, 0},
+  {&__pyx_n_u_subtraction, __pyx_k_subtraction, sizeof(__pyx_k_subtraction), 0, 1, 0, 1},
   {&__pyx_n_s_super, __pyx_k_super, sizeof(__pyx_k_super), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_n_u_top, __pyx_k_top, sizeof(__pyx_k_top), 0, 1, 0, 1},
   {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
   {&__pyx_n_s_use_setstate, __pyx_k_use_setstate, sizeof(__pyx_k_use_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
+  {&__pyx_n_s_where, __pyx_k_where, sizeof(__pyx_k_where), 0, 0, 1, 1},
+  {&__pyx_n_s_x, __pyx_k_x, sizeof(__pyx_k_x), 0, 0, 1, 1},
+  {&__pyx_n_s_y, __pyx_k_y, sizeof(__pyx_k_y), 0, 0, 1, 1},
   #endif
   {0, 0, 0, 0, 0, 0, 0}
 };
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_builtin_AssertionError = __Pyx_GetBuiltinName(__pyx_n_s_AssertionError); if (!__pyx_builtin_AssertionError) __PYX_ERR(0, 33, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_builtin_super = __Pyx_GetBuiltinName(__pyx_n_s_super); if (!__pyx_builtin_super) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_builtin_AssertionError = __Pyx_GetBuiltinName(__pyx_n_s_AssertionError); if (!__pyx_builtin_AssertionError) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 63, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(2, 986, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -13067,16 +14554,27 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":60
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":63
  *             if not self.isLegal():
  *                 self.__md = m
  *                 raise ValueError('ERROR: Invalid data.')             # <<<<<<<<<<<<<<
  * 
  *     property nmd:
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_ERROR_Invalid_data); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_ERROR_Invalid_data); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":263
+ *         q = self.__qrung
+ * 
+ *         x = np.linspace(0, 1, 1000)             # <<<<<<<<<<<<<<
+ * 
+ *         plt.gca().spines['top'].set_linewidth(False)
+ */
+  __pyx_tuple__4 = PyTuple_Pack(3, __pyx_int_0, __pyx_int_1, __pyx_int_1000); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 263, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
 
   /* "(tree fragment)":4
  *     cdef object __pyx_PickleError
@@ -13085,9 +14583,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         from pickle import PickleError as __pyx_PickleError
  *         raise __pyx_PickleError, "Incompatible checksums (0x%x vs (0xe61f17d, 0xb54e177, 0xab5694b) = (_qrungifn__accuracy, _qrungifn__indeterminacy, _qrungifn__md, _qrungifn__nmd, _qrungifn__parent, _qrungifn__qrung, _qrungifn__score))" % __pyx_checksum
  */
-  __pyx_tuple__4 = PyTuple_Pack(3, __pyx_int_241299837, __pyx_int_190112119, __pyx_int_179661131); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 4, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__4);
-  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_tuple__5 = PyTuple_Pack(3, __pyx_int_241299837, __pyx_int_190112119, __pyx_int_179661131); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
 
   /* "../../../../.virtualenvs/practiceLibrary/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":986
  *         __pyx_import_array()
@@ -13096,9 +14594,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_umath() except -1:
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(2, 986, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__6);
-  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_multiarray_failed_to); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(2, 986, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
 
   /* "../../../../.virtualenvs/practiceLibrary/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":992
  *         _import_umath()
@@ -13107,127 +14605,142 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * cdef inline int import_ufunc() except -1:
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(2, 992, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_u_numpy_core_umath_failed_to_impor); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(2, 992, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":99
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":102
  *             return self.__indeterminacy
  * 
  *     cpdef set_md(self, value):             # <<<<<<<<<<<<<<
  *         v = np.float_(value)
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
  */
-  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_value); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 99, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_set_md, 99, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 99, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_value); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_set_md, 102, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 102, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":104
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":107
  *         self.__md = v
  * 
  *     cpdef set_nmd(self, value):             # <<<<<<<<<<<<<<
  *         v = np.float_(value)
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
  */
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_set_nmd, 104, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_set_nmd, 107, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 107, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":109
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":112
  *         self.__nmd = v
  * 
  *     cpdef bint isEmpty(self):             # <<<<<<<<<<<<<<
  *         if self.__md is None and self.__nmd is None:
  *             return True
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 109, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_isEmpty, 109, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_isEmpty, 112, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 112, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":115
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":118
  *             return False
  * 
  *     cpdef bint isEmpty_half(self):             # <<<<<<<<<<<<<<
  *         if self.__md is None or self.__nmd is None:
  *             return True
  */
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_isEmpty_half, 115, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 115, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_isEmpty_half, 118, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 118, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":121
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":124
  *             return False
  * 
  *     cpdef bint isLegal(self):             # <<<<<<<<<<<<<<
  *         mds = self.__md
  *         nmds = self.__nmd
  */
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_isLegal, 121, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 121, __pyx_L1_error)
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_isLegal, 124, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 124, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":130
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":133
  *             return False
  * 
  *     cpdef convert(self):             # <<<<<<<<<<<<<<
  *         m = np.round(self.__md ,4)
  *         n = np.round(self.__nmd,4)
  */
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_convert, 130, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_convert, 133, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 133, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":135
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":138
  *         return m,n
  * 
  *     cpdef comp(self):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(self.__nmd)
  */
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_comp, 135, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_comp, 138, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 138, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":216
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":219
  * 
  * 
  *     cpdef algeb_power(self, float l):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(self.__md ** l)
  */
-  __pyx_tuple__18 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_l); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 216, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_algeb_power, 216, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 216, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_l); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_algeb_power, 219, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 219, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":222
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":225
  *         return newFN
  * 
  *     cpdef algeb_times(self, float l):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** l) ** (1. / self.__qrung))
  */
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_algeb_times, 222, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 222, __pyx_L1_error)
+  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_algeb_times, 225, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 225, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":228
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":231
  *         return newFN
  * 
  *     cpdef eins_power(self, float l):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (
  */
-  __pyx_codeobj__21 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_eins_power, 228, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__21)) __PYX_ERR(0, 228, __pyx_L1_error)
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_eins_power, 231, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 231, __pyx_L1_error)
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":236
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":239
  *         return newFN
  * 
  *     cpdef eins_times(self, float l):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (
  */
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_eins_times, 236, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_eins_times, 239, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 239, __pyx_L1_error)
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":247
+ *         return newFN
+ * 
+ *     def plot(self, region='None'):             # <<<<<<<<<<<<<<
+ *         """
+ *             Plots the fuzzynumber distribution for a given fuzzynumber.
+ */
+  __pyx_tuple__24 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_region, __pyx_n_s_md, __pyx_n_s_nmd, __pyx_n_s_q, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_n, __pyx_n_s_m); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy, __pyx_n_s_plot, 247, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_u_None); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__26);
+  __Pyx_GIVEREF(__pyx_tuple__26);
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     cdef tuple state
  *     cdef object _dict
  */
-  __pyx_tuple__23 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_state, __pyx_n_s_dict_2, __pyx_n_s_use_setstate); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__23);
-  __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_reduce_cython, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_tuple__27 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_state, __pyx_n_s_dict_2, __pyx_n_s_use_setstate); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__27);
+  __Pyx_GIVEREF(__pyx_tuple__27);
+  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_reduce_cython, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(1, 1, __pyx_L1_error)
 
   /* "(tree fragment)":16
  *     else:
@@ -13235,20 +14748,20 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_qrungifn__set_state(self, __pyx_state)
  */
-  __pyx_tuple__25 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_pyx_state); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(1, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__25);
-  __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_setstate_cython, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __pyx_tuple__29 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_pyx_state); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__29);
+  __Pyx_GIVEREF(__pyx_tuple__29);
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_setstate_cython, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(1, 16, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_qrungifn(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
-  __pyx_tuple__27 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__27);
-  __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_qrungifn, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __pyx_tuple__31 = PyTuple_Pack(5, __pyx_n_s_pyx_type, __pyx_n_s_pyx_checksum, __pyx_n_s_pyx_state, __pyx_n_s_pyx_PickleError, __pyx_n_s_pyx_result); if (unlikely(!__pyx_tuple__31)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__31);
+  __Pyx_GIVEREF(__pyx_tuple__31);
+  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_stringsource, __pyx_n_s_pyx_unpickle_qrungifn, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -13269,107 +14782,149 @@ static CYTHON_SMALL_CODE int __Pyx_InitConstants(void) {
   if (__Pyx_InitString(__pyx_string_tab[7], &__pyx_kp_u_ERROR_the_two_ifns_are_not_the_i) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[8], &__pyx_n_s_ImportError) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   if (__Pyx_InitString(__pyx_string_tab[9], &__pyx_kp_s_Incompatible_checksums_0x_x_vs_0) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[10], &__pyx_n_s_PickleError) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[11], &__pyx_n_s_ValueError) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[12], &__pyx_kp_u__2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[13], &__pyx_n_s__29) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[14], &__pyx_kp_u__5) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[15], &__pyx_n_s__8) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[16], &__pyx_n_s_algeb_power) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[17], &__pyx_n_s_algeb_times) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[18], &__pyx_n_s_all) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[19], &__pyx_n_s_around) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[20], &__pyx_n_s_asyncio_coroutines) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[21], &__pyx_n_s_bases) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[22], &__pyx_n_s_class) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[23], &__pyx_n_s_cline_in_traceback) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[24], &__pyx_n_s_comp) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[25], &__pyx_n_s_convert) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[26], &__pyx_n_s_copy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[27], &__pyx_n_s_deepcopy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[28], &__pyx_n_s_dict) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[29], &__pyx_n_s_dict_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[30], &__pyx_kp_u_disable) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[31], &__pyx_n_s_eins_power) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[32], &__pyx_n_s_eins_times) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[33], &__pyx_kp_u_enable) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[34], &__pyx_n_s_float) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[35], &__pyx_kp_u_gc) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[36], &__pyx_n_s_getstate) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[37], &__pyx_n_s_import) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[38], &__pyx_n_s_init) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[39], &__pyx_n_s_initializing) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[40], &__pyx_n_s_isEmpty) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[41], &__pyx_n_s_isEmpty_half) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[42], &__pyx_n_s_isLegal) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[43], &__pyx_n_s_is_coroutine) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[44], &__pyx_kp_u_isenabled) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[45], &__pyx_n_s_l) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[46], &__pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[47], &__pyx_n_s_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[48], &__pyx_kp_u_md_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[49], &__pyx_kp_u_md_and_nmd_must_be_between_0_and) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[50], &__pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[51], &__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[52], &__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[53], &__pyx_n_s_name) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[54], &__pyx_n_s_new) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[55], &__pyx_n_s_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[56], &__pyx_kp_u_nmd_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[57], &__pyx_n_s_np) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[58], &__pyx_n_s_numpy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[59], &__pyx_kp_u_numpy_core_multiarray_failed_to) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[60], &__pyx_kp_u_numpy_core_umath_failed_to_impor) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[61], &__pyx_n_s_pickle) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[62], &__pyx_n_s_pyx_PickleError) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[63], &__pyx_n_s_pyx_checksum) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[64], &__pyx_n_s_pyx_result) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[65], &__pyx_n_s_pyx_state) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[66], &__pyx_n_s_pyx_type) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[67], &__pyx_n_s_pyx_unpickle_qrungifn) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[68], &__pyx_n_s_pyx_vtable) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[69], &__pyx_n_s_qrung) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[70], &__pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[71], &__pyx_kp_u_qrungifn_Q_d) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[72], &__pyx_n_s_qrungifn___reduce_cython) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[73], &__pyx_n_s_qrungifn___setstate_cython) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[74], &__pyx_n_s_qrungifn_algeb_power) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[75], &__pyx_n_s_qrungifn_algeb_times) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[76], &__pyx_n_s_qrungifn_comp) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[77], &__pyx_n_s_qrungifn_convert) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[78], &__pyx_n_s_qrungifn_eins_power) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[79], &__pyx_n_s_qrungifn_eins_times) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[80], &__pyx_n_s_qrungifn_isEmpty) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[81], &__pyx_n_s_qrungifn_isEmpty_half) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[82], &__pyx_n_s_qrungifn_isLegal) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[83], &__pyx_n_s_qrungifn_set_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[84], &__pyx_n_s_qrungifn_set_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[85], &__pyx_n_s_reduce) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[86], &__pyx_n_s_reduce_cython) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[87], &__pyx_n_s_reduce_ex) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[88], &__pyx_n_s_round) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[89], &__pyx_n_s_self) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[90], &__pyx_n_s_set_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[91], &__pyx_n_s_set_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[92], &__pyx_n_s_setstate) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[93], &__pyx_n_s_setstate_cython) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[94], &__pyx_n_s_spec) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[95], &__pyx_n_s_state) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[96], &__pyx_kp_s_stringsource) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[97], &__pyx_n_s_super) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[98], &__pyx_n_s_test) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[99], &__pyx_n_s_update) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[100], &__pyx_n_s_use_setstate) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
-  if (__Pyx_InitString(__pyx_string_tab[101], &__pyx_n_s_value) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[10], &__pyx_n_u_None) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[11], &__pyx_n_s_PickleError) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[12], &__pyx_n_s_ValueError) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[13], &__pyx_kp_u__2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[14], &__pyx_n_s__33) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[15], &__pyx_kp_u__6) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[16], &__pyx_n_s__9) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[17], &__pyx_n_u_addition) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[18], &__pyx_n_s_algeb_power) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[19], &__pyx_n_s_algeb_times) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[20], &__pyx_n_s_all) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[21], &__pyx_n_u_all) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[22], &__pyx_n_s_alpha) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[23], &__pyx_n_s_around) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[24], &__pyx_n_s_asyncio_coroutines) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[25], &__pyx_n_s_axhline) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[26], &__pyx_n_s_axis) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[27], &__pyx_n_s_axvline) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[28], &__pyx_n_s_bases) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[29], &__pyx_n_u_blue) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[30], &__pyx_n_u_bottom) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[31], &__pyx_n_s_class) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[32], &__pyx_n_s_cline_in_traceback) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[33], &__pyx_n_s_color) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[34], &__pyx_n_s_comp) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[35], &__pyx_n_s_convert) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[36], &__pyx_n_s_copy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[37], &__pyx_n_s_deepcopy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[38], &__pyx_n_s_dict) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[39], &__pyx_n_s_dict_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[40], &__pyx_kp_u_disable) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[41], &__pyx_n_u_division) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[42], &__pyx_n_s_eins_power) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[43], &__pyx_n_s_eins_times) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[44], &__pyx_kp_u_enable) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[45], &__pyx_n_s_fill_between) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[46], &__pyx_n_s_fill_betweenx) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[47], &__pyx_n_s_float) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[48], &__pyx_kp_u_gc) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[49], &__pyx_n_s_gca) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[50], &__pyx_n_s_getstate) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[51], &__pyx_n_s_import) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[52], &__pyx_n_s_init) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[53], &__pyx_n_s_initializing) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[54], &__pyx_n_s_isEmpty) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[55], &__pyx_n_s_isEmpty_half) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[56], &__pyx_n_s_isLegal) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[57], &__pyx_n_s_is_coroutine) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[58], &__pyx_kp_u_isenabled) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[59], &__pyx_n_s_l) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[60], &__pyx_n_u_left) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[61], &__pyx_n_s_linspace) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[62], &__pyx_n_s_m) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[63], &__pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[64], &__pyx_n_s_marker) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[65], &__pyx_n_s_matplotlib) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[66], &__pyx_n_s_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[67], &__pyx_kp_u_md_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[68], &__pyx_kp_u_md_and_nmd_must_be_between_0_and) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[69], &__pyx_kp_u_md_qrung_nmd_qrung_must_be_betwe) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[70], &__pyx_kp_s_mohusets_fuzzynumbers_qifn_fuzzy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[71], &__pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[72], &__pyx_n_u_multiplication) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[73], &__pyx_n_s_n) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[74], &__pyx_n_s_name) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[75], &__pyx_n_s_new) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[76], &__pyx_n_s_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[77], &__pyx_kp_u_nmd_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[78], &__pyx_n_s_np) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[79], &__pyx_n_s_numpy) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[80], &__pyx_kp_u_numpy_core_multiarray_failed_to) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[81], &__pyx_kp_u_numpy_core_umath_failed_to_impor) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[82], &__pyx_n_u_o) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[83], &__pyx_n_s_pickle) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[84], &__pyx_n_s_plot) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[85], &__pyx_n_s_plt) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[86], &__pyx_n_s_pyplot) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[87], &__pyx_n_s_pyx_PickleError) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[88], &__pyx_n_s_pyx_checksum) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[89], &__pyx_n_s_pyx_result) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[90], &__pyx_n_s_pyx_state) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[91], &__pyx_n_s_pyx_type) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[92], &__pyx_n_s_pyx_unpickle_qrungifn) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[93], &__pyx_n_s_pyx_vtable) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[94], &__pyx_n_s_q) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[95], &__pyx_n_s_qrung) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[96], &__pyx_n_s_qrungifn) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[97], &__pyx_kp_u_qrungifn_Q_d) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[98], &__pyx_n_s_qrungifn___reduce_cython) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[99], &__pyx_n_s_qrungifn___setstate_cython) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[100], &__pyx_n_s_qrungifn_algeb_power) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[101], &__pyx_n_s_qrungifn_algeb_times) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[102], &__pyx_n_s_qrungifn_comp) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[103], &__pyx_n_s_qrungifn_convert) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[104], &__pyx_n_s_qrungifn_eins_power) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[105], &__pyx_n_s_qrungifn_eins_times) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[106], &__pyx_n_s_qrungifn_isEmpty) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[107], &__pyx_n_s_qrungifn_isEmpty_half) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[108], &__pyx_n_s_qrungifn_isLegal) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[109], &__pyx_n_s_qrungifn_plot) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[110], &__pyx_n_s_qrungifn_set_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[111], &__pyx_n_s_qrungifn_set_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[112], &__pyx_n_u_red) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[113], &__pyx_n_s_reduce) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[114], &__pyx_n_s_reduce_cython) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[115], &__pyx_n_s_reduce_ex) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[116], &__pyx_n_s_region) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[117], &__pyx_n_u_right) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[118], &__pyx_n_s_round) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[119], &__pyx_n_s_scatter) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[120], &__pyx_n_s_self) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[121], &__pyx_n_s_set_linewidth) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[122], &__pyx_n_s_set_md) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[123], &__pyx_n_s_set_nmd) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[124], &__pyx_n_s_setstate) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[125], &__pyx_n_s_setstate_cython) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[126], &__pyx_n_s_show) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[127], &__pyx_n_s_spec) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[128], &__pyx_n_s_spines) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[129], &__pyx_n_s_state) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[130], &__pyx_kp_s_stringsource) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[131], &__pyx_n_u_subtraction) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[132], &__pyx_n_s_super) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[133], &__pyx_n_s_test) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[134], &__pyx_n_u_top) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[135], &__pyx_n_s_update) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[136], &__pyx_n_s_use_setstate) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[137], &__pyx_n_s_value) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[138], &__pyx_n_s_where) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[139], &__pyx_n_s_x) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  if (__Pyx_InitString(__pyx_string_tab[140], &__pyx_n_s_y) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   #endif
   #if !CYTHON_USE_MODULE_STATE
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   #endif
   __pyx_float_0_ = PyFloat_FromDouble(0.); if (unlikely(!__pyx_float_0_)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_float_1_ = PyFloat_FromDouble(1.); if (unlikely(!__pyx_float_1_)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_float_0_1 = PyFloat_FromDouble(0.1); if (unlikely(!__pyx_float_0_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_float_1_1 = PyFloat_FromDouble(1.1); if (unlikely(!__pyx_float_1_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_4 = PyInt_FromLong(4); if (unlikely(!__pyx_int_4)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_1000 = PyInt_FromLong(1000); if (unlikely(!__pyx_int_1000)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_179661131 = PyInt_FromLong(179661131L); if (unlikely(!__pyx_int_179661131)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_190112119 = PyInt_FromLong(190112119L); if (unlikely(!__pyx_int_190112119)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_241299837 = PyInt_FromLong(241299837L); if (unlikely(!__pyx_int_241299837)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -13464,12 +15019,12 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtable_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn.eins_power = (PyObject *(*)(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *, float, int __pyx_skip_dispatch))__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_eins_power;
   __pyx_vtable_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn.eins_times = (PyObject *(*)(struct __pyx_obj_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn *, float, int __pyx_skip_dispatch))__pyx_f_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_eins_times;
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_t_2 = PyTuple_Pack(1, (PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_8Fuzzynum_Fuzzynum); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_Pack(1, (PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_8Fuzzynum_Fuzzynum); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn_spec, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn)) __PYX_ERR(0, 15, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn_spec, __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (unlikely(!__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn)) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn_spec, __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   #else
   __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn = &__pyx_type_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn;
   #endif
@@ -13477,7 +15032,7 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_base = __pyx_ptype_8mohusets_12fuzzynumbers_8Fuzzynum_Fuzzynum;
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
   __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_print = 0;
@@ -13489,7 +15044,7 @@ static int __Pyx_modinit_type_init_code(void) {
   #endif
   #if CYTHON_UPDATE_DESCRIPTOR_DOC
   {
-    PyObject *wrapper = PyObject_GetAttrString((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn, "__sub__"); if (unlikely(!wrapper)) __PYX_ERR(0, 15, __pyx_L1_error)
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn, "__sub__"); if (unlikely(!wrapper)) __PYX_ERR(0, 18, __pyx_L1_error)
     if (__Pyx_IS_TYPE(wrapper, &PyWrapperDescr_Type)) {
       __pyx_wrapperbase_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_26__sub__ = *((PyWrapperDescrObject *)wrapper)->d_base;
       __pyx_wrapperbase_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_26__sub__.doc = __pyx_doc_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_26__sub__;
@@ -13499,7 +15054,7 @@ static int __Pyx_modinit_type_init_code(void) {
   #endif
   #if CYTHON_UPDATE_DESCRIPTOR_DOC
   {
-    PyObject *wrapper = PyObject_GetAttrString((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn, "__truediv__"); if (unlikely(!wrapper)) __PYX_ERR(0, 15, __pyx_L1_error)
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn, "__truediv__"); if (unlikely(!wrapper)) __PYX_ERR(0, 18, __pyx_L1_error)
     if (__Pyx_IS_TYPE(wrapper, &PyWrapperDescr_Type)) {
       __pyx_wrapperbase_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_28__truediv__ = *((PyWrapperDescrObject *)wrapper)->d_base;
       __pyx_wrapperbase_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_28__truediv__.doc = __pyx_doc_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_28__truediv__;
@@ -13507,13 +15062,13 @@ static int __Pyx_modinit_type_init_code(void) {
     }
   }
   #endif
-  if (__Pyx_SetVtable(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn, __pyx_vtabptr_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn, __pyx_vtabptr_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if (__Pyx_MergeVtables(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (__Pyx_MergeVtables(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_qrungifn, (PyObject *) __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_qrungifn, (PyObject *) __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   #endif
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_RefNannyFinishContext();
@@ -13793,6 +15348,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_fuzzy_element(PyObject *__pyx_pyin
   int stringtab_initialized = 0;
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -13913,167 +15469,202 @@ if (!__Pyx_RefNanny) {
  * #  Software: Mohusets
  * 
  * import copy             # <<<<<<<<<<<<<<
- * from ..Fuzzynum cimport Fuzzynum
- * from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
+ * 
+ * from matplotlib import pyplot as plt
  */
   __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_copy, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_copy, __pyx_t_2) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":12
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":10
+ * import copy
+ * 
+ * from matplotlib import pyplot as plt             # <<<<<<<<<<<<<<
+ * 
+ * from ..Fuzzynum cimport Fuzzynum
+ */
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_n_s_pyplot);
+  __Pyx_GIVEREF(__pyx_n_s_pyplot);
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_pyplot);
+  __pyx_t_3 = __Pyx_Import(__pyx_n_s_matplotlib, __pyx_t_2, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_pyplot); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_plt, __pyx_t_2) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":15
  * from ..archimedean cimport algebraic_T, algebraic_S, einstein_T, einstein_S
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
  * 
  */
-  __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_numpy, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_ImportDottedModule(__pyx_n_s_numpy, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_3) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":99
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":102
  *             return self.__indeterminacy
  * 
  *     cpdef set_md(self, value):             # <<<<<<<<<<<<<<
  *         v = np.float_(value)
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_5set_md, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_set_md, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__10)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_set_md, __pyx_t_2) < 0) __PYX_ERR(0, 99, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_5set_md, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_set_md, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_set_md, __pyx_t_3) < 0) __PYX_ERR(0, 102, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":104
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":107
  *         self.__md = v
  * 
  *     cpdef set_nmd(self, value):             # <<<<<<<<<<<<<<
  *         v = np.float_(value)
  *         assert 0 <= v.all() <= 1, 'ERROR: Invalid data.'
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_7set_nmd, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_set_nmd, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_set_nmd, __pyx_t_2) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_7set_nmd, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_set_nmd, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_set_nmd, __pyx_t_3) < 0) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":109
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":112
  *         self.__nmd = v
  * 
  *     cpdef bint isEmpty(self):             # <<<<<<<<<<<<<<
  *         if self.__md is None and self.__nmd is None:
  *             return True
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_9isEmpty, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_isEmpty, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_isEmpty, __pyx_t_2) < 0) __PYX_ERR(0, 109, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_9isEmpty, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_isEmpty, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_isEmpty, __pyx_t_3) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":115
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":118
  *             return False
  * 
  *     cpdef bint isEmpty_half(self):             # <<<<<<<<<<<<<<
  *         if self.__md is None or self.__nmd is None:
  *             return True
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_11isEmpty_half, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_isEmpty_half, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 115, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_isEmpty_half, __pyx_t_2) < 0) __PYX_ERR(0, 115, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_11isEmpty_half, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_isEmpty_half, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 118, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_isEmpty_half, __pyx_t_3) < 0) __PYX_ERR(0, 118, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":121
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":124
  *             return False
  * 
  *     cpdef bint isLegal(self):             # <<<<<<<<<<<<<<
  *         mds = self.__md
  *         nmds = self.__nmd
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_13isLegal, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_isLegal, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 121, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_isLegal, __pyx_t_2) < 0) __PYX_ERR(0, 121, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_13isLegal, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_isLegal, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 124, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_isLegal, __pyx_t_3) < 0) __PYX_ERR(0, 124, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":130
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":133
  *             return False
  * 
  *     cpdef convert(self):             # <<<<<<<<<<<<<<
  *         m = np.round(self.__md ,4)
  *         n = np.round(self.__nmd,4)
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_15convert, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_convert, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_convert, __pyx_t_2) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_15convert, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_convert, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_convert, __pyx_t_3) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":135
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":138
  *         return m,n
  * 
  *     cpdef comp(self):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(self.__nmd)
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_17comp, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_comp, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__17)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_comp, __pyx_t_2) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_17comp, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_comp, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__18)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_comp, __pyx_t_3) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":216
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":219
  * 
  * 
  *     cpdef algeb_power(self, float l):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(self.__md ** l)
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_31algeb_power, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_algeb_power, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__19)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 216, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_algeb_power, __pyx_t_2) < 0) __PYX_ERR(0, 216, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_31algeb_power, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_algeb_power, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_algeb_power, __pyx_t_3) < 0) __PYX_ERR(0, 219, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":222
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":225
  *         return newFN
  * 
  *     cpdef algeb_times(self, float l):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((1. - (1. - self.__md ** self.__qrung) ** l) ** (1. / self.__qrung))
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_33algeb_times, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_algeb_times, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__20)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 222, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_algeb_times, __pyx_t_2) < 0) __PYX_ERR(0, 222, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_33algeb_times, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_algeb_times, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 225, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_algeb_times, __pyx_t_3) < 0) __PYX_ERR(0, 225, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":228
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":231
  *         return newFN
  * 
  *     cpdef eins_power(self, float l):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md(((2. * (self.__md ** self.__qrung) ** l) / (
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_35eins_power, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_eins_power, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__21)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 228, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_eins_power, __pyx_t_2) < 0) __PYX_ERR(0, 228, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_35eins_power, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_eins_power, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_eins_power, __pyx_t_3) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
-  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":236
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":239
  *         return newFN
  * 
  *     cpdef eins_times(self, float l):             # <<<<<<<<<<<<<<
  *         newFN = copy.deepcopy(self)
  *         newFN.set_md((((1. + self.__md ** self.__qrung) ** l - (1. - self.__md ** self.__qrung) ** l) / (
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_37eins_times, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_eins_times, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__22)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_eins_times, __pyx_t_2) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_37eins_times, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_eins_times, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__23)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_eins_times, __pyx_t_3) < 0) __PYX_ERR(0, 239, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
+
+  /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":247
+ *         return newFN
+ * 
+ *     def plot(self, region='None'):             # <<<<<<<<<<<<<<
+ *         """
+ *             Plots the fuzzynumber distribution for a given fuzzynumber.
+ */
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39plot, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn_plot, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_tuple__26);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_plot, __pyx_t_3) < 0) __PYX_ERR(0, 247, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
   /* "(tree fragment)":1
@@ -14081,10 +15672,10 @@ if (!__Pyx_RefNanny) {
  *     cdef tuple state
  *     cdef object _dict
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_39__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn___reduce_cython, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__24)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_reduce_cython, __pyx_t_2) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn___reduce_cython, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_reduce_cython, __pyx_t_3) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
   /* "(tree fragment)":16
@@ -14093,10 +15684,10 @@ if (!__Pyx_RefNanny) {
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_qrungifn__set_state(self, __pyx_state)
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_41__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn___setstate_cython, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__26)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_setstate_cython, __pyx_t_2) < 0) __PYX_ERR(1, 16, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_8qrungifn_43__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_qrungifn___setstate_cython, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__30)); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn->tp_dict, __pyx_n_s_setstate_cython, __pyx_t_3) < 0) __PYX_ERR(1, 16, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_ptype_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_qrungifn);
 
   /* "(tree fragment)":1
@@ -14104,20 +15695,20 @@ if (!__Pyx_RefNanny) {
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_1__pyx_unpickle_qrungifn, 0, __pyx_n_s_pyx_unpickle_qrungifn, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__28)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_qrungifn, __pyx_t_2) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_8mohusets_12fuzzynumbers_4qifn_13fuzzy_element_1__pyx_unpickle_qrungifn, 0, __pyx_n_s_pyx_unpickle_qrungifn, NULL, __pyx_n_s_mohusets_fuzzynumbers_qifn_fuzzy_2, __pyx_d, ((PyObject *)__pyx_codeobj__32)); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_qrungifn, __pyx_t_3) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "mohusets/fuzzynumbers/qifn/fuzzy_element.pyx":1
  * #  Copyright (c) yibocat 2023 All Rights Reserved             # <<<<<<<<<<<<<<
  * #  Python: 3.10.9
  * #  Date: 2023/2/21 4:11
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_3) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "../../../../.virtualenvs/practiceLibrary/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":1048
  * 
@@ -14132,6 +15723,7 @@ if (!__Pyx_RefNanny) {
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
       __Pyx_AddTraceback("init mohusets.fuzzynumbers.qifn.fuzzy_element", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -15676,6 +17268,30 @@ static PyObject* __Pyx_PyInt_SubtractCObj(PyObject *op1, PyObject *op2, long int
 }
 #endif
 
+/* DictGetItem */
+#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
+static PyObject *__Pyx_PyDict_GetItem(PyObject *d, PyObject* key) {
+    PyObject *value;
+    value = PyDict_GetItemWithError(d, key);
+    if (unlikely(!value)) {
+        if (!PyErr_Occurred()) {
+            if (unlikely(PyTuple_Check(key))) {
+                PyObject* args = PyTuple_Pack(1, key);
+                if (likely(args)) {
+                    PyErr_SetObject(PyExc_KeyError, args);
+                    Py_DECREF(args);
+                }
+            } else {
+                PyErr_SetObject(PyExc_KeyError, key);
+            }
+        }
+        return NULL;
+    }
+    Py_INCREF(value);
+    return value;
+}
+#endif
+
 /* GetAttr3 */
 static PyObject *__Pyx_GetAttr3Default(PyObject *d) {
     __Pyx_PyThreadState_declare
@@ -15782,7 +17398,7 @@ static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
         if (unlikely(!module_name_str)) { goto modbad; }
         module_name = PyUnicode_FromString(module_name_str);
         if (unlikely(!module_name)) { goto modbad; }
-        module_dot = PyUnicode_Concat(module_name, __pyx_kp_u__5);
+        module_dot = PyUnicode_Concat(module_name, __pyx_kp_u__6);
         if (unlikely(!module_dot)) { goto modbad; }
         full_name = PyUnicode_Concat(module_dot, name);
         if (unlikely(!full_name)) { goto modbad; }
@@ -16826,7 +18442,7 @@ static PyObject *__Pyx__ImportDottedModule_Lookup(PyObject *name) {
 #endif
 static PyObject *__Pyx__ImportDottedModule(PyObject *name, PyObject *parts_tuple) {
 #if PY_MAJOR_VERSION < 3
-    PyObject *module, *from_list, *star = __pyx_n_s__8;
+    PyObject *module, *from_list, *star = __pyx_n_s__9;
     CYTHON_UNUSED_VAR(parts_tuple);
     from_list = PyList_New(1);
     if (unlikely(!from_list))
@@ -18985,7 +20601,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
                                                __pyx_n_s_name);
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
-        Py_XSETREF(name, __Pyx_NewRef(__pyx_n_s__29));
+        Py_XSETREF(name, __Pyx_NewRef(__pyx_n_s__33));
     }
     return name;
 }
