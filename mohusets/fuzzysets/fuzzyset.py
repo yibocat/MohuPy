@@ -190,20 +190,22 @@ class fuzzyset(object):
     @property
     def md(self):
         shape = self.__shape
-        m = np.zeros(shape)
-        for i in range(shape[0]):
-            for j in range(shape[1]):
-                m[i, j] = self.__set[i, j].md
-        return m
+        m = np.array([])
+        s = self.ravel()
+        for i in s:
+            m = np.append(m, i.md)
+        self.reshape(shape)
+        return m.reshape(shape)
 
     @property
     def nmd(self):
         shape = self.__shape
-        n = np.zeros(shape)
-        for i in range(shape[0]):
-            for j in range(shape[1]):
-                n[i, j] = self.__set[i, j].nmd
-        return n
+        m = np.array([])
+        s = self.ravel()
+        for i in s:
+            m = np.append(m, i.nmd)
+        self.reshape(shape)
+        return m.reshape(shape)
 
     def __len__(self):
         return self.__size
