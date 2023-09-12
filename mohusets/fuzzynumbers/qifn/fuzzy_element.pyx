@@ -244,7 +244,7 @@ cdef class qrungifn(Fuzzynum):
                     (2. - self.__nmd ** self.__qrung) ** l + (self.__nmd ** self.__qrung) ** l)) ** (1. / self.__qrung))
         return newFN
 
-    def plot(self, region='None'):
+    cpdef plot(self, region='None'):
         """
             Plots the fuzzynumber distribution for a given fuzzynumber.
 
@@ -252,6 +252,7 @@ cdef class qrungifn(Fuzzynum):
             ----------
             region : str
                 The region of operations.
+                optional: 'all','addition','subtraction','multiplication' or 'division'
 
             Returns
             -------
