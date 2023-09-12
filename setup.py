@@ -13,6 +13,7 @@ include_dirs = [numpy.get_include()]
 
 import os.path
 
+
 # Noting: Release versions need to set USE_CYTHON=False
 USE_CYTHON = False  # command line option, try-import, ...
 ext = '.pyx' if USE_CYTHON else '.c'
