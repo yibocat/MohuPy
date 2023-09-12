@@ -187,6 +187,24 @@ class fuzzyset(object):
         self.reshape(shape)
         return slist.reshape(shape)
 
+    @property
+    def md(self):
+        shape = self.__shape
+        m = np.zeros(shape)
+        for i in range(shape[0]):
+            for j in range(shape[1]):
+                m[i, j] = self.__set[i, j].md
+        return m
+
+    @property
+    def nmd(self):
+        shape = self.__shape
+        n = np.zeros(shape)
+        for i in range(shape[0]):
+            for j in range(shape[1]):
+                n[i, j] = self.__set[i, j].nmd
+        return n
+
     def __len__(self):
         return self.__size
 
