@@ -187,6 +187,175 @@ class fuzzyset(object):
         self.reshape(shape)
         return slist.reshape(shape)
 
+    def __len__(self):
+        return self.__size
+
+    def __add__(self, other):
+        """
+            Add two fuzzy sets.
+
+            Parameters:
+                other: the fuzzy set to be added
+
+            Returns:
+                the fuzzy set that is the sum of the two fuzzy sets
+
+            Notes:
+                The fuzzy sets must be q-rung orthopair fuzzy set.
+        """
+        assert self.__type == 'qrungifn', \
+            'ERROR: fuzzy set type is not \'qrungifn\'.'
+        assert self.__type == other.ftype, \
+            'ERROR: fuzzy set type does not match.'
+        assert self.__qrung == other.qrung, \
+            'ERROR: Q-rung for adding elements differs from set.'
+        assert self.__shape == other.shape, \
+            'ERROR: fuzzy set shape does not match.'
+        assert self.__size == other.size, \
+            'ERROR: fuzzy set size does not match.'
+        newset = fuzzyset(self.__qrung, self.__type)
+        newset.__set = self.__set + other.__set
+        newset.__shape = self.__shape
+        newset.__size = self.__size
+        return newset
+
+    def __sub__(self, other):
+        """
+            Subtract two fuzzy sets.
+
+            Parameters:
+                other: the fuzzy set to be subtracted
+
+            Returns:
+                the fuzzy set that is the difference of the two fuzzy sets
+
+            Notes:
+                The fuzzy sets must be q-rung orthopair fuzzy set.
+        """
+        assert self.__type == 'qrungifn', \
+            'ERROR: fuzzy set type is not \'qrungifn\'.'
+        assert self.__type == other.ftype, \
+            'ERROR: fuzzy set type does not match.'
+        assert self.__qrung == other.qrung, \
+            'ERROR: Q-rung for adding elements differs from set.'
+        assert self.__shape == other.shape, \
+            'ERROR: fuzzy set shape does not match.'
+        assert self.__size == other.size, \
+            'ERROR: fuzzy set size does not match.'
+        newset = fuzzyset(self.__qrung, self.__type)
+        newset.__set = self.__set - other.__set
+        newset.__shape = self.__shape
+        newset.__size = self.__size
+        return newset
+
+    def __mul__(self, other):
+        """
+            Multiply two fuzzy sets.
+
+            Parameters:
+                other: the fuzzy set to be multiplied
+
+            Returns:
+                the fuzzy set that is the product of the two fuzzy sets
+
+            Notes:
+                The fuzzy sets must be q-rung orthopair fuzzy set.
+        """
+        assert self.__type == 'qrungifn', \
+            'ERROR: fuzzy set type is not \'qrungifn\'.'
+        assert self.__type == other.ftype, \
+            'ERROR: fuzzy set type does not match.'
+        assert self.__qrung == other.qrung, \
+            'ERROR: Q-rung for adding elements differs from set.'
+        assert self.__shape == other.shape, \
+            'ERROR: fuzzy set shape does not match.'
+        assert self.__size == other.size, \
+            'ERROR: fuzzy set size does not match.'
+        newset = fuzzyset(self.__qrung, self.__type)
+        newset.__set = self.__set * other.__set
+        newset.__shape = self.__shape
+        newset.__size = self.__size
+        return newset
+
+    def __rmul__(self, other):
+        """
+            Multiply two fuzzy sets.
+
+            Parameters:
+                other: the fuzzy set to be multiplied
+
+            Returns:
+                the fuzzy set that is the product of the two fuzzy sets
+
+            Notes:
+                The fuzzy sets must be q-rung orthopair fuzzy set.
+        """
+        assert self.__type == 'qrungifn', \
+            'ERROR: fuzzy set type is not \'qrungifn\'.'
+        assert self.__type == other.ftype, \
+            'ERROR: fuzzy set type does not match.'
+        assert self.__qrung == other.qrung, \
+            'ERROR: Q-rung for adding elements differs from set.'
+        assert self.__shape == other.shape, \
+            'ERROR: fuzzy set shape does not match.'
+        assert self.__size == other.size, \
+            'ERROR: fuzzy set size does not match.'
+        newset = fuzzyset(self.__qrung, self.__type)
+        newset.__set = self.__set * other.__set
+        newset.__shape = self.__shape
+        newset.__size = self.__size
+        return newset
+
+    def __truediv__(self, other):
+        """
+            Divide two fuzzy sets.
+
+            Parameters:
+                other: the fuzzy set to be divided
+
+            Returns:
+                the fuzzy set that is the quotient of the two fuzzy sets
+
+            Notes:
+                The fuzzy sets must be q-rung orthopair fuzzy set.
+        """
+        assert self.__type == 'qrungifn', \
+            'ERROR: fuzzy set type is not \'qrungifn\'.'
+        assert self.__type == other.ftype, \
+            'ERROR: fuzzy set type does not match.'
+        assert self.__qrung == other.qrung, \
+            'ERROR: Q-rung for adding elements differs from set.'
+        assert self.__shape == other.shape, \
+            'ERROR: fuzzy set shape does not match.'
+        assert self.__size == other.size, \
+            'ERROR: fuzzy set size does not match.'
+        newset = fuzzyset(self.__qrung, self.__type)
+        newset.__set = self.__set / other.__set
+        newset.__shape = self.__shape
+        newset.__size = self.__size
+        return newset
+
+    def __pow__(self, power, modulo=None):
+        """
+            Raise a fuzzy set to a power.
+
+            Parameters:
+                power: the power to be raised, must be between 0 and 1.
+                modulo: the fuzzy set to be raised to the power
+
+            Notes:
+                The fuzzy sets must be q-rung orthopair fuzzy set.
+        """
+        assert self.__type == 'qrungifn', \
+            'ERROR: fuzzy set type is not \'qrungifn\'.'
+        assert 0 <= power <= 1, \
+            'ERROR: power must be between 0 and 1.'
+        newset = fuzzyset(self.__qrung, self.__type)
+        newset.__set = self.__set ** power
+        newset.__shape = self.__shape
+        newset.__size = self.__size
+        return newset
+
     def append(self, x):
         """
             Adds an element to a set.
@@ -264,7 +433,6 @@ class fuzzyset(object):
             newf.append(fe)
         newf.reshape(shape)
         return newf
-
 
     def random(self, n, num=5):
         """
@@ -543,7 +711,7 @@ class fuzzyset(object):
         qrung = self.__qrung
         shape = self.__shape
         dicts = self.__dict
-        np.savez_compressed(path+'.npz', set=collection, ftype=ftype, qrung=qrung, shape=shape, dict=dicts)
+        np.savez_compressed(path + '.npz', set=collection, ftype=ftype, qrung=qrung, shape=shape, dict=dicts)
         print('Saved!')
 
     def loadz(self, path):
@@ -627,7 +795,7 @@ class fuzzyset(object):
                 try:
                     m[i][j] = self.__dict['convert_str'](m[i, j], self.__qrung)
                 except Exception as e:
-                    print(e, 'error element:(%d,%d)' % (i+1, j+1))
+                    print(e, 'error element:(%d,%d)' % (i + 1, j + 1))
                     return None
 
         matrix = np.asarray(m)

@@ -12,6 +12,30 @@ from .fuzzyset import fuzzyset
 from ..fuzzynumbers import glb, dh_fn_max, dh_fn_min, dh_fn_mean
 
 
+def fuzzset(x, *n):
+    """
+        construct a fuzzy set
+
+        Parameters
+        ----------
+            x:  numpy.array or list
+                Can be a numpy.ndarray of any dimension
+            copy: bool
+        Returns
+        -------
+            fuzzyset
+                A fuzzy set.
+    """
+    q = x.qrung
+    dtype = x.__class__.__name__
+    newset = fuzzyset(q, dtype)
+    num = np.prod(n)
+    for i in range(num):
+        newset.append(x)
+    newset.reshape(n)
+    return newset
+
+
 def fuzzys(x, copy=True):
     """
         construct a fuzzy set
