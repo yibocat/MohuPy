@@ -190,7 +190,7 @@ cdef class qrungifn(Fuzzynum):
         if other.nmd == 0 or other.md == 1:
             newFN.set_md(0)
             newFN.set_nmd(1)
-        elif 0<=self.nmd**q/other.nmd**q<=(1-self.md**q)/(1-other.md**q)<=1:
+        elif 0<=self.nmd/other.nmd<=((1-self.md**q)/(1-other.md**q))**(1/q)<=1:
             newFN.set_md(((self.md ** q - other.md ** q)/(1 - other.md**q))**(1/q))
             newFN.set_nmd(self.nmd/other.nmd)
         else:
@@ -207,7 +207,7 @@ cdef class qrungifn(Fuzzynum):
         if other.md == 0 or other.nmd == 1:
             newFN.set_md(1)
             newFN.set_nmd(0)
-        elif 0<=self.md/other.md<=(1-self.nmd**q)/(1-other.nmd**q)<=1:
+        elif 0<=self.md/other.md<=((1-self.nmd**q)/(1-other.nmd**q))**(1/q)<=1:
             newFN.set_md(self.md/other.md)
             newFN.set_nmd(((self.nmd ** q - other.nmd ** q)/(1 - other.nmd**q))**(1/q))
         else:
