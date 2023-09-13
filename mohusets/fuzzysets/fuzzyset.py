@@ -210,6 +210,12 @@ class fuzzyset(object):
     def __len__(self):
         return self.__size
 
+    # Note: The addition, subtraction, multiplication, and division exponentiation operator
+    # overloads for sets only work with q-rung orthopair fuzzy numbers. The rest of the
+    # operations have not been written yet due to various reasons (no paper has been
+    # published yet or I am lazy).
+
+
     def __add__(self, other):
         """
             Add two fuzzy sets.
@@ -225,6 +231,8 @@ class fuzzyset(object):
         """
         assert self.__type == 'qrungifn', \
             'ERROR: fuzzy set type is not \'qrungifn\'.'
+        assert other.__class__.__name__ == 'fuzzyset', \
+            'ERROR: fuzzy set type is not \'fuzzyset\'.'
         assert self.__type == other.ftype, \
             'ERROR: fuzzy set type does not match.'
         assert self.__qrung == other.qrung, \
@@ -254,6 +262,8 @@ class fuzzyset(object):
         """
         assert self.__type == 'qrungifn', \
             'ERROR: fuzzy set type is not \'qrungifn\'.'
+        assert other.__class__.__name__ == 'fuzzyset', \
+            'ERROR: fuzzy set type is not \'fuzzyset\'.'
         assert self.__type == other.ftype, \
             'ERROR: fuzzy set type does not match.'
         assert self.__qrung == other.qrung, \
@@ -282,8 +292,12 @@ class fuzzyset(object):
                 The fuzzy sets must be q-rung orthopair fuzzy set.
         """
         assert self.__type == 'qrungifn', \
-            'ERROR: fuzzy set type is not \'qrungifn\'.'
-        assert self.__type == other.ftype, \
+            'ERROR: fuzzy set type is not \'qrungifn'
+        assert other.__class__.__name__ == 'fuzzyset', \
+            'ERROR: fuzzy set type must be \'fuzzyset\'.'
+        assert other.__class__.__name__ == self.__class__.__name__, \
+            'ERROR: fuzzy set type does not match.'
+        assert other.ftype == self.__type, \
             'ERROR: fuzzy set type does not match.'
         assert self.__qrung == other.qrung, \
             'ERROR: Q-rung for adding elements differs from set.'
@@ -311,8 +325,12 @@ class fuzzyset(object):
                 The fuzzy sets must be q-rung orthopair fuzzy set.
         """
         assert self.__type == 'qrungifn', \
-            'ERROR: fuzzy set type is not \'qrungifn\'.'
-        assert self.__type == other.ftype, \
+            'ERROR: fuzzy set type is not \'qrungifn'
+        assert other.__class__.__name__ == 'fuzzyset', \
+            'ERROR: fuzzy set type must be \'fuzzyset\'.'
+        assert other.__class__.__name__ == self.__class__.__name__, \
+            'ERROR: fuzzy set type does not match.'
+        assert other.ftype == self.__type, \
             'ERROR: fuzzy set type does not match.'
         assert self.__qrung == other.qrung, \
             'ERROR: Q-rung for adding elements differs from set.'
@@ -341,6 +359,8 @@ class fuzzyset(object):
         """
         assert self.__type == 'qrungifn', \
             'ERROR: fuzzy set type is not \'qrungifn\'.'
+        assert other.__class__.__name__ == 'fuzzyset', \
+            'ERROR: fuzzy set type is not \'fuzzyset\'.'
         assert self.__type == other.ftype, \
             'ERROR: fuzzy set type does not match.'
         assert self.__qrung == other.qrung, \
