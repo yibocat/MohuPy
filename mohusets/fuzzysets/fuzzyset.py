@@ -374,20 +374,28 @@ class fuzzyset(object):
         """
         assert self.__type == 'qrungifn', \
             'ERROR: fuzzy set type is not \'qrungifn\'.'
-        assert other.__class__.__name__ == 'fuzzyset', \
-            'ERROR: fuzzy set type is not \'fuzzyset\'.'
-        assert self.__type == other.ftype, \
-            'ERROR: fuzzy set type does not match.'
-        assert self.__qrung == other.qrung, \
-            'ERROR: Q-rung for adding elements differs from set.'
-        assert self.__shape == other.shape, \
-            'ERROR: fuzzy set shape does not match.'
-        assert self.__size == other.size, \
-            'ERROR: fuzzy set size does not match.'
         newset = fuzzyset(self.__qrung, self.__type)
-        newset.__set = self.__set / other.__set
-        newset.__shape = self.__shape
-        newset.__size = self.__size
+        if other.__class__.__name__ == 'fuzzyset':
+            assert self.__type == other.ftype, \
+                'ERROR: fuzzy set type does not match.'
+            assert self.__qrung == other.qrung, \
+                'ERROR: Q-rung for adding elements differs from set.'
+            assert self.__shape == other.shape, \
+                'ERROR: fuzzy set shape does not match.'
+            assert self.__size == other.size, \
+                'ERROR: fuzzy set size does not match.'
+            newset = fuzzyset(self.__qrung, self.__type)
+            newset.__set = self.__set / other.__set
+            newset.__shape = self.__shape
+            newset.__size = self.__size
+        else:
+            assert other.__class__.__name__ == 'qrungifn', \
+                'ERROR: fuzzy set type must be \'qrungifn\'.'
+            assert self.__qrung == other.qrung, \
+                'ERROR: Q-rung for adding elements differs from set.'
+            newset.__set = self.__set / other
+            newset.__shape = self.__shape
+            newset.__size = self.__size
         return newset
 
     def __pow__(self, power, modulo=None):
