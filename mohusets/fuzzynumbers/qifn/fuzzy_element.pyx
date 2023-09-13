@@ -213,6 +213,47 @@ cdef class qrungifn(Fuzzynum):
             newFN.set_nmd(0)
         return newFN
 
+    def __eq__(self, other):
+        assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
+        assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
+        return self.md==other.md and self.nmd==other.nmd
+
+    def __ne__(self, other):
+        assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
+        assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
+        return self.md!=other.md or self.nmd!=other.nmd
+
+    def __lt__(self, other):
+        assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
+        assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
+        if self - other != qrungifn(self.qrung, 0, 1):
+            return False
+        else:
+            return True
+
+    def __gt__(self, other):
+        assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
+        assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
+        if self - other != qrungifn(self.qrung, 0, 1):
+            return True
+        else:
+            return False
+
+    def __le__(self, other):
+        assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
+        assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
+        if self - other != qrungifn(self.qrung, 0, 1) or self == other:
+            return False
+        else:
+            return True
+
+    def __ge__(self, other):
+        assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
+        assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
+        if self - other!= qrungifn(self.qrung, 0, 1) or self == other:
+            return True
+        else:
+            return False
 
     cpdef algeb_power(self, float l):
         newFN = copy.deepcopy(self)
