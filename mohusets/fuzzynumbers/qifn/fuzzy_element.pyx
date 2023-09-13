@@ -226,15 +226,15 @@ cdef class qrungifn(Fuzzynum):
     def __lt__(self, other):
         assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
         assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
-        if self - other != qrungifn(self.qrung, 0, 1):
-            return False
-        else:
+        if self - other == qrungifn(self.qrung, 0, 1) and self != other:
             return True
+        else:
+            return False
 
     def __gt__(self, other):
         assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
         assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
-        if self - other != qrungifn(self.qrung, 0, 1):
+        if self - other != qrungifn(self.qrung, 0, 1) and self != other:
             return True
         else:
             return False
@@ -242,15 +242,15 @@ cdef class qrungifn(Fuzzynum):
     def __le__(self, other):
         assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
         assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
-        if self - other != qrungifn(self.qrung, 0, 1) or self == other:
-            return False
-        else:
+        if self - other == qrungifn(self.qrung, 0, 1) or self == other:
             return True
+        else:
+            return False
 
     def __ge__(self, other):
         assert other.__class__.__name__ == self.__class__.__name__, 'ERROR: the two fuzzy elements are not same'
         assert self.qrung == other.qrung, 'ERROR:the two FNs are not the same FN'
-        if self - other!= qrungifn(self.qrung, 0, 1) or self == other:
+        if self - other != qrungifn(self.qrung, 0, 1) or self == other:
             return True
         else:
             return False
