@@ -344,6 +344,21 @@ class fuzzyset(object):
         newset.__size = self.__size
         return newset
 
+    def mul(self, other):
+        if other.__class__.__name__ == 'fuzzyset':
+            return self * other
+        else:
+            fl = self.__set * other
+            shape = fl.shape
+            y = fl.ravel()
+
+            newset = fuzzyset(self.__qrung,self.__type)
+            for fe in y:
+                newset.append(fe)
+            newset.reshape(*shape)
+            del y
+            return newset
+
     def __truediv__(self, other):
         """
             Divide two fuzzy sets.
