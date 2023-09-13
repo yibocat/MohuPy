@@ -23,10 +23,10 @@ qrungivfn = glb.global_get('qrungivfn')['type']
 __all__ += ['qrungdhfe', 'qrungifn', 'qrungivfn']
 
 from .qdhfe.toolkit import str_to_hfe
-from .qifn.toolkit import str_to_fn
+from .qifn.toolkit import str_to_fn, plot
 from .qivfn.toolkit import str_to_ivfn
 
-__all__ += ['str_to_hfe', 'str_to_fn', 'str_to_ivfn']
+__all__ += ['str_to_hfe', 'str_to_fn', 'str_to_ivfn','plot']
 
 from .fuzzmath import (generalized_distance, random,
                        intersection, unions,
