@@ -1,13 +1,9 @@
-# Mohusets(developing...)
+# MohuPy(developing...)
 
-Mohusets is a fuzzy logic and fuzzy mathematics toolkit which includes the q-rung intuitionistic 
-fuzzy sets, q-rung interval-valued intuitionistic fuzzy sets and q-rung dual hesitant fuzzy sets.
-The tool mainly includes: the basic definition of fuzzy elements (fuzzy numbers) and some 
-operation rules, the definition of fuzzy sets and some operation rules, generation of membership 
-functions, generation of fuzzy elements, simple fuzzy measure including measure expression 
-and fuzzy integral, etc., and finally A general aggregation operator of three kinds fuzzy elements.
-
-
+MohuPy is a fuzzy logic and fuzzy mathematics toolkit which includes q-rung orthopair 
+fuzzy sets, q-rung orthopair interval-valued fuzzy sets.
+This also includes advanced uses of q-rung orthopair 
+fuzzy sets and q-rung orthopair interval-valued fuzzy sets.
 
 ## Document
 
@@ -27,6 +23,9 @@ email: yibocat@yeah.net
 
 ## Functional description
 
-[Chinese](docs/project_chinese.md)
+[Chinese](docs/description(Chinese).md)
 
-[English](docs/project_english.md)
+[English](docs/description(English).md)
+
+## License
+[MIT](LICENSE)

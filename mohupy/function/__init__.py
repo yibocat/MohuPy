@@ -7,11 +7,10 @@ __all__ = []
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from .construct_set import zeros, poss, negs, nums
+from .func import *
+
+from .mem_func import memFunc
 
 __all__ += [
-    'zeros',
-    'poss',
-    'negs',
-    'nums',
+    'memFunc'
 ]
