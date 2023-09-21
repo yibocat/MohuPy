@@ -15,7 +15,7 @@ import os.path
 
 
 # Noting: Release versions need to set USE_CYTHON=False
-USE_CYTHON = False  # command line option, try-import, ...
+USE_CYTHON = True  # command line option, try-import, ...
 ext = '.pyx' if USE_CYTHON else '.c'
 
 def no_cythonize(extensions, **_ignore):

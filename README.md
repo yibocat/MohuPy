@@ -19,6 +19,7 @@ coming soon...
 2. scipy
 3. matplotlib
 4. pandas
+5. networkx
 
 ## Contact
 
