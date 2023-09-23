@@ -7,10 +7,13 @@ __all__ = []
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from .func import *
+from .func import (sigmf, trimf, zmf, trapmf,
+                   smf, gaussmf, gauss2mf, gbellmf)
 
 from .mem_func import memFunc
 
 __all__ += [
-    'memFunc'
+    'sigmf', 'trimf', 'zmf', 'trapmf','smf',
+    'gaussmf', 'gauss2mf', 'gbellmf',
+    'memFunc',
 ]

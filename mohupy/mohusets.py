@@ -11,6 +11,108 @@ from matplotlib import pyplot as plt
 
 
 class mohuset(object):
+    """
+        Mohuset class is a fuzzy set class of fuzzy number. This class contains two
+            type of fuzzy numbers(currently): q-rung orthopair fuzzy number and q-rung
+            orthopair interval-valued fuzzy number. The fuzzy set here can not only be
+            regarded as a set, but also as a high-order fuzzy vector or high-order
+            fuzzy tensor. It includes not only logical operations on sets, but also
+            high-order mathematical operations.
+
+        Private Attributes
+        -----------------
+            __qrung : int       The q-rung of the fuzzy set.
+            __shape : tuple     The shape of the fuzzy set
+            __mtype : str       The type of the fuzzy set. Mainly the type of fuzzy
+                                set elements
+            __ndim : int        The dimension of the fuzzy set.
+            __size : int        The size of the fuzzy set.
+            __set : np.ndarray  The set of the fuzzy set.
+
+        Public Attributes
+        -----------------
+            qrung : int         The q-rung of the fuzzy set.
+
+            mtype : str         The type of the fuzzy set. Mainly the type of fuzzy
+
+            ndim : int          The dimension of the fuzzy set.
+
+            size : int          The size of the fuzzy set.
+
+            set : np.ndarray    The set of the fuzzy set.
+
+            shape : tuple       The shape of the fuzzy set.
+
+            md: np.ndarray      The membership degree matrix of the fuzzy set.
+
+            nmd: np.ndarray     The non-membership degree matrix of the fuzzy set.
+
+            mat: pd.DataFrame   The set matrix of the fuzzy set.
+
+            score: np.ndarray   The score matrix of the fuzzy set.
+
+            T: mohuset.T        The transpose of the fuzzy set.
+
+
+        Methods
+        --------------
+            __getitem__(self, item):    Return the element of the fuzzy set. This
+                method treats the fuzzy set class as a higher-order tensor. Return a
+                fuzzy number directly through the coordinates.
+
+            __len__(self):              Return the size of the fuzzy set.
+
+            __repr__(self):             Return a string representation of the fuzzy set.
+
+            __str__(self):              Return a string representation of the fuzzy set.
+
+            __add__(self, other):       Add two fuzzy sets.
+
+            __sub__(self, other):       Subtract two fuzzy sets.
+
+            __mul__(self, other):       Multiply two fuzzy sets.
+
+            __truediv__(self, other):   Divide two fuzzy sets.
+
+            __pow__(self, other):       Raise to the power of two fuzzy sets.
+
+            __matmul__(self, other):    Matrix multiplication of two fuzzy sets.
+
+
+            setter(self, s, shape, ndim, size):
+                                        Set the fuzzy set's set, shape, ndim and size.
+
+            random(self, *n):           Generate a random fuzzy set with *n shape.
+
+            ravel(self):                Reshapes the fuzzy set to a 1-dimensional array.
+
+            append(self, other):        Append a fuzzy number to the fuzzy set.
+
+            remove(self, other):        Remove a fuzzy number from the fuzzy set.
+
+            pop(self, i):               Remove a fuzzy number from the fuzzy set by index.
+
+            reshsape(self, *n):         Reshapes the fuzzy set to a *n shape set.
+
+            clear(self):                Clear the fuzzy set.
+
+            max(self):                  Return the maximum element of the fuzzy set.
+
+            min(self):                  Return the minimum element of the fuzzy set.
+
+            fmax(self):                 Return the maximum element of the fuzzy set with func.
+
+            fmin(self):                 Return the minimum element of the fuzzy set with func.
+
+            sum(self):                  Return the sum of all elements of the fuzzy set.
+
+            savez(self, path):          Save the fuzzy set to a .npz file.
+
+            loadz(self, path):          Load the fuzzy set from a.npz file.
+
+            plot(self):                 Plot all fuzzy element of the fuzzy set.
+
+    """
     __qrung = None
     __shape = None
     __mtype = None
