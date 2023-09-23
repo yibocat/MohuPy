@@ -6,7 +6,7 @@
 #  Software: MohuPy
 
 from setuptools import setup, find_packages
-from configuration import *
+from information import *
 
 with open("README.md", "r") as fh:
     long_description = fh.read()

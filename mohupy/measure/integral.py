@@ -5,7 +5,9 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-import numpy as np
+from ..config import import_cupy_lib
+
+np = import_cupy_lib()
 
 
 def choquet(e: (list, np.ndarray), func, *args, measurable_func=None, info=False):

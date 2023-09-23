@@ -5,12 +5,14 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-import numpy as np
-import pandas as pd
+from ..config import import_cupy_lib, import_cudf_lib
 
 from ..mohunums import mohunum
 from ..mohusets import mohuset
 from .fnumutils import str_to_mohunum
+
+np = import_cupy_lib()
+pd = import_cudf_lib()
 
 
 def asmohuset(x, copy=False):

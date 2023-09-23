@@ -5,7 +5,9 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-import numpy as np
+from ..config import import_cupy_lib
+
+np = import_cupy_lib()
 
 from ..mohusets import mohuset
 

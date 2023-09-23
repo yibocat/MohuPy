@@ -7,7 +7,8 @@
 
 import re
 
-import numpy as np
+from ..config import import_cupy_lib
+np = import_cupy_lib()
 
 
 def dirac_meas(e, s):

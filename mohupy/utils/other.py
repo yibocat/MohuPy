@@ -5,9 +5,11 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-import numpy as np
-import pandas as pd
+from ..config import import_cupy_lib, import_cudf_lib
 from matplotlib import pyplot as plt
+
+np = import_cupy_lib()
+pd = import_cudf_lib()
 
 
 def plot_stats(data):

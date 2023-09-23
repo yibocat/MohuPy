@@ -8,9 +8,11 @@
 #  Software: MohuPy
 
 import re
-import numpy as np
+from ..config import import_cupy_lib
 
 from ..mohunums import mohunum
+
+np = import_cupy_lib()
 
 
 def rand_num(q=1, mtype='fn'):

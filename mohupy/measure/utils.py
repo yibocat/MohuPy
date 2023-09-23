@@ -8,8 +8,11 @@
 import re
 
 import networkx
-import numpy as np
+from ..config import import_cupy_lib
+
 from matplotlib import pyplot as plt
+
+np = import_cupy_lib()
 
 
 def subsets(nums):

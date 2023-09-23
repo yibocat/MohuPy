@@ -5,9 +5,11 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-import numpy as np
-import pandas as pd
+from .config import import_cupy_lib, import_cudf_lib
 from matplotlib import pyplot as plt
+
+np = import_cupy_lib()
+pd = import_cudf_lib()
 
 
 class mohuset(object):
@@ -920,7 +922,7 @@ class mohuset(object):
             md = self.md
             nmd = self.nmd
 
-            plt.scatter(md, nmd, color=color, marker='.',alpha=alpha)
+            plt.scatter(md, nmd, color=color, marker='.', alpha=alpha)
 
         if self.__mtype == 'ivfn':
             def __plot(x):

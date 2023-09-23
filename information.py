@@ -6,7 +6,7 @@
 #  Software: MohuPy
 
 __NAME = "MohuPy"
-__VERSION = "0.1"
+__VERSION = "0.1.1"
 __AUTHOR = "Yibo Wang"
 __LICENSE = "MIT"
 __EMAIL = "yibocat@yeah.net"
@@ -28,5 +28,6 @@ install_requires = [
     "scipy",
     "matplotlib",
     "pandas",
-    "networkx"
+    "networkx",
+    'gputil'
 ]

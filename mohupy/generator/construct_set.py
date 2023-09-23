@@ -8,7 +8,8 @@
 from ..mohusets import mohuset
 from ..mohunums import mohunum
 
-import numpy as np
+from ..config import import_cupy_lib
+np = import_cupy_lib()
 
 
 def zeros(qrung, mtype, *n):
