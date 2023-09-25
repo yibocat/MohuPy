@@ -39,7 +39,7 @@ def asmohuset(x, copy=False):
     shape = fl.shape
     y = fl.ravel()
 
-    newset = mohuset(y[0].qrung, y[0].__class__.__name__)
+    newset = mohuset(y[0].qrung, y[0].mtype)
     for num in y:
         newset.append(num)
     newset.reshape(shape)
