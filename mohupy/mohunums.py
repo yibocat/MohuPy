@@ -229,13 +229,13 @@ class mohunum(object):
                 raise ValueError('ERROR: Membership degree cannot be set.')
             assert 0. <= value <= 1., \
                 'ERROR: md must be between 0 and 1.'
-            self.__md = np.float_(value)
+            self.__md = np.round(value,6)
         if self.__mtype == 'ivfn':
             if self.__MEMSHIP_KEY:
                 raise ValueError('ERROR: Membership degree cannot be set.')
             assert 0 <= value[0] <= 1 and 0 <= value[1] <= 1, \
                 'ERROR: The upper and lower of membership degree must be between 0 and 1.'
-            self.__md = np.asarray(value)
+            self.__md = np.round(np.asarray(value),6)
 
     @property
     def nmd(self):
@@ -248,13 +248,13 @@ class mohunum(object):
                 raise ValueError('ERROR: Non-membership degree cannot be set.')
             assert 0. <= value <= 1., \
                 'ERROR: nmd must be between 0 and 1.'
-            self.__nmd = np.float_(value)
+            self.__nmd = np.round(value,6)
         if self.__mtype == 'ivfn':
             if self.__MEMSHIP_KEY:
                 raise ValueError('ERROR: Non-membership degree cannot be set.')
             assert 0 <= value[0] <= 1 and 0 <= value[1] <= 1, \
                 'ERROR: The upper and lower of non-membership degree must be between 0 and 1.'
-            self.__nmd = np.asarray(value)
+            self.__nmd = np.round(np.asarray(value),6)
 
     @property
     def mtype(self):

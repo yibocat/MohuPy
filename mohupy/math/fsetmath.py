@@ -41,7 +41,7 @@ def dot(f1: mohuset, f2: mohuset):
             (f1.ndim == 1 and f2.ndim == 2):
         result = np.dot(f1.set, f2.set)
         newset = mohuset(f1.qrung, f1.mtype)
-        newset.setter(result, result.shape, result.size, result.ndim)
+        newset.setter(result, result.shape, result.ndim, result.size)
         return newset
     if f1.ndim == 1 and f2.ndim == 1:
         return np.dot(f1.set, f2.set)
@@ -73,7 +73,7 @@ def inner(f1: mohuset, f2: mohuset):
     else:
         result = np.inner(f1.set, f2.set)
         newset = mohuset(f1.qrung, f1.mtype)
-        newset.setter(result, result.shape, result.size, result.ndim)
+        newset.setter(result, result.shape, result.ndim, result.size)
         return newset
 
 
@@ -102,7 +102,7 @@ def outer(f1: mohuset, f2: mohuset):
 
     result = np.outer(f1.set, f2.set)
     newset = mohuset(f1.qrung, f1.mtype)
-    newset.setter(result, result.shape, result.size, result.ndim)
+    newset.setter(result, result.shape, result.ndim, result.size)
     return newset
 
 
@@ -132,7 +132,7 @@ def mohu_func(func, f1: mohuset, f2: mohuset, *args):
 
     result = func(f1.set, f2.set, *args)
     newset = mohuset(f1.qrung, f1.mtype)
-    newset.setter(result, result.shape, result.size, result.ndim)
+    newset.setter(result, result.shape, result.ndim, result.size)
     del result
     return newset
 
@@ -154,7 +154,7 @@ def cartadd(f1: mohuset, f2: mohuset):
     """
     newset = mohuset(f1.qrung, f1.mtype)
     result = np.asarray(np.add.outer(f1.set, f2.set))
-    newset.setter(result, result.shape, result.size, result.ndim)
+    newset.setter(result, result.shape, result.ndim, result.size)
     del result
     return newset
 
@@ -176,6 +176,6 @@ def cartprod(f1: mohuset, f2: mohuset):
     """
     newset = mohuset(f1.qrung, f1.mtype)
     result = np.asarray(np.meshgrid(f1.set, f2.set))
-    newset.setter(result, result.shape, result.size, result.ndim)
+    newset.setter(result, result.shape, result.ndim, result.size)
     del result
     return newset
