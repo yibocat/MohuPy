@@ -5,13 +5,14 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from .config import *
+# from .config import *
+from .core import *
 from .utils import *
 from .math import *
 from .generator import *
 from .function import *
 from .measure import *
 from .measure import integral, indices
+from .random import *
 
-from .mohusets import *
-from .mohunums import *
+from .init import fuzzType

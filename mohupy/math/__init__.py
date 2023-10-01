@@ -7,8 +7,8 @@ __all__ = []
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from .fnummath import ein_plus, ein_mul, ein_times, ein_power
-from .fsetmath import dot, inner, outer, cartprod, cartadd
+from .operation import ein_plus, ein_mul, ein_times, ein_power
+from .math import dot, inner, outer, set_func, cartadd, cartprod
 
 __all__ += [
     'ein_plus',
@@ -18,6 +18,7 @@ __all__ += [
     'dot',
     'inner',
     'outer',
+    'set_func',
     'cartprod',
     'cartadd'
 ]

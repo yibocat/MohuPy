@@ -7,17 +7,14 @@ __all__ = []
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from .fnumutils import rand_num, str_to_mohunum, distance
-from .fsetutils import (rand_set, asmohuset, savez, loadz,
-                        to_csv, load_csv, rand_choice, func4num)
+from .construct import zeros, poss, negs, full
 from .other import plot_stats, random_split, show_decision_mat
-
-from .utils import plot
+from .utils import (str_to_mohunum, plot, distance, asfuzzset,
+                    func4num, savez, loadz, to_csv, load_csv)
 
 __all__ += [
-    'rand_num', 'str_to_mohunum', 'distance',
-    'rand_set', 'asmohuset', 'savez', 'loadz', 'to_csv', 'load_csv',
-    'rand_choice', 'func4num',
+    'zeros', 'poss', 'negs', 'full',
     'plot_stats', 'random_split', 'show_decision_mat',
-    'plot'
+    'str_to_mohunum', 'plot', 'distance', 'asfuzzset',
+    'func4num','savez', 'loadz', 'to_csv', 'load_csv'
 ]
