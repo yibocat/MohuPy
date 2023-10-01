@@ -8,6 +8,7 @@
 import mohupy as mp
 
 if __name__ == '__main__':
-    t1 = mp.random(3, 'qrofn', 3,5)
-    t2 = mp.random(3, 'qrofn', 5,4)
-    print(t1@t2)
+    t1 = mp.random(3, 'ivfn', 15)
+    t2 = mp.random(3, 'qrofn', 15)
+    t1.plot()
+    t2.plot()

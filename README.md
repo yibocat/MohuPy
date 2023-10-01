@@ -109,6 +109,25 @@ print(mp.indices.shapley(t, mp.lambda_meas, t))
 [0.33322906 0.2013346  0.30610416 0.15933218]
 ```
 
+### 6. Randomly generate 15 qrofn and ivfn and draw their distribution map
+
+```python
+import mohupy as mp
+t1 = mp.random(3, 'ivfn', 15)
+t2 = mp.random(3, 'qrofn', 15)
+t1.plot()
+t2.plot()
+```
+
+Scatter plot of t1
+
+![img1.png](assets%2Fimg1.png)
+
+Scatter plot of t2
+
+![img2.png](assets%2Fimg2.png)
+
+
 ## Update Log
 Latest update instructions: 0.1.2-10.1.2023
 
