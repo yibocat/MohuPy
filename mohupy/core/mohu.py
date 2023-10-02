@@ -140,7 +140,7 @@ class MohuQROFN(MohuBase):
             assert self.mtype == oth.mtype, \
                 'ERROR: mtype must be same.'
             from .mohunum import mohunum
-            newfn = mohunum(q, 0, 0)
+            newfn = mohunum(q, 0, 1)
             if oth.nmd == 0. or oth.md == 1.:
                 return newfn
             elif 0 <= self.nmd / oth.nmd <= ((1 - self.md ** q) / (1 - oth.md ** q)) ** (1 / q) <= 1:
@@ -260,7 +260,7 @@ class MohuQROFN(MohuBase):
         def __truediv(oth: Union[MohuQROFN, float, int, np.int_, np.float_]):
             if isinstance(oth, MohuQROFN):
                 from .mohunum import mohunum
-                newfn = mohunum(q, 0, 0)
+                newfn = mohunum(q, 1, 0)
                 if oth.md == 0 or oth.nmd == 1.:
                     return newfn
                 elif 0 <= self.md / oth.md <= \
