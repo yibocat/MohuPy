@@ -7,7 +7,6 @@
 from typing import Union
 
 from .base import MohuBase
-from .mohunum import mohunum
 
 from matplotlib import pyplot as plt
 
@@ -291,6 +290,54 @@ class mohuset(MohuBase):
         newset = mohuset(self.__qrung, self.__mtype)
         newset.set = self.__set @ other.set
         return newset
+
+    def __eq__(self, other) -> np.ndarray:
+        if isinstance(other, mohuset):
+            return self.__set == other.__set
+        from .mohunum import mohunum
+        if isinstance(other, mohunum):
+            return self.__set == other
+        raise TypeError(f'Invalid type {type(other)}')
+
+    def __ne__(self, other) -> np.ndarray:
+        if isinstance(other, mohuset):
+            return self.__set != other.__set
+        from .mohunum import mohunum
+        if isinstance(other, mohunum):
+            return self.__set != other
+        raise TypeError(f'Invalid type {type(other)}')
+
+    def __lt__(self, other) -> np.ndarray:
+        if isinstance(other, mohuset):
+            return self.__set < other.__set
+        from .mohunum import mohunum
+        if isinstance(other, mohunum):
+            return self.__set < other
+        raise TypeError(f'Invalid type {type(other)}')
+
+    def __gt__(self, other) -> np.ndarray:
+        if isinstance(other, mohuset):
+            return self.__set > other.__set
+        from .mohunum import mohunum
+        if isinstance(other, mohunum):
+            return self.__set > other
+        raise TypeError(f'Invalid type {type(other)}')
+
+    def __le__(self, other) -> np.ndarray:
+        if isinstance(other, mohuset):
+            return self.__set <= other.__set
+        from .mohunum import mohunum
+        if isinstance(other, mohunum):
+            return self.__set <= other
+        raise TypeError(f'Invalid type {type(other)}')
+
+    def __ge__(self, other) -> np.ndarray:
+        if isinstance(other, mohuset):
+            return self.__set >= other.__set
+        from .mohunum import mohunum
+        if isinstance(other, mohunum):
+            return self.__set >= other
+        raise TypeError(f'Invalid type {type(other)}')
 
     def append(self, x):
         if self.__mtype is not None and self.__qrung is not None:

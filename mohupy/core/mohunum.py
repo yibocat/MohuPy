@@ -71,6 +71,11 @@ class mohunum(MohuQROFN, MohuQROIVFN):
         if self.mtype == 'ivfn':
             return MohuQROIVFN.comp(self)
 
+    @property
+    def T(self):
+        newfn = mohunum(self.qrung, self.md, self.nmd)
+        return newfn
+
     def is_valid(self):
         if self.mtype == 'qrofn':
             return MohuQROFN.is_valid(self)
@@ -88,6 +93,12 @@ class mohunum(MohuQROFN, MohuQROIVFN):
             return MohuQROFN.convert(self)
         if self.mtype == 'ivfn':
             return MohuQROIVFN.convert(self)
+
+    def reshape(self, *n):
+        from ..utils import asfuzzset
+        if n == (1,):
+            return asfuzzset([self])
+        raise ValueError(f'cannot reshape mohunum of size {self.size} to {n}')
 
     def plot(self,
              other=None,

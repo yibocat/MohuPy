@@ -365,3 +365,6 @@ def load_csv(path: str, q: int, mtype: str = 'qrofn'):
     except Exception as e:
         print(e, 'Load failed.')
 
+
+# def abs(f1: mohuset, f2: mohuset):
+#

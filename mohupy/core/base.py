@@ -80,14 +80,14 @@ class MohuBase(abc.ABC):
     def plot(self):
         pass
 
-    def max(self):
+    def max(self, axis=None):
         return self
 
-    def min(self):
+    def min(self, axis=None):
         return self
 
-    def mean(self):
+    def mean(self, axis=None):
         return self
 
-    def sum(self):
+    def sum(self, axis=None):
         return self

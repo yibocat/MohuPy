@@ -1,6 +1,13 @@
 # UPDATE LOG
 
 ------
+## version: 0.1.3-10.2.2023
+1. 增加了 `mohusets` 的比较运算
+2. 增加了 `mohunum` reshape 方法和 T 属性
+3. 修复了 `MohuBase` 的 `max`,`min`,`mean`和`sum` 方法，添加了 `axis` 参数
+4. 修复了 `mohuset` 的一些 bugs。
+
+------
 ## version: 0.1.2-10.1.2023
 1. 重构代码框架，将 `mohuset` 和 `mohunum` 放入 `core`；
 2. 完善了 `mohuset` 与 `mohunum` 的运算规则，支持复杂运算，包括 数数运算，数集运算等；
