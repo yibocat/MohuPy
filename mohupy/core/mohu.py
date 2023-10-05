@@ -41,14 +41,10 @@ class MohuQROFN(MohuBase):
         pass
 
     def __repr__(self):
-        return '[' + \
-            str(np.round(self.md, 4)) + ',' + \
-            str(np.round(self.nmd, 4)) + ']'
+        return f'<{np.round(self.md,4)},{np.round(self.nmd,4)}>'
 
     def __str__(self):
-        return '[' + \
-            str(np.round(self.md, 4)) + ',' + \
-            str(np.round(self.nmd, 4)) + ']'
+        return f'<{np.round(self.md,4)},{np.round(self.nmd,4)}>'
 
     def score(self):
         return self.md ** self.qrung - self.nmd ** self.qrung
@@ -261,7 +257,9 @@ class MohuQROFN(MohuBase):
             if isinstance(oth, MohuQROFN):
                 from .mohunum import mohunum
                 newfn = mohunum(q, 1, 0)
-                if oth.md == 0 or oth.nmd == 1.:
+                if self.md == 0 and self.nmd == 1:
+                    return mohunum(q, 0, 1)
+                elif oth.md == 0 or oth.nmd == 1.:
                     return newfn
                 elif 0 <= self.md / oth.md <= \
                         ((1 - self.nmd ** q) / (1 - oth.nmd ** q)) ** (1 / q) <= 1:
@@ -517,18 +515,10 @@ class MohuQROIVFN(MohuBase):
             self.size = 1
 
     def __repr__(self):
-        return '[[' + \
-            str(np.round(self.md[0], 4)) + ',' + \
-            str(np.round(self.md[1], 4)) + '],[' + \
-            str(np.round(self.nmd[0], 4)) + ',' + \
-            str(np.round(self.nmd[1], 4)) + ']]'
+        return f'<{np.round(self.md,4)},{np.round(self.nmd,4)}>'
 
     def __str__(self):
-        return '[[' + \
-            str(np.round(self.md[0], 4)) + ',' + \
-            str(np.round(self.md[1], 4)) + '],[' + \
-            str(np.round(self.nmd[0], 4)) + ',' + \
-            str(np.round(self.nmd[1], 4)) + ']]'
+        return f'<{np.round(self.md,4)},{np.round(self.nmd,4)}>'
 
     def score(self):
         m = self.md[0] ** self.qrung + self.md[1] ** self.qrung
