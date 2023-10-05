@@ -6,6 +6,7 @@
 #  Software: MohuPy
 
 import re
+from typing import Union
 
 import numpy as np
 import pandas as pd
@@ -366,5 +367,13 @@ def load_csv(path: str, q: int, mtype: str = 'qrofn'):
         print(e, 'Load failed.')
 
 
-# def abs(f1: mohuset, f2: mohuset):
-#
+def abs(f1: Union[mohuset, mohunum], f2: Union[mohuset, mohunum]):
+    y = lambda x, y: x - y if x > y else y - x
+    if isinstance(f1, mohunum) and isinstance(f2, mohunum):
+        return y(f1, f2)
+    if isinstance(f1, mohuset) and isinstance(f2, mohuset):
+        vec_func = np.vectorize(y)
+        result = vec_func(f1.set, f2.set)
+        newset = mohuset(f1.qrung, f1.mtype)
+        newset.set = result
+        return newset
