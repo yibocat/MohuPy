@@ -418,6 +418,10 @@ class MohuQROFN(MohuBase):
             vec_func = np.vectorize(__lt)
             res = vec_func(other.set)
             return res
+        if isinstance(other, np.ndarray):
+            vec_func = np.vectorize(__lt)
+            res = vec_func(other)
+            return res
         raise TypeError(f'Invalid type: {type(other)}')
 
     def __gt__(self, other):
@@ -440,6 +444,10 @@ class MohuQROFN(MohuBase):
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__gt)
             res = vec_func(other.set)
+            return res
+        if isinstance(other, np.ndarray):
+            vec_func = np.vectorize(__gt)
+            res = vec_func(other)
             return res
         raise TypeError(f'Invalid type: {type(other)}')
 
@@ -464,6 +472,10 @@ class MohuQROFN(MohuBase):
             vec_func = np.vectorize(__le)
             res = vec_func(other.set)
             return res
+        if isinstance(other, np.ndarray):
+            vec_func = np.vectorize(__le)
+            res = vec_func(other)
+            return res
         raise TypeError(f'Invalid type: {type(other)}')
 
     def __ge__(self, other):
@@ -486,6 +498,10 @@ class MohuQROFN(MohuBase):
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__ge)
             res = vec_func(other.set)
+            return res
+        if isinstance(other, np.ndarray):
+            vec_func = np.vectorize(__ge)
+            res = vec_func(other)
             return res
         raise TypeError(f'Invalid type: {type(other)}')
 
@@ -895,6 +911,10 @@ class MohuQROIVFN(MohuBase):
             vec_func = np.vectorize(__lt)
             res = vec_func(other.set)
             return res
+        if isinstance(other, np.ndarray):
+            vec_func = np.vectorize(__lt)
+            res = vec_func(other)
+            return res
         raise TypeError(f'Invalid type: {type(other)}')
 
     def __gt__(self, other):
@@ -914,6 +934,10 @@ class MohuQROIVFN(MohuBase):
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__gt)
             res = vec_func(other.set)
+            return res
+        if isinstance(other, np.ndarray):
+            vec_func = np.vectorize(__gt)
+            res = vec_func(other)
             return res
         raise TypeError(f'Invalid type: {type(other)}')
 
@@ -935,6 +959,11 @@ class MohuQROIVFN(MohuBase):
             vec_func = np.vectorize(__le)
             res = vec_func(other.set)
             return res
+        if isinstance(other, np.ndarray):
+            vec_func = np.vectorize(__le)
+            res = vec_func(other)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __ge__(self, other):
         # TODO: The comparison of MohuQROIVFN is not supported.
@@ -953,6 +982,10 @@ class MohuQROIVFN(MohuBase):
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__ge)
             res = vec_func(other.set)
+            return res
+        if isinstance(other, np.ndarray):
+            vec_func = np.vectorize(__ge)
+            res = vec_func(other)
             return res
         raise TypeError(f'Invalid type: {type(other)}')
 
