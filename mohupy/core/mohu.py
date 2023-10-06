@@ -317,107 +317,177 @@ class MohuQROFN(MohuBase):
         raise TypeError(f'Invalid type: {type(power)}')
 
     def __and__(self, other):
-        assert isinstance(other, MohuQROFN), \
-            'ERROR: other must be a MohuQROFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
-
         q = self.qrung
-        from .mohunum import mohunum
-        newfn = mohunum(q, 0, 0)
-        newfn.md = (min(self.md, other.md))
-        newfn.nmd = (max(self.nmd, other.nmd))
-        return newfn
+
+        def __and(oth: MohuQROFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+
+            from .mohunum import mohunum
+            newfn = mohunum(q, 0, 0)
+            newfn.md = (min(self.md, oth.md))
+            newfn.nmd = (max(self.nmd, oth.nmd))
+            return newfn
+
+        if isinstance(other, MohuQROFN):
+            return __and(other)
+        from .mohusets import mohuset
+        if isinstance(other, mohuset):
+            newset = mohuset(q, self.mtype)
+            vec_func = np.vectorize(__and)
+            newset.set = vec_func(other.set)
+            return newset
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __or__(self, other):
-        assert isinstance(other, MohuQROFN), \
-            'ERROR: other must be a MohuQROFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
         q = self.qrung
-        from .mohunum import mohunum
-        newfn = mohunum(q, 0, 0)
-        newfn.md = (max(self.md, other.md))
-        newfn.nmd = (min(self.nmd, other.nmd))
-        return newfn
+
+        def __or(oth: MohuQROFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            from .mohunum import mohunum
+            newfn = mohunum(q, 0, 0)
+            newfn.md = (max(self.md, oth.md))
+            newfn.nmd = (min(self.nmd, oth.nmd))
+            return newfn
+
+        if isinstance(other, MohuQROFN):
+            return __or(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            newset = mohuset(q, self.mtype)
+            vec_func = np.vectorize(__or)
+            newset.set = vec_func(other.set)
+            return newset
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __eq__(self, other):
-        assert isinstance(other, MohuQROFN), \
-            'ERROR: other must be a MohuQROFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
-        return self.md == other.md and self.nmd == other.nmd
+        def __eq(oth: MohuQROFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            return self.md == oth.md and self.nmd == oth.nmd
+
+        if isinstance(other, MohuQROFN):
+            return __eq(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__eq)
+            res = vec_func(other.set)
+            return res
 
     def __ne__(self, other):
-        assert isinstance(other, MohuQROFN), \
-            'ERROR: other must be a MohuQROFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
-        return self.md != other.md or self.nmd != other.nmd
+        def __ne(oth: MohuQROFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            return self.md != oth.md or self.nmd != oth.nmd
+
+        if isinstance(other, MohuQROFN):
+            return __ne(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__ne)
+            res = vec_func(other.set)
+            return res
 
     def __lt__(self, other):
-        assert isinstance(other, MohuQROFN), \
-            'ERROR: other must be a MohuQROFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
         q = self.qrung
-        from .mohunum import mohunum
-        if self - other == mohunum(q, 0, 1) and self != other:
-            return True
-        else:
-            return False
+
+        def __lt(oth: MohuQROFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            from .mohunum import mohunum
+            if self - oth == mohunum(q, 0, 1) and self != oth:
+                return True
+            else:
+                return False
+
+        if isinstance(other, MohuQROFN):
+            return __lt(other)
+        from .mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__lt)
+            res = vec_func(other.set)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __gt__(self, other):
-        assert isinstance(other, MohuQROFN), \
-            'ERROR: other must be a MohuQROFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
         q = self.qrung
-        from .mohunum import mohunum
-        if self - other != mohunum(q, 0., 1.) and self != other:
-            return True
-        else:
-            return False
+
+        def __gt(oth: MohuQROFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            from .mohunum import mohunum
+            if self - oth != mohunum(q, 0., 1.) and self != oth:
+                return True
+            else:
+                return False
+
+        if isinstance(other, MohuQROFN):
+            return __gt(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__gt)
+            res = vec_func(other.set)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __le__(self, other):
-        assert isinstance(other, MohuQROFN), \
-            'ERROR: other must be a MohuQROFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
         q = self.qrung
-        from .mohunum import mohunum
-        if self - other == mohunum(q, 0., 1.) or self == other:
-            return True
-        else:
-            return False
+
+        def __le(oth: MohuQROFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            from .mohunum import mohunum
+            if self - oth == mohunum(q, 0., 1.) or self == oth:
+                return True
+            else:
+                return False
+
+        if isinstance(other, MohuQROFN):
+            return __le(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__le)
+            res = vec_func(other.set)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __ge__(self, other):
-        assert isinstance(other, MohuQROFN), \
-            'ERROR: other must be a MohuQROFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
         q = self.qrung
-        from .mohunum import mohunum
-        if self - other != mohunum(q, 0., 1.) or self == other:
-            return True
-        else:
-            return False
+
+        def __ge(oth: MohuQROFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            from .mohunum import mohunum
+            if self - oth != mohunum(q, 0., 1.) or self == oth:
+                return True
+            else:
+                return False
+
+        if isinstance(other, MohuQROFN):
+            return __ge(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__ge)
+            res = vec_func(other.set)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def is_valid(self):
         mds = self.md
@@ -724,78 +794,167 @@ class MohuQROIVFN(MohuBase):
         raise TypeError(f'Invalid type: {type(power)}')
 
     def __and__(self, other):
-        assert isinstance(other, MohuQROIVFN), \
-            'ERROR: other must be a MohuQROIVFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
         q = self.qrung
-        from .mohunum import mohunum
-        newfn = mohunum(q, [0., 0.], [0., 0.])
-        newfn.md = [min(self.md[0], other.md[0]), min(self.md[1], other.md[1])]
-        newfn.nmd = [max(self.nmd[0], other.nmd[0]), max(self.nmd[1], other.nmd[1])]
-        return newfn
+
+        def __and(oth: MohuQROIVFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            from .mohunum import mohunum
+            newfn = mohunum(q, [0., 0.], [0., 0.])
+            newfn.md = [min(self.md[0], oth.md[0]), min(self.md[1], oth.md[1])]
+            newfn.nmd = [max(self.nmd[0], oth.nmd[0]), max(self.nmd[1], oth.nmd[1])]
+            return newfn
+
+        if isinstance(other, MohuQROIVFN):
+            return __and(other)
+        from .mohusets import mohuset
+        if isinstance(other, mohuset):
+            newset = mohuset(q, self.mtype)
+            vec_func = np.vectorize(__and)
+            newset.set = vec_func(other.set)
+            return newset
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __or__(self, other):
-        assert isinstance(other, MohuQROIVFN), \
-            'ERROR: other must be a MohuQROIVFN.'
-        assert self.mtype == other.mtype, \
-            'ERROR: mtype must be same.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
         q = self.qrung
-        from .mohunum import mohunum
-        newfn = mohunum(q, [0., 0.], [0., 0.])
-        newfn.md = [max(self.md[0], other.md[0]), max(self.md[1], other.md[1])]
-        newfn.nmd = [min(self.nmd[0], other.nmd[0]), min(self.nmd[1], other.nmd[1])]
-        return newfn
+
+        def __or(oth: MohuQROIVFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: mtype must be same.'
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            from .mohunum import mohunum
+            newfn = mohunum(q, [0., 0.], [0., 0.])
+            newfn.md = [max(self.md[0], oth.md[0]), max(self.md[1], oth.md[1])]
+            newfn.nmd = [min(self.nmd[0], oth.nmd[0]), min(self.nmd[1], oth.nmd[1])]
+            return newfn
+
+        if isinstance(other, MohuQROIVFN):
+            return __or(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            newset = mohuset(q, self.mtype)
+            vec_func = np.vectorize(__or)
+            newset.set = vec_func(other.set)
+            return newset
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __eq__(self, other):
-        assert isinstance(other, MohuQROIVFN), \
-            'ERROR: other must be a MohuQROIVFN.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
-        return np.array_equal(self.md, other.md) and np.array_equal(self.nmd, other.nmd)
+
+        def __eq(oth: MohuQROIVFN):
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            assert self.mtype == oth.mtype, \
+                'ERROR: The mtype must be same.'
+            return np.array_equal(self.md, oth.md) and np.array_equal(self.nmd, oth.nmd)
+
+        if isinstance(other, MohuQROIVFN):
+            return __eq(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__eq)
+            res = vec_func(other.set)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __ne__(self, other):
-        assert isinstance(other, MohuQROIVFN), \
-            'ERROR: other must be a MohuQROIVFN.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
-        return not np.array_equal(self.md, other.md) or not np.array_equal(self.nmd, other.nmd)
+
+        def __ne(oth: MohuQROIVFN):
+            assert self.mtype == oth.mtype, \
+                'ERROR: The mtype must be same.'
+            assert self.qrung == other.qrung, \
+                'ERROR: The qrung must be equal.'
+            return not np.array_equal(self.md, other.md) or not np.array_equal(self.nmd, other.nmd)
+
+        if isinstance(other, MohuQROIVFN):
+            return __ne(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__ne)
+            res = vec_func(other.set)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __lt__(self, other):
         # TODO: The comparison of MohuQROIVFN is not supported.
-        assert isinstance(other, MohuQROIVFN), \
-            'ERROR: other must be a MohuQROIVFN.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
-        raise TypeError('MohuQROIVFN does not support comparison.')
+        # Temporarily adopt the score value comparison method
+
+        def __lt(oth: MohuQROIVFN):
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            assert self.mtype == oth.mtype, \
+                'ERROR: The mtype must be same.'
+            return self.score < oth.score
+
+        if isinstance(other, MohuQROIVFN):
+            return __lt(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__lt)
+            res = vec_func(other.set)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __gt__(self, other):
         # TODO: The comparison of MohuQROIVFN is not supported.
-        assert isinstance(other, MohuQROIVFN), \
-            'ERROR: other must be a MohuQROIVFN.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
-        raise TypeError('MohuQROIVFN does not support comparison.')
+        # Temporarily adopt the score value comparison method
+
+        def __gt(oth: MohuQROIVFN):
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            assert self.mtype == oth.mtype, \
+                'ERROR: The mtype must be same.'
+            return self.score > oth.score
+
+        if isinstance(other, MohuQROIVFN):
+            return __gt(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__gt)
+            res = vec_func(other.set)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def __le__(self, other):
         # TODO: The comparison of MohuQROIVFN is not supported.
-        assert isinstance(other, MohuQROIVFN), \
-            'ERROR: other must be a MohuQROIVFN.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
-        raise TypeError('MohuQROIVFN does not support comparison.')
+        # Temporarily adopt the score value comparison method
+
+        def __le(oth: MohuQROIVFN):
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            assert self.mtype == oth.mtype, \
+                'ERROR: The mtype must be same.'
+            return self.score <= oth.score
+
+        if isinstance(other, MohuQROIVFN):
+            return __le(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__le)
+            res = vec_func(other.set)
+            return res
 
     def __ge__(self, other):
         # TODO: The comparison of MohuQROIVFN is not supported.
-        assert isinstance(other, MohuQROIVFN), \
-            'ERROR: other must be a MohuQROIVFN.'
-        assert self.qrung == other.qrung, \
-            'ERROR: The qrung must be equal.'
-        raise TypeError('MohuQROIVFN does not support comparison.')
+        # Temporarily adopt the score value comparison method
+
+        def __ge(oth: MohuQROIVFN):
+            assert self.qrung == oth.qrung, \
+                'ERROR: The qrung must be equal.'
+            assert self.mtype == oth.mtype, \
+                'ERROR: The mtype must be same.'
+            return self.score >= oth.score
+
+        if isinstance(other, MohuQROIVFN):
+            return __ge(other)
+        from.mohusets import mohuset
+        if isinstance(other, mohuset):
+            vec_func = np.vectorize(__ge)
+            res = vec_func(other.set)
+            return res
+        raise TypeError(f'Invalid type: {type(other)}')
 
     def is_valid(self):
         if not len(self.md) == 2 and len(self.nmd) == 2:

@@ -368,12 +368,39 @@ def load_csv(path: str, q: int, mtype: str = 'qrofn'):
 
 
 def abs(f1: Union[mohuset, mohunum], f2: Union[mohuset, mohunum]):
+    """
+        Calculate the absolute value of two fuzzy sets or numbers.
+
+        Parameters
+        ----------
+            f1:  Union[mohuset, mohunum]
+                The first fuzzy set or number.
+            f2:  Union[mohuset, mohunum]
+                The second fuzzy set or number.
+
+        Returns
+        -------
+            Union[mohuset, mohunum]
+                The absolute value of f1 and f2.
+    """
     y = lambda x, y: x - y if x > y else y - x
     if isinstance(f1, mohunum) and isinstance(f2, mohunum):
         return y(f1, f2)
     if isinstance(f1, mohuset) and isinstance(f2, mohuset):
         vec_func = np.vectorize(y)
         result = vec_func(f1.set, f2.set)
+        newset = mohuset(f1.qrung, f1.mtype)
+        newset.set = result
+        return newset
+    if isinstance(f1, mohunum) and isinstance(f2, mohuset):
+        vec_func = np.vectorize(y)
+        result = vec_func(f1, f2.set)
+        newset = mohuset(f2.qrung, f2.mtype)
+        newset.set = result
+        return newset
+    if isinstance(f1, mohuset) and isinstance(f2, mohunum):
+        vec_func = np.vectorize(y)
+        result = vec_func(f1.set, f2)
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result
         return newset

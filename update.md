@@ -1,5 +1,11 @@
 # UPDATE LOG
 
+
+------
+## version: 0.1.4-10.6.2023
+1. 修复了`mohuset` 和`mohunum` 绝对值计算 bugs
+2. 修复了 `mohunum` 的比较运算(`mohunum` 与 `mohuset` 的比较)
+
 ------
 ## version: 0.1.3-10.2.2023
 1. 增加了 `mohusets` 的比较运算
