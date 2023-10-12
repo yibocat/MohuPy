@@ -17,6 +17,35 @@ import numpy as np
 
 @fuzzType('MohuQROFN')
 class MohuQROFN(MohuBase):
+    """
+        MohuQROFN is a class of q-rung orthopair fuzzy numbers. The class
+        contains the basic arithmetic rules, comparison rules and basic
+        properties.
+        q-rung orthopair fuzzy numbers(q-ROFNs) usually contains three main
+        attributes: q-rung, membership and non-membership degree. In addition,
+        there are score values, accuracy values, uncertainties and complements.
+        In particular, it contains addition, subtraction, multiplication,
+        division, exponentiation, intersection, union, greater than, less than,
+        equal to, greater than or equal to, less than or equal to, and
+        inequality operations.
+
+        Attributes
+        ----------
+            qrung : int
+                    The q-rung orthopair value.
+            md: : float or int or np.float_ or np.int_
+                    The membership degree.
+            nmd: : float or int or np.float_ or np.int_
+                    The non-membership degree.
+
+        Examples
+        --------
+            Int [1]: import mohupy as mp
+            Int [2]: mp.MohuQROFN(2, 0.5, 0.5)  # That means that the q-rung is 2 and the
+                                                # membership degree is 0.5 and non-membership
+                                                # degree is 0.5.
+            Out [2]: <0.5,0.5>
+    """
     qrung = None
     md = None
     nmd = None
@@ -523,8 +552,30 @@ class MohuQROFN(MohuBase):
     def convert(self):
         return np.round(self.md, 4), np.round(self.nmd, 4)
 
-    def plot(self, other=None, area=None, color='red', color_area=None, alpha=0.3):
+    def plot(self, other=None, area: list[bool] = None, color='red', color_area=None, alpha=0.3):
+        """
+            This function plots the Q-ROFN distribution in the fuzzy space.
+            If other is not None, it plots the Q-ROFN distribution in the fuzzy space,
+            and other is plotted in the fuzzy space. This helps to see which domain
+            other is at that point.
 
+            Parameters
+            ----------
+                other : MohuQROFN
+                        If it is None, only the position of the self point in the fuzzy
+                        space is drawn. Otherwise, the position of other in the fuzzy
+                        space is also drawn.
+                area : list[bool]
+                        This is a four-element bool list, representing the addition field,
+                        subtraction field, multiplication field and division field in order.
+                color : str
+                        The color of the Q-ROFN distribution.
+                color_area : list[str]
+                        The color of the addition field, subtraction field, multiplication field
+                        and division field.
+                alpha : float
+                        The transparency of the Q-ROFN distribution.
+        """
         if area is None:
             area = [False, False, False, False]
         if color_area is None:

@@ -30,6 +30,8 @@ pip install .
  - [ ] Derivatives of mohunum function and gradients of mohuset functions 
  - [ ] Symbol mohu function
  - [ ] Adapted to GPU
+ - [ ] Integrate the operations of fuzzy numbers and fuzzy sets into computational graph models
+ - [ ] Add more Archimedean norm operations and register (Einstein, Frank, Hamacher)
 
 ## Quick Start
 
@@ -121,11 +123,11 @@ t2.plot()
 
 Scatter plot of t1
 
-![img1.png](assets%2Fimg1.png)
+![img2.png](assets%2Fimg2.png)
 
 Scatter plot of t2
 
-![img2.png](assets%2Fimg2.png)
+![img1.png](assets%2Fimg1.png)
 
 
 ## Update Log

@@ -8,6 +8,13 @@ import abc
 
 
 class MohuBase(abc.ABC):
+    """
+        Fuzzy base class is an abstract class, which is the base class of
+        fuzzy numbers and fuzzy sets.
+        The base class contains three attributes, basic operation rules
+        (addition, subtraction, multiplication, division, exponentiation
+        and intersection, comparison operations), and basic methods.
+    """
     __shape = ()
     __ndim = 0
     size = 0
