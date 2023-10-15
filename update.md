@@ -1,5 +1,15 @@
 # UPDATE LOG
 
+------
+## version: 0.1.5-10.15.2023
+1. 新增了模糊类型注册表，通过运行 `mp.download_template` 方法下载模糊数模板
+2. 优化了模糊数结构， `qrofn` 和 `ivfn` 父类调整为 `fuzzNum`，并且基于工厂函数动态继承
+3. 优化了 `mohuset` 类，运算方法代码，修复了一些 bugs
+
+### 计划：
+- [ ] 添加阿基米德范数注册表
+- [ ] 添加随机函数注册表
+- [ ] 添加 q-rung orthopair hesitant fuzzy number 类型
 
 ------
 ## version: 0.1.4-10.6.2023

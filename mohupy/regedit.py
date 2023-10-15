@@ -51,6 +51,9 @@ class Register(MutableMapping):
     def __str__(self):
         return str(self.__dict)
 
+    def __repr__(self):
+        return str(self.__dict)
+
     def keys(self):
         return self.__dict.keys()
 

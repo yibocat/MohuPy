@@ -15,4 +15,5 @@ from .measure import *
 from .measure import integral, indices
 from .random import *
 
-from .init import fuzzType
+from .runtime import fuzzType, fuzzParent
+from .regedit import Register

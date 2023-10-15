@@ -8,6 +8,7 @@ import numpy as np
 
 from ..core.mohusets import mohuset
 from ..core.mohunum import mohunum
+from ..core.base import fuzzNum
 
 
 def __rand_qrofn(q=1):
@@ -68,7 +69,7 @@ def __rand_set(q=1, mtype='qrofn', *n):
         -------
             newset : mohuset
     """
-    def __random(__damm: mohunum):
+    def __random(__damm: fuzzNum):
         if __damm.mtype == 'qrofn':
             return __rand_qrofn(q)
         if __damm.mtype == 'ivfn':
@@ -110,7 +111,7 @@ def random(q: int = 1, mtype: str = 'qrofn', *n):
         return __rand_set(q, mtype, *n)
 
 
-def choice(f: mohuset) -> mohunum:
+def choice(f: mohuset) -> fuzzNum:
     """
         Randomly select a fuzzy number
 

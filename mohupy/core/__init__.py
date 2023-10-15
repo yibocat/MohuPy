@@ -10,6 +10,9 @@ __all__ = []
 from .mohunum import mohunum
 from .mohusets import mohuset
 
+from .mohu import MohuQROFN, MohuQROIVFN
+from .interface import mohuParent, download_template
+
 __all__ += [
-    'mohunum', 'mohuset'
+    'mohunum', 'mohuset', 'download_template'
 ]

@@ -149,8 +149,13 @@ class mohuset(MohuBase):
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set + other.set
             return newset
-        from .mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             assert other.mtype == self.__mtype, \
                 'ERROR: The fuzzy number and set must be of the same type.'
             assert other.qrung == self.__qrung, \
@@ -159,7 +164,7 @@ class mohuset(MohuBase):
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set + other
             return newset
-        raise TypeError(f'Invalid type {other}')
+        raise TypeError(f'Invalid type {type(other)}')
 
     def __sub__(self, other):
         if isinstance(other, mohuset):
@@ -177,8 +182,13 @@ class mohuset(MohuBase):
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set - other.set
             return newset
-        from.mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             assert other.mtype == self.__mtype, \
                         'ERROR: The fuzzy number and set must be of the same type.'
             assert other.qrung == self.__qrung, \
@@ -187,7 +197,7 @@ class mohuset(MohuBase):
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set - other
             return newset
-        raise TypeError(f'Invalid type {other}')
+        raise TypeError(f'Invalid type {type(other)}')
 
     def __mul__(self, other):
         if isinstance(other, mohuset):
@@ -205,8 +215,13 @@ class mohuset(MohuBase):
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set * other.set
             return newset
-        from .mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             assert other.mtype == self.__mtype, \
                 'ERROR: The fuzzy number and set must be of the same type.'
             assert other.qrung == self.__qrung, \
@@ -225,7 +240,7 @@ class mohuset(MohuBase):
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set * other
             return newset
-        raise TypeError(f'Invalid type {other}')
+        raise TypeError(f'Invalid type {type(other)}')
 
     def __truediv__(self, other):
         if isinstance(other, mohuset):
@@ -242,8 +257,13 @@ class mohuset(MohuBase):
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set / other.set
             return newset
-        from .mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             assert other.mtype == self.__mtype, \
                     'ERROR: The fuzzy number and set must be of the same type.'
             assert other.qrung == self.__qrung, \
@@ -261,7 +281,7 @@ class mohuset(MohuBase):
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set / other
             return newset
-        raise TypeError(f'Invalid type {other}')
+        raise TypeError(f'Invalid type {type(other)}')
 
     def __pow__(self, power, modulo=None):
         if isinstance(power, Union[float, np.float_, int, np.int_]):
@@ -274,7 +294,7 @@ class mohuset(MohuBase):
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set ** power
             return newset
-        raise TypeError(f'Invalid type {power}')
+        raise TypeError(f'Invalid type {type(power)}')
 
     def __matmul__(self, other):
         assert isinstance(other, mohuset), \
@@ -294,48 +314,78 @@ class mohuset(MohuBase):
     def __eq__(self, other) -> np.ndarray:
         if isinstance(other, mohuset):
             return self.__set == other.__set
-        from .mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             return self.__set == other
         raise TypeError(f'Invalid type {type(other)}')
 
     def __ne__(self, other) -> np.ndarray:
         if isinstance(other, mohuset):
             return self.__set != other.__set
-        from .mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             return self.__set != other
         raise TypeError(f'Invalid type {type(other)}')
 
     def __lt__(self, other) -> np.ndarray:
         if isinstance(other, mohuset):
             return self.__set < other.__set
-        from .mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             return self.__set < other
         raise TypeError(f'Invalid type {type(other)}')
 
     def __gt__(self, other) -> np.ndarray:
         if isinstance(other, mohuset):
             return self.__set > other.__set
-        from .mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             return self.__set > other
         raise TypeError(f'Invalid type {type(other)}')
 
     def __le__(self, other) -> np.ndarray:
         if isinstance(other, mohuset):
             return self.__set <= other.__set
-        from .mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             return self.__set <= other
         raise TypeError(f'Invalid type {type(other)}')
 
     def __ge__(self, other) -> np.ndarray:
         if isinstance(other, mohuset):
             return self.__set >= other.__set
-        from .mohunum import mohunum
-        if isinstance(other, mohunum):
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+
             return self.__set >= other
         raise TypeError(f'Invalid type {type(other)}')
 

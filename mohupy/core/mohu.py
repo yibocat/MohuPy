@@ -9,14 +9,14 @@ import copy
 from typing import Union
 
 from matplotlib import pyplot as plt
-from .base import MohuBase
-from ..init import fuzzType
+from .base import fuzzNum
+from ..runtime import fuzzType
 
 import numpy as np
 
 
-@fuzzType('MohuQROFN')
-class MohuQROFN(MohuBase):
+@fuzzType('qrofn')
+class MohuQROFN(fuzzNum):
     """
         MohuQROFN is a class of q-rung orthopair fuzzy numbers. The class
         contains the basic arithmetic rules, comparison rules and basic
@@ -622,8 +622,8 @@ class MohuQROFN(MohuBase):
         plt.show()
 
 
-@fuzzType('MohuQROIVFN')
-class MohuQROIVFN(MohuBase):
+@fuzzType('ivfn')
+class MohuQROIVFN(fuzzNum):
     qrung = None
     md = None
     nmd = None

@@ -7,12 +7,13 @@
 
 from ..core.mohunum import mohunum
 from .archimedean import *
+from ..core.base import fuzzNum
 
 
 # TODO: 将爱因斯坦运算注册到范数运算表中，这里暂时写成函数，后期改成爱因斯坦类
 
 
-def ein_plus(f1: mohunum, f2: mohunum) -> mohunum:
+def ein_plus(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
     """
         The einstein plus of two fuzzy mohunums.
     """
@@ -34,7 +35,7 @@ def ein_plus(f1: mohunum, f2: mohunum) -> mohunum:
     return newfn
 
 
-def ein_mul(f1: mohunum, f2: mohunum) -> mohunum:
+def ein_mul(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
     """
         The einstein multiplication of two fuzzy numbers.
     """
@@ -56,7 +57,7 @@ def ein_mul(f1: mohunum, f2: mohunum) -> mohunum:
     return newfn
 
 
-def ein_times(f: mohunum, l) -> mohunum:
+def ein_times(f: fuzzNum, l) -> fuzzNum:
     assert l >= 0, 'The value must be greater than or equal to 0.'
     q = f.qrung
     if f.mtype == 'qrofn':
@@ -73,7 +74,7 @@ def ein_times(f: mohunum, l) -> mohunum:
     return newfn
 
 
-def ein_power(f: mohunum, l) -> mohunum:
+def ein_power(f: fuzzNum, l) -> fuzzNum:
     assert l >= 0, 'The value must be greater than or equal to 0.'
     q = f.qrung
     if f.mtype == 'qrofn':

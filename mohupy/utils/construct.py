@@ -7,6 +7,7 @@
 
 from ..core.mohunum import mohunum
 from ..core.mohusets import mohuset
+from ..core.base import fuzzNum
 
 import numpy as np
 
@@ -92,13 +93,13 @@ def negs(q, mtype, *n):
     return newset
 
 
-def full(x: mohunum, *n):
+def full(x: fuzzNum, *n):
     """
         Generate an *n any fuzzy number fuzzy set
 
         Parameters
         ----------
-            x: mohunum
+            x: fuzzNum
                     The fuzzy number
             n : int
                     The shape of the fuzzy set

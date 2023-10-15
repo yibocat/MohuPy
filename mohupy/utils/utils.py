@@ -13,9 +13,10 @@ import pandas as pd
 
 from ..core.mohunum import mohunum
 from ..core.mohusets import mohuset
+from ..core.base import fuzzNum
 
 
-def str_to_mohunum(s: str, q, mtype: str = 'qrofn') -> mohunum:
+def str_to_mohunum(s: str, q, mtype: str = 'qrofn') -> fuzzNum:
     """
         Convert a string to a fuzzy number.
 
@@ -65,7 +66,7 @@ def str_to_mohunum(s: str, q, mtype: str = 'qrofn') -> mohunum:
     raise TypeError(f'unknown mtype: {mtype}')
 
 
-def plot(x: (mohuset, mohunum), other=None, area=None,
+def plot(x: (mohuset, fuzzNum), other=None, area=None,
          color='red', color_area=None, alpha=0.3):
     """
         Draw the plane diagram of fuzzy numbers
@@ -91,12 +92,12 @@ def plot(x: (mohuset, mohunum), other=None, area=None,
         assert isinstance(area, list), 'ERROR: area must be a list.'
     if isinstance(x, mohuset):
         x.plot(color=color, alpha=alpha)
-    if isinstance(x, mohunum):
+    if isinstance(x, fuzzNum):
         x.plot(other=other, area=area, color=color,
                color_area=color_area, alpha=alpha)
 
 
-def distance(d1: mohunum, d2: mohunum, l: (int, np.int_), indeterminacy=True):
+def distance(d1: fuzzNum, d2: fuzzNum, l: (int, np.int_), indeterminacy=True):
     """
         The generalized distance function for two fuzzy elements.
         The parameter 'l' is the generalized distance function parameter.
@@ -367,7 +368,7 @@ def load_csv(path: str, q: int, mtype: str = 'qrofn'):
         print(e, 'Load failed.')
 
 
-def abs(f1: Union[mohuset, mohunum], f2: Union[mohuset, mohunum]):
+def abs(f1: Union[mohuset, fuzzNum], f2: Union[mohuset, fuzzNum]):
     """
         Calculate the absolute value of two fuzzy sets or numbers.
 
@@ -384,7 +385,7 @@ def abs(f1: Union[mohuset, mohunum], f2: Union[mohuset, mohunum]):
                 The absolute value of f1 and f2.
     """
     y = lambda x, y: x - y if x > y else y - x
-    if isinstance(f1, mohunum) and isinstance(f2, mohunum):
+    if isinstance(f1, fuzzNum) and isinstance(f2, fuzzNum):
         return y(f1, f2)
     if isinstance(f1, mohuset) and isinstance(f2, mohuset):
         vec_func = np.vectorize(y)
@@ -392,13 +393,13 @@ def abs(f1: Union[mohuset, mohunum], f2: Union[mohuset, mohunum]):
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result
         return newset
-    if isinstance(f1, mohunum) and isinstance(f2, mohuset):
+    if isinstance(f1, fuzzNum) and isinstance(f2, mohuset):
         vec_func = np.vectorize(y)
         result = vec_func(f1, f2.set)
         newset = mohuset(f2.qrung, f2.mtype)
         newset.set = result
         return newset
-    if isinstance(f1, mohuset) and isinstance(f2, mohunum):
+    if isinstance(f1, mohuset) and isinstance(f2, fuzzNum):
         vec_func = np.vectorize(y)
         result = vec_func(f1.set, f2)
         newset = mohuset(f1.qrung, f1.mtype)
