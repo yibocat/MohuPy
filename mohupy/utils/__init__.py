@@ -9,14 +9,14 @@ __all__ = []
 
 from .construct import zeros, poss, negs, full
 from .other import plot_stats, random_split, show_decision_mat
-from .utils import (str_to_mohunum, plot, distance, asfuzzset,
-                    func4num, savez, loadz, to_csv, load_csv,
+from .utils import (str2mohu, distance, plot,
+                    asfuzzset, func4num, savez, loadz, to_csv, load_csv,
                     abs)
 
 __all__ += [
     'zeros', 'poss', 'negs', 'full',
     'plot_stats', 'random_split', 'show_decision_mat',
-    'str_to_mohunum', 'plot', 'distance', 'asfuzzset',
-    'func4num','savez', 'loadz', 'to_csv', 'load_csv',
+    'str2mohu', 'distance', 'plot',
+    'asfuzzset', 'func4num', 'savez', 'loadz', 'to_csv', 'load_csv',
     'abs'
 ]

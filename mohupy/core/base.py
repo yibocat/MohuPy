@@ -188,6 +188,3 @@ class fuzzNum(MohuBase):
 
     def convert(self):
         pass
-
-    def plot(self):
-        pass

@@ -8,11 +8,12 @@
 import copy
 from typing import Union
 
-from matplotlib import pyplot as plt
 from .base import fuzzNum
-from ..runtime import fuzzType
 
 import numpy as np
+from ..registry.regedit import Register
+
+fuzzType = Register()
 
 
 @fuzzType('qrofn')
@@ -70,10 +71,10 @@ class MohuQROFN(fuzzNum):
         pass
 
     def __repr__(self):
-        return f'<{np.round(self.md,4)},{np.round(self.nmd,4)}>'
+        return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
 
     def __str__(self):
-        return f'<{np.round(self.md,4)},{np.round(self.nmd,4)}>'
+        return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
 
     def score(self):
         return self.md ** self.qrung - self.nmd ** self.qrung
@@ -386,7 +387,7 @@ class MohuQROFN(fuzzNum):
 
         if isinstance(other, MohuQROFN):
             return __or(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             newset = mohuset(q, self.mtype)
             vec_func = np.vectorize(__or)
@@ -404,7 +405,7 @@ class MohuQROFN(fuzzNum):
 
         if isinstance(other, MohuQROFN):
             return __eq(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__eq)
             res = vec_func(other.set)
@@ -420,7 +421,7 @@ class MohuQROFN(fuzzNum):
 
         if isinstance(other, MohuQROFN):
             return __ne(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__ne)
             res = vec_func(other.set)
@@ -469,7 +470,7 @@ class MohuQROFN(fuzzNum):
 
         if isinstance(other, MohuQROFN):
             return __gt(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__gt)
             res = vec_func(other.set)
@@ -496,7 +497,7 @@ class MohuQROFN(fuzzNum):
 
         if isinstance(other, MohuQROFN):
             return __le(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__le)
             res = vec_func(other.set)
@@ -523,7 +524,7 @@ class MohuQROFN(fuzzNum):
 
         if isinstance(other, MohuQROFN):
             return __ge(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__ge)
             res = vec_func(other.set)
@@ -552,74 +553,74 @@ class MohuQROFN(fuzzNum):
     def convert(self):
         return np.round(self.md, 4), np.round(self.nmd, 4)
 
-    def plot(self, other=None, area: list[bool] = None, color='red', color_area=None, alpha=0.3):
-        """
-            This function plots the Q-ROFN distribution in the fuzzy space.
-            If other is not None, it plots the Q-ROFN distribution in the fuzzy space,
-            and other is plotted in the fuzzy space. This helps to see which domain
-            other is at that point.
-
-            Parameters
-            ----------
-                other : MohuQROFN
-                        If it is None, only the position of the self point in the fuzzy
-                        space is drawn. Otherwise, the position of other in the fuzzy
-                        space is also drawn.
-                area : list[bool]
-                        This is a four-element bool list, representing the addition field,
-                        subtraction field, multiplication field and division field in order.
-                color : str
-                        The color of the Q-ROFN distribution.
-                color_area : list[str]
-                        The color of the addition field, subtraction field, multiplication field
-                        and division field.
-                alpha : float
-                        The transparency of the Q-ROFN distribution.
-        """
-        if area is None:
-            area = [False, False, False, False]
-        if color_area is None:
-            color_area = ['red', 'green', 'blue', 'yellow']
-
-        md = self.md
-        nmd = self.nmd
-        q = self.qrung
-
-        x = np.linspace(0, 1, 1000)
-
-        plt.gca().spines['top'].set_linewidth(False)
-        plt.gca().spines['bottom'].set_linewidth(True)
-        plt.gca().spines['left'].set_linewidth(True)
-        plt.gca().spines['right'].set_linewidth(False)
-        plt.axis((0, 1.1, 0, 1.1))
-        plt.axhline(y=0)
-        plt.axvline(x=0)
-        plt.scatter(md, nmd, color=color, marker='.')
-
-        if other is not None:
-            assert other.qrung == q, 'ERROR: The qrungs are not equal'
-            plt.scatter(other.md, other.nmd, color=color, marker='*')
-
-        y = (1 - x ** q) ** (1 / q)
-
-        n = (nmd ** q / (1 - md ** q) * (1 - x ** q)) ** (1 / q)
-        m = (md ** q / (1 - nmd ** q) * (1 - x ** q)) ** (1 / q)
-
-        if area[0]:
-            # Q-ROFN f addition region
-            plt.fill_between(x, n, color=color_area[0], alpha=alpha, where=x > md)
-        if area[1]:
-            # Q-ROFN f subtraction region
-            plt.fill_between(x, n, y, color=color_area[1], alpha=alpha, where=x < md)
-        if area[2]:
-            # Q-ROFN f multiplication region
-            plt.fill_betweenx(x, m, color=color_area[2], alpha=alpha, where=x > nmd)
-        if area[3]:
-            # Q-ROFN f division region
-            plt.fill_betweenx(x, m, y, color=color_area[3], alpha=alpha, where=x < nmd)
-
-        plt.plot(x, y)
-        plt.show()
+    # def plot(self, other=None, area: list[bool] = None, color='red', color_area=None, alpha=0.3):
+    #     """
+    #         This function plots the Q-ROFN distribution in the fuzzy space.
+    #         If other is not None, it plots the Q-ROFN distribution in the fuzzy space,
+    #         and other is plotted in the fuzzy space. This helps to see which domain
+    #         other is at that point.
+    #
+    #         Parameters
+    #         ----------
+    #             other : MohuQROFN
+    #                     If it is None, only the position of the self point in the fuzzy
+    #                     space is drawn. Otherwise, the position of other in the fuzzy
+    #                     space is also drawn.
+    #             area : list[bool]
+    #                     This is a four-element bool list, representing the addition field,
+    #                     subtraction field, multiplication field and division field in order.
+    #             color : str
+    #                     The color of the Q-ROFN distribution.
+    #             color_area : list[str]
+    #                     The color of the addition field, subtraction field, multiplication field
+    #                     and division field.
+    #             alpha : float
+    #                     The transparency of the Q-ROFN distribution.
+    #     """
+    #     if area is None:
+    #         area = [False, False, False, False]
+    #     if color_area is None:
+    #         color_area = ['red', 'green', 'blue', 'yellow']
+    #
+    #     md = self.md
+    #     nmd = self.nmd
+    #     q = self.qrung
+    #
+    #     x = np.linspace(0, 1, 1000)
+    #
+    #     plt.gca().spines['top'].set_linewidth(False)
+    #     plt.gca().spines['bottom'].set_linewidth(True)
+    #     plt.gca().spines['left'].set_linewidth(True)
+    #     plt.gca().spines['right'].set_linewidth(False)
+    #     plt.axis((0, 1.1, 0, 1.1))
+    #     plt.axhline(y=0)
+    #     plt.axvline(x=0)
+    #     plt.scatter(md, nmd, color=color, marker='.')
+    #
+    #     if other is not None:
+    #         assert other.qrung == q, 'ERROR: The qrungs are not equal'
+    #         plt.scatter(other.md, other.nmd, color=color, marker='*')
+    #
+    #     y = (1 - x ** q) ** (1 / q)
+    #
+    #     n = (nmd ** q / (1 - md ** q) * (1 - x ** q)) ** (1 / q)
+    #     m = (md ** q / (1 - nmd ** q) * (1 - x ** q)) ** (1 / q)
+    #
+    #     if area[0]:
+    #         # Q-ROFN f addition region
+    #         plt.fill_between(x, n, color=color_area[0], alpha=alpha, where=x > md)
+    #     if area[1]:
+    #         # Q-ROFN f subtraction region
+    #         plt.fill_between(x, n, y, color=color_area[1], alpha=alpha, where=x < md)
+    #     if area[2]:
+    #         # Q-ROFN f multiplication region
+    #         plt.fill_betweenx(x, m, color=color_area[2], alpha=alpha, where=x > nmd)
+    #     if area[3]:
+    #         # Q-ROFN f division region
+    #         plt.fill_betweenx(x, m, y, color=color_area[3], alpha=alpha, where=x < nmd)
+    #
+    #     plt.plot(x, y)
+    #     plt.show()
 
 
 @fuzzType('ivfn')
@@ -652,10 +653,10 @@ class MohuQROIVFN(fuzzNum):
             self.size = 1
 
     def __repr__(self):
-        return f'<{np.round(self.md,4)},{np.round(self.nmd,4)}>'
+        return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
 
     def __str__(self):
-        return f'<{np.round(self.md,4)},{np.round(self.nmd,4)}>'
+        return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
 
     def score(self):
         m = self.md[0] ** self.qrung + self.md[1] ** self.qrung
@@ -835,7 +836,7 @@ class MohuQROIVFN(fuzzNum):
 
     def __truediv__(self, other):
         # TODO: The division of MohuQROIVFN is not supported.
-        pass
+        raise TypeError('Interval-valued fuzzy division operation is not supported for the time being.')
 
     def __pow__(self, power, modulo=None):
         q = self.qrung
@@ -900,7 +901,7 @@ class MohuQROIVFN(fuzzNum):
 
         if isinstance(other, MohuQROIVFN):
             return __or(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             newset = mohuset(q, self.mtype)
             vec_func = np.vectorize(__or)
@@ -919,7 +920,7 @@ class MohuQROIVFN(fuzzNum):
 
         if isinstance(other, MohuQROIVFN):
             return __eq(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__eq)
             res = vec_func(other.set)
@@ -937,7 +938,7 @@ class MohuQROIVFN(fuzzNum):
 
         if isinstance(other, MohuQROIVFN):
             return __ne(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__ne)
             res = vec_func(other.set)
@@ -953,11 +954,11 @@ class MohuQROIVFN(fuzzNum):
                 'ERROR: The qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: The mtype must be same.'
-            return self.score < oth.score
+            return self.score() < oth.score()
 
         if isinstance(other, MohuQROIVFN):
             return __lt(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__lt)
             res = vec_func(other.set)
@@ -977,11 +978,11 @@ class MohuQROIVFN(fuzzNum):
                 'ERROR: The qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: The mtype must be same.'
-            return self.score > oth.score
+            return self.score() > oth.score()
 
         if isinstance(other, MohuQROIVFN):
             return __gt(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__gt)
             res = vec_func(other.set)
@@ -1001,11 +1002,11 @@ class MohuQROIVFN(fuzzNum):
                 'ERROR: The qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: The mtype must be same.'
-            return self.score <= oth.score
+            return self.score() <= oth.score()
 
         if isinstance(other, MohuQROIVFN):
             return __le(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__le)
             res = vec_func(other.set)
@@ -1025,11 +1026,11 @@ class MohuQROIVFN(fuzzNum):
                 'ERROR: The qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: The mtype must be same.'
-            return self.score >= oth.score
+            return self.score() >= oth.score()
 
         if isinstance(other, MohuQROIVFN):
             return __ge(other)
-        from.mohusets import mohuset
+        from .mohusets import mohuset
         if isinstance(other, mohuset):
             vec_func = np.vectorize(__ge)
             res = vec_func(other.set)
@@ -1061,36 +1062,218 @@ class MohuQROIVFN(fuzzNum):
     def convert(self):
         return np.round(self.md, 4).tolist(), np.round(self.nmd, 4).tolist()
 
-    def plot(self, other=None, color='red', alpha=0.3):
-        md = self.md
-        nmd = self.nmd
-        q = self.qrung
+    # def plot(self, other=None, color='red', alpha=0.3):
+    #     md = self.md
+    #     nmd = self.nmd
+    #     q = self.qrung
+    #
+    #     x = np.linspace(0, 1, 1000)
+    #
+    #     plt.gca().spines['top'].set_linewidth(False)
+    #     plt.gca().spines['bottom'].set_linewidth(True)
+    #     plt.gca().spines['left'].set_linewidth(True)
+    #     plt.gca().spines['right'].set_linewidth(False)
+    #     plt.axis((0, 1.1, 0, 1.1))
+    #     plt.axhline(y=0)
+    #     plt.axvline(x=0)
+    #
+    #     plt.fill([md[0], md[1], md[1], md[0]],
+    #              [nmd[1], nmd[1], nmd[0], nmd[0]],
+    #              color=color, alpha=alpha)
+    #
+    #     if other is not None:
+    #         assert isinstance(other, MohuQROIVFN), \
+    #             'ERROR: other must be a mohunum object.'
+    #         assert other.qrung == q, \
+    #             'ERROR: The qrungs are not equal'
+    #         assert self.mtype == other.mtype, \
+    #             'ERROR: The type of two fuzzy numbers must be same.'
+    #         plt.fill([other.md[0], other.md[1], other.md[1], other.md[0]],
+    #                  [other.nmd[1], other.nmd[1], other.nmd[0], other.nmd[0]],
+    #                  color=color, alpha=alpha)
+    #
+    #     y = (1 - x ** q) ** (1 / q)
+    #     plt.plot(x, y)
+    #     plt.show()
 
-        x = np.linspace(0, 1, 1000)
 
-        plt.gca().spines['top'].set_linewidth(False)
-        plt.gca().spines['bottom'].set_linewidth(True)
-        plt.gca().spines['left'].set_linewidth(True)
-        plt.gca().spines['right'].set_linewidth(False)
-        plt.axis((0, 1.1, 0, 1.1))
-        plt.axhline(y=0)
-        plt.axvline(x=0)
+@fuzzType('qrohfn')
+class MohuQROHFN(fuzzNum):
+    qrung = None
+    __md = []
+    __nmd = []
+    mtype = None
 
-        plt.fill([md[0], md[1], md[1], md[0]],
-                 [nmd[1], nmd[1], nmd[0], nmd[0]],
-                 color=color, alpha=alpha)
+    def __init__(self, qrung: Union[int, np.int_] = None,
+                 md: Union[list, np.ndarray] = None,
+                 nmd: Union[list, np.ndarray] = None):
+        super().__init__()
+        if isinstance(md, Union[list, np.ndarray]) and isinstance(nmd, Union[list, np.ndarray]):
+            mds = np.asarray(md)
+            nmds = np.asarray(nmd)
+            if mds.size == 0 and nmds.size == 0: pass
+            if mds.size == 0 and nmds.size != 0:
+                assert np.max(nmds) <= 1 and np.min(nmds) >= 0, \
+                    'non-membership degrees must be in the interval [0,1].'
+            if mds.size != 0 and nmds.size == 0:
+                assert np.max(mds) <= 1 and np.min(mds) >= 0, \
+                    'membership degrees must be in the interval [0,1].'
+            if mds.size > 0 and nmds.size > 0:
+                assert np.max(mds) <= 1 and np.max(nmds) <= 1 and \
+                       np.min(mds) >= 0 and np.min(nmds) >= 0, 'ERROR: must be in [0,1].'
+                assert 0 <= np.max(mds) ** qrung + np.max(nmds) ** qrung <= 1, 'ERROR'
 
-        if other is not None:
-            assert isinstance(other, MohuQROIVFN), \
-                'ERROR: other must be a mohunum object.'
-            assert other.qrung == q, \
-                'ERROR: The qrungs are not equal'
-            assert self.mtype == other.mtype, \
-                'ERROR: The type of two fuzzy numbers must be same.'
-            plt.fill([other.md[0], other.md[1], other.md[1], other.md[0]],
-                     [other.nmd[1], other.nmd[1], other.nmd[0], other.nmd[0]],
-                     color=color, alpha=alpha)
+            self.qrung = qrung
+            self.__md = mds
+            self.__nmd = nmds
+            self.mtype = 'qrohfn'
+            self.size = 1
 
-        y = (1 - x ** q) ** (1 / q)
-        plt.plot(x, y)
-        plt.show()
+    def __repr__(self):
+        if len(self.__md) > 12 or len(self.__nmd) > 12:
+            return f'({len(self.__md)},{len(self.__nmd)})<{np.round(self.__md, 4)[:12]}...,' \
+                   f'{np.round(self.__nmd, 4)[:12]}...>'
+        else:
+            return f'({len(self.__md)},{len(self.__nmd)})<{np.round(self.__md, 4)},' \
+                   f'{np.round(self.__nmd, 4)}>'
+
+    def __str__(self):
+        if len(self.__md) > 12 or len(self.__nmd) > 12:
+            return f'<{np.round(self.__md, 4)[:12]}...,\n{np.round(self.__nmd, 4)[:12]}...>'
+        else:
+            return f'<{np.round(self.__md, 4)},\n {np.round(self.__nmd, 4)}>'
+
+    @property
+    def md(self):
+        return self.__md
+
+    @md.setter
+    def md(self, value):
+        self.__md = np.asarray(value)
+
+    @property
+    def nmd(self):
+        return self.__nmd
+
+    @nmd.setter
+    def nmd(self, value):
+        self.__nmd = np.asarray(value)
+
+    def score(self):
+        mm = ((self.__md ** self.qrung).sum()) / len(self.__md)
+        nn = ((self.__nmd ** self.qrung).sum()) / len(self.__nmd)
+        return mm - nn
+
+    def acc(self):
+        mm = ((self.__md ** self.qrung).sum()) / len(self.__md)
+        nn = ((self.__nmd ** self.qrung).sum()) / len(self.__nmd)
+        return mm + nn
+
+    def ind(self):
+        mm = ((self.__md ** self.qrung).sum()) / len(self.__md)
+        nn = ((self.__nmd ** self.qrung).sum()) / len(self.__nmd)
+        if mm + nn == 1.:
+            return 0.
+        else:
+            return (1. - mm - nn) ** (1 / self.qrung)
+
+    def comp(self):
+        newfn = copy.deepcopy(self)
+        if self.__md.size == 0 and self.__nmd.size != 0:
+            newfn.md = np.array([])
+            newfn.nmd = 1. - self.__nmd
+        elif self.__md.size != 0 and self.__nmd.size == 0:
+            newfn.md = 1. - self.__md
+            newfn.nmd = np.array([])
+        else:
+            newfn.md = self.__nmd
+            newfn.nmd = self.__md
+        return newfn
+
+    def __add__(self, other):
+        pass
+
+    def __radd__(self, other):
+        pass
+
+    def __sub__(self, other):
+        pass
+
+    def __mul__(self, other):
+        pass
+
+    def __rmul__(self, other):
+        pass
+
+    def __truediv__(self, other):
+        pass
+
+    def __pow__(self, power, modulo=None):
+        pass
+
+    def __and__(self, other):
+        pass
+
+    def __or__(self, other):
+        pass
+
+    def __eq__(self, other):
+        pass
+
+    def __ne__(self, other):
+        pass
+
+    def __lt__(self, other):
+        pass
+
+    def __gt__(self, other):
+        pass
+
+    def __le__(self, other):
+        pass
+
+    def __ge__(self, other):
+        pass
+
+    def is_valid(self):
+        a1 = self.__md.size == 0 and self.__nmd.size == 0
+        a2 = self.__md.size == 0 and 0 <= self.__nmd.all() <= 1
+        a3 = self.__nmd.size == 0 and 0 <= self.__md.all() <= 1
+        a4 = min(self.__md) >= 0 and min(self.__nmd) >= 0 and max(self.__md) ** self.qrung + max(
+            self.__nmd) ** self.qrung <= 1
+        if a1:
+            # print('a1')
+            return True
+        elif a2:
+            # print('a2')
+            return True
+        elif a3:
+            # print('a3')
+            return True
+        elif a4:
+            # print('a4')
+            return True
+        else:
+            return False
+
+    def isEmpty(self):
+        if self.__md.size == 0 and self.__nmd.size == 0:
+            return True
+        else:
+            return False
+
+    def convert(self):
+        m = np.round(self.__md, 4).tolist()
+        n = np.round(self.__nmd, 4).tolist()
+        return m, n
+
+    def qsort(self, rev=True):
+        newEle = copy.deepcopy(self)
+        if rev:
+            newEle.md = np.sort(self.__md)
+            newEle.nmd = np.sort(self.__nmd)
+        else:
+            newEle.md = np.abs(np.sort(-self.__md))
+            newEle.nmd = np.abs(np.sort(-self.__nmd))
+        return newEle
+

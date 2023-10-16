@@ -7,6 +7,7 @@
 
 __all__ = []
 
-from .random import random, choice
+from .random import rand, choice
+from .random import *
 
-__all__ += ['random', 'choice']
+__all__ += ['rand', 'choice']

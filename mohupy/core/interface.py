@@ -22,7 +22,7 @@ class Memoize:
 
 @Memoize
 def mohuParent(base):
-    class fuzz(base):
+    class mohunum(base):
         def __init__(self, qrung, md, nmd):
             base.__init__(self, qrung, md, nmd)
 
@@ -50,7 +50,7 @@ def mohuParent(base):
 
         @property
         def T(self):
-            newfn = fuzz(self.qrung, self.md, self.nmd)
+            newfn = mohunum(self.qrung, self.md, self.nmd)
             return newfn
 
         def is_valid(self):
@@ -68,19 +68,7 @@ def mohuParent(base):
                 return asfuzzset([self])
             raise ValueError(f'cannot reshape mohunum of size {self.size} to {n}')
 
-        def plot(self,
-                 other=None,
-                 area=None,
-                 color='red',
-                 color_area=None,
-                 alpha=0.3):
-            # TODO: 这里需要将画图函数统一，类中不能包含任何模糊集信息（'qrofn','ivfn'）
-            if self.mtype == 'qrofn':
-                return base.plot(self, other, area, color, color_area, alpha)
-            if self.mtype == 'ivfn':
-                return base.plot(self, other, color, alpha)
-
-    return fuzz
+    return mohunum
 
 
 import shutil

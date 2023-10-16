@@ -1,61 +1,35 @@
 #  Copyright (c) yibocat 2023 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/10/1 下午3:05
+#  Date: 2023/10/16 下午8:22
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 import numpy as np
 
-from ..core.mohusets import mohuset
-from ..core.mohunum import mohunum
-from ..core.base import fuzzNum
+from ..registry.random import fuzzRandom
 
 
-def __rand_qrofn(q=1):
+def randnum(q: int, mtype: str):
     """
-        Randomly generate a q-rung orthopair fuzzy number.
+        randomly generate a fuzzy number
 
         Parameters
         ----------
             q : int
                 The q-rung
+            mtype : str
+                The type of fuzzy number to be generated
+
         Returns
         -------
-            newfn : mohunum
+            fuzzNum
     """
-    newfn = mohunum(q, 0., 0.)
-    while True:
-        newfn.md = np.random.rand()
-        newfn.nmd = np.random.rand()
-        if newfn.is_valid():
-            break
-    return newfn
+    return fuzzRandom[mtype](q)
 
 
-def __rand_ivfn(q=1):
+def randset(q: int, mtype: str, *n):
     """
-        Randomly generate an interval-valued q-rung orthopair fuzzy number.
-
-        Parameters
-        ----------
-            q : int
-                The q-rung
-        Returns
-        -------
-            newfn : mohunum
-    """
-    newfn = mohunum(q, [0., 0.], [0., 0.])
-    while True:
-        newfn.md = [np.random.rand(), np.random.rand()]
-        newfn.nmd = [np.random.rand(), np.random.rand()]
-        if newfn.is_valid():
-            break
-    return newfn
-
-
-def __rand_set(q=1, mtype='qrofn', *n):
-    """
-        Randomly generate a set of fuzzy numbers.
+        Randomly generate a fuzzy set
 
         Parameters
         ----------
@@ -65,29 +39,27 @@ def __rand_set(q=1, mtype='qrofn', *n):
                 The type of fuzzy number to be generated
             n : int
                 The number of fuzzy numbers to be generated
+
         Returns
         -------
-            newset : mohuset
+            mohuset
     """
-    def __random(__damm: fuzzNum):
-        if __damm.mtype == 'qrofn':
-            return __rand_qrofn(q)
-        if __damm.mtype == 'ivfn':
-            return __rand_ivfn(q)
-        raise ValueError('Invalid fuzzy type.')
+    from ..core.base import fuzzNum
+
+    def __rand(f: fuzzNum):
+        return randnum(f.qrung, f.mtype)
 
     from ..utils.construct import zeros
     newset = zeros(q, mtype, *n)
-
-    vec_func = np.vectorize(__random)
+    vec_func = np.vectorize(__rand)
     result = vec_func(newset.set)
     newset.set = result
     return newset
 
 
-def random(q: int = 1, mtype: str = 'qrofn', *n):
+def rand(q: int, mtype: str, *n):
     """
-        Randomly generate a fuzzy number or fuzzy set.
+        random fuzzy function
 
         Parameters
         ----------
@@ -97,18 +69,19 @@ def random(q: int = 1, mtype: str = 'qrofn', *n):
                 The type of fuzzy number to be generated
             n : int
                 The number of fuzzy numbers to be generated
+
         Returns
         -------
-            mohunum or mohuset
+            mohuset or fuzzNum
     """
     if len(n) == 0:
-        if mtype == 'qrofn':
-            return __rand_qrofn(q)
-        if mtype == 'ivfn':
-            return __rand_ivfn(q)
-        raise ValueError('Invalid fuzzy type.')
+        return randnum(q, mtype)
     else:
-        return __rand_set(q, mtype, *n)
+        return randset(q, mtype, *n)
+
+
+from ..core.mohusets import mohuset
+from ..core.base import fuzzNum
 
 
 def choice(f: mohuset) -> fuzzNum:
@@ -122,6 +95,6 @@ def choice(f: mohuset) -> fuzzNum:
 
         Returns
         -------
-            mohunum
+            fuzzNum
     """
     return np.random.choice(f.set.flatten())

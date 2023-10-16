@@ -139,5 +139,5 @@ def mohunum(qrung, md, nmd):
             isinstance(nmd, Union[list, tuple, np.ndarray]):
         mohuType = 'ivfn'
 
-    from ..runtime import fuzzType
+    from .mohu import fuzzType
     return mohuParent(fuzzType.get(mohuType))(qrung, md, nmd)

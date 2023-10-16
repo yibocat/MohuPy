@@ -3,10 +3,12 @@ from typing import Union
 import numpy as np
 from matplotlib import pyplot as plt
 
-from mohupy import fuzzType, asfuzzset
+from mohupy import asfuzzset
 from mohupy.core.base import fuzzNum
 
 
+# from .mohu import fuzzType
+#
 # @fuzzType('template')
 class template(fuzzNum):
     """
@@ -353,31 +355,3 @@ class template(fuzzNum):
             return asfuzzset([self])
         raise ValueError(f'cannot reshape mohunum of size {self.size} to {n}')
 
-    def plot(self, other=None, color='red', alpha=0.3):
-        """
-            The following code is an example and can be completely replaced
-            to suit your needs.
-        """
-        q = self.qrung
-
-        x = np.linspace(0, 1, 1000)
-
-        plt.gca().spines['top'].set_linewidth(False)
-        plt.gca().spines['bottom'].set_linewidth(True)
-        plt.gca().spines['left'].set_linewidth(True)
-        plt.gca().spines['right'].set_linewidth(False)
-        plt.axis((0, 1.1, 0, 1.1))
-        plt.axhline(y=0)
-        plt.axvline(x=0)
-
-        if other is not None:
-            assert other.qrung == q, 'ERROR: The qrungs are not equal'
-            plt.scatter(other.md, other.nmd, color=color, marker='*')
-
-        y = (1 - x ** q) ** (1 / q)
-        #
-        # n = (nmd ** q / (1 - md ** q) * (1 - x ** q)) ** (1 / q)
-        # m = (md ** q / (1 - nmd ** q) * (1 - x ** q)) ** (1 / q)
-
-        plt.plot(x, y)
-        plt.show()

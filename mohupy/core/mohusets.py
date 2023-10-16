@@ -25,6 +25,8 @@ class mohuset(MohuBase):
     def __init__(self, qrung=None, mtype='qrofn'):
         super().__init__()
         if qrung is not None or mtype is None:
+            from .mohu import fuzzType
+            assert mtype in fuzzType.keys(), f'Unknown fuzzy type: {mtype}'
             assert qrung > 0, 'qrung must be greater than 0.'
             self.__qrung = qrung
             self.__mtype = mtype
@@ -88,10 +90,10 @@ class mohuset(MohuBase):
     @property
     def md(self):
         def __md(x):
-            if x.mtype == 'qrofn':
-                return x.md
-            if x.mtype == 'ivfn':
-                return np.array(x.md, dtype=list)
+            if isinstance(x.md, Union[int, float, np.float_, np.int_]):
+                return np.float_(x.md)
+            if isinstance(x.md, Union[np.ndarray, list]):
+                return np.array(x.md, dtype=object)
 
         vec_func = np.vectorize(__md)
         return vec_func(self.__set)
@@ -99,10 +101,10 @@ class mohuset(MohuBase):
     @property
     def nmd(self):
         def __nmd(x):
-            if x.mtype == 'qrofn':
+            if isinstance(x.nmd, Union[int, float, np.float_, np.int_]):
                 return x.nmd
-            if x.mtype == 'ivfn':
-                return np.array(x.nmd, dtype=list)
+            if isinstance(x.nmd, Union[np.ndarray, list]):
+                return np.array(x.md, dtype=object)
 
         vec_func = np.vectorize(__nmd)
         return vec_func(self.__set)
@@ -155,7 +157,6 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             assert other.mtype == self.__mtype, \
                 'ERROR: The fuzzy number and set must be of the same type.'
             assert other.qrung == self.__qrung, \
@@ -188,9 +189,8 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             assert other.mtype == self.__mtype, \
-                        'ERROR: The fuzzy number and set must be of the same type.'
+                'ERROR: The fuzzy number and set must be of the same type.'
             assert other.qrung == self.__qrung, \
                 'ERROR: The fuzzy number and set must be of the same Q-rung.'
 
@@ -221,7 +221,6 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             assert other.mtype == self.__mtype, \
                 'ERROR: The fuzzy number and set must be of the same type.'
             assert other.qrung == self.__qrung, \
@@ -263,9 +262,8 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             assert other.mtype == self.__mtype, \
-                    'ERROR: The fuzzy number and set must be of the same type.'
+                'ERROR: The fuzzy number and set must be of the same type.'
             assert other.qrung == self.__qrung, \
                 'ERROR: The fuzzy number and set must be of the same Q-rung.'
             newset = mohuset(self.__qrung, self.__mtype)
@@ -320,7 +318,6 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             return self.__set == other
         raise TypeError(f'Invalid type {type(other)}')
 
@@ -333,7 +330,6 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             return self.__set != other
         raise TypeError(f'Invalid type {type(other)}')
 
@@ -346,7 +342,6 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             return self.__set < other
         raise TypeError(f'Invalid type {type(other)}')
 
@@ -359,7 +354,6 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             return self.__set > other
         raise TypeError(f'Invalid type {type(other)}')
 
@@ -372,7 +366,6 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             return self.__set <= other
         raise TypeError(f'Invalid type {type(other)}')
 
@@ -385,7 +378,6 @@ class mohuset(MohuBase):
 
         from .base import fuzzNum
         if isinstance(other, fuzzNum):
-
             return self.__set >= other
         raise TypeError(f'Invalid type {type(other)}')
 
@@ -440,53 +432,35 @@ class mohuset(MohuBase):
         self.__ndim = self.__set.ndim
         return self
 
+    def is_valid(self):
+        fs = lambda x: x.is_valid()
+        vec_func = np.vectorize(fs)
+        return vec_func(self.__set)
+
+    def isEmpty(self):
+        fs = lambda x: x.isEmpty()
+        vec_func = np.vectorize(fs)
+        return vec_func(self.__set)
+
     def max(self, show=True, axis=None):
         if axis is None:
-            if self.__mtype == 'qrofn':
-                index = np.unravel_index(np.argmax(self.__set), self.__shape)
-                if show:
-                    print(index)
-                return self.__set[index]
-            if self.__mtype == 'ivfn':
-                # TODO: 这里的区间值比较采用的得分值，后期会进行修正
-                index = np.unravel_index(np.argmax(self.score), self.__shape)
-                if show:
-                    print(index)
-                return self.__set[index]
-            raise ValueError(f'Invalid mtype: {self.__mtype}')
+            index = np.unravel_index(np.argmax(self.__set), self.__shape)
+            if show:
+                print(index)
+            return self.__set[index]
         else:
             from ..utils import asfuzzset
-            if self.__mtype == 'qrofn':
-                return asfuzzset(self.__set.max(axis=axis))
-            if self.__mtype == 'ivfn':
-                # TODO: 这里的区间值比较采用的得分值，后期会进行修正
-                index = np.unravel_index(np.argmax(self.score, axis=axis), self.__shape)
-                return asfuzzset(self.__set[index])
-            raise ValueError(f'Invalid mtype: {self.__mtype}')
+            return asfuzzset(np.max(self.__set, axis=axis))
 
     def min(self, show=True, axis=None):
         if axis is None:
-            if self.__mtype == 'qrofn':
-                index = np.unravel_index(np.argmin(self.__set), self.__shape)
-                if show:
-                    print(index)
-                return self.__set[index]
-            if self.__mtype == 'ivfn':
-                # TODO: 这里的区间值比较采用的得分值，后期会进行修正
-                index = np.unravel_index(np.argmin(self.score), self.__shape)
-                if show:
-                    print(index)
-                return self.__set[index]
-            raise ValueError(f'Invalid mtype: {self.__mtype}')
+            index = np.unravel_index(np.argmin(self.__set), self.__shape)
+            if show:
+                print(index)
+            return self.__set[index]
         else:
             from ..utils import asfuzzset
-            if self.__mtype == 'qrofn':
-                return asfuzzset(self.__set.min(axis=axis))
-            if self.__mtype == 'ivfn':
-                # TODO: 这里的区间值比较采用的得分值，后期会进行修正
-                index = np.unravel_index(np.argmin(self.score, axis=axis), self.__shape)
-                return asfuzzset(self.__set[index])
-            raise ValueError(f'Invalid mtype: {self.__mtype}')
+            return asfuzzset(np.min(self.__set, axis=axis))
 
     def fmax(self, func, *args, show=True):
         slist = func(self.__set, *args)
@@ -527,34 +501,3 @@ class mohuset(MohuBase):
         self.__shape = tuple(mset['shape'])
         self.__size = mset['size']
         self.__ndim = mset['ndim']
-
-    def plot(self, color='red', alpha=0.3):
-        q = self.__qrung
-        x = np.linspace(0, 1, 1000)
-
-        plt.gca().spines['top'].set_linewidth(False)
-        plt.gca().spines['bottom'].set_linewidth(True)
-        plt.gca().spines['left'].set_linewidth(True)
-        plt.gca().spines['right'].set_linewidth(False)
-        plt.axis((0, 1.1, 0, 1.1))
-        plt.axhline(y=0)
-        plt.axvline(x=0)
-
-        if self.__mtype == 'qrofn':
-            md = self.md
-            nmd = self.nmd
-
-            plt.scatter(md, nmd, color=color, marker='.', alpha=alpha)
-        if self.__mtype == 'ivfn':
-            def __plot(x):
-                md = x.md
-                nmd = x.nmd
-                plt.fill([md[0], md[1], md[1], md[0]],
-                         [nmd[1], nmd[1], nmd[0], nmd[0]],
-                         color=color, alpha=alpha)
-            plot_func = np.vectorize(__plot)
-            plot_func(self.__set)
-
-        y = (1 - x ** q) ** (1 / q)
-        plt.plot(x, y)
-        plt.show()
