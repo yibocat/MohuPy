@@ -12,8 +12,20 @@ from .core.interface import mohuParent
 # and values represent subclasses.
 fuzzParent = mohuParent.memo
 
-
+from .core.mohu import fuzzType
 from .registry.distance import fuzzDis
 from .registry.image import fuzzPlot
 from .registry.string2num import fuzzString
-from .core.mohu import fuzzType
+from .registry.random import fuzzRandom
+from .registry.construct import fuzzZeros, fuzzPoss, fuzzNegs
+
+
+class runtime:
+    type = fuzzType
+    distance = fuzzDis
+    plot = fuzzPlot
+    string = fuzzString
+    random = fuzzRandom
+    zeros = fuzzZeros
+    poss = fuzzPoss
+    negs = fuzzNegs

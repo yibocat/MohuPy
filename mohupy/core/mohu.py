@@ -11,6 +11,7 @@ from typing import Union
 from .base import fuzzNum
 
 import numpy as np
+
 from ..registry.regedit import Register
 
 fuzzType = Register()
@@ -94,6 +95,9 @@ class MohuQROFN(fuzzNum):
         newf.md = self.nmd
         newf.nmd = self.md
         return newf
+
+    def T(self):
+        return MohuQROFN(self.qrung, self.md, self.nmd)
 
     def __add__(self, other):
         q = self.qrung
@@ -626,15 +630,15 @@ class MohuQROFN(fuzzNum):
 @fuzzType('ivfn')
 class MohuQROIVFN(fuzzNum):
     qrung = None
-    md = None
-    nmd = None
+    md = np.array([])
+    nmd = np.array([])
     mtype = None
 
     def __init__(self, qrung: Union[int, np.int_] = None,
-                 md: Union[list, tuple, np.ndarray] = None,
-                 nmd: Union[list, tuple, np.ndarray] = None):
+                 md: Union[tuple, list, np.ndarray] = None,
+                 nmd: Union[tuple, list, np.ndarray] = None):
         super().__init__()
-        if isinstance(md, (list, tuple, np.ndarray)) and isinstance(nmd, (list, tuple, np.ndarray)):
+        if isinstance(md, Union[tuple, list, np.ndarray]) and isinstance(nmd, Union[tuple, list, np.ndarray]):
             assert len(md) == 2 and len(nmd) == 2, \
                 'ERROR: The data format contains at least upper and lower bounds.'
             assert md[0] <= md[1] and nmd[0] <= nmd[1], \
@@ -681,6 +685,9 @@ class MohuQROIVFN(fuzzNum):
         newf.md = self.nmd
         newf.nmd = self.md
         return newf
+
+    def T(self):
+        return MohuQROIVFN(self.qrung, self.md, self.nmd)
 
     def __add__(self, other):
         q = self.qrung
@@ -1111,7 +1118,8 @@ class MohuQROHFN(fuzzNum):
         if isinstance(md, Union[list, np.ndarray]) and isinstance(nmd, Union[list, np.ndarray]):
             mds = np.asarray(md)
             nmds = np.asarray(nmd)
-            if mds.size == 0 and nmds.size == 0: pass
+            if mds.size == 0 and nmds.size == 0:
+                pass
             if mds.size == 0 and nmds.size != 0:
                 assert np.max(nmds) <= 1 and np.min(nmds) >= 0, \
                     'non-membership degrees must be in the interval [0,1].'
@@ -1130,18 +1138,24 @@ class MohuQROHFN(fuzzNum):
             self.size = 1
 
     def __repr__(self):
-        if len(self.__md) > 12 or len(self.__nmd) > 12:
-            return f'({len(self.__md)},{len(self.__nmd)})<{np.round(self.__md, 4)[:12]}...,' \
-                   f'{np.round(self.__nmd, 4)[:12]}...>'
+        if len(self.__md) > 8 >= len(self.__nmd):
+            return f'<{np.round(self.__md[:8], 4)}..., {np.round(self.__nmd, 4)}>'
+        if len(self.__nmd) > 8 >= len(self.__md):
+            return f'<{np.round(self.__md, 4)}, {np.round(self.__nmd[:8], 4)}...>'
+        if len(self.__md) > 8 and len(self.__nmd) > 8:
+            return f'<{np.round(self.__md[:8], 4)}..., {np.round(self.__nmd[:8], 4)}...>'
         else:
-            return f'({len(self.__md)},{len(self.__nmd)})<{np.round(self.__md, 4)},' \
-                   f'{np.round(self.__nmd, 4)}>'
+            return f'<{np.round(self.__md, 4)}, {np.round(self.__nmd, 4)}>'
 
     def __str__(self):
-        if len(self.__md) > 12 or len(self.__nmd) > 12:
-            return f'<{np.round(self.__md, 4)[:12]}...,\n{np.round(self.__nmd, 4)[:12]}...>'
+        if len(self.__md) > 8 >= len(self.__nmd):
+            return f'<{np.round(self.__md[:8], 4)}..., {np.round(self.__nmd, 4)}>'
+        if len(self.__nmd) > 8 >= len(self.__md):
+            return f'<{np.round(self.__md, 4)}, {np.round(self.__nmd[:8], 4)}...>'
+        if len(self.__md) > 8 and len(self.__nmd) > 8:
+            return f'<{np.round(self.__md[:8], 4)}..., {np.round(self.__nmd[:8], 4)}...>'
         else:
-            return f'<{np.round(self.__md, 4)},\n {np.round(self.__nmd, 4)}>'
+            return f'<{np.round(self.__md, 4)}, {np.round(self.__nmd, 4)}>'
 
     @property
     def md(self):
@@ -1158,6 +1172,11 @@ class MohuQROHFN(fuzzNum):
     @nmd.setter
     def nmd(self, value):
         self.__nmd = np.asarray(value)
+
+    @property
+    def info(self):
+        print(f'<({len(self.__md)},{len(self.__nmd)}), qrung={self.qrung}>, mtype={self.mtype}>')
+        return None
 
     def score(self):
         mm = ((self.__md ** self.qrung).sum()) / len(self.__md)
@@ -1189,6 +1208,9 @@ class MohuQROHFN(fuzzNum):
             newfn.md = self.__nmd
             newfn.nmd = self.__md
         return newfn
+
+    def T(self):
+        return MohuQROHFN(self.qrung, self.__md, self.__nmd)
 
     def __add__(self, other):
         pass
@@ -1277,3 +1299,10 @@ class MohuQROHFN(fuzzNum):
             newEle.nmd = np.abs(np.sort(-self.__nmd))
         return newEle
 
+    def unique(self, x=4):
+        """
+            Simplify the membership and non-membership degrees with x precision
+        """
+        assert x > 1, "x must be greater than 1"
+        self.__md = np.unique(np.round(self.__md, x))
+        self.__nmd = np.unique(np.round(self.__nmd, x))

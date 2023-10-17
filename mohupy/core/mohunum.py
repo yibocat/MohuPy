@@ -135,9 +135,11 @@ def mohunum(qrung, md, nmd):
             isinstance(nmd, Union[int, float, np.int_, np.float_]):
         mohuType = 'qrofn'
 
-    if isinstance(md, Union[list, tuple, np.ndarray]) and \
-            isinstance(nmd, Union[list, tuple, np.ndarray]):
+    if isinstance(md, tuple) and isinstance(nmd, tuple):
         mohuType = 'ivfn'
+
+    if isinstance(md, Union[list, np.ndarray]) and isinstance(nmd, Union[list, np.ndarray]):
+        mohuType = 'qrohfn'
 
     from .mohu import fuzzType
     return mohuParent(fuzzType.get(mohuType))(qrung, md, nmd)

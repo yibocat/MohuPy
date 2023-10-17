@@ -12,7 +12,7 @@ fuzzRandom = Register()
 
 
 @fuzzRandom('qrofn')
-def random_qrofn(q):
+def random_qrofn(q, num=0):
     """
         Randomly generate a q-rung orthopair fuzzy number.
 
@@ -20,6 +20,8 @@ def random_qrofn(q):
         ----------
             q:  int
                 The q rung
+            num:  int
+                default 1
 
         Returns
         -------
@@ -36,21 +38,23 @@ def random_qrofn(q):
 
 
 @fuzzRandom('ivfn')
-def random_ivfn(q):
+def random_ivfn(q, num=0):
     """
-        Randomly generate a q-rung orthopair fuzzy number.
+        Randomly generate a interval-valued q-rung orthopair fuzzy number.
 
         Parameters
         ----------
             q:  int
                 The q rung
+            num: int
+                default 1
 
         Returns
         -------
             mohunum
     """
     from ..core.mohunum import mohunum
-    newfn = mohunum(q, [0., 0.], [0., 0.])
+    newfn = mohunum(q, (0., 0.), (0., 0.))
     while True:
         newfn.md = np.asarray([np.random.rand(), np.random.rand()])
         newfn.nmd = np.asarray([np.random.rand(), np.random.rand()])
@@ -60,8 +64,31 @@ def random_ivfn(q):
 
 
 @fuzzRandom('qrohfn')
-def random_qrohfn(q):
-    pass
+def random_qrohfn(q, num):
+    """
+        Randomly generate a q-rung orthopair hesitant fuzzy number.
+        Parameters
+        ----------
+            q:  int
+                The q rung
+            num : int
+                Maximum number of membership and non-membership degrees
+                of q-rung orthopair hesitant fuzzy number
+
+        Returns
+        -------
+            mohunum
+    """
+    from ..core.mohunum import mohunum
+    newfn = mohunum(q, [], [])
+    newfn.md = np.random.rand(np.random.randint(1, num))
+    newfn.nmd = np.random.rand(np.random.randint(1, num))
+    while True:
+        newfn.md = np.random.rand(np.random.randint(1, num))
+        newfn.nmd = np.random.rand(np.random.randint(1, num))
+        if newfn.is_valid():
+            break
+    return newfn
 
 
 

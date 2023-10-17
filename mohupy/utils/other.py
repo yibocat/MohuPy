@@ -65,7 +65,7 @@ def random_split(data, l):
     return data_1, data_2
 
 
-def show_decision_mat(Data, round=4):
+def show_decision_mat(Data, r=4):
     """
         Show the decision matrix of a fuzzy set.
 
@@ -73,7 +73,7 @@ def show_decision_mat(Data, round=4):
         ----------
             Data:  pandas.DataFrame
                 The fuzzy set.
-            round: int
+            r: int
                 The number of decimal places.
         Returns
         -------
@@ -101,6 +101,6 @@ def show_decision_mat(Data, round=4):
     for i in range(len(Data)):
         alt = []
         for j in range(len(Data[i])):
-            alt.append([np.round(Data[i, j].md, round), np.round(Data[i, j].nmd, 4)])
+            alt.append([np.round(Data[i, j].md, r), np.round(Data[i, j].nmd, 4)])
         matrix.append(alt)
     return pd.DataFrame(matrix, index=suppliers, columns=attributes)

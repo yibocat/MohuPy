@@ -84,9 +84,6 @@ class MohuBase(abc.ABC):
     def convert(self):
         pass
 
-    def plot(self):
-        pass
-
     def max(self, axis=None):
         return self
 

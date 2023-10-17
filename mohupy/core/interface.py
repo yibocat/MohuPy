@@ -50,8 +50,7 @@ def mohuParent(base):
 
         @property
         def T(self):
-            newfn = mohunum(self.qrung, self.md, self.nmd)
-            return newfn
+            return base.T(self)
 
         def is_valid(self):
             return base.is_valid(self)

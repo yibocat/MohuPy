@@ -95,9 +95,9 @@ def plot_ivfn(x: fuzzNum,
 
         Parameters
         ----------
-            x:      MohuQROFN
+            x:      MohuQROIVFN
                     Plot of points to be drawn
-            other : MohuQROFN
+            other : MohuQROIVFN
                     If it is None, only the position of the self point in the fuzzy
                     space is drawn. Otherwise, the position of other in the fuzzy
                     space is also drawn.
@@ -125,7 +125,32 @@ def plot_ivfn(x: fuzzNum,
 
 
 @fuzzPlot('qrohfn')
-def plot_qrohfn(x: fuzzNum, ):
-    pass
+def plot_qrohfn(x: fuzzNum,
+                other: fuzzNum = None,
+                color='red',
+                alpha=0.3,
+                area: list[bool] = None,
+                color_area=None):
+    """
+        This function plots the q-ROHFN distribution in the fuzzy space.
+        If other is not None, it plots the Q-ROFN distribution in the fuzzy space,
+        and other is plotted in the fuzzy space. This helps to see which domain
+        other is at that point.
 
-
+        Parameters
+        ----------
+            x:      MohuQROFN
+                    Plot of points to be drawn
+            other : MohuQROFN
+                    If it is None, only the position of the self point in the fuzzy
+                    space is drawn. Otherwise, the position of other in the fuzzy
+                    space is also drawn.
+            color : str
+                    The color of the Q-ROFN distribution.
+            alpha : float
+                    The transparency of the Q-ROFN distribution.
+            area:   None
+            color_area: None
+    """
+    # TODO: q-ROHFN scatter plot is not implemented yet
+    raise ValueError('q-rung orthopair hesitant fuzzy number scatter plot is not implemented yet')

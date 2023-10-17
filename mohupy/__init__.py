@@ -15,5 +15,9 @@ from .measure import *
 from .measure import integral, indices
 from .random import *
 
-from .runtime import fuzzParent, fuzzPlot, fuzzString, fuzzDis, fuzzType
+# from .runtime import (fuzzParent,  fuzzType,
+#                       fuzzPlot, fuzzString, fuzzDis,
+#                       fuzzRandom, fuzzZeros, fuzzPoss,fuzzNegs)
+
+from .runtime import runtime
 from .registry import *

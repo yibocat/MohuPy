@@ -19,7 +19,9 @@
 
 __all__ = []
 from .regedit import Register
+from .distance import normalize
 
 __all__ += [
-    'Register'
+    'Register',
+    'normalize'
 ]

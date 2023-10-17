@@ -5,11 +5,95 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from ..core.mohunum import mohunum
+# from ..core.mohunum import mohunum
 from ..core.mohusets import mohuset
 from ..core.base import fuzzNum
 
 import numpy as np
+
+
+# def zeros(q, mtype, *n):
+#     """
+#          Generate an *n all-zero fuzzy set
+#
+#         Parameters
+#         ----------
+#             q : int
+#                     The qrung of the fuzzy set
+#             mtype : str
+#                     The type of the fuzzy set
+#             n : int
+#                     The shape of the fuzzy set
+#         Returns
+#         -------
+#             newset : mohuset
+#     """
+#     if mtype == 'qrofn':
+#         s = np.full(n, mohunum(q, 0., 0.), dtype=object)
+#     elif mtype == 'ivfn':
+#         s = np.full(n, mohunum(q, [0., 0.], [0., 0.]), dtype=object)
+#     else:
+#         raise TypeError(f'Unknown mtype: {mtype}')
+#     newset = mohuset(q, mtype)
+#     newset.set = s
+#     return newset
+#
+#
+# def poss(q, mtype, *n):
+#     """
+#         Generate an *n all-positive fuzzy set
+#
+#         Parameters
+#         ----------
+#             q : int
+#                     The qrung of the fuzzy set
+#             mtype : str
+#                     The type of the fuzzy set
+#             n : int
+#                     The shape of the fuzzy set
+#         Returns
+#         -------
+#             newset : mohuset
+#     """
+#     if mtype == 'qrofn':
+#         s = np.full(n, mohunum(q, 1., 0.), dtype=object)
+#     elif mtype == 'ivfn':
+#         s = np.full(n, mohunum(q, [1., 1.], [0., 0.]), dtype=object)
+#     else:
+#         raise TypeError(f'Unknown mtype: {mtype}')
+#     newset = mohuset(q, mtype)
+#     newset.set = s
+#     return newset
+#
+#
+# def negs(q, mtype, *n):
+#     """
+#         Generate an *n all-negative fuzzy set
+#
+#         Parameters
+#         ----------
+#             q : int
+#                     The qrung of the fuzzy set
+#             mtype : str
+#                     The type of the fuzzy set
+#             n : int
+#                     The shape of the fuzzy set
+#         Returns
+#         -------
+#             newset : mohuset
+#     """
+#     if mtype == 'qrofn':
+#         s = np.full(n, mohunum(q, 0., 1.), dtype=object)
+#     elif mtype == 'ivfn':
+#         s = np.full(n, mohunum(q, [0., 0.], [1., 1.]), dtype=object)
+#     else:
+#         raise TypeError(f'Unknown mtype: {mtype}')
+#     newset = mohuset(q, mtype)
+#     newset.set = s
+#     return newset
+#
+
+from ..registry.construct import fuzzZeros, fuzzPoss, fuzzNegs
 
 
 def zeros(q, mtype, *n):
@@ -28,15 +112,7 @@ def zeros(q, mtype, *n):
         -------
             newset : mohuset
     """
-    if mtype == 'qrofn':
-        s = np.full(n, mohunum(q, 0., 0.), dtype=object)
-    elif mtype == 'ivfn':
-        s = np.full(n, mohunum(q, [0., 0.], [0., 0.]), dtype=object)
-    else:
-        raise TypeError(f'Unknown mtype: {mtype}')
-    newset = mohuset(q, mtype)
-    newset.set = s
-    return newset
+    return fuzzZeros[mtype](q, *n)
 
 
 def poss(q, mtype, *n):
@@ -55,15 +131,7 @@ def poss(q, mtype, *n):
         -------
             newset : mohuset
     """
-    if mtype == 'qrofn':
-        s = np.full(n, mohunum(q, 1., 0.), dtype=object)
-    elif mtype == 'ivfn':
-        s = np.full(n, mohunum(q, [1., 1.], [0., 0.]), dtype=object)
-    else:
-        raise TypeError(f'Unknown mtype: {mtype}')
-    newset = mohuset(q, mtype)
-    newset.set = s
-    return newset
+    return fuzzPoss[mtype](q, *n)
 
 
 def negs(q, mtype, *n):
@@ -82,15 +150,7 @@ def negs(q, mtype, *n):
         -------
             newset : mohuset
     """
-    if mtype == 'qrofn':
-        s = np.full(n, mohunum(q, 0., 1.), dtype=object)
-    elif mtype == 'ivfn':
-        s = np.full(n, mohunum(q, [0., 0.], [1., 1.]), dtype=object)
-    else:
-        raise TypeError(f'Unknown mtype: {mtype}')
-    newset = mohuset(q, mtype)
-    newset.set = s
-    return newset
+    return fuzzNegs[mtype](q, *n)
 
 
 def full(x: fuzzNum, *n):
