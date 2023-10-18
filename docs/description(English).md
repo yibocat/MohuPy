@@ -61,4 +61,4 @@
 4. [ ] Add a fuzzy framework based on PyTorch or TensorFlow, adapted for deep learning development
 5. [ ] Numpy and CuPy have flaws in tensor calculations. Consider adapting PyTorch and TensorFlow.
 6. [ ] Q-rung orthopair fuzzy neural network based on MohuPy
-7. [ ] Adding the calculation of Q-rung orthopair hesitant fuzzy sets
+7. [x] Adding the calculation of Q-rung orthopair hesitant fuzzy sets

@@ -24,9 +24,9 @@ pip install .
 ## TODO
 
  - [x] Regedit
- - [ ] Q-rung orthopair hesitant fuzzy sets
+ - [x] Q-rung orthopair hesitant fuzzy sets
  - [ ] Neural network
- - [ ] Mohunum function(Q-rung orthopair fuzzy function)
+ - [ ] Fuzzy function
  - [ ] Derivatives of mohunum function and gradients of mohuset functions 
  - [ ] Symbol mohu function
  - [ ] Adapted to GPU

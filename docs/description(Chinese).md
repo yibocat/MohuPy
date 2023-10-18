@@ -54,4 +54,4 @@
 4. [ ] 添加基于 PyTorch 或 TensorFlow 的模糊框架，已适配深度学习开发
 5. [ ] Numpy 和 CuPy 进行张量计算存在缺陷，考虑适配 PyTorch 和 TensorFlow
 6. [ ] 基于 MohuPy 的 Q 阶序对模糊神经网络
-7. [ ] 添加 Q 阶序对犹豫模糊集的计算
+7. [x] 添加 Q 阶序对犹豫模糊集的计算

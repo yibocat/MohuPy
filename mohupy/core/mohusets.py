@@ -133,7 +133,7 @@ class mohuset(MohuBase):
     @property
     def mat(self):
         assert 0 <= self.__ndim <= 2, 'ndim must be 0 or 1 or 2.'
-        return pd.DataFrame(self.__set.tolist())
+        return pd.DataFrame(self.__set)
 
     def __add__(self, other):
         if isinstance(other, mohuset):

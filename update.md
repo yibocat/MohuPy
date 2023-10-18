@@ -1,6 +1,11 @@
 # UPDATE LOG
 
 ------
+## version: 0.1.6-10.18.2023
+1. 完善了 `qrohfn` 的所有功能
+2. 修复了一些 bugs
+
+------
 ### version: 0.1.5-10.17.2023
 1. 完善了 `qrohfn` 的功能，并注册
    1. 构造函数(zeros, poss, negs)

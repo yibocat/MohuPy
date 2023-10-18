@@ -33,7 +33,7 @@ def str2qrofn(s: str, q) -> fuzzNum:
     """
     from ..core.mohunum import mohunum
     newfn = mohunum(q, 0., 0.)
-    t = re.findall(r'^\[(\d.*?\d)]$', s)
+    t = re.findall(r'^<(\d.*?\d)>$', s)
     assert len(t) == 1, \
         'data format error.'
     x = re.findall(r'\d.?\d*', t[0])
@@ -49,7 +49,7 @@ def str2qrofn(s: str, q) -> fuzzNum:
 def str2ivfn(s: str, q) -> fuzzNum:
     from ..core.mohunum import mohunum
     newfn = mohunum(q, (0., 0.), (0., 0.))
-    t2 = re.findall(r'\[(\d.*?\d)]', s)
+    t2 = re.findall(r'\[(\d.*?\d)\s?]', s)
     assert len(t2) == 2, \
         'data format error.'
     md = re.findall(r'\d.?\d*', t2[0])
@@ -88,7 +88,7 @@ def str2qrohfn(s: str, q) -> fuzzNum:
     """
     from ..core.mohunum import mohunum
     newfn = mohunum(q, [], [])
-    t2 = re.findall(r'\[(\d.*?\d)]', s)
+    t2 = re.findall(r'\[(\d.*?\d)\s?]', s)
     assert len(t2) == 2, 'ERROR: data format error.'
     md = re.findall(r'\d.?\d*', t2[0])
     nmd = re.findall(r'\d.?\d*', t2[1])
