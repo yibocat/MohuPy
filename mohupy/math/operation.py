@@ -27,7 +27,7 @@ def ein_plus(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
     if mtype == 'qrofn':
         newfn = mohunum(q, 0., 0.)
     elif mtype == 'ivfn':
-        newfn = mohunum(q, [0., 0.], [0., 0.])
+        newfn = mohunum(q, (0., 0.), (0., 0.))
     else:
         raise TypeError(f'Invalid mtype {mtype}')
     newfn.md = einstein_S(f1.md ** q, f2.md ** q) ** (1 / q)
@@ -49,7 +49,7 @@ def ein_mul(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
     if mtype == 'qrofn':
         newfn = mohunum(q, 0., 0.)
     elif mtype == 'ivfn':
-        newfn = mohunum(q, [0., 0.], [0., 0.])
+        newfn = mohunum(q, (0., 0.), (0., 0.))
     else:
         raise TypeError(f'Invalid mtype {mtype}')
     newfn.md = einstein_T(f1.md ** q, f2.md ** q) ** (1 / q)
@@ -63,7 +63,7 @@ def ein_times(f: fuzzNum, l) -> fuzzNum:
     if f.mtype == 'qrofn':
         newfn = mohunum(q, 0., 0.)
     elif f.mtype == 'ivfn':
-        newfn = mohunum(q, [0., 0.], [0., 0.])
+        newfn = mohunum(q, (0., 0.), (0., 0.))
     else:
         raise TypeError(f'Invalid mtype {f.mtype}')
 
@@ -80,7 +80,7 @@ def ein_power(f: fuzzNum, l) -> fuzzNum:
     if f.mtype == 'qrofn':
         newfn = mohunum(q, 0., 0.)
     elif f.mtype == 'ivfn':
-        newfn = mohunum(q, [0., 0.], [0., 0.])
+        newfn = mohunum(q, (0., 0.), (0., 0.))
     else:
         raise TypeError(f'Invalid mtype {f.mtype}')
     newfn.md = ((2. * (f.md ** q) ** l) / (

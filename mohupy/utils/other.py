@@ -85,9 +85,9 @@ def show_decision_mat(Data, r=4):
             set of ndarray type, and is also applicable to fuzzyset.set.
         Examples
         --------
-        In [1]: import mohusets.fuzzyset as fs
-        In [2]: fs.show_decision_mat(Data)
-        In [2]: fs.show_decision_mat(t.set)
+        In [1]: import mohupy as mp
+        In [2]: mp.show_decision_mat(Data)
+        In [2]: mp.show_decision_mat(t.set)
     """
     attributes = []
     matrix = []

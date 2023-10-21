@@ -3,11 +3,11 @@ from typing import Union
 import numpy as np
 from matplotlib import pyplot as plt
 
-from mohupy import fuzzType, asfuzzset
+from mohupy import asfuzzset
 from mohupy.core.base import MohuBase
 
 
-@fuzzType('template')
+# @fuzzType('template')
 class template(MohuBase):
     qrung = 1
     mtype = 'template'

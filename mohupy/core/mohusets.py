@@ -167,6 +167,38 @@ class mohuset(MohuBase):
             return newset
         raise TypeError(f'Invalid type {type(other)}')
 
+    def __radd__(self, other):
+        if isinstance(other, mohuset):
+            assert other.mtype == self.__mtype, \
+                'ERROR: The two fuzzy sets must be of the same type.'
+            assert other.qrung == self.__qrung, \
+                'ERROR: The two fuzzy sets must be of the same Q-rung.'
+            assert other.shape == self.__shape, \
+                'ERROR: The two fuzzy sets must be of the same shape.'
+            assert other.ndim == self.__ndim, \
+                'ERROR: The two fuzzy sets must be of the same ndim.'
+            assert other.size == self.__size, \
+                'ERROR: The two fuzzy sets must be of the same size.'
+
+            newset = mohuset(self.__qrung, self.__mtype)
+            newset.set = other.set + self.__set
+            return newset
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+            assert other.mtype == self.__mtype, \
+                'ERROR: The fuzzy number and set must be of the same type.'
+            assert other.qrung == self.__qrung, \
+                'ERROR: The fuzzy number and set must be of the same Q-rung.'
+
+            newset = mohuset(self.__qrung, self.__mtype)
+            newset.set = other + self.__set
+            return newset
+        raise TypeError(f'Invalid type {type(other)}')
+
     def __sub__(self, other):
         if isinstance(other, mohuset):
             assert other.mtype == self.__mtype, \
@@ -238,6 +270,48 @@ class mohuset(MohuBase):
             assert np.all(other) > 0, 'The values must be greater than 0.'
             newset = mohuset(self.__qrung, self.__mtype)
             newset.set = self.__set * other
+            return newset
+        raise TypeError(f'Invalid type {type(other)}')
+
+    def __rmul__(self, other):
+        if isinstance(other, mohuset):
+            assert other.mtype == self.__mtype, \
+                'ERROR: The two fuzzy sets must be of the same type.'
+            assert other.qrung == self.__qrung, \
+                'ERROR: The two fuzzy sets must be of the same Q-rung.'
+            assert other.shape == self.__shape, \
+                'ERROR: The two fuzzy sets must be of the same shape.'
+            assert other.ndim == self.__ndim, \
+                'ERROR: The two fuzzy sets must be of the same ndim.'
+            assert other.size == self.__size, \
+                'ERROR: The two fuzzy sets must be of the same size.'
+
+            newset = mohuset(self.__qrung, self.__mtype)
+            newset.set = other.set * self.__set
+            return newset
+
+        # from ..runtime import fuzzParent, fuzzType
+        # if isinstance(other, fuzzParent.get(fuzzType[self.__mtype])):
+
+        from .base import fuzzNum
+        if isinstance(other, fuzzNum):
+            assert other.mtype == self.__mtype, \
+                'ERROR: The fuzzy number and set must be of the same type.'
+            assert other.qrung == self.__qrung, \
+                'ERROR: The fuzzy number and set must be of the same Q-rung.'
+
+            newset = mohuset(self.__qrung, self.__mtype)
+            newset.set = other * self.__set
+            return newset
+        if isinstance(other, Union[float, np.float_, int, np.int_]):
+            assert other > 0, 'The value must be greater than 0.'
+            newset = mohuset(self.__qrung, self.__mtype)
+            newset.set = other * self.__set
+            return newset
+        if isinstance(other, np.ndarray):
+            assert np.all(other) > 0, 'The values must be greater than 0.'
+            newset = mohuset(self.__qrung, self.__mtype)
+            newset.set = other * self.__set
             return newset
         raise TypeError(f'Invalid type {type(other)}')
 

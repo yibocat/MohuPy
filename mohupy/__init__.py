@@ -19,5 +19,5 @@ from .random import *
 #                       fuzzPlot, fuzzString, fuzzDis,
 #                       fuzzRandom, fuzzZeros, fuzzPoss,fuzzNegs)
 
-from .runtime import runtime
+from .runtime import info, fuzzParent
 from .registry import *

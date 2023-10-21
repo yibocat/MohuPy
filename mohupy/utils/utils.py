@@ -38,7 +38,9 @@ def plot(f: (mohuset, fuzzNum),
          area=None,
          color='red',
          color_area=None,
-         alpha=0.3):
+         alpha=0.3,
+         label='',
+         legend=False):
     if area is None:
         area = [False, False, False, False]
     if color_area is None:
@@ -73,7 +75,8 @@ def plot(f: (mohuset, fuzzNum),
 
     x = np.linspace(0, 1, 1000)
     y = (1 - x ** q) ** (1 / q)
-    plt.plot(x, y)
+    plt.plot(x, y, label=label)
+    if legend: plt.legend(loc='upper right', fontsize='small')
     plt.show()
 
 
@@ -268,7 +271,8 @@ def load_csv(path: str, q: int, mtype: str):
         newset.set = f
         return newset
     except Exception as e:
-        print(e, 'Load failed.')
+        raise ValueError("Failed to load " + e)
+        # print(e, 'Load failed.')
 
 
 def abs(f1: Union[mohuset, fuzzNum], f2: Union[mohuset, fuzzNum]):

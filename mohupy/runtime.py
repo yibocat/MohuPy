@@ -20,7 +20,7 @@ from .registry.random import fuzzRandom
 from .registry.construct import fuzzZeros, fuzzPoss, fuzzNegs
 
 
-class runtime:
+class info:
     type = fuzzType
     distance = fuzzDis
     plot = fuzzPlot
@@ -29,3 +29,7 @@ class runtime:
     zeros = fuzzZeros
     poss = fuzzPoss
     negs = fuzzNegs
+
+
+class runtime:
+    ...

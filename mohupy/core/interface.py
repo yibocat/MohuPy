@@ -17,6 +17,7 @@ class Memoize:
         self.memo = {}
 
     def __call__(self, args):
+        self.memo.clear()
         return self.memo.setdefault(args, self.f(args))
 
 
