@@ -5,9 +5,9 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-# from ..core.mohunum import mohunum
+# from ..core.fuzznum import fuzznum
 from ..core.mohusets import mohuset
-from ..core.base import fuzzNum
+from ..core.base import mohunum
 
 import numpy as np
 
@@ -29,9 +29,9 @@ import numpy as np
 #             newset : mohuset
 #     """
 #     if mtype == 'qrofn':
-#         s = np.full(n, mohunum(q, 0., 0.), dtype=object)
+#         s = np.full(n, fuzznum(q, 0., 0.), dtype=object)
 #     elif mtype == 'ivfn':
-#         s = np.full(n, mohunum(q, [0., 0.], [0., 0.]), dtype=object)
+#         s = np.full(n, fuzznum(q, [0., 0.], [0., 0.]), dtype=object)
 #     else:
 #         raise TypeError(f'Unknown mtype: {mtype}')
 #     newset = mohuset(q, mtype)
@@ -56,9 +56,9 @@ import numpy as np
 #             newset : mohuset
 #     """
 #     if mtype == 'qrofn':
-#         s = np.full(n, mohunum(q, 1., 0.), dtype=object)
+#         s = np.full(n, fuzznum(q, 1., 0.), dtype=object)
 #     elif mtype == 'ivfn':
-#         s = np.full(n, mohunum(q, [1., 1.], [0., 0.]), dtype=object)
+#         s = np.full(n, fuzznum(q, [1., 1.], [0., 0.]), dtype=object)
 #     else:
 #         raise TypeError(f'Unknown mtype: {mtype}')
 #     newset = mohuset(q, mtype)
@@ -83,9 +83,9 @@ import numpy as np
 #             newset : mohuset
 #     """
 #     if mtype == 'qrofn':
-#         s = np.full(n, mohunum(q, 0., 1.), dtype=object)
+#         s = np.full(n, fuzznum(q, 0., 1.), dtype=object)
 #     elif mtype == 'ivfn':
-#         s = np.full(n, mohunum(q, [0., 0.], [1., 1.]), dtype=object)
+#         s = np.full(n, fuzznum(q, [0., 0.], [1., 1.]), dtype=object)
 #     else:
 #         raise TypeError(f'Unknown mtype: {mtype}')
 #     newset = mohuset(q, mtype)
@@ -153,13 +153,13 @@ def negs(q, mtype, *n):
     return fuzzNegs[mtype](q, *n)
 
 
-def full(x: fuzzNum, *n):
+def full(x: mohunum, *n):
     """
         Generate an *n any fuzzy number fuzzy set
 
         Parameters
         ----------
-            x: fuzzNum
+            x: mohunum
                     The fuzzy number
             n : int
                     The shape of the fuzzy set

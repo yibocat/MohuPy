@@ -97,7 +97,7 @@ class MohuBase(abc.ABC):
         return self
 
 
-class fuzzNum(MohuBase):
+class mohunum(MohuBase):
     """
         Fuzzy number base class, which inherits from the fuzzy base class.
         This class serves as the base class of fuzzy numbers and is intended

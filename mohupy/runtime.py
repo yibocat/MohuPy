@@ -5,12 +5,12 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from .core.interface import mohuParent
+# from .core.interface import mohuParent
 
 # Initialize fuzzy parent class, also indicates the currently used fuzzy number type
 # It is worth noting: fuzzyParent is a dictionary whose keys represent parent classes
 # and values represent subclasses.
-fuzzParent = mohuParent.memo
+# fuzzParent = mohuParent.memo
 
 from .core.mohu import fuzzType
 from .registry.distance import fuzzDis

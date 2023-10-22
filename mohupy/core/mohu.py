@@ -8,7 +8,7 @@
 import copy
 from typing import Union
 
-from .base import fuzzNum
+from .base import mohunum
 
 import numpy as np
 
@@ -18,7 +18,7 @@ fuzzType = Register()
 
 
 @fuzzType('qrofn')
-class MohuQROFN(fuzzNum):
+class MohuQROFN(mohunum):
     """
         MohuQROFN is a class of q-rung orthopair fuzzy numbers. The class
         contains the basic arithmetic rules, comparison rules and basic
@@ -77,12 +77,15 @@ class MohuQROFN(fuzzNum):
     def __str__(self):
         return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
 
+    @property
     def score(self):
         return self.md ** self.qrung - self.nmd ** self.qrung
 
+    @property
     def acc(self):
         return self.md ** self.qrung + self.nmd ** self.qrung
 
+    @property
     def ind(self):
         acc = self.md ** self.qrung + self.nmd ** self.qrung
         if acc == 1.:
@@ -90,12 +93,14 @@ class MohuQROFN(fuzzNum):
         else:
             return (1. - acc) ** (1. / self.qrung)
 
+    @property
     def comp(self):
         newf = copy.deepcopy(self)
         newf.md = self.nmd
         newf.nmd = self.md
         return newf
 
+    @property
     def T(self):
         return MohuQROFN(self.qrung, self.md, self.nmd)
 
@@ -107,8 +112,8 @@ class MohuQROFN(fuzzNum):
                 'ERROR: qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: mtype must be same.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, 0, 0)
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, 0, 0)
             newfn.md = (self.md ** q + oth.md ** q
                         - self.md ** q * oth.md ** q) ** (1 / q)
             newfn.nmd = self.nmd * oth.nmd
@@ -138,8 +143,8 @@ class MohuQROFN(fuzzNum):
                 'ERROR: qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: mtype must be same.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, 0, 0)
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, 0, 0)
             newfn.md = (self.md ** q + oth.md ** q
                         - self.md ** q * oth.md ** q) ** (1 / q)
             newfn.nmd = self.nmd * oth.nmd
@@ -169,8 +174,8 @@ class MohuQROFN(fuzzNum):
                 'ERROR: qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: mtype must be same.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, 0, 1)
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, 0, 1)
             if oth.nmd == 0. or oth.md == 1.:
                 return newfn
             elif 0 <= self.nmd / oth.nmd <= ((1 - self.md ** q) / (1 - oth.md ** q)) ** (1 / q) <= 1:
@@ -205,16 +210,16 @@ class MohuQROFN(fuzzNum):
                     'ERROR: qrung must be equal.'
                 assert self.mtype == oth.mtype, \
                     'ERROR: mtype must be same.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, 0, 0)
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, 0, 0)
                 newfn.md = self.md * oth.md
                 newfn.nmd = (self.nmd ** q + oth.nmd ** q
                              - self.nmd ** q * oth.nmd ** q) ** (1. / q)
                 return newfn
             if isinstance(oth, Union[float, int, np.int_, np.float_]):
                 assert oth > 0., 'ERROR: The value must be greater than 0.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, 0, 0)
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, 0, 0)
                 newfn.md = (1. - (1. - self.md ** q) ** oth) ** (1. / q)
                 newfn.nmd = self.nmd ** oth
                 return newfn
@@ -249,16 +254,16 @@ class MohuQROFN(fuzzNum):
                     'ERROR: qrung must be equal.'
                 assert self.mtype == oth.mtype, \
                     'ERROR: mtype must be same.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, 0, 0)
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, 0, 0)
                 newfn.md = self.md * oth.md
                 newfn.nmd = (self.nmd ** q + oth.nmd ** q
                              - self.nmd ** q * oth.nmd ** q) ** (1. / q)
                 return newfn
             if isinstance(oth, Union[float, int, np.int_, np.float_]):
                 assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, 0, 0)
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, 0, 0)
                 newfn.md = (1. - (1. - self.md ** q) ** oth) ** (1. / q)
                 newfn.nmd = self.nmd ** oth
                 return newfn
@@ -289,10 +294,10 @@ class MohuQROFN(fuzzNum):
 
         def __truediv(oth: Union[MohuQROFN, float, int, np.int_, np.float_]):
             if isinstance(oth, MohuQROFN):
-                from .mohunum import mohunum
-                newfn = mohunum(q, 1, 0)
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, 1, 0)
                 if self.md == 0 and self.nmd == 1:
-                    return mohunum(q, 0, 1)
+                    return fuzznum(q, 0, 1)
                 elif oth.md == 0 or oth.nmd == 1.:
                     return newfn
                 elif 0 <= self.md / oth.md <= \
@@ -332,8 +337,8 @@ class MohuQROFN(fuzzNum):
 
         def __pow(p: Union[float, int, np.int_, np.float_]):
             assert p > 0., 'ERROR: The power must be greater than 0.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, 0, 0)
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, 0, 0)
             newfn.md = self.md ** p
             newfn.nmd = (1. - (1. - self.nmd ** q) ** p) ** (1. / q)
             return newfn
@@ -359,8 +364,8 @@ class MohuQROFN(fuzzNum):
             assert self.qrung == oth.qrung, \
                 'ERROR: The qrung must be equal.'
 
-            from .mohunum import mohunum
-            newfn = mohunum(q, 0, 0)
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, 0, 0)
             newfn.md = (min(self.md, oth.md))
             newfn.nmd = (max(self.nmd, oth.nmd))
             return newfn
@@ -383,8 +388,8 @@ class MohuQROFN(fuzzNum):
                 'ERROR: mtype must be same.'
             assert self.qrung == oth.qrung, \
                 'ERROR: The qrung must be equal.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, 0, 0)
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, 0, 0)
             newfn.md = (max(self.md, oth.md))
             newfn.nmd = (min(self.nmd, oth.nmd))
             return newfn
@@ -439,8 +444,8 @@ class MohuQROFN(fuzzNum):
                 'ERROR: mtype must be same.'
             assert self.qrung == oth.qrung, \
                 'ERROR: The qrung must be equal.'
-            from .mohunum import mohunum
-            if self - oth == mohunum(q, 0, 1) and self != oth:
+            from ._multi_func import fuzznum
+            if self - oth == fuzznum(q, 0, 1) and self != oth:
                 return True
             else:
                 return False
@@ -466,8 +471,8 @@ class MohuQROFN(fuzzNum):
                 'ERROR: mtype must be same.'
             assert self.qrung == oth.qrung, \
                 'ERROR: The qrung must be equal.'
-            from .mohunum import mohunum
-            if self - oth != mohunum(q, 0., 1.) and self != oth:
+            from ._multi_func import fuzznum
+            if self - oth != fuzznum(q, 0., 1.) and self != oth:
                 return True
             else:
                 return False
@@ -493,8 +498,8 @@ class MohuQROFN(fuzzNum):
                 'ERROR: mtype must be same.'
             assert self.qrung == oth.qrung, \
                 'ERROR: The qrung must be equal.'
-            from .mohunum import mohunum
-            if self - oth == mohunum(q, 0., 1.) or self == oth:
+            from ._multi_func import fuzznum
+            if self - oth == fuzznum(q, 0., 1.) or self == oth:
                 return True
             else:
                 return False
@@ -520,8 +525,8 @@ class MohuQROFN(fuzzNum):
                 'ERROR: mtype must be same.'
             assert self.qrung == oth.qrung, \
                 'ERROR: The qrung must be equal.'
-            from .mohunum import mohunum
-            if self - oth != mohunum(q, 0., 1.) or self == oth:
+            from ._multi_func import fuzznum
+            if self - oth != fuzznum(q, 0., 1.) or self == oth:
                 return True
             else:
                 return False
@@ -628,7 +633,7 @@ class MohuQROFN(fuzzNum):
 
 
 @fuzzType('ivfn')
-class MohuQROIVFN(fuzzNum):
+class MohuQROIVFN(mohunum):
     qrung = None
     md = np.array([])
     nmd = np.array([])
@@ -662,16 +667,19 @@ class MohuQROIVFN(fuzzNum):
     def __str__(self):
         return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
 
+    @property
     def score(self):
         m = self.md[0] ** self.qrung + self.md[1] ** self.qrung
         n = self.nmd[0] ** self.qrung + self.nmd[1] ** self.qrung
         return (m - n) / 2
 
+    @property
     def acc(self):
         m = self.md[0] ** self.qrung + self.md[1] ** self.qrung
         n = self.nmd[0] ** self.qrung + self.nmd[1] ** self.qrung
         return (m + n) / 2
 
+    @property
     def ind(self):
         m = self.md[0] ** self.qrung + self.md[1] ** self.qrung
         n = self.nmd[0] ** self.qrung + self.nmd[1] ** self.qrung
@@ -680,12 +688,14 @@ class MohuQROIVFN(fuzzNum):
         else:
             return (1. - (m + n) / 2) ** (1. / self.qrung)
 
+    @property
     def comp(self):
         newf = copy.deepcopy(self)
         newf.md = self.nmd
         newf.nmd = self.md
         return newf
 
+    @property
     def T(self):
         return MohuQROIVFN(self.qrung, self.md, self.nmd)
 
@@ -697,8 +707,8 @@ class MohuQROIVFN(fuzzNum):
                 'ERROR: qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: mtype must be same.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, (0., 0.), (0., 0.))
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, (0., 0.), (0., 0.))
             newfn.md = (self.md ** q + oth.md ** q - self.md ** q * oth.md ** q) ** (1. / q)
             newfn.nmd = self.nmd * oth.nmd
             return newfn
@@ -727,8 +737,8 @@ class MohuQROIVFN(fuzzNum):
                 'ERROR: qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: mtype must be same.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, (0., 0.), (0., 0.))
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, (0., 0.), (0., 0.))
             newfn.md = (self.md ** q + oth.md ** q - self.md ** q * oth.md ** q) ** (1. / q)
             newfn.nmd = self.nmd * oth.nmd
             return newfn
@@ -762,15 +772,15 @@ class MohuQROIVFN(fuzzNum):
                     'ERROR: qrung must be equal.'
                 assert self.mtype == oth.mtype, \
                     'ERROR: mtype must be same.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, (0., 0.), (0., 0.))
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, (0., 0.), (0., 0.))
                 newfn.md = self.md * oth.md
                 newfn.nmd = (self.nmd ** q + oth.nmd ** q - self.nmd ** q * oth.nmd ** q) ** (1. / q)
                 return newfn
             if isinstance(oth, Union[float, int, np.int_, np.float_]):
                 assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, (0., 0.), (0., 0.))
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, (0., 0.), (0., 0.))
                 newfn.md = (1. - (1 - self.md ** q) ** oth) ** (1. / q)
                 newfn.nmd = self.nmd ** oth
                 return newfn
@@ -807,15 +817,15 @@ class MohuQROIVFN(fuzzNum):
                     'ERROR: qrung must be equal.'
                 assert self.mtype == oth.mtype, \
                     'ERROR: mtype must be same.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, (0., 0.), (0., 0.))
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, (0., 0.), (0., 0.))
                 newfn.md = self.md * oth.md
                 newfn.nmd = (self.nmd ** q + oth.nmd ** q - self.nmd ** q * oth.nmd ** q) ** (1. / q)
                 return newfn
             if isinstance(oth, Union[float, int, np.int_, np.float_]):
                 assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, (0., 0.), (0., 0.))
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, (0., 0.), (0., 0.))
                 newfn.md = (1. - (1 - self.md ** q) ** oth) ** (1. / q)
                 newfn.nmd = self.nmd ** oth
                 return newfn
@@ -851,8 +861,8 @@ class MohuQROIVFN(fuzzNum):
 
         def __pow(p: Union[float, int, np.int_, np.float_]):
             assert p > 0., 'ERROR: The power must be greater than 0.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, (0., 0.), (0., 0.))
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, (0., 0.), (0., 0.))
             newfn.md = self.md ** p
             newfn.nmd = (1. - (1. - self.nmd ** q) ** p) ** (1. / q)
             return newfn
@@ -877,8 +887,8 @@ class MohuQROIVFN(fuzzNum):
                 'ERROR: mtype must be same.'
             assert self.qrung == oth.qrung, \
                 'ERROR: The qrung must be equal.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, (0., 0.), (0., 0.))
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, (0., 0.), (0., 0.))
             newfn.md = [min(self.md[0], oth.md[0]), min(self.md[1], oth.md[1])]
             newfn.nmd = [max(self.nmd[0], oth.nmd[0]), max(self.nmd[1], oth.nmd[1])]
             return newfn
@@ -901,8 +911,8 @@ class MohuQROIVFN(fuzzNum):
                 'ERROR: mtype must be same.'
             assert self.qrung == oth.qrung, \
                 'ERROR: The qrung must be equal.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, (0., 0.), (0., 0.))
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, (0., 0.), (0., 0.))
             newfn.md = [max(self.md[0], oth.md[0]), max(self.md[1], oth.md[1])]
             newfn.nmd = [min(self.nmd[0], oth.nmd[0]), min(self.nmd[1], oth.nmd[1])]
             return newfn
@@ -1091,7 +1101,7 @@ class MohuQROIVFN(fuzzNum):
     #
     #     if other is not None:
     #         assert isinstance(other, MohuQROIVFN), \
-    #             'ERROR: other must be a mohunum object.'
+    #             'ERROR: other must be a fuzznum object.'
     #         assert other.qrung == q, \
     #             'ERROR: The qrungs are not equal'
     #         assert self.mtype == other.mtype, \
@@ -1106,7 +1116,7 @@ class MohuQROIVFN(fuzzNum):
 
 
 @fuzzType('qrohfn')
-class MohuQROHFN(fuzzNum):
+class MohuQROHFN(mohunum):
     qrung = None
     __md = []
     __nmd = []
@@ -1179,16 +1189,19 @@ class MohuQROHFN(fuzzNum):
         print(f'<({len(self.__md)},{len(self.__nmd)}), qrung={self.qrung}>, mtype={self.mtype}>')
         return None
 
+    @property
     def score(self):
         mm = ((self.__md ** self.qrung).sum()) / len(self.__md)
         nn = ((self.__nmd ** self.qrung).sum()) / len(self.__nmd)
         return mm - nn
 
+    @property
     def acc(self):
         mm = ((self.__md ** self.qrung).sum()) / len(self.__md)
         nn = ((self.__nmd ** self.qrung).sum()) / len(self.__nmd)
         return mm + nn
 
+    @property
     def ind(self):
         mm = ((self.__md ** self.qrung).sum()) / len(self.__md)
         nn = ((self.__nmd ** self.qrung).sum()) / len(self.__nmd)
@@ -1197,6 +1210,7 @@ class MohuQROHFN(fuzzNum):
         else:
             return (1. - mm - nn) ** (1 / self.qrung)
 
+    @property
     def comp(self):
         newfn = copy.deepcopy(self)
         if self.__md.size == 0 and self.__nmd.size != 0:
@@ -1210,6 +1224,7 @@ class MohuQROHFN(fuzzNum):
             newfn.nmd = self.__md
         return newfn
 
+    @property
     def T(self):
         return MohuQROHFN(self.qrung, self.__md, self.__nmd)
 
@@ -1221,8 +1236,8 @@ class MohuQROHFN(fuzzNum):
                 'ERROR: qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: mtype must be same.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, [], [])
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, [], [])
 
             mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
             nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
@@ -1259,8 +1274,8 @@ class MohuQROHFN(fuzzNum):
                 'ERROR: qrung must be equal.'
             assert self.mtype == oth.mtype, \
                 'ERROR: mtype must be same.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, [], [])
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, [], [])
 
             mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
             nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
@@ -1302,8 +1317,8 @@ class MohuQROHFN(fuzzNum):
                     'ERROR: qrung must be equal.'
                 assert self.mtype == oth.mtype, \
                     'ERROR: mtype must be same.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, [], [])
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, [], [])
 
                 mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
                 nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
@@ -1318,8 +1333,8 @@ class MohuQROHFN(fuzzNum):
 
             if isinstance(oth, Union[float, int, np.int_, np.float_]):
                 assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, [], [])
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, [], [])
                 newfn.md = (1. - (1. - self.md ** self.qrung) ** oth) ** (1 / self.qrung)
                 newfn.nmd = self.nmd ** oth
                 return newfn.unique(4)
@@ -1355,8 +1370,8 @@ class MohuQROHFN(fuzzNum):
                     'ERROR: qrung must be equal.'
                 assert self.mtype == oth.mtype, \
                     'ERROR: mtype must be same.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, [], [])
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, [], [])
 
                 mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
                 nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
@@ -1371,8 +1386,8 @@ class MohuQROHFN(fuzzNum):
 
             if isinstance(oth, Union[float, int, np.int_, np.float_]):
                 assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from .mohunum import mohunum
-                newfn = mohunum(q, [], [])
+                from ._multi_func import fuzznum
+                newfn = fuzznum(q, [], [])
                 newfn.md = (1. - (1. - self.md ** self.qrung) ** oth) ** (1 / self.qrung)
                 newfn.nmd = self.nmd ** oth
                 return newfn.unique(4)
@@ -1408,8 +1423,8 @@ class MohuQROHFN(fuzzNum):
 
         def __pow(p: Union[float, int, np.int_, np.float_]):
             assert p > 0., 'ERROR: The power must be greater than 0.'
-            from .mohunum import mohunum
-            newfn = mohunum(q, [], [])
+            from ._multi_func import fuzznum
+            newfn = fuzznum(q, [], [])
             newfn.md = self.md ** p
             newfn.nmd = (1. - (1. - self.nmd ** self.qrung) ** p) ** (1 / self.qrung)
             return newfn.unique(4)

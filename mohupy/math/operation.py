@@ -5,15 +5,15 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from ..core.mohunum import mohunum
+from ..core._multi_func import fuzznum
 from .archimedean import *
-from ..core.base import fuzzNum
+from ..core.base import mohunum
 
 
 # TODO: 将爱因斯坦运算注册到范数运算表中，这里暂时写成函数，后期改成爱因斯坦类
 
 
-def ein_plus(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
+def ein_plus(f1: mohunum, f2: mohunum) -> mohunum:
     """
         The einstein plus of two fuzzy mohunums.
     """
@@ -25,9 +25,9 @@ def ein_plus(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
     mtype = f1.mtype
 
     if mtype == 'qrofn':
-        newfn = mohunum(q, 0., 0.)
+        newfn = fuzznum(q, 0., 0.)
     elif mtype == 'ivfn':
-        newfn = mohunum(q, (0., 0.), (0., 0.))
+        newfn = fuzznum(q, (0., 0.), (0., 0.))
     else:
         raise TypeError(f'Invalid mtype {mtype}')
     newfn.md = einstein_S(f1.md ** q, f2.md ** q) ** (1 / q)
@@ -35,7 +35,7 @@ def ein_plus(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
     return newfn
 
 
-def ein_mul(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
+def ein_mul(f1: mohunum, f2: mohunum) -> mohunum:
     """
         The einstein multiplication of two fuzzy numbers.
     """
@@ -47,9 +47,9 @@ def ein_mul(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
     mtype = f1.mtype
 
     if mtype == 'qrofn':
-        newfn = mohunum(q, 0., 0.)
+        newfn = fuzznum(q, 0., 0.)
     elif mtype == 'ivfn':
-        newfn = mohunum(q, (0., 0.), (0., 0.))
+        newfn = fuzznum(q, (0., 0.), (0., 0.))
     else:
         raise TypeError(f'Invalid mtype {mtype}')
     newfn.md = einstein_T(f1.md ** q, f2.md ** q) ** (1 / q)
@@ -57,13 +57,13 @@ def ein_mul(f1: fuzzNum, f2: fuzzNum) -> fuzzNum:
     return newfn
 
 
-def ein_times(f: fuzzNum, l) -> fuzzNum:
+def ein_times(f: mohunum, l) -> mohunum:
     assert l >= 0, 'The value must be greater than or equal to 0.'
     q = f.qrung
     if f.mtype == 'qrofn':
-        newfn = mohunum(q, 0., 0.)
+        newfn = fuzznum(q, 0., 0.)
     elif f.mtype == 'ivfn':
-        newfn = mohunum(q, (0., 0.), (0., 0.))
+        newfn = fuzznum(q, (0., 0.), (0., 0.))
     else:
         raise TypeError(f'Invalid mtype {f.mtype}')
 
@@ -74,13 +74,13 @@ def ein_times(f: fuzzNum, l) -> fuzzNum:
     return newfn
 
 
-def ein_power(f: fuzzNum, l) -> fuzzNum:
+def ein_power(f: mohunum, l) -> mohunum:
     assert l >= 0, 'The value must be greater than or equal to 0.'
     q = f.qrung
     if f.mtype == 'qrofn':
-        newfn = mohunum(q, 0., 0.)
+        newfn = fuzznum(q, 0., 0.)
     elif f.mtype == 'ivfn':
-        newfn = mohunum(q, (0., 0.), (0., 0.))
+        newfn = fuzznum(q, (0., 0.), (0., 0.))
     else:
         raise TypeError(f'Invalid mtype {f.mtype}')
     newfn.md = ((2. * (f.md ** q) ** l) / (

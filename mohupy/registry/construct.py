@@ -20,8 +20,8 @@ fuzzNegs = Register()
 ################################
 @fuzzZeros('qrofn')
 def zeros_qrofn(q, *n):
-    from ..core.mohunum import mohunum
-    s = np.full(n, mohunum(q, 0., 0.), dtype=object)
+    from ..core import fuzznum
+    s = np.full(n, fuzznum(q, 0., 0.), dtype=object)
     newset = mohuset(q, 'qrofn')
     newset.set = s
     return newset
@@ -29,8 +29,8 @@ def zeros_qrofn(q, *n):
 
 @fuzzPoss('qrofn')
 def poss_qrofn(q, *n):
-    from ..core.mohunum import mohunum
-    s = np.full(n, mohunum(q, 1., 0.), dtype=object)
+    from ..core import fuzznum
+    s = np.full(n, fuzznum(q, 1., 0.), dtype=object)
     newset = mohuset(q, 'qrofn')
     newset.set = s
     return newset
@@ -38,8 +38,8 @@ def poss_qrofn(q, *n):
 
 @fuzzNegs('qrofn')
 def negs_qrofn(q, *n):
-    from ..core.mohunum import mohunum
-    s = np.full(n, mohunum(q, 0., 1.), dtype=object)
+    from ..core import fuzznum
+    s = np.full(n, fuzznum(q, 0., 1.), dtype=object)
     newset = mohuset(q, 'qrofn')
     newset.set = s
     return newset
@@ -50,8 +50,8 @@ def negs_qrofn(q, *n):
 ################################
 @fuzzZeros('ivfn')
 def zeros_ivfn(q, *n):
-    from ..core.mohunum import mohunum
-    s = np.full(n, mohunum(q, (0., 0.), (0., 0.)), dtype=object)
+    from ..core import fuzznum
+    s = np.full(n, fuzznum(q, (0., 0.), (0., 0.)), dtype=object)
     newset = mohuset(q, 'ivfn')
     newset.set = s
     return newset
@@ -59,8 +59,8 @@ def zeros_ivfn(q, *n):
 
 @fuzzPoss('ivfn')
 def poss_ivfn(q, *n):
-    from ..core.mohunum import mohunum
-    s = np.full(n, mohunum(q, (1., 1.), (0., 0.)), dtype=object)
+    from ..core import fuzznum
+    s = np.full(n, fuzznum(q, (1., 1.), (0., 0.)), dtype=object)
     newset = mohuset(q, 'ivfn')
     newset.set = s
     return newset
@@ -68,8 +68,8 @@ def poss_ivfn(q, *n):
 
 @fuzzNegs('ivfn')
 def negs_ivfn(q, *n):
-    from ..core.mohunum import mohunum
-    s = np.full(n, mohunum(q, (0., 0.), (1., 1.)), dtype=object)
+    from ..core import fuzznum
+    s = np.full(n, fuzznum(q, (0., 0.), (1., 1.)), dtype=object)
     newset = mohuset(q, 'ivfn')
     newset.set = s
     return newset
@@ -80,8 +80,8 @@ def negs_ivfn(q, *n):
 ################################
 @fuzzZeros('qrohfn')
 def zeros_qrohfn(q, *n):
-    from ..core.mohunum import mohunum
-    s = np.full(n, mohunum(q, [0], [0]), dtype=object)
+    from ..core import fuzznum
+    s = np.full(n, fuzznum(q, [0], [0]), dtype=object)
     newset = mohuset(q, 'qrohfn')
     newset.set = s
     return newset
@@ -89,8 +89,8 @@ def zeros_qrohfn(q, *n):
 
 @fuzzPoss('qrohfn')
 def poss_qrohfn(q, *n):
-    from ..core.mohunum import mohunum
-    s = np.full(n, mohunum(q, [1], [0]), dtype=object)
+    from ..core import fuzznum
+    s = np.full(n, fuzznum(q, [1], [0]), dtype=object)
     newset = mohuset(q, 'qrohfn')
     newset.set = s
     return newset
@@ -98,8 +98,8 @@ def poss_qrohfn(q, *n):
 
 @fuzzNegs('qrohfn')
 def negs_qrohfn(q, *n):
-    from ..core.mohunum import mohunum
-    s = np.full(n, mohunum(q, [0], [1]), dtype=object)
+    from ..core import fuzznum
+    s = np.full(n, fuzznum(q, [0], [1]), dtype=object)
     newset = mohuset(q, 'qrohfn')
     newset.set = s
     return newset

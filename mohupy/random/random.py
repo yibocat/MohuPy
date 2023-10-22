@@ -4,6 +4,8 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+from typing import Union
+
 import numpy as np
 
 from ..registry.random import fuzzRandom
@@ -25,7 +27,7 @@ def randnum(q: int, mtype: str, num=5):
 
         Returns
         -------
-            fuzzNum
+            mohunum
     """
     return fuzzRandom[mtype](q, num)
 
@@ -48,9 +50,9 @@ def randset(q: int, mtype: str, *n, num=5):
         -------
             mohuset
     """
-    from ..core.base import fuzzNum
+    from ..core.base import mohunum
 
-    def __rand(f: fuzzNum):
+    def __rand(f: mohunum):
         return randnum(f.qrung, f.mtype, num)
 
     from ..utils.construct import zeros
@@ -76,7 +78,7 @@ def randset(q: int, mtype: str, *n, num=5):
 #
 #         Returns
 #         -------
-#             mohuset or fuzzNum
+#             mohuset or mohunum
 #     """
 #     if len(n) == 0:
 #         return randnum(q, mtype, num)
@@ -85,10 +87,10 @@ def randset(q: int, mtype: str, *n, num=5):
 
 
 from ..core.mohusets import mohuset
-from ..core.base import fuzzNum
+from ..core.base import mohunum
 
 
-def choice(f: mohuset) -> fuzzNum:
+def choice(f: mohuset, n: Union[int, tuple[int], list[int]] = None) -> Union[mohunum, mohuset]:
     """
         Randomly select a fuzzy number
 
@@ -96,9 +98,15 @@ def choice(f: mohuset) -> fuzzNum:
         ----------
             f:  mohuset
                 The fuzzy set.
+            n:  Randomly extract shapes
 
         Returns
         -------
-            fuzzNum
+            mohunum or mohuset
     """
-    return np.random.choice(f.set.flatten())
+    if n is not None:
+        newset = mohuset(f.qrung, f.mtype)
+        newset.set = np.random.choice(f.set, size=n)
+        return newset
+    else:
+        return np.random.choice(f.set.flatten())

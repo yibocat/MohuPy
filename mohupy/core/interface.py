@@ -6,11 +6,13 @@
 #  Software: MohuPy
 
 
+"""
+# Dynamic inheritance
+
 class Memoize:
-    """
-        Memory unit dictionary, a dictionary used to dynamically
-        record fuzzy parent classes
-    """
+
+    # Memory unit dictionary, a dictionary used to dynamically
+    # record fuzzy parent classes
 
     def __init__(self, f):
         self.f = f
@@ -23,7 +25,7 @@ class Memoize:
 
 @Memoize
 def mohuParent(base):
-    class mohunum(base):
+    class fuzznum(base):
         def __init__(self, qrung, md, nmd):
             base.__init__(self, qrung, md, nmd)
 
@@ -66,9 +68,11 @@ def mohuParent(base):
             from ..utils import asfuzzset
             if n == (1,):
                 return asfuzzset([self])
-            raise ValueError(f'cannot reshape mohunum of size {self.size} to {n}')
+            raise ValueError(f'cannot reshape fuzznum of size {self.size} to {n}')
 
     return mohunum
+
+"""
 
 
 import shutil

@@ -11,12 +11,12 @@ from .construct import zeros, poss, negs, full
 from .other import plot_stats, random_split, show_decision_mat
 from .utils import (str2mohu, distance, plot,
                     asfuzzset, func4num, savez, loadz, to_csv, load_csv,
-                    abs)
+                    abs, zeros_like, poss_like, negs_like, full_like)
 
 __all__ += [
     'zeros', 'poss', 'negs', 'full',
     'plot_stats', 'random_split', 'show_decision_mat',
     'str2mohu', 'distance', 'plot',
     'asfuzzset', 'func4num', 'savez', 'loadz', 'to_csv', 'load_csv',
-    'abs'
+    'abs', 'zeros_like', 'poss_like', 'negs_like', 'full_like'
 ]

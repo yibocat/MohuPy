@@ -8,7 +8,7 @@ import re
 
 import numpy as np
 
-from ..core.base import fuzzNum
+from ..core.base import mohunum
 
 from .regedit import Register
 
@@ -16,7 +16,7 @@ fuzzString = Register()
 
 
 @fuzzString('qrofn')
-def str2qrofn(s: str, q) -> fuzzNum:
+def str2qrofn(s: str, q) -> mohunum:
     """
         convert a string to a qrofn
 
@@ -26,13 +26,13 @@ def str2qrofn(s: str, q) -> fuzzNum:
             q : int
         Returns
         -------
-            fuzzNum
+            mohunum
 
         Notes: When the input data is 0, it should be set to 0.
         Q-rung fuzzy convert function accepts the form: [x,x]
     """
-    from ..core.mohunum import mohunum
-    newfn = mohunum(q, 0., 0.)
+    from ..core import fuzznum
+    newfn = fuzznum(q, 0., 0.)
     t = re.findall(r'^<(\d.*?\d)>$', s)
     assert len(t) == 1, \
         'data format error.'
@@ -46,9 +46,9 @@ def str2qrofn(s: str, q) -> fuzzNum:
 
 
 @fuzzString('ivfn')
-def str2ivfn(s: str, q) -> fuzzNum:
-    from ..core.mohunum import mohunum
-    newfn = mohunum(q, (0., 0.), (0., 0.))
+def str2ivfn(s: str, q) -> mohunum:
+    from ..core import fuzznum
+    newfn = fuzznum(q, (0., 0.), (0., 0.))
     t2 = re.findall(r'\[(\d.*?\d)\s?]', s)
     assert len(t2) == 2, \
         'data format error.'
@@ -66,7 +66,7 @@ def str2ivfn(s: str, q) -> fuzzNum:
 
 
 @fuzzString('qrohfn')
-def str2qrohfn(s: str, q) -> fuzzNum:
+def str2qrohfn(s: str, q) -> mohunum:
     """
         Convert input data to Q-rung orthopair hesitant fuzzy element.
         Note: When the input data is '0', it should be set to '0.'.
@@ -86,8 +86,8 @@ def str2qrohfn(s: str, q) -> fuzzNum:
         -------
             MohuQROHFN
     """
-    from ..core.mohunum import mohunum
-    newfn = mohunum(q, [], [])
+    from ..core import fuzznum
+    newfn = fuzznum(q, [], [])
     t2 = re.findall(r'\[(\d.*?\d)\s?]', s)
     assert len(t2) == 2, 'ERROR: data format error.'
     md = re.findall(r'\d.?\d*', t2[0])

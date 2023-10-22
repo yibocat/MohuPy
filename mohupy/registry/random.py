@@ -25,10 +25,10 @@ def random_qrofn(q, num=0):
 
         Returns
         -------
-            mohunum
+            fuzznum
     """
-    from ..core.mohunum import mohunum
-    newfn = mohunum(q, 0., 0.)
+    from ..core import fuzznum
+    newfn = fuzznum(q, 0., 0.)
     while True:
         newfn.md = np.random.rand()
         newfn.nmd = np.random.rand()
@@ -51,10 +51,10 @@ def random_ivfn(q, num=0):
 
         Returns
         -------
-            mohunum
+            fuzznum
     """
-    from ..core.mohunum import mohunum
-    newfn = mohunum(q, (0., 0.), (0., 0.))
+    from ..core import fuzznum
+    newfn = fuzznum(q, (0., 0.), (0., 0.))
     while True:
         newfn.md = np.asarray([np.random.rand(), np.random.rand()])
         newfn.nmd = np.asarray([np.random.rand(), np.random.rand()])
@@ -77,10 +77,10 @@ def random_qrohfn(q, num):
 
         Returns
         -------
-            mohunum
+            fuzznum
     """
-    from ..core.mohunum import mohunum
-    newfn = mohunum(q, [], [])
+    from ..core import fuzznum
+    newfn = fuzznum(q, [], [])
     newfn.md = np.random.rand(np.random.randint(1, num))
     newfn.nmd = np.random.rand(np.random.randint(1, num))
     while True:

@@ -11,7 +11,7 @@
 # from .mohu import MohuQROFN, MohuQROIVFN
 #
 #
-# class mohunum(MohuQROFN, MohuQROIVFN):
+# class fuzznum(MohuQROFN, MohuQROIVFN):
 #
 #     def __init__(self, qrung, md, nmd):
 #         """
@@ -73,7 +73,7 @@
 #
 #     @property
 #     def T(self):
-#         newfn = mohunum(self.qrung, self.md, self.nmd)
+#         newfn = fuzznum(self.qrung, self.md, self.nmd)
 #         return newfn
 #
 #     def is_valid(self):
@@ -98,7 +98,7 @@
 #         from ..utils import asfuzzset
 #         if n == (1,):
 #             return asfuzzset([self])
-#         raise ValueError(f'cannot reshape mohunum of size {self.size} to {n}')
+#         raise ValueError(f'cannot reshape fuzznum of size {self.size} to {n}')
 #
 #     def plot(self,
 #              other=None,
@@ -113,12 +113,12 @@
 
 
 from typing import Union
-from .interface import mohuParent
+# from .interface import mohuParent
 
 import numpy as np
 
 
-def mohunum(qrung, md, nmd):
+def fuzznum(qrung, md, nmd):
     """
         Dynamically inherit factory function to determine which type of fuzzy
         number is inherited based on the input. Note that mohuParent is a dynamically
@@ -142,4 +142,27 @@ def mohunum(qrung, md, nmd):
         mohuType = 'qrohfn'
 
     from .mohu import fuzzType
-    return mohuParent(fuzzType.get(mohuType))(qrung, md, nmd)
+
+    # Use dynamic inheritance
+    # return mohuParent(fuzzType.get(mohuType))(qrung, md, nmd)
+
+    # Non-dynamic inheritance
+    return fuzzType.get(mohuType)(qrung, md, nmd)
+
+
+def fuzzset(x: Union[list, tuple, np.ndarray]):
+    y = x.flatten()
+    mt = y[0].mtype
+    for i in y:
+        if i.mtype != mt:
+            raise ValueError('error mtype')
+        mt = i.mtype
+
+    from .mohusets import mohuset
+    t = np.random.choice(y)
+    qrung = t.qrung
+    mtype = t.mtype
+
+    newset = mohuset(qrung, mtype)
+    newset.set = np.array(x, dtype=object)
+    return newset

@@ -7,12 +7,12 @@
 
 __all__ = []
 
-from .mohunum import mohunum
+from ._multi_func import fuzznum, fuzzset
 from .mohusets import mohuset
 
 from .mohu import MohuQROFN, MohuQROIVFN
-from .interface import mohuParent, download_template
+from .interface import download_template
 
 __all__ += [
-    'mohunum', 'mohuset', 'download_template'
+    'fuzznum', 'fuzzset', 'mohuset', 'download_template'
 ]

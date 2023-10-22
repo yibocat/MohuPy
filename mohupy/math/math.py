@@ -7,7 +7,7 @@
 from typing import Union
 
 from ..core.mohusets import mohuset
-# from ..core.mohunum import mohunum
+# from ..core.fuzznum import fuzznum
 import numpy as np
 
 
@@ -18,10 +18,10 @@ def dot(f1, f2):
 
         Parameters
         ----------
-        f1 : mohuset or fuzzNum
-            The first mohuset or mohunum.
-        f2 : mohuset or mohunum
-            The second mohuset or mohunum.
+        f1 : mohuset or mohunum
+            The first mohuset or fuzznum.
+        f2 : mohuset or fuzznum
+            The second mohuset or fuzznum.
 
         Returns
         -------
@@ -41,11 +41,11 @@ def dot(f1, f2):
     # if isinstance(f1, fuzzParent.get(fuzzType[f1.mtype])) \
     #         and isinstance(f2, fuzzParent.get(fuzzType[f2.mtype])):
 
-    from ..core.base import fuzzNum
-    if isinstance(f1, fuzzNum) and isinstance(f2, fuzzNum):
+    from ..core.base import mohunum
+    if isinstance(f1, mohunum) and isinstance(f2, mohunum):
         return f1 * f2
 
-    if isinstance(f1, fuzzNum) and isinstance(f2, mohuset):
+    if isinstance(f1, mohunum) and isinstance(f2, mohuset):
         if f2.ndim == 1:
             return np.dot(f1, f2.set)
         else:
@@ -54,7 +54,7 @@ def dot(f1, f2):
             newset.set = result
             return newset
 
-    if isinstance(f1, mohuset) and isinstance(f2, fuzzNum):
+    if isinstance(f1, mohuset) and isinstance(f2, mohunum):
         if f1.ndim == 1:
             return np.dot(f1.set, f2)
         else:
@@ -72,10 +72,10 @@ def inner(f1, f2):
 
         Parameters
         ----------
-        f1 : mohuset or mohunum
-            The first mohuset or mohunum.
-        f2 : mohuset or mohunum
-            The second mohuset or mohunum.
+        f1 : mohuset or fuzznum
+            The first mohuset or fuzznum.
+        f2 : mohuset or fuzznum
+            The second mohuset or fuzznum.
 
         Returns
         -------
@@ -95,11 +95,11 @@ def inner(f1, f2):
     # if isinstance(f1, fuzzParent.get(fuzzType[f1.mtype])) \
     #         and isinstance(f2, fuzzParent.get(fuzzType[f2.mtype])):
 
-    from ..core.base import fuzzNum
-    if isinstance(f1, fuzzNum) and isinstance(f2, fuzzNum):
+    from ..core.base import mohunum
+    if isinstance(f1, mohunum) and isinstance(f2, mohunum):
         return f1 * f2
 
-    if isinstance(f1, fuzzNum) and isinstance(f2, mohuset):
+    if isinstance(f1, mohunum) and isinstance(f2, mohuset):
         if f2.ndim == 1:
             return np.inner(f1, f2.set)
         else:
@@ -108,7 +108,7 @@ def inner(f1, f2):
             newset.set = result
             return newset
 
-    if isinstance(f1, mohuset) and isinstance(f2, fuzzNum):
+    if isinstance(f1, mohuset) and isinstance(f2, mohunum):
         if f1.ndim == 1:
             return np.inner(f1.set, f2)
         else:
@@ -125,10 +125,10 @@ def outer(f1, f2):
 
         Parameters
         ----------
-        f1 : mohuset or mohunum
-            The first mohuset or mohunum.
-        f2 : mohuset or mohunum
-            The second mohuset or mohunum.
+        f1 : mohuset or fuzznum
+            The first mohuset or fuzznum.
+        f2 : mohuset or fuzznum
+            The second mohuset or fuzznum.
 
         Returns
         -------
@@ -145,17 +145,17 @@ def outer(f1, f2):
     # if isinstance(f1, fuzzParent.get(fuzzType[f1.mtype])) \
     #         and isinstance(f2, fuzzParent.get(fuzzType[f2.mtype])):
 
-    from ..core.base import fuzzNum
-    if isinstance(f1, fuzzNum) and isinstance(f2, fuzzNum):
+    from ..core.base import mohunum
+    if isinstance(f1, mohunum) and isinstance(f2, mohunum):
         return f1 * f2
 
-    if isinstance(f1, fuzzNum) and isinstance(f2, mohuset):
+    if isinstance(f1, mohunum) and isinstance(f2, mohuset):
         result = np.outer(f1, f2.set)
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result
         return newset
 
-    if isinstance(f1, mohuset) and isinstance(f2, fuzzNum):
+    if isinstance(f1, mohuset) and isinstance(f2, mohunum):
         result = np.outer(f1.set, f2)
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result
@@ -180,10 +180,10 @@ def cartadd(f1, f2):
 
         Parameters
         ----------
-        f1 : mohuset or mohunum
-            The first mohuset or mohunum.
-        f2 : mohuset or mohunum
-            The second mohuset or mohunum.
+        f1 : mohuset or fuzznum
+            The first mohuset or fuzznum.
+        f2 : mohuset or fuzznum
+            The second mohuset or fuzznum.
 
         Returns
         -------
@@ -200,17 +200,17 @@ def cartadd(f1, f2):
     # if isinstance(f1, fuzzParent.get(fuzzType[f1.mtype])) \
     #         and isinstance(f2, fuzzParent.get(fuzzType[f2.mtype])):
 
-    from ..core.base import fuzzNum
-    if isinstance(f1, fuzzNum) and isinstance(f2, fuzzNum):
+    from ..core.base import mohunum
+    if isinstance(f1, mohunum) and isinstance(f2, mohunum):
         return f1 * f2
 
-    if isinstance(f1, fuzzNum) and isinstance(f2, mohuset):
+    if isinstance(f1, mohunum) and isinstance(f2, mohuset):
         result = np.asarray(np.add.outer(f1, f2.set))
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result
         return newset
 
-    if isinstance(f1, mohuset) and isinstance(f2, fuzzNum):
+    if isinstance(f1, mohuset) and isinstance(f2, mohunum):
         result = np.asarray(np.add.outer(f1.set, f2))
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result
@@ -224,10 +224,10 @@ def cartprod(f1, f2):
 
         Parameters
         ----------
-        f1 : mohuset or mohunum
-            The first mohuset or mohunum.
-        f2 : mohuset or mohunum
-            The second mohuset or mohunum.
+        f1 : mohuset or fuzznum
+            The first mohuset or fuzznum.
+        f2 : mohuset or fuzznum
+            The second mohuset or fuzznum.
 
         Returns
         -------
@@ -244,17 +244,17 @@ def cartprod(f1, f2):
     # if isinstance(f1, fuzzParent.get(fuzzType[f1.mtype])) \
     #         and isinstance(f2, fuzzParent.get(fuzzType[f2.mtype])):
 
-    from ..core.base import fuzzNum
-    if isinstance(f1, fuzzNum) and isinstance(f2, fuzzNum):
+    from ..core.base import mohunum
+    if isinstance(f1, mohunum) and isinstance(f2, mohunum):
         return f1 * f2
 
-    if isinstance(f1, fuzzNum) and isinstance(f2, mohuset):
+    if isinstance(f1, mohunum) and isinstance(f2, mohuset):
         result = np.asarray(np.meshgrid(f1, f2.set))
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result
         return newset
 
-    if isinstance(f1, mohuset) and isinstance(f2, fuzzNum):
+    if isinstance(f1, mohuset) and isinstance(f2, mohunum):
         result = np.asarray(np.meshgrid(f1.set, f2))
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result

@@ -12,20 +12,19 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
-# from ..core.mohunum import mohunum
 from ..core.mohusets import mohuset
-from ..core.base import fuzzNum
+from ..core.base import mohunum
 from ..registry.image import fuzzPlot
 from ..registry.distance import fuzzDis
 from ..registry.string2num import fuzzString
 
 
-def str2mohu(s: str, q, mtype: str) -> fuzzNum:
+def str2mohu(s: str, q, mtype: str) -> mohunum:
     return fuzzString[mtype](s, q)
 
 
-def distance(f1: fuzzNum,
-             f2: fuzzNum,
+def distance(f1: mohunum,
+             f2: mohunum,
              t: (float, np.float_) = 1,
              l: (int, np.int_) = 1,
              indeterminacy=True):
@@ -33,7 +32,7 @@ def distance(f1: fuzzNum,
     return fuzzDis[mtype](f1, f2, l, t, indeterminacy)
 
 
-def plot(f: (mohuset, fuzzNum),
+def plot(f: (mohuset, mohunum),
          other=None,
          area=None,
          color='red',
@@ -57,7 +56,7 @@ def plot(f: (mohuset, fuzzNum),
     plt.axhline(y=0)
     plt.axvline(x=0)
 
-    if isinstance(f, fuzzNum):
+    if isinstance(f, mohunum):
         fuzzPlot[mtype](f,
                         other=other,
                         area=area,
@@ -271,11 +270,11 @@ def load_csv(path: str, q: int, mtype: str):
         newset.set = f
         return newset
     except Exception as e:
-        raise ValueError("Failed to load " + e)
+        raise ValueError("Failed to load " + str(e))
         # print(e, 'Load failed.')
 
 
-def abs(f1: Union[mohuset, fuzzNum], f2: Union[mohuset, fuzzNum]):
+def abs(f1: Union[mohuset, mohunum], f2: Union[mohuset, mohunum]):
     """
         Calculate the absolute value of two fuzzy sets or numbers.
 
@@ -283,16 +282,16 @@ def abs(f1: Union[mohuset, fuzzNum], f2: Union[mohuset, fuzzNum]):
         ----------
             f1:  Union[mohuset, mohunum]
                 The first fuzzy set or number.
-            f2:  Union[mohuset, mohunum]
+            f2:  Union[mohuset, fuzzNum]
                 The second fuzzy set or number.
 
         Returns
         -------
-            Union[mohuset, mohunum]
+            Union[mohuset, fuzzNum]
                 The absolute value of f1 and f2.
     """
-    y = lambda x, y: x - y if x > y else y - x
-    if isinstance(f1, fuzzNum) and isinstance(f2, fuzzNum):
+    y = lambda x, t: x - t if x > t else t - x
+    if isinstance(f1, mohunum) and isinstance(f2, mohunum):
         return y(f1, f2)
     if isinstance(f1, mohuset) and isinstance(f2, mohuset):
         vec_func = np.vectorize(y)
@@ -300,15 +299,35 @@ def abs(f1: Union[mohuset, fuzzNum], f2: Union[mohuset, fuzzNum]):
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result
         return newset
-    if isinstance(f1, fuzzNum) and isinstance(f2, mohuset):
+    if isinstance(f1, mohunum) and isinstance(f2, mohuset):
         vec_func = np.vectorize(y)
         result = vec_func(f1, f2.set)
         newset = mohuset(f2.qrung, f2.mtype)
         newset.set = result
         return newset
-    if isinstance(f1, mohuset) and isinstance(f2, fuzzNum):
+    if isinstance(f1, mohuset) and isinstance(f2, mohunum):
         vec_func = np.vectorize(y)
         result = vec_func(f1.set, f2)
         newset = mohuset(f1.qrung, f1.mtype)
         newset.set = result
         return newset
+
+
+def zeros_like(f: mohuset):
+    from .construct import zeros
+    return zeros(f.qrung, f.mtype, *f.shape)
+
+
+def poss_like(f: mohuset):
+    from .construct import poss
+    return poss(f.qrung, f.mtype, *f.shape)
+
+
+def negs_like(f: mohuset):
+    from .construct import negs
+    return negs(f.qrung, f.mtype, *f.shape)
+
+
+def full_like(f: mohuset, x):
+    from .construct import full
+    return full(x, *f.shape)

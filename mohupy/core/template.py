@@ -4,13 +4,13 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 from mohupy import asfuzzset
-from mohupy.core.base import fuzzNum
+from mohupy.core.base import mohunum
 
 
 # from .mohu import fuzzType
 #
 # @fuzzType('template')
-class template(fuzzNum):
+class template(mohunum):
     """
         This class is a template class used to create new fuzzy numbers
         (hesitant fuzzy numbers, etc.). It contains basic algorithms.
@@ -353,5 +353,5 @@ class template(fuzzNum):
     def reshape(self, *n):
         if n == (1,):
             return asfuzzset([self])
-        raise ValueError(f'cannot reshape mohunum of size {self.size} to {n}')
+        raise ValueError(f'cannot reshape fuzznum of size {self.size} to {n}')
 

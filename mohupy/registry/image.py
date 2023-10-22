@@ -7,15 +7,15 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-from ..core.base import fuzzNum
+from ..core.base import mohunum
 from .regedit import Register
 
 fuzzPlot = Register()
 
 
 @fuzzPlot('qrofn')
-def plot_qrofn(x: fuzzNum,
-               other: fuzzNum = None,
+def plot_qrofn(x: mohunum,
+               other: mohunum = None,
                area: list[bool] = None,
                color='red',
                color_area=None,
@@ -81,8 +81,8 @@ def plot_qrofn(x: fuzzNum,
 
 
 @fuzzPlot('ivfn')
-def plot_ivfn(x: fuzzNum,
-              other: fuzzNum = None,
+def plot_ivfn(x: mohunum,
+              other: mohunum = None,
               color='red',
               alpha=0.3,
               area: list[bool] = None,
@@ -125,8 +125,8 @@ def plot_ivfn(x: fuzzNum,
 
 
 @fuzzPlot('qrohfn')
-def plot_qrohfn(x: fuzzNum,
-                other: fuzzNum = None,
+def plot_qrohfn(x: mohunum,
+                other: mohunum = None,
                 color='red',
                 alpha=0.3,
                 area: list[bool] = None,

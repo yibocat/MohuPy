@@ -341,7 +341,7 @@ class template(MohuBase):
     def reshape(self, *n):
         if n == (1,):
             return asfuzzset([self])
-        raise ValueError(f'cannot reshape mohunum of size {self.size} to {n}')
+        raise ValueError(f'cannot reshape fuzznum of size {self.size} to {n}')
 
     def plot(self, other=None, color='red', alpha=0.3):
         """
