@@ -1,6 +1,12 @@
 # UPDATE LOG
 
 ------
+## version: 0.1.7-10.24.2023
+1. 添加了常量设置 `constant`
+2. 修复了一些 bug
+3. 更新了 0.1.6-10.22.2023 遗留的一些问题
+
+------
 ### version: 0.1.6-10.22.2023
 1. 添加 `zeros_like`,`poss_like`,`negs_like` 和 `full_like` 方法
 2. 修复了 `random.choice` 方法存在的一些 bugs。
@@ -9,6 +15,7 @@
 5. 更换模糊数基类名称：`fuzzNum` -> `mohunum`
    > 注意：模糊集合基类为 `mohuset`，模糊集合创建方法为 `fuzzset()`， 模糊数基类为 `mohunum`， 模糊数创建方法为 `fuzznum()` 
 6. 取消了动态继承
+
 ------
 ## version: 0.1.6-10.18.2023
 1. 完善了 `qrohfn` 的所有功能

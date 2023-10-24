@@ -11,7 +11,6 @@ from ..core.base import mohunum
 
 import numpy as np
 
-
 # def zeros(q, mtype, *n):
 #     """
 #          Generate an *n all-zero fuzzy set
@@ -94,6 +93,7 @@ import numpy as np
 #
 
 from ..registry.construct import fuzzZeros, fuzzPoss, fuzzNegs
+from .constant import fuzzZero, fuzzPos, fuzzNeg
 
 
 def zeros(q, mtype, *n):
@@ -112,7 +112,10 @@ def zeros(q, mtype, *n):
         -------
             newset : mohuset
     """
-    return fuzzZeros[mtype](q, *n)
+    if len(n) != 0:
+        return fuzzZeros[mtype](q, *n)
+    else:
+        return fuzzZero[mtype](q)
 
 
 def poss(q, mtype, *n):
@@ -131,7 +134,10 @@ def poss(q, mtype, *n):
         -------
             newset : mohuset
     """
-    return fuzzPoss[mtype](q, *n)
+    if len(n) != 0:
+        return fuzzPoss[mtype](q, *n)
+    else:
+        return fuzzPos[mtype](q)
 
 
 def negs(q, mtype, *n):
@@ -150,7 +156,10 @@ def negs(q, mtype, *n):
         -------
             newset : mohuset
     """
-    return fuzzNegs[mtype](q, *n)
+    if len(n)!= 0:
+        return fuzzNegs[mtype](q, *n)
+    else:
+        return fuzzNeg[mtype](q)
 
 
 def full(x: mohunum, *n):
