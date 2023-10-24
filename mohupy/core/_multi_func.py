@@ -162,6 +162,7 @@ def fuzzset(x: Union[list, tuple, np.ndarray, mohunum]):
         newset.set = fl
         return newset
     if isinstance(x, Union[list, tuple, np.ndarray]):
+        y = np.asarray(x, dtype=object)
         y = y.flatten()
         mt = y[0].mtype
         for i in y:

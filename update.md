@@ -1,5 +1,12 @@
 # UPDATE LOG
 
+
+------
+### version: 0.1.7-10.25.2023
+1. 增加了 `isscalar` 方法
+2. 修复了 `fuzzset` 存在的 bug
+3. 重新设置了打印格式
+
 ------
 ### version: 0.1.7-10.24.2023
 1. 对 `mohunum` 添加了 `flatten()` 方法

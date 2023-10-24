@@ -37,9 +37,10 @@ class mohuset(MohuBase):
             pass
 
     def __repr__(self):
-        return np.array_repr(self.__set) + \
-            '\n mtype=%s, qrung=%s, shape=%s, size=%s' \
-            % (self.__mtype, self.__qrung, self.__shape, self.__size)
+        if self.set is None:
+            return 'fuzzTensor(None)'
+        p = str(self.set).replace('\n', '\n' + ' ' * 8)
+        return f'mohuSet({p}, qrung={self.__qrung}, mtype={self.__mtype})'
 
     def __str__(self):
         return str(self.__set)

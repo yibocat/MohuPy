@@ -19,6 +19,14 @@ from ..registry.distance import fuzzDis
 from ..registry.string2num import fuzzString
 
 
+def isscalar(x: Union[mohuset, mohunum]):
+    if isinstance(x, mohunum):
+        return True
+    if isinstance(x, mohuset):
+        return False
+    raise TypeError('unsupported type: {}'.format(type(x)))
+
+
 def str2mohu(s: str, q, mtype: str) -> mohunum:
     return fuzzString[mtype](s, q)
 
