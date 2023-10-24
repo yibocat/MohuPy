@@ -185,3 +185,6 @@ class mohunum(MohuBase):
 
     def convert(self):
         pass
+
+    def flatten(self):
+        pass

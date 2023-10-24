@@ -562,6 +562,12 @@ class MohuQROFN(mohunum):
     def convert(self):
         return self.md, self.nmd
 
+    def flatten(self):
+        from .mohusets import mohuset
+        newset = mohuset(self.qrung, self.mtype)
+        newset.append(self)
+        return newset
+
     # def plot(self, other=None, area: list[bool] = None, color='red', color_area=None, alpha=0.3):
     #     """
     #         This function plots the Q-ROFN distribution in the fuzzy space.
@@ -1079,6 +1085,12 @@ class MohuQROIVFN(mohunum):
 
     def convert(self):
         return self.md.tolist(), self.nmd.tolist()
+
+    def flatten(self):
+        from .mohusets import mohuset
+        newset = mohuset(self.qrung, self.mtype)
+        newset.append(self)
+        return newset
 
     # def plot(self, other=None, color='red', alpha=0.3):
     #     md = self.md
@@ -1629,3 +1641,9 @@ class MohuQROHFN(mohunum):
         self.__md = np.unique(np.round(self.__md, ac))
         self.__nmd = np.unique(np.round(self.__nmd, ac))
         return self
+
+    def flatten(self):
+        from .mohusets import mohuset
+        newset = mohuset(self.qrung, self.mtype)
+        newset.append(self)
+        return newset

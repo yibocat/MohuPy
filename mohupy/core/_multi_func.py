@@ -114,7 +114,7 @@
 
 from typing import Union
 # from .interface import mohuParent
-
+from .base import mohunum
 import numpy as np
 
 
@@ -150,19 +150,32 @@ def fuzznum(qrung, md, nmd):
     return fuzzType.get(mohuType)(qrung, md, nmd)
 
 
-def fuzzset(x: Union[list, tuple, np.ndarray]):
-    y = x.flatten()
-    mt = y[0].mtype
-    for i in y:
-        if i.mtype != mt:
-            raise ValueError('error mtype')
-        mt = i.mtype
+def fuzzset(x: Union[list, tuple, np.ndarray, mohunum]):
+    y = x
 
-    from .mohusets import mohuset
-    t = np.random.choice(y)
-    qrung = t.qrung
-    mtype = t.mtype
+    if isinstance(x, mohunum):
+        from .mohusets import mohuset
+        fl = np.asarray(y, dtype=object)
+        flat = fl.flatten()
+        r = np.random.choice(flat)
+        newset = mohuset(r.qrung, r.mtype)
+        newset.set = fl
+        return newset
+    if isinstance(x, Union[list, tuple, np.ndarray]):
+        y = y.flatten()
+        mt = y[0].mtype
+        for i in y:
+            if i.mtype != mt:
+                raise ValueError('error mtype')
+            mt = i.mtype
 
-    newset = mohuset(qrung, mtype)
-    newset.set = np.array(x, dtype=object)
-    return newset
+        from .mohusets import mohuset
+        t = np.random.choice(y)
+        qrung = t.qrung
+        mtype = t.mtype
+
+        newset = mohuset(qrung, mtype)
+        newset.set = np.array(x, dtype=object)
+        return newset
+
+    raise TypeError('unsupported type: {}'.format(type(x)))

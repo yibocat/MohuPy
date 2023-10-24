@@ -1,6 +1,11 @@
 # UPDATE LOG
 
 ------
+### version: 0.1.7-10.24.2023
+1. 对 `mohunum` 添加了 `flatten()` 方法
+2. 修复了 `fuzzset` 方法存在的 bug
+
+------
 ## version: 0.1.7-10.24.2023
 1. 添加了常量设置 `constant`
 2. 修复了一些 bug
