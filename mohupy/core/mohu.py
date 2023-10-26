@@ -7,10 +7,9 @@
 
 import copy
 from typing import Union
+import numpy as np
 
 from .base import mohunum
-
-import numpy as np
 
 from ..registry.regedit import Register
 
@@ -104,445 +103,445 @@ class MohuQROFN(mohunum):
     def T(self):
         return MohuQROFN(self.qrung, self.md, self.nmd)
 
-    def __add__(self, other):
-        q = self.qrung
-
-        def __add(oth: MohuQROFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, 0, 0)
-            newfn.md = (self.md ** q + oth.md ** q
-                        - self.md ** q * oth.md ** q) ** (1 / q)
-            newfn.nmd = self.nmd * oth.nmd
-            return newfn
-
-        if isinstance(other, MohuQROFN):
-            return __add(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-
-            vec_func = np.vectorize(__add)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __radd__(self, other):
-        q = self.qrung
-
-        def __add(oth: MohuQROFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, 0, 0)
-            newfn.md = (self.md ** q + oth.md ** q
-                        - self.md ** q * oth.md ** q) ** (1 / q)
-            newfn.nmd = self.nmd * oth.nmd
-            return newfn
-
-        if isinstance(other, MohuQROFN):
-            return __add(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-
-            vec_func = np.vectorize(__add)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __sub__(self, other):
-        q = self.qrung
-
-        def __sub(oth: MohuQROFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, 0, 1)
-            if oth.nmd == 0. or oth.md == 1.:
-                return newfn
-            elif 0 <= self.nmd / oth.nmd <= ((1 - self.md ** q) / (1 - oth.md ** q)) ** (1 / q) <= 1:
-                newfn.md = ((self.md ** q - oth.md ** q) / (1 - oth.md ** q)) ** (1 / q)
-                newfn.nmd = self.nmd / oth.nmd
-                return newfn
-            else:
-                return newfn
-
-        if isinstance(other, MohuQROFN):
-            return __sub(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-
-            vec_func = np.vectorize(__sub)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __mul__(self, other):
-        q = self.qrung
-
-        def __mul(oth: Union[MohuQROFN, float, int, np.int_, np.float_]):
-            if isinstance(oth, MohuQROFN):
-                assert self.qrung == oth.qrung, \
-                    'ERROR: qrung must be equal.'
-                assert self.mtype == oth.mtype, \
-                    'ERROR: mtype must be same.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, 0, 0)
-                newfn.md = self.md * oth.md
-                newfn.nmd = (self.nmd ** q + oth.nmd ** q
-                             - self.nmd ** q * oth.nmd ** q) ** (1. / q)
-                return newfn
-            if isinstance(oth, Union[float, int, np.int_, np.float_]):
-                assert oth > 0., 'ERROR: The value must be greater than 0.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, 0, 0)
-                newfn.md = (1. - (1. - self.md ** q) ** oth) ** (1. / q)
-                newfn.nmd = self.nmd ** oth
-                return newfn
-
-        if isinstance(other, Union[MohuQROFN, float, int, np.int_, np.float_]):
-            return __mul(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        if isinstance(other, np.ndarray):
-            assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __rmul__(self, other):
-        q = self.qrung
-
-        def __mul(oth: Union[MohuQROFN, float, int, np.int_, np.float_]):
-            if isinstance(oth, MohuQROFN):
-                assert self.qrung == oth.qrung, \
-                    'ERROR: qrung must be equal.'
-                assert self.mtype == oth.mtype, \
-                    'ERROR: mtype must be same.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, 0, 0)
-                newfn.md = self.md * oth.md
-                newfn.nmd = (self.nmd ** q + oth.nmd ** q
-                             - self.nmd ** q * oth.nmd ** q) ** (1. / q)
-                return newfn
-            if isinstance(oth, Union[float, int, np.int_, np.float_]):
-                assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, 0, 0)
-                newfn.md = (1. - (1. - self.md ** q) ** oth) ** (1. / q)
-                newfn.nmd = self.nmd ** oth
-                return newfn
-
-        if isinstance(other, Union[MohuQROFN, float, int, np.int_, np.float_]):
-            return __mul(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        if isinstance(other, np.ndarray):
-            assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __truediv__(self, other):
-        q = self.qrung
-
-        def __truediv(oth: Union[MohuQROFN, float, int, np.int_, np.float_]):
-            if isinstance(oth, MohuQROFN):
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, 1, 0)
-                if self.md == 0 and self.nmd == 1:
-                    return fuzznum(q, 0, 1)
-                elif oth.md == 0 or oth.nmd == 1.:
-                    return newfn
-                elif 0 <= self.md / oth.md <= \
-                        ((1 - self.nmd ** q) / (1 - oth.nmd ** q)) ** (1 / q) <= 1:
-                    newfn.md = self.md / oth.md
-                    newfn.nmd = ((self.nmd ** q - oth.nmd ** q) / (1 - oth.nmd ** q)) ** (1 / q)
-                    return newfn
-                else:
-                    return newfn
-            if isinstance(oth, Union[float, int, np.int_, np.float_]):
-                assert oth >= 1., 'ERROR: The value must be greater than 1.'
-                return self.__mul__(1. / oth)
-
-        if isinstance(other, Union[MohuQROFN, float, int, np.int_, np.float_]):
-            return __truediv(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-            vec_func = np.vectorize(__truediv)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        if isinstance(other, np.ndarray):
-            assert np.all(other) >= 1., 'ERROR: The value must be greater than'
-            vec_func = np.vectorize(__truediv)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __pow__(self, power, modulo=None):
-        q = self.qrung
-
-        def __pow(p: Union[float, int, np.int_, np.float_]):
-            assert p > 0., 'ERROR: The power must be greater than 0.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, 0, 0)
-            newfn.md = self.md ** p
-            newfn.nmd = (1. - (1. - self.nmd ** q) ** p) ** (1. / q)
-            return newfn
-
-        if isinstance(power, Union[float, int, np.int_, np.float_]):
-            return __pow(power)
-
-        from .mohusets import mohuset
-        if isinstance(power, np.ndarray):
-            assert np.all(power) > 0., 'ERROR: The power must be greater than 0.'
-            vec_func = np.vectorize(__pow)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(power)
-            return newset
-        raise TypeError(f'Invalid type: {type(power)}')
-
-    def __and__(self, other):
-        q = self.qrung
-
-        def __and(oth: MohuQROFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, 0, 0)
-            newfn.md = (min(self.md, oth.md))
-            newfn.nmd = (max(self.nmd, oth.nmd))
-            return newfn
-
-        if isinstance(other, MohuQROFN):
-            return __and(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            newset = mohuset(q, self.mtype)
-            vec_func = np.vectorize(__and)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __or__(self, other):
-        q = self.qrung
-
-        def __or(oth: MohuQROFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, 0, 0)
-            newfn.md = (max(self.md, oth.md))
-            newfn.nmd = (min(self.nmd, oth.nmd))
-            return newfn
-
-        if isinstance(other, MohuQROFN):
-            return __or(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            newset = mohuset(q, self.mtype)
-            vec_func = np.vectorize(__or)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __eq__(self, other):
-        def __eq(oth: MohuQROFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            return self.md == oth.md and self.nmd == oth.nmd
-
-        if isinstance(other, MohuQROFN):
-            return __eq(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__eq)
-            res = vec_func(other.set)
-            return res
-
-    def __ne__(self, other):
-        def __ne(oth: MohuQROFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            return self.md != oth.md or self.nmd != oth.nmd
-
-        if isinstance(other, MohuQROFN):
-            return __ne(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__ne)
-            res = vec_func(other.set)
-            return res
-
-    def __lt__(self, other):
-        q = self.qrung
-
-        def __lt(oth: MohuQROFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            from ._multi_func import fuzznum
-            if self - oth == fuzznum(q, 0, 1) and self != oth:
-                return True
-            else:
-                return False
-
-        if isinstance(other, MohuQROFN):
-            return __lt(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__lt)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__lt)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __gt__(self, other):
-        q = self.qrung
-
-        def __gt(oth: MohuQROFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            from ._multi_func import fuzznum
-            if self - oth != fuzznum(q, 0., 1.) and self != oth:
-                return True
-            else:
-                return False
-
-        if isinstance(other, MohuQROFN):
-            return __gt(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__gt)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__gt)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __le__(self, other):
-        q = self.qrung
-
-        def __le(oth: MohuQROFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            from ._multi_func import fuzznum
-            if self - oth == fuzznum(q, 0., 1.) or self == oth:
-                return True
-            else:
-                return False
-
-        if isinstance(other, MohuQROFN):
-            return __le(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__le)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__le)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __ge__(self, other):
-        q = self.qrung
-
-        def __ge(oth: MohuQROFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            from ._multi_func import fuzznum
-            if self - oth != fuzznum(q, 0., 1.) or self == oth:
-                return True
-            else:
-                return False
-
-        if isinstance(other, MohuQROFN):
-            return __ge(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__ge)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__ge)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
+    # def __add__(self, other):
+    #     q = self.qrung
+    #
+    #     def __add(oth: MohuQROFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, 0, 0)
+    #         newfn.md = (self.md ** q + oth.md ** q
+    #                     - self.md ** q * oth.md ** q) ** (1 / q)
+    #         newfn.nmd = self.nmd * oth.nmd
+    #         return newfn
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __add(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #
+    #         vec_func = np.vectorize(__add)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __radd__(self, other):
+    #     q = self.qrung
+    #
+    #     def __add(oth: MohuQROFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, 0, 0)
+    #         newfn.md = (self.md ** q + oth.md ** q
+    #                     - self.md ** q * oth.md ** q) ** (1 / q)
+    #         newfn.nmd = self.nmd * oth.nmd
+    #         return newfn
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __add(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #
+    #         vec_func = np.vectorize(__add)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __sub__(self, other):
+    #     q = self.qrung
+    #
+    #     def __sub(oth: MohuQROFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, 0, 1)
+    #         if oth.nmd == 0. or oth.md == 1.:
+    #             return newfn
+    #         elif 0 <= self.nmd / oth.nmd <= ((1 - self.md ** q) / (1 - oth.md ** q)) ** (1 / q) <= 1:
+    #             newfn.md = ((self.md ** q - oth.md ** q) / (1 - oth.md ** q)) ** (1 / q)
+    #             newfn.nmd = self.nmd / oth.nmd
+    #             return newfn
+    #         else:
+    #             return newfn
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __sub(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #
+    #         vec_func = np.vectorize(__sub)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __mul__(self, other):
+    #     q = self.qrung
+    #
+    #     def __mul(oth: Union[MohuQROFN, float, int, np.int_, np.float_]):
+    #         if isinstance(oth, MohuQROFN):
+    #             assert self.qrung == oth.qrung, \
+    #                 'ERROR: qrung must be equal.'
+    #             assert self.mtype == oth.mtype, \
+    #                 'ERROR: mtype must be same.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, 0, 0)
+    #             newfn.md = self.md * oth.md
+    #             newfn.nmd = (self.nmd ** q + oth.nmd ** q
+    #                          - self.nmd ** q * oth.nmd ** q) ** (1. / q)
+    #             return newfn
+    #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
+    #             assert oth > 0., 'ERROR: The value must be greater than 0.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, 0, 0)
+    #             newfn.md = (1. - (1. - self.md ** q) ** oth) ** (1. / q)
+    #             newfn.nmd = self.nmd ** oth
+    #             return newfn
+    #
+    #     if isinstance(other, Union[MohuQROFN, float, int, np.int_, np.float_]):
+    #         return __mul(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     if isinstance(other, np.ndarray):
+    #         assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __rmul__(self, other):
+    #     q = self.qrung
+    #
+    #     def __mul(oth: Union[MohuQROFN, float, int, np.int_, np.float_]):
+    #         if isinstance(oth, MohuQROFN):
+    #             assert self.qrung == oth.qrung, \
+    #                 'ERROR: qrung must be equal.'
+    #             assert self.mtype == oth.mtype, \
+    #                 'ERROR: mtype must be same.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, 0, 0)
+    #             newfn.md = self.md * oth.md
+    #             newfn.nmd = (self.nmd ** q + oth.nmd ** q
+    #                          - self.nmd ** q * oth.nmd ** q) ** (1. / q)
+    #             return newfn
+    #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
+    #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, 0, 0)
+    #             newfn.md = (1. - (1. - self.md ** q) ** oth) ** (1. / q)
+    #             newfn.nmd = self.nmd ** oth
+    #             return newfn
+    #
+    #     if isinstance(other, Union[MohuQROFN, float, int, np.int_, np.float_]):
+    #         return __mul(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     if isinstance(other, np.ndarray):
+    #         assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __truediv__(self, other):
+    #     q = self.qrung
+    #
+    #     def __truediv(oth: Union[MohuQROFN, float, int, np.int_, np.float_]):
+    #         if isinstance(oth, MohuQROFN):
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, 1, 0)
+    #             if self.md == 0 and self.nmd == 1:
+    #                 return fuzznum(q, 0, 1)
+    #             elif oth.md == 0 or oth.nmd == 1.:
+    #                 return newfn
+    #             elif 0 <= self.md / oth.md <= \
+    #                     ((1 - self.nmd ** q) / (1 - oth.nmd ** q)) ** (1 / q) <= 1:
+    #                 newfn.md = self.md / oth.md
+    #                 newfn.nmd = ((self.nmd ** q - oth.nmd ** q) / (1 - oth.nmd ** q)) ** (1 / q)
+    #                 return newfn
+    #             else:
+    #                 return newfn
+    #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
+    #             assert oth >= 1., 'ERROR: The value must be greater than 1.'
+    #             return self.__mul__(1. / oth)
+    #
+    #     if isinstance(other, Union[MohuQROFN, float, int, np.int_, np.float_]):
+    #         return __truediv(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #         vec_func = np.vectorize(__truediv)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     if isinstance(other, np.ndarray):
+    #         assert np.all(other) >= 1., 'ERROR: The value must be greater than'
+    #         vec_func = np.vectorize(__truediv)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __pow__(self, power, modulo=None):
+    #     q = self.qrung
+    #
+    #     def __pow(p: Union[float, int, np.int_, np.float_]):
+    #         assert p > 0., 'ERROR: The power must be greater than 0.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, 0, 0)
+    #         newfn.md = self.md ** p
+    #         newfn.nmd = (1. - (1. - self.nmd ** q) ** p) ** (1. / q)
+    #         return newfn
+    #
+    #     if isinstance(power, Union[float, int, np.int_, np.float_]):
+    #         return __pow(power)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(power, np.ndarray):
+    #         assert np.all(power) > 0., 'ERROR: The power must be greater than 0.'
+    #         vec_func = np.vectorize(__pow)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(power)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(power)}')
+    #
+    # def __and__(self, other):
+    #     q = self.qrung
+    #
+    #     def __and(oth: MohuQROFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, 0, 0)
+    #         newfn.md = (min(self.md, oth.md))
+    #         newfn.nmd = (max(self.nmd, oth.nmd))
+    #         return newfn
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __and(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         newset = mohuset(q, self.mtype)
+    #         vec_func = np.vectorize(__and)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __or__(self, other):
+    #     q = self.qrung
+    #
+    #     def __or(oth: MohuQROFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, 0, 0)
+    #         newfn.md = (max(self.md, oth.md))
+    #         newfn.nmd = (min(self.nmd, oth.nmd))
+    #         return newfn
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __or(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         newset = mohuset(q, self.mtype)
+    #         vec_func = np.vectorize(__or)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __eq__(self, other):
+    #     def __eq(oth: MohuQROFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         return self.md == oth.md and self.nmd == oth.nmd
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __eq(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__eq)
+    #         res = vec_func(other.set)
+    #         return res
+    #
+    # def __ne__(self, other):
+    #     def __ne(oth: MohuQROFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         return self.md != oth.md or self.nmd != oth.nmd
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __ne(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__ne)
+    #         res = vec_func(other.set)
+    #         return res
+    #
+    # def __lt__(self, other):
+    #     q = self.qrung
+    #
+    #     def __lt(oth: MohuQROFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         from ._multi_func import fuzznum
+    #         if self - oth == fuzznum(q, 0, 1) and self != oth:
+    #             return True
+    #         else:
+    #             return False
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __lt(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__lt)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__lt)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __gt__(self, other):
+    #     q = self.qrung
+    #
+    #     def __gt(oth: MohuQROFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         from ._multi_func import fuzznum
+    #         if self - oth != fuzznum(q, 0., 1.) and self != oth:
+    #             return True
+    #         else:
+    #             return False
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __gt(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__gt)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__gt)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __le__(self, other):
+    #     q = self.qrung
+    #
+    #     def __le(oth: MohuQROFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         from ._multi_func import fuzznum
+    #         if self - oth == fuzznum(q, 0., 1.) or self == oth:
+    #             return True
+    #         else:
+    #             return False
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __le(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__le)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__le)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __ge__(self, other):
+    #     q = self.qrung
+    #
+    #     def __ge(oth: MohuQROFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         from ._multi_func import fuzznum
+    #         if self - oth != fuzznum(q, 0., 1.) or self == oth:
+    #             return True
+    #         else:
+    #             return False
+    #
+    #     if isinstance(other, MohuQROFN):
+    #         return __ge(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__ge)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__ge)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
 
     def is_valid(self):
         mds = self.md
@@ -705,365 +704,365 @@ class MohuQROIVFN(mohunum):
     def T(self):
         return MohuQROIVFN(self.qrung, self.md, self.nmd)
 
-    def __add__(self, other):
-        q = self.qrung
-
-        def __add(oth: MohuQROIVFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, (0., 0.), (0., 0.))
-            newfn.md = (self.md ** q + oth.md ** q - self.md ** q * oth.md ** q) ** (1. / q)
-            newfn.nmd = self.nmd * oth.nmd
-            return newfn
-
-        if isinstance(other, MohuQROIVFN):
-            return __add(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-
-            vec_func = np.vectorize(__add)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __radd__(self, other):
-        q = self.qrung
-
-        def __add(oth: MohuQROIVFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, (0., 0.), (0., 0.))
-            newfn.md = (self.md ** q + oth.md ** q - self.md ** q * oth.md ** q) ** (1. / q)
-            newfn.nmd = self.nmd * oth.nmd
-            return newfn
-
-        if isinstance(other, MohuQROIVFN):
-            return __add(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-
-            vec_func = np.vectorize(__add)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __sub__(self, other):
-        # TODO: The subtraction of MohuQROIVFN is not supported.
-        raise TypeError('interval-valued fuzzy subtraction operation is not supported for the time being.')
-
-    def __mul__(self, other):
-        q = self.qrung
-
-        def __mul(oth: Union[MohuQROIVFN, float, int, np.int_, np.float_]):
-            if isinstance(oth, MohuQROIVFN):
-                assert self.qrung == oth.qrung, \
-                    'ERROR: qrung must be equal.'
-                assert self.mtype == oth.mtype, \
-                    'ERROR: mtype must be same.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, (0., 0.), (0., 0.))
-                newfn.md = self.md * oth.md
-                newfn.nmd = (self.nmd ** q + oth.nmd ** q - self.nmd ** q * oth.nmd ** q) ** (1. / q)
-                return newfn
-            if isinstance(oth, Union[float, int, np.int_, np.float_]):
-                assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, (0., 0.), (0., 0.))
-                newfn.md = (1. - (1 - self.md ** q) ** oth) ** (1. / q)
-                newfn.nmd = self.nmd ** oth
-                return newfn
-            raise TypeError('ERROR: Unsupported type.')
-
-        if isinstance(other, Union[MohuQROIVFN, float, int, np.int_, np.float_]):
-            return __mul(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-
-        if isinstance(other, np.ndarray):
-            assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __rmul__(self, other):
-        q = self.qrung
-
-        def __mul(oth: Union[MohuQROIVFN, float, int, np.int_, np.float_]):
-            if isinstance(oth, MohuQROIVFN):
-                assert self.qrung == oth.qrung, \
-                    'ERROR: qrung must be equal.'
-                assert self.mtype == oth.mtype, \
-                    'ERROR: mtype must be same.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, (0., 0.), (0., 0.))
-                newfn.md = self.md * oth.md
-                newfn.nmd = (self.nmd ** q + oth.nmd ** q - self.nmd ** q * oth.nmd ** q) ** (1. / q)
-                return newfn
-            if isinstance(oth, Union[float, int, np.int_, np.float_]):
-                assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, (0., 0.), (0., 0.))
-                newfn.md = (1. - (1 - self.md ** q) ** oth) ** (1. / q)
-                newfn.nmd = self.nmd ** oth
-                return newfn
-            raise TypeError('ERROR: Unsupported type.')
-
-        if isinstance(other, Union[MohuQROIVFN, float, int, np.int_, np.float_]):
-            return __mul(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        if isinstance(other, np.ndarray):
-            assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __truediv__(self, other):
-        # TODO: The division of MohuQROIVFN is not supported.
-        raise TypeError('Interval-valued fuzzy division operation is not supported for the time being.')
-
-    def __pow__(self, power, modulo=None):
-        q = self.qrung
-
-        def __pow(p: Union[float, int, np.int_, np.float_]):
-            assert p > 0., 'ERROR: The power must be greater than 0.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, (0., 0.), (0., 0.))
-            newfn.md = self.md ** p
-            newfn.nmd = (1. - (1. - self.nmd ** q) ** p) ** (1. / q)
-            return newfn
-
-        if isinstance(power, Union[float, int, np.int_, np.float_]):
-            return __pow(power)
-
-        from .mohusets import mohuset
-        if isinstance(power, np.ndarray):
-            assert np.all(power) > 0., 'ERROR: The power must be greater than 0.'
-            vec_func = np.vectorize(__pow)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(power)
-            return newset
-        raise TypeError(f'Invalid type: {type(power)}')
-
-    def __and__(self, other):
-        q = self.qrung
-
-        def __and(oth: MohuQROIVFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, (0., 0.), (0., 0.))
-            newfn.md = [min(self.md[0], oth.md[0]), min(self.md[1], oth.md[1])]
-            newfn.nmd = [max(self.nmd[0], oth.nmd[0]), max(self.nmd[1], oth.nmd[1])]
-            return newfn
-
-        if isinstance(other, MohuQROIVFN):
-            return __and(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            newset = mohuset(q, self.mtype)
-            vec_func = np.vectorize(__and)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __or__(self, other):
-        q = self.qrung
-
-        def __or(oth: MohuQROIVFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, (0., 0.), (0., 0.))
-            newfn.md = [max(self.md[0], oth.md[0]), max(self.md[1], oth.md[1])]
-            newfn.nmd = [min(self.nmd[0], oth.nmd[0]), min(self.nmd[1], oth.nmd[1])]
-            return newfn
-
-        if isinstance(other, MohuQROIVFN):
-            return __or(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            newset = mohuset(q, self.mtype)
-            vec_func = np.vectorize(__or)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __eq__(self, other):
-
-        def __eq(oth: MohuQROIVFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return np.array_equal(self.md, oth.md) and np.array_equal(self.nmd, oth.nmd)
-
-        if isinstance(other, MohuQROIVFN):
-            return __eq(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__eq)
-            res = vec_func(other.set)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __ne__(self, other):
-
-        def __ne(oth: MohuQROIVFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            assert self.qrung == other.qrung, \
-                'ERROR: The qrung must be equal.'
-            return not np.array_equal(self.md, other.md) or not np.array_equal(self.nmd, other.nmd)
-
-        if isinstance(other, MohuQROIVFN):
-            return __ne(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__ne)
-            res = vec_func(other.set)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __lt__(self, other):
-        # TODO: The comparison of MohuQROIVFN is not supported.
-        # Temporarily adopt the score value comparison method
-
-        def __lt(oth: MohuQROIVFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return self.score < oth.score
-
-        if isinstance(other, MohuQROIVFN):
-            return __lt(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__lt)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__lt)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __gt__(self, other):
-        # TODO: The comparison of MohuQROIVFN is not supported.
-        # Temporarily adopt the score value comparison method
-
-        def __gt(oth: MohuQROIVFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return self.score > oth.score
-
-        if isinstance(other, MohuQROIVFN):
-            return __gt(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__gt)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__gt)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __le__(self, other):
-        # TODO: The comparison of MohuQROIVFN is not supported.
-        # Temporarily adopt the score value comparison method
-
-        def __le(oth: MohuQROIVFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return self.score <= oth.score
-
-        if isinstance(other, MohuQROIVFN):
-            return __le(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__le)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__le)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __ge__(self, other):
-        # TODO: The comparison of MohuQROIVFN is not supported.
-        # Temporarily adopt the score value comparison method
-
-        def __ge(oth: MohuQROIVFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return self.score >= oth.score
-
-        if isinstance(other, MohuQROIVFN):
-            return __ge(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__ge)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__ge)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
+    # def __add__(self, other):
+    #     q = self.qrung
+    #
+    #     def __add(oth: MohuQROIVFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, (0., 0.), (0., 0.))
+    #         newfn.md = (self.md ** q + oth.md ** q - self.md ** q * oth.md ** q) ** (1. / q)
+    #         newfn.nmd = self.nmd * oth.nmd
+    #         return newfn
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __add(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #
+    #         vec_func = np.vectorize(__add)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __radd__(self, other):
+    #     q = self.qrung
+    #
+    #     def __add(oth: MohuQROIVFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, (0., 0.), (0., 0.))
+    #         newfn.md = (self.md ** q + oth.md ** q - self.md ** q * oth.md ** q) ** (1. / q)
+    #         newfn.nmd = self.nmd * oth.nmd
+    #         return newfn
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __add(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #
+    #         vec_func = np.vectorize(__add)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __sub__(self, other):
+    #     # TODO: The subtraction of MohuQROIVFN is not supported.
+    #     raise TypeError('interval-valued fuzzy subtraction operation is not supported for the time being.')
+    #
+    # def __mul__(self, other):
+    #     q = self.qrung
+    #
+    #     def __mul(oth: Union[MohuQROIVFN, float, int, np.int_, np.float_]):
+    #         if isinstance(oth, MohuQROIVFN):
+    #             assert self.qrung == oth.qrung, \
+    #                 'ERROR: qrung must be equal.'
+    #             assert self.mtype == oth.mtype, \
+    #                 'ERROR: mtype must be same.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, (0., 0.), (0., 0.))
+    #             newfn.md = self.md * oth.md
+    #             newfn.nmd = (self.nmd ** q + oth.nmd ** q - self.nmd ** q * oth.nmd ** q) ** (1. / q)
+    #             return newfn
+    #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
+    #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, (0., 0.), (0., 0.))
+    #             newfn.md = (1. - (1 - self.md ** q) ** oth) ** (1. / q)
+    #             newfn.nmd = self.nmd ** oth
+    #             return newfn
+    #         raise TypeError('ERROR: Unsupported type.')
+    #
+    #     if isinstance(other, Union[MohuQROIVFN, float, int, np.int_, np.float_]):
+    #         return __mul(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #
+    #     if isinstance(other, np.ndarray):
+    #         assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __rmul__(self, other):
+    #     q = self.qrung
+    #
+    #     def __mul(oth: Union[MohuQROIVFN, float, int, np.int_, np.float_]):
+    #         if isinstance(oth, MohuQROIVFN):
+    #             assert self.qrung == oth.qrung, \
+    #                 'ERROR: qrung must be equal.'
+    #             assert self.mtype == oth.mtype, \
+    #                 'ERROR: mtype must be same.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, (0., 0.), (0., 0.))
+    #             newfn.md = self.md * oth.md
+    #             newfn.nmd = (self.nmd ** q + oth.nmd ** q - self.nmd ** q * oth.nmd ** q) ** (1. / q)
+    #             return newfn
+    #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
+    #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, (0., 0.), (0., 0.))
+    #             newfn.md = (1. - (1 - self.md ** q) ** oth) ** (1. / q)
+    #             newfn.nmd = self.nmd ** oth
+    #             return newfn
+    #         raise TypeError('ERROR: Unsupported type.')
+    #
+    #     if isinstance(other, Union[MohuQROIVFN, float, int, np.int_, np.float_]):
+    #         return __mul(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     if isinstance(other, np.ndarray):
+    #         assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __truediv__(self, other):
+    #     # TODO: The division of MohuQROIVFN is not supported.
+    #     raise TypeError('Interval-valued fuzzy division operation is not supported for the time being.')
+    #
+    # def __pow__(self, power, modulo=None):
+    #     q = self.qrung
+    #
+    #     def __pow(p: Union[float, int, np.int_, np.float_]):
+    #         assert p > 0., 'ERROR: The power must be greater than 0.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, (0., 0.), (0., 0.))
+    #         newfn.md = self.md ** p
+    #         newfn.nmd = (1. - (1. - self.nmd ** q) ** p) ** (1. / q)
+    #         return newfn
+    #
+    #     if isinstance(power, Union[float, int, np.int_, np.float_]):
+    #         return __pow(power)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(power, np.ndarray):
+    #         assert np.all(power) > 0., 'ERROR: The power must be greater than 0.'
+    #         vec_func = np.vectorize(__pow)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(power)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(power)}')
+    #
+    # def __and__(self, other):
+    #     q = self.qrung
+    #
+    #     def __and(oth: MohuQROIVFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, (0., 0.), (0., 0.))
+    #         newfn.md = [min(self.md[0], oth.md[0]), min(self.md[1], oth.md[1])]
+    #         newfn.nmd = [max(self.nmd[0], oth.nmd[0]), max(self.nmd[1], oth.nmd[1])]
+    #         return newfn
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __and(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         newset = mohuset(q, self.mtype)
+    #         vec_func = np.vectorize(__and)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __or__(self, other):
+    #     q = self.qrung
+    #
+    #     def __or(oth: MohuQROIVFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, (0., 0.), (0., 0.))
+    #         newfn.md = [max(self.md[0], oth.md[0]), max(self.md[1], oth.md[1])]
+    #         newfn.nmd = [min(self.nmd[0], oth.nmd[0]), min(self.nmd[1], oth.nmd[1])]
+    #         return newfn
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __or(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         newset = mohuset(q, self.mtype)
+    #         vec_func = np.vectorize(__or)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __eq__(self, other):
+    #
+    #     def __eq(oth: MohuQROIVFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return np.array_equal(self.md, oth.md) and np.array_equal(self.nmd, oth.nmd)
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __eq(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__eq)
+    #         res = vec_func(other.set)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __ne__(self, other):
+    #
+    #     def __ne(oth: MohuQROIVFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         assert self.qrung == other.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         return not np.array_equal(self.md, other.md) or not np.array_equal(self.nmd, other.nmd)
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __ne(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__ne)
+    #         res = vec_func(other.set)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __lt__(self, other):
+    #     # TODO: The comparison of MohuQROIVFN is not supported.
+    #     # Temporarily adopt the score value comparison method
+    #
+    #     def __lt(oth: MohuQROIVFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return self.score < oth.score
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __lt(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__lt)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__lt)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __gt__(self, other):
+    #     # TODO: The comparison of MohuQROIVFN is not supported.
+    #     # Temporarily adopt the score value comparison method
+    #
+    #     def __gt(oth: MohuQROIVFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return self.score > oth.score
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __gt(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__gt)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__gt)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __le__(self, other):
+    #     # TODO: The comparison of MohuQROIVFN is not supported.
+    #     # Temporarily adopt the score value comparison method
+    #
+    #     def __le(oth: MohuQROIVFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return self.score <= oth.score
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __le(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__le)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__le)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __ge__(self, other):
+    #     # TODO: The comparison of MohuQROIVFN is not supported.
+    #     # Temporarily adopt the score value comparison method
+    #
+    #     def __ge(oth: MohuQROIVFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return self.score >= oth.score
+    #
+    #     if isinstance(other, MohuQROIVFN):
+    #         return __ge(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__ge)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__ge)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
 
     def is_valid(self):
         if not len(self.md) == 2 and len(self.nmd) == 2:
@@ -1240,356 +1239,356 @@ class MohuQROHFN(mohunum):
     def T(self):
         return MohuQROHFN(self.qrung, self.__md, self.__nmd)
 
-    def __add__(self, other):
-        q = self.qrung
-
-        def __add(oth: MohuQROHFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, [], [])
-
-            mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
-            nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
-
-            from ..math.archimedean import algebraic_S, algebraic_T
-            for i in range(len(mds)):
-                newfn.md = np.append(newfn.md, algebraic_S(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
-            for i in range(len(nmds)):
-                newfn.nmd = np.append(newfn.nmd, algebraic_T(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
-
-            return newfn.unique(4)
-
-        if isinstance(other, MohuQROHFN):
-            return __add(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-
-            vec_func = np.vectorize(__add)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __radd__(self, other):
-        q = self.qrung
-
-        def __add(oth: MohuQROHFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: mtype must be same.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, [], [])
-
-            mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
-            nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
-
-            from ..math.archimedean import algebraic_S, algebraic_T
-            for i in range(len(mds)):
-                newfn.md = np.append(newfn.md, algebraic_S(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
-            for i in range(len(nmds)):
-                newfn.nmd = np.append(newfn.nmd, algebraic_T(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
-
-            return newfn.unique(4)
-
-        if isinstance(other, MohuQROHFN):
-            return __add(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            assert other.mtype == self.mtype, \
-                'ERROR: The fuzzy number and set must be of the same type.'
-            assert other.qrung == self.qrung, \
-                'ERROR: The fuzzy number and set must be of the same Q-rung.'
-
-            vec_func = np.vectorize(__add)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __sub__(self, other):
-        # TODO: The subtraction of MohuQROHFN is not supported.
-        raise TypeError('q-rung orthopair fuzzy subtraction operation is not supported for the time being.')
-
-    def __mul__(self, other):
-        q = self.qrung
-
-        def __mul(oth: Union[MohuQROHFN, float, int, np.int_, np.float_]):
-            if isinstance(oth, MohuQROHFN):
-                assert self.qrung == oth.qrung, \
-                    'ERROR: qrung must be equal.'
-                assert self.mtype == oth.mtype, \
-                    'ERROR: mtype must be same.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, [], [])
-
-                mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
-                nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
-
-                from ..math.archimedean import algebraic_S, algebraic_T
-                for i in range(len(mds)):
-                    newfn.md = np.append(newfn.md, algebraic_T(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
-                for i in range(len(nmds)):
-                    newfn.nmd = np.append(newfn.nmd, algebraic_S(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
-
-                return newfn.unique(4)
-
-            if isinstance(oth, Union[float, int, np.int_, np.float_]):
-                assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, [], [])
-                newfn.md = (1. - (1. - self.md ** self.qrung) ** oth) ** (1 / self.qrung)
-                newfn.nmd = self.nmd ** oth
-                return newfn.unique(4)
-
-        if isinstance(other, Union[MohuQROHFN, float, int, np.int_, np.float_]):
-            return __mul(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            # assert other.mtype == self.mtype, \
-            #     'ERROR: The fuzzy number and set must be of the same type.'
-            # assert other.qrung == self.qrung, \
-            #     'ERROR: The fuzzy number and set must be of the same Q-rung.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-
-        if isinstance(other, np.ndarray):
-            # assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __rmul__(self, other):
-        q = self.qrung
-
-        def __mul(oth: Union[MohuQROHFN, float, int, np.int_, np.float_]):
-            if isinstance(oth, MohuQROHFN):
-                assert self.qrung == oth.qrung, \
-                    'ERROR: qrung must be equal.'
-                assert self.mtype == oth.mtype, \
-                    'ERROR: mtype must be same.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, [], [])
-
-                mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
-                nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
-
-                from ..math.archimedean import algebraic_S, algebraic_T
-                for i in range(len(mds)):
-                    newfn.md = np.append(newfn.md, algebraic_T(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
-                for i in range(len(nmds)):
-                    newfn.nmd = np.append(newfn.nmd, algebraic_S(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
-
-                return newfn.unique(4)
-
-            if isinstance(oth, Union[float, int, np.int_, np.float_]):
-                assert oth >= 0., 'ERROR: The value must be greater than 0.'
-                from ._multi_func import fuzznum
-                newfn = fuzznum(q, [], [])
-                newfn.md = (1. - (1. - self.md ** self.qrung) ** oth) ** (1 / self.qrung)
-                newfn.nmd = self.nmd ** oth
-                return newfn.unique(4)
-
-        if isinstance(other, Union[MohuQROHFN, float, int, np.int_, np.float_]):
-            return __mul(other)
-
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            # assert other.mtype == self.mtype, \
-            #     'ERROR: The fuzzy number and set must be of the same type.'
-            # assert other.qrung == self.qrung, \
-            #     'ERROR: The fuzzy number and set must be of the same Q-rung.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other.set)
-            return newset
-
-        if isinstance(other, np.ndarray):
-            # assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
-            vec_func = np.vectorize(__mul)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(other)
-            return newset
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __truediv__(self, other):
-        # TODO: The division of MohuQROHFN is not supported.
-        raise TypeError('q-rung orthopair fuzzy division operation is not supported for the time being.')
-
-    def __pow__(self, power, modulo=None):
-        q = self.qrung
-
-        def __pow(p: Union[float, int, np.int_, np.float_]):
-            assert p > 0., 'ERROR: The power must be greater than 0.'
-            from ._multi_func import fuzznum
-            newfn = fuzznum(q, [], [])
-            newfn.md = self.md ** p
-            newfn.nmd = (1. - (1. - self.nmd ** self.qrung) ** p) ** (1 / self.qrung)
-            return newfn.unique(4)
-
-        if isinstance(power, Union[float, int, np.int_, np.float_]):
-            return __pow(power)
-
-        from .mohusets import mohuset
-        if isinstance(power, np.ndarray):
-            assert np.all(power) > 0., 'ERROR: The power must be greater than 0.'
-            vec_func = np.vectorize(__pow)
-            newset = mohuset(q, self.mtype)
-            newset.set = vec_func(power)
-            return newset
-        raise TypeError(f'Invalid type: {type(power)}')
-
-    def __and__(self, other):
-        # TODO: The and of MohuQROHFN is not supported.
-        raise TypeError('q-rung orthopair hesitant fuzzy add operation is not supported for the time being.')
-
-    def __or__(self, other):
-        # TODO: The or of MohuQROHFN is not supported.
-        raise TypeError('q-rung orthopair hesitant fuzzy or operation is not supported for the time being.')
-
-    def __eq__(self, other):
-        def __eq(oth: MohuQROHFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return np.array_equal(self.md, oth.md) and np.array_equal(self.nmd, oth.nmd)
-
-        if isinstance(other, MohuQROHFN):
-            return __eq(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__eq)
-            res = vec_func(other.set)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __ne__(self, other):
-        def __ne(oth: MohuQROHFN):
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            assert self.qrung == other.qrung, \
-                'ERROR: The qrung must be equal.'
-            return not np.array_equal(self.md, other.md) or not np.array_equal(self.nmd, other.nmd)
-
-        if isinstance(other, MohuQROHFN):
-            return __ne(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__ne)
-            res = vec_func(other.set)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __lt__(self, other):
-        # TODO: The comparison of MohuQROHFN is not supported.
-        # Temporarily adopt the score value comparison method
-
-        def __lt(oth: MohuQROHFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return self.score < oth.score
-
-        if isinstance(other, MohuQROHFN):
-            return __lt(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__lt)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__lt)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __gt__(self, other):
-        # TODO: The comparison of MohuQROHFN is not supported.
-        # Temporarily adopt the score value comparison method
-
-        def __gt(oth: MohuQROHFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return self.score > oth.score
-
-        if isinstance(other, MohuQROHFN):
-            return __gt(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__gt)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__gt)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __le__(self, other):
-        # TODO: The comparison of MohuQROHFN is not supported.
-        # Temporarily adopt the score value comparison method
-
-        def __le(oth: MohuQROHFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return self.score <= oth.score
-
-        if isinstance(other, MohuQROHFN):
-            return __le(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__le)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__le)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
-
-    def __ge__(self, other):
-        # TODO: The comparison of MohuQROHFN is not supported.
-        # Temporarily adopt the score value comparison method
-
-        def __ge(oth: MohuQROHFN):
-            assert self.qrung == oth.qrung, \
-                'ERROR: The qrung must be equal.'
-            assert self.mtype == oth.mtype, \
-                'ERROR: The mtype must be same.'
-            return self.score >= oth.score
-
-        if isinstance(other, MohuQROHFN):
-            return __ge(other)
-        from .mohusets import mohuset
-        if isinstance(other, mohuset):
-            vec_func = np.vectorize(__ge)
-            res = vec_func(other.set)
-            return res
-        if isinstance(other, np.ndarray):
-            vec_func = np.vectorize(__ge)
-            res = vec_func(other)
-            return res
-        raise TypeError(f'Invalid type: {type(other)}')
+    # def __add__(self, other):
+    #     q = self.qrung
+    #
+    #     def __add(oth: MohuQROHFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, [], [])
+    #
+    #         mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
+    #         nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
+    #
+    #         from ..math.archimedean import algebraic_S, algebraic_T
+    #         for i in range(len(mds)):
+    #             newfn.md = np.append(newfn.md, algebraic_S(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
+    #         for i in range(len(nmds)):
+    #             newfn.nmd = np.append(newfn.nmd, algebraic_T(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
+    #
+    #         return newfn.unique(4)
+    #
+    #     if isinstance(other, MohuQROHFN):
+    #         return __add(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #
+    #         vec_func = np.vectorize(__add)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __radd__(self, other):
+    #     q = self.qrung
+    #
+    #     def __add(oth: MohuQROHFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: mtype must be same.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, [], [])
+    #
+    #         mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
+    #         nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
+    #
+    #         from ..math.archimedean import algebraic_S, algebraic_T
+    #         for i in range(len(mds)):
+    #             newfn.md = np.append(newfn.md, algebraic_S(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
+    #         for i in range(len(nmds)):
+    #             newfn.nmd = np.append(newfn.nmd, algebraic_T(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
+    #
+    #         return newfn.unique(4)
+    #
+    #     if isinstance(other, MohuQROHFN):
+    #         return __add(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         assert other.mtype == self.mtype, \
+    #             'ERROR: The fuzzy number and set must be of the same type.'
+    #         assert other.qrung == self.qrung, \
+    #             'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #
+    #         vec_func = np.vectorize(__add)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __sub__(self, other):
+    #     # TODO: The subtraction of MohuQROHFN is not supported.
+    #     raise TypeError('q-rung orthopair fuzzy subtraction operation is not supported for the time being.')
+    #
+    # def __mul__(self, other):
+    #     q = self.qrung
+    #
+    #     def __mul(oth: Union[MohuQROHFN, float, int, np.int_, np.float_]):
+    #         if isinstance(oth, MohuQROHFN):
+    #             assert self.qrung == oth.qrung, \
+    #                 'ERROR: qrung must be equal.'
+    #             assert self.mtype == oth.mtype, \
+    #                 'ERROR: mtype must be same.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, [], [])
+    #
+    #             mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
+    #             nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
+    #
+    #             from ..math.archimedean import algebraic_S, algebraic_T
+    #             for i in range(len(mds)):
+    #                 newfn.md = np.append(newfn.md, algebraic_T(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
+    #             for i in range(len(nmds)):
+    #                 newfn.nmd = np.append(newfn.nmd, algebraic_S(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
+    #
+    #             return newfn.unique(4)
+    #
+    #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
+    #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, [], [])
+    #             newfn.md = (1. - (1. - self.md ** self.qrung) ** oth) ** (1 / self.qrung)
+    #             newfn.nmd = self.nmd ** oth
+    #             return newfn.unique(4)
+    #
+    #     if isinstance(other, Union[MohuQROHFN, float, int, np.int_, np.float_]):
+    #         return __mul(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         # assert other.mtype == self.mtype, \
+    #         #     'ERROR: The fuzzy number and set must be of the same type.'
+    #         # assert other.qrung == self.qrung, \
+    #         #     'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #
+    #     if isinstance(other, np.ndarray):
+    #         # assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __rmul__(self, other):
+    #     q = self.qrung
+    #
+    #     def __mul(oth: Union[MohuQROHFN, float, int, np.int_, np.float_]):
+    #         if isinstance(oth, MohuQROHFN):
+    #             assert self.qrung == oth.qrung, \
+    #                 'ERROR: qrung must be equal.'
+    #             assert self.mtype == oth.mtype, \
+    #                 'ERROR: mtype must be same.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, [], [])
+    #
+    #             mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
+    #             nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
+    #
+    #             from ..math.archimedean import algebraic_S, algebraic_T
+    #             for i in range(len(mds)):
+    #                 newfn.md = np.append(newfn.md, algebraic_T(mds[i, 0] ** q, mds[i, 1] ** q) ** (1 / q))
+    #             for i in range(len(nmds)):
+    #                 newfn.nmd = np.append(newfn.nmd, algebraic_S(nmds[i, 0] ** q, nmds[i, 1] ** q) ** (1 / q))
+    #
+    #             return newfn.unique(4)
+    #
+    #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
+    #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
+    #             from ._multi_func import fuzznum
+    #             newfn = fuzznum(q, [], [])
+    #             newfn.md = (1. - (1. - self.md ** self.qrung) ** oth) ** (1 / self.qrung)
+    #             newfn.nmd = self.nmd ** oth
+    #             return newfn.unique(4)
+    #
+    #     if isinstance(other, Union[MohuQROHFN, float, int, np.int_, np.float_]):
+    #         return __mul(other)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         # assert other.mtype == self.mtype, \
+    #         #     'ERROR: The fuzzy number and set must be of the same type.'
+    #         # assert other.qrung == self.qrung, \
+    #         #     'ERROR: The fuzzy number and set must be of the same Q-rung.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other.set)
+    #         return newset
+    #
+    #     if isinstance(other, np.ndarray):
+    #         # assert np.all(other) > 0, 'ERROR: The value must be greater than 0.'
+    #         vec_func = np.vectorize(__mul)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(other)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __truediv__(self, other):
+    #     # TODO: The division of MohuQROHFN is not supported.
+    #     raise TypeError('q-rung orthopair fuzzy division operation is not supported for the time being.')
+    #
+    # def __pow__(self, power, modulo=None):
+    #     q = self.qrung
+    #
+    #     def __pow(p: Union[float, int, np.int_, np.float_]):
+    #         assert p > 0., 'ERROR: The power must be greater than 0.'
+    #         from ._multi_func import fuzznum
+    #         newfn = fuzznum(q, [], [])
+    #         newfn.md = self.md ** p
+    #         newfn.nmd = (1. - (1. - self.nmd ** self.qrung) ** p) ** (1 / self.qrung)
+    #         return newfn.unique(4)
+    #
+    #     if isinstance(power, Union[float, int, np.int_, np.float_]):
+    #         return __pow(power)
+    #
+    #     from .mohusets import mohuset
+    #     if isinstance(power, np.ndarray):
+    #         assert np.all(power) > 0., 'ERROR: The power must be greater than 0.'
+    #         vec_func = np.vectorize(__pow)
+    #         newset = mohuset(q, self.mtype)
+    #         newset.set = vec_func(power)
+    #         return newset
+    #     raise TypeError(f'Invalid type: {type(power)}')
+    #
+    # def __and__(self, other):
+    #     # TODO: The and of MohuQROHFN is not supported.
+    #     raise TypeError('q-rung orthopair hesitant fuzzy add operation is not supported for the time being.')
+    #
+    # def __or__(self, other):
+    #     # TODO: The or of MohuQROHFN is not supported.
+    #     raise TypeError('q-rung orthopair hesitant fuzzy or operation is not supported for the time being.')
+    #
+    # def __eq__(self, other):
+    #     def __eq(oth: MohuQROHFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return np.array_equal(self.md, oth.md) and np.array_equal(self.nmd, oth.nmd)
+    #
+    #     if isinstance(other, MohuQROHFN):
+    #         return __eq(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__eq)
+    #         res = vec_func(other.set)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __ne__(self, other):
+    #     def __ne(oth: MohuQROHFN):
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         assert self.qrung == other.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         return not np.array_equal(self.md, other.md) or not np.array_equal(self.nmd, other.nmd)
+    #
+    #     if isinstance(other, MohuQROHFN):
+    #         return __ne(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__ne)
+    #         res = vec_func(other.set)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __lt__(self, other):
+    #     # TODO: The comparison of MohuQROHFN is not supported.
+    #     # Temporarily adopt the score value comparison method
+    #
+    #     def __lt(oth: MohuQROHFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return self.score < oth.score
+    #
+    #     if isinstance(other, MohuQROHFN):
+    #         return __lt(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__lt)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__lt)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __gt__(self, other):
+    #     # TODO: The comparison of MohuQROHFN is not supported.
+    #     # Temporarily adopt the score value comparison method
+    #
+    #     def __gt(oth: MohuQROHFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return self.score > oth.score
+    #
+    #     if isinstance(other, MohuQROHFN):
+    #         return __gt(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__gt)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__gt)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __le__(self, other):
+    #     # TODO: The comparison of MohuQROHFN is not supported.
+    #     # Temporarily adopt the score value comparison method
+    #
+    #     def __le(oth: MohuQROHFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return self.score <= oth.score
+    #
+    #     if isinstance(other, MohuQROHFN):
+    #         return __le(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__le)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__le)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
+    #
+    # def __ge__(self, other):
+    #     # TODO: The comparison of MohuQROHFN is not supported.
+    #     # Temporarily adopt the score value comparison method
+    #
+    #     def __ge(oth: MohuQROHFN):
+    #         assert self.qrung == oth.qrung, \
+    #             'ERROR: The qrung must be equal.'
+    #         assert self.mtype == oth.mtype, \
+    #             'ERROR: The mtype must be same.'
+    #         return self.score >= oth.score
+    #
+    #     if isinstance(other, MohuQROHFN):
+    #         return __ge(other)
+    #     from .mohusets import mohuset
+    #     if isinstance(other, mohuset):
+    #         vec_func = np.vectorize(__ge)
+    #         res = vec_func(other.set)
+    #         return res
+    #     if isinstance(other, np.ndarray):
+    #         vec_func = np.vectorize(__ge)
+    #         res = vec_func(other)
+    #         return res
+    #     raise TypeError(f'Invalid type: {type(other)}')
 
     def is_valid(self):
         a1 = self.__md.size == 0 and self.__nmd.size == 0

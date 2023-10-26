@@ -7,7 +7,7 @@ __all__ = []
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from .operation import ein_plus, ein_mul, ein_times, ein_power
+from .norms import ein_plus, ein_mul, ein_times, ein_power
 from .math import dot, inner, outer, set_func, cartadd, cartprod
 
 __all__ += [

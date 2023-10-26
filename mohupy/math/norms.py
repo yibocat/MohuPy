@@ -5,7 +5,7 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from ..core._multi_func import fuzznum
+from ..core.__multi_func import fuzznum
 from .archimedean import *
 from ..core.base import mohunum
 
