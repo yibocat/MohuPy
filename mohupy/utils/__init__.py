@@ -11,7 +11,8 @@ from .construct import zeros, poss, negs, full
 from .other import plot_stats, random_split, show_decision_mat
 from .utils import (isscalar, str2mohu, distance, plot,
                     asfuzzset, func4num, savez, loadz, to_csv, load_csv,
-                    abs, zeros_like, poss_like, negs_like, full_like)
+                    abs, zeros_like, poss_like, negs_like, full_like,
+                    broadcast_to, squeeze, relu)
 from .constant import (ZERO_QROFN, ZERO_IVFN, ZERO_QROHFN,
                        POS_QROFN, POS_IVFN, POS_QROHFN,
                        NEG_QROFN, NEG_IVFN, NEG_QROHFN)
@@ -23,6 +24,7 @@ __all__ += [
     'isscalar', 'str2mohu', 'distance', 'plot',
     'asfuzzset', 'func4num', 'savez', 'loadz', 'to_csv', 'load_csv',
     'abs', 'zeros_like', 'poss_like', 'negs_like', 'full_like',
+    'broadcast_to', 'squeeze', 'relu',
     'ZERO_QROFN', 'ZERO_IVFN', 'ZERO_QROHFN',
     'POS_QROFN', 'POS_IVFN', 'POS_QROHFN',
     'NEG_QROFN', 'NEG_IVFN', 'NEG_QROHFN'

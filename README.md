@@ -25,13 +25,11 @@ pip install .
 
  - [x] Regedit
  - [x] Q-rung orthopair hesitant fuzzy sets
+ - [x] Add more Archimedean norm operations and register (Einstein, Frank, Hamacher)
  - [ ] Neural network
  - [ ] Fuzzy function
- - [ ] Derivatives of fuzznum function and gradients of mohuset functions 
- - [ ] Symbol mohu function
- - [ ] Adapted to GPU
+ - [ ] Derivatives of fuzznum function and gradients of mohuset functions
  - [ ] Integrate the operations of fuzzy numbers and fuzzy sets into computational graph models
- - [ ] Add more Archimedean norm operations and register (Einstein, Frank, Hamacher)
 
 ## Quick Start
 

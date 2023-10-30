@@ -38,9 +38,9 @@ class mohuset(MohuBase):
 
     def __repr__(self):
         if self.set is None:
-            return 'fuzzTensor(None)'
+            return 'mohuset(None)'
         p = str(self.set).replace('\n', '\n' + ' ' * 8)
-        return f'mohuSet({p}, qrung={self.__qrung}, mtype={self.__mtype})'
+        return f'mohuset({p}, qrung={self.__qrung}, mtype={self.__mtype})'
 
     def __str__(self):
         return str(self.__set)
@@ -492,9 +492,14 @@ class mohuset(MohuBase):
         self.__ndim = self.__set.ndim
 
     def reshape(self, *shape):
-        self.__set = self.__set.reshape(*shape)
-        self.__shape = self.__set.shape
-        self.__ndim = self.__set.ndim
+        newset = mohuset(self.__qrung, self.__mtype)
+        newset.set = self.__set.reshape(*shape)
+        return newset
+
+    def squeeze(self, axis=None):
+        newset = mohuset(self.__qrung, self.__mtype)
+        newset.set = np.squeeze(self.__set, axis)
+        return newset
 
     def clear(self):
         self.__set = np.array([], dtype=object)
@@ -554,11 +559,15 @@ class mohuset(MohuBase):
             print(index)
         return self.__set[index]
 
-    def sum(self, axis=None):
-        return np.sum(self.__set, axis=axis)
+    def sum(self, axis=None, keepdims=False):
+        newset = mohuset(self.__qrung, self.__mtype)
+        newset.set = np.sum(self.__set, axis=axis, keepdims=keepdims)
+        return newset
 
     def mean(self, axis=None):
-        return np.mean(self.__set, axis=axis)
+        newset = mohuset(self.__qrung, self.__mtype)
+        newset.set = np.mean(self.__set, axis=axis)
+        return newset
 
     def savez(self, path):
         np.savez_compressed(

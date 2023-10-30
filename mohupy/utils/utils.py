@@ -4,7 +4,7 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
-
+import copy
 import re
 from typing import Union
 
@@ -339,3 +339,25 @@ def negs_like(f: mohuset):
 def full_like(f: mohuset, x):
     from .construct import full
     return full(x, *f.shape)
+
+
+def broadcast_to(f: mohuset, shape):
+    newset = mohuset(f.qrung, f.mtype)
+    newset.set = np.broadcast_to(f.set, shape)
+    return newset
+
+
+def squeeze(f: mohuset, axis=None):
+    newset = mohuset(f.qrung, f.mtype)
+    newset.set = np.squeeze(f.set, axis)
+    return newset
+
+
+def relu(f: mohuset):
+    newset = mohuset(f.qrung, f.mtype)
+    res = copy.copy(f.set)
+    from ..core import fuzznum
+    res[res < fuzznum(f.qrung, 0.3, 0.7)] = fuzznum(f.qrung, 0., 1.)
+    newset.set = res
+    del res
+    return newset

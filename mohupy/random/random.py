@@ -110,3 +110,7 @@ def choice(f: mohuset, n: Union[int, tuple[int], list[int]] = None) -> Union[moh
         return newset
     else:
         return np.random.choice(f.set.flatten())
+
+
+def seed(x):
+    np.random.seed(x)
