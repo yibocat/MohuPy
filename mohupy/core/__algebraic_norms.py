@@ -33,19 +33,13 @@ def algebraic_sub(x0, y0, x1, y1, q):
     """
     if x0 == 0. and y0 == 1.:
         return 0., 1.
-    elif x1 == 1. and y1 == 0.:
+    if x1 == 1. or y1 == 0.:
         return 0., 1.
-    elif x1 != 1 and y1 == 0:
-        md = np.round(max(0., (x0 ** q - x1 ** q) / (1 - x1 ** q)) ** (1 / q), Approx.round)
-        nmd = np.round(min(1., ((1 - x0 ** q) / (1 - x1 ** q)) ** (1 / q)), Approx.round)
-
-    elif x0 == 0. and y0 != 1.:
-        md = np.round(0., Approx.round)
-        nmd = np.round(min(1., y0 / y1), Approx.round)
-    else:
-        md = np.round(max(0., (x0 ** q - x1 ** q) / (1 - x1 ** q)) ** (1 / q), Approx.round)
-        nmd = np.round(min(1., y0 / y1, ((1 - x0 ** q) / (1 - x1 ** q)) ** (1 / q)), Approx.round)
-    return md, nmd
+    if 0. <= y0 / y1 <= ((1 - x0 ** q) / (1 - x1 ** q)) ** (1 / q) <= 1.:
+        md = np.round(((x0 ** q - x1 ** q) / (1 - x1 ** q)) ** (1 / q), Approx.round)
+        nmd = np.round(y0 / y1, Approx.round)
+        return md, nmd
+    return 0., 1.
 
 
 def algebraic_mul(x0, y0, x1, y1, q):
@@ -72,18 +66,13 @@ def algebraic_div(x0, y0, x1, y1, q):
     """
     if x0 == 1. and y0 == 0.:
         return 1., 0.
-    elif x1 == 0. and y1 == 1.:
+    if x1 == 0. or y1 == 1.:
         return 1., 0.
-    elif x1 == 0. and y1 != 1.:
-        md = np.round(min(1., ((1 - y0 ** q) / (1 - y1 ** q)) ** (1 / q)), Approx.round)
-        nmd = np.round(max(0., (y0 ** q - y1 ** q) / (1 - y1 ** q)) ** (1 / q), Approx.round)
-    elif x0 != 1. and y0 == 0.:
-        md = np.round(min(1., x0 / x1, ((1 - y0 ** q) / (1 - y1 ** q)) ** (1 / q)), Approx.round)
-        nmd = np.round(0, Approx.round)
-    else:
-        md = np.round(min(1., x0 / x1, ((1 - y0 ** q) / (1 - y1 ** q)) ** (1 / q)), Approx.round)
-        nmd = np.round(max(0., (y0 ** q - y1 ** q) / (1 - y1 ** q)) ** (1 / q), Approx.round)
-    return md, nmd
+    if 0. <= x0 / x1 <= ((1 - y0 ** q) / (1 - y1 ** q)) ** (1 / q) <= 1.:
+        md = np.round(x0 / x1, Approx.round)
+        nmd = np.round(((y0 ** q - y1 ** q) / (1 - y1 ** q)) ** (1 / q), Approx.round)
+        return md, nmd
+    return 1., 0.
 
 
 def algebraic_pow(p, x0, y0, q):

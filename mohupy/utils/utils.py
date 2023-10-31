@@ -82,7 +82,10 @@ def plot(f: (mohuset, mohunum),
                  other=other,
                  color=color,
                  alpha=alpha,
-                 area=None,
+                 add=add,
+                 sub=sub,
+                 mul=mul,
+                 div=div,
                  color_area=None)
 
     x = np.linspace(0, 1, 1000)

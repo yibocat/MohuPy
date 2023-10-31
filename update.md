@@ -1,6 +1,11 @@
 # UPDATE LOG
 
-
+------
+### version: 0.1.8-10.31.2023.2
+1. 修复了减法运算和除法运算存在的缺陷，原论文中的方法有误
+   > Reference: W. S. Du, “Research on arithmetic operations over generalized 
+   > orthopair fuzzy sets,” Int. J. Intell. Syst., vol. 34, no. 5, pp. 709–732,
+   > 2019, doi: 10.1002/int.22073.
 ------
 ### version: 0.1.8-10.31.2023
 1. 修复了 `qrofn` 的比较运算 `>=` 和 `<=`存在的 bug.
