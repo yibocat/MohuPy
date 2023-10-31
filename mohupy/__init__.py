@@ -5,7 +5,6 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-# from .config import *
 from .core import *
 from .utils import *
 from .math import *
@@ -21,3 +20,4 @@ from .random import *
 
 from .runtime import info
 from .registry import *
+from .config import Approx

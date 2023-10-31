@@ -9,6 +9,7 @@ import re
 import numpy as np
 
 from ..core.base import mohunum
+from ..config import Approx
 
 from .regedit import Register
 

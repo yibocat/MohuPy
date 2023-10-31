@@ -8,6 +8,7 @@
 import re
 
 import numpy as np
+from ..config import Approx
 
 
 def dirac_meas(e, s):
@@ -67,7 +68,7 @@ def add_meas(e, s):
             2.  In [2]: add_meas(0.2, [0.2,0.1,0.3,0.15,0.25])
                 Out[2]: 0.2
     """
-    assert np.round(sum(s), 5) == 1, \
+    assert np.round(sum(s), Approx.round) == 1, \
         "ERROR: The sum of the measurements must be 1."
     assert len(np.setdiff1d(e, s)) == 0, \
         'ERROR: The element must be in the set.'
@@ -154,7 +155,7 @@ def lambda_meas(e, s):
     from scipy.optimize import fsolve
     l = fsolve(__lamda(np.asarray(s)), np.array(-1))
 
-    if np.round(l, 5) == 0:
+    if np.round(l, Approx.round) == 0:
         return np.float_(np.sum(e))
     else:
         return np.float_((np.prod(1 + l * e) - 1) / l)
@@ -287,7 +288,7 @@ def vector_rep(e: (list, np.ndarray), func, *args):
     return vector
 
 
-def dict_rep(e: (list, np.ndarray), func, *args, chara='C', r=6):
+def dict_rep(e: (list, np.ndarray), func, *args, chara='C'):
     """
         Dictionary representation function.
             Dictionary representation is to directly represent the fuzzy measure
@@ -334,7 +335,7 @@ def dict_rep(e: (list, np.ndarray), func, *args, chara='C', r=6):
 
     from .utils import str_subsets
     subset_attributes = str_subsets(attributes)
-    fuzzy_measure = np.round(vector_rep(e, func, *args), r).tolist()
+    fuzzy_measure = np.round(vector_rep(e, func, *args), Approx.round).tolist()
 
     sub_att = ['{}']
     for t in subset_attributes[1:]:

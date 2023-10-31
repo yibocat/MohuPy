@@ -5,7 +5,6 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-# TODO: GPU support
 # import GPUtil
 #
 # gpu = GPUtil.getGPUs()
@@ -69,3 +68,7 @@
 #     #     import pandas as array_lib
 #     import pandas as array_lib
 #     return array_lib
+
+
+class Approx:
+    round = 6

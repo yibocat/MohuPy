@@ -53,12 +53,3 @@
    1. Data set normal distribution ks test
    2. The data set is randomly divided into two sets
    3. Archimedean T norm and Archimedean T co-norm
-
-## Features to be developed：
-1. Q-rung orthopair fuzzy similarity measure for fuzzy numbers, fuzzy entropy measure
-2. Generalized fuzzy set distance, similarity measure
-3. [ ] Adapted to GPU, using CuPy
-4. [ ] Add a fuzzy framework based on PyTorch or TensorFlow, adapted for deep learning development
-5. [ ] Numpy and CuPy have flaws in tensor calculations. Consider adapting PyTorch and TensorFlow.
-6. [ ] Q-rung orthopair fuzzy neural network based on MohuPy
-7. [x] Adding the calculation of Q-rung orthopair hesitant fuzzy sets

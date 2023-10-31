@@ -42,14 +42,16 @@ def distance(f1: mohunum,
 
 def plot(f: (mohuset, mohunum),
          other=None,
-         area=None,
+         add=None,
+         sub=None,
+         mul=None,
+         div=None,
          color='red',
          color_area=None,
          alpha=0.3,
          label='',
          legend=False):
-    if area is None:
-        area = [False, False, False, False]
+    area = [add, sub, mul, div]
     if color_area is None:
         color_area = ['red', 'green', 'blue', 'yellow']
 
@@ -67,7 +69,10 @@ def plot(f: (mohuset, mohunum),
     if isinstance(f, mohunum):
         fuzzPlot[mtype](f,
                         other=other,
-                        area=area,
+                        add=add,
+                        sub=sub,
+                        mul=mul,
+                        div=div,
                         color=color,
                         color_area=color_area,
                         alpha=alpha)

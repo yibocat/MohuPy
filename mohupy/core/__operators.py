@@ -462,7 +462,7 @@ class Le(Operation):
                 return x0.score <= x1.score
             else:
                 from .. import fuzznum
-                if Equal()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) and Equal()(x0, x1):
+                if Equal()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) or Equal()(x0, x1):
                     return True
                 else:
                     return False
@@ -498,7 +498,7 @@ class Ge(Operation):
                 return x0.score >= x1.score
             else:
                 from .. import fuzznum
-                if Inequality()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) and Equal()(x0, x1):
+                if Inequality()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) or Equal()(x0, x1):
                     return True
                 else:
                     return False

@@ -87,12 +87,6 @@ class mohunum(MohuBase):
     def comp(self):
         pass
 
-    def is_valid(self):
-        pass
-
-    def isEmpty(self):
-        pass
-
     def convert(self):
         pass
 

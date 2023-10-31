@@ -8,7 +8,7 @@
 import warnings
 import numpy as np
 
-from .algebraic_norms import *
+from .__algebraic_norms import *
 from ..registry.regedit import Register
 
 algebAdd = Register()

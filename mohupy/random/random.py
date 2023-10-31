@@ -63,27 +63,27 @@ def randset(q: int, mtype: str, *n, num=5):
     return newset
 
 
-# def rand(q: int, mtype: str, *n, num=5):
-#     """
-#         random fuzzy function
-#
-#         Parameters
-#         ----------
-#             q : int
-#                 The q-rung
-#             mtype : str
-#                 The type of fuzzy number to be generated
-#             n : int
-#                 The number of fuzzy numbers to be generated
-#
-#         Returns
-#         -------
-#             mohuset or mohunum
-#     """
-#     if len(n) == 0:
-#         return randnum(q, mtype, num)
-#     else:
-#         return randset(q, mtype, *n, num)
+def rand(q: int, mtype: str, *n, num=5):
+    """
+        random fuzzy function
+
+        Parameters
+        ----------
+            q : int
+                The q-rung
+            mtype : str
+                The type of fuzzy number to be generated
+            n : int
+                The number of fuzzy numbers to be generated
+
+        Returns
+        -------
+            mohuset or mohunum
+    """
+    if len(n) == 0:
+        return randnum(q, mtype, num=num)
+    else:
+        return randset(q, mtype, *n, num=num)
 
 
 from ..core.mohusets import mohuset

@@ -7,6 +7,7 @@
 import numpy as np
 
 from .regedit import Register
+from ..config import Approx
 
 fuzzRandom = Register()
 
@@ -30,8 +31,8 @@ def random_qrofn(q, num=0):
     from ..core import fuzznum
     newfn = fuzznum(q, 0., 0.)
     while True:
-        newfn.md = np.random.rand()
-        newfn.nmd = np.random.rand()
+        newfn.md = np.round(np.random.rand(), Approx.round)
+        newfn.nmd = np.round(np.random.rand(), Approx.round)
         if newfn.is_valid():
             break
     return newfn
@@ -56,8 +57,8 @@ def random_ivfn(q, num=0):
     from ..core import fuzznum
     newfn = fuzznum(q, (0., 0.), (0., 0.))
     while True:
-        newfn.md = np.asarray([np.random.rand(), np.random.rand()])
-        newfn.nmd = np.asarray([np.random.rand(), np.random.rand()])
+        newfn.md = np.round(np.asarray([np.random.rand(), np.random.rand()]), Approx.round)
+        newfn.nmd = np.round(np.asarray([np.random.rand(), np.random.rand()]), Approx.round)
         if newfn.is_valid():
             break
     return newfn
@@ -81,11 +82,11 @@ def random_qrohfn(q, num):
     """
     from ..core import fuzznum
     newfn = fuzznum(q, [], [])
-    newfn.md = np.random.rand(np.random.randint(1, num))
-    newfn.nmd = np.random.rand(np.random.randint(1, num))
+    newfn.md = np.round(np.random.rand(np.random.randint(1, num)), Approx.round)
+    newfn.nmd = np.round(np.random.rand(np.random.randint(1, num)), Approx.round)
     while True:
-        newfn.md = np.random.rand(np.random.randint(1, num))
-        newfn.nmd = np.random.rand(np.random.randint(1, num))
+        newfn.md = np.round(np.random.rand(np.random.randint(1, num)), Approx.round)
+        newfn.nmd = np.round(np.random.rand(np.random.randint(1, num)), Approx.round)
         if newfn.is_valid():
             break
     return newfn

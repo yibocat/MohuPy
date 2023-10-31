@@ -16,7 +16,10 @@ fuzzPlot = Register()
 @fuzzPlot('qrofn')
 def plot_qrofn(x: mohunum,
                other: mohunum = None,
-               area: list[bool] = None,
+               add=False,
+               sub=False,
+               mul=False,
+               div=False,
                color='red',
                color_area=None,
                alpha=0.3):
@@ -34,9 +37,14 @@ def plot_qrofn(x: mohunum,
                     If it is None, only the position of the self point in the fuzzy
                     space is drawn. Otherwise, the position of other in the fuzzy
                     space is also drawn.
-            area : list[bool]
-                    This is a four-element bool list, representing the addition field,
-                    subtraction field, multiplication field and division field in order.
+            add : bool
+                    Additive field
+            sub : bool
+                    Subtraction field
+            mul : bool
+                    Multiplication field
+            div : bool
+                    Division field
             color : str
                     The color of the Q-ROFN distribution.
             color_area : list[str]
@@ -45,8 +53,6 @@ def plot_qrofn(x: mohunum,
             alpha : float
                     The transparency of the Q-ROFN distribution.
     """
-    if area is None:
-        area = [False, False, False, False]
     if color_area is None:
         color_area = ['red', 'green', 'blue', 'yellow']
 
@@ -62,27 +68,36 @@ def plot_qrofn(x: mohunum,
         plt.scatter(other.md, other.nmd, color=color, marker='*')
 
     y = (1 - x ** q) ** (1 / q)
-    if area is not None:
+
+    if md == 1 and nmd != 1:
+        n, m = 1, 0
+    elif md != 1 and nmd == 1:
+        n, m = 0, 1
+    else:
         n = (nmd ** q / (1 - md ** q) * (1 - x ** q)) ** (1 / q)
         m = (md ** q / (1 - nmd ** q) * (1 - x ** q)) ** (1 / q)
 
-        if area[0]:
-            # Q-ROFN f addition region
-            plt.fill_between(x, n, color=color_area[0], alpha=alpha, where=x > md)
-        if area[1]:
-            # Q-ROFN f subtraction region
-            plt.fill_between(x, n, y, color=color_area[1], alpha=alpha, where=x < md)
-        if area[2]:
-            # Q-ROFN f multiplication region
-            plt.fill_betweenx(x, m, color=color_area[2], alpha=alpha, where=x > nmd)
-        if area[3]:
-            # Q-ROFN f division region
-            plt.fill_betweenx(x, m, y, color=color_area[3], alpha=alpha, where=x < nmd)
+    if add:
+        # Q-ROFN f addition region
+        plt.fill_between(x, n, color=color_area[0], alpha=alpha, where=x > md)
+    if sub:
+        # Q-ROFN f subtraction region
+        plt.fill_between(x, n, y, color=color_area[1], alpha=alpha, where=x < md)
+    if mul:
+        # Q-ROFN f multiplication region
+        plt.fill_betweenx(x, m, color=color_area[2], alpha=alpha, where=x > nmd)
+    if div:
+        # Q-ROFN f division region
+        plt.fill_betweenx(x, m, y, color=color_area[3], alpha=alpha, where=x < nmd)
 
 
 @fuzzPlot('ivfn')
 def plot_ivfn(x: mohunum,
               other: mohunum = None,
+              add=None,
+              sub=None,
+              mul=None,
+              div=None,
               color='red',
               alpha=0.3,
               area: list[bool] = None,
@@ -101,6 +116,14 @@ def plot_ivfn(x: mohunum,
                     If it is None, only the position of the self point in the fuzzy
                     space is drawn. Otherwise, the position of other in the fuzzy
                     space is also drawn.
+            add : bool
+                    Additive field
+            sub : bool
+                    Subtraction field
+            mul : bool
+                    Multiplication field
+            div : bool
+                    Division field
             color : str
                     The color of the Q-ROFN distribution.
             alpha : float
@@ -127,6 +150,10 @@ def plot_ivfn(x: mohunum,
 @fuzzPlot('qrohfn')
 def plot_qrohfn(x: mohunum,
                 other: mohunum = None,
+                add=None,
+                sub=None,
+                mul=None,
+                div=None,
                 color='red',
                 alpha=0.3,
                 area: list[bool] = None,
@@ -145,6 +172,14 @@ def plot_qrohfn(x: mohunum,
                     If it is None, only the position of the self point in the fuzzy
                     space is drawn. Otherwise, the position of other in the fuzzy
                     space is also drawn.
+            add : bool
+                    Additive field
+            sub : bool
+                    Subtraction field
+            mul : bool
+                    Multiplication field
+            div : bool
+                    Division field
             color : str
                     The color of the Q-ROFN distribution.
             alpha : float

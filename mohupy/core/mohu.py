@@ -12,6 +12,7 @@ import numpy as np
 from .base import mohunum
 
 from ..registry.regedit import Register
+from ..config import Approx
 
 fuzzType = Register()
 
@@ -48,8 +49,8 @@ class MohuQROFN(mohunum):
             Out [2]: <0.5,0.5>
     """
     qrung = None
-    md = None
-    nmd = None
+    __md = None
+    __nmd = None
     mtype = None
 
     def __init__(self, qrung: Union[int, np.int_] = None,
@@ -64,29 +65,45 @@ class MohuQROFN(mohunum):
                 'ERROR: md ** qrung + nmd ** qrung must be between 0 and 1'
 
             self.qrung = qrung
-            self.md = np.float_(md)
-            self.nmd = np.float_(nmd)
+            self.__md = np.round(md, Approx.round)
+            self.__nmd = np.round(nmd, Approx.round)
             self.mtype = 'qrofn'
             self.size = 1
         pass
 
     def __repr__(self):
-        return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
+        return f'<{np.round(self.__md, 4)},{np.round(self.__nmd, 4)}>'
 
     def __str__(self):
-        return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
+        return f'<{np.round(self.__md, 4)},{np.round(self.__nmd, 4)}>'
+
+    @property
+    def md(self):
+        return self.__md
+
+    @md.setter
+    def md(self, value):
+        self.__md = np.round(value, Approx.round)
+
+    @property
+    def nmd(self):
+        return self.__nmd
+
+    @nmd.setter
+    def nmd(self, value):
+        self.__nmd = np.round(value, Approx.round)
 
     @property
     def score(self):
-        return self.md ** self.qrung - self.nmd ** self.qrung
+        return self.__md ** self.qrung - self.__nmd ** self.qrung
 
     @property
     def acc(self):
-        return self.md ** self.qrung + self.nmd ** self.qrung
+        return self.__md ** self.qrung + self.__nmd ** self.qrung
 
     @property
     def ind(self):
-        acc = self.md ** self.qrung + self.nmd ** self.qrung
+        acc = self.__md ** self.qrung + self.__nmd ** self.qrung
         if acc == 1.:
             return 0.
         else:
@@ -95,13 +112,14 @@ class MohuQROFN(mohunum):
     @property
     def comp(self):
         newf = copy.deepcopy(self)
-        newf.md = self.nmd
-        newf.nmd = self.md
+        newf.md = self.__nmd
+        newf.nmd = self.__md
         return newf
 
     @property
     def T(self):
-        return MohuQROFN(self.qrung, self.md, self.nmd)
+        t = copy.copy(self)
+        return t
 
     # def __add__(self, other):
     #     q = self.qrung
@@ -113,9 +131,9 @@ class MohuQROFN(mohunum):
     #             'ERROR: mtype must be same.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, 0, 0)
-    #         newfn.md = (self.md ** q + oth.md ** q
-    #                     - self.md ** q * oth.md ** q) ** (1 / q)
-    #         newfn.nmd = self.nmd * oth.nmd
+    #         newfn.md = (self.__md ** q + oth.md ** q
+    #                     - self.__md ** q * oth.md ** q) ** (1 / q)
+    #         newfn.nmd = self.__nmd * oth.nmd
     #         return newfn
     #
     #     if isinstance(other, MohuQROFN):
@@ -144,9 +162,9 @@ class MohuQROFN(mohunum):
     #             'ERROR: mtype must be same.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, 0, 0)
-    #         newfn.md = (self.md ** q + oth.md ** q
-    #                     - self.md ** q * oth.md ** q) ** (1 / q)
-    #         newfn.nmd = self.nmd * oth.nmd
+    #         newfn.md = (self.__md ** q + oth.md ** q
+    #                     - self.__md ** q * oth.md ** q) ** (1 / q)
+    #         newfn.nmd = self.__nmd * oth.nmd
     #         return newfn
     #
     #     if isinstance(other, MohuQROFN):
@@ -177,9 +195,9 @@ class MohuQROFN(mohunum):
     #         newfn = fuzznum(q, 0, 1)
     #         if oth.nmd == 0. or oth.md == 1.:
     #             return newfn
-    #         elif 0 <= self.nmd / oth.nmd <= ((1 - self.md ** q) / (1 - oth.md ** q)) ** (1 / q) <= 1:
-    #             newfn.md = ((self.md ** q - oth.md ** q) / (1 - oth.md ** q)) ** (1 / q)
-    #             newfn.nmd = self.nmd / oth.nmd
+    #         elif 0 <= self.__nmd / oth.nmd <= ((1 - self.__md ** q) / (1 - oth.md ** q)) ** (1 / q) <= 1:
+    #             newfn.md = ((self.__md ** q - oth.md ** q) / (1 - oth.md ** q)) ** (1 / q)
+    #             newfn.nmd = self.__nmd / oth.nmd
     #             return newfn
     #         else:
     #             return newfn
@@ -211,16 +229,16 @@ class MohuQROFN(mohunum):
     #                 'ERROR: mtype must be same.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, 0, 0)
-    #             newfn.md = self.md * oth.md
-    #             newfn.nmd = (self.nmd ** q + oth.nmd ** q
-    #                          - self.nmd ** q * oth.nmd ** q) ** (1. / q)
+    #             newfn.md = self.__md * oth.md
+    #             newfn.nmd = (self.__nmd ** q + oth.nmd ** q
+    #                          - self.__nmd ** q * oth.nmd ** q) ** (1. / q)
     #             return newfn
     #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
     #             assert oth > 0., 'ERROR: The value must be greater than 0.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, 0, 0)
-    #             newfn.md = (1. - (1. - self.md ** q) ** oth) ** (1. / q)
-    #             newfn.nmd = self.nmd ** oth
+    #             newfn.md = (1. - (1. - self.__md ** q) ** oth) ** (1. / q)
+    #             newfn.nmd = self.__nmd ** oth
     #             return newfn
     #
     #     if isinstance(other, Union[MohuQROFN, float, int, np.int_, np.float_]):
@@ -255,16 +273,16 @@ class MohuQROFN(mohunum):
     #                 'ERROR: mtype must be same.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, 0, 0)
-    #             newfn.md = self.md * oth.md
-    #             newfn.nmd = (self.nmd ** q + oth.nmd ** q
-    #                          - self.nmd ** q * oth.nmd ** q) ** (1. / q)
+    #             newfn.md = self.__md * oth.md
+    #             newfn.nmd = (self.__nmd ** q + oth.nmd ** q
+    #                          - self.__nmd ** q * oth.nmd ** q) ** (1. / q)
     #             return newfn
     #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
     #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, 0, 0)
-    #             newfn.md = (1. - (1. - self.md ** q) ** oth) ** (1. / q)
-    #             newfn.nmd = self.nmd ** oth
+    #             newfn.md = (1. - (1. - self.__md ** q) ** oth) ** (1. / q)
+    #             newfn.nmd = self.__nmd ** oth
     #             return newfn
     #
     #     if isinstance(other, Union[MohuQROFN, float, int, np.int_, np.float_]):
@@ -295,14 +313,14 @@ class MohuQROFN(mohunum):
     #         if isinstance(oth, MohuQROFN):
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, 1, 0)
-    #             if self.md == 0 and self.nmd == 1:
+    #             if self.__md == 0 and self.__nmd == 1:
     #                 return fuzznum(q, 0, 1)
     #             elif oth.md == 0 or oth.nmd == 1.:
     #                 return newfn
-    #             elif 0 <= self.md / oth.md <= \
-    #                     ((1 - self.nmd ** q) / (1 - oth.nmd ** q)) ** (1 / q) <= 1:
-    #                 newfn.md = self.md / oth.md
-    #                 newfn.nmd = ((self.nmd ** q - oth.nmd ** q) / (1 - oth.nmd ** q)) ** (1 / q)
+    #             elif 0 <= self.__md / oth.md <= \
+    #                     ((1 - self.__nmd ** q) / (1 - oth.nmd ** q)) ** (1 / q) <= 1:
+    #                 newfn.md = self.__md / oth.md
+    #                 newfn.nmd = ((self.__nmd ** q - oth.nmd ** q) / (1 - oth.nmd ** q)) ** (1 / q)
     #                 return newfn
     #             else:
     #                 return newfn
@@ -338,8 +356,8 @@ class MohuQROFN(mohunum):
     #         assert p > 0., 'ERROR: The power must be greater than 0.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, 0, 0)
-    #         newfn.md = self.md ** p
-    #         newfn.nmd = (1. - (1. - self.nmd ** q) ** p) ** (1. / q)
+    #         newfn.md = self.__md ** p
+    #         newfn.nmd = (1. - (1. - self.__nmd ** q) ** p) ** (1. / q)
     #         return newfn
     #
     #     if isinstance(power, Union[float, int, np.int_, np.float_]):
@@ -365,8 +383,8 @@ class MohuQROFN(mohunum):
     #
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, 0, 0)
-    #         newfn.md = (min(self.md, oth.md))
-    #         newfn.nmd = (max(self.nmd, oth.nmd))
+    #         newfn.md = (min(self.__md, oth.md))
+    #         newfn.nmd = (max(self.__nmd, oth.nmd))
     #         return newfn
     #
     #     if isinstance(other, MohuQROFN):
@@ -389,8 +407,8 @@ class MohuQROFN(mohunum):
     #             'ERROR: The qrung must be equal.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, 0, 0)
-    #         newfn.md = (max(self.md, oth.md))
-    #         newfn.nmd = (min(self.nmd, oth.nmd))
+    #         newfn.md = (max(self.__md, oth.md))
+    #         newfn.nmd = (min(self.__nmd, oth.nmd))
     #         return newfn
     #
     #     if isinstance(other, MohuQROFN):
@@ -409,7 +427,7 @@ class MohuQROFN(mohunum):
     #             'ERROR: mtype must be same.'
     #         assert self.qrung == oth.qrung, \
     #             'ERROR: The qrung must be equal.'
-    #         return self.md == oth.md and self.nmd == oth.nmd
+    #         return self.__md == oth.md and self.__nmd == oth.nmd
     #
     #     if isinstance(other, MohuQROFN):
     #         return __eq(other)
@@ -425,7 +443,7 @@ class MohuQROFN(mohunum):
     #             'ERROR: mtype must be same.'
     #         assert self.qrung == oth.qrung, \
     #             'ERROR: The qrung must be equal.'
-    #         return self.md != oth.md or self.nmd != oth.nmd
+    #         return self.__md != oth.md or self.__nmd != oth.nmd
     #
     #     if isinstance(other, MohuQROFN):
     #         return __ne(other)
@@ -544,8 +562,8 @@ class MohuQROFN(mohunum):
     #     raise TypeError(f'Invalid type: {type(other)}')
 
     def is_valid(self):
-        mds = self.md
-        nmds = self.nmd
+        mds = self.__md
+        nmds = self.__nmd
         if 0. <= mds <= 1. and 0. <= nmds <= 1. \
                 and 0. <= mds ** self.qrung + nmds ** self.qrung <= 1.:
             return True
@@ -553,13 +571,13 @@ class MohuQROFN(mohunum):
             return False
 
     def isEmpty(self):
-        if self.md is None and self.nmd is None:
+        if self.__md is None and self.__nmd is None:
             return True
         else:
             return False
 
     def convert(self):
-        return self.md, self.nmd
+        return self.__md, self.__nmd
 
     def flatten(self):
         from .mohusets import mohuset
@@ -567,81 +585,12 @@ class MohuQROFN(mohunum):
         newset.append(self)
         return newset
 
-    # def plot(self, other=None, area: list[bool] = None, color='red', color_area=None, alpha=0.3):
-    #     """
-    #         This function plots the Q-ROFN distribution in the fuzzy space.
-    #         If other is not None, it plots the Q-ROFN distribution in the fuzzy space,
-    #         and other is plotted in the fuzzy space. This helps to see which domain
-    #         other is at that point.
-    #
-    #         Parameters
-    #         ----------
-    #             other : MohuQROFN
-    #                     If it is None, only the position of the self point in the fuzzy
-    #                     space is drawn. Otherwise, the position of other in the fuzzy
-    #                     space is also drawn.
-    #             area : list[bool]
-    #                     This is a four-element bool list, representing the addition field,
-    #                     subtraction field, multiplication field and division field in order.
-    #             color : str
-    #                     The color of the Q-ROFN distribution.
-    #             color_area : list[str]
-    #                     The color of the addition field, subtraction field, multiplication field
-    #                     and division field.
-    #             alpha : float
-    #                     The transparency of the Q-ROFN distribution.
-    #     """
-    #     if area is None:
-    #         area = [False, False, False, False]
-    #     if color_area is None:
-    #         color_area = ['red', 'green', 'blue', 'yellow']
-    #
-    #     md = self.md
-    #     nmd = self.nmd
-    #     q = self.qrung
-    #
-    #     x = np.linspace(0, 1, 1000)
-    #
-    #     plt.gca().spines['top'].set_linewidth(False)
-    #     plt.gca().spines['bottom'].set_linewidth(True)
-    #     plt.gca().spines['left'].set_linewidth(True)
-    #     plt.gca().spines['right'].set_linewidth(False)
-    #     plt.axis((0, 1.1, 0, 1.1))
-    #     plt.axhline(y=0)
-    #     plt.axvline(x=0)
-    #     plt.scatter(md, nmd, color=color, marker='.')
-    #
-    #     if other is not None:
-    #         assert other.qrung == q, 'ERROR: The qrungs are not equal'
-    #         plt.scatter(other.md, other.nmd, color=color, marker='*')
-    #
-    #     y = (1 - x ** q) ** (1 / q)
-    #
-    #     n = (nmd ** q / (1 - md ** q) * (1 - x ** q)) ** (1 / q)
-    #     m = (md ** q / (1 - nmd ** q) * (1 - x ** q)) ** (1 / q)
-    #
-    #     if area[0]:
-    #         # Q-ROFN f addition region
-    #         plt.fill_between(x, n, color=color_area[0], alpha=alpha, where=x > md)
-    #     if area[1]:
-    #         # Q-ROFN f subtraction region
-    #         plt.fill_between(x, n, y, color=color_area[1], alpha=alpha, where=x < md)
-    #     if area[2]:
-    #         # Q-ROFN f multiplication region
-    #         plt.fill_betweenx(x, m, color=color_area[2], alpha=alpha, where=x > nmd)
-    #     if area[3]:
-    #         # Q-ROFN f division region
-    #         plt.fill_betweenx(x, m, y, color=color_area[3], alpha=alpha, where=x < nmd)
-    #
-    #     plt.plot(x, y)
-    #     plt.show()
-
 
 @fuzzType('ivfn')
 class MohuQROIVFN(mohunum):
     qrung = None
-    md = np.array([])
-    nmd = np.array([])
+    __md = np.array([])
+    __nmd = np.array([])
     mtype = None
 
     def __init__(self, qrung: Union[int, np.int_] = None,
@@ -661,33 +610,49 @@ class MohuQROIVFN(mohunum):
                 'ERROR: The q powers sum of membership degree and non-membership degree must be between 0 and 1.'
 
             self.qrung = qrung
-            self.md = np.asarray(md)
-            self.nmd = np.asarray(nmd)
+            self.__md = np.round(md, Approx.round)
+            self.__nmd = np.round(nmd, Approx.round)
             self.mtype = 'ivfn'
             self.size = 1
 
     def __repr__(self):
-        return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
+        return f'<{np.round(self.__md, 4)},{np.round(self.__nmd, 4)}>'
 
     def __str__(self):
-        return f'<{np.round(self.md, 4)},{np.round(self.nmd, 4)}>'
+        return f'<{np.round(self.__md, 4)},{np.round(self.__nmd, 4)}>'
+
+    @property
+    def md(self):
+        return self.__md
+
+    @md.setter
+    def md(self, value):
+        self.__md = np.round(value, Approx.round)
+
+    @property
+    def nmd(self):
+        return self.__nmd
+
+    @nmd.setter
+    def nmd(self, value):
+        self.__nmd = np.round(value, Approx.round)
 
     @property
     def score(self):
-        m = self.md[0] ** self.qrung + self.md[1] ** self.qrung
-        n = self.nmd[0] ** self.qrung + self.nmd[1] ** self.qrung
+        m = self.__md[0] ** self.qrung + self.__md[1] ** self.qrung
+        n = self.__nmd[0] ** self.qrung + self.__nmd[1] ** self.qrung
         return (m - n) / 2
 
     @property
     def acc(self):
-        m = self.md[0] ** self.qrung + self.md[1] ** self.qrung
-        n = self.nmd[0] ** self.qrung + self.nmd[1] ** self.qrung
+        m = self.__md[0] ** self.qrung + self.__md[1] ** self.qrung
+        n = self.__nmd[0] ** self.qrung + self.__nmd[1] ** self.qrung
         return (m + n) / 2
 
     @property
     def ind(self):
-        m = self.md[0] ** self.qrung + self.md[1] ** self.qrung
-        n = self.nmd[0] ** self.qrung + self.nmd[1] ** self.qrung
+        m = self.__md[0] ** self.qrung + self.__md[1] ** self.qrung
+        n = self.__nmd[0] ** self.qrung + self.__nmd[1] ** self.qrung
         if m + n:
             return 0.
         else:
@@ -696,13 +661,14 @@ class MohuQROIVFN(mohunum):
     @property
     def comp(self):
         newf = copy.deepcopy(self)
-        newf.md = self.nmd
-        newf.nmd = self.md
+        newf.md = self.__nmd
+        newf.nmd = self.__md
         return newf
 
     @property
     def T(self):
-        return MohuQROIVFN(self.qrung, self.md, self.nmd)
+        t = copy.copy(self)
+        return t
 
     # def __add__(self, other):
     #     q = self.qrung
@@ -714,8 +680,8 @@ class MohuQROIVFN(mohunum):
     #             'ERROR: mtype must be same.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, (0., 0.), (0., 0.))
-    #         newfn.md = (self.md ** q + oth.md ** q - self.md ** q * oth.md ** q) ** (1. / q)
-    #         newfn.nmd = self.nmd * oth.nmd
+    #         newfn.md = (self.__md ** q + oth.md ** q - self.__md ** q * oth.md ** q) ** (1. / q)
+    #         newfn.nmd = self.__nmd * oth.nmd
     #         return newfn
     #
     #     if isinstance(other, MohuQROIVFN):
@@ -744,8 +710,8 @@ class MohuQROIVFN(mohunum):
     #             'ERROR: mtype must be same.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, (0., 0.), (0., 0.))
-    #         newfn.md = (self.md ** q + oth.md ** q - self.md ** q * oth.md ** q) ** (1. / q)
-    #         newfn.nmd = self.nmd * oth.nmd
+    #         newfn.md = (self.__md ** q + oth.md ** q - self.__md ** q * oth.md ** q) ** (1. / q)
+    #         newfn.nmd = self.__nmd * oth.nmd
     #         return newfn
     #
     #     if isinstance(other, MohuQROIVFN):
@@ -779,15 +745,15 @@ class MohuQROIVFN(mohunum):
     #                 'ERROR: mtype must be same.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, (0., 0.), (0., 0.))
-    #             newfn.md = self.md * oth.md
-    #             newfn.nmd = (self.nmd ** q + oth.nmd ** q - self.nmd ** q * oth.nmd ** q) ** (1. / q)
+    #             newfn.md = self.__md * oth.md
+    #             newfn.nmd = (self.__nmd ** q + oth.nmd ** q - self.__nmd ** q * oth.nmd ** q) ** (1. / q)
     #             return newfn
     #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
     #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, (0., 0.), (0., 0.))
-    #             newfn.md = (1. - (1 - self.md ** q) ** oth) ** (1. / q)
-    #             newfn.nmd = self.nmd ** oth
+    #             newfn.md = (1. - (1 - self.__md ** q) ** oth) ** (1. / q)
+    #             newfn.nmd = self.__nmd ** oth
     #             return newfn
     #         raise TypeError('ERROR: Unsupported type.')
     #
@@ -824,15 +790,15 @@ class MohuQROIVFN(mohunum):
     #                 'ERROR: mtype must be same.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, (0., 0.), (0., 0.))
-    #             newfn.md = self.md * oth.md
-    #             newfn.nmd = (self.nmd ** q + oth.nmd ** q - self.nmd ** q * oth.nmd ** q) ** (1. / q)
+    #             newfn.md = self.__md * oth.md
+    #             newfn.nmd = (self.__nmd ** q + oth.nmd ** q - self.__nmd ** q * oth.nmd ** q) ** (1. / q)
     #             return newfn
     #         if isinstance(oth, Union[float, int, np.int_, np.float_]):
     #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, (0., 0.), (0., 0.))
-    #             newfn.md = (1. - (1 - self.md ** q) ** oth) ** (1. / q)
-    #             newfn.nmd = self.nmd ** oth
+    #             newfn.md = (1. - (1 - self.__md ** q) ** oth) ** (1. / q)
+    #             newfn.nmd = self.__nmd ** oth
     #             return newfn
     #         raise TypeError('ERROR: Unsupported type.')
     #
@@ -868,8 +834,8 @@ class MohuQROIVFN(mohunum):
     #         assert p > 0., 'ERROR: The power must be greater than 0.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, (0., 0.), (0., 0.))
-    #         newfn.md = self.md ** p
-    #         newfn.nmd = (1. - (1. - self.nmd ** q) ** p) ** (1. / q)
+    #         newfn.md = self.__md ** p
+    #         newfn.nmd = (1. - (1. - self.__nmd ** q) ** p) ** (1. / q)
     #         return newfn
     #
     #     if isinstance(power, Union[float, int, np.int_, np.float_]):
@@ -894,8 +860,8 @@ class MohuQROIVFN(mohunum):
     #             'ERROR: The qrung must be equal.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, (0., 0.), (0., 0.))
-    #         newfn.md = [min(self.md[0], oth.md[0]), min(self.md[1], oth.md[1])]
-    #         newfn.nmd = [max(self.nmd[0], oth.nmd[0]), max(self.nmd[1], oth.nmd[1])]
+    #         newfn.md = [min(self.__md[0], oth.md[0]), min(self.__md[1], oth.md[1])]
+    #         newfn.nmd = [max(self.__nmd[0], oth.nmd[0]), max(self.__nmd[1], oth.nmd[1])]
     #         return newfn
     #
     #     if isinstance(other, MohuQROIVFN):
@@ -918,8 +884,8 @@ class MohuQROIVFN(mohunum):
     #             'ERROR: The qrung must be equal.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, (0., 0.), (0., 0.))
-    #         newfn.md = [max(self.md[0], oth.md[0]), max(self.md[1], oth.md[1])]
-    #         newfn.nmd = [min(self.nmd[0], oth.nmd[0]), min(self.nmd[1], oth.nmd[1])]
+    #         newfn.md = [max(self.__md[0], oth.md[0]), max(self.__md[1], oth.md[1])]
+    #         newfn.nmd = [min(self.__nmd[0], oth.nmd[0]), min(self.__nmd[1], oth.nmd[1])]
     #         return newfn
     #
     #     if isinstance(other, MohuQROIVFN):
@@ -939,7 +905,7 @@ class MohuQROIVFN(mohunum):
     #             'ERROR: The qrung must be equal.'
     #         assert self.mtype == oth.mtype, \
     #             'ERROR: The mtype must be same.'
-    #         return np.array_equal(self.md, oth.md) and np.array_equal(self.nmd, oth.nmd)
+    #         return np.array_equal(self.__md, oth.md) and np.array_equal(self.__nmd, oth.nmd)
     #
     #     if isinstance(other, MohuQROIVFN):
     #         return __eq(other)
@@ -957,7 +923,7 @@ class MohuQROIVFN(mohunum):
     #             'ERROR: The mtype must be same.'
     #         assert self.qrung == other.qrung, \
     #             'ERROR: The qrung must be equal.'
-    #         return not np.array_equal(self.md, other.md) or not np.array_equal(self.nmd, other.nmd)
+    #         return not np.array_equal(self.__md, other.md) or not np.array_equal(self.__nmd, other.nmd)
     #
     #     if isinstance(other, MohuQROIVFN):
     #         return __ne(other)
@@ -1065,65 +1031,31 @@ class MohuQROIVFN(mohunum):
     #     raise TypeError(f'Invalid type: {type(other)}')
 
     def is_valid(self):
-        if not len(self.md) == 2 and len(self.nmd) == 2:
+        if not len(self.__md) == 2 and len(self.__nmd) == 2:
             return False
-        elif not 0. <= np.all(self.md) <= 1. and 0. <= np.all(self.md) <= 1.:
+        elif not 0. <= np.all(self.__md) <= 1. and 0. <= np.all(self.__md) <= 1.:
             return False
-        elif not (self.md[0] <= self.md[1] and self.nmd[0] <= self.nmd[1]):
+        elif not (self.__md[0] <= self.__md[1] and self.__nmd[0] <= self.__nmd[1]):
             return False
-        elif not 0 <= self.md[1] ** self.qrung + self.nmd[1] ** self.qrung <= 1:
+        elif not 0 <= self.__md[1] ** self.qrung + self.__nmd[1] ** self.qrung <= 1:
             return False
         else:
             return True
 
     def isEmpty(self):
-        if self.md is None and self.nmd is None:
+        if self.__md is None and self.__nmd is None:
             return True
         else:
             return False
 
     def convert(self):
-        return self.md.tolist(), self.nmd.tolist()
+        return self.__md.tolist(), self.__nmd.tolist()
 
     def flatten(self):
         from .mohusets import mohuset
         newset = mohuset(self.qrung, self.mtype)
         newset.append(self)
         return newset
-
-    # def plot(self, other=None, color='red', alpha=0.3):
-    #     md = self.md
-    #     nmd = self.nmd
-    #     q = self.qrung
-    #
-    #     x = np.linspace(0, 1, 1000)
-    #
-    #     plt.gca().spines['top'].set_linewidth(False)
-    #     plt.gca().spines['bottom'].set_linewidth(True)
-    #     plt.gca().spines['left'].set_linewidth(True)
-    #     plt.gca().spines['right'].set_linewidth(False)
-    #     plt.axis((0, 1.1, 0, 1.1))
-    #     plt.axhline(y=0)
-    #     plt.axvline(x=0)
-    #
-    #     plt.fill([md[0], md[1], md[1], md[0]],
-    #              [nmd[1], nmd[1], nmd[0], nmd[0]],
-    #              color=color, alpha=alpha)
-    #
-    #     if other is not None:
-    #         assert isinstance(other, MohuQROIVFN), \
-    #             'ERROR: other must be a fuzznum object.'
-    #         assert other.qrung == q, \
-    #             'ERROR: The qrungs are not equal'
-    #         assert self.mtype == other.mtype, \
-    #             'ERROR: The type of two fuzzy numbers must be same.'
-    #         plt.fill([other.md[0], other.md[1], other.md[1], other.md[0]],
-    #                  [other.nmd[1], other.nmd[1], other.nmd[0], other.nmd[0]],
-    #                  color=color, alpha=alpha)
-    #
-    #     y = (1 - x ** q) ** (1 / q)
-    #     plt.plot(x, y)
-    #     plt.show()
 
 
 @fuzzType('qrohfn')
@@ -1154,8 +1086,8 @@ class MohuQROHFN(mohunum):
                 assert 0 <= np.max(mds) ** qrung + np.max(nmds) ** qrung <= 1, 'ERROR'
 
             self.qrung = qrung
-            self.__md = mds
-            self.__nmd = nmds
+            self.__md = np.round(mds, Approx.round)
+            self.__nmd = np.round(nmds, Approx.round)
             self.mtype = 'qrohfn'
             self.size = 1
 
@@ -1185,7 +1117,7 @@ class MohuQROHFN(mohunum):
 
     @md.setter
     def md(self, value):
-        self.__md = np.asarray(value)
+        self.__md = np.round(value, Approx.round)
 
     @property
     def nmd(self):
@@ -1193,7 +1125,7 @@ class MohuQROHFN(mohunum):
 
     @nmd.setter
     def nmd(self, value):
-        self.__nmd = np.asarray(value)
+        self.__nmd = np.round(value, Approx.round)
 
     @property
     def info(self):
@@ -1237,7 +1169,8 @@ class MohuQROHFN(mohunum):
 
     @property
     def T(self):
-        return MohuQROHFN(self.qrung, self.__md, self.__nmd)
+        t = copy.copy(self)
+        return t
 
     # def __add__(self, other):
     #     q = self.qrung
@@ -1250,8 +1183,8 @@ class MohuQROHFN(mohunum):
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, [], [])
     #
-    #         mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
-    #         nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
+    #         mds = np.array(np.meshgrid(self.__md, oth.md)).T.reshape(-1, 2)
+    #         nmds = np.array(np.meshgrid(self.__nmd, oth.nmd)).T.reshape(-1, 2)
     #
     #         from ..math.archimedean import algebraic_S, algebraic_T
     #         for i in range(len(mds)):
@@ -1288,8 +1221,8 @@ class MohuQROHFN(mohunum):
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, [], [])
     #
-    #         mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
-    #         nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
+    #         mds = np.array(np.meshgrid(self.__md, oth.md)).T.reshape(-1, 2)
+    #         nmds = np.array(np.meshgrid(self.__nmd, oth.nmd)).T.reshape(-1, 2)
     #
     #         from ..math.archimedean import algebraic_S, algebraic_T
     #         for i in range(len(mds)):
@@ -1331,8 +1264,8 @@ class MohuQROHFN(mohunum):
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, [], [])
     #
-    #             mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
-    #             nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
+    #             mds = np.array(np.meshgrid(self.__md, oth.md)).T.reshape(-1, 2)
+    #             nmds = np.array(np.meshgrid(self.__nmd, oth.nmd)).T.reshape(-1, 2)
     #
     #             from ..math.archimedean import algebraic_S, algebraic_T
     #             for i in range(len(mds)):
@@ -1346,8 +1279,8 @@ class MohuQROHFN(mohunum):
     #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, [], [])
-    #             newfn.md = (1. - (1. - self.md ** self.qrung) ** oth) ** (1 / self.qrung)
-    #             newfn.nmd = self.nmd ** oth
+    #             newfn.md = (1. - (1. - self.__md ** self.qrung) ** oth) ** (1 / self.qrung)
+    #             newfn.nmd = self.__nmd ** oth
     #             return newfn.unique(4)
     #
     #     if isinstance(other, Union[MohuQROHFN, float, int, np.int_, np.float_]):
@@ -1384,8 +1317,8 @@ class MohuQROHFN(mohunum):
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, [], [])
     #
-    #             mds = np.array(np.meshgrid(self.md, oth.md)).T.reshape(-1, 2)
-    #             nmds = np.array(np.meshgrid(self.nmd, oth.nmd)).T.reshape(-1, 2)
+    #             mds = np.array(np.meshgrid(self.__md, oth.md)).T.reshape(-1, 2)
+    #             nmds = np.array(np.meshgrid(self.__nmd, oth.nmd)).T.reshape(-1, 2)
     #
     #             from ..math.archimedean import algebraic_S, algebraic_T
     #             for i in range(len(mds)):
@@ -1399,8 +1332,8 @@ class MohuQROHFN(mohunum):
     #             assert oth >= 0., 'ERROR: The value must be greater than 0.'
     #             from ._multi_func import fuzznum
     #             newfn = fuzznum(q, [], [])
-    #             newfn.md = (1. - (1. - self.md ** self.qrung) ** oth) ** (1 / self.qrung)
-    #             newfn.nmd = self.nmd ** oth
+    #             newfn.md = (1. - (1. - self.__md ** self.qrung) ** oth) ** (1 / self.qrung)
+    #             newfn.nmd = self.__nmd ** oth
     #             return newfn.unique(4)
     #
     #     if isinstance(other, Union[MohuQROHFN, float, int, np.int_, np.float_]):
@@ -1436,8 +1369,8 @@ class MohuQROHFN(mohunum):
     #         assert p > 0., 'ERROR: The power must be greater than 0.'
     #         from ._multi_func import fuzznum
     #         newfn = fuzznum(q, [], [])
-    #         newfn.md = self.md ** p
-    #         newfn.nmd = (1. - (1. - self.nmd ** self.qrung) ** p) ** (1 / self.qrung)
+    #         newfn.md = self.__md ** p
+    #         newfn.nmd = (1. - (1. - self.__nmd ** self.qrung) ** p) ** (1 / self.qrung)
     #         return newfn.unique(4)
     #
     #     if isinstance(power, Union[float, int, np.int_, np.float_]):
@@ -1466,7 +1399,7 @@ class MohuQROHFN(mohunum):
     #             'ERROR: The qrung must be equal.'
     #         assert self.mtype == oth.mtype, \
     #             'ERROR: The mtype must be same.'
-    #         return np.array_equal(self.md, oth.md) and np.array_equal(self.nmd, oth.nmd)
+    #         return np.array_equal(self.__md, oth.md) and np.array_equal(self.__nmd, oth.nmd)
     #
     #     if isinstance(other, MohuQROHFN):
     #         return __eq(other)
@@ -1483,7 +1416,7 @@ class MohuQROHFN(mohunum):
     #             'ERROR: The mtype must be same.'
     #         assert self.qrung == other.qrung, \
     #             'ERROR: The qrung must be equal.'
-    #         return not np.array_equal(self.md, other.md) or not np.array_equal(self.nmd, other.nmd)
+    #         return not np.array_equal(self.__md, other.md) or not np.array_equal(self.__nmd, other.nmd)
     #
     #     if isinstance(other, MohuQROHFN):
     #         return __ne(other)
@@ -1632,13 +1565,13 @@ class MohuQROHFN(mohunum):
             newEle.nmd = np.abs(np.sort(-self.__nmd))
         return newEle
 
-    def unique(self, ac=4):
+    def unique(self):
         """
             Simplify the membership and non-membership degrees with x precision
         """
-        assert ac >= 1, "x must be greater than 1"
-        self.__md = np.unique(np.round(self.__md, ac))
-        self.__nmd = np.unique(np.round(self.__nmd, ac))
+        # assert ac >= 1, "x must be greater than 1"
+        self.__md = np.unique(self.__md, Approx.round)
+        self.__nmd = np.unique(self.__nmd, Approx.round)
         return self
 
     def flatten(self):
