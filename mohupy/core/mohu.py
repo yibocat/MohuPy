@@ -60,9 +60,9 @@ class MohuQROFN(mohunum):
         if isinstance(md, (float, int, np.int_, np.float_)) and \
                 isinstance(nmd, (float, int, np.int_, np.float_)):
             assert 0. <= md <= 1. and 0. <= nmd <= 1., \
-                'ERROR: md and nmd must be between 0 and 1.'
+                'ERROR: md and nmd must be betweenZERO and ONE'
             assert 0. <= md ** qrung + nmd ** qrung <= 1., \
-                'ERROR: md ** qrung + nmd ** qrung must be between 0 and 1'
+                'ERROR: md ** qrung + nmd ** qrung must be between ZERO and ONE'
 
             self.qrung = qrung
             self.__md = np.round(md, Approx.round)
@@ -104,8 +104,8 @@ class MohuQROFN(mohunum):
     @property
     def ind(self):
         acc = self.__md ** self.qrung + self.__nmd ** self.qrung
-        if acc == 1.:
-            return 0.
+        if acc == np.round(1., Approx.round):
+            return np.round(0., Approx.round)
         else:
             return (1. - acc) ** (1. / self.qrung)
 
@@ -602,11 +602,11 @@ class MohuQROIVFN(mohunum):
                 'ERROR: The data format contains at least upper and lower bounds.'
             assert md[0] <= md[1] and nmd[0] <= nmd[1], \
                 'ERROR: The upper of membership and non-membership must be greater than the lower.'
-            assert 0 <= md[0] <= 1 and 0 <= md[1] <= 1, \
+            assert 0. <= md[0] <= 1. and 0. <= md[1] <= 1., \
                 'ERROR: The upper and lower of membership degree must be between 0 and 1.'
-            assert 0 <= nmd[0] <= 1 and 0 <= nmd[1] <= 1, \
+            assert 0. <= nmd[0] <= 1. and 0. <= nmd[1] <= 1., \
                 'ERROR: The upper and lower of non-membership degree must be between 0 and 1.'
-            assert 0 <= md[0] ** qrung + nmd[0] ** qrung <= 1 and 0 <= md[1] ** qrung + nmd[1] ** qrung <= 1, \
+            assert 0. <= md[0] ** qrung + nmd[0] ** qrung <= 1. and 0. <= md[1] ** qrung + nmd[1] ** qrung <= 1., \
                 'ERROR: The q powers sum of membership degree and non-membership degree must be between 0 and 1.'
 
             self.qrung = qrung
@@ -654,7 +654,7 @@ class MohuQROIVFN(mohunum):
         m = self.__md[0] ** self.qrung + self.__md[1] ** self.qrung
         n = self.__nmd[0] ** self.qrung + self.__nmd[1] ** self.qrung
         if m + n:
-            return 0.
+            return np.round(0., Approx.round)
         else:
             return (1. - (m + n) / 2) ** (1. / self.qrung)
 
@@ -1037,7 +1037,7 @@ class MohuQROIVFN(mohunum):
             return False
         elif not (self.__md[0] <= self.__md[1] and self.__nmd[0] <= self.__nmd[1]):
             return False
-        elif not 0 <= self.__md[1] ** self.qrung + self.__nmd[1] ** self.qrung <= 1:
+        elif not 0. <= self.__md[1] ** self.qrung + self.__nmd[1] ** self.qrung <= 1.:
             return False
         else:
             return True
@@ -1149,9 +1149,9 @@ class MohuQROHFN(mohunum):
         mm = ((self.__md ** self.qrung).sum()) / len(self.__md)
         nn = ((self.__nmd ** self.qrung).sum()) / len(self.__nmd)
         if mm + nn == 1.:
-            return 0.
+            return np.round(0., Approx.round)
         else:
-            return (1. - mm - nn) ** (1 / self.qrung)
+            return (1. - mm - nn) ** (1. / self.qrung)
 
     @property
     def comp(self):
@@ -1525,10 +1525,10 @@ class MohuQROHFN(mohunum):
 
     def is_valid(self):
         a1 = self.__md.size == 0 and self.__nmd.size == 0
-        a2 = self.__md.size == 0 and 0 <= self.__nmd.all() <= 1
-        a3 = self.__nmd.size == 0 and 0 <= self.__md.all() <= 1
-        a4 = min(self.__md) >= 0 and min(self.__nmd) >= 0 and max(self.__md) ** self.qrung + max(
-            self.__nmd) ** self.qrung <= 1
+        a2 = self.__md.size == 0 and 0. <= self.__nmd.all() <= 1.
+        a3 = self.__nmd.size == 0 and 0. <= self.__md.all() <= 1.
+        a4 = min(self.__md) >= 0. and min(self.__nmd) >= 0. and max(self.__md) ** self.qrung + max(
+            self.__nmd) ** self.qrung <= 1.
         if a1:
             # print('a1')
             return True

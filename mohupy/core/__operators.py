@@ -62,6 +62,10 @@ class Addition(Operation):
             return newset
 
 
+def add(x, y):
+    return Addition()(x, y)
+
+
 class Subtraction(Operation):
     def function(self, x, y):
         """
@@ -100,6 +104,10 @@ class Subtraction(Operation):
             newset = mohuset(x.qrung, x.mtype)
             newset.set = vec_func(x.set, y.set)
             return newset
+
+
+def sub(x, y):
+    return Subtraction()(x, y)
 
 
 class Multiplication(Operation):
@@ -202,6 +210,10 @@ class Multiplication(Operation):
             return newset
 
 
+def mul(x, y):
+    return Multiplication()(x, y)
+
+
 class Division(Operation):
     def function(self, x, y):
         """
@@ -269,6 +281,10 @@ class Division(Operation):
             return newset
 
 
+def div(x, y):
+    return Division()(x, y)
+
+
 class Power(Operation):
     def __init__(self, p):
         self.p = p
@@ -307,6 +323,10 @@ class Power(Operation):
             return newset
 
 
+def pow(x, p):
+    return Power(p)(x)
+
+
 class MatrixMul(Operation):
     def function(self, x: mohuset, y: mohuset):
         assert x.ndim > 0, f"input operand 0 does not have enough dimensions."
@@ -315,6 +335,10 @@ class MatrixMul(Operation):
         newset = mohuset(x.qrung, x.mtype)
         newset.set = x.set @ y.set
         return newset
+
+
+def matmul(x, y):
+    return MatrixMul()(x, y)
 
 
 class Equal(Operation):
@@ -346,6 +370,10 @@ class Equal(Operation):
             return vec_func(x.set, y.set)
 
 
+def equal(x, y):
+    return Equal()(x, y)
+
+
 class Inequality(Operation):
     def function(self, x, y):
         """
@@ -373,6 +401,10 @@ class Inequality(Operation):
         if isinstance(x, mohuset) and isinstance(y, mohuset):
             vec_func = np.vectorize(__ne)
             return vec_func(x.set, y.set)
+
+
+def inequal(x, y):
+    return Inequality()(x, y)
 
 
 class Lt(Operation):
@@ -411,6 +443,10 @@ class Lt(Operation):
             return vec_func(x.set, y.set)
 
 
+def lt(x, y):
+    return Lt()(x, y)
+
+
 class Gt(Operation):
     def function(self, x, y):
         """
@@ -445,6 +481,10 @@ class Gt(Operation):
         if isinstance(x, mohuset) and isinstance(y, mohuset):
             vec_func = np.vectorize(__gt)
             return vec_func(x.set, y.set)
+
+
+def gt(x, y):
+    return Gt()(x, y)
 
 
 class Le(Operation):
@@ -483,6 +523,10 @@ class Le(Operation):
             return vec_func(x.set, y.set)
 
 
+def le(x, y):
+    return Le()(x, y)
+
+
 class Ge(Operation):
     def function(self, x, y):
         """
@@ -519,49 +563,22 @@ class Ge(Operation):
             return vec_func(x.set, y.set)
 
 
-def add(x, y):
-    return Addition()(x, y)
-
-
-def sub(x, y):
-    return Subtraction()(x, y)
-
-
-def mul(x, y):
-    return Multiplication()(x, y)
-
-
-def div(x, y):
-    return Division()(x, y)
-
-
-def pow(x, p):
-    return Power(p)(x)
-
-
-def matmul(x, y):
-    return MatrixMul()(x, y)
-
-
-def equal(x, y):
-    return Equal()(x, y)
-
-
-def inequal(x, y):
-    return Inequality()(x, y)
-
-
-def lt(x, y):
-    return Lt()(x, y)
-
-
-def gt(x, y):
-    return Gt()(x, y)
-
-
-def le(x, y):
-    return Le()(x, y)
-
-
 def ge(x, y):
     return Ge()(x, y)
+
+
+class GetItem(Operation):
+    def __init__(self, slices):
+        self.slices = slices
+
+    def function(self, x):
+        from . import fuzzset
+        y = x.set[self.slices]
+        if isinstance(y, np.ndarray):
+            return fuzzset(y)
+        else:
+            return y
+
+
+def getitem(x, slices):
+    return GetItem(slices)(x)

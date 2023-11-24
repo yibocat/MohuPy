@@ -20,4 +20,4 @@ from .random import *
 
 from .runtime import info
 from .registry import *
-from .config import Approx
+from .config import Approx, approx

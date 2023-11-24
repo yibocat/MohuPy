@@ -13,16 +13,16 @@ fuzzPos = Register()
 fuzzNeg = Register()
 
 ZERO_QROFN = lambda q: fuzznum(q, 0., 0.)
-ZERO_IVFN = lambda q: fuzznum(q, (0., 0.), (0, 0.))
-ZERO_QROHFN = lambda q: fuzznum(q, [0], [0.])
+ZERO_IVFN = lambda q: fuzznum(q, (0., 0.), (0., 0.))
+ZERO_QROHFN = lambda q: fuzznum(q, [0.], [0.])
 
 POS_QROFN = lambda q: fuzznum(q, 1., 0.)
-POS_IVFN = lambda q: fuzznum(q, (1., 1.), (0, 0.))
-POS_QROHFN = lambda q: fuzznum(q, [1], [0.])
+POS_IVFN = lambda q: fuzznum(q, (1., 1.), (0., 0.))
+POS_QROHFN = lambda q: fuzznum(q, [1.], [0.])
 
 NEG_QROFN = lambda q: fuzznum(q, 0., 1.)
-NEG_IVFN = lambda q: fuzznum(q, (0., 0.), (1, 1.))
-NEG_QROHFN = lambda q: fuzznum(q, [0], [1.])
+NEG_IVFN = lambda q: fuzznum(q, (0., 0.), (1., 1.))
+NEG_QROHFN = lambda q: fuzznum(q, [0.], [1.])
 
 
 @fuzzZero('qrofn')

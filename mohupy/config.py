@@ -4,6 +4,8 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+import numpy as np
+
 
 # import GPUtil
 #
@@ -69,6 +71,47 @@
 #     import pandas as array_lib
 #     return array_lib
 
-
 class Approx:
     round = 6
+
+    ZERO_1 = np.float_(1e-1)
+    ZERO_2 = np.float_(1e-2)
+    ZERO_3 = np.float_(1e-3)
+    ZERO_4 = np.float_(1e-4)
+    ZERO_5 = np.float_(1e-5)
+    ZERO_6 = np.float_(1e-6)
+    ZERO_7 = np.float_(1e-7)
+    ZERO_8 = np.float_(1e-8)
+    ZERO_9 = np.float_(1e-9)
+    ZERO_10 = np.float_(1e-10)
+    ZERO_16 = np.float_(1e-16)
+
+    ONE_1 = np.float_(1 - 1e-1)
+    ONE_2 = np.float_(1 - 1e-2)
+    ONE_3 = np.float_(1 - 1e-3)
+    ONE_4 = np.float_(1 - 1e-4)
+    ONE_5 = np.float_(1 - 1e-5)
+    ONE_6 = np.float_(1 - 1e-6)
+    ONE_7 = np.float_(1 - 1e-7)
+    ONE_8 = np.float_(1 - 1e-8)
+    ONE_9 = np.float_(1 - 1e-9)
+    ONE_10 = np.float_(1 - 1e-10)
+    ONE_16 = np.float_(1 - 1e-16)
+
+    approx_dict = {
+        1: (ONE_1, ZERO_1),
+        2: (ONE_2, ZERO_2),
+        3: (ONE_3, ZERO_3),
+        4: (ONE_4, ZERO_4),
+        5: (ONE_5, ZERO_5),
+        6: (ONE_6, ZERO_6),
+        7: (ONE_7, ZERO_7),
+        8: (ONE_8, ZERO_8),
+        9: (ONE_9, ZERO_9),
+        10: (ONE_10, ZERO_10),
+        16: (ONE_16, ZERO_16),
+    }
+
+
+def approx(a):
+    Approx.round = a

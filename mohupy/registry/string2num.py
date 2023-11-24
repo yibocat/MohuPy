@@ -9,7 +9,6 @@ import re
 import numpy as np
 
 from ..core.base import mohunum
-from ..config import Approx
 
 from .regedit import Register
 
@@ -29,7 +28,7 @@ def str2qrofn(s: str, q) -> mohunum:
         -------
             mohunum
 
-        Notes: When the input data is 0, it should be set to 0.
+        Notes: When the input data is 0, it should be set to ZERO
         Q-rung fuzzy convert function accepts the form: [x,x]
     """
     from ..core import fuzznum
@@ -70,7 +69,7 @@ def str2ivfn(s: str, q) -> mohunum:
 def str2qrohfn(s: str, q) -> mohunum:
     """
         Convert input data to Q-rung orthopair hesitant fuzzy element.
-        Note: When the input data is '0', it should be set to '0.'.
+        Note: When the input data is '0', it should be set to 'ZERO'.
 
         Q-rung Hesitant Fuzzy convert function accepts three forms
         of input data:

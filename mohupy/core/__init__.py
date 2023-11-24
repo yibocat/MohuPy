@@ -18,7 +18,9 @@ __all__ += [
 ]
 
 from .mohu import MohuQROFN, MohuQROIVFN, MohuQROHFN
-from .__operators import add, sub, mul, div, pow, equal, inequal, lt, gt, le, ge, matmul
+from .__operators import (add, sub, mul, div,
+                          pow, equal, inequal,
+                          lt, gt, le, ge, matmul, getitem)
 
 MohuQROFN.__add__ = add
 MohuQROFN.__radd__ = add
@@ -76,3 +78,4 @@ mohuset.__gt__ = gt
 mohuset.__le__ = le
 mohuset.__ge__ = ge
 mohuset.__matmul__ = matmul
+mohuset.__getitem__ = getitem

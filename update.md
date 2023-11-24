@@ -1,6 +1,10 @@
 # UPDATE LOG
 
 ------
+### version: 0.1.8-11.24.2023
+修复了一些 bugs
+
+------
 ### version: 0.1.8-10.31.2023.2
 1. 修复了减法运算和除法运算存在的缺陷，原论文中的方法有误
    > Reference: W. S. Du, “Research on arithmetic operations over generalized 
