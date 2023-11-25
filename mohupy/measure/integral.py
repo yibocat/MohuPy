@@ -8,7 +8,7 @@
 import numpy as np
 
 
-def choquet(e: (list, np.ndarray), func, *args, measurable_func=None, info=False):
+def choquet(e: (list, np.ndarray), func, *args, measurable_func=None, info=False, summation=True):
     """
          Choquet integral based on arbitrary fuzzy measures over a subset of a
             fixed set.
@@ -31,6 +31,8 @@ def choquet(e: (list, np.ndarray), func, *args, measurable_func=None, info=False
                 The measurable function.
             info: bool
                 Whether to print intermediate information.
+            summation:  bool
+                summation or not
 
         Returns
         -------
@@ -49,13 +51,14 @@ def choquet(e: (list, np.ndarray), func, *args, measurable_func=None, info=False
         'ERROR: The subset must be a list or numpy array.'
     assert func is not None, \
         'ERROR: The function must not be None.'
-    RI = np.asarray(*args) if measurable_func is None else measurable_func(*args)
+    RI = (np.asarray(*args)     # When no args are set, use the fuzzy measure e directly.
+          if measurable_func is None else measurable_func(*args)) if len(args) > 0 else np.asarray(e)
     index = np.argsort(-RI)  # fuzzy measure subscripts in descending sort
     sub = np.sort(e)[::-1]
 
     p = []
     for i in range(len(index)):
-        p.append(func(sub[:i + 1], *args) - func(sub[:i], *args))
+        p.append(func(sub[:i + 1], sub) - func(sub[:i], sub))
     p = np.asarray(p)
 
     # Arrange the derivatives of the fuzzy measure set function in descending order
@@ -77,7 +80,7 @@ def choquet(e: (list, np.ndarray), func, *args, measurable_func=None, info=False
     integral = np.array([])
     for i in range(len(index)):
         integral = np.append(integral, fz[i] * p[i])
-    return sum(integral)
+    return sum(integral) if summation else integral
 
 
 def sugeno(e: (list, np.ndarray), func, *args, measurable_func=None):
@@ -117,12 +120,13 @@ def sugeno(e: (list, np.ndarray), func, *args, measurable_func=None):
         'ERROR: The subset must be a list or numpy array.'
     assert func is not None, \
         'ERROR: The function must not be None.'
-    RI = np.asarray(*args) if measurable_func is None else measurable_func(*args)
+    RI = (np.asarray(*args)     # When no args are set, use the fuzzy measure e directly.
+          if measurable_func is None else measurable_func(*args)) if len(args) > 0 else np.asarray(e)
 
     sub = np.sort(e)
     res = np.array([])
     for i in range(len(sub)):
-        res = np.append(res, min(sub[i], func(sub[i:], RI)))
+        res = np.append(res, min(sub[i], func(sub[i:], sub)))
     return np.max(res)
 
 
@@ -162,10 +166,11 @@ def shilkret(e: (list or np.ndarray), func, *args, measurable_func=None):
         'ERROR: The subset must be a list or numpy array.'
     assert func is not None, \
         'ERROR: The function must not be None.'
-    RI = np.asarray(*args) if measurable_func is None else measurable_func(*args)
+    RI = (np.asarray(*args)     # When no args are set, use the fuzzy measure e directly.
+          if measurable_func is None else measurable_func(*args)) if len(args) > 0 else np.asarray(e)
 
     sub = np.sort(e)
     res = np.array([])
     for i in range(len(sub)):
-        res = np.append(res, sub[i] * func(sub[i:], RI))
+        res = np.append(res, sub[i] * func(sub[i:], sub))
     return np.max(res)
