@@ -1,5 +1,10 @@
 # UPDATE LOG
 
+
+------
+### version: 0.1.8-11.25.2023.3
+1. 修复了 Choquet integral 的计算错误问题
+
 ------
 ### version: 0.1.8-11.25.2023
 1. 修复了 Choquet integral 无法正常计算的 bug

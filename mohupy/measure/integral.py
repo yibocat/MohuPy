@@ -62,7 +62,7 @@ def choquet(e: (list, np.ndarray), func, *args, measurable_func=None, info=False
     p = np.asarray(p)
 
     # Arrange the derivatives of the fuzzy measure set function in descending order
-    p = p[::-1]
+    # p = p[::-1]
 
     fz = np.sort(RI)
     if info:
