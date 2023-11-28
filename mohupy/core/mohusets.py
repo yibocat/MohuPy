@@ -241,6 +241,11 @@ class mohuset(MohuBase):
         newset.set = np.sum(self.__set, axis=axis, keepdims=keepdims)
         return newset
 
+    def prod(self, axis=None, keepdims=False):
+        newset = mohuset(self.__qrung, self.__mtype)
+        newset.set = np.prod(self.__set, axis=axis, keepdims=keepdims)
+        return newset
+
     def mean(self, axis=None):
         newset = mohuset(self.__qrung, self.__mtype)
         newset.set = np.mean(self.__set, axis=axis)

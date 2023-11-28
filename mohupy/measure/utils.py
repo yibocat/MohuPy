@@ -163,7 +163,7 @@ def hasse_diagram(e: (list, np.ndarray), func, node_char='C', r=6,
             return False
 
     from .fuzzmeas import dict_rep
-    dd = dict_rep(e, func, e, chara=node_char, r=r)
+    dd = dict_rep(e, func, e, chara=node_char)
 
     keys = []
     for i in dd.keys():
