@@ -8,7 +8,7 @@
 import re
 
 import numpy as np
-from ..config import Approx
+from ..constant import Approx
 
 
 def dirac_meas(e, s):

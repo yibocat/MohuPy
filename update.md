@@ -1,6 +1,28 @@
 # UPDATE LOG
 
 ------
+# version: 0.2.0
+**更新日期: 11.29.2023**
+
+**主要更新内容**:
+1. 重构核心代码，模糊集合类更新为 `Fuzzarray`，模糊数集合整合到一个模糊集类 `Fuzznum`；
+2. 添加注册表，所有方法通过 `core.Registry()` 创建新字典，并保存到 `regedit` 文件下；
+3. 重构 Archimedean 计算范数框架，整合到 `src` 文件下，并构建 Archimedean 注册表字典，可直接通过 mohupy.archimedeanDict 查看；
+4. 构建 Library，注册好的方法通过 Library 调用；
+5. 创建配置 config 文件夹(后续更新)，目前 config 仅包含 T 范数的转换配置，但尚未支持 Einstein 运算；
+6. 废弃了原 `mohuset` 内容，部分方法名称发生变化
+   * `str2num` -> `str2fuzz`
+   * `asfuzzset` -> `asfuzzarray`
+   * `is_valid` -> `isValid`
+   * `is_empty` -> `isEmpty`
+   * `max` -> `getmax`
+   * `min` -> `getmin`
+   * `sum` -> `getsum`
+   * `prod` -> `getprod`
+
+**Noting**: 0.2.0 版本修复了大部分以前遗留的 bugs，此外，0.2.0 版本以下的各版本不兼容
+
+------
 ## version: 0.1.9-11.28.2023
 1. 重构代码框架，重写了内核并命名为 base
 2. 将模糊集类重命名为 `Fuzzarray`，并继承自 `mohuset`

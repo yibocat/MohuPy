@@ -53,7 +53,7 @@ A Fermatean fuzzy number with `qrung=3` and a membership degree of `0.7` and a n
 ### 2. Randomly generate a `qrung=3`, q-rung orthopair fuzzy matrix with a shape of 3*5
 ```python
 import mohupy as mp
-t = mp.randset(3, 'qrofn', 3, 5)
+t = mp.random.rand(3, 'qrofn', 3, 5)
 print(t)
 ```
 ```
@@ -68,8 +68,8 @@ print(t)
 ### 3. Calculate the dot product and cartesian sum of two q-rung orthopair fuzzy vectors
 ```python
 import mohupy as mp
-t1 = mp.randset(3, 'qrofn', 5)
-t2 = mp.randset(3, 'qrofn', 5)
+t1 = mp.random.rand(3, 'qrofn', 5)
+t2 = mp.random.rand(3, 'qrofn', 5)
 print(mp.dot(t1, t2))
 print(mp.cartadd(t1,t2))
 ```
@@ -91,8 +91,8 @@ print(mp.cartadd(t1,t2))
 ### 4. Matrix multiplication of two fuzzy matrices
 ```python
 import mohupy as mp
-t1 = mp.randset(3, 'qrofn', 3,5)
-t2 = mp.randset(3, 'qrofn', 5,4)
+t1 = mp.random.rand(3, 'qrofn', 3,5)
+t2 = mp.random.rand(3, 'qrofn', 5,4)
 print(t1@t2)
 ```
 ```
@@ -115,8 +115,8 @@ print(mp.indices.shapley(t, mp.lambda_meas, t))
 
 ```python
 import mohupy as mp
-t1 = mp.randset(3, 'ivfn', 15)
-t2 = mp.randset(3, 'qrofn', 15)
+t1 = mp.random.rand(3, 'ivfn', 15)
+t2 = mp.random.rand(3, 'qrofn', 15)
 mp.plot(t1)
 mp.plot(t2)
 ```
