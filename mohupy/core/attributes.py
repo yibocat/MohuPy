@@ -191,11 +191,11 @@ class Complement(Attribute):
                 return newf
             if x.mtype == 'qrohfn':
                 newfn = copy.deepcopy(x)
-                if x.md.size == 0 and x.nmd.size != 0:
+                if len(x.md) == 0 and len(x.nmd) != 0:
                     newfn.md = np.array([])
-                    newfn.nmd = 1. - x.nmd
-                elif x.md.size != 0 and x.nmd.size == 0:
-                    newfn.md = 1. - x.md
+                    newfn.nmd = 1. - np.array(x.nmd)
+                elif len(x.md) != 0 and len(x.nmd) == 0:
+                    newfn.md = 1. - np.array(x.md)
                     newfn.nmd = np.array([])
                 else:
                     newfn.md = x.nmd
@@ -210,46 +210,46 @@ def comp(x):
     return Complement()(x)
 
 
-class MemDegrees(Attribute):
-    def function(self, x):
-        from .nums import Fuzznum
-        from .array import Fuzzarray
-
-        def membership(t):
-            if isinstance(t.md, Union[int, float, np.float_, np.int_]):
-                return np.float_(t.md)
-            if isinstance(t.md, Union[np.ndarray, list]):
-                return np.array(x.md, dtype=object)
-        if isinstance(x, Fuzznum):
-            return membership(x)
-        if isinstance(x, Fuzzarray):
-            vec_func = np.vectorize(membership)
-            return vec_func(x.array)
-
-
-def memDegrees(x):
-    return MemDegrees()(x)
-
-
-class NonMemDegrees(Attribute):
-    def function(self, x):
-        from .nums import Fuzznum
-        from .array import Fuzzarray
-
-        def nonmembership(t):
-            if isinstance(t.nmd, Union[int, float, np.float_, np.int_]):
-                return np.float_(t.nmd)
-            if isinstance(t.nmd, Union[np.ndarray, list]):
-                return np.array(x.nmd, dtype=object)
-        if isinstance(x, Fuzznum):
-            return nonmembership(x)
-        if isinstance(x, Fuzzarray):
-            vec_func = np.vectorize(nonmembership)
-            return vec_func(x.array)
-
-
-def nonMemDegrees(x):
-    return NonMemDegrees()(x)
+# class MemDegrees(Attribute):
+#     def function(self, x):
+#         from .nums import Fuzznum
+#         from .array import Fuzzarray
+#
+#         def membership(t):
+#             if isinstance(t.md, Union[int, float, np.float_, np.int_]):
+#                 return np.float_(t.md)
+#             if isinstance(t.md, Union[np.ndarray, list]):
+#                 return np.array(t.md, dtype=object)
+#         if isinstance(x, Fuzznum):
+#             return membership(x)
+#         if isinstance(x, Fuzzarray):
+#             vec_func = np.vectorize(membership)
+#             return vec_func(x.array)
+#
+#
+# def memDegrees(x):
+#     return MemDegrees()(x)
+#
+#
+# class NonMemDegrees(Attribute):
+#     def function(self, x):
+#         from .nums import Fuzznum
+#         from .array import Fuzzarray
+#
+#         def nonmembership(t):
+#             if isinstance(t.nmd, Union[int, float, np.float_, np.int_]):
+#                 return np.float_(t.nmd)
+#             if isinstance(t.nmd, Union[np.ndarray, list]):
+#                 return np.array(t.nmd, dtype=object)
+#         if isinstance(x, Fuzznum):
+#             return nonmembership(x)
+#         if isinstance(x, Fuzzarray):
+#             vec_func = np.vectorize(nonmembership)
+#             return vec_func(x.array)
+#
+#
+# def nonMemDegrees(x):
+#     return NonMemDegrees()(x)
 
 
 

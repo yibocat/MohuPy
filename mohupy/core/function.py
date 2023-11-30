@@ -807,7 +807,7 @@ class FuzzNum(Function):
         return Fuzznum(qrung, md, nmd)
 
 
-def fuzznum(qrung, md, nmd):
+def fuzznum(qrung=None, md=None, nmd=None):
     return FuzzNum()(qrung, md, nmd)
 
 
@@ -816,10 +816,11 @@ class FuzzSet(Function):
         This class is just a class for generating a fuzzy array,
             specifically implemented with function. Similar to the numpy.array method.
     """
-
     def function(self, x):
         from .array import Fuzzarray
         from .nums import Fuzznum
+        if x is None:
+            return Fuzzarray()
         y = x
         if isinstance(x, Fuzznum):
             fl = np.asarray(y, dtype=object)
@@ -842,11 +843,11 @@ class FuzzSet(Function):
             mtype = t.mtype
 
             newset = Fuzzarray(qrung, mtype)
-            newset.array = np.array(y, dtype=object)
+            newset.array = np.array(x, dtype=object)
             return newset
 
         raise TypeError(f'Unsupported type: {type(x)}.')
 
 
-def fuzzset(x):
+def fuzzset(x=None):
     return FuzzSet()(x)

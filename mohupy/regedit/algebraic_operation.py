@@ -40,8 +40,8 @@ def ivfn_algeb_add(x0, y0, x1, y1, q):
 def qrohfn_algeb_add(x0, y0, x1, y1, q):
     mds, nmds = np.array([]), np.array([])
 
-    m = np.array(np.meshgrid(x0, y0)).T.reshape(-1, 2)
-    n = np.array(np.meshgrid(x1, y1)).T.reshape(-1, 2)
+    m = np.array(np.meshgrid(x0, x1)).T.reshape(-1, 2)
+    n = np.array(np.meshgrid(y0, y1)).T.reshape(-1, 2)
 
     for i in range(len(m)):
         mds = np.append(mds, algebraic_add(m[i, 0], 0, m[i, 1], 0, q)[0])
@@ -91,8 +91,8 @@ def ivfn_algeb_mul(x0, y0, x1, y1, q):
 def qrohfn_algeb_mul(x0, y0, x1, y1, q):
     mds, nmds = np.array([]), np.array([])
 
-    m = np.array(np.meshgrid(x0, y0)).T.reshape(-1, 2)
-    n = np.array(np.meshgrid(x1, y1)).T.reshape(-1, 2)
+    m = np.array(np.meshgrid(x0, x1)).T.reshape(-1, 2)
+    n = np.array(np.meshgrid(y0, y1)).T.reshape(-1, 2)
 
     for i in range(len(m)):
         mds = np.append(mds, algebraic_mul(m[i, 0], 0, m[i, 1], 0, q)[0])

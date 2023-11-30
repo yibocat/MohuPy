@@ -10,7 +10,7 @@ import numpy as np
 
 from .base import mohuset
 from .function import initializeSet, transpose
-from .attributes import score, acc, ind, comp, memDegrees, nonMemDegrees
+from .attributes import score, acc, ind, comp
 
 
 class Fuzzarray(mohuset):
@@ -85,11 +85,25 @@ class Fuzzarray(mohuset):
 
     @property
     def md(self):
-        return memDegrees(self)
+        def membership(t):
+            if isinstance(t.md, Union[int, float, np.float_, np.int_]):
+                return np.float_(t.md)
+            if isinstance(t.md, Union[np.ndarray, list]):
+                return np.array(t.md, dtype=object)
+
+        vec_func = np.vectorize(membership)
+        return vec_func(self.array)
 
     @property
     def nmd(self):
-        return memDegrees(self)
+        def membership(t):
+            if isinstance(t.nmd, Union[int, float, np.float_, np.int_]):
+                return np.float_(t.nmd)
+            if isinstance(t.nmd, Union[np.ndarray, list]):
+                return np.array(t.nmd, dtype=object)
+
+        vec_func = np.vectorize(membership)
+        return vec_func(self.array)
 
     @property
     def T(self):

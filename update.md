@@ -1,5 +1,17 @@
 # UPDATE LOG
 
+
+------
+### version: 0.2.1-11-30.2023
+1. 修复了 `Fuzzarray.md` 和 `Fuzzarray.nmd` 存在的 bugs.
+2. 修复了 `mtype='qrohfn'` 时的 `comp` 属性 bug.
+3. 修复了 `mtype='qrohfn'` 的加法运算和乘法运算 bug.
+4. 修复了 `fuzzset` 的一些 bugs：
+   * `fuzzset(None)` 无法生成的情况已修复
+   * `fuzzset` 高维数组被展开的情况已修复
+5. 修复了 `fuzznum` 无法生成 `fuzznum(None)` 的情况
+6. 更新了 requirements.txt 文件
+
 ------
 # version: 0.2.0
 **更新日期: 11.29.2023**
