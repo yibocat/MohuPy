@@ -419,14 +419,15 @@ class Lt(Operation):
         def __lt(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
-            if x0.mtype == 'ivfn' or x0.mtype == 'qrohfn':
-                return x0.score < x1.score
-            else:
-                from .. import fuzznum
-                if Equal()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) and Inequality()(x0, x1):
-                    return True
-                else:
-                    return False
+            # if x0.mtype == 'ivfn' or x0.mtype == 'qrohfn':
+            #     return x0.score < x1.score
+            # else:
+            #     from .. import fuzznum
+            #     if Equal()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) and Inequality()(x0, x1):
+            #         return True
+            #     else:
+            #         return False
+            return x0.score < x1.score
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
             return __lt(x, y)
@@ -459,14 +460,15 @@ class Gt(Operation):
         def __gt(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
-            if x0.mtype == 'ivfn' or x0.mtype == 'qrohfn':
-                return x0.score > x1.score
-            else:
-                from .. import fuzznum
-                if Inequality()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) and Inequality()(x0, x1):
-                    return True
-                else:
-                    return False
+            # if x0.mtype == 'ivfn' or x0.mtype == 'qrohfn':
+            #     return x0.score > x1.score
+            # else:
+            #     from .. import fuzznum
+            #     if Inequality()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) and Inequality()(x0, x1):
+            #         return True
+            #     else:
+            #         return False
+            return x0.score > x1.score
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
             return __gt(x, y)
@@ -499,14 +501,15 @@ class Le(Operation):
         def __le(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
-            if x0.mtype == 'ivfn' or x0.mtype == 'qrohfn':
-                return x0.score <= x1.score
-            else:
-                from .. import fuzznum
-                if Equal()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) or Equal()(x0, x1):
-                    return True
-                else:
-                    return False
+            # if x0.mtype == 'ivfn' or x0.mtype == 'qrohfn':
+            #     return x0.score <= x1.score
+            # else:
+            #     from .. import fuzznum
+            #     if Equal()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) or Equal()(x0, x1):
+            #         return True
+            #     else:
+            #         return False
+            return x0.score <= x1.score
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
             return __le(x, y)
@@ -539,14 +542,15 @@ class Ge(Operation):
         def __ge(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
-            if x0.mtype == 'ivfn' or x0.mtype == 'qrohfn':
-                return x0.score >= x1.score
-            else:
-                from .. import fuzznum
-                if Inequality()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) or Equal()(x0, x1):
-                    return True
-                else:
-                    return False
+            # if x0.mtype == 'ivfn' or x0.mtype == 'qrohfn':
+            #     return x0.score >= x1.score
+            # else:
+            #     from .. import fuzznum
+            #     if Inequality()(Subtraction()(x0, x1), fuzznum(x0.qrung, 0., 1.)) or Equal()(x0, x1):
+            #         return True
+            #     else:
+            #         return False
+            return x0.score >= x1.score
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
             return __ge(x, y)

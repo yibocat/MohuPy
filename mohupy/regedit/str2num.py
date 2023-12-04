@@ -87,8 +87,8 @@ def str2qrohfn(s: str, q) -> Fuzznum:
     """
     from ..core import fuzznum
     newfn = fuzznum(q, [], [])
-    t2 = re.findall(r'\[(\d.*?\d)\s?]', s)
-    assert len(t2) == 2, 'ERROR: data format error.'
+    t2 = re.findall(r'\[(\d.*?\d)\s*?]', s)
+    assert len(t2) == 2, f'data format error:{t2}'
     md = re.findall(r'\d.?\d*', t2[0])
     nmd = re.findall(r'\d.?\d*', t2[1])
 

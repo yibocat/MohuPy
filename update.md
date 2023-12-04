@@ -2,6 +2,13 @@
 
 
 ------
+### version: 0.2.2-12-01.2023
+1. 更改了模糊数的比较规则，使用 score 得分值来进行比较
+2. 修复了 Choquet integral 的计算问题
+3. 修复了 `random.choice()` 存在的 bug(replace 参数问题)
+4. 修复了 `str2fuzz()` 函数转换 `'qrohfn'` 类型时可能存在无法转换的 bug
+
+------
 ### version: 0.2.1-11-30.2023
 1. 修复了 `Fuzzarray.md` 和 `Fuzzarray.nmd` 存在的 bugs.
 2. 修复了 `mtype='qrohfn'` 时的 `comp` 属性 bug.

@@ -114,7 +114,7 @@ def rand(q: int, mtype: str, *n, num: int = 5):
 
 
 class Choice(Random):
-    def function(self, f, n):
+    def function(self, f, n, replace):
         """
             Randomly select a fuzzy number
 
@@ -123,23 +123,30 @@ class Choice(Random):
                 f:  Fuzzarray
                     The fuzzy set.
                 n:  Randomly extract shapes
+                replace:
 
             Returns
             -------
                 Fuzznum or Fuzzarray
+                :param replace:
         """
 
         if n is not None:
             from ..core import Fuzzarray
-            newset = Fuzzarray(f.qrung, f.mtype)
-            newset.array = np.random.choice(f.array, size=n)
-            return newset
+            if replace:
+                t = np.random.choice(f.array, size=n, replace=replace)
+                f.array = t
+                return f
+            else:
+                newset = Fuzzarray(f.qrung, f.mtype)
+                newset.array = np.random.choice(f.array, size=n, replace=replace)
+                return newset
         else:
             return np.random.choice(f.array.flatten())
 
 
-def choice(f, n: Union[int, tuple[int], list[int]] = None):
-    return Choice()(f, n)
+def choice(f, size: Union[int, tuple[int], list[int]] = None, replace=False):
+    return Choice()(f, size, replace)
 
 
 def seed(x):
