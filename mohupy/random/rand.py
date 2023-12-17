@@ -12,8 +12,9 @@ import numpy as np
 
 class RandNum(Random):
 
-    def __init__(self, num):
-        self.num = num
+    def __init__(self, minnum, maxnum):
+        self.minnum = minnum
+        self.maxnum = maxnum
 
     def function(self, q, mtype):
         """
@@ -34,17 +35,18 @@ class RandNum(Random):
                 mohunum
         """
         from ..regedit.random import fuzzRandom
-        return fuzzRandom[mtype](q, self.num)
+        return fuzzRandom[mtype](q, self.minnum, self.maxnum)
 
 
-def randnum(q: int, mtype: str, num: int = 5):
-    return RandNum(num)(q, mtype)
+def randnum(q: int, mtype: str, minnum=1, maxnum=5):
+    return RandNum(minnum, maxnum)(q, mtype)
 
 
 class RandSet(Random):
 
-    def __init__(self, num):
-        self.num = num
+    def __init__(self, minnum, maxnum):
+        self.minnum = minnum
+        self.maxnum = maxnum
 
     def function(self, q, mtype, *n):
         """
@@ -67,7 +69,7 @@ class RandSet(Random):
         from ..core import Fuzznum
 
         def __rand(f: Fuzznum):
-            return randnum(f.qrung, f.mtype, self.num)
+            return randnum(f.qrung, f.mtype, self.minnum, self.maxnum)
 
         from ..lib.construct import zeros
         newset = zeros(q, mtype, *n)
@@ -77,14 +79,15 @@ class RandSet(Random):
         return newset
 
 
-def randset(q: int, mtype: str, *n, num: int = 5):
-    return RandSet(num)(q, mtype, *n)
+def randset(q: int, mtype: str, *n, minnum=1, maxnum=5):
+    return RandSet(minnum, maxnum)(q, mtype, *n)
 
 
 class Rand(Random):
 
-    def __init__(self, num):
-        self.num = num
+    def __init__(self, minnum, maxnum):
+        self.minnum = minnum
+        self.maxnum = maxnum
 
     def function(self, q, mtype, *n):
         """
@@ -104,13 +107,13 @@ class Rand(Random):
                 Fuzzarray or Fuzznum
         """
         if len(n) == 0:
-            return randnum(q, mtype, num=self.num)
+            return randnum(q, mtype, minnum=self.minnum, maxnum=self.maxnum)
         else:
-            return randset(q, mtype, *n, num=self.num)
+            return randset(q, mtype, *n, minnum=self.minnum, maxnum=self.maxnum)
 
 
-def rand(q: int, mtype: str, *n, num: int = 5):
-    return Rand(num)(q, mtype, *n)
+def rand(q: int, mtype: str, *n, minnum=1, maxnum=5):
+    return Rand(minnum, maxnum)(q, mtype, *n)
 
 
 class Choice(Random):
