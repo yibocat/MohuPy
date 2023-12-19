@@ -4,7 +4,7 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
-from typing import Union
+
 from .base import Random
 
 import numpy as np
@@ -148,7 +148,7 @@ class Choice(Random):
             return np.random.choice(f.array.flatten())
 
 
-def choice(f, size: Union[int, tuple[int], list[int]] = None, replace=False):
+def choice(f, size: (int, tuple[int], list[int]) = None, replace=False):
     return Choice()(f, size, replace)
 
 

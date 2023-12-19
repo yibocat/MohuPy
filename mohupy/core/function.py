@@ -18,7 +18,6 @@
 import copy
 import numpy as np
 
-from typing import Union
 from ..constant import Approx
 
 
@@ -41,8 +40,8 @@ class InitializeNum(Function):
     """
 
     def function(self, qrung, md, nmd):
-        if isinstance(md, Union[float, int, np.int_, np.float_]) and \
-                isinstance(nmd, Union[float, int, np.int_, np.float_]):
+        if isinstance(md, (float, int, np.int_, np.float_)) and \
+                isinstance(nmd, (float, int, np.int_, np.float_)):
             assert 0. <= md <= 1. and 0. <= nmd <= 1., \
                 'ERROR: md and nmd must be betweenZERO and ONE'
             assert 0. <= md ** qrung + nmd ** qrung <= 1., \
@@ -72,7 +71,7 @@ class InitializeNum(Function):
 
             return mtype, memDegree, nonMemDegree
 
-        if isinstance(md, Union[list, np.ndarray]) and isinstance(nmd, Union[list, np.ndarray]):
+        if isinstance(md, (list, np.ndarray)) and isinstance(nmd, (list, np.ndarray)):
             mds = np.asarray(md)
             nmds = np.asarray(nmd)
             if mds.size == 0 and nmds.size == 0:
@@ -829,7 +828,7 @@ class FuzzSet(Function):
             newset = Fuzzarray(r.qrung, r.mtype)
             newset.array = fl
             return newset
-        if isinstance(x, Union[list, tuple, np.ndarray]):
+        if isinstance(x, (list, tuple, np.ndarray)):
             y = np.asarray(x, dtype=object)
             y = y.flatten()
             mt = y[0].mtype

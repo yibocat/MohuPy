@@ -4,7 +4,6 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
-from typing import Union
 
 from .base import mohunum
 from .attributes import score, acc, ind, comp

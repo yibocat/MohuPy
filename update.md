@@ -1,6 +1,10 @@
 # UPDATE LOG
 
 ------
+### version: 0.2.3-12-19.2023
+1. 更新了适配的 Python 版本
+
+------
 ### version: 0.2.2-12-17.2023
 1. 更新了 `random` 模块中 `random.rand` 方法，对于 qrohfn 做了调整，加入了参数 minnum 和 maxnum，表示隶属度数量的最小限和最大限
 

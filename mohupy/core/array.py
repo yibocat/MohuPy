@@ -4,7 +4,6 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
-from typing import Union
 
 import numpy as np
 
@@ -86,9 +85,9 @@ class Fuzzarray(mohuset):
     @property
     def md(self):
         def membership(t):
-            if isinstance(t.md, Union[int, float, np.float_, np.int_]):
+            if isinstance(t.md, (int, float, np.float_, np.int_)):
                 return np.float_(t.md)
-            if isinstance(t.md, Union[np.ndarray, list]):
+            if isinstance(t.md, (np.ndarray, list)):
                 return np.array(t.md, dtype=object)
 
         vec_func = np.vectorize(membership)
@@ -97,9 +96,9 @@ class Fuzzarray(mohuset):
     @property
     def nmd(self):
         def membership(t):
-            if isinstance(t.nmd, Union[int, float, np.float_, np.int_]):
+            if isinstance(t.nmd, (int, float, np.float_, np.int_)):
                 return np.float_(t.nmd)
-            if isinstance(t.nmd, Union[np.ndarray, list]):
+            if isinstance(t.nmd, (np.ndarray, list)):
                 return np.array(t.nmd, dtype=object)
 
         vec_func = np.vectorize(membership)

@@ -29,6 +29,6 @@ setup(
         'Development Status :: 3 - Beta',
         "License :: OSI Approved :: MIT License",
     ],
-    python_requires='>=3.7, <=3.11',
+    python_requires='>=3.8',
     install_requires=install_requires,
 )

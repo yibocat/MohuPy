@@ -4,7 +4,6 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
-from typing import Union
 
 import numpy as np
 
@@ -136,12 +135,12 @@ class Multiplication(Operation):
                 operation = BasicOperation(x0.qrung, x0.mtype)
                 return operation.mul(x0, x1)
 
-            if isinstance(x0, Fuzznum) and isinstance(x1, Union[int, float, np.float_, np.int_]):
+            if isinstance(x0, Fuzznum) and isinstance(x1, (int, float, np.float_, np.int_)):
                 assert x1 > 0, f"value must be greater than 0: ({x1} <= 0)."
                 operation = BasicOperation(x0.qrung, x0.mtype)
                 return operation.times(x1, x0)
 
-            if isinstance(x0, Union[int, float, np.float_, np.int_]) and isinstance(x1, Fuzznum):
+            if isinstance(x0, (int, float, np.float_, np.int_)) and isinstance(x1, Fuzznum):
                 assert x0 > 0, f"value must be greater than 0: ({x0} <= 0)."
                 operation = BasicOperation(x1.qrung, x1.mtype)
                 return operation.times(x0, x1)
@@ -149,7 +148,7 @@ class Multiplication(Operation):
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
             return __mul(x, y)
 
-        if isinstance(x, Fuzznum) and isinstance(y, Union[int, float, np.float_, np.int_]):
+        if isinstance(x, Fuzznum) and isinstance(y, (int, float, np.float_, np.int_)):
             return __mul(x, y)
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzzarray):
@@ -182,17 +181,17 @@ class Multiplication(Operation):
             newset.array = vec_func(x.array, y)
             return newset
 
-        if isinstance(x, Fuzzarray) and isinstance(y, Union[int, float, np.float_, np.int_]):
+        if isinstance(x, Fuzzarray) and isinstance(y, (int, float, np.float_, np.int_)):
             vec_func = np.vectorize(__mul)
             newset = Fuzzarray(x.qrung, x.mtype)
             newset.array = vec_func(x.array, y)
             return newset
 
         ### TODO: 数在前的都有点问题，因为不能直接让其等于 Fuzzarray.__mul__，需要在低下的函数 mul() 调整
-        if isinstance(x, Union[int, float, np.float_, np.int_]) and isinstance(y, Fuzznum):
+        if isinstance(x, (int, float, np.float_, np.int_)) and isinstance(y, Fuzznum):
             return __mul(x, y)
 
-        if isinstance(x, Union[int, float, np.float_, np.int_]) and isinstance(y, Fuzzarray):
+        if isinstance(x, (int, float, np.float_, np.int_)) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__mul)
             newset = Fuzzarray(y.qrung, y.mtype)
             newset.array = vec_func(x, y.array)
@@ -234,7 +233,7 @@ class Division(Operation):
                 assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
                 operation = BasicOperation(x0.qrung, x.mtype)
                 return operation.div(x0, x1)
-            if isinstance(x0, Fuzznum) and isinstance(x1, Union[int, float, np.float_, np.int_]):
+            if isinstance(x0, Fuzznum) and isinstance(x1, (int, float, np.float_, np.int_)):
                 assert x1 > 0, f"value must be greater than 0: ({x1} <= 0)."
                 operation = BasicOperation(x0.qrung, x0.mtype)
                 return operation.times((1/x1), x0)
@@ -242,7 +241,7 @@ class Division(Operation):
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
             return __div(x, y)
 
-        if isinstance(x, Fuzznum) and isinstance(y, Union[int, float, np.float_, np.int_]):
+        if isinstance(x, Fuzznum) and isinstance(y, (int, float, np.float_, np.int_)):
             return __div(x, y)
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzzarray):
@@ -275,7 +274,7 @@ class Division(Operation):
             newset.array = vec_func(x.array, y)
             return newset
 
-        if isinstance(x, Fuzzarray) and isinstance(y, Union[int, float, np.float_, np.int_]):
+        if isinstance(x, Fuzzarray) and isinstance(y, (int, float, np.float_, np.int_)):
             vec_func = np.vectorize(__div)
             newset = Fuzzarray(x.qrung, x.mtype)
             newset.array = vec_func(x.array, y)
@@ -302,7 +301,7 @@ class Power(Operation):
             operation = BasicOperation(x0.qrung, x0.mtype)
             return operation.power(p, x0)
 
-        if isinstance(x, Fuzznum) and isinstance(self.p, Union[int, float, np.float_, np.int_]):
+        if isinstance(x, Fuzznum) and isinstance(self.p, (int, float, np.float_, np.int_)):
             return __pow(x, self.p)
 
         if isinstance(x, Fuzznum) and isinstance(self.p, np.ndarray):
@@ -311,7 +310,7 @@ class Power(Operation):
             newset.array = vec_func(x, self.p)
             return newset
 
-        if isinstance(x, Fuzzarray) and isinstance(self.p, Union[int, float, np.float_, np.int_]):
+        if isinstance(x, Fuzzarray) and isinstance(self.p, (int, float, np.float_, np.int_)):
             vec_func = np.vectorize(__pow)
             newset = Fuzzarray(x.qrung, x.mtype)
             newset.array = vec_func(x.array, self.p)

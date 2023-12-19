@@ -5,7 +5,6 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 import copy
-from typing import Union
 
 import numpy as np
 
@@ -216,9 +215,9 @@ def comp(x):
 #         from .array import Fuzzarray
 #
 #         def membership(t):
-#             if isinstance(t.md, Union[int, float, np.float_, np.int_]):
+#             if isinstance(t.md, (int, float, np.float_, np.int_)):
 #                 return np.float_(t.md)
-#             if isinstance(t.md, Union[np.ndarray, list]):
+#             if isinstance(t.md, (np.ndarray, list)):
 #                 return np.array(t.md, dtype=object)
 #         if isinstance(x, Fuzznum):
 #             return membership(x)
@@ -237,9 +236,9 @@ def comp(x):
 #         from .array import Fuzzarray
 #
 #         def nonmembership(t):
-#             if isinstance(t.nmd, Union[int, float, np.float_, np.int_]):
+#             if isinstance(t.nmd, (int, float, np.float_, np.int_)):
 #                 return np.float_(t.nmd)
-#             if isinstance(t.nmd, Union[np.ndarray, list]):
+#             if isinstance(t.nmd, (np.ndarray, list)):
 #                 return np.array(t.nmd, dtype=object)
 #         if isinstance(x, Fuzznum):
 #             return nonmembership(x)
