@@ -576,7 +576,7 @@ class GetItem(Operation):
         self.slices = slices
 
     def function(self, x):
-        from .function import fuzzset
+        from .fuzzfunc import fuzzset
         y = x.array[self.slices]
         if isinstance(y, np.ndarray):
             return fuzzset(y)
