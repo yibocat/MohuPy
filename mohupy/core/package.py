@@ -6,11 +6,13 @@
 #  Software: MohuPy
 from .nums import Fuzznum
 from .array import Fuzzarray
-
+from .attributes import report, string
 from .operation import (add, sub, mul, div,
                         pow, equal, inequal,
                         lt, gt, le, ge, matmul, getitem)
 
+Fuzznum.__repr__ = report
+Fuzznum.__str__ = string
 Fuzznum.__add__ = add
 Fuzznum.__radd__ = add
 Fuzznum.__sub__ = sub
@@ -25,6 +27,8 @@ Fuzznum.__gt__ = gt
 Fuzznum.__le__ = le
 Fuzznum.__ge__ = ge
 
+Fuzzarray.__repr__ = report
+Fuzzarray.__str__ = string
 Fuzzarray.__add__ = add
 Fuzzarray.__radd__ = add
 Fuzzarray.__sub__ = sub

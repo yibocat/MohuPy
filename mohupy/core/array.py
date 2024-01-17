@@ -11,6 +11,11 @@ from .base import mohuset
 from .function import initializeSet, transpose
 from .attributes import score, acc, ind, comp
 
+from .function import (isValid, isEmpty, isInitial, qsort, unique,
+                       append, remove, pop, reshape, squeeze, clear,
+                       ravel, flatten, getmax, getmin, getsum, getprod, mean,
+                       fmax, fmin)
+
 
 class Fuzzarray(mohuset):
     __array_priority__ = 200
@@ -108,35 +113,44 @@ class Fuzzarray(mohuset):
     def T(self):
         return transpose(self)
 
+    def isValid(self): return isValid(self)
 
-from .attributes import report, string
-from .function import (isValid, isEmpty, isInitial, convert, qsort, unique,
-                       append, remove, pop, reshape, squeeze, clear,
-                       ravel, flatten, getmax, getmin, getsum, getprod, mean,
-                       fmax, fmin)
+    def isEmpty(self, onlyfn=False): return isEmpty(self, onlyfn)
 
-Fuzzarray.__repr__ = report
-Fuzzarray.__str__ = string
-Fuzzarray.isValid = isValid
-Fuzzarray.isEmpty = isEmpty
-Fuzzarray.isInitial = isInitial
+    def isInitial(self): return isInitial(self)
 
-Fuzzarray.qsort = qsort
-Fuzzarray.unique = unique
-Fuzzarray.append = append
-Fuzzarray.reshape = reshape
-Fuzzarray.squeeze = squeeze
-Fuzzarray.clear = clear
-Fuzzarray.ravel = ravel
-Fuzzarray.flatten = flatten
-Fuzzarray.max = getmax
-Fuzzarray.min = getmin
-Fuzzarray.sum = getsum
-Fuzzarray.prod = getprod
-Fuzzarray.mean = mean
+    def qsort(self, reverse=False): return qsort(self, reverse)
 
-Fuzzarray.fmax = fmax
-Fuzzarray.fmin = fmin
-Fuzzarray.remove = remove
-Fuzzarray.pop = pop
+    def unique(self, onlyfn=False): return unique(self, onlyfn)
+
+    def append(self, e): return append(self, e)
+
+    def reshape(self, *shape): return reshape(self, *shape)
+
+    def squeeze(self, axis=None): return squeeze(self, axis)
+
+    def clear(self): return clear(self)
+
+    def ravel(self): return ravel(self)
+
+    def flatten(self): return flatten(self)
+
+    def max(self, show=False, axis=None): return getmax(self, show, axis)
+
+    def min(self, show=False, axis=None): return getmin(self, show, axis)
+
+    def sum(self, axis=None, keepdims=False): return getsum(self, axis, keepdims)
+
+    def prod(self, axis=None, keepdims=False): return getprod(self, axis, keepdims)
+
+    def mean(self, axis=None): return mean(self, axis)
+
+    def fmax(self, func, *args, show=False, axis=None): return fmax(self, func, *args, show, axis)
+
+    def fmin(self, func, *args, show=False, axis=None): return fmin(self, func, *args, show, axis)
+
+    def remove(self, e): return remove(self, e)
+
+    def pop(self, e): return pop(self, e)
+
 

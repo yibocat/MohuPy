@@ -793,60 +793,61 @@ def absolute(x, y):
     return Absolute()(x, y)
 
 
-class FuzzNum(Function):
-    """
-        The method of generating fuzzy numbers is encapsulated in a fuzzy number
-        class, which only generates fuzzy numbers and does not undertake other
-        functions.
-        'function' returns a fuzzy number of type Fuzznum
-    """
-
-    def function(self, qrung, md, nmd):
-        from .nums import Fuzznum
-        return Fuzznum(qrung, md, nmd)
-
-
-def fuzznum(qrung=None, md=None, nmd=None):
-    return FuzzNum()(qrung, md, nmd)
-
-
-class FuzzSet(Function):
-    """
-        This class is just a class for generating a fuzzy array,
-            specifically implemented with function. Similar to the numpy.array method.
-    """
-    def function(self, x):
-        from .array import Fuzzarray
-        from .nums import Fuzznum
-        if x is None:
-            return Fuzzarray()
-        y = x
-        if isinstance(x, Fuzznum):
-            fl = np.asarray(y, dtype=object)
-            flat = fl.flatten()
-            r = np.random.choice(flat)
-            newset = Fuzzarray(r.qrung, r.mtype)
-            newset.array = fl
-            return newset
-        if isinstance(x, (list, tuple, np.ndarray)):
-            y = np.asarray(x, dtype=object)
-            y = y.flatten()
-            mt = y[0].mtype
-            for i in y:
-                if i.mtype != mt:
-                    raise TypeError(f'Unsupported mtype: {i.mtype}.')
-                mt = i.mtype
-
-            t = np.random.choice(y)
-            qrung = t.qrung
-            mtype = t.mtype
-
-            newset = Fuzzarray(qrung, mtype)
-            newset.array = np.array(x, dtype=object)
-            return newset
-
-        raise TypeError(f'Unsupported type: {type(x)}.')
-
-
-def fuzzset(x=None):
-    return FuzzSet()(x)
+# class FuzzNum(Function):
+#     """
+#         The method of generating fuzzy numbers is encapsulated in a fuzzy number
+#         class, which only generates fuzzy numbers and does not undertake other
+#         functions.
+#         'function' returns a fuzzy number of type Fuzznum
+#     """
+#
+#     def function(self, qrung, md, nmd):
+#         from .nums import Fuzznum
+#         return Fuzznum(qrung, md, nmd)
+#
+#
+# def fuzznum(qrung=None, md=None, nmd=None):
+#     return FuzzNum()(qrung, md, nmd)
+#
+#
+# class FuzzSet(Function):
+#     """
+#         This class is just a class for generating a fuzzy array,
+#             specifically implemented with function. Similar to the numpy.array method.
+#     """
+#
+#     def function(self, x):
+#         from .array import Fuzzarray
+#         from .nums import Fuzznum
+#         if x is None:
+#             return Fuzzarray()
+#         y = x
+#         if isinstance(x, Fuzznum):
+#             fl = np.asarray(y, dtype=object)
+#             flat = fl.flatten()
+#             r = np.random.choice(flat)
+#             newset = Fuzzarray(r.qrung, r.mtype)
+#             newset.array = fl
+#             return newset
+#         if isinstance(x, (list, tuple, np.ndarray)):
+#             y = np.asarray(x, dtype=object)
+#             y = y.flatten()
+#             mt = y[0].mtype
+#             for i in y:
+#                 if i.mtype != mt:
+#                     raise TypeError(f'Unsupported mtype: {i.mtype}.')
+#                 mt = i.mtype
+#
+#             t = np.random.choice(y)
+#             qrung = t.qrung
+#             mtype = t.mtype
+#
+#             newset = Fuzzarray(qrung, mtype)
+#             newset.array = np.array(x, dtype=object)
+#             return newset
+#
+#         raise TypeError(f'Unsupported type: {type(x)}.')
+#
+#
+# def fuzzset(x=None):
+#     return FuzzSet()(x)

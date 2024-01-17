@@ -10,15 +10,13 @@ from .nums import Fuzznum
 from .array import Fuzzarray
 from .base import FuzzType
 
-from .function import fuzznum, fuzzset, normalize, broadcast_to
+from .function import normalize, broadcast_to
 from .regedit import Registry
 from .package import *
 
 __all__ += ['FuzzType',
             'Fuzznum',
             'Fuzzarray',
-            'fuzznum',
-            'fuzzset',
             'normalize',
             'Registry',
             'broadcast_to']
@@ -38,3 +36,7 @@ __all__ += [
     'add', 'sub', 'mul', 'div', 'pow', 'matmul', 'equal', 'inequal',
     'lt', 'gt', 'le', 'ge', 'getitem'
 ]
+
+from .fuzzfunc import fuzznum, fuzzset
+
+__all__ += ['fuzznum', 'fuzzset']

@@ -142,7 +142,7 @@ class LoadCSV(Library):
     """
     def function(self, path: str, q: int, mtype: str):
         try:
-            m = np.asarray(pd.read_csv(path, index_col=0))
+            m = pd.read_csv(path, header=None).to_numpy()
             from .string import str2fuzz
             vec_func = np.vectorize(str2fuzz)
             f = vec_func(m, q, mtype)

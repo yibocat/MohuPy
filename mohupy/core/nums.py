@@ -8,6 +8,9 @@
 from .base import mohunum
 from .attributes import score, acc, ind, comp
 from .function import initializeNum, transpose
+from .function import (isValid, isEmpty, isInitial, convert, qsort, unique,
+                       append, reshape, squeeze, clear,
+                       ravel, flatten, getmax, getmin, getsum, getprod, mean)
 
 
 class Fuzznum(mohunum):
@@ -42,32 +45,39 @@ class Fuzznum(mohunum):
         return ind(self)
 
     @property
-    def comp(self):
-        return comp(self)
+    def comp(self): return comp(self)
 
+    def isValid(self): return isValid(self)
 
-from .attributes import report, string
-from .function import (isValid, isEmpty, isInitial, convert, qsort, unique,
-                       append, reshape, squeeze, clear,
-                       ravel, flatten, getmax, getmin, getsum, getprod, mean)
+    def isEmpty(self, onlyfn=False): return isEmpty(self, onlyfn)
 
-Fuzznum.__repr__ = report
-Fuzznum.__str__ = string
-Fuzznum.isValid = isValid
-Fuzznum.isEmpty = isEmpty
-Fuzznum.isInitial = isInitial
-Fuzznum.convert = convert
-Fuzznum.qsort = qsort
-Fuzznum.unique = unique
-Fuzznum.append = append
-Fuzznum.reshape = reshape
-Fuzznum.squeeze = squeeze
-Fuzznum.clear = clear
-Fuzznum.ravel = ravel
-Fuzznum.flatten = flatten
-Fuzznum.max = getmax
-Fuzznum.min = getmin
-Fuzznum.sum = getsum
-Fuzznum.prod = getprod
-Fuzznum.mean = mean
+    def isInitial(self): return isInitial(self)
+
+    def convert(self): return convert(self)
+
+    def qsort(self, reverse=False): return qsort(self, reverse)
+
+    def unique(self, onlyfn=False): return unique(self, onlyfn)
+
+    def append(self, e): return append(self, e)
+
+    def reshape(self, *shape): return reshape(self, *shape)
+
+    def squeeze(self, axis=None): return squeeze(self, axis)
+
+    def clear(self): return clear(self)
+
+    def ravel(self): return ravel(self)
+
+    def flatten(self): return flatten(self)
+
+    def max(self, show=False, axis=None): return getmax(self, show, axis)
+
+    def min(self, show=False, axis=None): return getmin(self, show, axis)
+
+    def sum(self, axis=None, keepdims=False): return getsum(self, axis, keepdims)
+
+    def prod(self, axis=None, keepdims=False): return getprod(self, axis, keepdims)
+
+    def mean(self, axis=None): return mean(self, axis)
 
