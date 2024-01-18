@@ -140,9 +140,13 @@ class LoadCSV(Library):
         -----
             This method loads the fuzzy set from a.csv file.
     """
+    def __init__(self, header, index_col):
+        self.header = header
+        self.index_col = index_col
+
     def function(self, path: str, q: int, mtype: str):
         try:
-            m = pd.read_csv(path, header=None).to_numpy()
+            m = pd.read_csv(path, header=self.header, index_col=self.index_col).to_numpy()
             from .string import str2fuzz
             vec_func = np.vectorize(str2fuzz)
             f = vec_func(m, q, mtype)
@@ -154,6 +158,6 @@ class LoadCSV(Library):
             print(f'{e}: Load failed.')
 
 
-def load_csv(path: str, q: int, mtype: str):
-    return LoadCSV()(path, q, mtype)
+def load_csv(path: str, q: int, mtype: str, header='infer', index_col=0):
+    return LoadCSV(header, index_col)(path, q, mtype)
 
