@@ -29,5 +29,4 @@ install_requires = [
     "matplotlib",
     "pandas",
     "networkx",
-    'gputil'
 ]
