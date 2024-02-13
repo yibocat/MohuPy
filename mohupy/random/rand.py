@@ -9,6 +9,8 @@ from .base import Random
 
 import numpy as np
 
+from ..core import Fuzzarray, Fuzznum
+
 
 class RandNum(Random):
 
@@ -38,7 +40,7 @@ class RandNum(Random):
         return fuzzRandom[mtype](q, self.minnum, self.maxnum)
 
 
-def randnum(q: int, mtype: str, minnum=1, maxnum=5):
+def randnum(q: int, mtype: str, minnum=1, maxnum=5) -> Fuzznum:
     return RandNum(minnum, maxnum)(q, mtype)
 
 
@@ -79,7 +81,7 @@ class RandSet(Random):
         return newset
 
 
-def randset(q: int, mtype: str, *n, minnum=1, maxnum=5):
+def randset(q: int, mtype: str, *n, minnum=1, maxnum=5) -> Fuzzarray:
     return RandSet(minnum, maxnum)(q, mtype, *n)
 
 

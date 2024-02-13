@@ -130,8 +130,8 @@ def banzhaf(e, func, *args):
     for x in e:
         ts = np.array([])
         for sub in subsets(np.setdiff1d(e, x)):
-            ts = np.append(ts, deriv(x, sub, func, *args))
-        ban = np.append(ban, coef * np.sum(ts))
+            ts = np.append(ts, coef * deriv(x, sub, func, *args))
+        ban = np.append(ban, np.sum(ts))
     return ban
 
 
