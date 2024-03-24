@@ -94,11 +94,14 @@ class ToCSV(Library):
         -----
             This method saves the fuzzy set to a.csv file.
     """
+    def __init__(self, header, index_col):
+        self.header = header
+        self.index_col = index_col
 
-    def function(self, f: Fuzzarray, path: str):
+    def function(self, f: Fuzzarray, path: str, float_format: int):
         if 0 <= f.ndim <= 2:
             try:
-                pd.DataFrame(f.array).to_csv(path)
+                pd.DataFrame(f.array, columns=self.header, index=self.index_col).to_csv(path, float_format=f'%.{float_format}f')
                 return True
             except Exception as e:
                 print(f'{e}: Save failed.')
@@ -107,8 +110,8 @@ class ToCSV(Library):
             raise ValueError(f'The ndim of fuzzy array is invalid: ndim={f.ndim}')
 
 
-def to_csv(x, path):
-    return ToCSV()(x, path)
+def to_csv(x: Fuzzarray, path: str, header=None, index_col=None, float_format=5):
+    return ToCSV(header, index_col)(x, path, float_format)
 
 
 class LoadCSV(Library):
