@@ -123,7 +123,7 @@ def banzhaf(e, func, *args):
                 Out[2]: [0.0925856  0.05584383 0.0850259 ]
     """
     n = len(*args)
-    coef = 1/(2**n - 1)
+    coef = 1/2**(n - 1)
     ban = np.array([])
 
     from .utils import subsets

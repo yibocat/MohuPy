@@ -4,6 +4,7 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+from typing import Union
 
 from .base import Random
 
@@ -114,7 +115,7 @@ class Rand(Random):
             return randset(q, mtype, *n, minnum=self.minnum, maxnum=self.maxnum)
 
 
-def rand(q: int, mtype: str, *n, minnum=1, maxnum=5):
+def rand(q: int, mtype: str, *n, minnum=1, maxnum=5) -> Union[Fuzzarray, Fuzznum]:
     return Rand(minnum, maxnum)(q, mtype, *n)
 
 
@@ -150,7 +151,7 @@ class Choice(Random):
             return np.random.choice(f.array.flatten())
 
 
-def choice(f, size: (int, tuple[int], list[int]) = None, replace=False):
+def choice(f, size: (int, tuple[int], list[int]) = None, replace=False) -> Union[Fuzzarray, Fuzznum]:
     return Choice()(f, size, replace)
 
 
