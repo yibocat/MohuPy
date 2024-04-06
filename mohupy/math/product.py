@@ -4,6 +4,7 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+from typing import Union
 
 import numpy as np
 
@@ -59,7 +60,7 @@ class Dot(Mathematics):
         raise ValueError(f'Invalid input type {type(x)} and {type(y)}')
 
 
-def dot(x, y):
+def dot(x, y) -> Union[Fuzznum, Fuzzarray]:
     return Dot()(x, y)
 
 
@@ -111,7 +112,7 @@ class Inner(Mathematics):
         raise ValueError(f'Invalid input type {type(x)} and {type(y)}')
 
 
-def inner(x, y):
+def inner(x, y) -> Union[Fuzznum, Fuzzarray]:
     return Inner()(x, y)
 
 
@@ -157,7 +158,7 @@ class Outer(Mathematics):
         raise ValueError(f'Invalid input type {type(x)} and {type(y)}')
 
 
-def outer(x, y):
+def outer(x, y) -> Union[Fuzznum, Fuzzarray]:
     return Outer()(x, y)
 
 
@@ -216,7 +217,7 @@ class Cartadd(Mathematics):
                 return newset
 
 
-def cartadd(x, y):
+def cartadd(x, y) -> Union[Fuzznum, Fuzzarray]:
     return Cartadd()(x, y)
 
 
@@ -255,5 +256,5 @@ class Cartprod(Mathematics):
             return newset
 
 
-def cartprod(x, y):
+def cartprod(x, y) -> Union[Fuzznum, Fuzzarray]:
     return Cartprod()(x, y)

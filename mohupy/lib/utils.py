@@ -5,6 +5,7 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 import warnings
+from typing import Union
 
 import numpy as np
 
@@ -21,7 +22,7 @@ class Isscalar(Library):
         raise TypeError(f'Unsupported type: {type(x)}')
 
 
-def isscalar(x):
+def isscalar(x) -> bool:
     return Isscalar()(x)
 
 
@@ -56,7 +57,7 @@ class FuncForFuzz(Library):
             return newset
 
 
-def func4fuzz(x, func, *args):
+def func4fuzz(x, func, *args) -> Union[Fuzznum, Fuzzarray]:
     return FuncForFuzz()(x, func, *args)
 
 
@@ -90,7 +91,7 @@ class AsFuzzarray(Library):
         return newset
 
 
-def asfuzzyarray(x, copy=False):
+def asfuzzyarray(x, copy=False) -> Fuzzarray:
     return AsFuzzarray()(x, copy)
 
 
@@ -121,7 +122,7 @@ class Absolute(Library):
         raise TypeError(f'Unsupported type: {type(a)} or {type(b)}.')
 
 
-def absolute(a, b):
+def absolute(a, b) -> Union[Fuzznum, Fuzzarray]:
     warnings.warn(f'This function calculates the difference between the two fuzzy numbers, but it is not reasonable. '
                   f'It is recommended to use the \'abs()\'.')
     return Absolute()(a, b)
@@ -154,6 +155,6 @@ class Relu(Library):
         raise TypeError(f'Unsupported type: {type(x)} or {type(op)}.')
 
 
-def relu(x, op=None):
+def relu(x, op=None) -> Union[Fuzznum, Fuzzarray]:
     return Relu()(x, op)
 

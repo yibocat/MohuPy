@@ -1,12 +1,13 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
+#  Copyright (c) yibocat 2024 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/11/27 下午7:49
+#  Date: 2024/4/6 下午3:12
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
-from .nums import Fuzznum
-from .array import Fuzzarray
-from .attributes import report, string
+
+from .fuzznums import Fuzznum
+from .fuzzarray import Fuzzarray
+from .attribute import report, string
 from .operation import (add, sub, mul, div,
                         pow, equal, inequal,
                         lt, gt, le, ge, matmul, getitem)

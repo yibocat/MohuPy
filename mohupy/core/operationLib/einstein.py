@@ -1,13 +1,12 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
+#  Copyright (c) yibocat 2024 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/11/29 下午2:15
+#  Date: 2024/4/6 下午2:47
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
-
 import numpy as np
 
-from .base import Archimedean
+from ..base import Archimedean
 
 
 class EinsT(Archimedean):

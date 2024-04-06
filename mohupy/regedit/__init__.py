@@ -26,18 +26,18 @@ __all__ += [
     'fuzzPlot',
 ]
 
-### Archimedean Norms Dictionary(AND)
-archimedeanDict = dict()
-__all__ += ['archimedeanDict']
-
-
-### Add algebraic norms to AND
-from .algebraic_operation import algebAdd, algebSub, algebMul, algebDiv, algebPow, algebTim
-archimedeanDict['algebraic'] = {'add': algebAdd,
-                                'sub': algebSub,
-                                'mul': algebMul,
-                                'div': algebDiv,
-                                'pow': algebPow,
-                                'tim': algebTim}
+# ### Archimedean Norms Dictionary(AND)
+# archimedeanDict = dict()
+# __all__ += ['archimedeanDict']
+#
+#
+# ### Add algebraic norms to AND
+# from .algebraic_operation import algebAdd, algebSub, algebMul, algebDiv, algebPow, algebTim
+# archimedeanDict['algebraic'] = {'add': algebAdd,
+#                                 'sub': algebSub,
+#                                 'mul': algebMul,
+#                                 'div': algebDiv,
+#                                 'pow': algebPow,
+#                                 'tim': algebTim}
 
 

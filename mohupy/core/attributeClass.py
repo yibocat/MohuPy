@@ -1,23 +1,19 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
+#  Copyright (c) yibocat 2024 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/11/26 下午4:10
+#  Date: 2024/4/6 下午2:04
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+
 import copy
 
 import numpy as np
 
+from .base import Attribute
+from .fuzznums import Fuzznum
+from .fuzzarray import Fuzzarray
+
 from ..constant import Approx
-
-
-class Attribute:
-    def __call__(self, x):
-        return self.function(x)
-
-    def function(self, x):
-        raise NotImplementedError()
-
 
 class Report(Attribute):
     """
@@ -25,7 +21,6 @@ class Report(Attribute):
     """
 
     def function(self, x):
-        from .nums import Fuzznum
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
                 return f'<{np.round(x.md, 4)},{np.round(x.nmd, 4)}>'
@@ -42,20 +37,14 @@ class Report(Attribute):
                     return f'<{np.round(x.md, 4)}, {np.round(x.nmd, 4)}>'
             if x.md is None and x.nmd is None:
                 return f'<>'
-        from .array import Fuzzarray
         if isinstance(x, Fuzzarray):
             p = str(x.array).replace('\n', '\n' + ' ' * 10)
             return f'Fuzzarray({p}, qrung={x.qrung}, mtype={x.mtype})'
         raise TypeError(f'Unsupported data types:{type(x)}.')
 
 
-def report(x):
-    return Report()(x)
-
-
 class Str(Attribute):
     def function(self, x):
-        from .nums import Fuzznum
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
                 return f'<{np.round(x.md, 4)},{np.round(x.nmd, 4)}>'
@@ -72,19 +61,14 @@ class Str(Attribute):
                     return f'<{np.round(x.md, 4)}, {np.round(x.nmd, 4)}>'
             if x.md is None and x.nmd is None:
                 return f'<>'
-        from .array import Fuzzarray
         if isinstance(x, Fuzzarray):
             return str(x.array)
         raise TypeError(f'Unsupported data types:{type(x)}.')
 
 
-def string(x):
-    return Str()(x)
-
 
 class Score(Attribute):
     def function(self, x):
-        from .nums import Fuzznum
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
                 return x.md ** x.qrung - x.nmd ** x.qrung
@@ -99,20 +83,14 @@ class Score(Attribute):
                     mm = ((x.md ** x.qrung).sum()) / len(x.md)
                     nn = ((x.nmd ** x.qrung).sum()) / len(x.nmd)
                     return mm - nn
-        from .array import Fuzzarray
         if isinstance(x, Fuzzarray):
             # TODO: 模糊集
             pass
 
 
-def score(x):
-    return Score()(x)
-
 
 class Accuracy(Attribute):
     def function(self, x):
-        from .nums import Fuzznum
-        from .array import Fuzzarray
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
                 return x.md ** x.qrung + x.nmd ** x.qrung
@@ -132,14 +110,9 @@ class Accuracy(Attribute):
             pass
 
 
-def acc(x):
-    return Accuracy()(x)
-
 
 class Indeterminacy(Attribute):
     def function(self, x):
-        from .nums import Fuzznum
-        from .array import Fuzzarray
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
                 acc = x.md ** x.qrung + x.nmd ** x.qrung
@@ -169,14 +142,9 @@ class Indeterminacy(Attribute):
             pass
 
 
-def ind(x):
-    return Indeterminacy()(x)
-
 
 class Complement(Attribute):
     def function(self, x):
-        from .nums import Fuzznum
-        from .array import Fuzzarray
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
                 newf = copy.deepcopy(x)
@@ -203,52 +171,3 @@ class Complement(Attribute):
         if isinstance(x, Fuzzarray):
             # TODO: 模糊集
             pass
-
-
-def comp(x):
-    return Complement()(x)
-
-
-# class MemDegrees(Attribute):
-#     def function(self, x):
-#         from .nums import Fuzznum
-#         from .array import Fuzzarray
-#
-#         def membership(t):
-#             if isinstance(t.md, (int, float, np.float_, np.int_)):
-#                 return np.float_(t.md)
-#             if isinstance(t.md, (np.ndarray, list)):
-#                 return np.array(t.md, dtype=object)
-#         if isinstance(x, Fuzznum):
-#             return membership(x)
-#         if isinstance(x, Fuzzarray):
-#             vec_func = np.vectorize(membership)
-#             return vec_func(x.array)
-#
-#
-# def memDegrees(x):
-#     return MemDegrees()(x)
-#
-#
-# class NonMemDegrees(Attribute):
-#     def function(self, x):
-#         from .nums import Fuzznum
-#         from .array import Fuzzarray
-#
-#         def nonmembership(t):
-#             if isinstance(t.nmd, (int, float, np.float_, np.int_)):
-#                 return np.float_(t.nmd)
-#             if isinstance(t.nmd, (np.ndarray, list)):
-#                 return np.array(t.nmd, dtype=object)
-#         if isinstance(x, Fuzznum):
-#             return nonmembership(x)
-#         if isinstance(x, Fuzzarray):
-#             vec_func = np.vectorize(nonmembership)
-#             return vec_func(x.array)
-#
-#
-# def nonMemDegrees(x):
-#     return NonMemDegrees()(x)
-
-
-

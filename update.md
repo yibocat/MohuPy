@@ -1,5 +1,13 @@
 # UPDATE LOG
 
+-----
+### 0.2.8-4-6.2024
+重大更新版本，为0.3做提前准备
+1. 重构核心模糊框架，优化代码与逻辑
+2. 修复函数无代码提示的问题，修复函数返回类型bug
+3. `mp.random.rand` 和 `mp.random.choice` 更新为 `mp.rand` 和 `mp.choice`
+4. 模糊数和模糊集合的函数 `isValid`,`isEmpty`和`isInitial` 更改为 `valid`,`empty`和`initial`
+
 ------
 ### 0.2.7-4-2.2024
 1. 修复 Banzhaf 函数错误

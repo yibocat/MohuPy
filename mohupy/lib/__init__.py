@@ -21,7 +21,7 @@ from .io import savez, loadz, to_csv, load_csv
 from .string import str2fuzz
 from .measure import distance
 from .plotlib import plot
-from .other import random_split, plot_stats, show_decision_mat
+from .other import rsplit, plot_stats, show_decision_mat
 from .utils import isscalar, func4fuzz, asfuzzyarray, absolute, relu
 
 __all__ += ['zeros', 'poss', 'negs', 'full',
@@ -31,7 +31,7 @@ __all__ += ['zeros', 'poss', 'negs', 'full',
             'to_csv', 'load_csv', 'str2fuzz',
             'distance',
             'plot',
-            'random_split',
+            'rsplit',
             'plot_stats',
             'show_decision_mat',
             'isscalar',

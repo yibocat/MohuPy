@@ -4,12 +4,12 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
-from typing import Union
-
-from .base import Random
 
 import numpy as np
 
+from typing import Union
+
+from .base import Random
 from ..core import Fuzzarray, Fuzznum
 
 
@@ -115,7 +115,7 @@ class Rand(Random):
             return randset(q, mtype, *n, minnum=self.minnum, maxnum=self.maxnum)
 
 
-def rand(q: int, mtype: str, *n, minnum=1, maxnum=5) -> Union[Fuzzarray, Fuzznum]:
+def rand(q: int, mtype: str = 'qrofn', *n, minnum=1, maxnum=5) -> Union[Fuzzarray, Fuzznum]:
     return Rand(minnum, maxnum)(q, mtype, *n)
 
 

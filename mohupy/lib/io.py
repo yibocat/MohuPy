@@ -9,8 +9,7 @@ import warnings
 import numpy as np
 import pandas as pd
 
-from ..core.nums import Fuzznum
-from ..core.array import Fuzzarray
+from ..core import Fuzznum, Fuzzarray
 
 from .base import Library
 
@@ -51,12 +50,11 @@ class Loadz(Library):
         if isinstance(x, Fuzznum):
             raise IOError(f'Invalid load for {type(x)}.')
         if isinstance(x, Fuzzarray):
-            if x.isInitial():
+            if x.initial():
                 new = np.load(path, allow_pickle=True)
                 x.qrung = new['qrung']
                 x.mtype = new['mtype']
                 x.array = new['array']
-                return True
             else:
                 warnings.warn('Loading existing data will overwrite the original data!', Warning)
                 x = x.clear()
@@ -64,8 +62,7 @@ class Loadz(Library):
                 x.qrung = new['qrung']
                 x.mtype = new['mtype']
                 x.array = new['array']
-                return True
-        return False
+        raise IOError(f'Invalid load for {type(x)}.')
 
 
 def loadz(x, path):
@@ -102,10 +99,8 @@ class ToCSV(Library):
         if 0 <= f.ndim <= 2:
             try:
                 pd.DataFrame(f.array, columns=self.header, index=self.index_col).to_csv(path, float_format=f'%.{float_format}f')
-                return True
             except Exception as e:
                 print(f'{e}: Save failed.')
-                return False
         else:
             raise ValueError(f'The ndim of fuzzy array is invalid: ndim={f.ndim}')
 
@@ -161,6 +156,6 @@ class LoadCSV(Library):
             print(f'{e}: Load failed.')
 
 
-def load_csv(path: str, q: int, mtype: str, header='infer', index_col=0):
+def load_csv(path: str, q: int, mtype: str, header='infer', index_col=0) -> Fuzzarray:
     return LoadCSV(header, index_col)(path, q, mtype)
 

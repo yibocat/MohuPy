@@ -7,6 +7,7 @@
 
 from .base import Library
 from ..regedit.str2num import fuzzString
+from ..core import Fuzznum
 
 
 class StrToFuzz(Library):
@@ -14,6 +15,6 @@ class StrToFuzz(Library):
         return fuzzString[mtype](s, q)
 
 
-def str2fuzz(s: str, q: int, mtype:str):
+def str2fuzz(s: str, q: int, mtype:str) -> Fuzznum:
     return StrToFuzz()(s, q, mtype)
 
