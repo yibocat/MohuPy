@@ -1,24 +1,16 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
+#  Copyright (c) yibocat 2024 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/11/27 下午7:15
+#  Date: 2024/4/6 下午3:01
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
 import numpy as np
 
-from .nums import Fuzznum
-from .array import Fuzzarray
-
-from .__nums_operation import BasicOperation
-
-
-class Operation:
-    def __call__(self, *args):
-        return self.function(*args)
-
-    def function(self, *args):
-        raise NotImplementedError()
+from .base import Operation
+from .fuzznums import Fuzznum
+from .fuzzarray import Fuzzarray
+from .operationClass import BasicOperation
 
 
 class Addition(Operation):
@@ -29,6 +21,7 @@ class Addition(Operation):
             3. 模糊集合 + 模糊数
             4. 模糊集合 + 模糊集合
         """
+
         def __add(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match('{x.mtype}' and '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match({x.qrung} and {x1.qrung})."
@@ -74,6 +67,7 @@ class Subtraction(Operation):
             3. 模糊集合 - 模糊数
             4. 模糊集合 - 模糊集合
         """
+
         def __sub(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match('{x.mtype}' and '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match({x.qrung} and {x1.qrung})."
@@ -128,6 +122,7 @@ class Multiplication(Operation):
             11.数集合 * 模糊数
             12.数集合 * 模糊集合
         """
+
         def __mul(x0, x1):
             if isinstance(x0, Fuzznum) and isinstance(x1, Fuzznum):
                 assert x0.mtype == x1.mtype, f"mtype does not match('{x0.mtype}' and '{x1.mtype}')."
@@ -227,6 +222,7 @@ class Division(Operation):
             7. 模糊集合 / 数集合
             8. 模糊集合 / 数
         """
+
         def __div(x0, x1):
             if isinstance(x0, Fuzznum) and isinstance(x1, Fuzznum):
                 assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
@@ -236,7 +232,7 @@ class Division(Operation):
             if isinstance(x0, Fuzznum) and isinstance(x1, (int, float, np.float_, np.int_)):
                 assert x1 > 0, f"value must be greater than 0: ({x1} <= 0)."
                 operation = BasicOperation(x0.qrung, x0.mtype)
-                return operation.times((1/x1), x0)
+                return operation.times((1 / x1), x0)
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
             return __div(x, y)
@@ -296,6 +292,7 @@ class Power(Operation):
             3. 模糊集合 ** 数
             4. 模糊集合 ** 数集合
         """
+
         def __pow(x0, p):
             assert p > 0, f"value must be greater than 0: ({self.p} <= 0)."
             operation = BasicOperation(x0.qrung, x0.mtype)
@@ -349,6 +346,7 @@ class Equal(Operation):
             3. 模糊集合 == 模糊数
             4. 模糊集合 == 模糊集合
         """
+
         def __eq(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
@@ -382,6 +380,7 @@ class Inequality(Operation):
             3. 模糊集合 != 模糊数
             4. 模糊集合 != 模糊集合
         """
+
         def __ne(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
@@ -415,6 +414,7 @@ class Lt(Operation):
             3. 模糊集合 < 模糊数
             4. 模糊集合 < 模糊集合
         """
+
         def __lt(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
@@ -456,6 +456,7 @@ class Gt(Operation):
             3. 模糊集合 > 模糊数
             4. 模糊集合 > 模糊集合
         """
+
         def __gt(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
@@ -497,6 +498,7 @@ class Le(Operation):
             3. 模糊集合 <= 模糊数
             4. 模糊集合 <= 模糊集合
         """
+
         def __le(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
@@ -538,6 +540,7 @@ class Ge(Operation):
             3. 模糊集合 >= 模糊数
             4. 模糊集合 >= 模糊集合
         """
+
         def __ge(x0, x1):
             assert x0.mtype == x1.mtype, f"mtype does not match: ('{x0.mtype}', '{x1.mtype}')."
             assert x0.qrung == x1.qrung, f"qrung does not match: ({x0.qrung}, {x1.qrung})."
@@ -576,7 +579,7 @@ class GetItem(Operation):
         self.slices = slices
 
     def function(self, x):
-        from .fuzzfunc import fuzzset
+        from .construct import fuzzset
         y = x.array[self.slices]
         if isinstance(y, np.ndarray):
             return fuzzset(y)

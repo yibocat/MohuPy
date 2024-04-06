@@ -1,29 +1,19 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
+#  Copyright (c) yibocat 2024 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/12/23 下午2:59
+#  Date: 2024/4/6 下午3:07
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
 import numpy as np
-from .nums import Fuzznum
-from .array import Fuzzarray
+
+from .fuzznums import Fuzznum
+from .fuzzarray import Fuzzarray
+
+from .base import Construct
 
 
-class FuzzFunc:
-    """
-        The method base class consists of a call function and an abstract function.
-        Among them, function is the concrete implementation of its subclass method.
-    """
-
-    def __call__(self, *x):
-        return self.function(*x)
-
-    def function(self, *x):
-        raise NotImplementedError()
-
-
-class FuzzNum(FuzzFunc):
+class FuzzNum(Construct):
     """
         The method of generating fuzzy numbers is encapsulated in a fuzzy number
         class, which only generates fuzzy numbers and does not undertake other
@@ -35,11 +25,7 @@ class FuzzNum(FuzzFunc):
         return Fuzznum(qrung, md, nmd)
 
 
-def fuzznum(qrung=None, md=None, nmd=None) -> Fuzznum:
-    return FuzzNum()(qrung, md, nmd)
-
-
-class FuzzSet(FuzzFunc):
+class FuzzSet(Construct):
     """
         This class is just a class for generating a fuzzy array,
             specifically implemented with function. Similar to the numpy.array method.
@@ -74,6 +60,10 @@ class FuzzSet(FuzzFunc):
             return newset
 
         raise TypeError(f'Unsupported type: {type(x)}.')
+
+
+def fuzznum(qrung=None, md=None, nmd=None) -> Fuzznum:
+    return FuzzNum()(qrung, md, nmd)
 
 
 def fuzzset(x=None) -> Fuzzarray:

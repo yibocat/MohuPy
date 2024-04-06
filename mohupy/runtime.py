@@ -13,7 +13,7 @@
 # fuzzParent = mohuParent.memo
 
 from .regedit import *
-from .core import FuzzType
+from .core import FuzzType, archimedeanDict
 
 
 class info:

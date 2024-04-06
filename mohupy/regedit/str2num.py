@@ -40,7 +40,7 @@ def str2qrofn(s: str, q) -> Fuzznum:
         'data format error.'
     newfn.md = float(x[0])
     newfn.nmd = float(x[1])
-    assert newfn.isValid(), f'data format is correct, but the data is invalid: {s}'
+    assert newfn.valid(), f'data format is correct, but the data is invalid: {s}'
     return newfn
 
 
@@ -60,7 +60,7 @@ def str2ivfn(s: str, q) -> Fuzznum:
     n = [float(nmd[0]), float(nmd[1])]
     newfn.md = m
     newfn.nmd = n
-    assert newfn.isValid(), f'data format is correct, but the data is invalid: {s}'
+    assert newfn.valid(), f'data format is correct, but the data is invalid: {s}'
     return newfn
 
 
@@ -97,6 +97,6 @@ def str2qrohfn(s: str, q) -> Fuzznum:
     for j in range(len(nmd)):
         newfn.nmd = np.append(newfn.nmd, np.float_(nmd[j]))
 
-    assert newfn.isValid(), f'data format is correct, but the data is invalid: {s}'
+    assert newfn.valid(), f'data format is correct, but the data is invalid: {s}'
     return newfn
 

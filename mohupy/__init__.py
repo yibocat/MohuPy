@@ -22,6 +22,8 @@
 # from .registry import *
 # from .config import Approx, approx
 
+__all__ = []
+
 from .config import *
 from .core import *
 from .function import *
@@ -36,3 +38,4 @@ from .regedit import *
 from .runtime import info
 from .constant import *
 
+__all__ += ['random','measure']

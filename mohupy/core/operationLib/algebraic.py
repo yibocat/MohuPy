@@ -1,75 +1,15 @@
-#  Copyright (c) yibocat 2023 All Rights Reserved
+#  Copyright (c) yibocat 2024 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2023/11/29 下午1:49
+#  Date: 2024/4/6 下午2:43
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
 import numpy as np
 
-from .base import Archimedean
-from ..constant import Approx
+from ..base import Archimedean
 
-
-class AlgebT(Archimedean):
-    def function(self, x):
-        return np.log2(x)
-
-
-def algebTao(x):
-    return AlgebT()(x)
-
-
-class AlgebInT(Archimedean):
-    def function(self, x):
-        return 1 / (2 ** x)
-
-
-def algebInTao(x):
-    return AlgebInT()(x)
-
-
-class AlgebS(Archimedean):
-    def function(self, x):
-        return np.log2(1 - x)
-
-
-def algebS(x):
-    return AlgebS()(x)
-
-
-class AlgebInS(Archimedean):
-    def function(self, x):
-        return 1 - 1 / (2 ** x)
-
-
-def algebInS(x):
-    return AlgebInS()(x)
-
-
-class AlgebTNorm(Archimedean):
-    def function(self, x, y):
-        """
-            AlgebInT()((AlgebT()(x) + AlgebT()(y)))
-        """
-        return x * y
-
-
-def algebTNorm(x, y):
-    return AlgebTNorm()(x, y)
-
-
-class AlgebSNorm(Archimedean):
-    def function(self, x, y):
-        """
-            AlgebInS()((AlgebS()(x) + AlgebS()(y)))
-        """
-        return x + y - x * y
-
-
-def algebSNorm(x, y):
-    return AlgebSNorm()(x, y)
-
+from ...constant import Approx
 
 """
 The following is a quick calculation of Algebraic norms in fuzzy number. 
@@ -166,3 +106,68 @@ def algebraic_times(p, x0, y0, q):
     md = np.round((1. - (1. - x0 ** q) ** p) ** (1. / q), Approx.round)
     nmd = np.round(y0 ** p, Approx.round)
     return md, nmd
+
+
+"""
+The following is a calculation of Algebraic norms in fuzzy number.
+"""
+
+
+class AlgebT(Archimedean):
+    def function(self, x):
+        return np.log2(x)
+
+
+def algebTao(x):
+    return AlgebT()(x)
+
+
+class AlgebInT(Archimedean):
+    def function(self, x):
+        return 1 / (2 ** x)
+
+
+def algebInTao(x):
+    return AlgebInT()(x)
+
+
+class AlgebS(Archimedean):
+    def function(self, x):
+        return np.log2(1 - x)
+
+
+def algebS(x):
+    return AlgebS()(x)
+
+
+class AlgebInS(Archimedean):
+    def function(self, x):
+        return 1 - 1 / (2 ** x)
+
+
+def algebInS(x):
+    return AlgebInS()(x)
+
+
+class AlgebTNorm(Archimedean):
+    def function(self, x, y):
+        """
+            AlgebInT()((AlgebT()(x) + AlgebT()(y)))
+        """
+        return x * y
+
+
+def algebTNorm(x, y):
+    return AlgebTNorm()(x, y)
+
+
+class AlgebSNorm(Archimedean):
+    def function(self, x, y):
+        """
+            AlgebInS()((AlgebS()(x) + AlgebS()(y)))
+        """
+        return x + y - x * y
+
+
+def algebSNorm(x, y):
+    return AlgebSNorm()(x, y)

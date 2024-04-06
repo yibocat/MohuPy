@@ -5,6 +5,7 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 import numpy as np
+np.set_printoptions(suppress=True)
 
 from ..core.regedit import Registry
 from ..constant import Approx
@@ -35,7 +36,7 @@ def random_qrofn(q, minnum=None, maxnum=None):
     while True:
         newfn.md = np.round(np.random.rand(), Approx.round)
         newfn.nmd = np.round(np.random.rand(), Approx.round)
-        if newfn.isValid():
+        if newfn.valid():
             break
     return newfn
 
@@ -63,7 +64,7 @@ def random_ivfn(q, minnum=None, maxnum=None):
     while True:
         newfn.md = np.round(np.asarray([np.random.rand(), np.random.rand()]), Approx.round)
         newfn.nmd = np.round(np.asarray([np.random.rand(), np.random.rand()]), Approx.round)
-        if newfn.isValid():
+        if newfn.valid():
             break
     return newfn
 
@@ -92,7 +93,7 @@ def random_qrohfn(q, minnum, maxnum):
     while True:
         newfn.md = np.round(np.random.rand(np.random.randint(minnum, maxnum)), Approx.round)
         newfn.nmd = np.round(np.random.rand(np.random.randint(minnum, maxnum)), Approx.round)
-        if newfn.isValid():
+        if newfn.valid():
             break
     return newfn
 

@@ -35,7 +35,7 @@ def plot_stats(data):
     plt.grid()
 
 
-def random_split(data, l):
+def rsplit(data, l):
     """
         Randomly split a dataset into two datasets proportionally.
         Parameters

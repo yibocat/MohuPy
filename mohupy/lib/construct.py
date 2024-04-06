@@ -4,6 +4,8 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+from typing import Union
+
 import numpy as np
 
 from ..core import Fuzznum, Fuzzarray
@@ -34,7 +36,7 @@ class Zeros(Library):
             return fuzzZero[mtype](q)
 
 
-def zeros(q, mtype, *n):
+def zeros(q, mtype, *n) -> Union[Fuzznum, Fuzzarray]:
     return Zeros()(q, mtype, *n)
 
 
@@ -61,7 +63,7 @@ class Poss(Library):
             return fuzzPos[mtype](q)
 
 
-def poss(q, mtype, *n):
+def poss(q, mtype, *n) -> Union[Fuzznum, Fuzzarray]:
     return Poss()(q, mtype, *n)
 
 
@@ -88,7 +90,7 @@ class Negs(Library):
             return fuzzNeg[mtype](q)
 
 
-def negs(q, mtype, *n):
+def negs(q, mtype, *n) -> Union[Fuzznum, Fuzzarray]:
     return Negs()(q, mtype, *n)
 
 
@@ -113,7 +115,7 @@ class Full(Library):
         return newset
 
 
-def full(x: Fuzznum, *n):
+def full(x: Fuzznum, *n) -> Union[Fuzznum, Fuzzarray]:
     return Full()(x, *n)
 
 
@@ -125,7 +127,7 @@ class ZerosLike(Library):
         return zeros(f.qrung, f.mtype, *f.shape)
 
 
-def zeros_like(f: Fuzzarray):
+def zeros_like(f: Fuzzarray) -> Union[Fuzznum, Fuzzarray]:
     return ZerosLike()(f)
 
 
@@ -137,7 +139,7 @@ class PossLike(Library):
         return poss(f.qrung, f.mtype, *f.shape)
 
 
-def poss_like(f: Fuzzarray):
+def poss_like(f: Fuzzarray) -> Union[Fuzznum, Fuzzarray]:
     return PossLike()(f)
 
 
@@ -149,7 +151,7 @@ class NegsLike(Library):
         return negs(f.qrung, f.mtype, *f.shape)
 
 
-def negs_like(f: Fuzzarray):
+def negs_like(f: Fuzzarray) -> Union[Fuzznum, Fuzzarray]:
     return NegsLike()(f)
 
 
@@ -161,5 +163,5 @@ class FullLike(Library):
         return full(x, *f.shape)
 
 
-def full_like(f: Fuzzarray):
+def full_like(f: Fuzzarray) -> Union[Fuzznum, Fuzzarray]:
     return FullLike()(f)

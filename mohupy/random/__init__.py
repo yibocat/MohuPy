@@ -10,4 +10,6 @@ __all__ = []
 # from .random import randset, randnum, choice, seed, rand
 from .rand import *
 
+__all__ += ['rand', 'choice']
+
 # __all__ += ['randset', 'randnum', 'choice', 'rand']
