@@ -9,7 +9,7 @@ import numpy as np
 
 from ..base import Archimedean
 
-from ...constant import Approx
+from ..constant import Approx
 
 """
 The following is a quick calculation of Algebraic norms in fuzzy number. 

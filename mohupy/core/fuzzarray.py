@@ -19,8 +19,9 @@ class Fuzzarray(MohuBase):
         self.ndim = 0
         self.size = 0
         self.shape = ()
-        from .function import initializeSet
-        self.qrung, self.mtype = initializeSet(qrung, mtype)
+
+        from .funcitonClass import InitializeSet
+        self.qrung, self.mtype = InitializeSet()(qrung, mtype)
 
     def __len__(self):
         return len(self.__array)
@@ -56,26 +57,26 @@ class Fuzzarray(MohuBase):
 
     @property
     def score(self):
-        from .attribute import score
-        vec_func = np.vectorize(score)
+        from .attributeClass import Score
+        vec_func = np.vectorize(Score())
         return vec_func(self.__array)
 
     @property
     def acc(self):
-        from .attribute import acc
-        vec_func = np.vectorize(acc)
+        from .attributeClass import Accuracy
+        vec_func = np.vectorize(Accuracy())
         return vec_func(self.__array)
 
     @property
     def ind(self):
-        from .attribute import ind
-        vec_func = np.vectorize(ind)
+        from .attributeClass import Indeterminacy
+        vec_func = np.vectorize(Indeterminacy())
         return vec_func(self.__array)
 
     @property
     def comp(self) -> 'Fuzzarray':
-        from .attribute import comp
-        vec_func = np.vectorize(comp)
+        from .attributeClass import Complement
+        vec_func = np.vectorize(Complement())
         newset = Fuzzarray(self.qrung, self.mtype)
         newset.array = vec_func(self.__array)
         return newset
@@ -104,86 +105,86 @@ class Fuzzarray(MohuBase):
 
     @property
     def T(self) -> 'Fuzzarray':
-        from .function import transpose
-        return transpose(self)
+        from .funcitonClass import FuzzTranspose
+        return FuzzTranspose()(self)
 
     def valid(self):
-        from .function import valid
-        return valid(self)
+        from .funcitonClass import FuzzValidity
+        return FuzzValidity()(self)
 
     def empty(self, onlyfn=False):
-        from .function import empty
-        return empty(self, onlyfn)
+        from .funcitonClass import FuzzEmpty
+        return FuzzEmpty()(self, onlyfn)
 
     def initial(self):
-        from .function import initial
-        return initial(self)
+        from .funcitonClass import FuzzInitial
+        return FuzzInitial()(self)
 
     def qsort(self, reverse=False):
-        from .function import qsort
-        return qsort(self, reverse)
+        from .funcitonClass import FuzzQsort
+        return FuzzQsort()(self, reverse)
 
     def unique(self, onlyfn=False):
-        from .function import unique
-        return unique(self, onlyfn)
+        from .funcitonClass import FuzzUnique
+        return FuzzUnique()(self, onlyfn)
 
     def append(self, e):
-        from .function import append
-        return append(self, e)
+        from .funcitonClass import FuzzAppend
+        return FuzzAppend()(self, e)
 
     def reshape(self, *shape):
-        from .function import reshape
-        return reshape(self, *shape)
+        from .funcitonClass import FuzzReshape
+        return FuzzReshape()(self, *shape)
 
     def squeeze(self, axis=None):
-        from .function import squeeze
-        return squeeze(self, axis)
+        from .funcitonClass import FuzzSqueeze
+        return FuzzSqueeze()(self, axis)
 
     def clear(self):
-        from .function import clear
-        return clear(self)
+        from .funcitonClass import FuzzClear
+        return FuzzClear()(self)
 
     def ravel(self):
-        from .function import ravel
-        return ravel(self)
+        from .funcitonClass import FuzzRavel
+        return FuzzRavel()(self)
 
     def flatten(self):
-        from .function import flatten
-        return flatten(self)
+        from .funcitonClass import FuzzFlatten
+        return FuzzFlatten()(self)
 
     def max(self, show=False, axis=None):
-        from .function import getmax
-        return getmax(self, show, axis)
+        from .funcitonClass import FuzzGetMax
+        return FuzzGetMax()(self, show, axis)
 
     def min(self, show=False, axis=None):
-        from .function import getmin
-        return getmin(self, show, axis)
+        from .funcitonClass import FuzzGetMin
+        return FuzzGetMin()(self, show, axis)
 
     def sum(self, axis=None, keepdims=False):
-        from .function import getsum
-        return getsum(self, axis, keepdims)
+        from .funcitonClass import FuzzGetSum
+        return FuzzGetSum()(self, axis, keepdims)
 
     def prod(self, axis=None, keepdims=False):
-        from .function import getprod
-        return getprod(self, axis, keepdims)
+        from .funcitonClass import FuzzGetProd
+        return FuzzGetProd()(self, axis, keepdims)
 
     def mean(self, axis=None):
-        from .function import mean
-        return mean(self, axis)
+        from .funcitonClass import FuzzMean
+        return FuzzMean()(self, axis)
 
     def fmax(self, func, *args, show=False, axis=None):
-        from .function import fmax
-        return fmax(self, func, *args, show, axis)
+        from .funcitonClass import FuzzGetFmax
+        return FuzzGetFmax()(self, func, *args, show, axis)
 
     def fmin(self, func, *args, show=False, axis=None):
-        from .function import fmin
-        return fmin(self, func, *args, show, axis)
+        from .funcitonClass import FuzzGetFmin
+        return FuzzGetFmin()(self, func, *args, show, axis)
 
     def remove(self, e):
-        from .function import remove
-        return remove(self, e)
+        from .funcitonClass import FuzzRemove
+        return FuzzRemove()(self, e)
 
     def pop(self, e):
-        from .function import pop
-        return pop(self, e)
+        from .funcitonClass import FuzzPop
+        return FuzzPop()(self, e)
 

@@ -5,37 +5,37 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
+__all__ = []
+
+# from .config import *
 # from .core import *
-# from .utils import *
-# from .math import *
-# from .generator import *
 # from .function import *
+# # from .generator import *
+# from .lib import *
+# from .math import *
 # from .measure import *
 # from .measure import integral, indices
 # from .random import *
-#
-# # from .runtime import (fuzzParent,  fuzzType,
-# #                       fuzzPlot, fuzzString, fuzzDis,
-# #                       fuzzRandom, fuzzZeros, fuzzPoss,fuzzNegs)
-#
+# from .regedit import *
+# # from .utils import *
 # from .runtime import info
-# from .registry import *
-# from .config import Approx, approx
+# from .constant import *
+#
+# __all__ += ['random','measure']
 
-__all__ = []
 
-from .config import *
+from .config import main
 from .core import *
-from .function import *
-# from .generator import *
-from .lib import *
-from .math import *
+from .corelib import *
+from .corelib import random
+from .generator import *
 from .measure import *
 from .measure import integral, indices
-from .random import *
-from .regedit import *
-# from .utils import *
 from .runtime import info
-from .constant import *
 
-__all__ += ['random','measure']
+__all__ += ['measure','random','info']
+
+__all__.extend(core.__all__)
+__all__.extend(corelib.__all__)
+# __all__.extend(generator.__all__)
+__all__.extend(measure.__all__)

@@ -54,6 +54,8 @@ class Addition(Operation):
             newset.array = vec_func(x.array, y.array)
             return newset
 
+        return NotImplemented
+
 
 def add(x, y):
     return Addition()(x, y)
@@ -98,6 +100,8 @@ class Subtraction(Operation):
             newset = Fuzzarray(x.qrung, x.mtype)
             newset.array = vec_func(x.array, y.array)
             return newset
+
+        return NotImplemented
 
 
 def sub(x, y):
@@ -204,6 +208,8 @@ class Multiplication(Operation):
             newset.array = vec_func(x, y.array)
             return newset
 
+        return NotImplemented
+
 
 def mul(x, y):
     return Multiplication()(x, y)
@@ -276,6 +282,8 @@ class Division(Operation):
             newset.array = vec_func(x.array, y)
             return newset
 
+        return NotImplemented
+
 
 def div(x, y):
     return Division()(x, y)
@@ -318,6 +326,8 @@ class Power(Operation):
             newset = Fuzzarray(x.qrung, x.mtype)
             newset.array = vec_func(x.array, self.p)
             return newset
+
+        return NotImplemented
 
 
 def pow(x, p):
@@ -367,6 +377,8 @@ class Equal(Operation):
             vec_func = np.vectorize(__eq)
             return vec_func(x.array, y.array)
 
+        return NotImplemented
+
 
 def equal(x, y):
     return Equal()(x, y)
@@ -400,6 +412,8 @@ class Inequality(Operation):
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__ne)
             return vec_func(x.array, y.array)
+
+        return NotImplemented
 
 
 def inequal(x, y):
@@ -443,6 +457,8 @@ class Lt(Operation):
             vec_func = np.vectorize(__lt)
             return vec_func(x.array, y.array)
 
+        return NotImplemented
+
 
 def lt(x, y):
     return Lt()(x, y)
@@ -484,6 +500,8 @@ class Gt(Operation):
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__gt)
             return vec_func(x.array, y.array)
+
+        return NotImplemented
 
 
 def gt(x, y):
@@ -527,6 +545,8 @@ class Le(Operation):
             vec_func = np.vectorize(__le)
             return vec_func(x.array, y.array)
 
+        return NotImplemented
+
 
 def le(x, y):
     return Le()(x, y)
@@ -568,6 +588,8 @@ class Ge(Operation):
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__ge)
             return vec_func(x.array, y.array)
+
+        return NotImplemented
 
 
 def ge(x, y):

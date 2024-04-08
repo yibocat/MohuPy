@@ -7,10 +7,9 @@ fuzzy sets and q-rung orthopair interval-valued fuzzy sets.
 
 ## Installation
 
-Download the latest version `MohuPy-xx.zip`. Put it into your project and unzip it.
+
 ```shell
-cd MohuPy-xx
-pip install .
+pip install mohupy
 ```
 
 ## Requirements
@@ -24,9 +23,8 @@ pip install .
 ## TODO
 
  - [x] Regedit
- - [x] Q-rung orthopair hesitant fuzzy sets
+ - [x] q-rung orthopair hesitant fuzzy sets
  - [x] Add more Archimedean norm operations and register (Einstein, Frank, Hamacher)
- - [ ] Neural network
  - [ ] Fuzzy function
  - [ ] Derivatives of fuzznum function and gradients of mohuset functions
  - [ ] Integrate the operations of fuzzy numbers and fuzzy sets into computational graph models

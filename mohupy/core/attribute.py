@@ -11,25 +11,25 @@ from .fuzzarray import Fuzzarray
 from .fuzznums import Fuzznum
 
 
-def report(x):
-    return Report()(x)
-
-
-def string(x):
-    return Str()(x)
-
-
-def score(x):
-    return Score()(x)
-
-
-def acc(x):
-    return Accuracy()(x)
-
-
-def ind(x):
-    return Indeterminacy()(x)
-
-
-def comp(x) -> Union[Fuzznum, Fuzzarray]:
-    return Complement()(x)
+# def report(x):
+#     return Report()(x)
+#
+#
+# def string(x):
+#     return Str()(x)
+#
+#
+# def score(x):
+#     return Score()(x)
+#
+#
+# def acc(x):
+#     return Accuracy()(x)
+#
+#
+# def ind(x):
+#     return Indeterminacy()(x)
+#
+#
+# def comp(x) -> Union[Fuzznum, Fuzzarray]:
+#     return Complement()(x)

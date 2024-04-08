@@ -13,7 +13,8 @@ from .base import Attribute
 from .fuzznums import Fuzznum
 from .fuzzarray import Fuzzarray
 
-from ..constant import Approx
+from .constant import Approx
+
 
 class Report(Attribute):
     """
@@ -66,7 +67,6 @@ class Str(Attribute):
         raise TypeError(f'Unsupported data types:{type(x)}.')
 
 
-
 class Score(Attribute):
     def function(self, x):
         if isinstance(x, Fuzznum):
@@ -88,7 +88,6 @@ class Score(Attribute):
             pass
 
 
-
 class Accuracy(Attribute):
     def function(self, x):
         if isinstance(x, Fuzznum):
@@ -108,7 +107,6 @@ class Accuracy(Attribute):
         if isinstance(x, Fuzzarray):
             # TODO: 模糊集
             pass
-
 
 
 class Indeterminacy(Attribute):
@@ -140,7 +138,6 @@ class Indeterminacy(Attribute):
         if isinstance(x, Fuzzarray):
             # TODO: 模糊集
             pass
-
 
 
 class Complement(Attribute):

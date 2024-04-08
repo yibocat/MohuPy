@@ -12,7 +12,7 @@ from .base import Function
 from .fuzznums import Fuzznum
 from .fuzzarray import Fuzzarray
 
-from ..constant import Approx
+from .constant import Approx
 
 
 class InitializeNum(Function):
@@ -92,7 +92,7 @@ class InitializeSet(Function):
         return qrung, mtype
 
 
-class Validity(Function):
+class FuzzValidity(Function):
     def function(self, x):
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
@@ -134,11 +134,11 @@ class Validity(Function):
                     return False
             raise TypeError(f'Unsupported mtype(type:{x.mtype}).')
         if isinstance(x, Fuzzarray):
-            vec_func = np.vectorize(lambda u: Validity()(u))
+            vec_func = np.vectorize(lambda u: FuzzValidity()(u))
             return vec_func(x.array)
 
 
-class Empty(Function):
+class FuzzEmpty(Function):
     def function(self, x, onlyfn):
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
@@ -159,13 +159,13 @@ class Empty(Function):
             raise TypeError(f'Unsupported mtype, ,type:{x.mtype}.')
         if isinstance(x, Fuzzarray):
             if onlyfn:
-                vec_func = np.vectorize(lambda u: Empty()(u, onlyfn))
+                vec_func = np.vectorize(lambda u: FuzzEmpty()(u, onlyfn))
                 return vec_func(x.array)
             else:
                 return True if x.size == 0 else False
 
 
-class Initial(Function):
+class FuzzInitial(Function):
     """
         Determine whether the fuzzy set or fuzzy number is the initialized
         fuzzy set or fuzzy number
@@ -192,7 +192,7 @@ class Initial(Function):
             return True
 
 
-class Convert(Function):
+class FuzzConvert(Function):
     def function(self, x):
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
@@ -204,7 +204,7 @@ class Convert(Function):
         raise TypeError(f'Unsupported type: {type(x)}.')
 
 
-class Qsort(Function):
+class FuzzQsort(Function):
     def function(self, x, reverse=True):
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrohfn':
@@ -219,13 +219,13 @@ class Qsort(Function):
             else:
                 return x
         if isinstance(x, Fuzzarray):
-            vec_func = np.vectorize(lambda u: Qsort()(u, reverse=reverse))
+            vec_func = np.vectorize(lambda u: FuzzQsort()(u, reverse))
             newset = Fuzzarray(x.qrung, x.mtype)
             newset.array = vec_func(x.array)
             return newset
 
 
-class Unique(Function):
+class FuzzUnique(Function):
     """
         Simplify the membership and non-membership degrees with Approx.round precision
     """
@@ -241,7 +241,7 @@ class Unique(Function):
                 return x
         if isinstance(x, Fuzzarray):
             if onlyfn:
-                vec_func = np.vectorize(lambda u: Unique()(u, onlyfn))
+                vec_func = np.vectorize(lambda u: FuzzUnique()(u, onlyfn))
                 newset = Fuzzarray(x.qrung, x.mtype)
                 newset.array = vec_func(x.array)
                 return newset
@@ -252,7 +252,7 @@ class Unique(Function):
                 return newset
 
 
-class Transpose(Function):
+class FuzzTranspose(Function):
     def function(self, x):
         if isinstance(x, Fuzznum):
             return copy.copy(x)
@@ -266,7 +266,7 @@ class Transpose(Function):
             return newset
 
 
-class Append(Function):
+class FuzzAppend(Function):
     """
         1. 模糊数 + 模糊数
         2. 模糊数 + 模糊集
@@ -320,7 +320,7 @@ class Append(Function):
         raise TypeError(f'Unsupported type({type(x)} and {type(e)}).')
 
 
-class Remove(Function):
+class FuzzRemove(Function):
     def function(self, x, e):
         if isinstance(x, Fuzznum):
             raise ValueError(f'Deletion is not supported for {str(x)}')
@@ -331,7 +331,7 @@ class Remove(Function):
             return x
 
 
-class Pop(Function):
+class FuzzPop(Function):
     def function(self, x, i):
         if isinstance(x, Fuzznum):
             raise ValueError(f'Deletion is not supported for {str(x)}')
@@ -340,7 +340,7 @@ class Pop(Function):
             return x
 
 
-class Reshape(Function):
+class FuzzReshape(Function):
     def function(self, x, *shape):
         if isinstance(x, Fuzznum):
             newset = Fuzzarray(x.qrung, x.mtype)
@@ -352,7 +352,7 @@ class Reshape(Function):
             return newset
 
 
-class Squeeze(Function):
+class FuzzSqueeze(Function):
     def function(self, x, axis):
         if isinstance(x, Fuzznum):
             return x
@@ -362,7 +362,7 @@ class Squeeze(Function):
             return newset
 
 
-class Broadcast(Function):
+class FuzzBroadcast(Function):
     def function(self, x, shape):
         if isinstance(x, Fuzznum):
             newset = Fuzzarray(x.qrung, x.mtype)
@@ -374,7 +374,7 @@ class Broadcast(Function):
             return newset
 
 
-class Clear(Function):
+class FuzzClear(Function):
     def function(self, x):
         if isinstance(x, Fuzznum):
             x.qrung = None
@@ -389,7 +389,7 @@ class Clear(Function):
             return x
 
 
-class Ravel(Function):
+class FuzzRavel(Function):
     def function(self, x):
         if isinstance(x, Fuzznum):
             newset = Fuzzarray(x.qrung, x.mtype)
@@ -401,7 +401,7 @@ class Ravel(Function):
             return newset
 
 
-class Flatten(Function):
+class FuzzFlatten(Function):
     def function(self, x):
         if isinstance(x, Fuzznum):
             newset = Fuzzarray(x.qrung, x.mtype)
@@ -413,7 +413,7 @@ class Flatten(Function):
             return newset
 
 
-class GetMax(Function):
+class FuzzGetMax(Function):
     def function(self, x, show, axis):
         if isinstance(x, Fuzznum):
             return x
@@ -433,7 +433,7 @@ class GetMax(Function):
                     return newset
 
 
-class GetMin(Function):
+class FuzzGetMin(Function):
     def function(self, x, show, axis):
         if isinstance(x, Fuzznum):
             return x
@@ -453,7 +453,7 @@ class GetMin(Function):
                     return newset
 
 
-class GetFmax(Function):
+class FuzzGetFmax(Function):
     def function(self, x, func, *args, show, axis):
         if isinstance(x, Fuzznum):
             raise TypeError(f'Unsupported type({type(x)})')
@@ -474,7 +474,7 @@ class GetFmax(Function):
                     return newset
 
 
-class GetFmin(Function):
+class FuzzGetFmin(Function):
     def function(self, x, func, *args, show, axis):
         if isinstance(x, Fuzznum):
             raise TypeError(f'Unsupported type({type(x)})')
@@ -495,7 +495,7 @@ class GetFmin(Function):
                     return newset
 
 
-class GetSum(Function):
+class FuzzGetSum(Function):
     def function(self, x, axis, keepdims):
         if isinstance(x, Fuzznum):
             return x
@@ -512,7 +512,7 @@ class GetSum(Function):
                     return newset
 
 
-class GetProd(Function):
+class FuzzGetProd(Function):
     def function(self, x, axis, keepdims):
         if isinstance(x, Fuzznum):
             return x
@@ -529,7 +529,7 @@ class GetProd(Function):
                     return newset
 
 
-class Mean(Function):
+class FuzzMean(Function):
     def function(self, x, axis):
         if isinstance(x, Fuzznum):
             return x
@@ -546,7 +546,7 @@ class Mean(Function):
                     return newset
 
 
-class Normalize(Function):
+class FuzzNormalize(Function):
     def function(self, d1, d2, t):
         """
             The normalization function for two q-rung orthopair hesitant fuzzy numbers.
@@ -616,6 +616,6 @@ class Normalize(Function):
 
 
 # TODO：待实现
-class Absolute(Function):
+class FuzzAbsolute(Function):
     def function(self, x, y):
         ValueError(f'Not yet implemented!')

@@ -12,7 +12,7 @@
 # and values represent subclasses.
 # fuzzParent = mohuParent.memo
 
-from .regedit import *
+from .corelib.regedit import *
 from .core import FuzzType, archimedeanDict
 
 

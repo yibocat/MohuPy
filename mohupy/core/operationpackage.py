@@ -7,10 +7,20 @@
 
 from .fuzznums import Fuzznum
 from .fuzzarray import Fuzzarray
-from .attribute import report, string
+# from .attribute import report, string
+from .attributeClass import Report, Str
 from .operation import (add, sub, mul, div,
                         pow, equal, inequal,
                         lt, gt, le, ge, matmul, getitem)
+
+
+def report(x):
+    return Report()(x)
+
+
+def string(x):
+    return Str()(x)
+
 
 Fuzznum.__repr__ = report
 Fuzznum.__str__ = string
