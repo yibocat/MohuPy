@@ -32,6 +32,8 @@ from .generator import *
 from .measure import *
 from .measure import integral, indices
 from .runtime import info
+from .tensor import *
+from .tensorlib import *
 
 __all__ += ['measure','random','info']
 
@@ -39,3 +41,5 @@ __all__.extend(core.__all__)
 __all__.extend(corelib.__all__)
 # __all__.extend(generator.__all__)
 __all__.extend(measure.__all__)
+__all__.extend(tensor.__all__)
+__all__.extend(tensorlib.__all__)

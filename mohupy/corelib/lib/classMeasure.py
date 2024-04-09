@@ -10,6 +10,7 @@ import numpy as np
 from .base import Library
 from ..regedit import fuzzDis
 from ...core import Fuzznum, Fuzzarray
+from ...config import Config
 
 
 class Distance(Library):
@@ -35,18 +36,15 @@ class Distance(Library):
             indeterminacy: Bool
                 Determine whether the distance formula contains indeterminacy.
         """
-        mtype = f1.mtype
-        # from ..core import Fuzznum, Fuzzarray
+
         if isinstance(f1, Fuzznum) and isinstance(f2, Fuzznum):
-            return fuzzDis[mtype](f1, f2, l, t, indeterminacy)
+            return fuzzDis[Config.mtype](f1, f2, l, t, indeterminacy)
         if isinstance(f1, Fuzznum) and isinstance(f2, Fuzzarray):
-            vec_func = np.vectorize(fuzzDis[mtype])
+            vec_func = np.vectorize(fuzzDis[Config.mtype])
             return vec_func(f1, f2.array, l, t, indeterminacy)
         if isinstance(f1, Fuzzarray) and isinstance(f2, Fuzznum):
-            vec_func = np.vectorize(fuzzDis[mtype])
+            vec_func = np.vectorize(fuzzDis[Config.mtype])
             return vec_func(f1.array, f2, l, t, indeterminacy)
         if isinstance(f1, Fuzzarray) and isinstance(f2, Fuzzarray):
-            vec_func = np.vectorize(fuzzDis[mtype])
+            vec_func = np.vectorize(fuzzDis[Config.mtype])
             return vec_func(f1.array, f2.array, l, t, indeterminacy)
-
-

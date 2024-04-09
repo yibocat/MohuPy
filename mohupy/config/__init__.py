@@ -5,4 +5,5 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from .main import *
+from .main import Config, set_mtype
+__all__ = ['Config', 'set_mtype']

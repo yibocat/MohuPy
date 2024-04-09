@@ -8,7 +8,7 @@
 from ...tensor import Fuzztensor
 
 
-def rand_tensor(*n, q=1) -> Fuzztensor:
+def rand_tensor(*n, qrung=1) -> Fuzztensor:
     from .randomClass import TensorRandom
-    return TensorRandom(q)(*n)
+    return TensorRandom(qrung)(*n)
 

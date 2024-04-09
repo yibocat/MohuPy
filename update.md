@@ -1,6 +1,20 @@
 # UPDATE LOG
 
 -----
+### 0.2.10-4-9.2024.beta
+重大更新版本，为 0.3.0 版本做提前准备
+1. 新增了 Config 配置文件，通过 `config.set_mtype` 来设置采用哪种模糊数类型，
+`qrofn` 表示q阶序对模糊数，`ivfn` 表示区间值q阶序对模糊数，`qrohfn` 表示 q
+阶序对犹豫模糊数，默认为 `qrofn`
+2. 修复了 Fuzzarray 的一些 Bug
+3. 修复了 Fuzztensor 的一些 Bug
+
+下个计划：
+1. 添加 mohupy 对应于 Fuzzarray, Fuzznum 和 Fuzztensor 的通用方法类
+2. 修复一些 Fuzztensor 的一些问题，比如：添加元素 `append` 方法等
+3. 添加 Fuzztensor 的一些特殊的带自动微分的方法
+
+-----
 ### 0.2.9-4-8.2024.beta
 重大更新版本，为 0.3.0 版本做提前准备
 1. 优化了模糊函数与方法框架，注册函数框架，集成到核心库

@@ -17,6 +17,7 @@ class TensorRandom(Random):
     def function(self, *n):
         from ...corelib.random import rand
         newTensor = Fuzztensor()
-        newTensor.data = rand(self.q, 'qrofn', *n)
+        # newTensor.data = rand(self.q, 'qrofn', *n)
+        newTensor.data = rand(*n, qrung=self.q)
         return newTensor
 

@@ -22,17 +22,17 @@ __all__ += ['FuzzType', 'Fuzzarray', 'Fuzznum',
 #                        append, remove, pop, reshape, squeeze, clear,
 #                        ravel, flatten, getmax, getmin, getsum,getprod,
 #                        mean, fmax, fmin)
-from .operation import (add, sub, mul, div, pow, matmul, equal, inequal,
-                        lt, gt, le, ge, getitem)
+# from .operation import (add, sub, mul, div, pow, matmul, equal, inequal,
+#                         lt, gt, le, ge, getitem)
 
-__all__ += [
-    # 'valid', 'empty', 'initial', 'convert', 'qsort', 'unique',
-    # 'append', 'remove', 'pop', 'reshape', 'squeeze', 'clear',
-    # 'ravel', 'flatten', 'getmax', 'getmin', 'getsum', 'getprod', 'mean',
-    # 'fmax', 'fmin',
-    'add', 'sub', 'mul', 'div', 'pow', 'matmul', 'equal', 'inequal',
-    'lt', 'gt', 'le', 'ge', 'getitem'
-]
+# __all__ += [
+#     'valid', 'empty', 'initial', 'convert', 'qsort', 'unique',
+#     'append', 'remove', 'pop', 'reshape', 'squeeze', 'clear',
+#     'ravel', 'flatten', 'getmax', 'getmin', 'getsum', 'getprod', 'mean',
+#     'fmax', 'fmin',
+#     'add', 'sub', 'mul', 'div', 'pow', 'matmul', 'equal', 'inequal',
+#     'lt', 'gt', 'le', 'ge', 'getitem'
+# ]
 
 from .construct import fuzznum, fuzzset
 __all__ += ['fuzznum', 'fuzzset']

@@ -6,7 +6,6 @@
 #  Software: MohuPy
 
 import abc
-import numpy as np
 
 
 class MohuBase(abc.ABC):

@@ -7,6 +7,6 @@
 
 __all__ = []
 from .function import rand, choice
-from .randclass import randnum, randset, seed
+from .randclass import seed
 
-__all__ += ['rand', 'choice', 'randnum', 'randset', 'seed']
+__all__ += ['rand', 'choice', 'seed']

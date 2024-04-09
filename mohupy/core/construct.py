@@ -5,6 +5,8 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
+from typing import Union
+
 import numpy as np
 
 from .fuzznums import Fuzznum
@@ -34,32 +36,59 @@ class FuzzSet(Construct):
     def function(self, x):
         if x is None:
             return Fuzzarray()
-        y = x
         if isinstance(x, Fuzznum):
-            fl = np.asarray(y, dtype=object)
-            flat = fl.flatten()
-            r = np.random.choice(flat)
-            newset = Fuzzarray(r.qrung, r.mtype)
-            newset.array = fl
+            newset = Fuzzarray(x.qrung)
+            newset.array = x
             return newset
-        if isinstance(x, (list, tuple, np.ndarray)):
+        if isinstance(x, Fuzzarray):
+            return x
+        if isinstance(x, Union[list, tuple, np.ndarray]):
             y = np.asarray(x, dtype=object)
-            y = y.flatten()
-            mt = y[0].mtype
-            for i in y:
-                if i.mtype != mt:
-                    raise TypeError(f'Unsupported mtype: {i.mtype}.')
-                mt = i.mtype
 
             t = np.random.choice(y)
             qrung = t.qrung
-            mtype = t.mtype
 
-            newset = Fuzzarray(qrung, mtype)
-            newset.array = np.array(x, dtype=object)
-            return newset
+            def checkdata(data: Fuzznum):
+                from ..config import Config
+                if data.mtype != Config.mtype:
+                    raise TypeError(f'Fuzzy type {data.mtype} and {Config.mtype} do not match.')
+                if data.qrung != qrung:
+                    raise TypeError(f'Fuzzy qrung {data.qrung} and {qrung} do not match.')
+                return True
 
+            vec_checkdata = np.vectorize(checkdata)
+            if np.all(vec_checkdata(y)):
+                newset = Fuzzarray(qrung)
+                newset.array = y
+                return newset
         raise TypeError(f'Unsupported type: {type(x)}.')
+
+
+        # if isinstance(x, Fuzznum):
+        #     fl = np.asarray(y, dtype=object)
+        #     flat = fl.flatten()
+        #     r = np.random.choice(flat)
+        #     newset = Fuzzarray(r.qrung, r.mtype)
+        #     newset.array = fl
+        #     return newset
+        # if isinstance(x, (list, tuple, np.ndarray)):
+        #     y = np.asarray(x, dtype=object)
+        #     y = y.flatten()
+        #     mt = y[0].mtype
+        #     for i in y:
+        #         if i.mtype != mt:
+        #             raise TypeError(f'Unsupported mtype: {i.mtype}.')
+        #         mt = i.mtype
+        #
+        #     t = np.random.choice(y)
+        #     qrung = t.qrung
+        #     mtype = t.mtype
+        #
+        #     newset = Fuzzarray(qrung, mtype)
+        #     newset.array = np.array(x, dtype=object)
+        #     return newset
+        #
+        # raise TypeError(f'Unsupported type: {type(x)}.')
 
 
 def fuzznum(qrung=None, md=None, nmd=None) -> Fuzznum:

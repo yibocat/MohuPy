@@ -10,6 +10,7 @@ from .operationBase import Operation
 from ..core import Fuzzarray
 from ..corelib import poss_like, negs_like, zeros, dot
 from .utils import as_fuzzarray, as_fuzztensor
+from ..config import Config
 
 
 class Add(Operation):
@@ -42,7 +43,6 @@ class Sub(Operation):
         return y
 
     def backward(self, grad):
-
         x1 = self.inputs[0].data
         x2 = self.inputs[1].data
 
@@ -70,14 +70,15 @@ class Mul(Operation):
 
         if isinstance(x1, Fuzzarray) and isinstance(x2, Fuzzarray):
             q = self.inputs[0].data.qrung
-            def deriv(x, h):
-                y = zeros(q, x.mtype)
-                y.md = (1 + (h.md ** q - 1) / (1 - x.md ** q * h.md ** q)) ** (1 / q)
-                y.nmd = (h.nmd ** q) / (x.nmd ** q + h.nmd ** q - x.nmd ** q * h.nmd ** q)
-                return y
 
-            newset1 = Fuzzarray(q, x1.mtype)
-            newset2 = Fuzzarray(q, x2.mtype)
+            def deriv(x, h):
+                res = zeros(qrung=q)
+                res.md = (1 + (h.md ** q - 1) / (1 - x.md ** q * h.md ** q)) ** (1 / q)
+                res.nmd = (h.nmd ** q) / (x.nmd ** q + h.nmd ** q - x.nmd ** q * h.nmd ** q)
+                return res
+
+            newset1 = Fuzzarray(q)
+            newset2 = Fuzzarray(q)
 
             vec_func = np.vectorize(deriv)
             y1 = vec_func(x1, x2)
@@ -103,16 +104,17 @@ class Mul(Operation):
                 raise ValueError("The value must be less than 1.")
 
             def deriv(x, a):
-                y = zeros(q, x.mtype)
+                res = zeros(qrung=q)
                 if a == 1 or a == 0:
-                    y.md = a ** (1 / q)
-                    y.nmd = (1 - a) ** (1 / q)
+                    res.md = a ** (1 / q)
+                    res.nmd = (1 - a) ** (1 / q)
                 else:
-                    y.md = a ** (1 / q)
-                    y.nmd = (1 - 1e-6 - a) ** (1 / q)
-                return y
+                    res.md = a ** (1 / q)
+                    res.nmd = (1 - 1e-6 - a) ** (1 / q)
+                return res
+
             q = self.inputs[0].data.qrung
-            newset = Fuzzarray(q, x1.mtype)
+            newset = Fuzzarray(q)
 
             vec_func = np.vectorize(deriv)
             y = vec_func(x1, x2)
@@ -126,16 +128,17 @@ class Mul(Operation):
                 raise ValueError("The value must be less than 1.")
 
             def deriv(x, a):
-                y = zeros(q, x.mtype)
+                res = zeros(qrung=q)
                 if a == 1 or a == 0:
-                    y.md = a ** (1 / q)
-                    y.nmd = (1 - a) ** (1 / q)
+                    res.md = a ** (1 / q)
+                    res.nmd = (1 - a) ** (1 / q)
                 else:
-                    y.md = a ** (1 / q)
-                    y.nmd = (1 - 1e-6 - a) ** (1 / q)
-                return y
+                    res.md = a ** (1 / q)
+                    res.nmd = (1 - 1e-6 - a) ** (1 / q)
+                return res
+
             q = self.inputs[1].data.qrung
-            newset = Fuzzarray(q, x2.mtype)
+            newset = Fuzzarray(q)
             vec_func = np.vectorize(deriv)
             y = vec_func(x2, x1)
             newset.array = y
@@ -150,7 +153,7 @@ class Div(Operation):
 
     def backward(self, grad):
         x1 = self.inputs[0].data
-        x2 = 1/self.inputs[1].data
+        x2 = 1 / self.inputs[1].data
 
         if isinstance(x1, Fuzzarray) and not isinstance(x2, Fuzzarray):
             x2 = np.array(x2)
@@ -158,16 +161,17 @@ class Div(Operation):
                 raise ValueError("The value must be less than 1.")
 
             def deriv(x, a):
-                y = zeros(q, x.mtype)
+                res = zeros(qrung=q)
                 if a == 1 or a == 0:
-                    y.md = a ** (1 / q)
-                    y.nmd = (1 - a) ** (1 / q)
+                    res.md = a ** (1 / q)
+                    res.nmd = (1 - a) ** (1 / q)
                 else:
-                    y.md = a ** (1 / q)
-                    y.nmd = (1 - 1e-6 - a) ** (1 / q)
-                return y
+                    res.md = a ** (1 / q)
+                    res.nmd = (1 - 1e-6 - a) ** (1 / q)
+                return res
+
             q = self.inputs[0].data.qrung
-            newset = Fuzzarray(q, x1.mtype)
+            newset = Fuzzarray(q)
 
             vec_func = np.vectorize(deriv)
             y = vec_func(x1, x2)
@@ -192,15 +196,15 @@ class Power(Operation):
 
         def deriv(f):
             from ..corelib import poss
-            y = poss(q, x.mtype)
+            res = poss(qrung=q)
             if f.md < 0.99 and f.nmd > 0.003:
-                y.md = (((1 - f.md ** q) / (1 - f.md ** (l * q))) * l * f.md ** ((l - 1) * q)) ** (1 / q)
-                y.nmd = (1 - (f.nmd ** q) / (1 - (1 - f.nmd ** q) ** l) * l * (1 - f.nmd ** q) ** (l - 1)) ** (1 / q)
+                res.md = (((1 - f.md ** q) / (1 - f.md ** (l * q))) * l * f.md ** ((l - 1) * q)) ** (1 / q)
+                res.nmd = (1 - (f.nmd ** q) / (1 - (1 - f.nmd ** q) ** l) * l * (1 - f.nmd ** q) ** (l - 1)) ** (1 / q)
             else:
                 pass
-            return y
+            return res
 
-        newset = Fuzzarray(q, x.mtype)
+        newset = Fuzzarray(q)
         vec_func = np.vectorize(deriv)
         y = vec_func(x)
         newset.array = y
@@ -214,7 +218,6 @@ class Matmul(Operation):
         return y
 
     def backward(self, grad):
-        q = self.inputs[0].data.qrung
         x1 = self.inputs[0].data
         x2 = self.inputs[1].data
         from .operation import matmul
@@ -230,7 +233,3 @@ class Transpose(Operation):
         from .operation import transpose
         gx = transpose(grad)
         return gx
-
-
-
-

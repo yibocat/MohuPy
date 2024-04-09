@@ -12,19 +12,18 @@ from .base import MohuBase
 
 class Fuzznum(MohuBase):
     qrung = None
-    mtype = None
     md = None
     nmd = None
+    ndim = 0
+    size = 0
+    shape = ()
 
     def __init__(self, qrung=None, md=None, nmd=None):
-        self.ndim = 0
-        self.size = 1
-        self.shape = ()
-
         if qrung is not None and md is not None and nmd is not None:
             from .funcitonClass import InitializeNum
             self.qrung = qrung
             self.mtype, self.md, self.nmd = InitializeNum()(qrung, md, nmd)
+            self.size = 1
 
     @property
     def T(self):

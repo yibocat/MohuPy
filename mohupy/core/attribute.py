@@ -4,11 +4,11 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
-from typing import Union
-
-from .attributeClass import *
-from .fuzzarray import Fuzzarray
-from .fuzznums import Fuzznum
+# from typing import Union
+#
+# from .attributeClass import *
+# from .fuzzarray import Fuzzarray
+# from .fuzznums import Fuzznum
 
 
 # def report(x):

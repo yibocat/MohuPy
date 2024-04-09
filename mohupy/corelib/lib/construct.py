@@ -9,48 +9,42 @@ from typing import Union
 from ...core import Fuzznum, Fuzzarray
 
 
-def zeros(q, mtype, *n) -> Union[Fuzznum, Fuzzarray]:
-    from .classConstruct import Zeros
-    return Zeros()(q, mtype, *n)
+def zeros(*n, qrung=1) -> Union[Fuzznum, Fuzzarray]:
+    from .classConstruct import ZerosConstruct
+    return ZerosConstruct(qrung)(*n)
 
 
-def poss(q, mtype, *n) -> Union[Fuzznum, Fuzzarray]:
-    from .classConstruct import Poss
-    return Poss()(q, mtype, *n)
+def poss(*n, qrung=1) -> Union[Fuzznum, Fuzzarray]:
+    from .classConstruct import PossConstruct
+    return PossConstruct(qrung)(*n)
 
 
-def negs(q, mtype, *n) -> Union[Fuzznum, Fuzzarray]:
-    from .classConstruct import Negs
-    return Negs()(q, mtype, *n)
+def negs(*n, qrung=1) -> Union[Fuzznum, Fuzzarray]:
+    from .classConstruct import NegsConstruct
+    return NegsConstruct(qrung)(*n)
 
 
 def full(x: Fuzznum, *n) -> Union[Fuzznum, Fuzzarray]:
-    from .classConstruct import Full
-    return Full()(x, *n)
+    from .classConstruct import FullConstruct
+    return FullConstruct(x)(*n)
 
 
-def zeros_like(f: Fuzzarray) -> Union[Fuzznum, Fuzzarray]:
-    from .classConstruct import ZerosLike
-    return ZerosLike()(f)
+def zeros_like(x: Union[Fuzznum, Fuzzarray]) -> Union[Fuzznum, Fuzzarray]:
+    from .classConstruct import ZerosLikeConstruct
+    return ZerosLikeConstruct(x)()
 
 
-def poss_like(f: Fuzzarray) -> Union[Fuzznum, Fuzzarray]:
-    from .classConstruct import PossLike
-    return PossLike()(f)
+def poss_like(x: Union[Fuzznum, Fuzzarray]) -> Union[Fuzznum, Fuzzarray]:
+    from .classConstruct import PossLikeConstruct
+    return PossLikeConstruct(x)()
 
 
-def negs_like(f: Fuzzarray) -> Union[Fuzznum, Fuzzarray]:
-    from .classConstruct import NegsLike
-    return NegsLike()(f)
+def negs_like(x: Union[Fuzznum, Fuzzarray]) -> Union[Fuzznum, Fuzzarray]:
+    from .classConstruct import NegsLikeConstruct
+    return NegsLikeConstruct(x)()
 
 
-def full_like(f: Fuzzarray) -> Union[Fuzznum, Fuzzarray]:
-    from .classConstruct import FullLike
-    return FullLike()(f)
-
-
-
-
-
-
+def full_like(x: Fuzznum, y: Union[Fuzznum, Fuzzarray]) -> Union[Fuzznum, Fuzzarray]:
+    from .classConstruct import FullLikeConstruct
+    return FullLikeConstruct(x)(y)
 

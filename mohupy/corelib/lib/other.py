@@ -10,6 +10,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
 
+
 def plot_stats(data):
     """
         Draw a graph to show the shape of the data set
@@ -103,8 +104,3 @@ def show_decision_mat(Data, r=4):
             alt.append([np.round(Data[i, j].md, r), np.round(Data[i, j].nmd, 4)])
         matrix.append(alt)
     return pd.DataFrame(matrix, index=suppliers, columns=attributes)
-
-
-
-
-

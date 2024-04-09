@@ -21,34 +21,27 @@ class Isscalar(Library):
 
 
 class FuncForFuzz(Library):
-    def function(self, x, func, *args):
-        """
-            Apply a function to a fuzzy set.
 
-            Parameters
-            ----------
-                func:  function
-                    The function to apply to the all num of fuzzy set
-                x:  Fuzzarray
-                    The fuzzy set.
-                *args:  list
-                    The arguments of the function.
-            Returns
-            -------
-                Fuzzarray
+    def __init__(self, func, *params):
+        self.func = func
+        self.params = params
 
-            Notes
-            -----
-                This is a method for fuzzy numbers in fuzzy sets
-        """
+    def function(self, x):
 
         if isinstance(x, Fuzznum):
-            return func(x, *args)
+            return self.func(x, *self.params)
         if isinstance(x, Fuzzarray):
-            vec_func = np.vectorize(func)
-            newset = Fuzzarray(x.qrung, x.mtype)
-            newset.array = vec_func(x, *args)
+            vec_func = np.vectorize(self.func)
+            newset = Fuzzarray(x.qrung)
+            newset.array = vec_func(x, *self.params)
             return newset
+
+        #     return func(x, *args)
+        # if isinstance(x, Fuzzarray):
+        #     vec_func = np.vectorize(func)
+        #     newset = Fuzzarray(x.qrung, x.mtype)
+        #     newset.array = vec_func(x, *args)
+        #     return newset
 
 
 class AsFuzzarray(Library):
@@ -76,7 +69,7 @@ class AsFuzzarray(Library):
         flat = fl.flatten()
         r = np.random.choice(flat)
 
-        newset = Fuzzarray(r.qrung, r.mtype)
+        newset = Fuzzarray(r.qrung)
         newset.array = fl
         return newset
 
@@ -90,26 +83,26 @@ class Absolute(Library):
         if isinstance(a, Fuzznum) and isinstance(b, Fuzzarray):
             vec_func = np.vectorize(y)
             result = vec_func(a, b.array)
-            newset = Fuzzarray(b.qrung, b.mtype)
+            newset = Fuzzarray(b.qrung,)
             newset.array = result
             return newset
         if isinstance(a, Fuzzarray) and isinstance(b, Fuzznum):
             vec_func = np.vectorize(y)
             result = vec_func(a.array, b)
-            newset = Fuzzarray(a.qrung, a.mtype)
+            newset = Fuzzarray(a.qrung)
             newset.array = result
             return newset
         if isinstance(a, Fuzzarray) and isinstance(b, Fuzzarray):
             vec_func = np.vectorize(y)
             result = vec_func(a.array, b.array)
-            newset = Fuzzarray(a.qrung, a.mtype)
+            newset = Fuzzarray(a.qrung)
             newset.array = result
             return newset
         raise TypeError(f'Unsupported type: {type(a)} or {type(b)}.')
 
 
 class Relu(Library):
-    def function(self, x, op):
+    def function(self, x: Fuzznum, op):
         def relu(t, o):
             return Fuzznum(t.qrung, 0., 1.) if t < o else t
 
@@ -119,19 +112,17 @@ class Relu(Library):
             return relu(x, op)
         if isinstance(x, Fuzznum) and isinstance(op, Fuzzarray):
             vec_func = np.vectorize(relu)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x, op.array)
             return newset
         if isinstance(x, Fuzzarray) and isinstance(op, Fuzznum):
             vec_func = np.vectorize(relu)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, op)
             return newset
         if isinstance(x, Fuzzarray) and isinstance(op, Fuzzarray):
             vec_func = np.vectorize(relu)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, op.array)
             return newset
         raise TypeError(f'Unsupported type: {type(x)} or {type(op)}.')
-
-

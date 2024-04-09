@@ -4,137 +4,81 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+from typing import Union
 
 import numpy as np
 
 from ...core import Fuzznum, Fuzzarray
 from ..regedit import fuzzZeros, fuzzPoss, fuzzNegs, fuzzZero, fuzzPos, fuzzNeg
 from .base import Library
+from ...config import Config
 
 
-class Zeros(Library):
-    def function(self, q, mtype, *n):
-        """
-        Generate an *n all-zero fuzzy set
+class ZerosConstruct(Library):
+    def __init__(self, qrung):
+        self.qrung = qrung
 
-        Parameters
-        ----------
-            q : int
-                    The qrung of the fuzzy set
-            mtype : str
-                    The type of the fuzzy set
-            n : int
-                    The shape of the fuzzy set
-        Returns
-        -------
-            newset : mohuset
-        """
-        if len(n) != 0:
-            return fuzzZeros[mtype](q, *n)
-        else:
-            return fuzzZero[mtype](q)
+    def function(self, *n):
+        mtype = Config.mtype
+        return fuzzZero[mtype](self.qrung) if len(n) == 0 else fuzzZeros[mtype](self.qrung, *n)
 
 
-class Poss(Library):
-    def function(self, q, mtype, *n):
-        """
-        Generate an *n all-positive fuzzy set
+class PossConstruct(Library):
+    def __init__(self, qrung):
+        self.qrung = qrung
 
-        Parameters
-        ----------
-            q : int
-                    The qrung of the fuzzy set
-            mtype : str
-                    The type of the fuzzy set
-            n : int
-                    The shape of the fuzzy set
-        Returns
-        -------
-            newset : mohuset
-        """
-        if len(n) != 0:
-            return fuzzPoss[mtype](q, *n)
-        else:
-            return fuzzPos[mtype](q)
+    def function(self, *n):
+        mtype = Config.mtype
+        return fuzzPos[mtype](self.qrung) if len(n) == 0 else fuzzPoss[mtype](self.qrung, *n)
 
 
-class Negs(Library):
-    def function(self, q, mtype, *n):
-        """
-        Generate an *n all-negative fuzzy set
+class NegsConstruct(Library):
+    def __init__(self, qrung):
+        self.qrung = qrung
 
-        Parameters
-        ----------
-            q : int
-                    The qrung of the fuzzy set
-            mtype : str
-                    The type of the fuzzy set
-            n : int
-                    The shape of the fuzzy set
-        Returns
-        -------
-            newset : mohuset
-        """
-        if len(n) != 0:
-            return fuzzNegs[mtype](q, *n)
-        else:
-            return fuzzNeg[mtype](q)
+    def function(self, *n):
+        mtype = Config.mtype
+        return fuzzNeg[mtype](self.qrung) if len(n) == 0 else fuzzNegs[mtype](self.qrung, *n)
 
 
-class Full(Library):
-    def function(self, x: Fuzznum, *n):
-        """
-        Generate an *n any fuzzy number fuzzy set
+class FullConstruct(Library):
+    def __init__(self, x: Fuzznum):
+        self.fuzznum = x
 
-        Parameters
-        ----------
-            x: mohunum
-                    The fuzzy number
-            n : int
-                    The shape of the fuzzy set
-        Returns
-        -------
-            newset : mohuset
-        """
-        s = np.full(n, x, dtype=object)
-        newset = Fuzzarray(x.qrung, x.mtype)
+    def function(self, *n):
+        s = np.full(n, self.fuzznum, dtype=object)
+        newset = Fuzzarray(self.fuzznum.qrung)
         newset.array = s
         return newset
 
 
-class ZerosLike(Library):
-    """
-        Constructing full zeros fuzzy arrays of the same shape
-    """
-    def function(self, f: Fuzzarray):
-        from .construct import zeros
-        return zeros(f.qrung, f.mtype, *f.shape)
+class ZerosLikeConstruct(Library):
+    def __init__(self, x: Union[Fuzznum, Fuzzarray]):
+        self.fuzznum = x
+
+    def function(self):
+        return ZerosConstruct(self.fuzznum.qrung)(*self.fuzznum.shape)
 
 
-class PossLike(Library):
-    """
-        Constructing full zeros fuzzy arrays of the same shape
-    """
-    def function(self, f: Fuzzarray):
-        from .construct import poss
-        return poss(f.qrung, f.mtype, *f.shape)
+class PossLikeConstruct(Library):
+    def __init__(self, x: Union[Fuzznum, Fuzzarray]):
+        self.fuzznum = x
+
+    def function(self):
+        return PossConstruct(self.fuzznum.qrung)(*self.fuzznum.shape)
 
 
-class NegsLike(Library):
-    """
-        Constructing full zeros fuzzy arrays of the same shape
-    """
-    def function(self, f: Fuzzarray):
-        from .construct import negs
-        return negs(f.qrung, f.mtype, *f.shape)
+class NegsLikeConstruct(Library):
+    def __init__(self, x: Union[Fuzznum, Fuzzarray]):
+        self.fuzznum = x
+
+    def function(self):
+        return NegsConstruct(self.fuzznum.qrung)(*self.fuzznum.shape)
 
 
-class FullLike(Library):
-    """
-        Constructing full zeros fuzzy arrays of the same shape
-    """
-    def function(self, f: Fuzzarray, x: Fuzznum):
-        from .construct import full
-        return full(x, *f.shape)
+class FullLikeConstruct(Library):
+    def __init__(self, x: Fuzznum):
+        self.x = x
 
-
+    def function(self, y: Fuzzarray):
+        return FullConstruct(self.x.qrung)(*y.shape)

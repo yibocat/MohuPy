@@ -13,6 +13,7 @@ from .fuzznums import Fuzznum
 from .fuzzarray import Fuzzarray
 
 from .constant import Approx
+from ..config import Config
 
 
 class InitializeNum(Function):
@@ -78,18 +79,28 @@ class InitializeNum(Function):
 
 
 class InitializeSet(Function):
-    def function(self, qrung, mtype):
-        if qrung is not None or mtype is not None:
-            from .base import FuzzType
-            assert mtype in FuzzType, f'Unsupported fuzzy types, mtype:{mtype}.'
+    # def function(self, qrung, mtype):
+    #     if qrung is not None or mtype is not None:
+    #         from .base import FuzzType
+    #         assert mtype in FuzzType, f'Unsupported fuzzy types, mtype:{mtype}.'
+    #         assert qrung > 0, f'Qrung must be greater than 0, qrung:{qrung}.'
+    #
+    #         qrung = qrung
+    #         mtype = mtype
+    #     else:
+    #         qrung = None
+    #         mtype = None
+    #     return qrung, mtype
+
+    def function(self, qrung):
+        if qrung is not None:
             assert qrung > 0, f'Qrung must be greater than 0, qrung:{qrung}.'
 
             qrung = qrung
-            mtype = mtype
         else:
             qrung = None
-            mtype = None
-        return qrung, mtype
+
+        return qrung, Config.mtype
 
 
 class FuzzValidity(Function):
@@ -175,8 +186,6 @@ class FuzzInitial(Function):
         if isinstance(x, Fuzznum):
             if x.qrung is not None:
                 return False
-            if x.mtype is not None:
-                return False
             if x.md is not None:
                 return False
             if x.nmd is not None:
@@ -184,8 +193,6 @@ class FuzzInitial(Function):
             return True
         if isinstance(x, Fuzzarray):
             if x.qrung is not None:
-                return False
-            if x.mtype is not None:
                 return False
             if x.array.size != 0:
                 return False
@@ -220,7 +227,7 @@ class FuzzQsort(Function):
                 return x
         if isinstance(x, Fuzzarray):
             vec_func = np.vectorize(lambda u: FuzzQsort()(u, reverse))
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array)
             return newset
 
@@ -242,12 +249,12 @@ class FuzzUnique(Function):
         if isinstance(x, Fuzzarray):
             if onlyfn:
                 vec_func = np.vectorize(lambda u: FuzzUnique()(u, onlyfn))
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 newset.array = vec_func(x.array)
                 return newset
             else:
                 uni = np.unique(x.array)
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 newset.array = uni
                 return newset
 
@@ -260,7 +267,7 @@ class FuzzTranspose(Function):
             st = x.array
             s = st.T
 
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = s
             del st, s
             return newset
@@ -278,7 +285,7 @@ class FuzzAppend(Function):
         if isinstance(x, Fuzznum) and isinstance(e, Fuzznum):
             assert x.qrung == e.qrung, f'qrung mismatch(x.qrung:{x.qrung} and e.qrung:{e.qrung}).'
             assert x.mtype == e.mtype, f'mtype mismatch(x.mtype:{x.mtype} and e.mtype:{e.mtype}).'
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.append(newset.array, [x, e])
             return newset
         if isinstance(x, Fuzznum) and isinstance(e, Fuzzarray):
@@ -343,11 +350,11 @@ class FuzzPop(Function):
 class FuzzReshape(Function):
     def function(self, x, *shape):
         if isinstance(x, Fuzznum):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.reshape(x, *shape)
             return newset
         if isinstance(x, Fuzzarray):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = x.array.reshape(*shape)
             return newset
 
@@ -357,7 +364,7 @@ class FuzzSqueeze(Function):
         if isinstance(x, Fuzznum):
             return x
         if isinstance(x, Fuzzarray):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.squeeze(x.array, axis)
             return newset
 
@@ -365,11 +372,11 @@ class FuzzSqueeze(Function):
 class FuzzBroadcast(Function):
     def function(self, x, shape):
         if isinstance(x, Fuzznum):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.broadcast_to(x, shape)
             return newset
         if isinstance(x, Fuzzarray):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.broadcast_to(x.array, shape)
             return newset
 
@@ -378,25 +385,23 @@ class FuzzClear(Function):
     def function(self, x):
         if isinstance(x, Fuzznum):
             x.qrung = None
-            x.mtype = None
             x.md = None
             x.nmd = None
             return x
         if isinstance(x, Fuzzarray):
             x.array = np.array([], dtype=object)
             x.qrung = None
-            x.mtype = None
             return x
 
 
 class FuzzRavel(Function):
     def function(self, x):
         if isinstance(x, Fuzznum):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.ravel(x)
             return newset
         if isinstance(x, Fuzzarray):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.ravel(x.array)
             return newset
 
@@ -404,11 +409,11 @@ class FuzzRavel(Function):
 class FuzzFlatten(Function):
     def function(self, x):
         if isinstance(x, Fuzznum):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.array([x])
             return newset
         if isinstance(x, Fuzzarray):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = x.array.flatten()
             return newset
 
@@ -428,7 +433,7 @@ class FuzzGetMax(Function):
                 if isinstance(m, Fuzznum):
                     return m
                 if isinstance(m, np.ndarray):
-                    newset = Fuzzarray(x.qrung, x.mtype)
+                    newset = Fuzzarray(x.qrung)
                     newset.array = m
                     return newset
 
@@ -448,7 +453,7 @@ class FuzzGetMin(Function):
                 if isinstance(m, Fuzznum):
                     return m
                 if isinstance(m, np.ndarray):
-                    newset = Fuzzarray(x.qrung, x.mtype)
+                    newset = Fuzzarray(x.qrung)
                     newset.array = m
                     return newset
 
@@ -469,7 +474,7 @@ class FuzzGetFmax(Function):
                 if isinstance(m, Fuzznum):
                     return m
                 if isinstance(slist, np.ndarray):
-                    newset = Fuzzarray(x.qrung, x.mtype)
+                    newset = Fuzzarray(x.qrung)
                     newset.array = m
                     return newset
 
@@ -490,7 +495,7 @@ class FuzzGetFmin(Function):
                 if isinstance(m, Fuzznum):
                     return m
                 if isinstance(slist, np.ndarray):
-                    newset = Fuzzarray(x.qrung, x.mtype)
+                    newset = Fuzzarray(x.qrung)
                     newset.array = m
                     return newset
 
@@ -507,7 +512,7 @@ class FuzzGetSum(Function):
                 if isinstance(s, Fuzznum):
                     return s
                 if isinstance(s, np.ndarray):
-                    newset = Fuzzarray(x.qrung, x.mtype)
+                    newset = Fuzzarray(x.qrung)
                     newset.array = s
                     return newset
 
@@ -524,7 +529,7 @@ class FuzzGetProd(Function):
                 if isinstance(s, Fuzznum):
                     return s
                 if isinstance(s, np.ndarray):
-                    newset = Fuzzarray(x.qrung, x.mtype)
+                    newset = Fuzzarray(x.qrung)
                     newset.array = s
                     return newset
 
@@ -541,7 +546,7 @@ class FuzzMean(Function):
                 if isinstance(s, Fuzznum):
                     return s
                 if isinstance(s, np.ndarray):
-                    newset = Fuzzarray(x.qrung, x.mtype)
+                    newset = Fuzzarray(x.qrung)
                     newset.array = s
                     return newset
 

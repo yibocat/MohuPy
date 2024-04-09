@@ -8,23 +8,25 @@
 from ...core import Fuzzarray
 
 
-def savez(x, path):
+def savez(x: Fuzzarray, path: str):
     from .classIO import Savez
-    return Savez()(x, path)
+    return Savez(x)(path)
 
 
-def loadz(x, path):
+def loadz(path: str):
     from .classIO import Loadz
-    return Loadz()(x, path)
+    return Loadz()(path)
 
 
 def to_csv(x: Fuzzarray, path: str, header=None, index_col=None, float_format=5):
     from .classIO import ToCSV
-    return ToCSV(header, index_col)(x, path, float_format)
+    return ToCSV(x, header, index_col)(path, float_format)
 
 
-def load_csv(path: str, q: int, mtype: str, header='infer', index_col=0) -> Fuzzarray:
+def load_csv(path, qrung, header='infer', index_col=0) -> Fuzzarray:
     from .classIO import LoadCSV
-    return LoadCSV(header, index_col)(path, q, mtype)
+    return LoadCSV(qrung, header, index_col)(path)
+
+
 
 

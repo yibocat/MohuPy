@@ -13,21 +13,22 @@ fuzzZeros = Registry()
 fuzzPoss = Registry()
 fuzzNegs = Registry()
 
+
 ################################
 # qrofn
 ################################
 @fuzzZeros('qrofn')
 def zeros_qrofn(q, *n) -> Fuzzarray:
     s = np.full(n, Fuzznum(q, 0., 0.), dtype=object)
-    newset = Fuzzarray(q, 'qrofn')
+    newset = Fuzzarray(q)
     newset.array = s
     return newset
 
 
 @fuzzPoss('qrofn')
-def poss_qrofn(q, *n)  -> Fuzzarray:
+def poss_qrofn(q, *n) -> Fuzzarray:
     s = np.full(n, Fuzznum(q, 1., 0.), dtype=object)
-    newset = Fuzzarray(q, 'qrofn')
+    newset = Fuzzarray(q)
     newset.array = s
     return newset
 
@@ -35,7 +36,7 @@ def poss_qrofn(q, *n)  -> Fuzzarray:
 @fuzzNegs('qrofn')
 def negs_qrofn(q, *n) -> Fuzzarray:
     s = np.full(n, Fuzznum(q, 0., 1.), dtype=object)
-    newset = Fuzzarray(q, 'qrofn')
+    newset = Fuzzarray(q)
     newset.array = s
     return newset
 
@@ -46,7 +47,7 @@ def negs_qrofn(q, *n) -> Fuzzarray:
 @fuzzZeros('ivfn')
 def zeros_ivfn(q, *n) -> Fuzzarray:
     s = np.full(n, Fuzznum(q, (0., 0.), (0., 0.)), dtype=object)
-    newset = Fuzzarray(q, 'ivfn')
+    newset = Fuzzarray(q)
     newset.array = s
     return newset
 
@@ -54,7 +55,7 @@ def zeros_ivfn(q, *n) -> Fuzzarray:
 @fuzzPoss('ivfn')
 def poss_ivfn(q, *n) -> Fuzzarray:
     s = np.full(n, Fuzznum(q, (1., 1.), (0., 0.)), dtype=object)
-    newset = Fuzzarray(q, 'ivfn')
+    newset = Fuzzarray(q)
     newset.array = s
     return newset
 
@@ -62,7 +63,7 @@ def poss_ivfn(q, *n) -> Fuzzarray:
 @fuzzNegs('ivfn')
 def negs_ivfn(q, *n) -> Fuzzarray:
     s = np.full(n, Fuzznum(q, (0., 0.), (1., 1.)), dtype=object)
-    newset = Fuzzarray(q, 'ivfn')
+    newset = Fuzzarray(q)
     newset.array = s
     return newset
 
@@ -73,7 +74,7 @@ def negs_ivfn(q, *n) -> Fuzzarray:
 @fuzzZeros('qrohfn')
 def zeros_qrohfn(q, *n) -> Fuzzarray:
     s = np.full(n, Fuzznum(q, [0], [0]), dtype=object)
-    newset = Fuzzarray(q, 'qrohfn')
+    newset = Fuzzarray(q)
     newset.array = s
     return newset
 
@@ -81,7 +82,7 @@ def zeros_qrohfn(q, *n) -> Fuzzarray:
 @fuzzPoss('qrohfn')
 def poss_qrohfn(q, *n) -> Fuzzarray:
     s = np.full(n, Fuzznum(q, [1], [0]), dtype=object)
-    newset = Fuzzarray(q, 'qrohfn')
+    newset = Fuzzarray(q)
     newset.array = s
     return newset
 
@@ -89,7 +90,7 @@ def poss_qrohfn(q, *n) -> Fuzzarray:
 @fuzzNegs('qrohfn')
 def negs_qrohfn(q, *n) -> Fuzzarray:
     s = np.full(n, Fuzznum(q, [0], [1]), dtype=object)
-    newset = Fuzzarray(q, 'qrohfn')
+    newset = Fuzzarray(q)
     newset.array = s
     return newset
 
@@ -154,28 +155,3 @@ def pos_qrohfn(q):
 @fuzzNeg('qrohfn')
 def neg_qrohfn(q):
     return NEG_QROHFN(q)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

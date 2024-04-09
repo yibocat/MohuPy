@@ -5,11 +5,15 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
+import warnings
+
 import numpy as np
 
 from typing import Union
 
 from ..core import Fuzzarray, Fuzznum
+from ..config import Config
+
 from .base import FuzzTensorBase
 
 
@@ -46,30 +50,25 @@ class Fuzztensor(FuzzTensorBase):
 
     def __init__(self, data=None):
         if data is not None:
-            if isinstance(data, Union[Fuzznum, Fuzzarray]):
-                # TODO: 目前仅适用于qrofn，需要适配 ivfn 和 qrohfn
-                if data.mtype == 'ivfn' or data.mtype == 'qrohfn':
-                    raise NotImplementedError(f'{data.mtype} is not implemented yet. Please use qrofn.')
-
+            if isinstance(data, np.ndarray):
+                self.__data = data
+                self.shape = data.shape
+                self.ndim = data.ndim
+                self.size = data.size
+            elif isinstance(data, Union[Fuzznum, Fuzzarray]):
+                if Config.mtype != 'qrofn':
+                    raise NotImplementedError(f'Fuzztensor currently only supports the qrofn fuzzy number type.')
                 from .utils import as_fuzzarray
                 self.__data = as_fuzzarray(data)
-
-                self.mtype = self.__data.mtype
-                self.qrung = self.__data.qrung
-
-                self.shape = self.__data.shape
-                self.ndim = self.__data.ndim
-                self.size = self.__data.size
-            elif isinstance(data, np.ndarray):
-                self.__data = data
-
-                self.shape = self.__data.shape
-                self.ndim = self.__data.ndim
-                self.size = self.__data.size
+                self.mtype = data.mtype
+                self.qrung = data.qrung
+                self.shape = data.shape
+                self.ndim = data.ndim
+                self.size = data.size
             else:
-                raise TypeError(f'{type(data).__name__} is not supported.')
+                raise NotImplementedError(f'{type(data).__name__} is not supported.')
 
-    ## 类的特别方法，保罗基本的打印输出，字符类型，基本运算等等
+    ## 类的特别方法，包括基本打印输出，字符类型，基本运算等等
 
     def __repr__(self):
         if self.__data is None:
@@ -134,17 +133,19 @@ class Fuzztensor(FuzzTensorBase):
 
     @property
     def md(self):
-        if isinstance(self.__data, Fuzzarray):
-            return self.__data.md
-        else:
+        if self.__data is None:
             return None
+        if not isinstance(self.__data, Fuzzarray):
+            return None
+        return self.__data.md
 
     @property
     def nmd(self):
-        if isinstance(self.__data, Fuzzarray):
-            return self.__data.nmd
-        else:
+        if self.__data is None:
             return None
+        if not isinstance(self.__data, Fuzzarray):
+            return None
+        return self.__data.nmd
 
     @property
     def ind(self):
@@ -171,26 +172,24 @@ class Fuzztensor(FuzzTensorBase):
 
     @data.setter
     def data(self, fdata):
-        if isinstance(fdata, Union[Fuzzarray, Fuzznum]):
-            if fdata.mtype == 'qrofn':
-                from .utils import as_fuzzarray
-                self.__data = as_fuzzarray(fdata)
-
-                self.mtype = self.__data.mtype
-                self.qrung = self.__data.qrung
-
-                self.shape = self.__data.shape
-                self.ndim = self.__data.ndim
-                self.size = self.__data.size
-            elif fdata.mtype is None and fdata.qrung is None:
+        if Config.mtype != 'qrofn': raise NotImplementedError(f'Currently only available for fuzzy type \'qrofn\'.')
+        if isinstance(fdata, Union[Fuzznum, Fuzzarray]):
+            if fdata.qrung is None or fdata.md is None and fdata.nmd is None:
                 self.__data = None
-                self.mtype = None
+                self.mtype = Config.mtype
                 self.qrung = None
                 self.shape = ()
                 self.ndim = None
                 self.size = None
             else:
-                raise TypeError(f'The mtype must be \'qrofn\'.')
+                from .utils import as_fuzzarray
+                self.__data = as_fuzzarray(fdata)
+
+                self.mtype = self.__data.mtype
+                self.qrung = self.__data.qrung
+                self.shape = self.__data.shape
+                self.ndim = self.__data.ndim
+                self.size = self.__data.size
         elif isinstance(fdata, Union[np.ndarray, int, float, np.int_, np.float_]):
             from .utils import as_array
             self.__data = as_array(fdata)
@@ -199,7 +198,37 @@ class Fuzztensor(FuzzTensorBase):
             self.ndim = self.__data.ndim
             self.size = self.__data.size
         else:
-            raise TypeError(f'{type(fdata).__name__} is not supported.')
+            raise TypeError(f'{type(fdata)} is not supported.')
+
+        # if isinstance(fdata, Union[Fuzzarray, Fuzznum]):
+        #     if fdata.mtype == 'qrofn':
+        #         from .utils import as_fuzzarray
+        #         self.__data = as_fuzzarray(fdata)
+        #
+        #         self.mtype = self.__data.mtype
+        #         self.qrung = self.__data.qrung
+        #
+        #         self.shape = self.__data.shape
+        #         self.ndim = self.__data.ndim
+        #         self.size = self.__data.size
+        #     elif fdata.mtype is None and fdata.qrung is None:
+        #         self.__data = None
+        #         self.mtype = None
+        #         self.qrung = None
+        #         self.shape = ()
+        #         self.ndim = None
+        #         self.size = None
+        #     else:
+        #         raise TypeError(f'The mtype must be \'qrofn\'.')
+        # elif isinstance(fdata, Union[np.ndarray, int, float, np.int_, np.float_]):
+        #     from .utils import as_array
+        #     self.__data = as_array(fdata)
+        #
+        #     self.shape = self.__data.shape
+        #     self.ndim = self.__data.ndim
+        #     self.size = self.__data.size
+        # else:
+        #     raise TypeError(f'{type(fdata).__name__} is not supported.')
 
     ## Fuzztensor 的反向微分和特别方法。backward 和set_creator和clear_grad用于自动微分计算
 
@@ -218,7 +247,7 @@ class Fuzztensor(FuzzTensorBase):
             elif isinstance(self.__data, np.ndarray):
                 self.grad = np.ones_like(self.__data)
             else:
-                raise NotImplemented
+                raise NotImplementedError(f'{type(self.__data)} is not supported.')
 
         from .utils import as_fuzzarray
         self.grad = Fuzztensor(as_fuzzarray(self.grad))
@@ -330,18 +359,3 @@ class Fuzztensor(FuzzTensorBase):
     def mean(self, axis=None) -> 'Fuzztensor':
         from .functionClass import TensorGetMean
         return TensorGetMean()(self, axis)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

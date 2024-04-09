@@ -14,14 +14,23 @@ class Fuzzarray(MohuBase):
     __array_priority__ = 200
     __array = np.array([], dtype=object)
 
-    def __init__(self, qrung=None, mtype=None):
+    # def __init__(self, qrung=None, mtype=None):
+    #     super().__init__()
+    #     self.ndim = 0
+    #     self.size = 0
+    #     self.shape = ()
+    #
+    #     from .funcitonClass import InitializeSet
+    #     self.qrung, self.mtype = InitializeSet()(qrung, mtype)
+
+    def __init__(self, qrung=None):
         super().__init__()
         self.ndim = 0
         self.size = 0
         self.shape = ()
 
         from .funcitonClass import InitializeSet
-        self.qrung, self.mtype = InitializeSet()(qrung, mtype)
+        self.qrung, self.mtype = InitializeSet()(qrung)
 
     def __len__(self):
         return len(self.__array)
@@ -77,31 +86,35 @@ class Fuzzarray(MohuBase):
     def comp(self) -> 'Fuzzarray':
         from .attributeClass import Complement
         vec_func = np.vectorize(Complement())
-        newset = Fuzzarray(self.qrung, self.mtype)
+        newset = Fuzzarray(self.qrung)
         newset.array = vec_func(self.__array)
         return newset
 
     @property
     def md(self):
-        def membership(t):
-            if isinstance(t.md, (int, float, np.float_, np.int_)):
-                return np.float_(t.md)
-            if isinstance(t.md, (np.ndarray, list)):
-                return np.array(t.md, dtype=object)
+        if self.__array.size != 0:
+            def membership(t):
+                if isinstance(t.md, (int, float, np.float_, np.int_)):
+                    return np.float_(t.md)
+                if isinstance(t.md, (np.ndarray, list)):
+                    return np.array(t.md, dtype=object)
 
-        vec_func = np.vectorize(membership)
-        return vec_func(self.__array)
+            vec_func = np.vectorize(membership)
+            return vec_func(self.__array)
+        return None
 
     @property
     def nmd(self):
-        def membership(t):
-            if isinstance(t.nmd, (int, float, np.float_, np.int_)):
-                return np.float_(t.nmd)
-            if isinstance(t.nmd, (np.ndarray, list)):
-                return np.array(t.nmd, dtype=object)
+        if self.__array.size != 0:
+            def membership(t):
+                if isinstance(t.nmd, (int, float, np.float_, np.int_)):
+                    return np.float_(t.nmd)
+                if isinstance(t.nmd, (np.ndarray, list)):
+                    return np.array(t.nmd, dtype=object)
 
-        vec_func = np.vectorize(membership)
-        return vec_func(self.__array)
+            vec_func = np.vectorize(membership)
+            return vec_func(self.__array)
+        return None
 
     @property
     def T(self) -> 'Fuzzarray':
@@ -187,4 +200,3 @@ class Fuzzarray(MohuBase):
     def pop(self, e):
         from .funcitonClass import FuzzPop
         return FuzzPop()(self, e)
-

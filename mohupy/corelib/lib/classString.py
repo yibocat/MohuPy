@@ -7,12 +7,17 @@
 
 from ..regedit import fuzzString
 from .base import Library
+from ...config import Config
 
 
 class StrToFuzz(Library):
 
-    def function(self, s: str, q: int, mtype: str):
-        return fuzzString[mtype](s, q)
+    def __init__(self, qrung):
+        self.qrung = qrung
+
+    def function(self, s: str):
+        mtype = Config.mtype
+        return fuzzString[mtype](s, self.qrung)
 
 
 

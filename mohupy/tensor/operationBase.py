@@ -4,12 +4,13 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+
 import weakref
 
 from .fuzztensor import Fuzztensor
-from .config import Config
+# from .config import Config
+from ..config import Config
 from .utils import as_fuzztensor
-# from ..core import Fuzzarray
 
 
 class Operation:

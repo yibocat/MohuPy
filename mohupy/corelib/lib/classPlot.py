@@ -11,6 +11,7 @@ from matplotlib import pyplot as plt
 from .base import Library
 from ..regedit import fuzzPlot
 from ...core import Fuzznum, Fuzzarray
+from ...config import Config
 
 
 class Plot(Library):
@@ -21,7 +22,6 @@ class Plot(Library):
             color_area = ['red', 'green', 'blue', 'yellow']
 
         q = f.qrung
-        mtype = f.mtype
 
         plt.gca().spines['top'].set_linewidth(False)
         plt.gca().spines['bottom'].set_linewidth(True)
@@ -32,7 +32,7 @@ class Plot(Library):
         plt.axvline(x=0)
 
         if isinstance(f, Fuzznum):
-            fuzzPlot[mtype](f,
+            fuzzPlot[Config.mtype](f,
                             other=other,
                             add=add,
                             sub=sub,
@@ -42,7 +42,7 @@ class Plot(Library):
                             color_area=color_area,
                             alpha=alpha)
         if isinstance(f, Fuzzarray):
-            plot_vec = np.vectorize(fuzzPlot[mtype])
+            plot_vec = np.vectorize(fuzzPlot[Config.mtype])
             plot_vec(f.array,
                      other=other,
                      color=color,

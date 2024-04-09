@@ -36,21 +36,21 @@ class Addition(Operation):
         # 模糊数 + 集合（广播）
         if isinstance(x, Fuzznum) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__add)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x, y.array)
             return newset
 
         # 集合 + 模糊数（广播）
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzznum):
             vec_func = np.vectorize(__add)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y)
             return newset
 
         # 集合 + 集合
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__add)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y.array)
             return newset
 
@@ -83,21 +83,21 @@ class Subtraction(Operation):
         # 模糊数 - 集合（广播）
         if isinstance(x, Fuzznum) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__sub)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x, y.array)
             return newset
 
         # 集合 - 模糊数（广播）
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzznum):
             vec_func = np.vectorize(__sub)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y)
             return newset
 
         # 集合 - 集合
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__sub)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y.array)
             return newset
 
@@ -152,37 +152,37 @@ class Multiplication(Operation):
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__mul)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x, y.array)
             return newset
 
         if isinstance(x, Fuzznum) and isinstance(y, np.ndarray):
             vec_func = np.vectorize(__mul)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x, y)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__mul)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y.array)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzznum):
             vec_func = np.vectorize(__mul)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(y, np.ndarray):
             vec_func = np.vectorize(__mul)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(y, (int, float, np.float_, np.int_)):
             vec_func = np.vectorize(__mul)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y)
             return newset
 
@@ -192,19 +192,19 @@ class Multiplication(Operation):
 
         if isinstance(x, (int, float, np.float_, np.int_)) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__mul)
-            newset = Fuzzarray(y.qrung, y.mtype)
+            newset = Fuzzarray(y.qrung)
             newset.array = vec_func(x, y.array)
             return newset
 
         if isinstance(x, np.ndarray) and isinstance(y, Fuzznum):
             vec_func = np.vectorize(__mul)
-            newset = Fuzzarray(y.qrung, y.mtype)
+            newset = Fuzzarray(y.qrung)
             newset.array = vec_func(x, y)
             return newset
 
         if isinstance(x, np.ndarray) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__mul)
-            newset = Fuzzarray(y.qrung, y.mtype)
+            newset = Fuzzarray(y.qrung)
             newset.array = vec_func(x, y.array)
             return newset
 
@@ -248,37 +248,37 @@ class Division(Operation):
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__div)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x, y.array)
             return newset
 
         if isinstance(x, Fuzznum) and isinstance(y, np.ndarray):
             vec_func = np.vectorize(__div)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x, y)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
             vec_func = np.vectorize(__div)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y.array)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzznum):
             vec_func = np.vectorize(__div)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(y, np.ndarray):
             vec_func = np.vectorize(__div)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(y, (int, float, np.float_, np.int_)):
             vec_func = np.vectorize(__div)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, y)
             return newset
 
@@ -311,19 +311,19 @@ class Power(Operation):
 
         if isinstance(x, Fuzznum) and isinstance(self.p, np.ndarray):
             vec_func = np.vectorize(__pow)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x, self.p)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(self.p, (int, float, np.float_, np.int_)):
             vec_func = np.vectorize(__pow)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, self.p)
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(self.p, np.ndarray):
             vec_func = np.vectorize(__pow)
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array, self.p)
             return newset
 
@@ -339,7 +339,7 @@ class MatrixMul(Operation):
         assert x.ndim > 0, f"input operand 0 does not have enough dimensions."
         assert y.ndim > 0, f"input operand 1 does not have enough dimensions."
 
-        newset = Fuzzarray(x.qrung, x.mtype)
+        newset = Fuzzarray(x.qrung)
         newset.array = x.array @ y.array
         return newset
 

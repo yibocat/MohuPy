@@ -6,6 +6,7 @@
 #  Software: MohuPy
 
 import warnings
+
 import numpy as np
 import pandas as pd
 
@@ -17,19 +18,19 @@ class Savez(Library):
     """
         Save data to npz file
     """
+    def __init__(self, x: Fuzzarray):
+        self.fuzz = x
 
-    def function(self, x, path):
-        # from ..base.nums import Fuzznum
-        # from ..base.array import Fuzzarray
-        if isinstance(x, Fuzznum):
-            raise IOError(f'Invalid save for {type(x)}.')
-        if isinstance(x, Fuzzarray):
+    def function(self, path):
+        if isinstance(self.fuzz, Fuzznum):
+            raise IOError(f'Invalid save for {type(self.fuzz)}.')
+        if isinstance(self.fuzz, Fuzzarray):
             try:
                 np.savez_compressed(
                     path,
-                    array=x.array,
-                    mtype=x.mtype,
-                    qrung=x.qrung)
+                    array=self.fuzz.array,
+                    mtype=self.fuzz.mtype,
+                    qrung=self.fuzz.qrung)
             except IOError as e:
                 print(f'Save failed.' + str(e))
 
@@ -38,26 +39,48 @@ class Loadz(Library):
     """
         Load data from npz file
     """
+    def function(self, path):
+        newset = Fuzzarray()
+        new = np.load(path, allow_pickle=True)
+        from ...config import Config, set_mtype
+        mtype = new['mtype']
+        if Config.mtype != new['mtype']:
+            warnings.warn(f'The fuzzy number type changed: ({Config.mtype} -> {mtype})', Warning)
+        set_mtype(mtype)
+        newset.qrung = new['qrung']
+        newset.mtype = new['mtype']
+        newset.array = new['array']
+        return newset
 
-    def function(self, x, path):
-        # from ..base.nums import Fuzznum
-        # from ..base.array import Fuzzarray
-        if isinstance(x, Fuzznum):
-            raise IOError(f'Invalid load for {type(x)}.')
-        if isinstance(x, Fuzzarray):
-            if x.initial():
-                new = np.load(path, allow_pickle=True)
-                x.qrung = new['qrung']
-                x.mtype = new['mtype']
-                x.array = new['array']
-            else:
-                warnings.warn('Loading existing data will overwrite the original data!', Warning)
-                x = x.clear()
-                new = np.load(path, allow_pickle=True)
-                x.qrung = new['qrung']
-                x.mtype = new['mtype']
-                x.array = new['array']
-        raise IOError(f'Invalid load for {type(x)}.')
+        # if isinstance(self.fuzz, Fuzznum):
+        #     raise IOError(f'Invalid load for {type(self.fuzz)}.')
+        # if isinstance(self.fuzz, Fuzzarray):
+        #     if self.fuzz.initial():
+        #         new = np.load(path, allow_pickle=True)
+        #         from ...config import Config, set_mtype
+        #         mtype = new['mtype']
+        #         if Config.mtype != new['mtype']:
+        #             warnings.warn(f'The fuzzy number type changed: ({Config.mtype} -> {mtype})', Warning)
+        #         set_mtype(self.fuzz.mtype)
+        #
+        #         self.fuzz.qrung = new['qrung']
+        #         self.fuzz.mtype = new['mtype']
+        #         self.fuzz.array = new['array']
+        #     else:
+        #         warnings.warn('Loading existing data will overwrite the original data!', Warning)
+        #         self.fuzz = self.fuzz.clear()
+        #         new = np.load(path, allow_pickle=True)
+        #
+        #         from ...config import Config, set_mtype
+        #         mtype = new['mtype']
+        #         if Config.mtype != new['mtype']:
+        #             warnings.warn(f'The fuzzy number type changed: ({Config.mtype} -> {mtype})', Warning)
+        #         set_mtype(self.fuzz.mtype)
+        #
+        #         self.fuzz.qrung = new['qrung']
+        #         self.fuzz.mtype = new['mtype']
+        #         self.fuzz.array = new['array']
+        # raise IOError(f'Invalid load for {type(self.fuzz)}.')
 
 
 class ToCSV(Library):
@@ -67,13 +90,6 @@ class ToCSV(Library):
         This method only saves the fuzzy set, and does not save the related
         information of the set.
 
-        Parameters
-        ----------
-            f:  Fuzzarray
-                The fuzzy set.
-            path:  str
-                The path to the file.
-
         Returns
         -------
             Boolean
@@ -82,18 +98,19 @@ class ToCSV(Library):
         -----
             This method saves the fuzzy set to a.csv file.
     """
-    def __init__(self, header, index_col):
+    def __init__(self, fuzz: Fuzzarray, header, index_col):
+        self.fuzz = fuzz
         self.header = header
         self.index_col = index_col
 
-    def function(self, f: Fuzzarray, path: str, float_format: int):
-        if 0 <= f.ndim <= 2:
+    def function(self, path: str, float_format: int):
+        if 0 <= self.fuzz.ndim <= 2:
             try:
-                pd.DataFrame(f.array, columns=self.header, index=self.index_col).to_csv(path, float_format=f'%.{float_format}f')
+                pd.DataFrame(self.fuzz.array, columns=self.header, index=self.index_col).to_csv(path, float_format=f'%.{float_format}f')
             except Exception as e:
                 print(f'{e}: Save failed.')
         else:
-            raise ValueError(f'The ndim of fuzzy array is invalid: ndim={f.ndim}')
+            raise ValueError(f'The ndim of fuzzy array is invalid: ndim={self.fuzz.ndim}')
 
 
 class LoadCSV(Library):
@@ -107,14 +124,6 @@ class LoadCSV(Library):
         load when the fuzzy set table is equal to or satisfied with the initial fuzzy set
         condition.
 
-        Parameters
-        ----------
-            path:  str
-                The path to the file.
-            q:  int
-                The q rung of the fuzzy set.
-            mtype:  str
-                The type of the fuzzy set.
 
         Returns
         -------
@@ -125,21 +134,21 @@ class LoadCSV(Library):
         -----
             This method loads the fuzzy set from a.csv file.
     """
-    def __init__(self, header, index_col):
+    def __init__(self, qrung, header, index_col):
+        self.qrung = qrung
         self.header = header
         self.index_col = index_col
 
-    def function(self, path: str, q: int, mtype: str):
+    def function(self, path: str):
         try:
             m = pd.read_csv(path, header=self.header, index_col=self.index_col).to_numpy()
-            from .string import str2fuzz
-            vec_func = np.vectorize(str2fuzz)
-            f = vec_func(m, q, mtype)
-
-            newset = Fuzzarray(q, mtype)
-            newset.array = f
-            return newset
+            from .classString import StrToFuzz
+            vec_func = np.vectorize(lambda x: StrToFuzz(self.qrung)(x))
+            newset = Fuzzarray(self.qrung)
+            try:
+                newset.array = vec_func(m)
+                return newset
+            except Exception as e:
+                Exception(f'Please check if the mtype type matches. error:{e}')
         except Exception as e:
             print(f'{e}: Load failed.')
-
-

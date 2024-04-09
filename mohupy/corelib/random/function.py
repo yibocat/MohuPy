@@ -11,9 +11,16 @@ from ...core import Fuzznum, Fuzzarray
 from .randclass import Rand, Choice
 
 
-def rand(q: int, mtype: str = 'qrofn', *n, minnum=1, maxnum=5) -> Union[Fuzzarray, Fuzznum]:
-    return Rand(minnum, maxnum)(q, mtype, *n)
+# def rand(q: int, mtype: str = 'qrofn', *n, minnum=1, maxnum=5) -> Union[Fuzzarray, Fuzznum]:
+#     return Rand(minnum, maxnum)(q, mtype, *n)
+#
+#
+# def choice(f, size: (int, tuple[int], list[int]) = None, replace=False) -> Union[Fuzzarray, Fuzznum]:
+#     return Choice()(f, size, replace)
+
+def rand(*n, qrung=1, minnum=1, maxnum=5) -> Union[Fuzzarray, Fuzznum]:
+    return Rand(qrung, minnum, maxnum)(*n)
 
 
-def choice(f, size: (int, tuple[int], list[int]) = None, replace=False) -> Union[Fuzzarray, Fuzznum]:
+def choice(f: Union[Fuzznum, Fuzzarray], size: (int, tuple[int], list[int]) = None, replace=False):
     return Choice()(f, size, replace)

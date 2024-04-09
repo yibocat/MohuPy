@@ -11,6 +11,8 @@ from ..core import FuzzType
 class Config:
     arch = 'algebraic'
     mtype = 'qrofn'
+    enable_backprop = True
+
     mtype_dict = FuzzType
 
 
