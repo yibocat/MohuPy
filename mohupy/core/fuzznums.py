@@ -19,6 +19,12 @@ class Fuzznum(MohuBase):
     shape = ()
 
     def __init__(self, qrung=None, md=None, nmd=None):
+        if qrung is None or (md is None and nmd is None):
+            from ..config import Config
+            self.mtype = Config.mtype
+            self.qrung = qrung
+            self.size = 0 if qrung is None else 1
+
         if qrung is not None and md is not None and nmd is not None:
             from .funcitonClass import InitializeNum
             self.qrung = qrung

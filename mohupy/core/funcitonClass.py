@@ -145,6 +145,8 @@ class FuzzValidity(Function):
                     return False
             raise TypeError(f'Unsupported mtype(type:{x.mtype}).')
         if isinstance(x, Fuzzarray):
+            if x.size == 0:
+                return True
             vec_func = np.vectorize(lambda u: FuzzValidity()(u))
             return vec_func(x.array)
 
@@ -169,11 +171,12 @@ class FuzzEmpty(Function):
                     return False
             raise TypeError(f'Unsupported mtype, ,type:{x.mtype}.')
         if isinstance(x, Fuzzarray):
+            if x.size == 0:
+                return True
             if onlyfn:
                 vec_func = np.vectorize(lambda u: FuzzEmpty()(u, onlyfn))
                 return vec_func(x.array)
-            else:
-                return True if x.size == 0 else False
+            return False
 
 
 class FuzzInitial(Function):
@@ -333,7 +336,7 @@ class FuzzRemove(Function):
             raise ValueError(f'Deletion is not supported for {str(x)}')
         if isinstance(x, Fuzzarray):
             assert x.size > 0, 'The set is empty, can not be removed.'
-            assert e in x.array, f'{x} is not in the set.'
+            assert e in x.array, f'{e} is not in the set.'
             x.array = np.delete(x.array, np.where(x.array == e))
             return x
 

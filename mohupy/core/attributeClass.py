@@ -23,6 +23,8 @@ class Report(Attribute):
 
     def function(self, x):
         if isinstance(x, Fuzznum):
+            if x.md is None and x.nmd is None:
+                return f'<>'
             if x.mtype == 'qrofn':
                 return f'<{np.round(x.md, 4)},{np.round(x.nmd, 4)}>'
             if x.mtype == 'ivfn':
@@ -36,8 +38,6 @@ class Report(Attribute):
                     return f'<{np.round(x.md[:8], 4)}..., {np.round(x.nmd[:8], 4)}...>'
                 else:
                     return f'<{np.round(x.md, 4)}, {np.round(x.nmd, 4)}>'
-            if x.md is None and x.nmd is None:
-                return f'<>'
         if isinstance(x, Fuzzarray):
             p = str(x.array).replace('\n', '\n' + ' ' * 10)
             return f'Fuzzarray({p}, qrung={x.qrung}, mtype={x.mtype})'
@@ -47,6 +47,8 @@ class Report(Attribute):
 class Str(Attribute):
     def function(self, x):
         if isinstance(x, Fuzznum):
+            if x.md is None and x.nmd is None:
+                return f'<>'
             if x.mtype == 'qrofn':
                 return f'<{np.round(x.md, 4)},{np.round(x.nmd, 4)}>'
             if x.mtype == 'ivfn':
@@ -60,8 +62,6 @@ class Str(Attribute):
                     return f'<{np.round(x.md[:8], 4)}..., {np.round(x.nmd[:8], 4)}...>'
                 else:
                     return f'<{np.round(x.md, 4)}, {np.round(x.nmd, 4)}>'
-            if x.md is None and x.nmd is None:
-                return f'<>'
         if isinstance(x, Fuzzarray):
             return str(x.array)
         raise TypeError(f'Unsupported data types:{type(x)}.')

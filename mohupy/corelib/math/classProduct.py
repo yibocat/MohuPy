@@ -35,7 +35,7 @@ class Dot(Mathematics):
             if y.ndim == 0:
                 return np.dot(x, y.array)
             else:
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 result = np.dot(x, y.array)
                 newset.array = result
                 return newset
@@ -44,7 +44,7 @@ class Dot(Mathematics):
             if x.ndim == 0:
                 return np.dot(x.array, y)
             else:
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 result = np.dot(x.array, y)
                 newset.array = result
                 return newset
@@ -52,12 +52,11 @@ class Dot(Mathematics):
             if x.ndim == 0 and y.ndim == 0:
                 return np.dot(x.array, y.array)
             else:
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 result = np.dot(x.array, y.array)
                 newset.array = result
                 return newset
         raise ValueError(f'Invalid input type {type(x)} and {type(y)}')
-
 
 
 class Inner(Mathematics):
@@ -84,7 +83,7 @@ class Inner(Mathematics):
             if y.ndim == 0:
                 return np.inner(x, y.array)
             else:
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 result = np.inner(x, y.array)
                 newset.array = result
                 return newset
@@ -93,7 +92,7 @@ class Inner(Mathematics):
             if x.ndim == 0:
                 return np.inner(x.array, y)
             else:
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 result = np.inner(x.array, y)
                 newset.array = result
                 return newset
@@ -101,7 +100,7 @@ class Inner(Mathematics):
             if x.ndim == 0 and y.ndim == 0:
                 return np.inner(x.array, y.array)
             else:
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 result = np.inner(x.array, y.array)
                 newset.array = result
                 return newset
@@ -127,28 +126,27 @@ class Outer(Mathematics):
         """
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
             result = np.outer(x, y)
-            newset = Fuzzarray(x.qrung, y.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = result
             return newset
 
         if isinstance(x, Fuzznum) and isinstance(y, Fuzzarray):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             result = np.outer(x, y.array)
             newset.array = result
             return newset
 
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzznum):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             result = np.outer(x.array, y)
             newset.array = result
             return newset
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             result = np.outer(x.array, y.array)
             newset.array = result
             return newset
         raise ValueError(f'Invalid input type {type(x)} and {type(y)}')
-
 
 
 class Cartadd(Mathematics):
@@ -187,21 +185,21 @@ class Cartadd(Mathematics):
             if y.ndim == 0:
                 return np.add.outer(x, y.array)
             else:
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 newset.array = np.add.outer(x, y.array)
                 return newset
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzznum):
             if x.ndim == 0:
                 return np.add.outer(x.array, y)
             else:
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 newset.array = np.add.outer(x.array, y)
                 return newset
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
             if x.ndim == 0 and y.ndim == 0:
                 return np.add.outer(x.array, y.array)
             else:
-                newset = Fuzzarray(x.qrung, x.mtype)
+                newset = Fuzzarray(x.qrung)
                 newset.array = np.add.outer(x.array, y.array)
                 return newset
 
@@ -224,28 +222,18 @@ class Cartprod(Mathematics):
                 The cartesian product of x and y.
         """
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.asarray(np.meshgrid(x, y))
             return newset
         if isinstance(x, Fuzznum) and isinstance(y, Fuzzarray):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.asarray(np.meshgrid(x, y.array))
             return newset
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzznum):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.asarray(np.meshgrid(x.array, y))
             return newset
         if isinstance(x, Fuzzarray) and isinstance(y, Fuzzarray):
-            newset = Fuzzarray(x.qrung, x.mtype)
+            newset = Fuzzarray(x.qrung)
             newset.array = np.asarray(np.meshgrid(x.array, y.array))
             return newset
-
-
-
-
-
-
-
-
-
-
