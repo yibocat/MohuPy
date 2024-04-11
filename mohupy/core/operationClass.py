@@ -9,7 +9,7 @@ from .operationLib import archimedeanDict
 
 
 class BasicOperation:
-    norms = 'algebraic'
+    # norms = 'algebraic'
 
     def __init__(self, qrung, mtype):
         self.qrung = qrung
@@ -17,54 +17,60 @@ class BasicOperation:
 
     def add(self, x, y):
         from .fuzznums import Fuzznum
+        from ..config import Config
         newfn = Fuzznum()
         newfn.mtype = self.mtype
         newfn.qrung = self.qrung
-        newfn.md = archimedeanDict[self.norms]['add'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[0]
-        newfn.nmd = archimedeanDict[self.norms]['add'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[1]
+        newfn.md = archimedeanDict[Config.arch]['add'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[0]
+        newfn.nmd = archimedeanDict[Config.arch]['add'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[1]
         return newfn
 
     def sub(self, x, y):
         from .fuzznums import Fuzznum
+        from ..config import Config
         newfn = Fuzznum()
         newfn.mtype = self.mtype
         newfn.qrung = self.qrung
-        newfn.md = archimedeanDict[self.norms]['sub'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[0]
-        newfn.nmd = archimedeanDict[self.norms]['sub'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[1]
+        newfn.md = archimedeanDict[Config.arch]['sub'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[0]
+        newfn.nmd = archimedeanDict[Config.arch]['sub'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[1]
         return newfn
 
     def mul(self, x, y):
         from .fuzznums import Fuzznum
+        from ..config import Config
         newfn = Fuzznum()
         newfn.mtype = self.mtype
         newfn.qrung = self.qrung
-        newfn.md = archimedeanDict[self.norms]['mul'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[0]
-        newfn.nmd = archimedeanDict[self.norms]['mul'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[1]
+        newfn.md = archimedeanDict[Config.arch]['mul'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[0]
+        newfn.nmd = archimedeanDict[Config.arch]['mul'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[1]
         return newfn
 
     def div(self, x, y):
         from .fuzznums import Fuzznum
+        from ..config import Config
         newfn = Fuzznum()
         newfn.mtype = self.mtype
         newfn.qrung = self.qrung
-        newfn.md = archimedeanDict[self.norms]['div'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[0]
-        newfn.nmd = archimedeanDict[self.norms]['div'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[1]
+        newfn.md = archimedeanDict[Config.arch]['div'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[0]
+        newfn.nmd = archimedeanDict[Config.arch]['div'][self.mtype](x.md, x.nmd, y.md, y.nmd, self.qrung)[1]
         return newfn
 
     def power(self, l, x):
         from .fuzznums import Fuzznum
+        from ..config import Config
         newfn = Fuzznum()
         newfn.mtype = self.mtype
         newfn.qrung = self.qrung
-        newfn.md = archimedeanDict[self.norms]['pow'][self.mtype](l, x.md, x.nmd, self.qrung)[0]
-        newfn.nmd = archimedeanDict[self.norms]['pow'][self.mtype](l, x.md, x.nmd, self.qrung)[1]
+        newfn.md = archimedeanDict[Config.arch]['pow'][self.mtype](l, x.md, x.nmd, self.qrung)[0]
+        newfn.nmd = archimedeanDict[Config.arch]['pow'][self.mtype](l, x.md, x.nmd, self.qrung)[1]
         return newfn
 
     def times(self, l, x):
         from .fuzznums import Fuzznum
+        from ..config import Config
         newfn = Fuzznum()
         newfn.mtype = self.mtype
         newfn.qrung = self.qrung
-        newfn.md = archimedeanDict[self.norms]['tim'][self.mtype](l, x.md, x.nmd, self.qrung)[0]
-        newfn.nmd = archimedeanDict[self.norms]['tim'][self.mtype](l, x.md, x.nmd, self.qrung)[1]
+        newfn.md = archimedeanDict[Config.arch]['tim'][self.mtype](l, x.md, x.nmd, self.qrung)[0]
+        newfn.nmd = archimedeanDict[Config.arch]['tim'][self.mtype](l, x.md, x.nmd, self.qrung)[1]
         return newfn

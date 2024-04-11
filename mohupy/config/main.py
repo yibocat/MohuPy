@@ -20,3 +20,10 @@ def set_mtype(mtype: str):
     if mtype not in Config.mtype_dict:
         raise ValueError(f'Fuzzy type \'{mtype}\' does not exist. Please choose from {Config.mtype_dict}')
     Config.mtype = mtype
+
+
+def set_approx(approx):
+    if approx <= 0:
+        raise ValueError(f'Invalid approximation value: {approx}.')
+    from ..core import Approx
+    Approx.round = approx

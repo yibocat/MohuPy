@@ -11,13 +11,11 @@ from ...tensor import Fuzztensor
 
 class TensorRandom(Random):
 
-    def __init__(self, q):
-        self.q = q
+    def __init__(self, qrung):
+        self.qrung = qrung
 
     def function(self, *n):
-        from ...corelib.random import rand
-        newTensor = Fuzztensor()
-        # newTensor.data = rand(self.q, 'qrofn', *n)
-        newTensor.data = rand(*n, qrung=self.q)
-        return newTensor
+        from ...corelib.random.randclass import Rand
+        r = Rand(self.qrung, 1, 5)(*n)
+        return Fuzztensor(r)
 

@@ -152,7 +152,10 @@ class FuzzValidity(Function):
 
 
 class FuzzEmpty(Function):
-    def function(self, x, onlyfn):
+    def __init__(self, onlyfn):
+        self.onlyfn = onlyfn
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrofn':
                 if x.md is None and x.nmd is None:
@@ -173,8 +176,8 @@ class FuzzEmpty(Function):
         if isinstance(x, Fuzzarray):
             if x.size == 0:
                 return True
-            if onlyfn:
-                vec_func = np.vectorize(lambda u: FuzzEmpty()(u, onlyfn))
+            if self.onlyfn:
+                vec_func = np.vectorize(lambda u: FuzzEmpty(self.onlyfn)(u))
                 return vec_func(x.array)
             return False
 
@@ -215,11 +218,15 @@ class FuzzConvert(Function):
 
 
 class FuzzQsort(Function):
-    def function(self, x, reverse=True):
+
+    def __init__(self, reverse):
+        self.reverse = reverse
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrohfn':
                 newfn = copy.deepcopy(x)
-                if reverse:
+                if self.reverse:
                     newfn.md = np.sort(x.md)
                     newfn.nmd = np.sort(x.nmd)
                 else:
@@ -229,7 +236,7 @@ class FuzzQsort(Function):
             else:
                 return x
         if isinstance(x, Fuzzarray):
-            vec_func = np.vectorize(lambda u: FuzzQsort()(u, reverse))
+            vec_func = np.vectorize(lambda u: FuzzQsort(self.reverse)(u))
             newset = Fuzzarray(x.qrung)
             newset.array = vec_func(x.array)
             return newset
@@ -240,7 +247,10 @@ class FuzzUnique(Function):
         Simplify the membership and non-membership degrees with Approx.round precision
     """
 
-    def function(self, x, onlyfn=False):
+    def __init__(self, onlyfn):
+        self.onlyfn = onlyfn
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             if x.mtype == 'qrohfn':
                 t = copy.deepcopy(x)
@@ -250,8 +260,8 @@ class FuzzUnique(Function):
             else:
                 return x
         if isinstance(x, Fuzzarray):
-            if onlyfn:
-                vec_func = np.vectorize(lambda u: FuzzUnique()(u, onlyfn))
+            if self.onlyfn:
+                vec_func = np.vectorize(lambda u: FuzzUnique(self.onlyfn)(u))
                 newset = Fuzzarray(x.qrung)
                 newset.array = vec_func(x.array)
                 return newset
@@ -284,103 +294,126 @@ class FuzzAppend(Function):
         4. 模糊集 + 模糊集
     """
 
-    def function(self, x, e):
-        if isinstance(x, Fuzznum) and isinstance(e, Fuzznum):
-            assert x.qrung == e.qrung, f'qrung mismatch(x.qrung:{x.qrung} and e.qrung:{e.qrung}).'
-            assert x.mtype == e.mtype, f'mtype mismatch(x.mtype:{x.mtype} and e.mtype:{e.mtype}).'
+    def __init__(self, e):
+        self.e = e
+
+    def function(self, x):
+        if isinstance(x, Fuzznum) and isinstance(self.e, Fuzznum):
+            assert x.qrung == self.e.qrung, f'qrung mismatch(x.qrung:{x.qrung} and e.qrung:{self.e.qrung}).'
+            assert x.mtype == self.e.mtype, f'mtype mismatch(x.mtype:{x.mtype} and e.mtype:{self.e.mtype}).'
             newset = Fuzzarray(x.qrung)
-            newset.array = np.append(newset.array, [x, e])
+            newset.array = np.append(newset.array, [x, self.e])
             return newset
-        if isinstance(x, Fuzznum) and isinstance(e, Fuzzarray):
-            if e.mtype is not None and e.qrung is not None:
-                assert x.qrung == e.qrung, f'qrung mismatch(x.qrung:{x.qrung} and e.qrung:{e.qrung}).'
-                assert x.mtype == e.mtype, f'mtype mismatch(x.mtype:{x.mtype} and e.mtype:{e.mtype}).'
-                e.array = np.insert(e.array, 0, x)
-                return e
+        if isinstance(x, Fuzznum) and isinstance(self.e, Fuzzarray):
+            if self.e.mtype is not None and self.e.qrung is not None:
+                assert x.qrung == self.e.qrung, f'qrung mismatch(x.qrung:{x.qrung} and e.qrung:{self.e.qrung}).'
+                assert x.mtype == self.e.mtype, f'mtype mismatch(x.mtype:{x.mtype} and e.mtype:{self.e.mtype}).'
+                self.e.array = np.insert(self.e.array, 0, x)
+                return self.e
             else:
-                e.qrung = x.qrung
-                e.mtype = x.mtype
-                e.array = np.append(e.array, x)
-                return e
-        if isinstance(x, Fuzzarray) and isinstance(e, Fuzznum):
+                self.e.qrung = x.qrung
+                self.e.mtype = x.mtype
+                self.e.array = np.append(self.e.array, x)
+                return self.e
+        if isinstance(x, Fuzzarray) and isinstance(self.e, Fuzznum):
             if x.mtype is not None and x.qrung is not None:
-                assert x.qrung == e.qrung, f'qrung mismatch(x.qrung:{x.qrung} and e.qrung:{e.qrung}).'
-                assert x.mtype == e.mtype, f'mtype mismatch(x.mtype:{x.mtype} and e.mtype:{e.mtype}).'
-                x.array = np.append(x.array, e)
+                assert x.qrung == self.e.qrung, f'qrung mismatch(x.qrung:{x.qrung} and e.qrung:{self.e.qrung}).'
+                assert x.mtype == self.e.mtype, f'mtype mismatch(x.mtype:{x.mtype} and e.mtype:{self.e.mtype}).'
+                x.array = np.append(x.array, self.e)
                 return x
             else:
-                x.qrung = e.qrung
-                x.mtype = e.mtype
-                x.array = np.append(x.array, e)
+                x.qrung = self.e.qrung
+                x.mtype = self.e.mtype
+                x.array = np.append(x.array, self.e)
                 return x
-        if isinstance(x, Fuzzarray) and isinstance(e, Fuzzarray):
-            if x.mtype is not None and x.qrung is not None and e.mtype is not None and e.qrung is not None:
-                assert x.qrung == e.qrung, f'qrung mismatch(x.qrung:{x.qrung} and e.qrung:{e.qrung}).'
-                assert x.mtype == e.mtype, f'mtype mismatch(x.mtype:{x.mtype} and e.mtype:{e.mtype}).'
-                x.array = np.append(x.array, e.array)
+        if isinstance(x, Fuzzarray) and isinstance(self.e, Fuzzarray):
+            if x.mtype is not None and x.qrung is not None and self.e.mtype is not None and self.e.qrung is not None:
+                assert x.qrung == self.e.qrung, f'qrung mismatch(x.qrung:{x.qrung} and e.qrung:{self.e.qrung}).'
+                assert x.mtype == self.e.mtype, f'mtype mismatch(x.mtype:{x.mtype} and e.mtype:{self.e.mtype}).'
+                x.array = np.append(x.array, self.e.array)
                 return x
-            elif x.mtype is not None and x.qrung is not None and e.mtype is None and e.qrung is None:
-                x.array = np.append(x.array, e.array)
+            elif x.mtype is not None and x.qrung is not None and self.e.mtype is None and self.e.qrung is None:
+                x.array = np.append(x.array, self.e.array)
                 return x
-            elif x.mtype is None and x.qrung is None and e.mtype is not None and e.qrung is not None:
-                e.array = np.append(e.array, x.array)
-                return e
+            elif x.mtype is None and x.qrung is None and self.e.mtype is not None and self.e.qrung is not None:
+                self.e.array = np.append(self.e.array, x.array)
+                return self.e
             else:
                 return x
-        raise TypeError(f'Unsupported type({type(x)} and {type(e)}).')
+        raise TypeError(f'Unsupported type({type(x)} and {type(self.e)}).')
 
 
 class FuzzRemove(Function):
-    def function(self, x, e):
+
+    def __init__(self, e):
+        self.e = e
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             raise ValueError(f'Deletion is not supported for {str(x)}')
         if isinstance(x, Fuzzarray):
             assert x.size > 0, 'The set is empty, can not be removed.'
-            assert e in x.array, f'{e} is not in the set.'
-            x.array = np.delete(x.array, np.where(x.array == e))
+            assert self.e in x.array, f'{self.e} is not in the set.'
+            x.array = np.delete(x.array, np.where(x.array == self.e))
             return x
 
 
 class FuzzPop(Function):
-    def function(self, x, i):
+
+    def __init__(self, index):
+        self.index = index
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             raise ValueError(f'Deletion is not supported for {str(x)}')
         if isinstance(x, Fuzzarray):
-            x.array = np.delete(x.array, i)
+            x.array = np.delete(x.array, self.index)
             return x
 
 
 class FuzzReshape(Function):
-    def function(self, x, *shape):
+
+    def __init__(self, *shape):
+        self.shape = shape
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             newset = Fuzzarray(x.qrung)
-            newset.array = np.reshape(x, *shape)
+            newset.array = np.reshape(x, *self.shape)
             return newset
         if isinstance(x, Fuzzarray):
             newset = Fuzzarray(x.qrung)
-            newset.array = x.array.reshape(*shape)
+            newset.array = x.array.reshape(*self.shape)
             return newset
 
 
 class FuzzSqueeze(Function):
-    def function(self, x, axis):
+
+    def __init__(self, axis):
+        self.axis = axis
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             return x
         if isinstance(x, Fuzzarray):
             newset = Fuzzarray(x.qrung)
-            newset.array = np.squeeze(x.array, axis)
+            newset.array = np.squeeze(x.array, self.axis)
             return newset
 
 
 class FuzzBroadcast(Function):
-    def function(self, x, shape):
+
+    def __init__(self, *shape):
+        self.shape = shape
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             newset = Fuzzarray(x.qrung)
-            newset.array = np.broadcast_to(x, shape)
+            newset.array = np.broadcast_to(x, self.shape)
             return newset
         if isinstance(x, Fuzzarray):
             newset = Fuzzarray(x.qrung)
-            newset.array = np.broadcast_to(x.array, shape)
+            newset.array = np.broadcast_to(x.array, self.shape)
             return newset
 
 
@@ -422,17 +455,22 @@ class FuzzFlatten(Function):
 
 
 class FuzzGetMax(Function):
-    def function(self, x, show, axis):
+
+    def __init__(self, show, axis):
+        self.show = show
+        self.axis = axis
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             return x
         if isinstance(x, Fuzzarray):
-            if axis is None:
+            if self.axis is None:
                 index = np.unravel_index(np.argmax(x.array), x.shape)
-                if show:
+                if self.show:
                     print(index)
                 return x.array[index]
             else:
-                m = np.max(x.array, axis=axis)
+                m = np.max(x.array, axis=self.axis)
                 if isinstance(m, Fuzznum):
                     return m
                 if isinstance(m, np.ndarray):
@@ -442,17 +480,22 @@ class FuzzGetMax(Function):
 
 
 class FuzzGetMin(Function):
-    def function(self, x, show, axis):
+
+    def __init__(self, show, axis):
+        self.show = show
+        self.axis = axis
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             return x
         if isinstance(x, Fuzzarray):
-            if axis is None:
+            if self.axis is None:
                 index = np.unravel_index(np.argmin(x.array), x.shape)
-                if show:
+                if self.show:
                     print(index)
                 return x.array[index]
             else:
-                m = np.min(x.array, axis=axis)
+                m = np.min(x.array, axis=self.axis)
                 if isinstance(m, Fuzznum):
                     return m
                 if isinstance(m, np.ndarray):
@@ -462,18 +505,28 @@ class FuzzGetMin(Function):
 
 
 class FuzzGetFmax(Function):
-    def function(self, x, func, *args, show, axis):
+
+    def __init__(self, show, axis, func, *params):
+        self.show = show
+        self.axis = axis
+        self.func = func
+        self.params = params
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             raise TypeError(f'Unsupported type({type(x)})')
         if isinstance(x, Fuzzarray):
-            slist = func(x.array, *args)
-            if axis is None:
+            if self.func is None:
+                return FuzzGetMax(self.show, self.axis)(x)
+
+            slist = self.func(x.array, *self.params)
+            if self.axis is None:
                 index = np.unravel_index(np.argmax(slist), x.shape)
-                if show:
+                if self.show:
                     print(index)
                 return x.array[index]
             else:
-                m = np.max(slist, axis=axis)
+                m = np.max(slist, axis=self.axis)
                 if isinstance(m, Fuzznum):
                     return m
                 if isinstance(slist, np.ndarray):
@@ -483,18 +536,28 @@ class FuzzGetFmax(Function):
 
 
 class FuzzGetFmin(Function):
-    def function(self, x, func, *args, show, axis):
+
+    def __init__(self, show, axis, func, *params):
+        self.show = show
+        self.axis = axis
+        self.func = func
+        self.params = params
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             raise TypeError(f'Unsupported type({type(x)})')
         if isinstance(x, Fuzzarray):
-            slist = func(x.array, *args)
-            if axis is None:
+            if self.func is None:
+                return FuzzGetMin(self.show, self.axis)(x)
+
+            slist = self.func(x.array, *self.params)
+            if self.axis is None:
                 index = np.unravel_index(np.argmin(slist), x.shape)
-                if show:
+                if self.show:
                     print(index)
                 return x.array[index]
             else:
-                m = np.min(slist, axis=axis)
+                m = np.min(slist, axis=self.axis)
                 if isinstance(m, Fuzznum):
                     return m
                 if isinstance(slist, np.ndarray):
@@ -504,14 +567,19 @@ class FuzzGetFmin(Function):
 
 
 class FuzzGetSum(Function):
-    def function(self, x, axis, keepdims):
+
+    def __init__(self, axis, keepdims):
+        self.axis = axis
+        self.keepdims = keepdims
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             return x
         if isinstance(x, Fuzzarray):
-            if axis is None:
+            if self.axis is None:
                 return np.sum(x.array)
             else:
-                s = np.sum(x.array, axis=axis, keepdims=keepdims)
+                s = np.sum(x.array, axis=self.axis, keepdims=self.keepdims)
                 if isinstance(s, Fuzznum):
                     return s
                 if isinstance(s, np.ndarray):
@@ -521,14 +589,19 @@ class FuzzGetSum(Function):
 
 
 class FuzzGetProd(Function):
-    def function(self, x, axis, keepdims):
+
+    def __init__(self, axis, keepdims):
+        self.axis = axis
+        self.keepdims = keepdims
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             return x
         if isinstance(x, Fuzzarray):
-            if axis is None:
+            if self.axis is None:
                 return np.prod(x.array)
             else:
-                s = np.prod(x.array, axis=axis, keepdims=keepdims)
+                s = np.prod(x.array, axis=self.axis, keepdims=self.keepdims)
                 if isinstance(s, Fuzznum):
                     return s
                 if isinstance(s, np.ndarray):
@@ -538,14 +611,18 @@ class FuzzGetProd(Function):
 
 
 class FuzzMean(Function):
-    def function(self, x, axis):
+
+    def __init__(self, axis):
+        self.axis = axis
+
+    def function(self, x):
         if isinstance(x, Fuzznum):
             return x
         if isinstance(x, Fuzzarray):
-            if axis is None:
+            if self.axis is None:
                 return np.mean(x.array)
             else:
-                s = np.mean(x.array, axis=axis)
+                s = np.mean(x.array, axis=self.axis)
                 if isinstance(s, Fuzznum):
                     return s
                 if isinstance(s, np.ndarray):
@@ -555,7 +632,11 @@ class FuzzMean(Function):
 
 
 class FuzzNormalize(Function):
-    def function(self, d1, d2, t):
+
+    def __init__(self, tao):
+        self.tao = tao
+
+    def function(self, d1, d2):
         """
             The normalization function for two q-rung orthopair hesitant fuzzy numbers.
                 The parameter 't' is the risk factor of normalization process, which in
@@ -568,8 +649,6 @@ class FuzzNormalize(Function):
                     The first q-rung orthopair hesitant fuzzy number
                 d2 : Fuzznum
                     The second q-rung orthopair hesitant fuzzy number
-                t : float or np.float_
-                    The risk factor of normalization process
 
             References
             ----------
@@ -593,7 +672,7 @@ class FuzzNormalize(Function):
                 i = 0.
                 m = d_2.md
                 while i < md_len:
-                    d_2.md = np.append(d_2.md, __adj(m, t))
+                    d_2.md = np.append(d_2.md, __adj(m, self.tao))
                     i += 1
             else:
                 # Explain that the number of membership elements in d1 is less than d2,
@@ -601,7 +680,7 @@ class FuzzNormalize(Function):
                 i = 0.
                 m = d_1.md
                 while i < (-md_len):
-                    d_1.md = np.append(d_1.md, __adj(m, t))
+                    d_1.md = np.append(d_1.md, __adj(m, self.tao))
                     i += 1
 
             if nmd_len > 0:
@@ -610,13 +689,13 @@ class FuzzNormalize(Function):
                 i = 0.
                 u = d_2.nmd
                 while i < nmd_len:
-                    d_2.nmd = np.append(d_2.nmd, __adj(u, t))
+                    d_2.nmd = np.append(d_2.nmd, __adj(u, self.tao))
                     i += 1
             else:
                 i = 0.
                 u = d_1.nmd
                 while i < (-nmd_len):
-                    d_1.nmd = np.append(d_1.nmd, __adj(u, t))
+                    d_1.nmd = np.append(d_1.nmd, __adj(u, self.tao))
                     i += 1
             return d_1.qsort(), d_2.qsort()
         else:

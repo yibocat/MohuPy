@@ -30,7 +30,7 @@ class TensorEmpty(Function):
             return True
         else:
             from ..core.funcitonClass import FuzzEmpty
-            return FuzzEmpty()(x.data, self.onlyfn)
+            return FuzzEmpty(self.onlyfn)(x.data)
 
 
 class TensorValidity(Function):
@@ -61,8 +61,9 @@ class TensorUnique(Function):
     """
     def forward(self, x: Fuzztensor):
         from ..core.funcitonClass import FuzzUnique
-        x.data = FuzzUnique()(x.data, False)
-        return x
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzUnique(False)(x.data)
+        return newFTensor
 
 
 class TensorAppend(Function):
@@ -74,25 +75,33 @@ class TensorAppend(Function):
 
     def forward(self, x: Fuzztensor):
         if x.data is None:
-            x.data = copy.deepcopy(self.e)
-            return x
+            newFTensor = Fuzztensor()
+            newFTensor.data = copy.deepcopy(self.e)
+            return newFTensor
         else:
             from ..core.funcitonClass import FuzzAppend
-            x.data = FuzzAppend()(x.data, self.e)
-            return x
+            newFTensor = Fuzztensor()
+            newFTensor.data = FuzzAppend(self.e)(x.data)
+            return newFTensor
 
 
 class TensorRemove(Function):
 
-    def __init__(self, e: Fuzznum):
-        if not isinstance(e, Fuzznum):
+    def __init__(self, e: Union[Fuzznum, Fuzzarray, Fuzztensor]):
+        if not isinstance(e, Union[Fuzznum, Fuzzarray, Fuzztensor]):
             raise TypeError(f'Not implemented of {type(e)} for remove function.')
-        self.e = e
+        if isinstance(e, Fuzznum):
+            self.e = e
+        if isinstance(e, Fuzzarray):
+            self.e = e.array
+        if isinstance(e, Fuzztensor):
+            self.e = e.data.array
 
     def forward(self, x: Fuzztensor):
         from ..core.funcitonClass import FuzzRemove
-        x.data = FuzzRemove()(x.data, self.e)
-        return x
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzRemove(self.e)(x.data)
+        return newFTensor
 
 
 class TensorPop(Function):
@@ -102,8 +111,9 @@ class TensorPop(Function):
 
     def forward(self, x: Fuzztensor):
         from ..core.funcitonClass import FuzzPop
-        x.data = FuzzPop()(x.data, self.index)
-        return x
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzPop(self.index)(x.data)
+        return newFTensor
 
 
 class TensorSqueeze(Function):
@@ -113,8 +123,9 @@ class TensorSqueeze(Function):
 
     def forward(self, x: Fuzztensor):
         from ..core.funcitonClass import FuzzSqueeze
-        x.data = FuzzSqueeze()(x.data, self.axis)
-        return x
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzSqueeze(self.axis)(x.data)
+        return newFTensor
 
 
 class TensorClear(Function):
@@ -124,57 +135,85 @@ class TensorClear(Function):
 
     def forward(self, x: Fuzztensor):
         if self.to_none:
-            x.data = None
+            newFTensor = copy.deepcopy(x)
+            newFTensor.data = None
+            return newFTensor
         else:
             from ..core.funcitonClass import FuzzClear
-            x = Fuzztensor(FuzzClear()(x.data))
-        return x
+            newFTensor = Fuzztensor(FuzzClear()(x.data))
+            return newFTensor
 
 
 class TensorInitialize(Function):
     def forward(self, x: Fuzztensor):
-        x.data = None
-        return x
+        newFTensor = copy.deepcopy(x)
+        newFTensor.data = None
+        return newFTensor
 
 
+class TensorRavel(Function):
+    def forward(self, x: Fuzztensor):
+        from ..core.funcitonClass import FuzzRavel
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzRavel()(x.data)
+        return newFTensor
 
 
-
-#
-# class TensorBroadcastTo(Operation):
-#     def __init__(self, shape):
-#         self.shape = shape
-#
-#     def forward(self, x: Fuzztensor):
-#         # self.x_shape = x.shape
-#         from ..core.functionClass import FuzzBroadcast
-#         newFTensor = FuzzBroadcast()(x.data, self.shape)
-#         return newFTensor
-#
-#     def backward(self, grad):
-#         ...
-#
-#
-# class TensorSumTo(Operation):
-#     def __init__(self, shape):
-#         self.shape = shape
-#
-#     def forward(self, x: Fuzztensor):
-#         ...
-#
-#
-#
-#
-#
-#
-#
-#
+class TensorFlatten(Function):
+    def forward(self, x: Fuzztensor):
+        from ..core.funcitonClass import FuzzFlatten
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzFlatten()(x.data)
+        return newFTensor
 
 
+class TensorGetMax(Function):
+    def __init__(self, show, axis):
+        self.show = show
+        self.axis = axis
+
+    def forward(self, x: Fuzztensor):
+        from ..core.funcitonClass import FuzzGetMax
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzGetMax(self.show, self.axis)(x.data)
+        return newFTensor
 
 
+class TensorGetMin(Function):
+    def __init__(self, show, axis):
+        self.show = show
+        self.axis = axis
+
+    def forward(self, x: Fuzztensor):
+        from ..core.funcitonClass import FuzzGetMin
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzGetMin(self.show, self.axis)(x.data)
+        return newFTensor
 
 
+class TensorGetFmax(Function):
+    def __init__(self, show, axis, func, *params):
+        self.show = show
+        self.axis = axis
+        self.func = func
+        self.params = params
+
+    def forward(self, x: Fuzztensor):
+        from ..core.funcitonClass import FuzzGetFmax
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzGetFmax(self.show, self.axis, self.func, *self.params)(x)
+        return newFTensor
 
 
+class TensorGetFmin(Function):
+    def __init__(self, show, axis, func, *params):
+        self.show = show
+        self.axis = axis
+        self.func = func
+        self.params = params
 
+    def forward(self, x: Fuzztensor):
+        from ..core.funcitonClass import FuzzGetFmin
+        newFTensor = Fuzztensor()
+        newFTensor.data = FuzzGetFmin(self.show, self.axis, self.func, *self.params)(x)
+        return newFTensor

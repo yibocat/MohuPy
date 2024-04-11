@@ -12,12 +12,12 @@ from .utils import as_fuzzarray
 from .utils import as_fuzztensor
 
 from ..core import Fuzzarray
-from ..corelib import poss_like, negs_like, zeros, dot
+# from ..corelib import poss_like, negs_like, zeros, dot, negs
 
 
 class Add(Operation):
     def forward(self, x0, x1):
-        # self.x0_shape, self.x1_shape = x0.shape, x1.shape
+        self.x0_shape, self.x1_shape = x0.shape, x1.shape
         y = x0 + x1
         return (y,)
 
@@ -25,22 +25,23 @@ class Add(Operation):
         x1 = self.inputs[0].data
         x2 = self.inputs[1].data
 
-        y1 = poss_like(x1)
-        y2 = poss_like(x2)
+        from ..corelib.lib.classConstruct import PossLikeConstruct
+        y1 = PossLikeConstruct(x1)()
+        y2 = PossLikeConstruct(x2)()
 
         y1 = as_fuzzarray(y1)
         y2 = as_fuzzarray(y2)
 
-        # if self.x0_shape != self.x1_shape:
-        # y1 = sum_to(y1, self.x0_shape)
-        # y2 = sum_to(y2, self.x1_shape)
+        if self.x0_shape != self.x1_shape:
+            y1 = SumTo.sum_to(y1, self.x0_shape)
+            y2 = SumTo.sum_to(y2, self.x1_shape)
 
         return as_fuzztensor(y1), as_fuzztensor(y2)
 
 
 class Sub(Operation):
     def forward(self, x0, x1):
-        # self.x0_shape, self.x1_shape = x0.shape, x1.shape
+        self.x0_shape, self.x1_shape = x0.shape, x1.shape
         y = x0 - x1
         return y
 
@@ -48,21 +49,22 @@ class Sub(Operation):
         x1 = self.inputs[0].data
         x2 = self.inputs[1].data
 
-        y1 = poss_like(x1)
-        y2 = negs_like(x2)
+        from ..corelib.lib.classConstruct import PossLikeConstruct, NegsLikeConstruct
+        y1 = PossLikeConstruct(x1)()
+        y2 = NegsLikeConstruct(x2)()
 
         y1 = as_fuzzarray(y1)
         y2 = as_fuzzarray(y2)
 
-        # if self.x0_shape != self.x1_shape:
-        #     y1 = sum_to(y1, self.x0_shape)
-        #     y2 = sum_to(y2, self.x1_shape)
+        if self.x0_shape != self.x1_shape:
+            y1 = SumTo.sum_to(y1, self.x0_shape)
+            y2 = SumTo.sum_to(y2, self.x1_shape)
         return as_fuzztensor(y1), as_fuzztensor(y2)
 
 
 class Mul(Operation):
     def forward(self, x0, x1):
-        # self.x0_shape, self.x1_shape = x0.shape, x1.shape
+        self.x0_shape, self.x1_shape = x0.shape, x1.shape
         y = x0 * x1
         return y
 
@@ -74,7 +76,8 @@ class Mul(Operation):
             q = self.inputs[0].data.qrung
 
             def deriv(x, h):
-                res = zeros(qrung=q)
+                from ..corelib.lib.classConstruct import ZerosConstruct
+                res = ZerosConstruct(qrung=q)()
                 res.md = (1 + (h.md ** q - 1) / (1 - x.md ** q * h.md ** q)) ** (1 / q)
                 res.nmd = (h.nmd ** q) / (x.nmd ** q + h.nmd ** q - x.nmd ** q * h.nmd ** q)
                 return res
@@ -94,9 +97,9 @@ class Mul(Operation):
 
             gy0, gy1 = n2 * grad, n1 * grad
 
-            # if self.x0_shape != self.x1_shape:
-            #     gy0 = sum_to(gy0, self.x0_shape)
-            #     gy1 = sum_to(gy1, self.x1_shape)
+            if self.x0_shape != self.x1_shape:
+                gy0 = SumTo.sum_to(gy0, self.x0_shape)
+                gy1 = SumTo.sum_to(gy1, self.x1_shape)
 
             return gy0, gy1
 
@@ -106,7 +109,8 @@ class Mul(Operation):
                 raise ValueError("The value must be less than 1.")
 
             def deriv(x, a):
-                res = zeros(qrung=q)
+                from ..corelib.lib.classConstruct import ZerosConstruct
+                res = ZerosConstruct(qrung=q)()
                 if a == 1 or a == 0:
                     res.md = a ** (1 / q)
                     res.nmd = (1 - a) ** (1 / q)
@@ -130,7 +134,8 @@ class Mul(Operation):
                 raise ValueError("The value must be less than 1.")
 
             def deriv(x, a):
-                res = zeros(qrung=q)
+                from ..corelib.lib.classConstruct import ZerosConstruct
+                res = ZerosConstruct(qrung=q)()
                 if a == 1 or a == 0:
                     res.md = a ** (1 / q)
                     res.nmd = (1 - a) ** (1 / q)
@@ -163,7 +168,8 @@ class Div(Operation):
                 raise ValueError("The value must be less than 1.")
 
             def deriv(x, a):
-                res = zeros(qrung=q)
+                from ..corelib.lib.classConstruct import ZerosConstruct
+                res = ZerosConstruct(qrung=q)()
                 if a == 1 or a == 0:
                     res.md = a ** (1 / q)
                     res.nmd = (1 - a) ** (1 / q)
@@ -197,11 +203,14 @@ class Power(Operation):
         l = self.power
 
         def deriv(f):
-            from ..corelib import poss
-            res = poss(qrung=q)
+            # from ..corelib import poss
+            from ..corelib.lib.classConstruct import PossConstruct
+            res = PossConstruct(qrung=q)()
             if f.md < 0.99 and f.nmd > 0.003:
-                res.md = (((1 - f.md ** q) / (1 - f.md ** (l * q))) * l * f.md ** ((l - 1) * q)) ** (1 / q)
-                res.nmd = (1 - (f.nmd ** q) / (1 - (1 - f.nmd ** q) ** l) * l * (1 - f.nmd ** q) ** (l - 1)) ** (1 / q)
+                res.md = (((1 - f.md ** q) / (1 - f.md ** (l * q)))
+                          * l * f.md ** ((l - 1) * q)) ** (1 / q)
+                res.nmd = (1 - (f.nmd ** q) / (1 - (1 - f.nmd ** q) ** l)
+                           * l * (1 - f.nmd ** q) ** (l - 1)) ** (1 / q)
             else:
                 pass
             return res
@@ -216,7 +225,8 @@ class Power(Operation):
 
 class Matmul(Operation):
     def forward(self, x0, x1):
-        y = dot(x0, x1)
+        from ..corelib.math.classProduct import Dot
+        y = Dot()(x0, x1)
         return y
 
     def backward(self, grad):
@@ -253,28 +263,100 @@ class Reshape(Operation):
         return tensor_reshape(grad, self.x_shape)
 
 
+class Sum(Operation):
+    def __init__(self, axis, keepdims):
+        self.axis = axis
+        self.keepdims = keepdims
+
+    def forward(self, x):
+        self.x_shape = x.shape
+        y = x.sum(axis=self.axis, keepdims=self.keepdims)
+        return y
+
+    def backward(self, grad):
+        from .utils import reshape_sum_backward
+        gy = reshape_sum_backward(grad, self.x_shape, self.axis, self.keepdims)
+        from .operationFunc import tensor_broadcast_to
+        gx = tensor_broadcast_to(gy, self.x_shape)
+        return gx
 
 
+class Mean(Operation):
+    def __init__(self, axis):
+        self.axis = axis
+
+    # TODO: 平均数的正向函数和反向微分
 
 
+class Prod(Operation):
+    def __init__(self, axis, keepdims):
+        self.axis = axis
+        self.keepdims = keepdims
+
+    # TODO: 连乘的正向函数和反向微分
 
 
+class BroadcastTo(Operation):
+    def __init__(self, shape):
+        self.shape = shape
+
+    def forward(self, x):
+        self.x_shape = x.shape
+        from ..core.funcitonClass import FuzzBroadcast
+
+        y = FuzzBroadcast(*self.shape)(x)
+        return y
+
+    def backward(self, grad):
+        gx = SumTo.sum_to(grad, self.x_shape)
+        return gx
 
 
+class SumTo(Operation):
+    def __init__(self, shape):
+        self.shape = shape
+
+    def forward(self, x):
+        self.x_shape = x.shape
+        from .utils import sumto
+        y = sumto(x, self.shape)
+        return y
+
+    def backward(self, grad):
+        from .operationFunc import tensor_broadcast_to
+        gx = tensor_broadcast_to(grad, self.x_shape)
+        return gx
+
+    @staticmethod
+    def sum_to(x, shape):
+        if x.shape == shape:
+            return as_fuzztensor(x)
+        return SumTo(shape)(x)
 
 
+class GetItem(Operation):
+    def __init__(self, slices):
+        self.slices = slices
+
+    def forward(self, x):
+        return x[self.slices]
+
+    def backward(self, grad):
+        x, = self.inputs
+        f = GetItemGrad(self.slices, x.shape)
+        return f(grad)
 
 
+class GetItemGrad(Operation):
+    def __init__(self, slices, in_shape):
+        self.slices = slices
+        self.in_shape = in_shape
 
+    def forward(self, x):
+        from ..corelib.lib.classConstruct import NegsConstruct
+        gx = NegsConstruct(x.qrung)(*self.in_shape)
+        np.add.at(gx.array, self.slices, x.array)
+        return gx
 
-
-
-
-
-
-
-
-
-
-
-
+    def backward(self, grad):
+        return GetItem(self.slices)(grad)

@@ -8,6 +8,6 @@
 from ...core import Fuzznum
 
 
-def str2fuzz(s: str, q: int) -> Fuzznum:
-    from .classString import StrToFuzz
-    return StrToFuzz(q)(s)
+# def str2fuzz(s: str, q: int) -> Fuzznum:
+#     from .classString import StrToFuzz
+#     return StrToFuzz(q)(s)

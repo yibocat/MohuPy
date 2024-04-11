@@ -88,3 +88,31 @@ def tensor_reshape(x, *shape) -> Fuzztensor:
     from .operation import Reshape
     return Reshape(shape)(x)
 
+
+def tensor_sum(x, axis=None, keepdims=False) -> Fuzztensor:
+    from .operation import Sum
+    return Sum(axis, keepdims)(x)
+
+
+def tensor_mean(x, axis=None) -> Fuzztensor:
+    # TODO: 暂未完成
+    from .operation import Mean
+    return Mean(axis)(x)
+
+
+def tensor_prod(x, axis=None, keepdims=False) -> Fuzztensor:
+    # TODO: 暂未完成
+    from .operation import Prod
+    return Prod(axis, keepdims)(x)
+
+
+def tensor_broadcast_to(x, *shape) -> Fuzztensor:
+    if x.shape == shape:
+        return as_fuzztensor(x)
+    from .operation import BroadcastTo
+    return BroadcastTo(*shape)(x)
+
+
+def tensor_getitem(x, slices) -> Fuzztensor:
+    from .operation import GetItem
+    return GetItem(slices)(x)

@@ -112,7 +112,7 @@ def distance_qrohfn(d1, d2, l, t, indeterminacy=True):
     # from ...core import normalize
 
     from ...core.funcitonClass import FuzzNormalize
-    d_1, d_2 = FuzzNormalize()(d_1, d_2, t)
+    d_1, d_2 = FuzzNormalize(t)(d_1, d_2)
 
     mds = 0.
     nmds = 0.

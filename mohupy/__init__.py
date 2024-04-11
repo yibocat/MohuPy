@@ -7,23 +7,6 @@
 
 __all__ = []
 
-# from .config import *
-# from .core import *
-# from .function import *
-# # from .generator import *
-# from .lib import *
-# from .math import *
-# from .measure import *
-# from .measure import integral, indices
-# from .random import *
-# from .regedit import *
-# # from .utils import *
-# from .runtime import info
-# from .constant import *
-#
-# __all__ += ['random','measure']
-
-
 from .config import main
 from .core import *
 from .corelib import *

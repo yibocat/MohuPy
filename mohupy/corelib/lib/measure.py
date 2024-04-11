@@ -5,6 +5,6 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-def distance(f1, f2, l=2, t=1, indeterminacy=True):
-    from .classMeasure import Distance
-    return Distance()(f1, f2, l, t, indeterminacy)
+# def distance(f1, f2, l=2, t=1, indeterminacy=True):
+#     from .classMeasure import Distance
+#     return Distance()(f1, f2, l, t, indeterminacy)

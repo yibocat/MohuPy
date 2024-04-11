@@ -62,7 +62,7 @@ class Fuzznum(MohuBase):
 
     def empty(self, onlyfn=False):
         from .funcitonClass import FuzzEmpty
-        return FuzzEmpty()(self, onlyfn)
+        return FuzzEmpty(onlyfn)(self)
 
     def initial(self):
         from .funcitonClass import FuzzInitial
@@ -74,23 +74,23 @@ class Fuzznum(MohuBase):
 
     def qsort(self, reverse=False):
         from .funcitonClass import FuzzQsort
-        return FuzzQsort()(self, reverse)
+        return FuzzQsort(reverse)(self)
 
     def unique(self, onlyfn=False):
         from .funcitonClass import FuzzUnique
-        return FuzzUnique()(self, onlyfn)
+        return FuzzUnique(onlyfn)(self)
 
     def append(self, e):
         from .funcitonClass import FuzzAppend
-        return FuzzAppend()(self, e)
+        return FuzzAppend(e)(self)
 
     def reshape(self, *shape):
         from .funcitonClass import FuzzReshape
-        return FuzzReshape()(self, *shape)
+        return FuzzReshape(*shape)(self)
 
     def squeeze(self, axis=None):
         from .funcitonClass import FuzzSqueeze
-        return FuzzSqueeze()(self, axis)
+        return FuzzSqueeze(axis)(self)
 
     def clear(self):
         from .funcitonClass import FuzzClear
@@ -106,20 +106,20 @@ class Fuzznum(MohuBase):
 
     def max(self, show=False, axis=None):
         from .funcitonClass import FuzzGetMax
-        return FuzzGetMax()(self, show, axis)
+        return FuzzGetMax(show, axis)(self)
 
     def min(self, show=False, axis=None):
         from .funcitonClass import FuzzGetMin
-        return FuzzGetMin()(self, show, axis)
+        return FuzzGetMin(show, axis)(self)
 
     def sum(self, axis=None, keepdims=False):
         from .funcitonClass import FuzzGetSum
-        return FuzzGetSum()(self, axis, keepdims)
+        return FuzzGetSum(axis, keepdims)(self)
 
     def prod(self, axis=None, keepdims=False):
         from .funcitonClass import FuzzGetProd
-        return FuzzGetProd()(self, axis, keepdims)
+        return FuzzGetProd(axis, keepdims)(self)
 
     def mean(self, axis=None):
         from .funcitonClass import FuzzMean
-        return FuzzMean()(self, axis)
+        return FuzzMean(axis)(self)

@@ -43,12 +43,12 @@ class Loadz(Library):
         newset = Fuzzarray()
         new = np.load(path, allow_pickle=True)
         from ...config import Config, set_mtype
-        mtype = new['mtype']
+        mtype = str(new['mtype'])
         if Config.mtype != new['mtype']:
             warnings.warn(f'The fuzzy number type changed: ({Config.mtype} -> {mtype})', Warning)
         set_mtype(mtype)
-        newset.qrung = new['qrung']
-        newset.mtype = new['mtype']
+        newset.qrung = int(new['qrung'])
+        newset.mtype = str(new['mtype'])
         newset.array = new['array']
         return newset
 
@@ -103,12 +103,15 @@ class ToCSV(Library):
         self.header = header
         self.index_col = index_col
 
-    def function(self, path: str, float_format: int):
+    def function(self, path: str):
         if 0 <= self.fuzz.ndim <= 2:
             try:
-                pd.DataFrame(self.fuzz.array, columns=self.header, index=self.index_col).to_csv(path, float_format=f'%.{float_format}f')
+                if isinstance(self.fuzz.array, Fuzzarray):
+                    pd.DataFrame(self.fuzz.array, columns=self.header, index=self.index_col).to_csv(path)
+                else:
+                    pd.DataFrame(np.array(self.fuzz), columns=self.header, index=self.index_col).to_csv(path)
             except Exception as e:
-                print(f'{e}: Save failed.')
+                raise IOError(f'{e}: Save failed.')
         else:
             raise ValueError(f'The ndim of fuzzy array is invalid: ndim={self.fuzz.ndim}')
 

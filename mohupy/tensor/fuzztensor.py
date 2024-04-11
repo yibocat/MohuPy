@@ -5,8 +5,6 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-import warnings
-
 import numpy as np
 
 from typing import Union
@@ -48,8 +46,10 @@ class Fuzztensor(FuzzTensorBase):
     mtype = None
     qrung = None
 
-    ## 构造函数，值得注意的是，data可以设置为Fuzzarray，也可以是ndarray，只不过ndarray只参与运算，不进行求导
-    ## 另外，目前仅支持 ‘qrofn’ 类型的模糊数，其余暂不支持。原因在于 区间值模糊数和犹豫模糊数的微分理论尚不完善
+    """
+        构造函数，值得注意的是，data可以设置为Fuzzarray，也可以是ndarray，只不过ndarray只参与运算，不进行求导
+        另外，目前仅支持 ‘qrofn’ 类型的模糊数，其余暂不支持。原因在于 区间值模糊数和犹豫模糊数的微分理论尚不完善
+    """
 
     def __init__(self, data=None):
         if data is not None:
@@ -73,7 +73,9 @@ class Fuzztensor(FuzzTensorBase):
             else:
                 raise NotImplementedError(f'{type(data).__name__} is not supported.')
 
-    ## 类的特别方法，包括基本打印输出，字符类型，基本运算等等
+    """
+        类的特别方法，包括基本打印输出，字符类型，基本运算等等
+    """
 
     def __repr__(self):
         if self.__data is None:
@@ -81,8 +83,6 @@ class Fuzztensor(FuzzTensorBase):
         p = str(self.__data).replace('\n', '\n' + ' ' * 11)
         if isinstance(self.__data, Fuzzarray):
             return f'Fuzztensor({p}, qrung={self.__data.qrung}, mtype={self.__data.mtype})'
-        # if isinstance(self.__data, Fuzznum):
-        #     return f'Fuzztensor({p}, qrung={self.__data.qrung}, mtype={self.__data.mtype})'
         if isinstance(self.__data, Union[np.ndarray, np.int_, np.float_, float, int]):
             return f'Fuzztensor({p}, mtype=ndarray:{self.__data.dtype})'
 
@@ -128,8 +128,10 @@ class Fuzztensor(FuzzTensorBase):
         from .operationFunc import tensor_matmul
         return tensor_matmul(other, self)
 
-    ## Fuzztensor 的特殊方法，包括Fuzzarray的一些特别性质，包括得分，隶属度和非隶属度
-    ## 不确定度，补，和转置
+    """
+        Fuzztensor 的特殊方法，包括Fuzzarray的一些特别性质，包括得分，隶属度和非隶属度
+        不确定度，补，和转置
+    """
 
     @property
     def score(self):
@@ -238,8 +240,9 @@ class Fuzztensor(FuzzTensorBase):
     def backward(self, retain_grad=False):
         if self.grad is None:
             if isinstance(self.__data, Fuzzarray):
-                from ..corelib import poss_like
-                self.grad = poss_like(self.__data)
+                # from ..corelib import poss_like
+                from ..corelib.lib.classConstruct import PossLikeConstruct
+                self.grad = PossLikeConstruct(self.__data)()
             elif isinstance(self.__data, np.ndarray):
                 self.grad = np.ones_like(self.__data)
             else:
@@ -257,7 +260,10 @@ class Fuzztensor(FuzzTensorBase):
                 seen_set.add(fun)
                 funcs.sort(key=lambda func: func.generation)
 
-        add_func(self.creator)
+        if self.creator is not None:
+            add_func(self.creator)
+        else:
+            self.creator = self
 
         while funcs:
             f = funcs.pop()
@@ -279,7 +285,9 @@ class Fuzztensor(FuzzTensorBase):
                 for y in f.outputs:
                     y().clear_grad()
 
-    ## Fuzztensor 的一些一般方法，包括求和，求积等等张量方法
+    """
+        Fuzztensor 的一些一般方法，包括求和，求积等等张量方法
+    """
 
     def empty(self, onlyfn: bool = False) -> bool:
         """
@@ -306,74 +314,82 @@ class Fuzztensor(FuzzTensorBase):
     #     self = TensorSort()(self)
     #     return self
 
-    def unique(self):
+    def unique(self) -> 'Fuzztensor':
         from .function import TensorUnique
         return TensorUnique()(self)
 
-    def append(self, e):
+    def append(self, e) -> 'Fuzztensor':
         from .function import TensorAppend
         return TensorAppend(e)(self)
 
-    def remove(self, e):
+    def remove(self, e) -> 'Fuzztensor':
         from .function import TensorRemove
         return TensorRemove(e)(self)
 
-    def pop(self, i):
+    def pop(self, i) -> 'Fuzztensor':
         from .function import TensorPop
         return TensorPop(i)(self)
 
-    def squeeze(self, axis=None):
+    def squeeze(self, axis=None) -> 'Fuzztensor':
         from .function import TensorSqueeze
         return TensorSqueeze(axis)(self)
 
-    def clear(self, to_none=False):
+    def clear(self, to_none=False) -> 'Fuzztensor':
         from .function import TensorClear
         return TensorClear(to_none)(self)
 
-    def initialize(self):
+    def initialize(self) -> 'Fuzztensor':
         from .function import TensorInitialize
         return TensorInitialize()(self)
 
+    def flatten(self) -> 'Fuzztensor':
+        from .function import TensorFlatten
+        return TensorFlatten()(self)
+
+    def ravel(self) -> 'Fuzztensor':
+        from .function import TensorRavel
+        return TensorRavel()(self)
+
+    def max(self, show=False, axis=None) -> 'Fuzztensor':
+        from .function import TensorGetMax
+        return TensorGetMax(show, axis)(self)
+
+    def min(self, show=False, axis=None) -> 'Fuzztensor':
+        from .function import TensorGetMin
+        return TensorGetMin(show, axis)(self)
+
+    def fmax(self, func, *params, show=False, axis=None) -> 'Fuzztensor':
+        from .function import TensorGetFmax
+        return TensorGetFmax(show, axis, func, *params)(self)
+
+    def fmin(self, func, *params, show=False, axis=None) -> 'Fuzztensor':
+        from .function import TensorGetFmin
+        return TensorGetFmin(show, axis, func, *params)(self)
+
+    """
+        带有自动微分的方法，这些都包含计算相关，在深度学习框架中可以很好地发挥
+    """
+    ##
     def reshape(self, *shape):
         from .operationFunc import tensor_reshape
         return tensor_reshape(self, *shape)
 
-    # def squeeze(self, axis=None) -> 'Fuzztensor':
-    #     from .functionClass import TensorSqueeze
-    #     return TensorSqueeze()(self, axis)
-    #
-    # def clear(self) -> 'Fuzztensor':
-    #     from .functionClass import TensorClear
-    #     return TensorClear()(self)
-    #
-    # def broadcast_to(self, *tensors) -> 'Fuzztensor':
-    #     from .functionClass import TensorBroadcast
-    #     return TensorBroadcast()(self, tensors)
-    #
-    # def max(self, show=False, axis=None) -> 'Fuzztensor':
-    #     from .functionClass import TensorGetMax
-    #     return TensorGetMax()(self, show, axis)
-    #
-    # def min(self, show=False, axis=None) -> 'Fuzztensor':
-    #     from .functionClass import TensorGetMin
-    #     return TensorGetMin()(self, show, axis)
-    #
-    # def fmax(self, func, *args, show=False, axis=None) -> 'Fuzztensor':
-    #     from .functionClass import TensorGetFmax
-    #     return TensorGetFmax()(self, func, *args, show, axis)
-    #
-    # def fmin(self, func, *args, show=False, axis=None) -> 'Fuzztensor':
-    #     from .functionClass import TensorGetFmin
-    #     return TensorGetFmin()(self, func, *args, show, axis)
-    #
-    # def sum(self, axis=None, keepdims=False) -> 'Fuzztensor':
-    #     from .functionClass import TensorGetSum
-    #     return TensorGetSum()(self, axis, keepdims)
-    #
-    # def prod(self, axis=None, keepdims=False) -> 'Fuzztensor':
-    #     from .functionClass import TensorGetProd
-    #     return TensorGetProd()(self, axis, keepdims)
-    #
-    # def mean(self, axis=None) -> 'Fuzztensor':
-    #     from .functionClass import TensorGetMean
-    #     return TensorGetMean()(self, axis)
+    def broadcast(self, *shape):
+        from .operationFunc import tensor_broadcast_to
+        return tensor_broadcast_to(self, shape)
+
+    def sum(self, axis=None, keepdims=False):
+        from .operationFunc import tensor_sum
+        return tensor_sum(self, axis, keepdims)
+
+    def __getitem__(self, item):
+        from .operationFunc import tensor_getitem
+        return tensor_getitem(self, item)
+
+    def prod(self, axis=None, keepdims=False):
+        from .operationFunc import tensor_prod
+        return tensor_prod(self, axis, keepdims)
+
+    def mean(self, axis=None):
+        from .operationFunc import tensor_mean
+        return tensor_mean(self, axis)

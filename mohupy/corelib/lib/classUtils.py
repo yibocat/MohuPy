@@ -70,7 +70,12 @@ class AsFuzzarray(Library):
         r = np.random.choice(flat)
 
         newset = Fuzzarray(r.qrung)
-        newset.array = fl
+        newset.array = xt if isinstance(xt, Fuzznum) else fl
+
+        # if isinstance(xt, Fuzznum):
+        #     newset.array = xt
+        # else
+        #     newset.array = fl
         return newset
 
 
@@ -101,6 +106,7 @@ class Absolute(Library):
         raise TypeError(f'Unsupported type: {type(a)} or {type(b)}.')
 
 
+# TODO: 该方法暂定
 class Relu(Library):
     def function(self, x: Fuzznum, op):
         def relu(t, o):

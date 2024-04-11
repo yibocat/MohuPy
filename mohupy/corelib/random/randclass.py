@@ -36,8 +36,10 @@ class RandSet(Random):
 
     def function(self, *n):
 
-        from ..lib import zeros
-        newset = zeros(*n, qrung=self.qrung)
+        # from ..lib import zeros
+
+        from ..lib.classConstruct import ZerosConstruct
+        newset = ZerosConstruct(self.qrung)(*n)
         vec_func = np.vectorize(lambda _: RandNum(self.qrung, self.minnum, self.maxnum)())
         result = vec_func(newset.array)
         newset.array = result

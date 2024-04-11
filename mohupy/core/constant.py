@@ -58,5 +58,3 @@ class Approx:
     ONE_9 = ONE_9
     ONE_10 = ONE_10
     ONE_16 = ONE_16
-
-
