@@ -5,8 +5,10 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-__all__ = []
-from .function import rand, choice
-from .randclass import seed
+# __all__ = []
+# from .function import rand, choice
+# from .randclass import seed
+#
+# __all__ += ['rand', 'choice', 'seed']
 
-__all__ += ['rand', 'choice', 'seed']
+from .randclass import Rand, Choice

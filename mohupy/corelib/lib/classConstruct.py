@@ -77,8 +77,8 @@ class NegsLikeConstruct(Library):
 
 
 class FullLikeConstruct(Library):
-    def __init__(self, x: Fuzznum):
+    def __init__(self, x: Fuzzarray):
         self.x = x
 
-    def function(self, y: Fuzzarray):
-        return FullConstruct(self.x.qrung)(*y.shape)
+    def function(self, y: Fuzznum):
+        return FullConstruct(y)(*self.x.shape)

@@ -5,25 +5,17 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-__all__ = []
 
 from .construct import fuzzZeros, fuzzPoss, fuzzNegs, fuzzZero, fuzzPos, fuzzNeg
-__all__ += [
-    'fuzzZeros',
-    'fuzzPoss',
-    'fuzzNegs',
-    'fuzzZero',
-    'fuzzPos',
-    'fuzzNeg',]
 
 from .distance import fuzzDis
-__all__ += ['fuzzDis']
 
 from .str2num import fuzzString
-__all__ += ['fuzzString']
 
 from .random import fuzzRandom
-__all__ += ['fuzzRandom']
 
 from .plotlib import fuzzPlot
-__all__ += ['fuzzPlot']
+
+from .random import fuzz_random_seed
+
+__all__ = ['fuzz_random_seed']

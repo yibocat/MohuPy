@@ -7,6 +7,9 @@
 
 __all__ = []
 
-from .random import *
-__all__.extend(random.__all__)
+# from .lib import *
+# from .math import *
+# from .random import *
+from .function import *
 
+__all__.extend(function.__all__)

@@ -19,3 +19,13 @@ class TensorRandom(Random):
         r = Rand(self.qrung, 1, 5)(*n)
         return Fuzztensor(r)
 
+
+class TensorChoice(Random):
+    def __init__(self, size, replace):
+        self.size = size
+        self.replace = replace
+
+    def function(self, fuzztensor):
+        from ...corelib.random.randclass import Choice
+        r = Choice()(fuzztensor.data, self.size, self.replace)
+        return Fuzztensor(r)

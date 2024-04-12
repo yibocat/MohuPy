@@ -1,6 +1,6 @@
 #  Copyright (c) yibocat 2024 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2024/4/7 下午2:24
+#  Date: 2024/4/12 下午1:49
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
@@ -10,7 +10,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-class Membership(object):
+class MembershipFunc(object):
     """
         Membership function class. This class organizes 8 commonly used
         membership functions together. In addition, custom membership
@@ -63,7 +63,7 @@ class Membership(object):
     __parameters = None
 
     def __init__(self, func=None, *args):
-        from .fuzzfunc import (sigmf, trimf, zmf,
+        from ..function import (sigmf, trimf, zmf,
                                trapmf, smf, gaussmf,
                                gauss2mf, gbellmf)
 

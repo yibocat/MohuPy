@@ -14,6 +14,8 @@
 
 from .corelib.regedit import *
 from .core import FuzzType, archimedeanDict
+from .corelib.regedit import (fuzzZeros, fuzzPoss, fuzzNegs,
+                              fuzzDis, fuzzString, fuzzRandom, fuzzPlot)
 
 
 class info:

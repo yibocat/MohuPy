@@ -27,3 +27,5 @@ def set_approx(approx):
         raise ValueError(f'Invalid approximation value: {approx}.')
     from ..core import Approx
     Approx.round = approx
+
+

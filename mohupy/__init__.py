@@ -17,6 +17,7 @@ from .measure import integral, indices
 from .runtime import info
 from .tensor import *
 from .tensorlib import *
+from .utils import *
 
 __all__ += ['measure','random','info']
 
@@ -26,3 +27,4 @@ __all__.extend(corelib.__all__)
 __all__.extend(measure.__all__)
 __all__.extend(tensor.__all__)
 __all__.extend(tensorlib.__all__)
+__all__.extend(utils.__all__)

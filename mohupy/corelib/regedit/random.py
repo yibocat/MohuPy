@@ -97,3 +97,6 @@ def random_qrohfn(q, minnum, maxnum):
             break
     return newfn
 
+
+def fuzz_random_seed(seed):
+    np.random.seed(seed)

@@ -1,6 +1,6 @@
 #  Copyright (c) yibocat 2024 All Rights Reserved
 #  Python: 3.10.9
-#  Date: 2024/4/7 下午2:23
+#  Date: 2024/4/12 下午1:48
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
@@ -24,7 +24,7 @@ def sigmf(x, *args):
                 function parameters.
         returns:
         -------
-            y:  np.float or np.ndarray
+            y:  np.float_ or np.ndarray
                 the sigmoid function value
 
     """
@@ -52,7 +52,7 @@ def trimf(x, *args):
     assert len(args) == 3, 'parameter must have exactly three elements.'
     assert args[0] <= args[1] <= args[2], 'parameters requires the three elements a <= b <= c.'
 
-    if type(x) != np.ndarray:
+    if isinstance(x, np.ndarray):
         x = np.array([x])
     y = np.zeros(len(x))
 
@@ -94,7 +94,7 @@ def zmf(x, *args):
     assert len(args) == 2, 'parameter list length must be 2.'
     assert args[0] <= args[1], 'a <= b is required.'
 
-    if type(x) != np.ndarray:
+    if isinstance(x, np.ndarray):
         x = np.array([x])
     y = np.ones(len(x))
 
@@ -130,7 +130,7 @@ def trapmf(x, *args):
     assert len(args) == 4, 'abcd parameter must have exactly four elements.'
     assert args[0] <= args[1] <= args[2] <= args[3], 'abcd requires the four elements \
                                           a <= b <= c <= d.'
-    if type(x) != np.ndarray:
+    if isinstance(x, np.ndarray):
         x = np.array([x])
     y = np.ones(len(x))
 
@@ -171,7 +171,7 @@ def smf(x, *args):
     """
     assert len(args) == 2, 'parameter list length must be 2.'
     assert args[0] <= args[1], 'a <= b is required.'
-    if type(x) != np.ndarray:
+    if isinstance(x, np.ndarray):
         x = np.array([x])
     y = np.ones(len(x))
     idx = x <= args[0]
@@ -238,7 +238,7 @@ def gauss2mf(x, *args):
     """
     assert len(args) == 4, 'parameter list length must be 4.'
     assert args[0] <= args[2], 'args[0] <= args[2] is required.  See docstring.'
-    if type(x) != np.ndarray:
+    if isinstance(x, np.ndarray):
         x = np.asarray([x])
     y = np.ones(len(x))
     idx1 = x <= args[0]
@@ -273,4 +273,3 @@ def gbellmf(x, *args):
     """
     assert len(args) == 3, 'parameter list length must be 3.'
     return 1. / (1. + np.abs((x - args[2]) / args[0]) ** (2 * args[1]))
-

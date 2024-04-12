@@ -5,8 +5,8 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-__NAME = "MohuPy"
-__VERSION = "0.2.10"
+__NAME = "mohupy"
+__VERSION = "0.3.0"
 __AUTHOR = "Yibo Wang"
 __LICENSE = "MIT"
 __EMAIL = "yibocat@yeah.net"

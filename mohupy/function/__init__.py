@@ -4,3 +4,11 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+
+__all__ = []
+
+from .formula import (sigmf, trimf, zmf,
+                      trapmf, smf, gaussmf,
+                      gauss2mf, gbellmf)
+
+__all__ += ['sigmf', 'trimf', 'zmf', 'trapmf', 'smf', 'gaussmf', 'gauss2mf', 'gbellmf']

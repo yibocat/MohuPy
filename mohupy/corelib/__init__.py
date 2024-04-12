@@ -7,16 +7,13 @@
 
 __all__ = []
 from .regedit import *
-from .math import *
-from .random import *
+# from .math import *
+# from .random import *
 from .function import *
-from .lib import *
+# from .lib import *
 
 __all__.extend(regedit.__all__)
-__all__.extend(math.__all__)
-__all__.extend(random.__all__)
 __all__.extend(function.__all__)
-__all__.extend(lib.__all__)
-
-
-
+# __all__.extend(math.__all__)
+# __all__.extend(random.__all__)
+# __all__.extend(lib.__all__)

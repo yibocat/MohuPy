@@ -5,7 +5,9 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-__all__ = []
+# __all__ = []
+#
+# from .random import rand_tensor
+# __all__ += ['rand_tensor']
 
-from .random import rand_tensor
-__all__ += ['rand_tensor']
+from .randomClass import TensorRandom, TensorChoice

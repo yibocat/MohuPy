@@ -4,3 +4,8 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+
+__all__ = []
+
+from .other import plot_stats, rsplit, show_decision_mat
+__all__ += ['plot_stats', 'rsplit', 'show_decision_mat']

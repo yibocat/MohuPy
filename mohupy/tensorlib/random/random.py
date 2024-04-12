@@ -5,10 +5,10 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 
-from ...tensor import Fuzztensor
-
-
-def rand_tensor(*n, qrung=1) -> Fuzztensor:
-    from .randomClass import TensorRandom
-    return TensorRandom(qrung)(*n)
-
+# from ...tensor import Fuzztensor
+#
+#
+# def rand_tensor(*n, qrung=1) -> Fuzztensor:
+#     from .randomClass import TensorRandom
+#     return TensorRandom(qrung)(*n)
+#

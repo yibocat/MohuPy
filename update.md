@@ -1,6 +1,39 @@
 # UPDATE LOG
 
 -----
+# version: 0.3.0
+**更新日期: 4.13.2024**
+
+**主要更新内容**:
+1. 新增模糊张量 `Fuzztensor`。`Fuzztensor` 基于 `Fuzzarray`。相比于`Fuzzarray`，`Fuzztensor` 增加了以 q-rung orthopair fuzzy
+number 为基本元素的复杂运算，包括 q-rung orthopair fuzzy function 的求导，以及复杂函数的自动微分。 需要注意，q-rung orthopair 
+fuzzy function 的求导与计算参考文献如下：
+   > [1] Gao J, Liang Z, Shang J, et al. Continuities, Derivatives, and Differentials of q-Rung Orthopair Fuzzy Functions[J]. 
+   > IEEE Transactions on Fuzzy Systems, 2018, 27(8): 1687–1699.
+   >
+   > [2] Lei Q, Xu Z. Fundamental properties of intuitionistic fuzzy calculus[J]. Knowledge-Based Systems, 2015, 76: 1–16.
+   >
+   > [3] Ai Z, Xu Z, Yager R. R., et al. Q-Rung Orthopair Fuzzy Integrals in the Frame of Continuous Archimedean T-Norms 
+   > and T-Conorms and Their Application[J]. IEEE Transactions on Fuzzy Systems, 2021, 29(5): 996–1007.
+   > 
+   > [4] Gao J, Liang Z, Xu Z. Additive Integrals of q-Rung Orthopair Fuzzy Functions[J]. 
+   > IEEE Transactions on Cybernetics, 2020, 50(10): 4406–4419.
+   >
+   > [5] Lei Q, Xu Z. Derivative and Differential Operations of Intuitionistic Fuzzy Numbers[J]. 
+   > International Journal of Intelligent Systems, 2015, 30(4): 468–498.
+2. 设置了全局模糊数类型，默认为 `qrofn`。修改方法通过 `mp.set_mtype()` 来进行设置。注意：模糊数类型仅满足 `qrofn`，`ivfn`和`qrohfn`，
+分别表示 q-rung orthopair fuzzy number, inter-valued q-rung orthopair fuzzy number 和 q-rung orthopair hesitant fuzzy number。
+3. 对整体结构进行了重构， 优化了计算性能。关键的模糊数计算部分移动至 core 文件。
+4. 设置了配置文件，通过 `mp.config.Config` 可以进行查看。
+
+**后续内容**
+1. 在 `Fuzztensor` 的基础上新增基于非规则模糊计算的深度学习框架；
+2. 优化性能，整合 `Fuzzarray`, `Fuzznum` 和 `Fuzztensor` 的一些相同特定方法；
+3. 完善更多可自动微分的方法；
+4. 完善 Einstein 范数下的基本运算；
+5. 将 `ivfn` 和 `qrohfn` 适配到 `Fuzztensor`。 
+
+-----
 ### 0.2.10-4-9.2024.beta
 重大更新版本，为 0.3.0 版本做提前准备
 1. 新增了 Config 配置文件，通过 `config.set_mtype` 来设置采用哪种模糊数类型，
