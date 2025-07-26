@@ -92,9 +92,9 @@ def str2qrohfn(s: str, q) -> Fuzznum:
     nmd = re.findall(r'\d.?\d*', t2[1])
 
     for i in range(len(md)):
-        newfn.md = np.append(newfn.md, np.float_(md[i]))
+        newfn.md = np.append(newfn.md, np.float64(md[i]))
     for j in range(len(nmd)):
-        newfn.nmd = np.append(newfn.nmd, np.float_(nmd[j]))
+        newfn.nmd = np.append(newfn.nmd, np.float64(nmd[j]))
 
     assert newfn.valid(), f'data format is correct, but the data is invalid: {s}'
     return newfn

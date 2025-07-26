@@ -20,7 +20,7 @@ def dirac_meas(e, s):
 
         Parameters
         ----------
-            e: float, int, np.float_, np.int_, list, np.ndarray
+            e: float, int, np.float64, np.int64, list, np.ndarray
                 The element.
             sub: list, np.ndarray
                 The subset.
@@ -29,7 +29,7 @@ def dirac_meas(e, s):
 
         Returns
         -------
-            np.int_
+            np.int64
                 The Dirac measure of 'e' in set 's'.
 
         Examples
@@ -41,7 +41,7 @@ def dirac_meas(e, s):
     """
     assert len(np.setdiff1d(e, s)) == 0, \
         'ERROR: The element must be in the set.'
-    return np.int_(1) if len(np.setdiff1d(e, s)) == 0 else np.int_(0)
+    return np.int64(1) if len(np.setdiff1d(e, s)) == 0 else np.int64(0)
 
 
 def add_meas(e, s):
@@ -58,7 +58,7 @@ def add_meas(e, s):
 
         Returns
         -------
-            np.float_
+            np.float64
             The additive measure of the element or the subset 'e'
 
         Examples
@@ -89,7 +89,7 @@ def sym_meas(e, s):
 
         Returns
         -------
-            np.float_
+            np.float64
             The symmetric measure of the element or the subset 'e'
 
         Examples
@@ -99,7 +99,7 @@ def sym_meas(e, s):
     """
     assert len(np.setdiff1d(e, s)) == 0, \
         'ERROR: The element must be in the set.'
-    return np.float_(len(e) / len(s))
+    return np.float64(len(e) / len(s))
 
 
 def lambda_meas(e, s):
@@ -127,7 +127,7 @@ def lambda_meas(e, s):
 
         Returns
         -------
-            np.float_
+            np.float64
             The lambda fuzzy measure of the subset 'e'.
 
         Examples
@@ -142,23 +142,29 @@ def lambda_meas(e, s):
             with the scipy library. The calculation is as follows.
 
             In [1]: x = [0.4,0.25,0.37,0.2]
-            In [2]: np.float_(scipy.optimize.fsolve(lamda(x), np.array(-1)))
+            In [2]: np.float64(scipy.optimize.fsolve(lamda(x), np.array(-1)))
             Out[2]: -0.4403002498696017
     """
-
-    def __lamda(sets):
-        return lambda lam: np.prod(1 + lam * sets) - lam - 1
 
     assert len(np.setdiff1d(e, s)) == 0, \
         'ERROR: The element or list must be in the set.'
 
-    from scipy.optimize import fsolve
-    l = fsolve(__lamda(np.asarray(s)), np.array(-1))
+    e = np.array(e)
+    s = np.array(s)
 
-    if np.round(l, Approx.round) == 0:
-        return np.float_(np.sum(e))
+    from scipy.optimize import root
+
+    def __lamda_root(lam, sets):
+        return np.prod(1 + lam * sets) - lam - 1
+
+    initial_guess = np.array(-0.5)
+
+    sol = root(__lamda_root, x0=initial_guess, args=(s,), method='hybr').x[0]
+
+    if np.round(sol, 6) == 0:
+        return np.float64(np.sum(e))
     else:
-        return np.float_((np.prod(1 + l * e) - 1) / l)
+        return np.float64((np.prod(1 + sol * e) - 1) / sol)
 
 
 def mobius_rep(e: (list, np.ndarray), func, *args):
@@ -185,7 +191,7 @@ def mobius_rep(e: (list, np.ndarray), func, *args):
 
         Returns
         -------
-            np.float_
+            np.float64
                 The Möbius representation of the subset 'e'.
 
         Examples
@@ -230,7 +236,7 @@ def zeta_rep(e: (list, np.ndarray), func, *args):
 
         Returns
         -------
-            np.float_
+            np.float64
                 The Zeta representation of the subset 'e'.
 
         Examples
@@ -273,7 +279,7 @@ def vector_rep(e: (list, np.ndarray), func, *args):
                 Usually is the fixed set.
         Returns
         -------
-            np.float_
+            np.float64
                 The Vector representation of the subset 'e'.
 
         Examples

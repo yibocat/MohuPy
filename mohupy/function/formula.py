@@ -24,7 +24,7 @@ def sigmf(x, *args):
                 function parameters.
         returns:
         -------
-            y:  np.float_ or np.ndarray
+            y:  np.float64 or np.ndarray
                 the sigmoid function value
 
     """

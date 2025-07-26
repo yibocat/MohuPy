@@ -22,11 +22,11 @@ class MembershipFunc(object):
 
         Attributes
         ----------
-            __VARI_START:   float or np.float_ or int or np.int_
+            __VARI_START:   float or np.float64 or int or np.int64
                 Starting value of independent variable range
-            __VARI_END:     float or np.float_ or int or np.int_
+            __VARI_END:     float or np.float64 or int or np.int64
                 Ending value of independent variable range
-            __LINSPACE:     int or np.int_
+            __LINSPACE:     int or np.int64
                 Accuracy within the range of the independent variable
 
             __func:         function
@@ -37,7 +37,7 @@ class MembershipFunc(object):
 
             domain:        list or tuple
                 range of arguments
-            linspace:       int or np.int_
+            linspace:       int or np.int64
                 Accuracy within the range of the independent variable
 
 

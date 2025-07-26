@@ -25,7 +25,7 @@ class Dot(Mathematics):
 
             Returns
             -------
-            Fuzzarray or np.float_
+            Fuzzarray or np.float64
                 The dot product of x and y.
         """
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
@@ -73,7 +73,7 @@ class Inner(Mathematics):
 
             Returns
             -------
-            Fuzzarray or np.float_
+            Fuzzarray or np.float64
                 The inner product of x and y.
         """
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
@@ -121,7 +121,7 @@ class Outer(Mathematics):
 
             Returns
             -------
-            Fuzzarray or np.float_
+            Fuzzarray or np.float64
                 The outer product of x and y.
         """
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):
@@ -163,7 +163,7 @@ class Cartadd(Mathematics):
 
             Returns
             -------
-            Fuzzarray or np.float_
+            Fuzzarray or np.float64
                 The cartesian sum of x and y.
         """
         """
@@ -218,7 +218,7 @@ class Cartprod(Mathematics):
 
             Returns
             -------
-            Fuzzarray or np.float_
+            Fuzzarray or np.float64
                 The cartesian product of x and y.
         """
         if isinstance(x, Fuzznum) and isinstance(y, Fuzznum):

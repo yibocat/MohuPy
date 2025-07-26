@@ -19,9 +19,9 @@ def deriv(e, sub, func, *args):
 
         Parameters
         ----------
-            e : list or float or np.float_ or np.ndarray
+            e : list or float or np.float64 or np.ndarray
                 Elements or subsets to be differentiated
-            sub : list or float or np.float_ or np.ndarray
+            sub : list or float or np.float64 or np.ndarray
                 The subset to be differentiated
             func : function
                 The fuzzy measure function
@@ -29,7 +29,7 @@ def deriv(e, sub, func, *args):
                 The fixed sets.
         Returns
         -------
-            np.float_
+            np.float64
             The derivative of an element or subset with respect to the subset under
                 a fixed set
 
@@ -60,7 +60,7 @@ def shapley(e, func, *args):
 
         Parameters
         ----------
-            e : list or float or np.float_ or np.ndarray
+            e : list or float or np.float64 or np.ndarray
                 Elements or subsets to be differentiated
             func : function
                 The fuzzy measure function
@@ -102,7 +102,7 @@ def banzhaf(e, func, *args):
 
         Parameters
         ----------
-            e : list or float or np.float_ or np.ndarray
+            e : list or float or np.float64 or np.ndarray
                 Elements or subsets to be differentiated
             func : function
                 The fuzzy measure function
@@ -143,7 +143,7 @@ def shannon(e, func, *args):
 
         Parameters
         ----------
-            e : list or float or np.float_ or np.ndarray
+            e : list or float or np.float64 or np.ndarray
                 Elements or subsets to be differentiated
             func : function
                 The fuzzy measure function

@@ -83,7 +83,7 @@ class Fuzztensor(FuzzTensorBase):
         p = str(self.__data).replace('\n', '\n' + ' ' * 11)
         if isinstance(self.__data, Fuzzarray):
             return f'Fuzztensor({p}, qrung={self.__data.qrung}, mtype={self.__data.mtype})'
-        if isinstance(self.__data, Union[np.ndarray, np.int_, np.float_, float, int]):
+        if isinstance(self.__data, Union[np.ndarray, np.int_, np.float64, float, int]):
             return f'Fuzztensor({p}, mtype=ndarray:{self.__data.dtype})'
 
     def __len__(self):
@@ -206,7 +206,7 @@ class Fuzztensor(FuzzTensorBase):
                 self.grad = None
                 self.creator = None
                 self.generation = 0
-        elif isinstance(fdata, Union[np.ndarray, int, float, np.int_, np.float_]):
+        elif isinstance(fdata, Union[np.ndarray, int, float, np.int_, np.float64]):
             from .utils import as_array
             self.__data = as_array(fdata)
 

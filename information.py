@@ -6,7 +6,7 @@
 #  Software: MohuPy
 
 __NAME = "mohupy"
-__VERSION = "0.3.0"
+__VERSION = "0.3.1"
 __AUTHOR = "Yibo Wang"
 __LICENSE = "MIT"
 __EMAIL = "yibocat@yeah.net"

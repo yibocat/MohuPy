@@ -1,8 +1,8 @@
-<img src="./assets/MohuPy-2.png" alt="MohuPy-2" style="zoom: 67%;" />
+<img src="https://github.com/yibocat/MohuPy/blob/master/assets/MohuPy-2.png?raw=true" alt="MohuPy-2" style="zoom: 67%;" />
 
 # MohuPy
 
-简体中文 | [English](README.md)
+简体中文 | [English](https://github.com/yibocat/MohuPy/blob/master/README.md)
 
 MohuPy 是一个模糊数学计算工具包，包括代数范数下的 q 阶序对模糊数（*q-rofn*）、区间值 q 阶序对模糊数（*iv-q-rofn*）和 q 阶序对犹豫模糊数（*q-rohfn*）的运算，并提供模糊向量的高阶运算和自动微分以及模糊数的计算图模型，可用于处理不规则模糊计算、模糊决策相关问题、一般高阶模糊计算问题以及复杂模糊函数的微分导数计算问题。
 
@@ -188,7 +188,7 @@ mp.dict_rep(measure, mp.lambda_meas, measure)
 mp.hasse_diagram(measure, mp.lambda_meas)
 ```
 
-<img src="./assets/hasse diagram.png" alt="hasse diagram" style="zoom:67%;" />
+<img src="https://github.com/yibocat/MohuPy/blob/master/assets/hasse%20diagram.png?raw=true" alt="hasse diagram" style="zoom:67%;" />
 
 如果计算这个数组的Choquet积分，可以通过下面的代码计算
 
@@ -209,7 +209,7 @@ x = mp.fuzznum(3, 0.7,0.4)
 mp.fuzz_plot(x)
 ```
 
-<img src="./assets/fuzzyplot.png" alt="fuzzyplot" style="zoom:67%;" />
+<img src="https://github.com/yibocat/MohuPy/blob/master/assets/fuzzyplot.png?raw=true" alt="fuzzyplot" style="zoom:67%;" />
 
 分别查看模糊数的每个域并编写代码，
 
@@ -220,9 +220,9 @@ mp.fuzz_plot(x, mul=True)
 mp.fuzz_plot(x, div=True)
 ```
 
-| <img src="./assets/add.png" alt="add" style="zoom:67%;" /> | <img src="./assets/sub.png" alt="sub" style="zoom:67%;" /> |
+| <img src="https://github.com/yibocat/MohuPy/blob/master/assets/add.png?raw=true" alt="add" style="zoom:67%;" /> | <img src="https://github.com/yibocat/MohuPy/blob/master/assets/sub.png?raw=true" alt="sub" style="zoom:67%;" /> |
 | :--------------------------------------------------------: | ---------------------------------------------------------- |
-| <img src="./assets/mul.png" alt="mul" style="zoom:67%;" /> | <img src="./assets/div.png" alt="div" style="zoom:67%;" /> |
+| <img src="https://github.com/yibocat/MohuPy/blob/master/assets/mul.png?raw=true" alt="mul" style="zoom:67%;" /> | <img src="https://github.com/yibocat/MohuPy/blob/master/assets/div.png?raw=true" alt="div" style="zoom:67%;" /> |
 
 甚至可以画出一个模糊集所有模糊数的分布，以15个随机 *iv-2-qrofns* 为例，
 
@@ -232,7 +232,7 @@ x = mp.rand_fuzz(15,qrung=2)
 mp.fuzz_plot(x, alpha=0.1)
 ```
 
-<img src="./assets/15ivfn.png" alt="15ivfn" style="zoom:67%;" />
+<img src="https://github.com/yibocat/MohuPy/blob/master/assets/15ivfn.png?raw=true" alt="15ivfn" style="zoom:67%;" />
 
 ## 待办事项
 
@@ -245,7 +245,7 @@ mp.fuzz_plot(x, alpha=0.1)
 
 ## 更新日志
 
-更新日志： [Log](update.md)
+更新日志： [Log](https://github.com/yibocat/MohuPy/blob/master/update.md)
 
 ## 联系方式
 
@@ -253,4 +253,4 @@ email: yibocat@yeah.net
 
 ## 许可证
 
-[MIT](LICENSE)
+[MIT](https://github.com/yibocat/MohuPy/blob/master/LICENSE)

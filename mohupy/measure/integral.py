@@ -36,7 +36,7 @@ def choquet(e: (list, np.ndarray), func, *args, measurable_func=None, info=False
 
         Returns
         -------
-            np.float_
+            np.float64
             The Choquet integral.
 
         Examples
@@ -107,7 +107,7 @@ def sugeno(e: (list, np.ndarray), func, *args, measurable_func=None):
 
         Returns
         -------
-            np.float_
+            np.float64
             The Sugeno integral.
 
         Examples
@@ -151,7 +151,7 @@ def shilkret(e: (list or np.ndarray), func, *args, measurable_func=None):
 
         Returns
         -------
-            np.float_
+            np.float64
             The Shilkret integral.
 
         Examples

@@ -33,7 +33,19 @@ class Fuzzarray(MohuBase):
     @array.setter
     def array(self, value: np.ndarray):
         from .fuzznums import Fuzznum
-        if isinstance(np.all(value), Fuzznum):
+        if value.size == 0:
+            self.__array = np.array([], dtype=object)
+            self.ndim = value.ndim
+            self.size = value.size
+            self.shape = value.shape
+        elif isinstance(value, Fuzznum):
+            self.__array = value
+            self.ndim = value.ndim
+            self.size = value.size
+            self.shape = value.shape
+            self.qrung = value.qrung
+            self.mtype = value.mtype
+        elif all(isinstance(x, Fuzznum) for x in value.flat):
             try:
                 self.__array = value
                 self.ndim = value.ndim
@@ -47,11 +59,6 @@ class Fuzzarray(MohuBase):
                 self.mtype = e.mtype
             except ValueError as e:
                 raise ValueError(f'Setup failed: {e}')
-        elif value.size == 0:
-            self.__array = np.array([], dtype=object)
-            self.ndim = value.ndim
-            self.size = value.size
-            self.shape = value.shape
         else:
             raise TypeError(f"Invalid fuzzy type.")
 
@@ -85,8 +92,8 @@ class Fuzzarray(MohuBase):
     def md(self):
         if self.__array.size != 0:
             def membership(t):
-                if isinstance(t.md, (int, float, np.float_, np.int_)):
-                    return np.float_(t.md)
+                if isinstance(t.md, (int, float, np.float64, np.int_)):
+                    return np.float64(t.md)
                 if isinstance(t.md, (np.ndarray, list)):
                     return np.array(t.md, dtype=object)
 
@@ -98,8 +105,8 @@ class Fuzzarray(MohuBase):
     def nmd(self):
         if self.__array.size != 0:
             def membership(t):
-                if isinstance(t.nmd, (int, float, np.float_, np.int_)):
-                    return np.float_(t.nmd)
+                if isinstance(t.nmd, (int, float, np.float64, np.int_)):
+                    return np.float64(t.nmd)
                 if isinstance(t.nmd, (np.ndarray, list)):
                     return np.array(t.nmd, dtype=object)
 

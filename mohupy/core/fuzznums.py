@@ -36,25 +36,49 @@ class Fuzznum(MohuBase):
         from .funcitonClass import FuzzTranspose
         return FuzzTranspose()(self)
 
+    # @property
+    # def score(self):
+    #     from .attributeClass import Score
+    #     return Score()(self)
+    #
+    # @property
+    # def acc(self):
+    #     from .attributeClass import Accuracy
+    #     return Accuracy()(self)
+    #
+    # @property
+    # def ind(self):
+    #     from .attributeClass import Indeterminacy
+    #     return Indeterminacy()(self)
+    #
+    # @property
+    # def comp(self):
+    #     from .attributeClass import Complement
+    #     return Complement()(self)
+
     @property
     def score(self):
-        from .attributeClass import Score
+        from .attribute import Score
         return Score()(self)
 
     @property
     def acc(self):
-        from .attributeClass import Accuracy
+        from .attribute import Accuracy
         return Accuracy()(self)
 
     @property
     def ind(self):
-        from .attributeClass import Indeterminacy
+        from .attribute import Indeterminacy
         return Indeterminacy()(self)
 
     @property
     def comp(self):
-        from .attributeClass import Complement
+        from .attribute import Complement
         return Complement()(self)
+
+
+
+
 
     def valid(self):
         from .funcitonClass import FuzzValidity

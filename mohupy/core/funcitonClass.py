@@ -22,8 +22,8 @@ class InitializeNum(Function):
     """
 
     def function(self, qrung, md, nmd):
-        if isinstance(md, (float, int, np.int_, np.float_)) and \
-                isinstance(nmd, (float, int, np.int_, np.float_)):
+        if isinstance(md, (float, int, np.int_, np.float64)) and \
+                isinstance(nmd, (float, int, np.int_, np.float64)):
             assert 0. <= md <= 1. and 0. <= nmd <= 1., \
                 'ERROR: md and nmd must be betweenZERO and ONE'
             assert 0. <= md ** qrung + nmd ** qrung <= 1., \

@@ -38,9 +38,9 @@ def tensor_mul(x0, x1) -> Fuzztensor:
         x0 = as_fuzztensor(as_fuzzarray(x0))
     if isinstance(x1, Union[Fuzznum, Fuzzarray]):
         x1 = as_fuzztensor(as_fuzzarray(x1))
-    if isinstance(x0, Union[np.ndarray, int, float, np.int_, np.float_]):
+    if isinstance(x0, Union[np.ndarray, int, float, np.int_, np.float64]):
         x0 = as_array(x0)
-    if isinstance(x1, Union[np.ndarray, int, float, np.int_, np.float_]):
+    if isinstance(x1, Union[np.ndarray, int, float, np.int_, np.float64]):
         x1 = as_array(x1)
     from .operation import Mul
     return Mul()(x0, x1)
@@ -51,9 +51,9 @@ def tensor_div(x0, x1) -> Fuzztensor:
         x0 = as_fuzztensor(as_fuzzarray(x0))
     if isinstance(x1, Union[Fuzznum, Fuzzarray]):
         x1 = as_fuzztensor(as_fuzzarray(x1))
-    if isinstance(x0, Union[np.ndarray, int, float, np.int_, np.float_]):
+    if isinstance(x0, Union[np.ndarray, int, float, np.int_, np.float64]):
         x0 = as_array(x0)
-    if isinstance(x1, Union[np.ndarray, int, float, np.int_, np.float_]):
+    if isinstance(x1, Union[np.ndarray, int, float, np.int_, np.float64]):
         x1 = as_array(x1)
     from .operation import Div
     return Div()(x0, x1)

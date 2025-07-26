@@ -1,12 +1,8 @@
-<img src="./assets/MohuPy-2.png" alt="MohuPy-2" style="zoom: 67%;" />
-
-
-
-
+<img src="https://github.com/yibocat/MohuPy/blob/master/assets/MohuPy-2.png?raw=true" alt="MohuPy-2" style="zoom: 67%;" />
 
 # MohuPy
 
-[简体中文](README_cn.md) | English
+[简体中文](https://github.com/yibocat/MohuPy/blob/master/README_cn.md) | English
 
 MohuPy is a fuzzy mathematics computing toolkit, including the operations of q-rung orthopair fuzzy number(*q-rofn*), interval-valued q-rung orthopair fuzzy number(*iv-q-rofn*) and q-rung orthopair hesitant fuzzy numbers(*q-rohfn*) under algebraic norms. It also provides high-order operations and automatic differentiation for fuzzy vectors and the computational graph model of fuzzy number. It can be used to deal with irregular fuzzy computation, fuzzy decision-making related problems, general higher-order fuzzy computation problems, and differential derivative calculation problems of complex fuzzy functions.
 
@@ -192,7 +188,7 @@ In particular, the Hasse diagram can also be used to view the measure value of t
 mp.hasse_diagram(measure, mp.lambda_meas)
 ```
 
-<img src="./assets/hasse diagram.png" alt="hasse diagram" style="zoom:67%;" />
+<img src="https://github.com/yibocat/MohuPy/blob/master/assets/hasse%20diagram.png?raw=true" alt="hasse diagram" style="zoom:67%;" />
 
 If the Choquet integral of this array is required, it can be computed by the following code
 
@@ -213,7 +209,7 @@ x = mp.fuzznum(3, 0.7,0.4)
 mp.fuzz_plot(x)
 ```
 
-<img src="./assets/fuzzyplot.png" alt="fuzzyplot" style="zoom:67%;" />
+<img src="https://github.com/yibocat/MohuPy/blob/master/assets/fuzzyplot.png?raw=true" alt="fuzzyplot" style="zoom:67%;" />
 
 Look at each domain of the fuzzy number separately and write code,
 
@@ -224,9 +220,9 @@ mp.fuzz_plot(x, mul=True)
 mp.fuzz_plot(x, div=True)
 ```
 
-| <img src="./assets/add.png" alt="add" style="zoom:67%;" /> | <img src="./assets/sub.png" alt="sub" style="zoom:67%;" /> |
+| <img src="https://github.com/yibocat/MohuPy/blob/master/assets/add.png?raw=true" alt="add" style="zoom:67%;" /> | <img src="https://github.com/yibocat/MohuPy/blob/master/assets/sub.png?raw=true" alt="sub" style="zoom:67%;" /> |
 | :--------------------------------------------------------: | ---------------------------------------------------------- |
-| <img src="./assets/mul.png" alt="mul" style="zoom:67%;" /> | <img src="./assets/div.png" alt="div" style="zoom:67%;" /> |
+| <img src="https://github.com/yibocat/MohuPy/blob/master/assets/mul.png?raw=true" alt="mul" style="zoom:67%;" /> | <img src="https://github.com/yibocat/MohuPy/blob/master/assets/div.png?raw=true" alt="div" style="zoom:67%;" /> |
 
 Even more, you can draw the distribution of all fuzzy numbers of a fuzzy set. Take 15 random *iv-2-qrofns* as an example, 
 
@@ -236,7 +232,7 @@ x = mp.rand_fuzz(15,qrung=2)
 mp.fuzz_plot(x, alpha=0.1)
 ```
 
-<img src="./assets/15ivfn.png" alt="15ivfn" style="zoom:67%;" />
+<img src="https://github.com/yibocat/MohuPy/blob/master/assets/15ivfn.png?raw=true" alt="15ivfn" style="zoom:67%;" />
 
 ## TODO
 
@@ -249,11 +245,11 @@ mp.fuzz_plot(x, alpha=0.1)
 
 ## Update Log
 
-Update log: [Log](update.md)
+Update log: [Log](https://github.com/yibocat/MohuPy/blob/master/update.md)
 
 ## Contact
 
 email: yibocat@yeah.net
 
 ## License
-[MIT](LICENSE)
+[MIT](https://github.com/yibocat/MohuPy/blob/master/LICENSE)

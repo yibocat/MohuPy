@@ -35,6 +35,7 @@ def fuzz_func4fuzz(x: Fuzznum | Fuzzarray, func: Callable, *params) -> Fuzznum |
     return FuncForFuzz(func, *params)(x)
 
 
+# TODO: 该方法在未来版本可能弃用，函数名称换成 asfuzzarray
 def asfuzzyarray(x: Fuzznum | Fuzzarray | np.ndarray | list, copy=False) -> Fuzzarray:
     """
     将一个模糊数或列表转换成一个 Fuzzarray。
