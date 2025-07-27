@@ -48,11 +48,31 @@ class Config:
         }
     )
 
+    DEFAULT_T_NORM: str = field(
+        default='algebraic',
+        metadata={
+            'category': 'basic',
+            'description': '默认t-范数类型，影响 Fuzznum 的运算规则',
+            'validator': lambda x: isinstance(x, str) and len(x) > 0,
+            'error_msg': "必须是非空字符串。"
+        }
+    )
+
     STRICT_ATTRIBUTE_MODE: bool = field(
         default=True,
         metadata={
             'category': 'basic',
             'description': '严格属性检查，主要用于 FuzznumStrategy 中 __setattr__ 方法的属性检查',
+            'validator': lambda x: isinstance(x, bool),
+            'error_msg': "必须是布尔值 (True/False)。"
+        }
+    )
+
+    ENABLE_CACHE: bool = field(
+        default=True,
+        metadata={
+            'category': 'performance',
+            'description': '是否启用运算缓存，影响工厂类和执行器等计算和创建实例的缓存行为',
             'validator': lambda x: isinstance(x, bool),
             'error_msg': "必须是布尔值 (True/False)。"
         }
@@ -68,11 +88,21 @@ class Config:
         }
     )
 
-    ENABLE_CACHE: bool = field(
+    EXECUTOR_CACHE_SIZE: int = field(
+        default=256,
+        metadata={
+            'category': 'performance',
+            'description': '运算缓存的最大条目数，控制内存使用',
+            'validator': lambda x: isinstance(x, int) and x >= 0,
+            'error_msg': "必须是非负整数。。"
+        }
+    )
+
+    ENABLE_EXECUTOR_CACHE: bool = field(
         default=True,
         metadata={
             'category': 'performance',
-            'description': '是否启用运算缓存，影响工厂类和执行器等计算和创建实例的缓存行为',
+            'description': '是否启用执行器缓存，影响执行器计算和创建实例的缓存行为',
             'validator': lambda x: isinstance(x, bool),
             'error_msg': "必须是布尔值 (True/False)。"
         }
@@ -99,7 +129,7 @@ class Config:
     )
 
     ENABLE_LOGGING: bool = field(
-        default=False,
+        default=True,
         metadata={
             'category': 'debug',
             'description': '启动日志记录',
@@ -109,7 +139,7 @@ class Config:
     )
 
     DEBUG_MODE: bool = field(
-        default=False,
+        default=True,
         metadata={
             'category': 'debug',
             'description': '调试模式开关，启用详细的调试信息',

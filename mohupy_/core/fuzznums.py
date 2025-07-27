@@ -300,7 +300,7 @@ class Fuzznum:
             # 这表示对象尚未初始化到可以安全查询 `_initialized` 属性的程度。
             return False
 
-    def _get_template_instance(self) -> FuzznumTemplate:
+    def get_template_instance(self) -> FuzznumTemplate:
         """
         获取模板实例
 
@@ -328,13 +328,13 @@ class Fuzznum:
             # 这通常意味着对象尚未完全初始化，或者初始化过程中出现了问题。
             raise RuntimeError("Template instance not found.")
 
-    def _get_strategy_instance(self) -> FuzznumStrategy:
+    def get_strategy_instance(self) -> FuzznumStrategy:
         """
         获取策略实例
 
         此方法提供了一个受保护的接口，用于安全地获取 Fuzznum 实例内部关联的
         `FuzznumStrategy` 实例。它在需要访问策略特定功能（如属性值或核心算法）时被调用。
-        与 `_get_template_instance` 类似，它确保在实例不存在或初始化不完整时提供明确的错误信息。
+        与 `get_template_instance` 类似，它确保在实例不存在或初始化不完整时提供明确的错误信息。
 
         Returns:
             FuzznumStrategy: 关联的策略实例。
@@ -532,8 +532,8 @@ class Fuzznum:
             # 如果要访问的属性名在策略属性集合中。
             if name in bound_strategy_attrs:
                 # 从策略实例中获取属性值。
-                # 调用 `_get_strategy_instance()` 确保获取到有效的策略实例。
-                value = getattr(self._get_strategy_instance(), name)
+                # 调用 `get_strategy_instance()` 确保获取到有效的策略实例。
+                value = getattr(self.get_strategy_instance(), name)
                 # 将获取到的值缓存起来，以便后续访问。
                 self._cache_attribute(name, value)
                 # 记录属性访问统计。
@@ -546,8 +546,8 @@ class Fuzznum:
             # 如果要访问的属性名在模板属性集合中。
             if name in bound_template_attrs:
                 # 从模板实例中获取属性值。
-                # 调用 `_get_template_instance()` 确保获取到有效的模板实例。
-                value = getattr(self._get_template_instance(), name)
+                # 调用 `get_template_instance()` 确保获取到有效的模板实例。
+                value = getattr(self.get_template_instance(), name)
                 # 将获取到的值缓存起来。
                 self._cache_attribute(name, value)
                 # 记录属性访问统计。
@@ -724,7 +724,7 @@ class Fuzznum:
             if name in strategy_attributes:
                 try:
                     # 获取策略实例。
-                    strategy_instance = self._get_strategy_instance()
+                    strategy_instance = self.get_strategy_instance()
                     # 尝试从策略类的角度获取属性描述符，以判断是否为 `property`。
                     strategy_class = strategy_instance.__class__
                     attr_descriptor = getattr(strategy_class, name, None)
@@ -755,7 +755,7 @@ class Fuzznum:
             template_attributes = object.__getattribute__(self, '_bound_template_attributes')
             if name in template_attributes:
                 try:
-                    template_instance = self._get_template_instance()
+                    template_instance = self.get_template_instance()
                     template_class = template_instance.__class__
                     attr_descriptor = getattr(template_class, name, None)
 
@@ -1125,7 +1125,7 @@ class Fuzznum:
             raise RuntimeError("Cannot get strategy attributes from an uninitialized Fuzznum object.")
 
         # 安全地获取策略实例。
-        strategy_instance = self._get_strategy_instance()
+        strategy_instance = self.get_strategy_instance()
 
         # 获取策略实例中所有已声明的属性名称集合。
         # _bound_strategy_attributes 是在 Fuzznum 初始化时从策略实例中收集的。
@@ -1349,7 +1349,7 @@ class Fuzznum:
             try:
                 # 获取策略实例，并尝试调用其 `validate_all_attributes` 方法（如果存在）。
                 # `FuzznumStrategy` 的子类可以实现这个方法来进行更深层次的自身验证。
-                strategy_instance = self._get_strategy_instance()
+                strategy_instance = self.get_strategy_instance()
                 if hasattr(strategy_instance, 'validate_all_attributes'):
                     strategy_validation = strategy_instance.validate_all_attributes()
                     if not strategy_validation['is_valid']:
@@ -1365,7 +1365,7 @@ class Fuzznum:
             try:
                 # 获取模板实例，并尝试调用其 `is_valid` 方法（如果存在）。
                 # `FuzznumTemplate` 实例具有 `is_valid()` 方法来检查其关联的 Fuzznum 实例是否仍然存在。
-                template_instance = self._get_template_instance()
+                template_instance = self.get_template_instance()
                 if hasattr(template_instance, 'is_valid') and not template_instance.is_valid():
                     validation_result['issues'].append("The template instance has expired.")
                     validation_result['is_valid'] = False
@@ -1537,7 +1537,7 @@ class Fuzznum:
             template_cls_name = "N/A"
             try:
                 # 尝试获取策略实例并获取其类名
-                strategy_instance = self._get_strategy_instance()
+                strategy_instance = self.get_strategy_instance()
                 strategy_cls_name = strategy_instance.__class__.__name__
             except RuntimeError:
                 # 如果策略实例未完全就绪或未找到，则保持为 N/A
@@ -1545,7 +1545,7 @@ class Fuzznum:
 
             try:
                 # 尝试获取模板实例并获取其类名
-                template_instance = self._get_template_instance()
+                template_instance = self.get_template_instance()
                 template_cls_name = template_instance.__class__.__name__
             except RuntimeError:
                 # 如果模板实例未完全就绪或未找到，则保持为 N/A
@@ -1628,7 +1628,7 @@ class Fuzznum:
             try:
                 # 尝试调用绑定到 Fuzznum 实例上的 `str()` 方法（来自模板）。
                 # 这是首选的方式，因为模板定义了模糊数的特定表示。
-                return self._get_template_instance().str()
+                return self.get_template_instance().str()
             except Exception:
                 # 如果模板的 `str()` 方法在执行过程中抛出任何异常，
                 # 则静默捕获异常，并回退到默认的字符串表示，以避免程序崩溃。

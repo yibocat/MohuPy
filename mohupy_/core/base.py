@@ -5,12 +5,12 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 import collections
-import threading
 import weakref
-from abc import ABC
+from abc import ABC, abstractmethod
 from typing import Set, Dict, Any, Callable, Optional
 
 from mohupy_.config import get_config
+from mohupy_.core.triangular import OperationTNorm
 
 
 class FuzznumStrategy(ABC):
@@ -26,6 +26,7 @@ class FuzznumStrategy(ABC):
     # 属性验证器和回调函数
     _attribute_validators: Dict[str, Callable[[Any], bool]] = {}
     _change_callbacks: Dict[str, Callable[[str, Any, Any], None]] = {}
+
     # 注意：_attribute_validators 和 _change_callbacks 如果希望每个子类实例有自己独立的注册，
     # 应该在 __init__ 中初始化为实例属性。但如果它们是类级别的，表示所有实例共享同一套验证器/回调。
     # 鉴于 add_attribute_validator 和 add_change_callback 是实例方法，且修改的是 self._attribute_validators，
@@ -242,7 +243,7 @@ class FuzznumStrategy(ABC):
 
     def _validate(self) -> None:
         """
-        子类 可冲写的验证方法
+        子类 可重写的验证方法
 
         此方法应包含特定于子类的验证逻辑。默认实现对 `mtype` 进行基本验证。
 
@@ -299,6 +300,90 @@ class FuzznumStrategy(ABC):
             if attr_name in self._declared_attributes:
                 setattr(self, attr_name, value)
 
+    def add(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def sub(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def mul(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def div(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def pow(self, tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def tim(self, tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def exp(self, tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def log(self, tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def gt(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def lt(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def ge(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def le(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def eq(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def ne(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def intersection(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def union(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def complement(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def implication(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def equivalence(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def difference(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
+    def symdiff(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
+                                  f"t-norm '{tnorm.norm_type}' is not yet implemented.")
+
 
 class FuzznumTemplate(ABC):
     """
@@ -340,9 +425,9 @@ class FuzznumTemplate(ABC):
         if not self._is_valid:
             # 首先检查 `_is_valid` 标志。如果它已经是 False，说明关联实例已经被回收，
             raise RuntimeError(
-                    f"Template for mtype '{self.mtype}' is no longer valid. "
-                    f"Associated Fuzznum instance (id: {self._instance_id}) has been garbage collected."
-                )
+                f"Template for mtype '{self.mtype}' is no longer valid. "
+                f"Associated Fuzznum instance (id: {self._instance_id}) has been garbage collected."
+            )
 
         instance = self._instance_ref()
 
@@ -352,9 +437,9 @@ class FuzznumTemplate(ABC):
             self._is_valid = False
 
             raise RuntimeError(
-                    f"Template for mtype '{self.mtype}' has lost its Fuzznum instance "
-                    f"(id: {self._instance_id}). Instance has been garbage collected."
-                )
+                f"Template for mtype '{self.mtype}' has lost its Fuzznum instance "
+                f"(id: {self._instance_id}). Instance has been garbage collected."
+            )
 
         return instance
 
@@ -438,43 +523,166 @@ class FuzznumTemplate(ABC):
             包含模板状态和缓存信息的字典
         """
         return {
-            'mtype': self.mtype,                # 模板关联的模糊数类型。
-            'is_valid': self._is_valid,         # 模板是否仍然有效（关联实例是否还存在）。
-            'instance_id': self._instance_id,   # 关联 Fuzznum 实例的唯一 ID。
-            'cache_enabled': self._cache_enabled,       # 缓存是否启用。
-            'cache_size': len(self._template_cache),    # 缓存中存储的条目数量。
+            'mtype': self.mtype,  # 模板关联的模糊数类型。
+            'is_valid': self._is_valid,  # 模板是否仍然有效（关联实例是否还存在）。
+            'instance_id': self._instance_id,  # 关联 Fuzznum 实例的唯一 ID。
+            'cache_enabled': self._cache_enabled,  # 缓存是否启用。
+            'cache_size': len(self._template_cache),  # 缓存中存储的条目数量。
             'cache_keys': list(self._template_cache.keys())
             # 缓存中的所有键列表。如果键的数量超过 10 个，则只显示数量，以避免输出过长。
             if len(self._template_cache) < 10 else f"{len(self._template_cache)} items"
         }
 
 
+# ======================== 改进的示例实现 ========================
+# 并不参与到初始化和任何运算过程，仅仅用来展示一个示例
+
+class ExampleStrategy(FuzznumStrategy):
+    """一个示例模糊数策略类，演示了如何定义隶属度和非隶属度属性，并为其添加验证和回调。
+
+    此类继承自 `FuzznumStrategy`，具体实现了模糊数的核心属性 `md`（隶属度）和 `nmd`（非隶属度）。
+    它展示了如何利用基类提供的机制来：
+        - 为 `md` 和 `nmd` 设置值范围验证器。
+        - 在 `md` 或 `nmd` 改变时触发回调，检查模糊数的基本约束（`md + nmd <= 1`）。
+        - 扩展基础的验证逻辑，在 `_validate` 方法中强制检查 `md + nmd` 的和。
+
+    Attributes:
+        mtype (str): 该策略对应的模糊数类型标识符，固定为 "example_fuzznum"。
+        md (Optional[float]): 隶属度，一个可选的浮点数，表示元素属于模糊集的程度。
+            其值应在 [0, 1] 范围内。
+        nmd (Optional[float]): 非隶属度，一个可选的浮点数，表示元素不属于模糊集的程度。
+            其值应在 [0, 1] 范围内。
+    """
+    mtype = "example_fuzznum"
+    md: Optional[float] = None
+    nmd: Optional[float] = None
+
+    def __init__(self):
+        """初始化 ExampleStrategy 实例。
+
+        在此构造函数中，会调用父类的初始化方法，并为 `md` 和 `nmd` 属性注册验证器和变更回调。
+        """
+        super().__init__()
+        # 调用父类 FuzznumStrategy 的初始化方法，这将初始化实例锁并为 'q' 属性添加验证器。
+
+        # 添加属性验证器
+        self.add_attribute_validator('md', lambda x: x is None or (isinstance(x, (int, float)) and 0 <= x <= 1))
+        self.add_attribute_validator('nmd', lambda x: x is None or (isinstance(x, (int, float)) and 0 <= x <= 1))
+        # 为 'md' 属性添加一个验证器。该验证器确保 'md' 的值要么是 None，要么是一个在 [0, 1] 范围内的整数或浮点数。
+        # 为 'nmd' 属性添加一个验证器。该验证器确保 'nmd' 的值要么是 None，要么是一个在 [0, 1] 范围内的整数或浮点数。
+
+        # 添加变更回调
+        self.add_change_callback('md', self._on_membership_change)
+        self.add_change_callback('nmd', self._on_membership_change)
+        # 当 'md' 属性的值发生变化时，注册 `_on_membership_change` 方法作为回调函数。
+        # 当 'nmd' 属性的值发生变化时，注册 `_on_membership_change` 方法作为回调函数。
+
+    def _on_membership_change(self, attr_name: str, old_value: Any, new_value: Any) -> None:
+        """隶属度或非隶属度变更时的回调函数。
+
+        此回调函数在 `md` 或 `nmd` 属性被设置时触发。它会检查模糊数约束条件
+        `md + nmd <= 1`，如果违反则发出警告。
+
+        Args:
+            attr_name (str): 发生变化的属性名（'md' 或 'nmd'）。
+            old_value (Any): 属性的旧值。
+            new_value (Any): 属性的新值。
+        """
+        if new_value is not None and hasattr(self, 'md') and hasattr(self, 'nmd'):
+            # 只有当新值不为 None，并且实例上同时存在 'md' 和 'nmd' 属性时才执行后续检查。
+            # 这确保了在对象初始化过程中，当属性可能尚未完全设置时，不会触发不完整的检查。
+
+            if self.md is not None and self.nmd is not None:
+                # 只有当 'md' 和 'nmd' 都已被赋值（非 None）时，才执行模糊数约束检查。
+                # 检查模糊数约束条件：通常，隶属度 (md) 和非隶属度 (nmd) 之和不应大于 1。
+                if self.md + self.nmd > 1:
+                    # **关键修改：从 warnings.warn 改为 raise ValueError。**
+                    # **这会触发 FuzznumStrategy.__setattr__ 中的回滚逻辑。**
+                    raise ValueError(f"md + nmd = {self.md + self.nmd} > 1, violates fuzzy number constraints")
+
+    def _validate(self) -> None:
+        """
+        扩展策略的验证方法，添加对隶属度和非隶属度之和的检查。
+
+        此方法在父类 `_validate` 的基础上，进一步检查 `md` 和 `nmd` 属性的组合约束。
+        如果 `md + nmd` 的和大于 1，则抛出 `ValueError`。
+        """
+        super()._validate()
+        # 调用父类 FuzznumStrategy 的 _validate 方法，执行其默认的验证逻辑（例如对 mtype 的检查）。
+
+        # 检查隶属度和非隶属度的约束：md + nmd 必须不大于 1。
+        # 只有当 'md' 和 'nmd' 都已被赋值（非 None）时，才执行此组合约束检查。
+        if (self.md is not None and self.nmd is not None and
+                self.md + self.nmd > 1):
+            raise ValueError(f"md + nmd = {self.md + self.nmd} must not exceed 1")
+            # 如果 md 和 nmd 的和大于 1，则抛出 ValueError，指示模糊数的状态无效。
 
 
+class ExampleTemplate(FuzznumTemplate):
+    """
+    一个改进的示例模糊数模板实现，演示了如何生成模糊数的字符串表示、详细报告，以及添加自定义的计算方法。
 
+    此类继承自 `FuzznumTemplate`，为 "example_fuzznum" 类型的模糊数提供了具体的表示逻辑。
+    它展示了如何利用基类的缓存机制来：
+        - 生成简洁的字符串表示（`str`）。
+        - 生成详细的报告字符串（`report`）。
+        - 计算一个自定义的得分函数（`score`）。
+    所有这些计算结果都会被缓存，以提高重复访问的性能。
 
+    Attributes:
+        mtype (str): 该模板对应的模糊数类型标识符，固定为 "example_fuzznum"。
+    """
 
+    mtype = "example_fuzznum"
 
+    def report(self) -> str:
+        """生成模糊数的详细报告字符串。
 
+        此方法利用 `FuzznumTemplate` 的缓存机制，生成一个包含模糊数所有关键参数的详细报告。
+        报告内容包括隶属度 (`md`)、非隶属度 (`nmd`) 和阶数 (`q`)。
 
+        Returns:
+            str: 详细的模糊数报告字符串，例如 "ExampleFuzz(md=0.8, nmd=0.1, q=2)"。
+        """
+        return self.get_cached_value(
+            'report',
+            # 缓存键，用于在 _template_cache 中查找或存储报告字符串。
+            lambda: f"ExampleFuzz(md={self.instance.md}, nmd={self.instance.nmd}, q={self.instance.q})"
+            # 计算报告字符串的函数。
+            # 它通过 `self.instance` 安全地访问关联 Fuzznum 实例的属性。
+        )
 
+    def str(self) -> str:
+        """生成模糊数的简洁字符串表示。
 
+        此方法利用 `FuzznumTemplate` 的缓存机制，生成一个简洁的模糊数字符串表示。
+        通常用于 `print()` 或 `str()` 调用。
 
+        Returns:
+            str: 简洁的模糊数字符串表示，例如 "<0.8,0.1>_q=2"。
+        """
+        return self.get_cached_value(
+            'str',
+            # 缓存键，用于在 _template_cache 中查找或存储简洁字符串表示。
+            lambda: f"<{self.instance.md},{self.instance.nmd}>_q={self.instance.q}"
+            # 计算简洁字符串表示的函数。
+            # 它通过 `self.instance` 安全地访问关联 Fuzznum 实例的属性。
+        )
 
+    def score(self) -> float:
+        """计算模糊数的得分函数。
 
+        此方法计算模糊数的得分，定义为隶属度与非隶属度之差 (`md - nmd`)。
+        它利用 `FuzznumTemplate` 的缓存机制，避免重复计算。
+        如果 `md` 或 `nmd` 为 None，则在计算中将其视为 0。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Returns:
+            float: 计算得到的模糊数得分。
+        """
+        return self.get_cached_value(
+            'score',
+            # 缓存键，用于在 _template_cache 中查找或存储得分。
+            lambda: (self.instance.md or 0) - (self.instance.nmd or 0)
+            # 计算得分的函数。
+            # `(self.instance.md or 0)` 确保如果 md 为 None，则使用 0 进行计算，避免 TypeError。
+        )

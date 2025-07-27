@@ -137,69 +137,11 @@ class FuzznumRegistry:
         # 作用：这个方法定义了框架内置的、作为默认加载的模糊数策略和模板类。
         # 它返回一个列表，其中每个元素都是一个 (策略类, 模板类) 的元组。
         # 这些类通常是作为嵌套类（内部类）定义的，以保持封装性，并且它们直接继承自 FuzznumStrategy 和 FuzznumTemplate。
-        # TODO: 后续会用专门写好的模糊数类型来改进
 
-        class QROFNStrategy(FuzznumStrategy):
-            mtype = 'qrofn'
-            md: Optional[float] = None
-            nmd: Optional[float] = None
-
-            def _validate(self) -> None:
-                # 模糊数的约束条件
-                # 一些模糊数规则
-
-                super()._validate()
-                if (self.md is not None and self.nmd is not None and
-                        pow(self.md, self.q) + pow(self.nmd, self.q) > 1):
-                    # QROFN（Q-rung Orthopair Fuzzy Number）的核心约束是：
-                    # 隶属度 (md) 的 q 次幂加上非隶属度 (nmd) 的 q 次幂必须小于等于 1。
-                    # 这里检查是否违反了这个约束。
-                    raise ValueError(f"md^q + nmd^q = {pow(self.md, self.q) + pow(self.nmd, self.q)} must not exceed 1")
-
-        class QROFNTemplate(FuzznumTemplate):
-            """Q阶序对模糊数模板"""
-
-            mtype = 'qrofn'
-
-            def report(self) -> str:
-                # 实现 FuzznumTemplate 的抽象方法 report。
-                # 这里简单地返回 str() 的结果，可以根据需要扩展为更详细的报告。
-                return self.str()
-
-            def str(self) -> str:
-                # 实现 FuzznumTemplate 的抽象方法 str。
-                # 返回 QROFN 的简洁字符串表示形式，包含 md, nmd 和 q。
-                # 通过 self.instance 访问关联的 Fuzznum 实例的属性。
-
-                if self.instance.md and self.instance.nmd:
-                    return f"<{self.instance.md},{self.instance.nmd}>_q={self.instance.q}"
-                return f"<>"
-
-        class IVQFNStrategy(FuzznumStrategy):
-            """区间值Q序对模糊数策略"""
-            mtype = 'ivqfn'
-            md: Optional[Tuple[float, float]] = None  # 隶属度现在是一个区间
-            nmd: Optional[Tuple[float, float]] = None  # 非隶属度现在是一个区间
-            # 注意：此处未实现 _validate 方法，如果需要，应添加对区间值约束的验证。
-
-        class IVQFNTemplate(FuzznumTemplate):
-            """区间值Q序对模糊数模板"""
-            mtype = 'ivqfn'
-
-            def report(self) -> str:
-                # 实现 FuzznumTemplate 的抽象方法 report。
-                # 这里简单地返回 str() 的结果，可以根据需要扩展为更详细的报告。
-                return self.str()
-
-            def str(self) -> str:
-                # 实现 FuzznumTemplate 的抽象方法 str。
-                # 返回 IVQFN 的简洁字符串表示形式，包含 md 区间, nmd 区间 和 q。
-                # 通过 self.instance 访问关联的 Fuzznum 实例的属性。
-                return f"<{self.instance.md},{self.instance.nmd}>_q={self.instance.q}"
+        from mohupy_.modules.qrofn import QROFNStrategy, QROFNTemplate
 
         return [
             (QROFNStrategy, QROFNTemplate),
-            (IVQFNStrategy, IVQFNTemplate)
         ]
 
     # ======================== 事务支持 ========================
