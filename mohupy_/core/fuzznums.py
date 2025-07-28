@@ -1596,10 +1596,10 @@ class Fuzznum:
             # 构造最终的 repr 字符串
             return (
                 f"Fuzznum({attrs_str}"
-                f"\n mtype='{mtype}"
+                f"\n mtype='{mtype}'"
                 f"\n id={obj_id}"
                 f"\n is_valid={self.validate_state()['is_valid']}"
-                f"\n status='initialized'"
+                f"\n status=initialized"
                 f"\n creation_time={self._creation_time}"
                 f"\n strategy={strategy_cls_name}"
                 f"\n template={template_cls_name})"

@@ -154,17 +154,17 @@ class Executor:
             # 重新抛出捕获到的异常，以便调用者能够处理。
             raise
 
-        finally:
-            # 无论 try 块是正常完成还是发生异常，finally 块都会执行。
-            # 计算验证耗时。
-            execution_time = time.perf_counter() - start_time
-            # 如果性能监控启用，则更新性能统计。
-            if self._performance_enabled:
-                # 调用 _update_performance_stats 方法，传入 'validation' 作为操作类型，
-                # 验证耗时，以及验证是否成功（由 _validation_stats['failed_validations'] 是否增加判断）。
-                self._update_performance_stats('validation',
-                                               execution_time,
-                                               self._validation_stats['failed_validations'] == 0)
+        # finally:
+        #     # 无论 try 块是正常完成还是发生异常，finally 块都会执行。
+        #     # 计算验证耗时。
+        #     execution_time = time.perf_counter() - start_time
+        #     # 如果性能监控启用，则更新性能统计。
+        #     if self._performance_enabled:
+        #         # 调用 _update_performance_stats 方法，传入 'validation' 作为操作类型，
+        #         # 验证耗时，以及验证是否成功（由 _validation_stats['failed_validations'] 是否增加判断）。
+        #         self._update_performance_stats('validation',
+        #                                        execution_time,
+        #                                        self._validation_stats['failed_validations'] == 0)
 
     def _create_result_fuzznum(self,
                                operation_type: str,
@@ -350,6 +350,7 @@ class Executor:
     def _execute_unary_op(self,
                           operation_type: str,
                           fuzznum: Fuzznum,
+                          operand: Union[float, int],
                           **params: Any) -> Union[Fuzznum, bool, Dict[str, Any]]:
         """
         内部方法：执行一元运算。
@@ -397,7 +398,7 @@ class Executor:
                                           f"strategy '{strategy.__class__.__name__}'.")
 
             # --- 5. 执行运算 ---
-            result_dict = operation_method(tnorm_instance)
+            result_dict = operation_method(operand, tnorm_instance)
 
             # --- 6. 创建结果 ---
             # 这里调用的是 Fuzznum.create 而不是 from_dict, 更加通用
@@ -407,8 +408,8 @@ class Executor:
         # --- 6. 缓存检查 ---
         # 生成一个唯一的缓存键，用于标识本次运算请求。
         # 缓存键的生成考虑了运算类型、Fuzznum 实例的身份和内容，以及额外参数。
-        # 注意：对于一元运算，`fuzznum_2` 参数为 None。
-        cache_key = self._generate_cache_key(operation_type, fuzznum, None, *params)
+        # 注意：对于一元运算，`operand` 参数为 None。
+        cache_key = self._generate_cache_key(operation_type, fuzznum, operand, *params)
         # 尝试从内部缓存 `_result_cache` 中获取结果。
         # `cache_hit` 为 True 表示命中缓存，`cached_result` 为缓存中的值。
         cache_hit, cached_result = self._get_cached_result(cache_key)
@@ -551,7 +552,7 @@ class Executor:
     @staticmethod
     def _generate_cache_key(operation_type: str,
                             fuzznum_1: Fuzznum,
-                            fuzznum_2: Optional[Fuzznum] = None,
+                            operand: Optional[Union[Fuzznum, float, int]] = None,
                             *params) -> str:
         """
         生成缓存键
@@ -563,7 +564,7 @@ class Executor:
         Args:
             operation_type: 运算类型字符串（如 'add', 'gt'）。
             fuzznum_1: 第一个 Fuzznum 操作数。
-            fuzznum_2: 可选，第二个 Fuzznum 操作数（用于二元运算）。
+            operand: 可选，第二个 Fuzznum 操作数（用于二元运算），操作数（一元运算的系数）。
             *params: 额外的运算参数。
 
         Returns:
@@ -584,8 +585,11 @@ class Executor:
         ]
 
         # 如果存在第二个 Fuzznum 操作数（二元运算）
-        if fuzznum_2:
-            key_parts.append(get_stable_dict_str(fuzznum_2))
+        if operand and isinstance(operand, Fuzznum):
+            key_parts.append(get_stable_dict_str(operand))
+
+        if operand and isinstance(operand, float):
+            key_parts.append(str(operand))
 
         # 如果有额外参数
         if params:
@@ -985,13 +989,14 @@ class Executor:
 
     # ----------------------------- 一元运算接口 -----------------------------
 
-    def power(self, fuzznum: Fuzznum, **params: Any) -> Union[Fuzznum, Dict[str, Any]]:
+    def power(self, fuzznum: Fuzznum, operand: Union[int, float], **params: Any) -> Union[Fuzznum, Dict[str, Any]]:
         """执行模糊数的幂运算。
 
         此方法将 `fuzznum` 进行幂运算（例如，`fuzznum` 的 `p` 次幂）。
 
         Args:
             fuzznum (Fuzznum): 模糊数操作数。
+            operand: 一元运算操作数
             **params (Any): 额外的位置参数，通常包含幂次。
 
         Returns:
@@ -1003,15 +1008,16 @@ class Executor:
             Exception: 传播底层运算中可能抛出的任何异常。
         """
         # 委托给内部的 _execute_unary_op 方法，指定运算类型为 'pow'。
-        return self._execute_unary_op('pow', fuzznum, **params)
+        return self._execute_unary_op('pow', fuzznum, operand, **params)
 
-    def times(self, fuzznum: Fuzznum, **params: Any) -> Union[Fuzznum, Dict[str, Any]]:
+    def times(self, fuzznum: Fuzznum, operand: Union[int, float], **params: Any) -> Union[Fuzznum, Dict[str, Any]]:
         """执行模糊数的倍数运算。
 
         此方法将 `fuzznum` 乘以一个倍数（例如，`p` 乘以 `fuzznum`）。
 
         Args:
             fuzznum (Fuzznum): 模糊数操作数。
+            operand: 一元运算操作数
             **params (Any): 额外的位置参数，通常包含倍数。
 
         Returns:
@@ -1023,15 +1029,16 @@ class Executor:
             Exception: 传播底层运算中可能抛出的任何异常。
         """
         # 委托给内部的 _execute_unary_op 方法，指定运算类型为 'tim'。
-        return self._execute_unary_op('tim', fuzznum, **params)
+        return self._execute_unary_op('tim', fuzznum, operand, **params)
 
-    def exponential(self, fuzznum: Fuzznum, **params: Any) -> Union[Fuzznum, Dict[str, Any]]:
+    def exponential(self, fuzznum: Fuzznum, operand: Union[int, float], **params: Any) -> Union[Fuzznum, Dict[str, Any]]:
         """执行模糊数的指数运算。
 
         此方法将 `e`（自然对数的底数）或指定底数提升到 `fuzznum` 的幂。
 
         Args:
             fuzznum (Fuzznum): 模糊数操作数（指数）。
+            operand: 一元运算操作数
             *params (Any): 额外的位置参数，可选地包含指数运算的底数。
 
         Returns:
@@ -1043,15 +1050,16 @@ class Executor:
             Exception: 传播底层运算中可能抛出的任何异常。
         """
         # 委托给内部的 _execute_unary_op 方法，指定运算类型为 'exp'。
-        return self._execute_unary_op('exp', fuzznum, **params)
+        return self._execute_unary_op('exp', fuzznum, operand, **params)
 
-    def logarithmic(self, fuzznum: Fuzznum, **params: Any) -> Union[Fuzznum, Dict[str, Any]]:
+    def logarithmic(self, fuzznum: Fuzznum, operand: Union[int, float], **params: Any) -> Union[Fuzznum, Dict[str, Any]]:
         """执行模糊数的对数运算。
 
         此方法计算 `fuzznum` 的对数。
 
         Args:
             fuzznum (Fuzznum): 模糊数操作数。
+            operand: 一元运算操作数
             **params (Any): 额外的位置参数，可选地包含对数运算的底数。
 
         Returns:
@@ -1063,7 +1071,7 @@ class Executor:
             Exception: 传播底层运算中可能抛出的任何异常。
         """
         # 委托给内部的 _execute_unary_op 方法，指定运算类型为 'log'。
-        return self._execute_unary_op('log', fuzznum, **params)
+        return self._execute_unary_op('log', fuzznum, operand, **params)
 
     # ----------------------------- 比较运算接口 -----------------------------
 

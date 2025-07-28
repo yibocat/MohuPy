@@ -7,7 +7,7 @@
 import collections
 import weakref
 from abc import ABC, abstractmethod
-from typing import Set, Dict, Any, Callable, Optional
+from typing import Set, Dict, Any, Callable, Optional, Union
 
 from mohupy_.config import get_config
 from mohupy_.core.triangular import OperationTNorm
@@ -316,19 +316,19 @@ class FuzznumStrategy(ABC):
         raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
                                   f"t-norm '{tnorm.norm_type}' is not yet implemented.")
 
-    def pow(self, tnorm: OperationTNorm) -> Dict[str, Any]:
+    def pow(self, other_operand: Union[int, float], tnorm: OperationTNorm) -> Dict[str, Any]:
         raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
                                   f"t-norm '{tnorm.norm_type}' is not yet implemented.")
 
-    def tim(self, tnorm: OperationTNorm) -> Dict[str, Any]:
+    def tim(self, other_operand: Union[int, float], tnorm: OperationTNorm) -> Dict[str, Any]:
         raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
                                   f"t-norm '{tnorm.norm_type}' is not yet implemented.")
 
-    def exp(self, tnorm: OperationTNorm) -> Dict[str, Any]:
+    def exp(self, other_operand: Union[int, float], tnorm: OperationTNorm) -> Dict[str, Any]:
         raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
                                   f"t-norm '{tnorm.norm_type}' is not yet implemented.")
 
-    def log(self, tnorm: OperationTNorm) -> Dict[str, Any]:
+    def log(self, other_operand: Union[int, float], tnorm: OperationTNorm) -> Dict[str, Any]:
         raise NotImplementedError(f"The operation of fuzzy numbers with '{self.mtype}' under the "
                                   f"t-norm '{tnorm.norm_type}' is not yet implemented.")
 
