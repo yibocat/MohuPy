@@ -58,6 +58,26 @@ class Config:
         }
     )
 
+    DEFAULT_PRECISION: int = field(
+        default=6,
+        metadata={
+            'category': 'basic',
+            'description': '默认计算精度（小数位数），影响所有数值计算和显示',
+            'validator': lambda x: isinstance(x, int) and x >= 0,
+            'error_msg': "必须是非负整数。"
+        }
+    )
+
+    DEFAULT_EPSILON: float = field(
+        default=1e-12,
+        metadata={
+            'category': 'basic',
+            'description': '默认数值容差，用于浮点数比较和零值判断',
+            'validator': lambda x: isinstance(x, (int, float)) and x > 0,
+            'error_msg': "必须是正数。"
+        }
+    )
+
     STRICT_ATTRIBUTE_MODE: bool = field(
         default=True,
         metadata={
@@ -166,25 +186,7 @@ class Config:
     #     }
     # )
     #
-    # DEFAULT_PRECISION: int = field(
-    #     default=6,
-    #     metadata={
-    #         'category': 'basic',
-    #         'description': '默认计算精度（小数位数），影响所有数值计算和显示',
-    #         'validator': lambda x: isinstance(x, int) and x >= 0,
-    #         'error_msg': "必须是非负整数。"
-    #     }
-    # )
     #
-    # DEFAULT_EPSILON: float = field(
-    #     default=1e-12,
-    #     metadata={
-    #         'category': 'basic',
-    #         'description': '默认数值容差，用于浮点数比较和零值判断',
-    #         'validator': lambda x: isinstance(x, (int, float)) and x > 0,
-    #         'error_msg': "必须是正数。"
-    #     }
-    # )
     #
     # # ==================== 性能配置 ====================
     # # 缓存和性能优化相关参数

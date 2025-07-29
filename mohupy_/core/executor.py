@@ -5,12 +5,15 @@
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
 import collections
+import datetime
 import logging
 import threading
 import time
 from contextlib import contextmanager
 
 from typing import Optional, Dict, Tuple, Any, Union, Callable, List
+
+import numpy as np
 
 from mohupy_.config import get_config
 from mohupy_.core.fuzznums import Fuzznum
@@ -80,172 +83,13 @@ class Executor:
         }
 
         # 记录执行器实例的创建时间戳。
-        self._creation_time = time.perf_counter()
+        self._creation_time = float(datetime.datetime.now().strftime("%Y%m%d%H%M%S.%f"))
 
         # 如果处于调试模式，则输出一条执行器初始化成功的调试日志。
         if self._debug_mode:
             logger.debug(f"Executor initialized with t-norm: '{self._t_norm_type}'")
 
     # ============================== 运算执行（内部方法） ===============================
-
-    def _validate_fuzznum(self, fuzz_obj: Fuzznum) -> None:
-        """
-        验证模糊数对象
-
-        用于验证输入的 Fuzznum 对象是否有效。在执行任何运算之前，
-        确保输入的 Fuzznum 对象符合当前执行器的要求，
-        包括类型兼容性、策略属性有效性以及对象自身的状态完整性。验证失败会抛出异常并记录错误信息。
-
-        Args:
-            fuzz_obj: 要验证的 Fuzznum 实例。
-
-        Raises:
-            ValueError: 如果 Fuzznum 对象验证失败。
-        """
-        # 记录验证开始时间，用于性能统计。
-        start_time = time.perf_counter()
-
-        try:
-            # 获取实例锁。
-            # 这是为了确保在多线程环境下，对 _validation_stats 字典的修改是线程安全的。
-            with self._lock:
-                # 增加总验证次数。
-                self._validation_stats['total_validations'] += 1
-
-            # --- 验证策略属性 ---
-            # 获取 Fuzznum 对象的策略属性字典。
-            attr_dict = fuzz_obj.get_strategy_attributes_dict()
-            # 遍历策略属性字典中的每一个键值对。
-            for key, value in attr_dict.items():
-                # 检查属性值是否为 None。
-                if value is None:
-                    # 如果有属性值为 None，则抛出 ValueError，说明策略属性无效。
-                    raise ValueError(f"Fuzzy number must have valid strategy attributes: "
-                                     f"'{key}' has invalid value '{value}'.")
-
-            # --- 验证对象状态 ---
-            # 调用 Fuzznum 对象自身的 validate_state 方法，进行更深层次的验证。
-            validation_result = fuzz_obj.validate_state()
-            # 检查验证结果中的 'is_valid' 标志。
-            if not validation_result.get('is_valid', True):
-                # 如果对象状态无效，则获取验证问题列表。
-                issues = validation_result.get('issues', [])
-                # 抛出 ValueError，列出所有验证失败的问题。
-                raise ValueError(f"Fuzzy number validation failed: {'; '.join(issues)}")
-
-            # 如果所有验证都通过，并且处于调试模式，则输出一条验证通过的调试日志。
-            if self._debug_mode:
-                logger.debug(f"Fuzznum validation passed for {fuzz_obj.mtype}")
-
-        except Exception as e:
-            # 如果在 try 块中发生任何异常（验证失败）。
-            # 获取实例锁。
-            with self._lock:
-                self._validation_stats['failed_validations'] += 1
-                self._validation_stats['validation_errors'].append({
-                    'error': str(e),  # 错误信息字符串
-                    'timestamp': time.perf_counter(),  # 错误发生的时间戳
-                    'fuzznum_id': id(fuzz_obj)  # 出错的 Fuzznum 对象的内存ID
-                })
-
-            # 如果处于调试模式，则输出一条验证失败的错误日志。
-            if self._debug_mode:
-                logger.error(f"Fuzznum validation failed: {e}")
-            # 重新抛出捕获到的异常，以便调用者能够处理。
-            raise
-
-        # finally:
-        #     # 无论 try 块是正常完成还是发生异常，finally 块都会执行。
-        #     # 计算验证耗时。
-        #     execution_time = time.perf_counter() - start_time
-        #     # 如果性能监控启用，则更新性能统计。
-        #     if self._performance_enabled:
-        #         # 调用 _update_performance_stats 方法，传入 'validation' 作为操作类型，
-        #         # 验证耗时，以及验证是否成功（由 _validation_stats['failed_validations'] 是否增加判断）。
-        #         self._update_performance_stats('validation',
-        #                                        execution_time,
-        #                                        self._validation_stats['failed_validations'] == 0)
-
-    def _create_result_fuzznum(self,
-                               operation_type: str,
-                               result: Dict[str, Any]) -> Union[Fuzznum, bool, Dict]:
-        """
-        创建结果模糊数对象
-
-        用于将底层运算返回的字典结果转换为 Fuzznum 对象或布尔值（针对比较运算）。
-        其逻辑思路是：标准化运算的输出，使其对用户来说是易于理解和使用的。
-        它还支持对 Fuzznum 实例进行缓存，避免为相同结果重复创建对象。
-
-        Args:
-            operation_type: 运算类型字符串（如 'add', 'gt'）。
-            result: 由底层运算（通过 factory.execute）返回的结果字典。
-
-        Returns:
-            Union[Fuzznum, bool, Dict]: 转换后的结果。
-                - 对于比较运算，返回布尔值。
-                - 对于其他运算，返回 Fuzznum 实例或原始字典（如果创建失败）。
-        """
-        config = get_config()
-
-        # --- 处理比较运算结果 ---
-        # 定义一个包含所有比较运算类型的集合。
-        # 特别注意，在比较运算中返回的结果也必须是字典，且字典的键为 'value'，值为 bool
-        comparison_ops = {'gt', 'lt', 'eq', 'ge', 'le', 'ne'}
-        if operation_type in comparison_ops:
-            if 'value' in result and isinstance(result['value'], bool):
-                return result['value']
-            # 如果结果格式不符合预期，则抛出 ValueError。
-            raise ValueError(f"Comparison operation '{operation_type}' "
-                             f"returned an unexpected result format: {result}. "
-                             f"Expected a boolean value under 'value' key.")
-
-        # --- 处理其他运算结果 ---
-        # 为 Fuzznum 实例生成一个缓存键。
-        cache_key = f"fuzznum_{result}_{id(result)}"
-
-        try:
-            # --- 检查 Fuzznum 缓存 ---
-            # 检查 cache_key 是否存在于 _fuzznum_cache 字典中。
-
-            if cache_key in self._fuzznum_cache:
-                # 如果命中缓存，并且处于调试模式，则输出一条复用缓存 Fuzznum 的调试日志。
-                if self._debug_mode:
-                    logger.debug(f"Reusing cached Fuzznum for {operation_type}")
-                    # 直接返回缓存中的 Fuzznum 实例。
-                return self._fuzznum_cache[cache_key]
-
-            # --- 创建新的 Fuzznum 实例 ---
-            fuzznum = Fuzznum(result['mtype'])
-            fuzznum.from_dict(result)
-
-            # --- 缓存 Fuzznum 实例 ---
-            if self._cache_enabled:
-                self._fuzznum_cache[cache_key] = fuzznum
-
-            # 如果处于调试模式，则输出一条创建新 Fuzznum 的调试日志。
-            if self._debug_mode:
-                logger.debug(f"Created new Fuzznum for {operation_type}")
-
-            return fuzznum
-
-        except (ValueError, AttributeError, RuntimeError) as e:
-            # 如果在尝试创建 Fuzznum 对象时发生已知的异常（如数据格式错误、属性不存在、运行时错误）。
-            # 检查配置中的调试模式。
-            if config.DEBUG_MODE:
-                # 如果处于调试模式，则输出一条警告日志，说明创建 Fuzznum 失败，并返回原始字典。
-                logger.warning(f"Failed to create Fuzznum object from result for operation '{operation_type}' "
-                               f"with mtype '{result['mtype']}': {e}. Returning raw dictionary: {result}")
-            # 返回原始的结果字典。
-            return result
-        except Exception as e:
-            # 如果在尝试创建 Fuzznum 对象时发生任何其他未知的异常。
-            # 检查配置中的调试模式。
-            if config.DEBUG_MODE:
-                # 如果处于调试模式，则输出一条警告日志，说明发生意外错误，并返回原始字典。
-                logger.warning(f"An unexpected error occurred during Fuzznum creation for operation '{operation_type}' "
-                               f"with mtype '{result['mtype']}': {e}. Returning raw dictionary: {result}")
-            # 返回原始的结果字典。
-            return result
 
     def _execute_binary_op(self,
                            operation_type: str,
@@ -318,10 +162,16 @@ class Executor:
             # --- 5. 执行运算 ---
             result_dict = operation_method(strategy2, tnorm_instance)
 
-            # --- 6. 创建结果 ---
+            # --- 6. 执行运算后处理 ---
+            post_process_result = self._postprocess_result(result_dict)
+
+            # --- 7. 创建结果 ---
             # 这里调用的是 Fuzznum.create 而不是 from_dict, 更加通用
             # 您需要确保 Fuzznum.create 接受字典形式的参数
-            return Fuzznum.create(fuzznum_1, **result_dict)
+            if post_process_result.get('value') is not None:
+                return post_process_result['value']
+            else:
+                return Fuzznum.create(fuzznum_1, **post_process_result)
 
         # --- 6. 缓存检查 ---
         # 生成一个唯一的缓存键，用于标识本次运算请求。
@@ -400,10 +250,13 @@ class Executor:
             # --- 5. 执行运算 ---
             result_dict = operation_method(operand, tnorm_instance)
 
-            # --- 6. 创建结果 ---
+            # --- 6. 执行运算后处理 ---
+            post_process_result = self._postprocess_result(result_dict)
+
+            # --- 7. 创建结果 ---
             # 这里调用的是 Fuzznum.create 而不是 from_dict, 更加通用
             # 您需要确保 Fuzznum.create 接受字典形式的参数
-            return Fuzznum.create(fuzznum, **result_dict)
+            return Fuzznum.create(fuzznum, **post_process_result)
 
         # --- 6. 缓存检查 ---
         # 生成一个唯一的缓存键，用于标识本次运算请求。
@@ -547,6 +400,184 @@ class Executor:
             # 传入运算类型、执行时间以及操作是否成功。
             self._update_performance_stats(operation_type, execution_time, success)
 
+    def _validate_fuzznum(self, fuzz_obj: Fuzznum) -> None:
+        """
+        验证模糊数对象
+
+        用于验证输入的 Fuzznum 对象是否有效。在执行任何运算之前，
+        确保输入的 Fuzznum 对象符合当前执行器的要求，
+        包括类型兼容性、策略属性有效性以及对象自身的状态完整性。验证失败会抛出异常并记录错误信息。
+
+        Args:
+            fuzz_obj: 要验证的 Fuzznum 实例。
+
+        Raises:
+            ValueError: 如果 Fuzznum 对象验证失败。
+        """
+        # 记录验证开始时间，用于性能统计。
+        start_time = time.perf_counter()
+
+        try:
+            # 获取实例锁。
+            # 这是为了确保在多线程环境下，对 _validation_stats 字典的修改是线程安全的。
+            with self._lock:
+                # 增加总验证次数。
+                self._validation_stats['total_validations'] += 1
+
+            # --- 验证策略属性 ---
+            # 获取 Fuzznum 对象的策略属性字典。
+            attr_dict = fuzz_obj.get_strategy_attributes_dict()
+            # 遍历策略属性字典中的每一个键值对。
+            for key, value in attr_dict.items():
+                # 检查属性值是否为 None。
+                if value is None:
+                    # 如果有属性值为 None，则抛出 ValueError，说明策略属性无效。
+                    raise ValueError(f"Fuzzy number must have valid strategy attributes: "
+                                     f"'{key}' has invalid value '{value}'.")
+
+            # --- 验证对象状态 ---
+            # 调用 Fuzznum 对象自身的 validate_state 方法，进行更深层次的验证。
+            validation_result = fuzz_obj.validate_state()
+            # 检查验证结果中的 'is_valid' 标志。
+            if not validation_result.get('is_valid', True):
+                # 如果对象状态无效，则获取验证问题列表。
+                issues = validation_result.get('issues', [])
+                # 抛出 ValueError，列出所有验证失败的问题。
+                raise ValueError(f"Fuzzy number validation failed: {'; '.join(issues)}")
+
+            # 如果所有验证都通过，并且处于调试模式，则输出一条验证通过的调试日志。
+            if self._debug_mode:
+                logger.debug(f"Fuzznum validation passed for {fuzz_obj.mtype}")
+
+        except Exception as e:
+            # 如果在 try 块中发生任何异常（验证失败）。
+            # 获取实例锁。
+            with self._lock:
+                self._validation_stats['failed_validations'] += 1
+                self._validation_stats['validation_errors'].append({
+                    'error': str(e),  # 错误信息字符串
+                    'timestamp': time.perf_counter(),  # 错误发生的时间戳
+                    'fuzznum_id': id(fuzz_obj)  # 出错的 Fuzznum 对象的内存ID
+                })
+
+            # 如果处于调试模式，则输出一条验证失败的错误日志。
+            if self._debug_mode:
+                logger.error(f"Fuzznum validation failed: {e}")
+            # 重新抛出捕获到的异常，以便调用者能够处理。
+            raise
+
+        finally:
+            # 无论 try 块是正常完成还是发生异常，finally 块都会执行。
+            # 计算验证耗时。
+            execution_time = time.perf_counter() - start_time
+            # 如果性能监控启用，则更新性能统计。
+            if self._performance_enabled:
+                # 调用 _update_performance_stats 方法，传入 'validation' 作为操作类型，
+                # 验证耗时，以及验证是否成功（由 _validation_stats['failed_validations'] 是否增加判断）。
+                self._update_performance_stats('validation',
+                                               execution_time,
+                                               self._validation_stats['failed_validations'] == 0)
+
+    def _create_result_fuzznum(self,
+                               operation_type: str,
+                               result: Dict[str, Any]) -> Union[Fuzznum, bool, Dict]:
+        """
+        创建结果模糊数对象
+
+        用于将底层运算返回的字典结果转换为 Fuzznum 对象或布尔值（针对比较运算）。
+        其逻辑思路是：标准化运算的输出，使其对用户来说是易于理解和使用的。
+        它还支持对 Fuzznum 实例进行缓存，避免为相同结果重复创建对象。
+
+        Args:
+            operation_type: 运算类型字符串（如 'add', 'gt'）。
+            result: 由底层运算（通过 factory.execute）返回的结果字典。
+
+        Returns:
+            Union[Fuzznum, bool, Dict]: 转换后的结果。
+                - 对于比较运算，返回布尔值。
+                - 对于其他运算，返回 Fuzznum 实例或原始字典（如果创建失败）。
+        """
+        config = get_config()
+
+        # --- 处理比较运算结果 ---
+        # 定义一个包含所有比较运算类型的集合。
+        # 特别注意，在比较运算中返回的结果也必须是字典，且字典的键为 'value'，值为 bool
+        comparison_ops = {'gt', 'lt', 'eq', 'ge', 'le', 'ne'}
+        if operation_type in comparison_ops:
+            if 'value' in result and isinstance(result['value'], bool):
+                return result['value']
+            # 如果结果格式不符合预期，则抛出 ValueError。
+            raise ValueError(f"Comparison operation '{operation_type}' "
+                             f"returned an unexpected result format: {result}. "
+                             f"Expected a boolean value under 'value' key.")
+
+        # --- 处理其他运算结果 ---
+        # 为 Fuzznum 实例生成一个缓存键。
+        cache_key = f"fuzznum_{result}_{id(result)}"
+
+        try:
+            # --- 检查 Fuzznum 缓存 ---
+            # 检查 cache_key 是否存在于 _fuzznum_cache 字典中。
+
+            if cache_key in self._fuzznum_cache:
+                # 如果命中缓存，并且处于调试模式，则输出一条复用缓存 Fuzznum 的调试日志。
+                if self._debug_mode:
+                    logger.debug(f"Reusing cached Fuzznum for {operation_type}")
+                    # 直接返回缓存中的 Fuzznum 实例。
+                return self._fuzznum_cache[cache_key]
+
+            # --- 创建新的 Fuzznum 实例 ---
+            fuzznum = Fuzznum(result['mtype'])
+            fuzznum.from_dict(result)
+
+            # --- 缓存 Fuzznum 实例 ---
+            if self._cache_enabled:
+                self._fuzznum_cache[cache_key] = fuzznum
+
+            # 如果处于调试模式，则输出一条创建新 Fuzznum 的调试日志。
+            if self._debug_mode:
+                logger.debug(f"Created new Fuzznum for {operation_type}")
+
+            return fuzznum
+
+        except (ValueError, AttributeError, RuntimeError) as e:
+            # 如果在尝试创建 Fuzznum 对象时发生已知的异常（如数据格式错误、属性不存在、运行时错误）。
+            # 检查配置中的调试模式。
+            if config.DEBUG_MODE:
+                # 如果处于调试模式，则输出一条警告日志，说明创建 Fuzznum 失败，并返回原始字典。
+                logger.warning(f"Failed to create Fuzznum object from result for operation '{operation_type}' "
+                               f"with mtype '{result['mtype']}': {e}. Returning raw dictionary: {result}")
+            # 返回原始的结果字典。
+            return result
+        except Exception as e:
+            # 如果在尝试创建 Fuzznum 对象时发生任何其他未知的异常。
+            # 检查配置中的调试模式。
+            if config.DEBUG_MODE:
+                # 如果处于调试模式，则输出一条警告日志，说明发生意外错误，并返回原始字典。
+                logger.warning(f"An unexpected error occurred during Fuzznum creation for operation '{operation_type}' "
+                               f"with mtype '{result['mtype']}': {e}. Returning raw dictionary: {result}")
+            # 返回原始的结果字典。
+            return result
+
+    def _postprocess_result(self, result: Any) -> Dict[str, Any]:
+        """
+        后处理运算结果。
+
+        默认策略将结果标准化为字典形式，并进行精度控制。
+        """
+        # 确保结果是字典，如果不是则包装成字典
+        if not isinstance(result, dict):
+            result = {'value': result}
+
+        for key, value in result.items():
+            if isinstance(value, (float, np.floating)):
+                result[key] = round(value, self._config.DEFAULT_PRECISION)
+            elif isinstance(value, dict):     # 针对嵌套的模糊数类型
+                for sub_key, sub_val in value.items():
+                    if isinstance(sub_val, (float, np.floating)):
+                        value[sub_key] = round(sub_val, self._config.DEFAULT_PRECISION)
+        return result
+
     # ============================ 缓存管理（内部结果缓存） ===============================
 
     @staticmethod
@@ -588,7 +619,7 @@ class Executor:
         if operand and isinstance(operand, Fuzznum):
             key_parts.append(get_stable_dict_str(operand))
 
-        if operand and isinstance(operand, float):
+        if operand and isinstance(operand, float | int):
             key_parts.append(str(operand))
 
         # 如果有额外参数
@@ -851,7 +882,8 @@ class Executor:
             return {
                 't_norm_type': self._t_norm_type,  # 当前运算器的t-范数名称。
                 'creation_time': self._creation_time,  # 执行器实例的创建时间戳。
-                'age_seconds': time.perf_counter() - self._creation_time,  # 执行器实例自创建以来的存活时间（秒）。
+                'age_seconds': float(datetime.datetime.now().strftime("%Y%m%d%H%M%S.%f"))
+                               - self._creation_time,  # 执行器实例自创建以来的存活时间（秒）。
                 'execution_stats': self._execution_stats.copy(),  # 运算执行的统计数据。
                 'cache_stats': self._cache_stats.copy(),  # 缓存使用情况的统计数据。
                 'validation_stats': self._validation_stats.copy(),  # Fuzznum 验证的统计数据。

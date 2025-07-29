@@ -4,10 +4,16 @@
 #  Author: yibow
 #  Email: yibocat@yeah.net
 #  Software: MohuPy
+import math
+import warnings
 from typing import Optional, Dict, Any, Union
+
+import numpy as np
 
 from mohupy_.core.base import FuzznumStrategy, FuzznumTemplate
 from mohupy_.core.triangular import OperationTNorm
+
+from mohupy_.config import get_config
 
 
 class QROFNStrategy(FuzznumStrategy):
@@ -18,18 +24,19 @@ class QROFNStrategy(FuzznumStrategy):
     def __init__(self):
         super().__init__()
 
+        # 添加隶属度约束和非隶属度约束条件
         self.add_attribute_validator('md',
                                      lambda x: x is None or isinstance(x, (int, float)) and 0 <= x <= 1)
         self.add_attribute_validator('nmd',
                                      lambda x: x is None or isinstance(x, (int, float)) and 0 <= x <= 1)
 
-        # 添加变更回调
+        # 添加模糊约束条件变更回调
         self.add_change_callback('md', self._on_membership_change)
         self.add_change_callback('nmd', self._on_membership_change)
 
     def _fuzz_constraint(self):
         # 模糊约束条件
-        if self.md is not None and self.nmd is not None and self.md ** self.q + self.nmd ** self.q > 1 :
+        if self.md is not None and self.nmd is not None and self.md ** self.q + self.nmd ** self.q > 1:
             raise ValueError(f"md^q + nmd^q = {self.md ** self.q + self.nmd ** self.q} > 1, violates fuzzy number constraints")
 
     def _on_membership_change(self, attr_name: str, old_value: Any, new_value: Any) -> None:
@@ -51,17 +58,57 @@ class QROFNStrategy(FuzznumStrategy):
 
     def add(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
 
-        new_md = tnorm.t_conorm(self.md, other_strategy.md)
-        new_nmd = tnorm.t_norm(self.nmd, other_strategy.nmd)
+        md = tnorm.t_conorm(self.md, other_strategy.md)
+        nmd = tnorm.t_norm(self.nmd, other_strategy.nmd)
 
-        return {'md': new_md, 'nmd': new_nmd, 'q': self.q}
+        return {'md': md, 'nmd': nmd, 'q': self.q}
+
+    def sub(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+
+        config = get_config()
+
+        if self.md < config.DEFAULT_EPSILON and self.nmd > 1 - config.DEFAULT_EPSILON:
+            return {'md': 0., 'nmd': 1., 'q': self.q}
+
+        if other_strategy.md > 1 - config.DEFAULT_EPSILON and other_strategy.nmd < config.DEFAULT_EPSILON:
+            return {'md': 0., 'nmd': 1., 'q': self.q}
+
+        if (config.DEFAULT_EPSILON
+                <= (self.nmd / other_strategy.nmd)
+                <= ((1 - self.md ** self.q) / (1 - other_strategy.md ** self.q)) ** (1/self.q)
+                <= 1 - config.DEFAULT_EPSILON):
+
+            md = ((self.md ** self.q - other_strategy.md ** self.q) / (1 - other_strategy.md ** self.q)) ** (1 / self.q)
+            nmd = self.nmd / other_strategy.nmd
+            return {'md': md, 'nmd': nmd, 'q': self.q}
+
+        return {'md': 0., 'nmd': 1., 'q': self.q}
 
     def mul(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
 
-        new_md = tnorm.t_norm(self.md, other_strategy.md)
-        new_nmd = tnorm.t_conorm(self.nmd, other_strategy.nmd)
+        md = tnorm.t_norm(self.md, other_strategy.md)
+        nmd = tnorm.t_conorm(self.nmd, other_strategy.nmd)
 
-        return {'md': new_md, 'nmd': new_nmd, 'q': self.q}
+        return {'md': md, 'nmd': nmd, 'q': self.q}
+
+    def div(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        config = get_config()
+
+        if self.md > 1 - config.DEFAULT_EPSILON and self.nmd < config.DEFAULT_EPSILON:
+            return {'md': 1., 'nmd': 0., 'q': self.q}
+
+        if other_strategy.md < config.DEFAULT_EPSILON and other_strategy.nmd > 1 - config.DEFAULT_EPSILON:
+            return {'md': 1., 'nmd': 0., 'q': self.q}
+
+        if (config.DEFAULT_EPSILON
+                <= self.md/other_strategy.md
+                <= ((1 - self.nmd ** self.q) / (1 - other_strategy.nmd ** self.q)) ** (1/self.q)
+                <= 1 - config.DEFAULT_EPSILON):
+
+            md = self.md / other_strategy.md
+            nmd = ((self.nmd ** self.q - other_strategy.nmd ** self.q) / (1 - other_strategy.nmd ** self.q)) ** (1 / self.q)
+            return {'md': md, 'nmd': nmd, 'q': self.q}
+        return {'md': 1., 'nmd': 0., 'q': self.q}
 
     def tim(self, other_operand: Union[int, float], tnorm: OperationTNorm) -> Dict[str, Any]:
 
@@ -76,6 +123,86 @@ class QROFNStrategy(FuzznumStrategy):
         nmd = tnorm.f_inv_func(other_operand * tnorm.f_func(self.nmd))
 
         return {'md': md, 'nmd': nmd, 'q': self.q}
+
+    # def exp(self, other_operand: Union[int, float], tnorm: OperationTNorm) -> Dict[str, Any]:
+    #     md, nmd = 0., 0.
+    #     warnings.warn(f"The exponential function method has not been verified; use with caution.")
+    #     print(f"The exponential function method has not been verified; use with caution.")
+    #     if 0 < other_operand < 1:
+    #         # md = tnorm.f_inv_func((1 - other_operand) * tnorm.f_func(self.md))
+    #         # nmd = tnorm.g_inv_func(other_operand * tnorm.g_func(1 - self.nmd))
+    #
+    #         md = self.md ** (1 - other_operand)
+    #         nmd = 1 - self.nmd ** other_operand
+    #
+    #     if other_operand > 1:
+    #         # md = tnorm.f_inv_func((1 - other_operand) * tnorm.f_func(1/self.md))
+    #         # nmd = tnorm.g_inv_func(other_operand * tnorm.g_func(1 - 1/self.nmd))
+    #
+    #         md = (1/self.md) ** (1 - other_operand)
+    #         nmd = (1 - self.nmd) ** other_operand
+    #
+    #     return {'md': md, 'nmd': nmd, 'q': self.q}
+
+    # def log(self, other_operand: Union[int, float], tnorm: OperationTNorm) -> Dict[str, Any]:
+    #
+    #     config = get_config()
+    #
+    #     if other_operand <= self.md - config.DEFAULT_EPSILON:
+    #
+    #         md = 1 - math.log(self.md, other_operand)
+    #         nmd = math.log(1 - self.nmd, other_operand)
+    #
+    #         return {'md': md, 'nmd': nmd, 'q': self.q}
+    #     return {'md': 0., 'nmd': 1., 'q': self.q}
+
+    def gt(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        if self.md - self.nmd > other_strategy.md - other_strategy.nmd:
+            return {'value': True}
+        return {'value': False}
+
+    def lt(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        if self.md - self.nmd < other_strategy.md - other_strategy.nmd:
+            return {'value': True}
+        return {'value': False}
+
+    def eq(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        config = get_config()
+        if (abs(self.md - other_strategy.md) < config.DEFAULT_EPSILON
+                and abs(self.nmd - other_strategy.nmd) < config.DEFAULT_EPSILON):
+            return {'value': True}
+        return {'value': False}
+
+    def ge(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        if self.md - self.nmd >= other_strategy.md - other_strategy.nmd:
+            return {'value': True}
+        return {'value': False}
+
+    def le(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        if self.md - self.nmd <= other_strategy.md - other_strategy.nmd:
+            return {'value': True}
+        return {'value': False}
+
+    def ne(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        if not self.eq(other_strategy, tnorm):
+            return {'value': True}
+        return {'value': False}
+
+    def intersection(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        md = tnorm.t_norm(self.md, other_strategy.md)
+        nmd = tnorm.t_conorm(self.nmd, other_strategy.nmd)
+
+        return {'md': md, 'nmd': nmd, 'q': self.q}
+
+    def union(self, other_strategy: 'QROFNStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        md = tnorm.t_conorm(self.md, other_strategy.md)
+        nmd = tnorm.t_norm(self.nmd, other_strategy.nmd)
+
+        return {'md': md, 'nmd': nmd, 'q': self.q}
+
+    def complement(self, other_strategy: 'FuzznumStrategy', tnorm: OperationTNorm) -> Dict[str, Any]:
+        # TODO: 补运算不应该包含 other_strategy
+        raise NotImplementedError(f"The complement method has not been implemented.")
 
 
 class QROFNTemplate(FuzznumTemplate):
@@ -100,3 +227,11 @@ class QROFNTemplate(FuzznumTemplate):
     @property
     def score(self):
         return self.instance.md ** self.instance.q - self.instance.nmd ** self.instance.q
+
+    @property
+    def accuracy(self):
+        return self.instance.md ** self.instance.q + self.instance.nmd ** self.instance.q
+
+    @property
+    def indeterminacy(self):
+        return (1 - self.accuracy) ** (1/self.instance.q)

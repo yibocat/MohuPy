@@ -17,7 +17,7 @@ class FuzznumStrategy(ABC):
     # 基础属性定义
     # 在模糊数各种类型里，任何模糊数都有一个 mtype 类型定义。而对于q，一般非q阶的直接设置为1 即可。
     # mtype 被设置为全局配置器的默认值
-    q: int = 1
+    q: int = 10
     mtype: str = get_config().DEFAULT_MTYPE
 
     # 私有属性管理

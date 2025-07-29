@@ -53,10 +53,9 @@ class Fuzznum:
                            get_config().ENABLE_PERFORMANCE_MONITORING)
         object.__setattr__(self, '_access_times', {})
 
+        config = get_config()
         if mtype is None:
-            config = get_config()
             mtype = config.DEFAULT_MTYPE
-
             warnings.warn(f"Fuzzy number type not specified, using default type: '{mtype}'")
 
         if not isinstance(mtype, str):
@@ -882,6 +881,8 @@ class Fuzznum:
     # 3. 资源清理 (__del__): 虽然 __del__ 方法已在前面讲解过，但它也是生命周期管理的一部分，
     #    负责在对象销毁前进行必要的清理。
 
+    # TODO: create 这个方法还存在缺陷，设置q为默认值1，但是每次先验证 md 和 nmd，可能会导致约束条件验证失败。
+    #  应该先设置q值
     def create(self, **kwargs) -> 'Fuzznum':
         """
         便捷的创建方法
