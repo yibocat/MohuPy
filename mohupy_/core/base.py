@@ -17,8 +17,9 @@ class FuzznumStrategy(ABC):
     # 基础属性定义
     # 在模糊数各种类型里，任何模糊数都有一个 mtype 类型定义。而对于q，一般非q阶的直接设置为1 即可。
     # mtype 被设置为全局配置器的默认值
-    q: int = 10
+
     mtype: str = get_config().DEFAULT_MTYPE
+    q: Optional[int] = None
 
     # 私有属性管理
     _declared_attributes: Set[str] = set()
@@ -32,12 +33,15 @@ class FuzznumStrategy(ABC):
     # 鉴于 add_attribute_validator 和 add_change_callback 是实例方法，且修改的是 self._attribute_validators，
     # 它们实际上修改的是类属性（如果类属性没有被实例覆盖）。
 
-    def __init__(self):
+    def __init__(self, qrung: Optional[int] = None):
+
+        object.__setattr__(self, 'q', qrung)
 
         # object.__setattr__(self, '_lock', threading.Lock())
 
         # 为 'q' 属性添加一个验证器。
-        self.add_attribute_validator('q', lambda x: isinstance(x, int) and 1 <= x <= 100)
+        self.add_attribute_validator('q',
+                                     lambda x: isinstance(x, int) and 1 <= x <= 100)
         # 'q' 是 FuzznumStrategy 的核心属性，它必须是大于等于1的正整数。
         # 将验证器添加到 _attribute_validators 字典中，确保每次通过 __setattr__ 设置 'q' 时都会进行验证。
         # 这比在 _validate() 中进行事后验证更及时、更有效。

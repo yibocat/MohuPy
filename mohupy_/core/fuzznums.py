@@ -23,6 +23,7 @@ class Fuzznum:
     # 直接访问和设置的内部属性名称。
     _INTERNAL_ATTRS = {
         'mtype',  # 模糊数类型标识符，核心且不可变。
+        # 'q',
         '_initialized',  # 实例初始化状态标志，防止在初始化完成前进行不安全操作。
         '_lock',  # 实例级别的可重入锁，用于保护并发访问和修改。
         '_creation_time',  # 实例创建时的时间戳，用于计算对象存活时间。
@@ -40,7 +41,7 @@ class Fuzznum:
         '_validation_cache',  # 内部验证缓存，用于存储验证结果，避免重复验证。
     }
 
-    def __init__(self, mtype: Optional[str] = None):
+    def __init__(self, mtype: Optional[str] = None, qrung: Optional[int] = None):
         object.__setattr__(self, '_creation_time',
                            float(datetime.datetime.now().strftime("%Y%m%d%H%M%S.%f")))
         object.__setattr__(self, '_initialized', False)
@@ -58,10 +59,17 @@ class Fuzznum:
             mtype = config.DEFAULT_MTYPE
             warnings.warn(f"Fuzzy number type not specified, using default type: '{mtype}'")
 
+        if qrung is None:
+            qrung = 1
+
         if not isinstance(mtype, str):
             raise TypeError(f"mtype must be a string type, got '{type(mtype).__name__}'")
 
+        if not isinstance(qrung, int):
+            raise TypeError(f"qrung must be an integer, got '{type(qrung).__name__}'")
+
         object.__setattr__(self, 'mtype', mtype)
+        object.__setattr__(self, 'q', qrung)
 
         # 执行具体的初始化流程，并处理可能的异常
         # 尝试调用 `_initialize` 方法来完成 Fuzznum 实例的复杂初始化逻辑，
@@ -104,7 +112,7 @@ class Fuzznum:
 
         # 从注册表中获取并实例化与当前 mtype 对应的 FuzznumStrategy 类。
         # 例如，如果 mtype 是 'qrofn'，这里会创建 QROFNStrategy 的一个实例。
-        strategy_instance = registry.strategies[self.mtype]()
+        strategy_instance = registry.strategies[self.mtype](self.q)
         # 调用 `_bind_instance_members` 辅助方法，将策略实例的公共方法和属性绑定到当前的 Fuzznum 实例上。
         # 这样，用户就可以直接通过 Fuzznum 实例访问策略的方法和属性（例如 `fuzznum_instance.md` 或 `fuzznum_instance.calculate_value()`)，
         # 而无需先获取策略实例，实现了透明的属性委托。
@@ -740,6 +748,7 @@ class Fuzznum:
                     else:
                         # 如果不是 `property`，则直接通过 `setattr` 设置策略实例的属性。
                         setattr(strategy_instance, name, value)
+                        object.__setattr__(self, name, value)
                         return
 
                 except AttributeError as e:
@@ -911,7 +920,7 @@ class Fuzznum:
         """
         # 调用类的构造函数 `__init__` 来创建 Fuzznum 实例。
         # 这会触发 Fuzznum 内部的初始化流程，包括配置策略和模板。
-        instance = Fuzznum(self.mtype)
+        instance = Fuzznum(self.mtype, self.q)
 
         # 批量设置属性
         # 如果 `kwargs` 不为空，则遍历其中的每个键值对，并尝试将其设置到新创建的实例上。

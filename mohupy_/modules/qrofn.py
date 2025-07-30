@@ -21,8 +21,8 @@ class QROFNStrategy(FuzznumStrategy):
     md: Optional[float] = None
     nmd: Optional[float] = None
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, qrung: Optional[int] = None):
+        super().__init__(qrung=qrung)
 
         # 添加隶属度约束和非隶属度约束条件
         self.add_attribute_validator('md',
@@ -34,10 +34,18 @@ class QROFNStrategy(FuzznumStrategy):
         self.add_change_callback('md', self._on_membership_change)
         self.add_change_callback('nmd', self._on_membership_change)
 
+        self.add_change_callback('q', self._on_q_change)
+
     def _fuzz_constraint(self):
         # 模糊约束条件
-        if self.md is not None and self.nmd is not None and self.md ** self.q + self.nmd ** self.q > 1:
-            raise ValueError(f"md^q + nmd^q = {self.md ** self.q + self.nmd ** self.q} > 1, violates fuzzy number constraints")
+        if self.md is not None and self.nmd is not None and self.q is not None:
+            sum_of_powers = self.md ** self.q + self.nmd ** self.q
+            if sum_of_powers > 1 + get_config().DEFAULT_EPSILON:
+                raise ValueError(
+                    f"violates fuzzy number constraints: md^q ({self.md}^{self.q}) + nmd^q ({self.nmd}^{self.q})"
+                    f"= {sum_of_powers: .4f} > 1.0."
+                    f"(q: {self.q}, md: {self.md}, nmd: {self.nmd})"
+                )
 
     def _on_membership_change(self, attr_name: str, old_value: Any, new_value: Any) -> None:
         """隶属度或非隶属度变更时的回调函数。
@@ -45,9 +53,22 @@ class QROFNStrategy(FuzznumStrategy):
         此回调函数在 `md` 或 `nmd` 属性被设置时触发。它会检查模糊数约束条件
         `md + nmd <= 1`，如果违反则发出警告。
         """
-        if new_value is not None and hasattr(self, 'md') and hasattr(self, 'nmd'):
+        if new_value is not None and self.q is not None and hasattr(self, 'md') and hasattr(self, 'nmd'):
             # 只有当新值不为 None，并且实例上同时存在 'md' 和 'nmd' 属性时才执行后续检查。
             # 这确保了在对象初始化过程中，当属性可能尚未完全设置时，不会触发不完整的检查。
+            self._fuzz_constraint()
+        # if self.md is not None and self.nmd is not None and self.q is not None:
+        #     self._fuzz_constraint()
+
+    def _on_q_change(self, attr_name: str, old_value: Any, new_value: Any) -> None:
+        """
+        当 'q' 属性变更时触发的回调函数。
+        执行模糊数约束检查。
+        """
+        # 类似于 _on_membership_change，触发约束检查。
+        # 此时 self.q 已经更新为 new_value (因为 super().__setattr__ 已经执行)，
+        # 所以直接调用 _fuzz_constraint 即可。
+        if self.md is not None and self.nmd is not None and new_value is not None:
             self._fuzz_constraint()
 
     def _validate(self) -> None:
